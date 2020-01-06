@@ -1,0 +1,42 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	var implementationsCount = 7;
+#>
+using System;
+using System.Collections.Generic;
+
+namespace Reinforced.Tecture.Commands {
+<# for (int i=0;i<implementationsCount;i++) {	#> 
+	public class ServicePipeline<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>> 
+		: ServicePipeline<T1<# for(int j =0;j<=i-1;j++) { #>, T<#= j+2 #><# } #>>
+	
+	{
+		internal ServicePipeline(Pipeline p) : base(p){}
+
+		public override IEnumerable<Type> Subjects 
+		{
+			get 
+			{
+				yield return typeof(T1);<# for(int j =0;j<=i;j++) { #> 
+				yield return typeof(T<#= j+2 #>); <# } #>
+
+			}
+		}
+
+		public override bool IsSubject(Type t)
+		{
+			if (t==typeof(T1)) return true;
+<# for(int j =0;j<=i;j++) { #>
+			if (t==typeof(T<#= j+2 #>)) return true; 
+<# } #>
+			return false;
+		}
+	}
+<# } #>
+	
+}

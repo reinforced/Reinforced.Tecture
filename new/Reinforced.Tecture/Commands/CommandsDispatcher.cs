@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Commands
 {
     /// <summary>
-    /// Dispatches side effect queueand implements enqueued actions
+    /// Dispatches commands queue and implements enqueued actions
     /// </summary>
     public class CommandsDispatcher
     {
+        private readonly Registry _registry;
         private class CommandRunnerGateway
         {
             private readonly MethodInfo _run;
@@ -22,8 +24,8 @@ namespace Reinforced.Tecture.Commands
                 _runner = runner;
 
                 var runnerType = runner.GetType();
-                _run = runnerType.GetMethod(nameof(ICommandRunner<CommandBase>.Run), new[] { effectType });
-                _runAsync = runnerType.GetMethod(nameof(ICommandRunner<CommandBase>.RunAsync), new[] { effectType });
+                _run = runnerType.GetRuntimeMethod(nameof(ICommandRunner<CommandBase>.Run), new[] { effectType });
+                _runAsync = runnerType.GetRuntimeMethod(nameof(ICommandRunner<CommandBase>.RunAsync), new[] { effectType });
 
             }
 
@@ -40,46 +42,22 @@ namespace Reinforced.Tecture.Commands
         }
 
         private readonly Dictionary<Type, CommandRunnerGateway> _runners = new Dictionary<Type, CommandRunnerGateway>();
-        private readonly Queue<ISideEffectSaver> _savers = new Queue<ISideEffectSaver>();
-
-        /// <summary>
-        /// Registers side effect runner for specified effect. Previous registration ruins all others
-        /// </summary>
-        /// <typeparam name="TCommand">Side effect runner type</typeparam>
-        /// <param name="runner">Side effect runner</param>
-        /// <returns>Fluent</returns>
-        public CommandsDispatcher RegisterRunner<TCommand>(ICommandRunner<TCommand> runner) where TCommand : CommandBase
+        
+        internal CommandsDispatcher(Registry registry)
         {
-            _runners[typeof(TCommand)] = new CommandRunnerGateway(typeof(TCommand), runner);
-            return this;
+            _registry = registry;
+            _savers = new Lazy<ISaver[]>(()=>_registry.GetSavers());
         }
 
-        /// <summary>
-        /// Registers changes saver
-        /// </summary>
-        /// <param name="saver"></param>
-        /// <returns></returns>
-        public CommandsDispatcher RegisterSaver(ISideEffectSaver saver)
-        {
-            _savers.Enqueue(saver);
-            return this;
-        }
 
-        internal Action<Exception> _exHandler;
-        public CommandsDispatcher RegisterExceptionHandler(Action<Exception> ex)
-        {
-            _exHandler = ex;
-            return this;
-        }
-
+        private readonly Lazy<ISaver[]> _savers;
         internal virtual void Dispatch(Pipeline queue, ActionsQueue postSave)
         {
-
             do
             {
                 if (queue.HasEffects) DispatchInternal(queue.GetEffects());
 
-                foreach (var sideEffectSaver in _savers)
+                foreach (var sideEffectSaver in _savers.Value)
                 {
                     sideEffectSaver.Save();
                 }
@@ -95,7 +73,7 @@ namespace Reinforced.Tecture.Commands
             {
                 if (queue.HasEffects) await DispatchInternalAsync(queue.GetEffects());
 
-                foreach (var sideEffectSaver in _savers)
+                foreach (var sideEffectSaver in _savers.Value)
                 {
                     await sideEffectSaver.SaveAsync();
                 }
@@ -105,10 +83,14 @@ namespace Reinforced.Tecture.Commands
 
         }
 
-        private CommandRunnerGateway GetRunner(CommandBase effect)
+        private CommandRunnerGateway GetRunner(CommandBase command)
         {
-            var effectType = effect.GetType();
-            if (!_runners.ContainsKey(effectType)) throw new Exception($"Unknown side effect {effectType} - do not know how to dispatch");
+            var effectType = command.GetType();
+            if (!_runners.ContainsKey(effectType))
+            {
+                _runners[effectType] = 
+                    new CommandRunnerGateway(effectType,_registry.GetRunner(effectType));
+            }
             return _runners[effectType];
         }
 

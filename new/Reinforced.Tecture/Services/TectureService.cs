@@ -14,29 +14,34 @@ namespace Reinforced.Tecture.Services
         internal ActionsQueue PostSaveActions { get; set; }
         internal ActionsQueue FinallyActions { get; set; }
         internal ServiceManager ServiceManager { get; set; }
-        
-        internal Pipeline _pipeline;
-        protected Pipeline Q => _pipeline;
         #endregion
 
         /// <summary>
         /// Await point to split actions before/after savechanges call
         /// </summary>
-        protected SaveTask Save { get => new SaveTask(PostSaveActions); }
+        protected ActionsQueueTask Save
+        {
+            get { return new ActionsQueueTask(PostSaveActions); }
+        }
 
         /// <summary>
-        /// Set of entities types that are being touched by this service
-        /// </summary> 
-        public static IEnumerable<Type> UsedEntities { get { yield break; } }
-
-        /// <summary>
-        /// Set of entities types that are being touched by this service
-        /// </summary> 
-        protected virtual HashSet<Type> EntitiesUsed { get; } = new HashSet<Type>();
+        /// Await point to split actions that must happen after everything
+        /// </summary>
+        protected ActionsQueueTask Final
+        {
+            get { return new ActionsQueueTask(FinallyActions); }
+        }
 
         internal void CallOnSave() { OnSave(); }
         internal void CallOnFinally() { OnFinally(); }
-        internal void CallInit() { Init(); }
+
+        internal  virtual  ServicePipeline Pipeline { get; private set; }
+
+        internal virtual void CallInit(Pipeline pipeline)
+        {
+            Pipeline = new ServicePipeline(pipeline);
+            Init();
+        }
 
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
@@ -139,55 +144,10 @@ namespace Reinforced.Tecture.Services
         [Unexplainable]
         protected void Comment(string comment)
         {
-            Tecture.Commands.Pipeline.Enqueue(new CommentCommand() {Annotation = comment});
+            Pipeline.Enqueue(new CommentCommand() {Annotation = comment});
         }
     }
 
-
-    /// <summary>
-    /// Storage services that touches 1 entity
-    /// </summary> 
-    public class TectureService<T1> : TectureService
-        where T1 : class
-    {
-        /// <summary>
-        /// Adds entity <typeparamref name="T1"/>
-        /// </summary>
-        /// <param name="entity">Entity to be added to storage</param>
-        [Unexplainable]
-        protected virtual AddSideEffect Add(T1 entity) { return ControlledAdd(entity); }
-
-        /// <summary>
-        /// Updates entity <typeparamref name="T1"/>
-        /// </summary>
-        /// <param name="entity">Entity to be updated storage</param>
-        [Unexplainable]
-        protected virtual UpdateSideEffect Update(T1 entity) { return ControlledUpdate(entity); }
-
-        /// <summary>
-        /// Updates entity <typeparamref name="T1"/>
-        /// </summary>
-        /// <param name="entity">Entity to be updated storage</param>
-        [Unexplainable]
-        protected virtual UpdateSideEffect Update(T1 entity, params Expression<Func<T1, object>>[] properties) { return ControlledUpdate(entity, properties); }
-
-        /// <summary>
-        /// Removes entity <typeparamref name="T1"/>
-        /// </summary>
-        /// <param name="entity">Entity to be removed from storage</param>
-        [Unexplainable]
-        protected virtual RemoveSideEffect Remove(T1 entity) { return ControlledRemove(entity); }
-
-        /// <summary>
-        /// Set of entities types that are being touched by this service
-        /// </summary>
-        public new static IEnumerable<Type> UsedEntities { get { yield return typeof(T1); } }
-
-        /// <summary>
-        /// Set of entities types that are being touched by this service
-        /// </summary> 
-        protected override HashSet<Type> EntitiesUsed { get; } = new HashSet<Type>(new[] { typeof(T1) });
-    }
 
 
 }

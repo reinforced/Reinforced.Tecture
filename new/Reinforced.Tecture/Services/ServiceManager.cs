@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Reinforced.Storage.QueryBuilders;
-using Reinforced.Storage.SideEffects;
-using Reinforced.Storage.Strokes;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Services
@@ -40,7 +37,7 @@ namespace Reinforced.Tecture.Services
         }
 
         private readonly Dictionary<Type, TectureService> _noContextServicesCache = new Dictionary<Type, TectureService>();
-        private Dictionary<Type, List<ServiceContextEntry>> _contextServices = new Dictionary<Type, List<ServiceContextEntry>>();
+        private readonly Dictionary<Type, List<ServiceContextEntry>> _contextServices = new Dictionary<Type, List<ServiceContextEntry>>();
         private readonly Dictionary<Type, LetBuilder> _letCache = new Dictionary<Type, LetBuilder>();
 
         private TectureService LocateExistingContextService(Type serviceType, Type[] contextTypes, object[] contextValues)
@@ -70,12 +67,13 @@ namespace Reinforced.Tecture.Services
             sd.Add(entry);
         }
 
-        public ServiceManager(StrokeProcessor stroke, ActionsQueue finallyActions, ActionsQueue postSaveActions, SetManager setManager, Pipeline pipeline)
+        public ServiceManager(
+            ActionsQueue finallyActions, 
+            ActionsQueue postSaveActions, 
+            Pipeline pipeline)
         {
-            _stroke = stroke;
             _finallyActions = finallyActions;
             _postSaveActions = postSaveActions;
-            _setManager = setManager;
             _pipeline = pipeline;
         }
 
@@ -85,8 +83,7 @@ namespace Reinforced.Tecture.Services
             service.FinallyActions = _finallyActions;
             service.PostSaveActions = _postSaveActions;
             service.ServiceManager = this;
-            service.StrokeProcessor = _stroke;
-            service.SetManager = _setManager;
+            
             service.Pipeline = _pipeline;
             return service;
         }
@@ -98,7 +95,7 @@ namespace Reinforced.Tecture.Services
 
             service = CreateService<TService>();
             
-            var contextMethod = typeof(TService).GetMethod("Context", paramTypes);
+            var contextMethod = typeof(TService).GetRuntimeMethod("Context", paramTypes);
             if (contextMethod == null)
                 throw new Exception($"Cannot find context method of {typeof(TService).FullName} having arguments of types {string.Join(", ", paramTypes.Select(d => d.Name))} ");
             try
@@ -111,7 +108,7 @@ namespace Reinforced.Tecture.Services
             }
 
             SaveExistingContextService(typeof(TService), paramTypes, context, service);
-            service.CallInit();
+            service.CallInit(_pipeline);
             _allServices.Add(service);
             return (TService) service;
         }
@@ -122,8 +119,7 @@ namespace Reinforced.Tecture.Services
             service.PostSaveActions = null;
             service.ServiceManager = null;
             service.Pipeline = null;
-            service.StrokeProcessor = null;
-            service.SetManager = null;
+            
             var st = service.GetType();
             if (service is INoContext)
             {
@@ -147,7 +143,7 @@ namespace Reinforced.Tecture.Services
             if (_noContextServicesCache.ContainsKey(typeof(T))) return (T)_noContextServicesCache[typeof(T)];
             var service = CreateService<T>();
             _noContextServicesCache[typeof(T)] = service;
-            service.CallInit();
+            service.CallInit(_pipeline);
             _allServices.Add(service);
             return service;
         }

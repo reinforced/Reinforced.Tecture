@@ -10,6 +10,13 @@ namespace Reinforced.Tecture.Commands
     
     public static class CommandExtensions
     {
+        /// <summary>
+        /// Specifies command annotation that helps to debug command chain
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cmd">Command</param>
+        /// <param name="annotation">Command annotation</param>
+        /// <returns>Fluent</returns>
         public static T Annotate<T>(this T cmd, string annotation) where T : CommandBase
         {
             cmd.Annotation = annotation;

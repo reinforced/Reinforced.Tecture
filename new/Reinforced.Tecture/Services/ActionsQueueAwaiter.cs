@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 
 namespace Reinforced.Tecture.Services
 {
-    public struct SaveAwaiter : INotifyCompletion
+    public struct ActionsQueueAwaiter : INotifyCompletion
     {
         private readonly ActionsQueue _exp;
 
-        internal SaveAwaiter(ActionsQueue exp)
+        internal ActionsQueueAwaiter(ActionsQueue exp)
         {
             _exp = exp;
             IsCompleted = false;
@@ -26,16 +26,16 @@ namespace Reinforced.Tecture.Services
     /// <summary>
     /// Save task to be awaited
     /// </summary>
-    public struct SaveTask
+    public struct ActionsQueueTask
     {
         private readonly ActionsQueue _exp;
 
-        internal SaveTask(ActionsQueue exp)
+        internal ActionsQueueTask(ActionsQueue exp)
         {
             _exp = exp;
         }
 
-        public SaveAwaiter GetAwaiter() => new SaveAwaiter(_exp);
+        public ActionsQueueAwaiter GetAwaiter() => new ActionsQueueAwaiter(_exp);
 
         /// <summary>
         /// Enqueues action to be executed after saving

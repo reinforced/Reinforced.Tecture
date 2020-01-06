@@ -39,10 +39,10 @@ namespace Reinforced.Tecture.Commands
             _commandQueue.Enqueue(effect);
         }
 
-        public TCommand Enqueue<TCommand>(TCommand effect) where TCommand : CommandBase
+        public TCommand Enqueue<TCommand>(TCommand cmd) where TCommand : CommandBase
         {
-            EnqueueCommand(effect);
-            return effect;
+            EnqueueCommand(cmd);
+            return cmd;
         }
 
 

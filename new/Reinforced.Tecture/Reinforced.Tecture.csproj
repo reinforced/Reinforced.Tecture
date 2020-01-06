@@ -5,7 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
+    <None Remove="Commands\ServicePipelines.tt" />
+    <None Remove="Services\ServiceLocators.tt" />
+    <None Remove="Services\TectureServices.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Commands\ServicePipelines.tt">
+      <LastGenOutput>ServicePipelines.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
+    <Content Include="Services\TectureServices.tt">
+      <LastGenOutput>TectureServices.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
+    <Content Include="Services\ServiceLocators.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TectureServices.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Testing\" />
   </ItemGroup>
 
@@ -21,11 +41,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Commands\ServicePipelines.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServicePipelines.tt</DependentUpon>
+    </Compile>
     <Compile Update="Services\StorageServiceClass.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StorageServiceClass.tt</DependentUpon>
     </Compile>
+    <Compile Update="Services\TectureServices.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TectureServices.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 
 </Project>

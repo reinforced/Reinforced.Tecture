@@ -3,10 +3,16 @@
 namespace Reinforced.Tecture.Commands
 {
     /// <summary>
+    /// Marker interface for command runners
+    /// </summary>
+    public interface ICommandRunner { }
+
+    /// <summary>
     /// Interface of particular command runner
     /// </summary>
     /// <typeparam name="TCommand">Command type</typeparam>
-    public interface ICommandRunner<in TCommand> where TCommand : CommandBase
+    public interface ICommandRunner<in TCommand> : ICommandRunner
+        where TCommand : CommandBase
     {
         /// <summary>
         /// Runs side effect 

@@ -1,0 +1,50 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	var implementationsCount = 7;
+#>
+using System;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+using Reinforced.Storage.SideEffects.Exact;
+using Reinforced.Tecture.Commands;
+
+namespace Reinforced.Tecture.Services {	
+	
+<# for (int i=0;i<implementationsCount;i++) {	#> 
+	
+
+	/// <summary>
+    /// Storage services that touches <#= i+2#> entities
+    /// </summary>    
+	public class TectureService<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>>
+			   : TectureService<T1<# for(int j =0;j<=i-1;j++) { #>, T<#= j+2 #><# } #>>
+			   where T1: class
+			   <# for(int j =0;j<=i;j++) { #>
+where T<#= j+2 #> : class
+			   <# } #>
+
+    {
+		/// <summary>
+        /// Service pipeline access
+        /// </summary>
+        protected ServicePipeline<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>> Q { get; private set; }
+
+        internal override void CallInit(Pipeline pipeline)
+        {
+            Q = new ServicePipeline<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>>(pipeline);
+            Init();
+        }
+
+        internal override ServicePipeline Pipeline
+        {
+            get { return Q; }
+        }
+    }
+
+<# } #>
+}

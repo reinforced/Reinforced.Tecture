@@ -5,7 +5,8 @@ using System.Text;
 namespace Reinforced.Tecture.Commands
 {
 
-    public class CatchingCommands<TCather> : IDisposable where TCather : ICommandCatcher
+    public class CatchingCommands<TCather> : IDisposable 
+        where TCather : ICommandCatcher
     {
         private readonly Pipeline _queue;
         private readonly TCather _catcher;
