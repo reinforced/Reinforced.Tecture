@@ -12,41 +12,37 @@ namespace Reinforced.Tecture.Commands
     /// </summary>
     public class CommandsDispatcher
     {
-        private readonly Registry _registry;
+        private readonly RuntimeMultiplexer _mx;
         private class CommandRunnerGateway
         {
             private readonly MethodInfo _run;
             private readonly MethodInfo _runAsync;
-            private readonly object _runner;
 
-            public CommandRunnerGateway(Type effectType, object runner)
+            public CommandRunnerGateway(Type effectType, Type runnerType)
             {
-                _runner = runner;
-
-                var runnerType = runner.GetType();
                 _run = runnerType.GetRuntimeMethod(nameof(ICommandRunner<CommandBase>.Run), new[] { effectType });
                 _runAsync = runnerType.GetRuntimeMethod(nameof(ICommandRunner<CommandBase>.RunAsync), new[] { effectType });
 
             }
 
-            public void Run(CommandBase effect)
+            public void Run(ICommandRunner runner, CommandBase effect)
             {
-                _run.Invoke(_runner, new[] { effect });
+                _run.Invoke(runner, new[] { effect });
             }
 
-            public async Task RunAsync(CommandBase effect)
+            public async Task RunAsync(ICommandRunner runner, CommandBase effect)
             {
-                var r = (Task)_runAsync.Invoke(_runner, new[] { effect });
+                var r = (Task)_runAsync.Invoke(runner, new[] { effect });
                 await r;
             }
         }
 
-        private readonly Dictionary<Type, CommandRunnerGateway> _runners = new Dictionary<Type, CommandRunnerGateway>();
-        
-        internal CommandsDispatcher(Registry registry)
+        private readonly Dictionary<Type, CommandRunnerGateway> _runnerGateways = new Dictionary<Type, CommandRunnerGateway>();
+
+        internal CommandsDispatcher(RuntimeMultiplexer mx)
         {
-            _registry = registry;
-            _savers = new Lazy<ISaver[]>(()=>_registry.GetSavers());
+            _mx = mx;
+            _savers = new Lazy<ISaver[]>(() => _mx.GetSavers());
         }
 
 
@@ -83,40 +79,51 @@ namespace Reinforced.Tecture.Commands
 
         }
 
-        private CommandRunnerGateway GetRunner(CommandBase command)
+        private Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)
         {
             var effectType = command.GetType();
-            if (!_runners.ContainsKey(effectType))
+            var runner = _mx.GetRunner(command);
+            if (runner == null) 
+                throw new TectureException($"Runner for command {command} was not found");
+            var runnerType = runner.GetType();
+
+            if (!_runnerGateways.ContainsKey(runnerType))
             {
-                _runners[effectType] = 
-                    new CommandRunnerGateway(effectType,_registry.GetRunner(effectType));
+                _runnerGateways[runnerType] =
+                    new CommandRunnerGateway(effectType, runnerType);
             }
-            return _runners[effectType];
+            return new Tuple<CommandRunnerGateway, ICommandRunner>(_runnerGateways[runnerType], runner);
         }
 
-        protected void RunEffect(CommandBase effect)
+        protected void RunCommand(CommandBase effect)
         {
-            GetRunner(effect).Run(effect);
+            var r = GetRunner(effect);
+            r.Item1.Run(r.Item2, effect);
         }
 
-        protected Task RunEffectAsync(CommandBase effect)
+        protected Task RunCommandAsync(CommandBase effect)
         {
-            return GetRunner(effect).RunAsync(effect);
+            var r = GetRunner(effect);
+            return r.Item1.RunAsync(r.Item2, effect);
         }
 
         protected virtual void DispatchInternal(IEnumerable<CommandBase> commands)
         {
-            foreach (var sideEffectBase in commands)
+            foreach (var commandBase in commands)
             {
-                if (!(sideEffectBase is CommentCommand)) RunEffect(sideEffectBase);
+                if (!(commandBase is CommentCommand)) RunCommand(commandBase);
             }
         }
 
         protected virtual async Task DispatchInternalAsync(IEnumerable<CommandBase> commands)
         {
-            foreach (var sideEffectBase in commands)
+            foreach (var commandBase in commands)
             {
-                if (!(sideEffectBase is CommentCommand)) await RunEffectAsync(sideEffectBase);
+                if (!(commandBase is CommentCommand))
+                {
+                    var r = RunCommandAsync((commandBase));
+                    if (r != null) await r;
+                }
             }
         }
     }

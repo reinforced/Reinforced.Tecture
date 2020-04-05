@@ -8,7 +8,7 @@ using Reinforced.Storage.SideEffects.Exact;
 
 namespace Reinforced.Storage.Testing.Stories.Remove
 {
-    public class RemovePredicateAssertion<T> : SideEffectAssertion<RemoveSideEffect>, IMemorizing
+    public class RemovePredicateAssertion<T> : CommandCheck<RemoveSideEffect>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
@@ -21,18 +21,18 @@ namespace Reinforced.Storage.Testing.Stories.Remove
             _memorizedValue = mem;
         }
 
-        public override string GetMessage(RemoveSideEffect effect)
+        public override string GetMessage(RemoveSideEffect command)
         {
-            if (effect == null) return $"expected removed entity {_explanation}, but story unexpectedly ends";
-            if (effect.EntityType != typeof(T))
+            if (command == null) return $"expected removed entity {_explanation}, but story unexpectedly ends";
+            if (command.EntityType != typeof(T))
             {
                 return
-                    $"expected removed entity of type {typeof(T).Name} and {_explanation}, but got one of {effect.EntityType.Name}";
+                    $"expected removed entity of type {typeof(T).Name} and {_explanation}, but got one of {command.EntityType.Name}";
             }
             return $"expected removed entity {_explanation}, but seems that it does not";
         }
 
-        public override bool IsValid(RemoveSideEffect effect)
+        public override bool IsActuallyValid(RemoveSideEffect effect)
         {
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;

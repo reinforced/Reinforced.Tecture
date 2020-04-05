@@ -7,7 +7,7 @@ using Reinforced.Storage.SideEffects.Exact;
 
 namespace Reinforced.Storage.Testing.Stories.Sql
 {
-    public class SqlExactParametersAssertion : SideEffectAssertion<DirectSqlSideEffect>
+    public class SqlExactParametersAssertion : CommandCheck<DirectSqlSideEffect>
     {
         private readonly object[] _parameters;
 
@@ -16,21 +16,21 @@ namespace Reinforced.Storage.Testing.Stories.Sql
             _parameters = parameters;
         }
 
-        public override string GetMessage(DirectSqlSideEffect effect)
+        public override string GetMessage(DirectSqlSideEffect command)
         {
-            if (effect == null)
+            if (command == null)
                 return $"expected direct SQL with particular parameters, but story unexpectedly ends";
 
             string name = "direct SQL";
-            if (!string.IsNullOrEmpty(effect.Annotation))
-                name = $"SQL for '{effect.Annotation}'";
-            if (effect.Parameters.Length != _parameters.Length)
-                return $"{name} has {effect.Parameters.Length} parameters, but must have {_parameters.Length} ones";
+            if (!string.IsNullOrEmpty(command.Annotation))
+                name = $"SQL for '{command.Annotation}'";
+            if (command.Parameters.Length != _parameters.Length)
+                return $"{name} has {command.Parameters.Length} parameters, but must have {_parameters.Length} ones";
 
-            for (int i = 0; i < effect.Parameters.Length; i++)
+            for (int i = 0; i < command.Parameters.Length; i++)
             {
-                if (!effect.Parameters[i].Equals(_parameters[i]))
-                    return $"{name} has parameter @p{i} = '{effect.Parameters[i]}', but it should be '{_parameters[i]}'"; ;
+                if (!command.Parameters[i].Equals(_parameters[i]))
+                    return $"{name} has parameter @p{i} = '{command.Parameters[i]}', but it should be '{_parameters[i]}'"; ;
             }
 
             return string.Empty; //never
@@ -44,7 +44,7 @@ namespace Reinforced.Storage.Testing.Stories.Sql
             return value1.Equals(value2);
         }
 
-        public override bool IsValid(DirectSqlSideEffect effect)
+        public override bool IsActuallyValid(DirectSqlSideEffect effect)
         {
             if (effect == null) return false;
             if (effect.Parameters.Length != _parameters.Length) return false;

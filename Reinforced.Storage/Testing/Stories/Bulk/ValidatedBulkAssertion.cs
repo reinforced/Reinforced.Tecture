@@ -7,23 +7,23 @@ using Reinforced.Storage.SideEffects.Exact;
 
 namespace Reinforced.Storage.Testing.Stories.Bulk
 {
-    public class ValidatedBulkAssertion : SideEffectAssertion<BulkSideEffect>
+    public class ValidatedBulkAssertion : CommandCheck<BulkSideEffect>
     {
 
-        public override string GetMessage(BulkSideEffect effect)
+        public override string GetMessage(BulkSideEffect command)
         {
-            if (effect == null) return $"bulk operation expected but story unexpectedly ends";
+            if (command == null) return $"bulk operation expected but story unexpectedly ends";
 
-            if (!Environment.BulkOperations.HasAssumption(effect))
+            if (!Environment.BulkOperations.HasAssumption(command))
             {
-                var name = string.IsNullOrEmpty(effect.Annotation) ? string.Empty : effect.Annotation;
+                var name = string.IsNullOrEmpty(command.Annotation) ? string.Empty : command.Annotation;
                 return $"no assumption/validation for bulk operation {name}";
             }
 
             return null;//never
         }
 
-        public override bool IsValid(BulkSideEffect effect)
+        public override bool IsActuallyValid(BulkSideEffect effect)
         {
             if (effect == null) return false;
             return Environment.BulkOperations.HasAssumption(effect);

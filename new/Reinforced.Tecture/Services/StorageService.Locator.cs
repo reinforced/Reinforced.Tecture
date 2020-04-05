@@ -10,7 +10,7 @@
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
-        public T Do<T>() where T : TectureService, INoContext
+        protected T Do<T>() where T : TectureService, INoContext
         {
             return ServiceManager.Do<T>();
         }
@@ -20,7 +20,7 @@
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Context service <typeparamref name="T"/></returns>
-        public LetBuilder<T> Let<T>() where T : TectureService, IWithContext
+        protected LetBuilder<T> Let<T>() where T : TectureService, IWithContext
         {
             return ServiceManager.Let<T>();
         }

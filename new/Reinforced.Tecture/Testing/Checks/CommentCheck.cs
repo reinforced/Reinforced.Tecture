@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Reinforced.Storage.SideEffects.Exact;
+using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Storage.Testing.Stories.Common
+namespace Reinforced.Tecture.Testing.Checks
 {
-    public class CommentAssertion : SideEffectAssertion<CommentSideEffect>
+    public class CommentCheck : CommandCheck<CommentCommand>
     {
         private readonly string _content;
 
-        public CommentAssertion(string content)
+        internal CommentCheck(string content)
         {
             _content = content;
         }
 
-        public override string GetMessage(CommentSideEffect effect)
+        protected override string GetMessage(CommentCommand command)
         {
             var msg = string.IsNullOrEmpty(_content)
                 ? $"comment"
                 : $"comment '{_content}'";
-            if (effect == null)
+            if (command == null)
             {
                 return $"{msg} expected here, but story unexpectedly ends";
             }
 
-            if (!string.IsNullOrEmpty(_content) && effect.Annotation != _content)
+            if (!string.IsNullOrEmpty(_content) && command.Annotation != _content)
             {
                 return $"{msg} expected here, but story unexpectedly ends";
             }
@@ -34,7 +33,7 @@ namespace Reinforced.Storage.Testing.Stories.Common
             return null;
         }
 
-        public override bool IsValid(CommentSideEffect effect)
+        protected override bool IsActuallyValid(CommentCommand effect)
         {
             if (effect == null) return false;
             if (!string.IsNullOrEmpty(_content)) return effect.Annotation == _content;

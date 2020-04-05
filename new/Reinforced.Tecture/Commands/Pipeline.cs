@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Reinforced.Storage.Services;
+using Reinforced.Tecture.Integrate;
 using Reinforced.Tecture.Services;
 
 namespace Reinforced.Tecture.Commands
@@ -10,29 +11,29 @@ namespace Reinforced.Tecture.Commands
     
     public class Pipeline
     {
-
+        internal IRuntimeLocator _locator;
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
-
+        
         public void EnqueueCommand(CommandBase effect)
         {
             if (_debugMode)
             {
                 DebugInfo dbg = null;
-                var st = new StackTrace();
-                foreach (var stf in st.GetFrames())
-                {
-                    var m = stf.GetMethod();
-                    if (m != null && m.DeclaringType != null && typeof(TectureService).IsAssignableFrom(m.DeclaringType))
-                    {
-                        //if (m.GetCustomAttribute<UnexplainableAttribute>() != null) continue;
-                        dbg = new DebugInfo();
-                        dbg.SourceService = m.DeclaringType;
-                        dbg.SourceMethod = m;
-                        dbg.LineNumber = stf.GetFileLineNumber();
-                        dbg.FileName = stf.GetFileName();
-                        break;
-                    }
-                }
+                //var st = new StackTrace();
+                //foreach (var stf in st.GetFrames())
+                //{
+                //    var m = stf.GetMethod();
+                //    if (m != null && m.DeclaringType != null && typeof(TectureService).IsAssignableFrom(m.DeclaringType))
+                //    {
+                //        //if (m.GetCustomAttribute<UnexplainableAttribute>() != null) continue;
+                //        dbg = new DebugInfo();
+                //        dbg.SourceService = m.DeclaringType;
+                //        dbg.SourceMethod = m;
+                //        dbg.LineNumber = stf.GetFileLineNumber();
+                //        dbg.FileName = stf.GetFileName();
+                //        break;
+                //    }
+                //}
 
                 effect.Debug = dbg;
             }
@@ -49,9 +50,10 @@ namespace Reinforced.Tecture.Commands
         private readonly bool _debugMode;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        internal Pipeline(bool debugMode)
+        internal Pipeline(bool debugMode, IRuntimeLocator locator)
         {
             _debugMode = debugMode;
+            _locator = locator;
         }
 
         private readonly Stack<ICommandCatcher> _catchersStack = new Stack<ICommandCatcher>();

@@ -27,15 +27,15 @@ namespace Reinforced.Storage.Testing.Stories
     }
 
     
-    public abstract class SideEffectAssertion<TEffect> : SideEffectAssertion where TEffect : SideEffectBase
+    public abstract class CommandCheck<TEffect> : SideEffectAssertion where TEffect : SideEffectBase
     {
-        public abstract string GetMessage(TEffect effect);
+        public abstract string GetMessage(TEffect command);
 
-        public abstract bool IsValid(TEffect effect);
+        public abstract bool IsActuallyValid(TEffect effect);
 
         public void Assert(TEffect effect)
         {
-            if (!IsValid(effect)) throw new StorageAssertionExpection(GetMessage(effect));
+            if (!IsActuallyValid(effect)) throw new StorageAssertionExpection(GetMessage(effect));
         }
 
         public override void Assert(SideEffectBase effect)
@@ -51,7 +51,7 @@ namespace Reinforced.Storage.Testing.Stories
 
         public override bool IsValidEffect(SideEffectBase effect)
         {
-            if (effect is TEffect) return IsValid((TEffect) effect);
+            if (effect is TEffect) return IsActuallyValid((TEffect) effect);
             return false;
         }
     }

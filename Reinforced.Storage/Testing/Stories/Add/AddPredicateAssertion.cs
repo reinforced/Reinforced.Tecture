@@ -8,7 +8,7 @@ using Reinforced.Storage.SideEffects.Exact;
 
 namespace Reinforced.Storage.Testing.Stories.Add
 {
-    public class AddPredicateAssertion<T> : SideEffectAssertion<AddSideEffect>, IMemorizing
+    public class AddPredicateAssertion<T> : CommandCheck<AddSideEffect>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
@@ -21,18 +21,18 @@ namespace Reinforced.Storage.Testing.Stories.Add
             _memorizedValue = mem;
         }
 
-        public override string GetMessage(AddSideEffect effect)
+        public override string GetMessage(AddSideEffect command)
         {
-            if (effect == null) return $"expected added entity {_explanation}, but story unexpectedly ends";
-            if (effect.EntityType != typeof(T))
+            if (command == null) return $"expected added entity {_explanation}, but story unexpectedly ends";
+            if (command.EntityType != typeof(T))
             {
                 return
-                    $"expected added entity of type {typeof(T).Name} and {_explanation}, but got one of {effect.EntityType.Name}";
+                    $"expected added entity of type {typeof(T).Name} and {_explanation}, but got one of {command.EntityType.Name}";
             }
             return $"expected added entity {_explanation}, but seems that it does not";
         }
 
-        public override bool IsValid(AddSideEffect effect)
+        public override bool IsActuallyValid(AddSideEffect effect)
         {
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;

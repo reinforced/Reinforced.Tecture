@@ -1,0 +1,51 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+<#
+	var implementationsCount = 7;
+#>
+using System;
+using System.Linq.Expressions;
+using Reinforced.Tecture.Commands;
+
+namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
+{
+    public static partial class Extensions
+    {
+    <# for (int i=0;i<implementationsCount;i++) {	#> 
+
+        /// <summary>
+        /// Updates entity in storage
+        /// </summary>
+        /// <param name="pipeline">Tecture pipeline</param>
+        /// <param name="entity">Entity</param>
+        /// <typeparam name="TEntity">Entity type</typeparam>
+        <# for(int j =0;j<=i;j++) { #>/// <typeparam name="T<#= j+1 #>">Not used</typeparam> 
+        <# } #>        
+        /// <returns>Update command instance</returns>
+        public static UpdateCommand Update<<# for(int j =0;j<=i;j++) { #>T<#= j+1 #>, <# } #>TEntity>(this ServicePipeline<<# for(int j =0;j<=i;j++) { #>T<#= j+1 #>, <# } #>TEntity> pipeline, TEntity entity)
+        {
+            return UpdateCore(pipeline, entity);
+        }
+
+        /// <summary>
+        /// Updates entity in storage
+        /// </summary>
+        /// <param name="pipeline">Tecture pipeline</param>
+        /// <param name="entity">Entity</param>
+        /// <typeparam name="TEntity">Entity type</typeparam>
+        <# for(int j =0;j<=i;j++) { #>/// <typeparam name="T<#= j+1 #>">Not used</typeparam> 
+        <# } #>        
+        /// <returns>Update command instance</returns>
+        public static UpdateCommand Update<<# for(int j =0;j<=i;j++) { #>T<#= j+1 #>, <# } #>TEntity>(this ServicePipeline<<# for(int j =0;j<=i;j++) { #>T<#= j+1 #>, <# } #>TEntity> pipeline, TEntity entity, params Expression<Func<TEntity, object>>[] properties)
+        {
+            return UpdateCore(pipeline, entity, properties);
+        }
+    <# } #>
+
+    }
+}

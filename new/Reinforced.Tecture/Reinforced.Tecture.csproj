@@ -16,17 +16,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
     <Content Include="Services\TectureServices.tt">
-      <LastGenOutput>TectureServices.cs</LastGenOutput>
+      <LastGenOutput>ServiceLocators.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </Content>
     <Content Include="Services\ServiceLocators.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TectureServices.cs</LastGenOutput>
+      <LastGenOutput>ServiceLocators.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Testing\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,10 +47,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StorageServiceClass.tt</DependentUpon>
     </Compile>
-    <Compile Update="Services\TectureServices.cs">
+    <Compile Update="Services\ServiceLocators.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>TectureServices.tt</DependentUpon>
+      <DependentUpon>ServiceLocators.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

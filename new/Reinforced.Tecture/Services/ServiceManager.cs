@@ -84,7 +84,6 @@ namespace Reinforced.Tecture.Services
             service.PostSaveActions = _postSaveActions;
             service.ServiceManager = this;
             
-            service.Pipeline = _pipeline;
             return service;
         }
 
@@ -118,7 +117,7 @@ namespace Reinforced.Tecture.Services
             service.FinallyActions = null;
             service.PostSaveActions = null;
             service.ServiceManager = null;
-            service.Pipeline = null;
+            
             
             var st = service.GetType();
             if (service is INoContext)

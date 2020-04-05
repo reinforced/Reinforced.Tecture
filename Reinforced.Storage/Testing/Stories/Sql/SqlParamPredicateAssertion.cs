@@ -8,7 +8,7 @@ using Reinforced.Storage.SideEffects.Exact;
 namespace Reinforced.Storage.Testing.Stories.Sql
 {
 
-    public class SqlParamPredicateAssertion : SideEffectAssertion<DirectSqlSideEffect>
+    public class SqlParamPredicateAssertion : CommandCheck<DirectSqlSideEffect>
     {
         private readonly bool _original;
         private readonly SqlParameterValidator[] _validators;
@@ -19,16 +19,16 @@ namespace Reinforced.Storage.Testing.Stories.Sql
             _original = original;
         }
 
-        public override string GetMessage(DirectSqlSideEffect effect)
+        public override string GetMessage(DirectSqlSideEffect command)
         {
-            if (effect == null)
+            if (command == null)
                 return $"expected direct SQL with particular parameters, but story unexpectedly ends"; ;
 
             string name = "direct SQL";
-            if (!string.IsNullOrEmpty(effect.Annotation))
-                name = $"SQL for '{effect.Annotation}'";
+            if (!string.IsNullOrEmpty(command.Annotation))
+                name = $"SQL for '{command.Annotation}'";
 
-            var pars = _original ? effect.OriginalParameters : effect.Parameters;
+            var pars = _original ? command.OriginalParameters : command.Parameters;
 
             if (pars.Length != _validators.Length)
                 return $"{name} has {pars.Length} parameters, but must have {_validators.Length} ones";
@@ -74,7 +74,7 @@ namespace Reinforced.Storage.Testing.Stories.Sql
             return value1.Equals(value2);
         }
 
-        public override bool IsValid(DirectSqlSideEffect effect)
+        public override bool IsActuallyValid(DirectSqlSideEffect effect)
         {
             return GetMessage(effect) != null;
         }

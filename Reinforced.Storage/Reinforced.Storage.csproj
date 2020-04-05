@@ -121,7 +121,7 @@
     <Compile Include="Testing\Stories\Bulk\ValidatedAsyncBulkAssertion.cs" />
     <Compile Include="Testing\Stories\Bulk\ValidatedBulkAssertion.cs" />
     <Compile Include="Testing\Stories\Common\AnnotationAssertion.cs" />
-    <Compile Include="Testing\Stories\Common\CommentAssertion.cs" />
+    <Compile Include="Testing\Stories\Common\CommentCheck.cs" />
     <Compile Include="Testing\Stories\Common\CommonAssertions.cs" />
     <Compile Include="Testing\Stories\Common\SaveAssertion.cs" />
     <Compile Include="Testing\Stories\EndStorySideEffect.cs" />

@@ -7,7 +7,7 @@ using Reinforced.Storage.SideEffects;
 
 namespace Reinforced.Storage.Testing.Stories.Common
 {
-    public class AnnotationAssertion : SideEffectAssertion<SideEffectBase>
+    public class AnnotationAssertion : CommandCheck<SideEffectBase>
     {
         private readonly string _requiredAnnotation;
 
@@ -16,13 +16,13 @@ namespace Reinforced.Storage.Testing.Stories.Common
             _requiredAnnotation = requiredAnnotation;
         }
 
-        public override string GetMessage(SideEffectBase effect)
+        public override string GetMessage(SideEffectBase command)
         {
-            if (effect== null) return $"expected effect with annotation '{_requiredAnnotation}', but story unexpectedly ended";
-            return $"expected effect with annotation '{_requiredAnnotation}', but got with '{effect.Annotation}' one";
+            if (command== null) return $"expected effect with annotation '{_requiredAnnotation}', but story unexpectedly ended";
+            return $"expected effect with annotation '{_requiredAnnotation}', but got with '{command.Annotation}' one";
         }
 
-        public override bool IsValid(SideEffectBase effect)
+        public override bool IsActuallyValid(SideEffectBase effect)
         {
             if (effect == null) return false;
             return effect.Annotation == _requiredAnnotation;

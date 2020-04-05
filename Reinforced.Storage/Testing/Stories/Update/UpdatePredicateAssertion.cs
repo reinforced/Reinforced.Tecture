@@ -8,7 +8,7 @@ using Reinforced.Storage.SideEffects.Exact;
 
 namespace Reinforced.Storage.Testing.Stories.Update
 {
-    public class UpdatePredicateAssertion<T> : SideEffectAssertion<UpdateSideEffect>, IMemorizing
+    public class UpdatePredicateAssertion<T> : CommandCheck<UpdateSideEffect>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
@@ -21,18 +21,18 @@ namespace Reinforced.Storage.Testing.Stories.Update
             _memorizedValue = mem;
         }
 
-        public override string GetMessage(UpdateSideEffect effect)
+        public override string GetMessage(UpdateSideEffect command)
         {
-            if (effect == null) return $"expected updated entity {_explanation}, but story unexpectedly ends";
-            if (effect.EntityType != typeof(T))
+            if (command == null) return $"expected updated entity {_explanation}, but story unexpectedly ends";
+            if (command.EntityType != typeof(T))
             {
                 return
-                    $"expected updated entity of type {typeof(T).Name} and {_explanation}, but got one of {effect.EntityType.Name}";
+                    $"expected updated entity of type {typeof(T).Name} and {_explanation}, but got one of {command.EntityType.Name}";
             }
             return $"expected updated entity {_explanation}, but seems that it does not";
         }
 
-        public override bool IsValid(UpdateSideEffect effect)
+        public override bool IsActuallyValid(UpdateSideEffect effect)
         {
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;

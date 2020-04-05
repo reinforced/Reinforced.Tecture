@@ -35,7 +35,7 @@ namespace Reinforced.Tecture.Services
         internal void CallOnSave() { OnSave(); }
         internal void CallOnFinally() { OnFinally(); }
 
-        internal  virtual  ServicePipeline Pipeline { get; private set; }
+        internal virtual ServicePipeline Pipeline { get; private set; }
 
         internal virtual void CallInit(Pipeline pipeline)
         {
@@ -52,29 +52,8 @@ namespace Reinforced.Tecture.Services
         /// Aggregating service pattern. Override this method to write aggregated data after all save changes calls.
         /// </summary>
         protected virtual void OnFinally() { }
-
-        private void Validate<TEntity>() where TEntity : class
-        {
-            if (!EntitiesUsed.Contains(typeof(TEntity)))
-            {
-                throw new Exception($"{GetType().FullName} cannot add entity {typeof(TEntity).FullName} because has no power to do so");
-            }
-        }
-
-        [Unexplainable]
-        protected internal AddSideEffect ControlledAdd<TEntity>(TEntity entity) where TEntity : class
-        {
-            Validate<TEntity>();
-            return Tecture.Commands.Pipeline.Enqueue(new AddSideEffect() { Entity = entity, EntityType = typeof(TEntity) });
-        }
-
-        [Unexplainable]
-        protected internal RemoveSideEffect ControlledRemove<TEntity>(TEntity entity) where TEntity : class
-        {
-            Validate<TEntity>();
-            return Tecture.Commands.Pipeline.Enqueue(new RemoveSideEffect() { Entity = entity, EntityType = typeof(TEntity) });
-        }
-
+       
+       
         [Unexplainable]
         protected internal UpdateSideEffect ControlledUpdate<TEntity>(TEntity entity) where TEntity : class
         {
@@ -144,7 +123,7 @@ namespace Reinforced.Tecture.Services
         [Unexplainable]
         protected void Comment(string comment)
         {
-            Pipeline.Enqueue(new CommentCommand() {Annotation = comment});
+            Pipeline.Enqueue(new CommentCommand() { Annotation = comment });
         }
     }
 

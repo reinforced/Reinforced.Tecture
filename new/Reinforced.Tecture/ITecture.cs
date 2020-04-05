@@ -11,7 +11,7 @@ namespace Reinforced.Tecture
     /// <summary>
     /// Tecture facade
     /// </summary>
-    public interface ITecture
+    public interface ITecture : IDisposable
     {
         /// <summary>
         /// Obtains instance of uncontexted service to make it to do something
@@ -32,7 +32,7 @@ namespace Reinforced.Tecture
         /// </summary>
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
-        T From<T>() where T:ISource;
+        T From<T>() where T : class, ISource;
 
         /// <summary>
         /// Runs commands queue

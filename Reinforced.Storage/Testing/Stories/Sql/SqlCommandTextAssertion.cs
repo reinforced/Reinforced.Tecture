@@ -19,7 +19,7 @@ namespace Reinforced.Storage.Testing.Stories.Sql
         /// </summary>
         Contains
     }
-    public class SqlCommandTextAssertion : SideEffectAssertion<DirectSqlSideEffect>
+    public class SqlCommandTextAssertion : CommandCheck<DirectSqlSideEffect>
     {
         private readonly StringComparison _comparison;
         private readonly string _pattern;
@@ -32,22 +32,22 @@ namespace Reinforced.Storage.Testing.Stories.Sql
             _assertionType = assertionType;
         }
 
-        public override string GetMessage(DirectSqlSideEffect effect)
+        public override string GetMessage(DirectSqlSideEffect command)
         {
-            if (effect == null)
+            if (command == null)
                 return $"expected direct SQL with particular command text, but story unexpectedly ends";
 
             string name = "Following direct SQL";
 
-            if (!string.IsNullOrEmpty(effect.Annotation))
-                name = $"SQL for '{effect.Annotation}'";
+            if (!string.IsNullOrEmpty(command.Annotation))
+                name = $"SQL for '{command.Annotation}'";
 
             if (_assertionType == CommandTextAssertionType.Exact)
             {
                 return $@"
 {name}:
 ---
-{effect.Command}
+{command.Command}
 ---
 must EXACTLY MATCH ({_comparison}) this:
 ---
@@ -59,7 +59,7 @@ But it does not.";
             return $@"
 {name}:
 ---
-{effect.Command}
+{command.Command}
 ---
 must contain ({_comparison}) following pattern:
 ---
@@ -68,7 +68,7 @@ must contain ({_comparison}) following pattern:
 But it does not.";
         }
 
-        public override bool IsValid(DirectSqlSideEffect effect)
+        public override bool IsActuallyValid(DirectSqlSideEffect effect)
         {
             if (effect == null) return false;
             if (_assertionType == CommandTextAssertionType.Exact)

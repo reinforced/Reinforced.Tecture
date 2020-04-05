@@ -1,4 +1,4 @@
-﻿namespace Reinforced.Storage.SideEffects.Exact
+﻿namespace Reinforced.Tecture.Commands.Exact
 {
     /// <summary>
     /// Entity that can describe itself

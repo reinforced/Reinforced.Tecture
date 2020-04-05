@@ -8,18 +8,18 @@ using Reinforced.Storage.SideEffects;
 
 namespace Reinforced.Storage.Testing.Stories
 {
-    public class EndStoryAssertion : SideEffectAssertion<EndStorySideEffect>
+    public class EndStoryAssertion : CommandCheck<EndStorySideEffect>
     {
         internal EndStoryAssertion()
         {
         }
 
-        public override string GetMessage(EndStorySideEffect effect)
+        public override string GetMessage(EndStorySideEffect command)
         {
             return $"story unexpectedly ends";
         }
 
-        public override bool IsValid(EndStorySideEffect effect)
+        public override bool IsActuallyValid(EndStorySideEffect effect)
         {
             return true;
         }

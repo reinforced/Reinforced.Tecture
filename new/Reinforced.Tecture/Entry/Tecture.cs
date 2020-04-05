@@ -13,26 +13,27 @@ namespace Reinforced.Tecture.Entry
 {
     internal class Tecture : ITecture
     {
-        private readonly Registry _registry;
+        private readonly RuntimeMultiplexer _mx;
         private readonly ServiceManager _serviceManager;
         private readonly CommandsDispatcher _dispatcher;
+
         private readonly Pipeline _pipeline;
         private readonly ActionsQueue _actions = new ActionsQueue(true);
         private readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
         public Tecture(
-            Registry registry, 
+            RuntimeMultiplexer mx, 
             bool debugMode = false,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
-            _pipeline = new Pipeline(debugMode);
-            _registry = registry;
+            _pipeline = new Pipeline(debugMode,mx);
+            _mx = mx;
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
             _serviceManager = new ServiceManager(_finallyActions, _actions, _pipeline);
-            _dispatcher = new CommandsDispatcher(registry);
+            _dispatcher = new CommandsDispatcher(mx);
         }
 
         /// <summary>
@@ -60,9 +61,12 @@ namespace Reinforced.Tecture.Entry
         /// </summary>
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
-        public T From<T>() where T : ISource
+        public T From<T>() where T : class,ISource
         {
-            return _registry.GetSource<T>();
+            var src = _mx.GetSource<T>();
+            if (src==null)
+                throw new TectureException($"Source {typeof(T).Name} not found");
+            return src;
         }
 
         private IOuterTransaction ObtainTransaction(
@@ -110,7 +114,7 @@ namespace Reinforced.Tecture.Entry
             {
                 try
                 {
-                    if (tran != null) tran.Dispose();
+                    tran?.Dispose();
                 }
                 catch (Exception)
                 {
@@ -153,7 +157,7 @@ namespace Reinforced.Tecture.Entry
             {
                 try
                 {
-                    if (tran != null) tran.Dispose();
+                    tran?.Dispose();
                 }
                 catch (Exception)
                 {
@@ -161,6 +165,13 @@ namespace Reinforced.Tecture.Entry
                 }
                 if (thrown != null) throw thrown;
             }
+        }
+
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public void Dispose()
+        {
+            _pipeline._locator = null;
+            _mx.Dispose();
         }
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Reinforced.Storage.Testing.Stories.Common
 {
-    public class SaveAssertion : SideEffectAssertion<SaveChangesSideEffect>
+    public class SaveAssertion : CommandCheck<SaveChangesSideEffect>
     {
-        public override string GetMessage(SaveChangesSideEffect effect)
+        public override string GetMessage(SaveChangesSideEffect command)
         {
             return "expected saving to storage, but something went wrong";
         }
 
-        public override bool IsValid(SaveChangesSideEffect effect)
+        public override bool IsActuallyValid(SaveChangesSideEffect effect)
         {
             return true;
         }

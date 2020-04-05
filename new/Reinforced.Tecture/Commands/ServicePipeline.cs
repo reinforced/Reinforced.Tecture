@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Commands
 {
     /// <summary>
     /// Command pipeline context suitable for extensions
     /// </summary>
-    public class ServicePipeline
+    public class ServicePipeline : IRuntimeLocator
     {
         private readonly Pipeline _pipeline;
-
+        
         internal ServicePipeline(Pipeline pipeline)
         {
             _pipeline = pipeline;
@@ -28,12 +29,7 @@ namespace Reinforced.Tecture.Commands
         {
             return IsSubject(typeof(T));
         }
-
-        public void EnqueueCommand(CommandBase effect)
-        {
-            _pipeline.EnqueueCommand(effect);
-        }
-
+        
         public TCommand Enqueue<TCommand>(TCommand cmd) where TCommand : CommandBase
         {
             return _pipeline.Enqueue(cmd);
@@ -42,6 +38,12 @@ namespace Reinforced.Tecture.Commands
         public CatchingCommands<T> Catch<T>(T sideEffectCatcher, string annotation = null) where T : ICommandCatcher
         {
             return _pipeline.Catch(sideEffectCatcher, annotation);
+        }
+
+        public IEnumerable<TRuntime> GetRuntimes<TRuntime>(Func<TRuntime, bool> predicate)
+            where TRuntime : ITectureRuntime
+        {
+            return _pipeline._locator.GetRuntimes(predicate);
         }
     }
 

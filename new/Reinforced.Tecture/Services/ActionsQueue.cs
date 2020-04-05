@@ -8,7 +8,6 @@ namespace Reinforced.Tecture
 {
     class ActionsQueue
     {
-        internal ServiceManager _serviceManager;
         private readonly Queue<object> _queue = new Queue<object>();
         private bool _isQueueRunning = false;
         private readonly bool _allowEnqueueWhileRunning;

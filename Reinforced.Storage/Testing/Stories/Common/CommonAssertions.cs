@@ -10,6 +10,6 @@ namespace Reinforced.Storage.Testing.Stories.Common
     {
         public static AnnotationAssertion Annotated(string annotationText) => new AnnotationAssertion(annotationText);
         public static SaveAssertion Saved() => new SaveAssertion();
-        public static CommentAssertion Comment(string content = null) => new CommentAssertion(content);
+        public static CommentCheck Comment(string content = null) => new CommentCheck(content);
     }
 }

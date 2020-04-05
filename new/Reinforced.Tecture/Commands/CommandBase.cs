@@ -39,7 +39,7 @@ namespace Reinforced.Tecture.Commands
         /// <summary>
         /// Describes actions that are being performed within command
         /// </summary>
-        /// <param name="tw"></param>
+        /// <param name="tw">Log writer</param>
         public abstract void Describe(TextWriter tw);
     }
 
