@@ -12,10 +12,8 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
             Action<IPrefetch> prefetch = null
             )
         {
-            TestingOrmSource src = new TestingOrmSource(strict);
-            if (prefetch != null) prefetch(src);
-
-            TestingOrmRuntime torr = new TestingOrmRuntime(src);
+            TestingOrmRuntime torr = new TestingOrmRuntime(strict);
+            if (prefetch != null) prefetch(torr._testingDataSource);
 
             te.WithTestRuntime(torr);
             return te;

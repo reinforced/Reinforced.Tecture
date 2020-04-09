@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Queries
 {
@@ -9,5 +10,6 @@ namespace Reinforced.Tecture.Queries
     /// </summary>
     public interface ISource
     {
+        T Runtime<T>() where T : class, ITectureRuntime;
     }
 }

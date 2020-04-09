@@ -7,6 +7,6 @@ namespace Reinforced.Tecture.Methodics.SqlStroke
 {
     public interface ISqlSource : ISource
     {
-        SqlStrokeRuntimeBase GetStrokeRuntime();
+        SqlStrokeRuntimeBase GetStrokeRuntime(Type[] usedTypes);
     }
 }

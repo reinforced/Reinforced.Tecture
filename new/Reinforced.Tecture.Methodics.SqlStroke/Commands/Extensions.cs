@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Methodics.SqlStroke.Commands
 {
     public static partial class Extensions
     {
-        internal static StrokeProcessor GetProcessor(this ServicePipeline s, Type[] usedTypes)
+        internal static SqlStrokeRuntimeBase  GetRuntime(this ServicePipeline s, Type[] usedTypes)
         {
             var rt = s
                 .GetRuntimes<SqlStrokeRuntimeBase>()
@@ -19,6 +19,12 @@ namespace Reinforced.Tecture.Methodics.SqlStroke.Commands
             if (rt == null)
                 throw new SqlStrokeException($"Can not use SQL strokes. Please ensure that corresponding runtime is registered and serving following types: {string.Join(", ", usedTypes.Select(v => v.Name))}");
 
+            return rt;
+        }
+
+        internal static StrokeProcessor GetProcessor(this ServicePipeline s, Type[] usedTypes)
+        {
+            var rt = s.GetRuntime(usedTypes);
             return rt.GetProcessor();
         }
 

@@ -14,7 +14,7 @@ namespace Reinforced.Tecture.Playground.Services
 
         public void Operation()
         {
-            Q.Add(new User());
+            Q.Add(new User()).Annotate("Удаляем юзера");
 
             Do<OrdersService>().Operation();
         }

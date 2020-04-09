@@ -43,5 +43,8 @@ namespace Reinforced.Tecture.Methodics.SqlStroke
         protected abstract IEnumerable<Type> ServingTypes { get; }
         public abstract void ExecuteSql(string command, object[] parameters);
         public abstract Task ExecuteSqlAsync(string command, object[] parameters);
+
+        public abstract IEnumerable<T> Query<T>(string command, object[] parameters);
+        public abstract Task<IEnumerable<T>> QueryAsync<T>(string command, object[] parameters);
     }
 }

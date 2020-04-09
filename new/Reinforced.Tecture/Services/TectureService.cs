@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Queries;
 
 
 namespace Reinforced.Tecture.Services
@@ -18,7 +19,7 @@ namespace Reinforced.Tecture.Services
         /// <summary>
         /// Await point to split actions before/after savechanges call
         /// </summary>
-        public ActionsQueueTask Save
+        protected ActionsQueueTask Save
         {
             get { return Pipeline.Save; }
         }
@@ -26,7 +27,7 @@ namespace Reinforced.Tecture.Services
         /// <summary>
         /// Await point to split actions that must happen after everything
         /// </summary>
-        public ActionsQueueTask Final
+        protected ActionsQueueTask Final
         {
             get { return Pipeline.Final; }
         }
@@ -70,7 +71,11 @@ namespace Reinforced.Tecture.Services
         /// </summary>
         protected virtual void Init() { }
 
-        
+        protected T From<T>() where T : class, ISource
+        {
+            return Pipeline.CorePipeline._locator.GetSource<T>();
+        }
+
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {

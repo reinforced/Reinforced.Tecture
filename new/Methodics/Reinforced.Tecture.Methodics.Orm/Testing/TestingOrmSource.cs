@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Methodics.Orm.Testing
 {
@@ -10,10 +11,11 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
     {
         private readonly bool _strict;
         private readonly Dictionary<Type, IList> _prefetchedCollections = new Dictionary<Type, IList>();
-
-        public TestingOrmSource(bool strict)
+        private readonly TestingOrmRuntime _runtime;
+        public TestingOrmSource(TestingOrmRuntime runtime, bool strict)
         {
             _strict = strict;
+            _runtime = runtime;
         }
 
         protected override IQueryable<T> ProvideSet<T>()
@@ -29,6 +31,14 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
                 }
             }
             return ((ICollection<T>)_prefetchedCollections[typeof(T)]).AsQueryable();
+        }
+
+        
+
+        public override T Runtime<T>()
+        {
+            if (_runtime is T rt) return rt;
+            return null;
         }
 
         /// <summary>

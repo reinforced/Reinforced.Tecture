@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Reinforced.Tecture.Integrate;
 using Reinforced.Tecture.Methodics.Orm.Queries;
 
 namespace Reinforced.Tecture.Methodics.Orm
@@ -31,5 +32,7 @@ namespace Reinforced.Tecture.Methodics.Orm
         {
             return ProvideSet<T>();
         }
+
+        public abstract T Runtime<T>() where T : class, ITectureRuntime;
     }
 }

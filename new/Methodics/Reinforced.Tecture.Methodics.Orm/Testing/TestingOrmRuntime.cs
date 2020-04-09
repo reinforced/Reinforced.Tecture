@@ -14,9 +14,9 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
         private readonly AddCommandRunner _add;
         private readonly DeleteCommandRunner _remove;
         private readonly UpdateCommandRunner _update;
-        public TestingOrmRuntime(TestingOrmSource testingDataSource)
+        public TestingOrmRuntime(bool strict)
         {
-            _testingDataSource = testingDataSource;
+            _testingDataSource = new TestingOrmSource(this, strict);
             _add = new AddCommandRunner(_testingDataSource);
             _remove = new DeleteCommandRunner(_testingDataSource);
             _update = new UpdateCommandRunner(_testingDataSource);
@@ -36,6 +36,14 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
         public override ISaver[] GetSavers()
         {
             return _empty;
+        }
+
+        /// <summary>
+        /// Gets whether runtime is in testing mode
+        /// </summary>
+        public override bool Testing
+        {
+            get { return true; }
         }
 
         protected override ICommandRunner<Add> ProvideAddRunner(Add command)

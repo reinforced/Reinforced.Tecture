@@ -1,4 +1,5 @@
 ﻿using System;
+using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Methodics.Orm.Commands.Add;
 using Reinforced.Tecture.Methodics.Orm.Testing;
 using Reinforced.Tecture.Methodics.Orm.Testing.Assumptions;
@@ -12,6 +13,16 @@ namespace Reinforced.Tecture.Playground
     {
         static void Main(string[] args)
         {
+            var bld = new TectureBuilder();
+
+            ITecture tc = bld.Build();
+
+            tc.Do<OrdersService>().Operation();
+            tc.Do<UserService>().Operation();
+
+            tc.Save();
+                
+
             var te = new TestingEnvironment()
                 .Assume(x =>
                 {
@@ -19,7 +30,10 @@ namespace Reinforced.Tecture.Playground
                 })
                 .WithOrmTesting();
 
-            var story = te.TellStory(x => x.Do<UserService>().Operation());
+            var story = te.TellStory(x =>
+            {
+                x.Do<UserService>().Operation();
+            });
 
         }
 

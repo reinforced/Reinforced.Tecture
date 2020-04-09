@@ -10,6 +10,7 @@ namespace Reinforced.Tecture.Methodics.SqlStroke.Commands
     [CommandCode("SQL")]
     public class Sql : CommandBase
     {
+        internal Sql() { }
         public string Command { get; internal set; }
 
         public object[] Parameters { get; internal set; }

@@ -52,7 +52,12 @@ namespace Reinforced.Tecture.Methodics.Orm
 
             return null;
         }
-       
+
+        /// <summary>
+        /// Gets whether runtime is in testing mode
+        /// </summary>
+        public abstract bool Testing { get; }
+
         protected abstract ICommandRunner<Add> ProvideAddRunner(Add command);
         protected abstract ICommandRunner<Delete> ProvideDeleteRunner(Delete command);
         protected abstract ICommandRunner<Update> ProvideUpdateRunner(Update command);

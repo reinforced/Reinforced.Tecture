@@ -31,6 +31,13 @@ namespace Reinforced.Tecture.Integrate
         /// <typeparam name="TSource">Type of supported data source</typeparam>
         /// <returns>Data source instance</returns>
         TSource GetSource<TSource>() where TSource : class, ISource;
+
+
+        /// <summary>
+        /// Gets whether runtime is in testing mode
+        /// </summary>
+        bool Testing { get; }
+        
     }
     
 }
