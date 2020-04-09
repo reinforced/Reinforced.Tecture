@@ -11,9 +11,9 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Add
     /// Command for entity addition
     /// </summary>
     [CommandCode("ADD")]
-    public class AddCommand : CommandBase
+    public class Add : CommandBase, IOrmCommand
     {
-        internal AddCommand() { }
+        internal Add() { }
         public object Entity { get; internal set; }
 
         public Type EntityType { get; internal set; }

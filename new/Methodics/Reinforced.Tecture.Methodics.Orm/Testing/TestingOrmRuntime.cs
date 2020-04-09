@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
 {
     class TestingOrmRuntime : OrmRuntimeBase, ITestingRuntime
     {
-        private readonly TestingOrmSource _testingDataSource;
+        internal readonly TestingOrmSource _testingDataSource;
         private readonly AddCommandRunner _add;
         private readonly DeleteCommandRunner _remove;
         private readonly UpdateCommandRunner _update;
@@ -38,17 +38,17 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
             return _empty;
         }
 
-        protected override ICommandRunner<AddCommand> ProvideAddRunner(AddCommand command)
+        protected override ICommandRunner<Add> ProvideAddRunner(Add command)
         {
             return _add;
         }
 
-        protected override ICommandRunner<DeleteCommand> ProvideDeleteRunner(DeleteCommand command)
+        protected override ICommandRunner<Delete> ProvideDeleteRunner(Delete command)
         {
             return _remove;
         }
 
-        protected override ICommandRunner<UpdateCommand> ProvideUpdateRunner(UpdateCommand command)
+        protected override ICommandRunner<Update> ProvideUpdateRunner(Update command)
         {
             return _update;
         }

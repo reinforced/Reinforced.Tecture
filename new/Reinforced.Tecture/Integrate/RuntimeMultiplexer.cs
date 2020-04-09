@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Integrate
     /// <summary>
     /// Multiplexes several runtime into one interface
     /// </summary>
-    class RuntimeMultiplexer : IDisposable
+    class RuntimeMultiplexer : IDisposable, IRuntimeLocator
 //: ITectureRuntime just to let you know
     {
         private readonly List<ITectureRuntime> _runtimes = new List<ITectureRuntime>();

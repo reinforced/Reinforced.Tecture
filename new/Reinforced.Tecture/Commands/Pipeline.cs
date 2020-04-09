@@ -47,14 +47,18 @@ namespace Reinforced.Tecture.Commands
             return cmd;
         }
 
+        internal ActionsQueue PostSaveActions { get; private set; }
+        internal ActionsQueue FinallyActions { get; private set; }
 
         private readonly bool _debugMode;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        internal Pipeline(bool debugMode, RuntimeMultiplexer locator)
+        internal Pipeline(bool debugMode, RuntimeMultiplexer locator, ActionsQueue postSaveActions, ActionsQueue finallyActions)
         {
             _debugMode = debugMode;
             _locator = locator;
+            PostSaveActions = postSaveActions;
+            FinallyActions = finallyActions;
         }
 
         private readonly Stack<ICommandCatcher> _catchersStack = new Stack<ICommandCatcher>();

@@ -12,9 +12,9 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
     /// Command for entity removal
     /// </summary>
     [CommandCode("DEL")]
-    public class DeleteCommand : CommandBase
+    public class Delete : CommandBase, IOrmCommand
     {
-        internal DeleteCommand() { }
+        internal Delete() { }
 
         public object Entity { get; internal set; }
 

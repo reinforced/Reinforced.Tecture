@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
     /// </summary>
     public static partial class Extensions
     {
-        private static DeleteCommand DeleteCore(ServicePipeline ppl, object entity)
+        private static Delete DeleteCore(ServicePipeline ppl, object entity)
         {
             if (entity == null)
                 throw new TectureOrmMethodicsException("Entity going to be deleted cannot be null");
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
             if (!ppl.IsSubject(t))
                 throw new TectureOrmMethodicsException($"Entity {entity} is not a subject for deletion in corresponding service");
 
-            return ppl.Enqueue(new DeleteCommand()
+            return ppl.Enqueue(new Delete()
             {
                 EntityType = t,
                 Entity = entity
@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
         /// <param name="pipeline">Tecture pipeline</param>
         /// <param name="entity">Entity</param>
         /// <returns>Add command instance</returns>
-        public static DeleteCommand Delete<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
+        public static Delete Delete<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
         {
             return DeleteCore(pipeline, entity);
         }

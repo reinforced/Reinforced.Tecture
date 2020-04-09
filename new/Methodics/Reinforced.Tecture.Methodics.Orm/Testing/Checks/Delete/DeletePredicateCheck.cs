@@ -6,7 +6,7 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Delete
 {
-    public class DeletePredicateCheck<T> : CommandCheck<DeleteCommand>, IMemorizing
+    public class DeletePredicateCheck<T> : CommandCheck<Commands.Delete.Delete>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
@@ -19,7 +19,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Delete
             _memorizedValue = mem;
         }
 
-        protected override string GetMessage(DeleteCommand command)
+        protected override string GetMessage(Commands.Delete.Delete command)
         {
             if (command == null) return $"expected removed entity {_explanation}, but story unexpectedly ends";
             if (command.EntityType != typeof(T))
@@ -30,7 +30,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Delete
             return $"expected removed entity {_explanation}, but seems that it does not";
         }
 
-        protected override bool IsActuallyValid(DeleteCommand effect)
+        protected override bool IsActuallyValid(Commands.Delete.Delete effect)
         {
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;
@@ -39,7 +39,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Delete
 
         public void Memorize(CommandBase seb)
         {
-            _memorizedValue.SetValue(((DeleteCommand)seb).Entity);
+            _memorizedValue.SetValue(((Commands.Delete.Delete)seb).Entity);
         }
     }
 }

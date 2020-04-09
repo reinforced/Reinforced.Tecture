@@ -31,9 +31,9 @@ namespace Reinforced.Tecture.Methodics.Orm
         /// <returns></returns>
         public virtual ICommandRunner GetRunner(CommandBase command)
         {
-            if (command is AddCommand ac) return ProvideAddRunner(ac);
-            if (command is DeleteCommand dc) return ProvideDeleteRunner(dc);
-            if (command is UpdateCommand uc) return ProvideUpdateRunner(uc);
+            if (command is Add ac) return ProvideAddRunner(ac);
+            if (command is Delete dc) return ProvideDeleteRunner(dc);
+            if (command is Update uc) return ProvideUpdateRunner(uc);
             return null;
         }
 
@@ -53,9 +53,9 @@ namespace Reinforced.Tecture.Methodics.Orm
             return null;
         }
        
-        protected abstract ICommandRunner<AddCommand> ProvideAddRunner(AddCommand command);
-        protected abstract ICommandRunner<DeleteCommand> ProvideDeleteRunner(DeleteCommand command);
-        protected abstract ICommandRunner<UpdateCommand> ProvideUpdateRunner(UpdateCommand command);
+        protected abstract ICommandRunner<Add> ProvideAddRunner(Add command);
+        protected abstract ICommandRunner<Delete> ProvideDeleteRunner(Delete command);
+        protected abstract ICommandRunner<Update> ProvideUpdateRunner(Update command);
         protected abstract OrmSourceBase ProvideSource(Type sourceType);
        
     }

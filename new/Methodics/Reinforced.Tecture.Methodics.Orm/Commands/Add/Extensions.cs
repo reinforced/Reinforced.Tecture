@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Add
     /// </summary>
     public static partial class Extensions
     {
-        private static AddCommand AddCore(ServicePipeline ppl, object entity)
+        private static Add AddCore(ServicePipeline ppl, object entity)
         {
             if (entity==null)
                 throw new TectureOrmMethodicsException("Entity going to be added cannot be null");
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Add
             if (!ppl.IsSubject(t)) 
                 throw new TectureOrmMethodicsException($"Entity {entity} is not a subject for addition in corresponding service");
 
-            return ppl.Enqueue(new AddCommand()
+            return ppl.Enqueue(new Add()
             {
                 EntityType = t,
                 Entity = entity
@@ -33,7 +33,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Add
         /// <param name="pipeline">Tecture pipeline</param>
         /// <param name="entity">Entity</param>
         /// <returns>Add command instance</returns>
-        public static AddCommand Add<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
+        public static Add Add<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
         {
             return AddCore(pipeline, entity);
         }

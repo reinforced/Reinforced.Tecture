@@ -8,10 +8,17 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing
     public static class Extensions
     {
         public static TestingEnvironment WithOrmTesting(this TestingEnvironment te, 
-            Action<IPrefetch> prefetch = null,
+            bool strict = false,
+            Action<IPrefetch> prefetch = null
             )
         {
-            
+            TestingOrmSource src = new TestingOrmSource(strict);
+            if (prefetch != null) prefetch(src);
+
+            TestingOrmRuntime torr = new TestingOrmRuntime(src);
+
+            te.WithTestRuntime(torr);
+            return te;
         }
     }
 }

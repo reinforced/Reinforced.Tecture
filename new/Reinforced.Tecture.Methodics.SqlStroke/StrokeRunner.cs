@@ -7,9 +7,9 @@ using Reinforced.Tecture.Methodics.SqlStroke.Commands;
 
 namespace Reinforced.Tecture.Methodics.SqlStroke
 {
-    class StrokeRunner : ICommandRunner<SqlCommand>
+    class StrokeRunner : ICommandRunner<Sql>
     {
-        private SqlStrokeRuntimeBase _runtime;
+        private readonly SqlStrokeRuntimeBase _runtime;
 
         public StrokeRunner(SqlStrokeRuntimeBase runtime)
         {
@@ -19,20 +19,20 @@ namespace Reinforced.Tecture.Methodics.SqlStroke
         /// <summary>
         /// Runs side effect 
         /// </summary>
-        /// <param name="effect">Side effect</param>
-        public void Run(SqlCommand effect)
+        /// <param name="cmd">Side effect</param>
+        public void Run(Sql cmd)
         {
-            _runtime.ExecuteSql(effect.Command,effect.Parameters);
+            _runtime.ExecuteSql(cmd.Command,cmd.Parameters);
         }
 
         /// <summary>
         /// Runs side effect asynchronously
         /// </summary>
-        /// <param name="effect">Side effect</param>
+        /// <param name="cmd">Side effect</param>
         /// <returns>Side effect</returns>
-        public Task RunAsync(SqlCommand effect)
+        public Task RunAsync(Sql cmd)
         {
-            return _runtime.ExecuteSqlAsync(effect.Command, effect.Parameters);
+            return _runtime.ExecuteSqlAsync(cmd.Command, cmd.Parameters);
         }
     }
 }

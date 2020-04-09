@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Integrate;
+using Reinforced.Tecture.Testing.Assumptions;
 using Reinforced.Tecture.Testing.Stories;
 
 namespace Reinforced.Tecture.Testing
 {
     class TestingCommandsDispatcher : CommandsDispatcher
     {
+        private readonly Dictionary<Type, List<AssumptionBase>> _assumptions;
         private Queue<CommandBase> _story;
         private bool _isStoryActive = false;
         internal void BeginStory()
@@ -27,8 +29,28 @@ namespace Reinforced.Tecture.Testing
             return new StorageStory(_story, env);
         }
 
-        internal TestingCommandsDispatcher(RuntimeMultiplexer mx) : base(mx)
+        internal TestingCommandsDispatcher(RuntimeMultiplexer mx, Dictionary<Type, List<AssumptionBase>> assumptions) : base(mx)
         {
+            _assumptions = assumptions;
+        }
+
+        protected override Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)
+        {
+            var commandType = command.GetType();
+            if (_assumptions.ContainsKey(commandType))
+            {
+                var assumed = _assumptions[commandType];
+                var suitable = assumed.FirstOrDefault(x => x.Should(command));
+                if (suitable != null)
+                {
+                    var bs = base.GetRunner(command);
+                    suitable.OriginalRunner = bs.Item2;
+                    var gateway = new CommandRunnerGateway(commandType, suitable.GetType());
+                    return new Tuple<CommandRunnerGateway, ICommandRunner>(gateway, suitable);
+                }
+            }
+
+            return base.GetRunner(command);
         }
 
         protected override void Save()

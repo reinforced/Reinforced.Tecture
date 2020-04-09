@@ -14,7 +14,8 @@ namespace Reinforced.Tecture.Commands
     class CommandsDispatcher
     {
         private readonly RuntimeMultiplexer _mx;
-        private class CommandRunnerGateway
+
+        protected class CommandRunnerGateway
         {
             private readonly MethodInfo _run;
             private readonly MethodInfo _runAsync;
@@ -90,9 +91,9 @@ namespace Reinforced.Tecture.Commands
             } while (queue.HasEffects);
         }
 
-        private Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)
+        protected virtual Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)
         {
-            var effectType = command.GetType();
+            var commandType = command.GetType();
             var runner = _mx.GetRunner(command);
             if (runner == null) 
                 throw new TectureException($"Runner for command {command} was not found");
@@ -101,18 +102,18 @@ namespace Reinforced.Tecture.Commands
             if (!_runnerGateways.ContainsKey(runnerType))
             {
                 _runnerGateways[runnerType] =
-                    new CommandRunnerGateway(effectType, runnerType);
+                    new CommandRunnerGateway(commandType, runnerType);
             }
             return new Tuple<CommandRunnerGateway, ICommandRunner>(_runnerGateways[runnerType], runner);
         }
 
-        protected void RunCommand(CommandBase effect)
+        protected virtual void RunCommand(CommandBase effect)
         {
             var r = GetRunner(effect);
             r.Item1.Run(r.Item2, effect);
         }
 
-        protected Task RunCommandAsync(CommandBase effect)
+        protected virtual Task RunCommandAsync(CommandBase effect)
         {
             var r = GetRunner(effect);
             return r.Item1.RunAsync(r.Item2, effect);

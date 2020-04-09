@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Integrate;
+using Reinforced.Tecture.Testing.Assumptions;
 
 namespace Reinforced.Tecture.Testing
 {
@@ -16,6 +18,12 @@ namespace Reinforced.Tecture.Testing
         public static TestingEnvironment WithTestRuntime(this TestingEnvironment env, ITestingRuntime runtime)
         {
             env._mx.AddRuntime(runtime);
+            return env;
+        }
+
+        public static TestingEnvironment Assume(this TestingEnvironment env, Action<Assuming> assumptions)
+        {
+            if (assumptions != null) assumptions(env._assumptions);
             return env;
         }
     }

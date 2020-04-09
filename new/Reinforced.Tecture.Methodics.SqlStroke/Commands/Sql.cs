@@ -8,7 +8,7 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Methodics.SqlStroke.Commands
 {
     [CommandCode("SQL")]
-    public class SqlCommand : CommandBase
+    public class Sql : CommandBase
     {
         public string Command { get; internal set; }
 
@@ -19,7 +19,7 @@ namespace Reinforced.Tecture.Methodics.SqlStroke.Commands
             return String.Format(Command, Parameters);
         }
 
-        public SqlCommand(string commandText, object[] parameters = null)
+        public Sql(string commandText, object[] parameters = null)
         {
             OriginalParameters = parameters;
             // here we do parameters reformatting

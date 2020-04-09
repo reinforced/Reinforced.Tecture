@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
 
@@ -11,29 +12,30 @@ namespace Reinforced.Tecture.Services
     public partial class TectureService : IDisposable
     {
         #region Auto-injected
-        internal ActionsQueue PostSaveActions { get; set; }
-        internal ActionsQueue FinallyActions { get; set; }
         internal ServiceManager ServiceManager { get; set; }
         #endregion
 
         /// <summary>
         /// Await point to split actions before/after savechanges call
         /// </summary>
-        protected ActionsQueueTask Save
+        public ActionsQueueTask Save
         {
-            get { return new ActionsQueueTask(PostSaveActions); }
+            get { return Pipeline.Save; }
         }
 
         /// <summary>
         /// Await point to split actions that must happen after everything
         /// </summary>
-        protected ActionsQueueTask Final
+        public ActionsQueueTask Final
         {
-            get { return new ActionsQueueTask(FinallyActions); }
+            get { return Pipeline.Final; }
         }
 
         internal void CallOnSave() { OnSave(); }
         internal void CallOnFinally() { OnFinally(); }
+
+        internal Task CallOnSaveAsync() { return OnSaveAsync(); }
+        internal Task CallOnFinallyAsync() { return OnFinallyAsync(); }
 
         internal virtual ServicePipeline Pipeline { get; private set; }
 
@@ -46,70 +48,29 @@ namespace Reinforced.Tecture.Services
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
         /// </summary>
-        protected virtual async void OnSave() { }
+        protected virtual void OnSave() { }
 
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data after all save changes calls.
         /// </summary>
         protected virtual void OnFinally() { }
-       
-       
-        [Unexplainable]
-        protected internal UpdateSideEffect ControlledUpdate<TEntity>(TEntity entity) where TEntity : class
-        {
-            Validate<TEntity>();
-            return Tecture.Commands.Pipeline.Enqueue(new UpdateSideEffect(entity, typeof(TEntity)));
-        }
 
-        [Unexplainable]
-        protected internal UpdateSideEffect ControlledUpdate<TEntity>(TEntity entity, params Expression<Func<TEntity, object>>[] properties) where TEntity : class
-        {
-            Validate<TEntity>();
-            return Tecture.Commands.Pipeline.Enqueue(new UpdateSideEffect(entity, typeof(TEntity), properties));
-        }
+        /// <summary>
+        /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
+        /// </summary>
+        protected virtual async Task OnSaveAsync() { }
 
-        private string ControlledReveal(LambdaExpression expr, out object[] parameters)
-        {
-            var cmd = StrokeProcessor.RevealQuery(expr);
-            foreach (var cmdUsedType in cmd.UsedTypes)
-            {
-                if (!EntitiesUsed.Contains(cmdUsedType))
-                {
-                    throw new Exception($"{GetType().FullName} cannot use entity {cmdUsedType.FullName} in SQL command because has no power to do so");
-                }
-            }
-
-            parameters = cmd.CommandParameters;
-            return cmd.CommandText;
-        }
+        /// <summary>
+        /// Aggregating service pattern. Override this method to write aggregated data after all save changes calls.
+        /// </summary>
+        protected virtual async Task OnFinallyAsync() { }
 
         /// <summary>
         /// Called right after service initialization. Use it to do things right after service is created
         /// </summary>
         protected virtual void Init() { }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        [Unexplainable]
-        protected virtual DirectSqlSideEffect Sql(string command, params object[] parameters)
-        {
-            return Tecture.Commands.Pipeline.Enqueue(new DirectSqlSideEffect(command, parameters));
-        }
-
-        /// <summary>
-        /// Query storage interface
-        /// </summary>
-        /// <typeparam name="T">Entity type</typeparam>
-        /// <returns>Query builder</returns>
-        protected IQueryFor<T> Get<T>() where T : class
-        {
-            return SetManager.Get<T>();
-        }
-
+        
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {

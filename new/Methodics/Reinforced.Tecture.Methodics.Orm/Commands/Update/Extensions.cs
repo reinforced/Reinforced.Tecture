@@ -8,7 +8,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
 {
     public static partial class Extensions
     {
-        private static UpdateCommand UpdateCore(ServicePipeline ppl, object entity, LambdaExpression[] properties)
+        private static Update UpdateCore(ServicePipeline ppl, object entity, LambdaExpression[] properties)
         {
             if (entity == null)
                 throw new TectureOrmMethodicsException("Entity going to be updated cannot be null");
@@ -18,10 +18,10 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
             if (!ppl.IsSubject(t))
                 throw new TectureOrmMethodicsException($"Entity {entity} is not a subject for updating in corresponding service");
 
-            return ppl.Enqueue(new UpdateCommand(entity, t, properties));
+            return ppl.Enqueue(new Update(entity, t, properties));
         }
 
-        private static UpdateCommand UpdateCore(ServicePipeline ppl, object entity)
+        private static Update UpdateCore(ServicePipeline ppl, object entity)
         {
             if (entity == null)
                 throw new TectureOrmMethodicsException("Entity going to be updated cannot be null");
@@ -31,7 +31,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
             if (!ppl.IsSubject(t))
                 throw new TectureOrmMethodicsException($"Entity {entity} is not a subject for updating in corresponding service");
 
-            return ppl.Enqueue(new UpdateCommand(entity, t));
+            return ppl.Enqueue(new Update(entity, t));
         }
 
 
@@ -42,7 +42,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
         /// <param name="pipeline">Tecture pipeline</param>
         /// <param name="entity">Entity</param>
         /// <returns>Update command instance</returns>
-        public static UpdateCommand Update<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
+        public static Update Update<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
         {
             return UpdateCore(pipeline, entity);
         }
@@ -54,7 +54,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
         /// <param name="pipeline">Tecture pipeline</param>
         /// <param name="entity">Entity</param>
         /// <returns>Update command instance</returns>
-        public static UpdateCommand Update<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity, params Expression<Func<TEntity, object>>[] properties)
+        public static Update Update<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity, params Expression<Func<TEntity, object>>[] properties)
         {
             return UpdateCore(pipeline, entity, properties);
         }

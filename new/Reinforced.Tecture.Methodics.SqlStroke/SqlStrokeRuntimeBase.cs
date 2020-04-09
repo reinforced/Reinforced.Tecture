@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Integrate;
+using Reinforced.Tecture.Methodics.SqlStroke.Reveal;
 using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Methodics.SqlStroke
@@ -27,7 +28,19 @@ namespace Reinforced.Tecture.Methodics.SqlStroke
             return new StrokeRunner(this);
         }
 
-        public abstract IMapp
+        internal StrokeProcessor GetProcessor()
+        {
+            return new StrokeProcessor(Mapper);
+        }
+
+        private HashSet<Type> _types = null;
+        internal HashSet<Type> Types
+        {
+            get { return _types ?? (_types = new HashSet<Type>(ServingTypes)); }
+        }
+
+        protected abstract IMapper Mapper { get; }
+        protected abstract IEnumerable<Type> ServingTypes { get; }
         public abstract void ExecuteSql(string command, object[] parameters);
         public abstract Task ExecuteSqlAsync(string command, object[] parameters);
     }

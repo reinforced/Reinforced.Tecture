@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Runners
     public class UpdateAssumptionArgument<T>
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public UpdateAssumptionArgument(T entity, UpdateCommand sideEffect, ICollectionProvider collectionProvider)
+        public UpdateAssumptionArgument(T entity, Update sideEffect, ICollectionProvider collectionProvider)
         {
             Entity = entity;
             SideEffect = sideEffect;
@@ -19,11 +19,11 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Runners
 
         public T Entity { get; private set; }
 
-        public UpdateCommand SideEffect { get; private set; }
+        public Update SideEffect { get; private set; }
 
         public ICollectionProvider CollectionProvider { get; private set; }
     }
-    class UpdateCommandRunner : ICommandRunner<UpdateCommand>
+    class UpdateCommandRunner : ICommandRunner<Update>
     {
         private readonly ICollectionProvider _env;
         private readonly Dictionary<Type, List<Delegate>> _assumedActions = new Dictionary<Type, List<Delegate>>();
@@ -43,15 +43,15 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Runners
         /// <summary>
         /// Runs side effect 
         /// </summary>
-        /// <param name="effect">Side effect</param>
-        public void Run(UpdateCommand effect)
+        /// <param name="cmd">Side effect</param>
+        public void Run(Update cmd)
         {
-            var coll = _env.GetCollection(effect.EntityType);
-            coll.Remove(effect.Entity);
-            if (_assumedActions.ContainsKey(effect.EntityType))
+            var coll = _env.GetCollection(cmd.EntityType);
+            coll.Remove(cmd.Entity);
+            if (_assumedActions.ContainsKey(cmd.EntityType))
             {
-                var l = _assumedActions[effect.EntityType];
-                var inst = Activator.CreateInstance(typeof(UpdateAssumptionArgument<>).MakeGenericType(effect.EntityType), new[] { effect.Entity, effect, _env });
+                var l = _assumedActions[cmd.EntityType];
+                var inst = Activator.CreateInstance(typeof(UpdateAssumptionArgument<>).MakeGenericType(cmd.EntityType), new[] { cmd.Entity, cmd, _env });
                 foreach (var del in l)
                 {
                     del.DynamicInvoke(inst);
@@ -62,11 +62,11 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Runners
         /// <summary>
         /// Runs side effect asynchronously
         /// </summary>
-        /// <param name="effect">Side effect</param>
+        /// <param name="cmd">Side effect</param>
         /// <returns>Side effect</returns>
-        public Task RunAsync(UpdateCommand effect)
+        public Task RunAsync(Update cmd)
         {
-            Run(effect);
+            Run(cmd);
             return Task.FromResult(0);
         }
     }

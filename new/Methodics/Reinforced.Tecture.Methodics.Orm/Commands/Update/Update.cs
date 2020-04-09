@@ -10,7 +10,7 @@ using Reinforced.Tecture.Commands.Exact;
 
 namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
 {
-    public class UpdateCommand : CommandBase
+    public class Update : CommandBase, IOrmCommand
     {
         public object Entity { get; internal set; }
 
@@ -18,13 +18,13 @@ namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
 
         public PropertyInfo[] PropertiesToUpdate { get; private set; } = new PropertyInfo[0];
 
-        internal UpdateCommand(object entity, Type entityType)
+        internal Update(object entity, Type entityType)
         {
             Entity = entity;
             EntityType = entityType;
         }
 
-        internal UpdateCommand(object entity, Type entityType, LambdaExpression[] properties)
+        internal Update(object entity, Type entityType, LambdaExpression[] properties)
         {
             Entity = entity;
             EntityType = entityType;

@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Entry
 {
     internal class Tecture : ITecture
     {
-        
+
         private readonly ServiceManager _serviceManager;
         private readonly CommandsDispatcher _dispatcher;
         private readonly RuntimeMultiplexer _mx;
@@ -21,18 +21,18 @@ namespace Reinforced.Tecture.Entry
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
         public Tecture(
-            RuntimeMultiplexer mx, 
+            RuntimeMultiplexer mx,
             CommandsDispatcher dispatcher,
             bool debugMode = false,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
             _mx = mx;
-            _pipeline = new Pipeline(debugMode, mx);
-            
+            _pipeline = new Pipeline(debugMode, mx, _actions, _finallyActions);
+
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
-            _serviceManager = new ServiceManager(_finallyActions, _actions, _pipeline);
+            _serviceManager = new ServiceManager(_pipeline);
             _dispatcher = dispatcher;
         }
 
@@ -61,10 +61,10 @@ namespace Reinforced.Tecture.Entry
         /// </summary>
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
-        public T From<T>() where T : class,ISource
+        public T From<T>() where T : class, ISource
         {
             var src = _mx.GetSource<T>();
-            if (src==null)
+            if (src == null)
                 throw new TectureException($"Source {typeof(T).Name} not found");
             return src;
         }
@@ -73,7 +73,7 @@ namespace Reinforced.Tecture.Entry
             OuterTransactionMode transaction,
             OuterTransactionIsolationLevel level)
         {
-            if (_tranManager==null)
+            if (_tranManager == null)
                 return new FakeOuterTransaction(level);
 
             if (transaction == OuterTransactionMode.DbTransaction)
@@ -91,7 +91,7 @@ namespace Reinforced.Tecture.Entry
         {
             if (_actions.IsRunning) throw new Exception(".SaveChanges cannot be called within post-save action");
             if (_finallyActions.IsRunning) throw new Exception(".SaveChanges cannot be called within finally action");
-            IOuterTransaction tran = ObtainTransaction(transaction,level);
+            IOuterTransaction tran = ObtainTransaction(transaction, level);
 
             Exception thrown = null;
             try
@@ -138,11 +138,11 @@ namespace Reinforced.Tecture.Entry
             try
             {
 
-                _serviceManager.OnSave();
+                await _serviceManager.OnSaveAsync();
 
                 await _dispatcher.DispatchAsync(_pipeline, _actions);
 
-                _serviceManager.OnFinally();
+                await _serviceManager.OnFinallyAsync();
                 await _finallyActions.RunAsync();
 
                 if (tran != null) tran.Commit();

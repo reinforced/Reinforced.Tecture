@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Services
 {
-    
+
     class ServiceManager
     {
-        private readonly ActionsQueue _postSaveActions;
-        private readonly ActionsQueue _finallyActions;
         private readonly Pipeline _pipeline;
         class ServiceContextEntry
         {
@@ -33,6 +32,22 @@ namespace Reinforced.Tecture.Services
             foreach (var srv in _allServices)
             {
                 srv.CallOnFinally();
+            }
+        }
+
+        public async Task OnSaveAsync()
+        {
+            foreach (var srv in _allServices)
+            {
+                await srv.CallOnSaveAsync();
+            }
+        }
+
+        public async Task OnFinallyAsync()
+        {
+            foreach (var srv in _allServices)
+            {
+                await srv.CallOnFinallyAsync();
             }
         }
 
@@ -67,23 +82,16 @@ namespace Reinforced.Tecture.Services
             sd.Add(entry);
         }
 
-        public ServiceManager(
-            ActionsQueue finallyActions, 
-            ActionsQueue postSaveActions, 
-            Pipeline pipeline)
+        public ServiceManager(Pipeline pipeline)
         {
-            _finallyActions = finallyActions;
-            _postSaveActions = postSaveActions;
             _pipeline = pipeline;
         }
 
         private TService CreateService<TService>() where TService : TectureService
         {
             var service = (TService)typeof(TService).InstanceNonpublic();
-            service.FinallyActions = _finallyActions;
-            service.PostSaveActions = _postSaveActions;
             service.ServiceManager = this;
-            
+
             return service;
         }
 
@@ -93,7 +101,7 @@ namespace Reinforced.Tecture.Services
             if (service != null) return (TService)service;
 
             service = CreateService<TService>();
-            
+
             var contextMethod = typeof(TService).GetRuntimeMethod("Context", paramTypes);
             if (contextMethod == null)
                 throw new Exception($"Cannot find context method of {typeof(TService).FullName} having arguments of types {string.Join(", ", paramTypes.Select(d => d.Name))} ");
@@ -109,16 +117,14 @@ namespace Reinforced.Tecture.Services
             SaveExistingContextService(typeof(TService), paramTypes, context, service);
             service.CallInit(_pipeline);
             _allServices.Add(service);
-            return (TService) service;
+            return (TService)service;
         }
 
         public void DestroyService(TectureService service)
         {
-            service.FinallyActions = null;
-            service.PostSaveActions = null;
             service.ServiceManager = null;
-            
-            
+
+
             var st = service.GetType();
             if (service is INoContext)
             {
