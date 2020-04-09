@@ -11,7 +11,7 @@ namespace Reinforced.Tecture
     /// <summary>
     /// Tecture facade
     /// </summary>
-    public interface ITecture : IDisposable
+    public interface ITectureNoSave : IDisposable
     {
         /// <summary>
         /// Obtains instance of uncontexted service to make it to do something
@@ -33,7 +33,10 @@ namespace Reinforced.Tecture
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
         T From<T>() where T : class, ISource;
+    }
 
+    public interface ITecture : ITectureNoSave
+    {
         /// <summary>
         /// Runs commands queue
         /// </summary>
@@ -47,4 +50,5 @@ namespace Reinforced.Tecture
         Task SaveAsync(OuterTransactionMode transaction = OuterTransactionMode.None,
             OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos);
     }
+
 }

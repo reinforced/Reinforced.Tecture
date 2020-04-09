@@ -1,4 +1,6 @@
 ﻿using System;
+using Reinforced.Tecture.Methodics.Orm.Testing;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Playground
 {
@@ -6,7 +8,8 @@ namespace Reinforced.Tecture.Playground
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var te = new TestingEnvironment()
+                .WithOrmTesting(x=>x.)
         }
     }
 }

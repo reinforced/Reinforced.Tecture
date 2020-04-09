@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Integrate;
@@ -13,27 +11,29 @@ namespace Reinforced.Tecture.Entry
 {
     internal class Tecture : ITecture
     {
-        private readonly RuntimeMultiplexer _mx;
+        
         private readonly ServiceManager _serviceManager;
         private readonly CommandsDispatcher _dispatcher;
-
-        private readonly Pipeline _pipeline;
-        private readonly ActionsQueue _actions = new ActionsQueue(true);
-        private readonly ActionsQueue _finallyActions = new ActionsQueue(false);
+        private readonly RuntimeMultiplexer _mx;
+        internal readonly Pipeline _pipeline;
+        internal readonly ActionsQueue _actions = new ActionsQueue(true);
+        internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
         public Tecture(
             RuntimeMultiplexer mx, 
+            CommandsDispatcher dispatcher,
             bool debugMode = false,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
-            _pipeline = new Pipeline(debugMode,mx);
             _mx = mx;
+            _pipeline = new Pipeline(debugMode, mx);
+            
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
             _serviceManager = new ServiceManager(_finallyActions, _actions, _pipeline);
-            _dispatcher = new CommandsDispatcher(mx);
+            _dispatcher = dispatcher;
         }
 
         /// <summary>

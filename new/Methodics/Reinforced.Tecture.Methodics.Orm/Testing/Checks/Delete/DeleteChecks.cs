@@ -1,7 +1,7 @@
 ﻿using System;
 using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Delete
+namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Delete
 {
     public static class DeleteChecks
     {

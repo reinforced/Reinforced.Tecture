@@ -1,4 +1,5 @@
 ﻿using System;
+using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Integrate;
 using Reinforced.Tecture.Transactions;
 
@@ -19,7 +20,12 @@ namespace Reinforced.Tecture.Entry
         /// <returns></returns>
         public ITecture Build()
         {
-            return new Tecture(_mx, tranManager: _transactionManager,exceptionHandler:_excHandler);
+            return new Tecture(
+                _mx,
+                new CommandsDispatcher(_mx),
+                false, 
+                _transactionManager, 
+                exceptionHandler: _excHandler);
         }
     }
 }

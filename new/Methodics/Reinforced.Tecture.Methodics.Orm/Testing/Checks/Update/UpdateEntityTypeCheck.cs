@@ -3,7 +3,7 @@ using Reinforced.Tecture.Methodics.Orm.Commands.Update;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Update
+namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
 {
     public class UpdateEntityTypeCheck<T> : CommandCheck<UpdateCommand>, IMemorizing
     {

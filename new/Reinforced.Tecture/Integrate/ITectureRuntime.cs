@@ -10,10 +10,10 @@ namespace Reinforced.Tecture.Integrate
     /// <summary>
     /// Tecture runtime
     /// </summary>
-    public interface ITectureRuntime : IDisposable
+    public interface ITectureRuntime
     {
         /// <summary>
-        /// Override supplies savers set
+        /// Override supplies savers set.
         /// </summary>
         /// <returns>Savers</returns>
         ISaver[] GetSavers();
@@ -32,4 +32,5 @@ namespace Reinforced.Tecture.Integrate
         /// <returns>Data source instance</returns>
         TSource GetSource<TSource>() where TSource : class, ISource;
     }
+    
 }

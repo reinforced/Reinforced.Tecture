@@ -3,7 +3,7 @@ using Reinforced.Tecture.Methodics.Orm.Commands.Add;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Add
+namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Add
 {
     public class AddEntityTypeCheck<T> : CommandCheck<AddCommand>, IMemorizing
     {

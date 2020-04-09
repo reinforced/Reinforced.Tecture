@@ -12,7 +12,7 @@ using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Methodics.Orm
 {
-    public abstract class OrmRuntimeBase : ITectureRuntime
+    public abstract class OrmRuntimeBase : ITectureRuntime, IDisposable
     {
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

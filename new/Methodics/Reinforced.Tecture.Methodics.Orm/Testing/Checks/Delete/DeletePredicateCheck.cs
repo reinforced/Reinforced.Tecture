@@ -4,7 +4,7 @@ using Reinforced.Tecture.Methodics.Orm.Commands.Delete;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Delete
+namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Delete
 {
     public class DeletePredicateCheck<T> : CommandCheck<DeleteCommand>, IMemorizing
     {

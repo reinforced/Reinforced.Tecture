@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reinforced.Storage.SideEffects;
-using Reinforced.Storage.SideEffects.Exact;
 
-namespace Reinforced.Storage.Testing.Stories.Update
+namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
 {
     public class UpdatePredicateCheck<T> : CommandCheck<UpdateSideEffect>, IMemorizing
     {

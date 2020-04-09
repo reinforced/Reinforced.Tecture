@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Commands
@@ -10,7 +11,7 @@ namespace Reinforced.Tecture.Commands
     /// <summary>
     /// Dispatches commands queue and implements enqueued actions
     /// </summary>
-    public class CommandsDispatcher
+    class CommandsDispatcher
     {
         private readonly RuntimeMultiplexer _mx;
         private class CommandRunnerGateway
@@ -47,36 +48,46 @@ namespace Reinforced.Tecture.Commands
 
 
         private readonly Lazy<ISaver[]> _savers;
-        internal virtual void Dispatch(Pipeline queue, ActionsQueue postSave)
+
+        protected virtual void Save()
+        {
+            foreach (var sideEffectSaver in _savers.Value)
+            {
+                sideEffectSaver.Save();
+            }
+        }
+
+        protected virtual async Task SaveAsync()
+        {
+            foreach (var sideEffectSaver in _savers.Value)
+            {
+                await sideEffectSaver.SaveAsync();
+            }
+        }
+
+
+        public virtual void Dispatch(Pipeline queue, ActionsQueue postSave)
         {
             do
             {
                 if (queue.HasEffects) DispatchInternal(queue.GetEffects());
 
-                foreach (var sideEffectSaver in _savers.Value)
-                {
-                    sideEffectSaver.Save();
-                }
+                Save();
 
                 postSave.Run();
             } while (queue.HasEffects);
         }
 
-        internal virtual async Task DispatchAsync(Pipeline queue, ActionsQueue postSave)
+        public virtual async Task DispatchAsync(Pipeline queue, ActionsQueue postSave)
         {
-
             do
             {
                 if (queue.HasEffects) await DispatchInternalAsync(queue.GetEffects());
 
-                foreach (var sideEffectSaver in _savers.Value)
-                {
-                    await sideEffectSaver.SaveAsync();
-                }
+                await SaveAsync();
 
                 await postSave.RunAsync();
             } while (queue.HasEffects);
-
         }
 
         private Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)

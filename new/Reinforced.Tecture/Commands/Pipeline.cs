@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Reinforced.Storage.Services;
+using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Integrate;
 using Reinforced.Tecture.Services;
 
@@ -11,7 +12,7 @@ namespace Reinforced.Tecture.Commands
     
     public class Pipeline
     {
-        internal IRuntimeLocator _locator;
+        internal RuntimeMultiplexer _locator;
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
         
         public void EnqueueCommand(CommandBase effect)
@@ -50,7 +51,7 @@ namespace Reinforced.Tecture.Commands
         private readonly bool _debugMode;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        internal Pipeline(bool debugMode, IRuntimeLocator locator)
+        internal Pipeline(bool debugMode, RuntimeMultiplexer locator)
         {
             _debugMode = debugMode;
             _locator = locator;

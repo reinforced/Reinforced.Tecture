@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reinforced.Tecture.Methodics.Orm.Testing.Add;
 using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Storage.Testing.Stories.Add
+namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Add
 {
     public static class AddChecks
     {

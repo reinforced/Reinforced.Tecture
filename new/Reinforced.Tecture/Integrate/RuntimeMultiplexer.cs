@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Integrate
@@ -10,20 +11,21 @@ namespace Reinforced.Tecture.Integrate
     /// <summary>
     /// Multiplexes several runtime into one interface
     /// </summary>
-    class RuntimeMultiplexer : IRuntimeLocator //: ITectureRuntime just to let you know
+    class RuntimeMultiplexer : IDisposable
+//: ITectureRuntime just to let you know
     {
         private readonly List<ITectureRuntime> _runtimes = new List<ITectureRuntime>();
 
-        public IEnumerable<TRuntime> GetRuntimes<TRuntime>(Func<TRuntime, bool> predicate) where TRuntime : ITectureRuntime
+        public IEnumerable<TRuntime> GetRuntimes<TRuntime>(Func<TRuntime, bool> predicate = null) where TRuntime : ITectureRuntime
         {
-            return _runtimes
-                .OfType<TRuntime>()
-                .Where(predicate);
+            var x = _runtimes.OfType<TRuntime>();
+            if (predicate != null) x = x.Where(predicate);
+            return x;
         }
 
         public void AddRuntime(ITectureRuntime runtime)
         {
-            if (runtime==null)
+            if (runtime == null)
                 throw new ArgumentNullException("runtime");
             _runtimes.Add(runtime);
         }
@@ -33,7 +35,7 @@ namespace Reinforced.Tecture.Integrate
         {
             foreach (var tectureRuntime in _runtimes)
             {
-                tectureRuntime.Dispose();
+               if (tectureRuntime is IDisposable tr)  tr.Dispose();
             }
         }
 

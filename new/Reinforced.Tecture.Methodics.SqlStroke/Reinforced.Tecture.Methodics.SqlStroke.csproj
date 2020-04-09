@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <ProjectReference Include="..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>
 
 </Project>

@@ -40,7 +40,7 @@ namespace Reinforced.Tecture.Commands
             return _pipeline.Catch(sideEffectCatcher, annotation);
         }
 
-        public IEnumerable<TRuntime> GetRuntimes<TRuntime>(Func<TRuntime, bool> predicate)
+        public IEnumerable<TRuntime> GetRuntimes<TRuntime>(Func<TRuntime, bool> predicate = null)
             where TRuntime : ITectureRuntime
         {
             return _pipeline._locator.GetRuntimes(predicate);
