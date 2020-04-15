@@ -5,11 +5,12 @@ using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Queries
 {
+    
     /// <summary>
     /// Flag interface fore data source
     /// </summary>
     public interface ISource
     {
-        T Runtime<T>() where T : class, ITectureRuntime;
+
     }
 }

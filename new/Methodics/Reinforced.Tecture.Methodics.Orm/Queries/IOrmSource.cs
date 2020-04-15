@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Methodics.Orm.Queries
 {
-    interface ISetAccess
+    public interface IOrmSource : ISource 
     {
-        IQueryable<T> Set<T>();
+        IOrmQueryRuntime Orm { get; }
     }
 }

@@ -6,21 +6,21 @@ using System.Text;
 
 namespace Reinforced.Tecture.Methodics.Orm.Queries
 {
-    internal class OnlineQueryBuilder<TEntity> : IQueryFor<TEntity> where TEntity : class
+    internal class QueryBuilder<TEntity> : IQueryFor<TEntity> where TEntity : class
     {
-        protected readonly ISetAccess _setAccess;
+        protected readonly IOrmQueryRuntime _runtime;
         
-        public OnlineQueryBuilder(ISetAccess setAccess, QueryStats stats)
+        public QueryBuilder(IOrmQueryRuntime runtime)
         {
-            _setAccess = setAccess;
+            _runtime = runtime;
             
-            if (_setAccess != null)
+            if (_runtime != null)
             {
-                if (!stats.OnlineCollectionUsageStats.ContainsKey(typeof(TEntity)))
+                if (!runtime.Stats.OnlineCollectionUsageStats.ContainsKey(typeof(TEntity)))
                 {
-                    stats.OnlineCollectionUsageStats[typeof(TEntity)] = 0;
+                    runtime.Stats.OnlineCollectionUsageStats[typeof(TEntity)] = 0;
                 }
-                stats.OnlineCollectionUsageStats[typeof(TEntity)]++;
+                runtime.Stats.OnlineCollectionUsageStats[typeof(TEntity)]++;
             }
         }
 
@@ -28,7 +28,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Queries
 
         public IQueryable<TEntity> All
         {
-            get { return _allCached ?? (_allCached = ApplyThats(_setAccess.Set<TEntity>())); }
+            get { return _allCached ?? (_allCached = ApplyThats(_runtime.Get<TEntity>())); }
         }
 
      
@@ -48,7 +48,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Queries
         
         public IQueryable<T> Joined<T>() where T : class
         {
-            var t = _setAccess.Set<T>();
+            var t = _runtime.Get<T>();
             return t;
         }
 

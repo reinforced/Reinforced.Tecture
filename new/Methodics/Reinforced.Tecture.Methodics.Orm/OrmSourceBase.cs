@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Methodics.Orm
         /// <returns>Query builder</returns>
         public IQueryFor<T> Get<T>() where T : class
         {
-            return new OnlineQueryBuilder<T>(this,_stats);
+            return new QueryBuilder<T>(this,_stats);
         }
 
         public string Stats()
