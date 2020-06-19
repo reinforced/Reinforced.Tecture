@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Methodics.Orm.Commands;
-using Reinforced.Tecture.Methodics.Orm.Commands.Delete;
-using Reinforced.Tecture.Methodics.Orm.Commands.Update;
 using Reinforced.Tecture.Testing.Assumptions;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Assumptions
+namespace Reinforced.Tecture.Features.Orm.Testing.Assumptions
 {
     public static class Extensions
     {

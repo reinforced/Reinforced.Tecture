@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Command.Add;
-using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Runners
+namespace Reinforced.Tecture.Features.Orm.Testing.Runners
 {
     public class AddAssumptionArgument<T>
     {

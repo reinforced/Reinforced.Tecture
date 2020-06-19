@@ -1,7 +1,6 @@
 ﻿using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Methodics.Orm.Queries;
 
-namespace Reinforced.Tecture.Features.Orm.Queries
+namespace Reinforced.Tecture.Features.Orm.Querу
 {
     public static class Extensions
     {

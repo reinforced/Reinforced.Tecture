@@ -3,7 +3,7 @@ using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Add
+namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 {
     public class AddPredicateCheck<T> : CommandCheck<Features.Orm.Command.Add.Add>, IMemorizing
     {

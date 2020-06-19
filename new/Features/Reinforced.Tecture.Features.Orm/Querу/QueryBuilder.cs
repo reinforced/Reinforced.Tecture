@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Methodics.Orm.Queries;
 
-namespace Reinforced.Tecture.Features.Orm.Queries
+namespace Reinforced.Tecture.Features.Orm.Querу
 {
     internal class QueryBuilder<TEntity> : IQueryFor<TEntity> where TEntity : class
     {
-        protected readonly Features.Orm.Queries.Orm Src;
+        protected readonly Orm Src;
         
-        public QueryBuilder(Features.Orm.Queries.Orm src)
+        public QueryBuilder(Orm src)
         {
             Src = src;
             

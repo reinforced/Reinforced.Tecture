@@ -1,10 +1,7 @@
-﻿
-
-using System;
+﻿using System;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Commands;
 
-namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
+namespace Reinforced.Tecture.Features.Orm.Command.Update
 {
     public static partial class Extensions
     {

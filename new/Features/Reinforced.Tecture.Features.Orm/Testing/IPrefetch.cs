@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing
+namespace Reinforced.Tecture.Features.Orm.Testing
 {
     public interface IPrefetch
     {

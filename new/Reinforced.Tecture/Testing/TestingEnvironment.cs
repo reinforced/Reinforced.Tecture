@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Threading.Tasks;
-using Reinforced.Tecture.Integrate;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Testing.Assumptions;
 using Reinforced.Tecture.Testing.Stories;
 
@@ -18,7 +17,7 @@ namespace Reinforced.Tecture.Testing
             _assumptions = new Assuming(_mx);
         }
 
-        internal readonly RuntimeMultiplexer _mx = new RuntimeMultiplexer();
+        internal readonly ChannelMultiplexer _mx = new ChannelMultiplexer();
         internal readonly Assuming _assumptions;
 
         private void OnException(Exception ex)

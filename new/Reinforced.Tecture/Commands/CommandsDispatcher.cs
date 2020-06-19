@@ -60,17 +60,20 @@ namespace Reinforced.Tecture.Commands
             } while (queue.HasEffects);
         }
 
-        
+        protected virtual CommandRunner GetRunner(CommandBase command)
+        {
+            return _mx.GetRunner(command);
+        }
 
         protected virtual void RunCommand(CommandBase command)
         {
-            var r = _mx.GetRunner(command);
+            var r = GetRunner(command);
             r.RunInternal(command);
         }
 
         protected virtual Task RunCommandAsync(CommandBase command)
         {
-            var r = _mx.GetRunner(command);
+            var r = GetRunner(command);
             return r.RunInternalAsync(command);
         }
 

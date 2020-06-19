@@ -1,7 +1,7 @@
 ﻿using System;
 using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
+namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
 {
     public static class UpdateChecks
     {

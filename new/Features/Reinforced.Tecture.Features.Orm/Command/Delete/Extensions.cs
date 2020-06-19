@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Commands;
-
-namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
+﻿namespace Reinforced.Tecture.Features.Orm.Command.Delete
 {
     /// <summary>
     /// Delete extensions

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Reinforced.Tecture.Methodics.Orm
+namespace Reinforced.Tecture.Features.Orm
 {
     internal static class DictionaryExtensions
     {

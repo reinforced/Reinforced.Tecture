@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Methodics.Orm.Commands.Update;
-using Reinforced.Tecture.Methodics.Orm.Testing;
+using Reinforced.Tecture.Features.Orm.Command.Update;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Runners
 {

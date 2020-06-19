@@ -1,13 +1,11 @@
 ﻿using System;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Command.Add;
+using Reinforced.Tecture.Features.Orm.Command.Delete;
+using Reinforced.Tecture.Features.Orm.Command.Update;
 using Reinforced.Tecture.Features.Orm.Testing.Runners;
-using Reinforced.Tecture.Methodics.Orm.Commands.Delete;
-using Reinforced.Tecture.Methodics.Orm.Commands.Update;
-using Reinforced.Tecture.Methodics.Orm.Testing.Runners;
-using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing
+namespace Reinforced.Tecture.Features.Orm.Testing
 {
     class TestingOrmRuntime : OrmRuntimeBase, ITestingRuntime
     {

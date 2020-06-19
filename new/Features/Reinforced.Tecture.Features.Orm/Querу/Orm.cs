@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Methodics.Orm.Queries;
+﻿using System.Linq;
 
-namespace Reinforced.Tecture.Features.Orm.Queries
+namespace Reinforced.Tecture.Features.Orm.Querу
 {
     public abstract class Orm : QueryFeature
     {

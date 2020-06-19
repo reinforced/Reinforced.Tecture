@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Command.Add;
-using Reinforced.Tecture.Integrate;
-using Reinforced.Tecture.Methodics.Orm.Commands.Delete;
-using Reinforced.Tecture.Methodics.Orm.Commands.Update;
-using Reinforced.Tecture.Methodics.Orm.Queries;
-using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Features.Orm.Command.Delete;
+using Reinforced.Tecture.Features.Orm.Command.Update;
 
-namespace Reinforced.Tecture.Methodics.Orm
+namespace Reinforced.Tecture.Features.Orm
 {
     public abstract class OrmRuntimeBase : ITectureRuntime, IDisposable
     {

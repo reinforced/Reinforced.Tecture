@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Testing.Assumptions
 {
     public class Assuming
     {
-        private readonly RuntimeMultiplexer _mx;
-        internal readonly Dictionary<Type, List<AssumptionBase>> _data = new Dictionary<Type, List<AssumptionBase>>();
+        private readonly ChannelMultiplexer _mx;
+        internal readonly Dictionary<Type, List<IAssumption>> _data = new Dictionary<Type, List<IAssumption>>();
 
-        internal Assuming(RuntimeMultiplexer mx)
+        internal Assuming(ChannelMultiplexer mx)
         {
             _mx = mx;
         }
@@ -19,10 +19,9 @@ namespace Reinforced.Tecture.Testing.Assumptions
         {
             if (!_data.ContainsKey(typeof(TCommand)))
             {
-                _data[typeof(TCommand)] = new List<AssumptionBase>();
+                _data[typeof(TCommand)] = new List<IAssumption>();
             }
 
-            assumption.Locate = _mx;
             _data[typeof(TCommand)].Add(assumption);
             return this;
         }

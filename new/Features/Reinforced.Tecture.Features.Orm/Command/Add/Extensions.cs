@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Methodics.Orm;
 
 namespace Reinforced.Tecture.Features.Orm.Command.Add
 {

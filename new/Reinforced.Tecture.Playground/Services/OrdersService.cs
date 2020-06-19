@@ -1,10 +1,9 @@
 ﻿using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Command.Add;
-using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Features.Orm.Querу;
 using Reinforced.Tecture.Features.SqlStroke;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Methodics.Orm.Queries;
 using Reinforced.Tecture.Playground.Entities;
 using Reinforced.Tecture.Services;
 

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing
+namespace Reinforced.Tecture.Features.Orm.Testing
 {
     public static class Extensions
     {

@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Reinforced.Tecture.Integrate;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing
+namespace Reinforced.Tecture.Features.Orm.Testing
 {
     class TestingOrmSource : OrmSourceBase, ICollectionProvider, IPrefetch
     {

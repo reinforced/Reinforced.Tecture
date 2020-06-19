@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Entry;
-using Reinforced.Tecture.Integrate;
 using Reinforced.Tecture.Testing.Assumptions;
 using Reinforced.Tecture.Testing.Stories;
 
@@ -13,7 +11,7 @@ namespace Reinforced.Tecture.Testing
 {
     class TestingCommandsDispatcher : CommandsDispatcher
     {
-        private readonly Dictionary<Type, List<AssumptionBase>> _assumptions;
+        private readonly Dictionary<Type, List<IAssumption>> _assumptions;
         private Queue<CommandBase> _story;
         private bool _isStoryActive = false;
         internal void BeginStory()
@@ -28,13 +26,8 @@ namespace Reinforced.Tecture.Testing
             _isStoryActive = false;
             return new StorageStory(_story, env);
         }
-
-        internal TestingCommandsDispatcher(RuntimeMultiplexer mx, Dictionary<Type, List<AssumptionBase>> assumptions) : base(mx)
-        {
-            _assumptions = assumptions;
-        }
-
-        protected override Tuple<CommandRunnerGateway, CommandRunner> GetRunner(CommandBase command)
+        
+        protected override CommandRunner GetRunner(CommandBase command)
         {
             var commandType = command.GetType();
             if (_assumptions.ContainsKey(commandType))
@@ -44,32 +37,32 @@ namespace Reinforced.Tecture.Testing
                 if (suitable != null)
                 {
                     var bs = base.GetRunner(command);
-                    suitable.OriginalRunner = bs.Item2;
-                    var gateway = new CommandRunnerGateway(commandType, suitable.GetType());
-                    return new Tuple<CommandRunnerGateway, CommandRunner>(gateway, suitable);
+                    suitable.OriginalRunner = bs;
+                   
+                    return (CommandRunner) suitable;
                 }
             }
 
             return base.GetRunner(command);
         }
 
-        protected override void Save()
+        protected override void Save(IEnumerable<string> channels)
         {
-            base.Save();
+            base.Save(channels);
             _story.Enqueue(new SaveCommand());
         }
 
-        protected override async Task SaveAsync()
+        protected override async Task SaveAsync(IEnumerable<string> channels)
         {
-            await base.SaveAsync();
+            await base.SaveAsync(channels);
             _story.Enqueue(new SaveCommand());
         }
 
-        protected override void DispatchInternal(IEnumerable<CommandBase> commands)
+        protected override void DispatchInternal(IEnumerable<CommandBase> commands,HashSet<string> channels)
         {
             if (!_isStoryActive)
             {
-                base.DispatchInternal(commands);
+                base.DispatchInternal(commands, channels);
                 return;
             }
             var e = commands.ToArray();
@@ -77,18 +70,23 @@ namespace Reinforced.Tecture.Testing
             {
                 _story.Enqueue(cmd);
             }
-            base.DispatchInternal(e);
+            base.DispatchInternal(e, channels);
         }
 
-        protected override Task DispatchInternalAsync(IEnumerable<CommandBase> commands)
+        protected override Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> channels)
         {
-            if (!_isStoryActive) return base.DispatchInternalAsync(commands);
+            if (!_isStoryActive) return base.DispatchInternalAsync(commands, channels);
             var e = commands.ToArray();
             foreach (var cmd in e)
             {
                 _story.Enqueue(cmd);
             }
-            return base.DispatchInternalAsync(e);
+            return base.DispatchInternalAsync(e, channels);
+        }
+
+        internal TestingCommandsDispatcher(ChannelMultiplexer mx, Dictionary<Type, List<IAssumption>> assumptions) : base(mx)
+        {
+            _assumptions = assumptions;
         }
     }
 }

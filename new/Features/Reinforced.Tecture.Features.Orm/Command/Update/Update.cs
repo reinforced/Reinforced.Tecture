@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
 
-namespace Reinforced.Tecture.Methodics.Orm.Commands.Update
+namespace Reinforced.Tecture.Features.Orm.Command.Update
 {
     public sealed class Update : CommandBase
     {

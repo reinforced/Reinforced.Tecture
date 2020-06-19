@@ -5,8 +5,10 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Testing.Assumptions
 {
-    public interface IAssumption : CommandRunner
+    public interface IAssumption
     {
+        CommandRunner OriginalRunner { get; set; }
+
         Type CommandType { get; }
 
         bool Should(CommandBase cmd);

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Methodics.Orm.Commands.Delete;
-using Reinforced.Tecture.Testing;
+using Reinforced.Tecture.Features.Orm.Command.Delete;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Runners
+namespace Reinforced.Tecture.Features.Orm.Testing.Runners
 {
     public class RemoveAssumptionArgument<T>
     {

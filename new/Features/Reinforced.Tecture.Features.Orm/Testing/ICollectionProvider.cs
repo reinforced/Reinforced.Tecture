@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing
+namespace Reinforced.Tecture.Features.Orm.Testing
 {
     public interface ICollectionProvider
     {

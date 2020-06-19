@@ -2,14 +2,15 @@
 
 namespace Reinforced.Tecture.Commands
 {
+
     /// <summary>
     /// Marker interface for command runners
     /// </summary>
     public abstract class CommandRunner
     {
-        internal abstract void RunCommand(CommandBase command);
+        internal abstract void RunInternal(CommandBase command);
 
-        internal abstract Task RunCommandAsync(CommandBase command);
+        internal abstract Task RunInternalAsync(CommandBase command);
     }
 
     /// <summary>
@@ -19,7 +20,7 @@ namespace Reinforced.Tecture.Commands
     public abstract class CommandRunner<TCommand> : CommandRunner
         where TCommand : CommandBase
     {
-        internal override void RunCommand(CommandBase command)
+        internal override void RunInternal(CommandBase command)
         {
             if (!(command is TCommand))
             {
@@ -28,7 +29,7 @@ namespace Reinforced.Tecture.Commands
             Run((TCommand) command);
         }
 
-        internal override Task RunCommandAsync(CommandBase command)
+        internal override Task RunInternalAsync(CommandBase command)
         {
             if (!(command is TCommand))
             {

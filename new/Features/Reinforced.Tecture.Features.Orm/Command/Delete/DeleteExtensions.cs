@@ -1,6 +1,4 @@
-﻿using Reinforced.Tecture.Commands;
-
-namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
+﻿namespace Reinforced.Tecture.Features.Orm.Command.Delete
 {
     public static partial class Extensions
     {

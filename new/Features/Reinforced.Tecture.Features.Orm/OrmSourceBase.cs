@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Reinforced.Tecture.Features.Orm.Queries;
-using Reinforced.Tecture.Integrate;
-using Reinforced.Tecture.Methodics.Orm.Queries;
+﻿using System.Linq;
+using Reinforced.Tecture.Features.Orm.Querу;
 
-namespace Reinforced.Tecture.Methodics.Orm
+namespace Reinforced.Tecture.Features.Orm
 {
     public abstract class OrmSourceBase : IOrmSource
     {

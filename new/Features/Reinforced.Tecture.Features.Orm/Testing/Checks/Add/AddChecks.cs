@@ -1,7 +1,7 @@
 ﻿using System;
 using Reinforced.Tecture.Testing;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Add
+namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 {
     public static class AddChecks
     {

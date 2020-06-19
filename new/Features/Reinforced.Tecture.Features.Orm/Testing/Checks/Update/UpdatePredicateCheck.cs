@@ -3,9 +3,9 @@ using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
+namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
 {
-    public class UpdatePredicateCheck<T> : CommandCheck<Commands.Update.Update>, IMemorizing
+    public class UpdatePredicateCheck<T> : CommandCheck<Command.Update.Update>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
             _memorizedValue = mem;
         }
 
-        protected override string GetMessage(Commands.Update.Update command)
+        protected override string GetMessage(Command.Update.Update command)
         {
             if (command == null) return $"expected updated entity {_explanation}, but story unexpectedly ends";
             if (command.EntityType != typeof(T))
@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
             return $"expected updated entity {_explanation}, but seems that it does not";
         }
 
-        protected override bool IsActuallyValid(Commands.Update.Update effect)
+        protected override bool IsActuallyValid(Command.Update.Update effect)
         {
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;
@@ -38,7 +38,7 @@ namespace Reinforced.Tecture.Methodics.Orm.Testing.Checks.Update
 
         public void Memorize(CommandBase seb)
         {
-            _memorizedValue.SetValue(((Commands.Update.Update)seb).Entity);
+            _memorizedValue.SetValue(((Command.Update.Update)seb).Entity);
         }
     }
 }

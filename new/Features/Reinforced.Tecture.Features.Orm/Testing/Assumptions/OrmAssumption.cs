@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Methodics.Orm.Commands;
 using Reinforced.Tecture.Testing.Assumptions;
 
-namespace Reinforced.Tecture.Methodics.Orm.Testing.Assumptions
+namespace Reinforced.Tecture.Features.Orm.Testing.Assumptions
 {
-    class OrmAssumption<TCommand> : AssumptionBase<TCommand> where TCommand : CommandBase, IOrmCommand
+    class OrmAssumption<TCommand> : AssumptionBase<TCommand> where TCommand : CommandBase
     {
         internal OrmAssumption(Type entityType, Delegate predicate, Delegate action, bool shouldRunOriginal)
         {

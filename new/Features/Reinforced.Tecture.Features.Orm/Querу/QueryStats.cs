@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Reinforced.Tecture.Methodics.Orm.Queries
+namespace Reinforced.Tecture.Features.Orm.Querу
 {
     public class QueryStats
     {

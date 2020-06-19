@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
 
-namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
+namespace Reinforced.Tecture.Features.Orm.Command.Delete
 {
     /// <summary>
     /// Command for entity removal
