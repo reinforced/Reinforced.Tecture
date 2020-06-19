@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
 using Reinforced.Tecture.Queries;
@@ -13,7 +15,10 @@ namespace Reinforced.Tecture.Services
     public partial class TectureService : IDisposable
     {
         #region Auto-injected
-        internal ServiceManager ServiceManager { get; set; }
+
+        internal ServiceManager ServiceManager;
+        internal ChannelMultiplexer ChannelMultiplexer;
+        internal Pipeline Pipeline;
         #endregion
 
         /// <summary>
@@ -21,7 +26,7 @@ namespace Reinforced.Tecture.Services
         /// </summary>
         protected ActionsQueueTask Save
         {
-            get { return Pipeline.Save; }
+            get { return new ActionsQueueTask(Pipeline.PostSaveActions); }
         }
 
         /// <summary>
@@ -29,7 +34,7 @@ namespace Reinforced.Tecture.Services
         /// </summary>
         protected ActionsQueueTask Final
         {
-            get { return Pipeline.Final; }
+            get { return new ActionsQueueTask(Pipeline.FinallyActions); }
         }
 
         internal void CallOnSave() { OnSave(); }
@@ -38,11 +43,10 @@ namespace Reinforced.Tecture.Services
         internal Task CallOnSaveAsync() { return OnSaveAsync(); }
         internal Task CallOnFinallyAsync() { return OnFinallyAsync(); }
 
-        internal virtual ServicePipeline Pipeline { get; private set; }
+        
 
-        internal virtual void CallInit(Pipeline pipeline)
+        internal virtual void CallInit()
         {
-            Pipeline = new ServicePipeline(pipeline);
             Init();
         }
 
@@ -70,12 +74,7 @@ namespace Reinforced.Tecture.Services
         /// Called right after service initialization. Use it to do things right after service is created
         /// </summary>
         protected virtual void Init() { }
-
-        protected T From<T>() where T : class, ISource
-        {
-            return Pipeline.CorePipeline._locator.GetSource<T>();
-        }
-
+        
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
@@ -89,7 +88,7 @@ namespace Reinforced.Tecture.Services
         [Unexplainable]
         protected void Comment(string comment)
         {
-            Pipeline.Enqueue(new CommentCommand() { Annotation = comment });
+            Pipeline.Enqueue(new Comment() { Annotation = comment });
         }
     }
 

@@ -5,17 +5,19 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture", "Reinforced.Tecture\Reinforced.Tecture.csproj", "{F738D6C7-FBD9-46FE-AAEA-6F2E84843F48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Methodics.Orm", "Methodics\Reinforced.Tecture.Methodics.Orm\Reinforced.Tecture.Methodics.Orm.csproj", "{F33A4529-947C-429E-A2DF-44C0B3EB9E8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.Orm", "Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj", "{F33A4529-947C-429E-A2DF-44C0B3EB9E8C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Methodics", "Methodics", "{6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtimes", "Runtimes", "{0D7F1782-E14E-48CC-AA6D-85865D5F4E48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reinforced.Tecture.Methodics.SqlStroke", "Reinforced.Tecture.Methodics.SqlStroke\Reinforced.Tecture.Methodics.SqlStroke.csproj", "{E2893CA6-0EE7-4DC8-8F89-D91BFCEFD687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.SqlStroke", "Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj", "{E2893CA6-0EE7-4DC8-8F89-D91BFCEFD687}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reinforced.Tecture.Playground", "Reinforced.Tecture.Playground\Reinforced.Tecture.Playground.csproj", "{0F6A25FE-22F8-423C-88E7-6D03C3995612}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Playground", "Reinforced.Tecture.Playground\Reinforced.Tecture.Playground.csproj", "{0F6A25FE-22F8-423C-88E7-6D03C3995612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reinforced.Tecture.Methodics.BulkSql", "Reinforced.Tecture.Methodics.BulkSql\Reinforced.Tecture.Methodics.BulkSql.csproj", "{0A94190F-1AEB-4CE7-983B-F370429DA0AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.BulkSql", "Features\Reinforced.Tecture.Features.BulkSql\Reinforced.Tecture.Features.BulkSql.csproj", "{0A94190F-1AEB-4CE7-983B-F370429DA0AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reunforced.Tecture.Runtimes.EFCore", "Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reunforced.Tecture.Runtimes.EFCore.csproj", "{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{0A94190F-1AEB-4CE7-983B-F370429DA0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A94190F-1AEB-4CE7-983B-F370429DA0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A94190F-1AEB-4CE7-983B-F370429DA0AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{F33A4529-947C-429E-A2DF-44C0B3EB9E8C} = {6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}
 		{E2893CA6-0EE7-4DC8-8F89-D91BFCEFD687} = {6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}
 		{0A94190F-1AEB-4CE7-983B-F370429DA0AF} = {6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}
+		{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B} = {0D7F1782-E14E-48CC-AA6D-85865D5F4E48}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39A37FE4-0B08-4971-AEEB-2C01BBA315FD}

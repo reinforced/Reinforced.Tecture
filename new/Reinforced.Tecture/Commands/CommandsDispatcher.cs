@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands.Exact;
-using Reinforced.Tecture.Entry;
-using Reinforced.Tecture.Integrate;
 
 namespace Reinforced.Tecture.Commands
 {
@@ -13,56 +10,26 @@ namespace Reinforced.Tecture.Commands
     /// </summary>
     class CommandsDispatcher
     {
-        private readonly RuntimeMultiplexer _mx;
+        private readonly ChannelMultiplexer _mx;
 
-        protected class CommandRunnerGateway
-        {
-            private readonly MethodInfo _run;
-            private readonly MethodInfo _runAsync;
-
-            public CommandRunnerGateway(Type effectType, Type runnerType)
-            {
-                _run = runnerType.GetRuntimeMethod(nameof(ICommandRunner<CommandBase>.Run), new[] { effectType });
-                _runAsync = runnerType.GetRuntimeMethod(nameof(ICommandRunner<CommandBase>.RunAsync), new[] { effectType });
-
-            }
-
-            public void Run(ICommandRunner runner, CommandBase effect)
-            {
-                _run.Invoke(runner, new[] { effect });
-            }
-
-            public async Task RunAsync(ICommandRunner runner, CommandBase effect)
-            {
-                var r = (Task)_runAsync.Invoke(runner, new[] { effect });
-                await r;
-            }
-        }
-
-        private readonly Dictionary<Type, CommandRunnerGateway> _runnerGateways = new Dictionary<Type, CommandRunnerGateway>();
-
-        internal CommandsDispatcher(RuntimeMultiplexer mx)
+        internal CommandsDispatcher(ChannelMultiplexer mx)
         {
             _mx = mx;
-            _savers = new Lazy<ISaver[]>(() => _mx.GetSavers());
         }
 
-
-        private readonly Lazy<ISaver[]> _savers;
-
-        protected virtual void Save()
+        protected virtual void Save(IEnumerable<string> channels)
         {
-            foreach (var sideEffectSaver in _savers.Value)
+            foreach (var sideEffectSaver in _mx.GetSavers(channels))
             {
-                sideEffectSaver.Save();
+                sideEffectSaver.SaveInternal();
             }
         }
 
-        protected virtual async Task SaveAsync()
+        protected virtual async Task SaveAsync(IEnumerable<string> channels)
         {
-            foreach (var sideEffectSaver in _savers.Value)
+            foreach (var sideEffectSaver in _mx.GetSavers(channels))
             {
-                await sideEffectSaver.SaveAsync();
+                await sideEffectSaver.SaveInternalAsync();
             }
         }
 
@@ -71,9 +38,10 @@ namespace Reinforced.Tecture.Commands
         {
             do
             {
-                if (queue.HasEffects) DispatchInternal(queue.GetEffects());
+                HashSet<string> usedChannels = new HashSet<string>();
+                if (queue.HasEffects) DispatchInternal(queue.GetEffects(),usedChannels);
 
-                Save();
+                Save(usedChannels);
 
                 postSave.Run();
             } while (queue.HasEffects);
@@ -83,56 +51,48 @@ namespace Reinforced.Tecture.Commands
         {
             do
             {
-                if (queue.HasEffects) await DispatchInternalAsync(queue.GetEffects());
+                HashSet<string> usedChannels = new HashSet<string>();
+                if (queue.HasEffects) await DispatchInternalAsync(queue.GetEffects(), usedChannels);
 
-                await SaveAsync();
+                await SaveAsync(usedChannels);
 
                 await postSave.RunAsync();
             } while (queue.HasEffects);
         }
 
-        protected virtual Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)
-        {
-            var commandType = command.GetType();
-            var runner = _mx.GetRunner(command);
-            if (runner == null) 
-                throw new TectureException($"Runner for command {command} was not found");
-            var runnerType = runner.GetType();
+        
 
-            if (!_runnerGateways.ContainsKey(runnerType))
-            {
-                _runnerGateways[runnerType] =
-                    new CommandRunnerGateway(commandType, runnerType);
-            }
-            return new Tuple<CommandRunnerGateway, ICommandRunner>(_runnerGateways[runnerType], runner);
+        protected virtual void RunCommand(CommandBase command)
+        {
+            var r = _mx.GetRunner(command);
+            r.RunInternal(command);
         }
 
-        protected virtual void RunCommand(CommandBase effect)
+        protected virtual Task RunCommandAsync(CommandBase command)
         {
-            var r = GetRunner(effect);
-            r.Item1.Run(r.Item2, effect);
+            var r = _mx.GetRunner(command);
+            return r.RunInternalAsync(command);
         }
 
-        protected virtual Task RunCommandAsync(CommandBase effect)
-        {
-            var r = GetRunner(effect);
-            return r.Item1.RunAsync(r.Item2, effect);
-        }
-
-        protected virtual void DispatchInternal(IEnumerable<CommandBase> commands)
+        protected virtual void DispatchInternal(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
         {
             foreach (var commandBase in commands)
             {
-                if (!(commandBase is CommentCommand)) RunCommand(commandBase);
-            }
-        }
-
-        protected virtual async Task DispatchInternalAsync(IEnumerable<CommandBase> commands)
-        {
-            foreach (var commandBase in commands)
-            {
-                if (!(commandBase is CommentCommand))
+                if (!(commandBase is Comment))
                 {
+                    if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
+                    RunCommand(commandBase);
+                }
+            }
+        }
+
+        protected virtual async Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
+        {
+            foreach (var commandBase in commands)
+            {
+                if (!(commandBase is Comment))
+                {
+                    if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r = RunCommandAsync((commandBase));
                     if (r != null) await r;
                 }

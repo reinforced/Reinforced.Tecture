@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Integrate;
-using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Services;
 using Reinforced.Tecture.Transactions;
 using Reinforced.Tecture.Transactions.Testing;
@@ -14,25 +14,25 @@ namespace Reinforced.Tecture.Entry
 
         private readonly ServiceManager _serviceManager;
         private readonly CommandsDispatcher _dispatcher;
-        private readonly RuntimeMultiplexer _mx;
+        private readonly ChannelMultiplexer _mx;
         internal readonly Pipeline _pipeline;
         internal readonly ActionsQueue _actions = new ActionsQueue(true);
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
         public Tecture(
-            RuntimeMultiplexer mx,
+            ChannelMultiplexer mx,
             CommandsDispatcher dispatcher,
             bool debugMode = false,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
             _mx = mx;
-            _pipeline = new Pipeline(debugMode, mx, _actions, _finallyActions);
+            _pipeline = new Pipeline(debugMode, _actions, _finallyActions);
 
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
-            _serviceManager = new ServiceManager(_pipeline);
+            _serviceManager = new ServiceManager(_pipeline,mx);
             _dispatcher = dispatcher;
         }
 
@@ -61,13 +61,11 @@ namespace Reinforced.Tecture.Entry
         /// </summary>
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
-        public T From<T>() where T : class, ISource
+        public Read<T> From<T>() where T : CanQuery
         {
-            var src = _mx.GetSource<T>();
-            if (src == null)
-                throw new TectureException($"Source {typeof(T).Name} not found");
-            return src;
+            return new SRead<T>(_mx);
         }
+
 
         private IOuterTransaction ObtainTransaction(
             OuterTransactionMode transaction,
@@ -170,7 +168,6 @@ namespace Reinforced.Tecture.Entry
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            _pipeline._locator = null;
             _mx.Dispose();
         }
     }

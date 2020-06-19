@@ -6,7 +6,7 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Testing.Checks
 {
-    public class CommentCheck : CommandCheck<CommentCommand>
+    public class CommentCheck : CommandCheck<Comment>
     {
         private readonly string _content;
 
@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Testing.Checks
             _content = content;
         }
 
-        protected override string GetMessage(CommentCommand command)
+        protected override string GetMessage(Comment command)
         {
             var msg = string.IsNullOrEmpty(_content)
                 ? $"comment"
@@ -33,7 +33,7 @@ namespace Reinforced.Tecture.Testing.Checks
             return null;
         }
 
-        protected override bool IsActuallyValid(CommentCommand effect)
+        protected override bool IsActuallyValid(Comment effect)
         {
             if (effect == null) return false;
             if (!string.IsNullOrEmpty(_content)) return effect.Annotation == _content;

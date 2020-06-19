@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Command\Add\AddExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Command\Delete\DeleteExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DeleteExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Command\Update\UpdateExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UpdateExtensions.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Command\Add\AddExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Command\Delete\DeleteExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DeleteExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Command\Update\UpdateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateExtensions.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

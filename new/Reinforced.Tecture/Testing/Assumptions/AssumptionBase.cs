@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Testing.Assumptions
         /// <summary>
         /// Original command runner (if any)
         /// </summary>
-        internal ICommandRunner OriginalRunner;
+        internal CommandRunner OriginalRunner;
 
         public abstract Type CommandType { get; }
         public abstract bool Should(CommandBase cmd);
@@ -29,11 +29,11 @@ namespace Reinforced.Tecture.Testing.Assumptions
     /// It allows to override runners for particular command while testing
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
-    public abstract class AssumptionBase<TCommand> : AssumptionBase, ICommandRunner<TCommand> where TCommand : CommandBase
+    public abstract class AssumptionBase<TCommand> : AssumptionBase, CommandRunner<TCommand> where TCommand : CommandBase
     {
-        protected ICommandRunner<TCommand> Runner
+        protected CommandRunner<TCommand> Runner
         {
-            get { return (ICommandRunner<TCommand>) base.OriginalRunner; }
+            get { return (CommandRunner<TCommand>) base.OriginalRunner; }
             set { base.OriginalRunner = value; }
         }
 

@@ -1,0 +1,105 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	var implementationsCount = 16;
+#>
+
+using System;
+using System.Collections.Generic;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Commands;
+
+namespace Reinforced.Tecture.Savers
+{
+<# for (int i=0;i<implementationsCount;i++) {	#> 
+
+#region Producer/Saver pair #<#= i+1 #>
+	
+	/// <summary>
+	/// Marking interface for feature being able to produce <#= (i+1) #> various commands
+	/// </summary>
+	public interface Produces<<#= GenericsStroke(i+1) #>> : CommandFeature
+<#= Constraints(i+1,"CommandBase") #> { }
+
+	/// <summary>
+	/// Saver serving <#= i+1 #> commands
+	/// </summary>
+	public abstract class Saver<<#= GenericsStroke(i+1) #>> : SaverBase
+<#= Constraints(i+1,"CommandBase") #>
+{ 
+
+	internal override IEnumerable<Type> ServingCommandTypes
+    {
+        get 
+		{ <# for (int j=0;j<=i;j++) {	#> 
+			yield return typeof(TCommand<#= j+1 #>); <# } #>
+		
+		}
+    }
+
+	internal override ICommandRunner GetRunner(CommandBase command)
+	{
+<# for (int j=0;j<=i;j++) {	#> 
+		if (command is TCommand<#= j+1 #> cm<#= j+1 #>) return GetRunner<#= j+1 #>(cm<#= j+1 #>);<# } #>
+
+		throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+	}
+
+<# for (int j=0;j<=i;j++) {	#> 
+	/// <summary>
+	/// Returns instance of command runner for command <typeparamref name="TCommand<#= j+1 #>"/>. 
+	/// </summary>
+	/// <param name="command">Command of type <typeparamref name="TCommand<#= j+1 #>"/> </param>
+	/// <returns>Command runner</returns>
+	protected abstract ICommandRunner<TCommand<#= j+1 #>> GetRunner<#= j+1 #>(TCommand<#= j+1 #> command);
+<# } #>
+}
+
+#endregion
+
+<# } #>
+}
+
+<#+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("TCommand"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+
+	private string Constraints(int num, string constraint)
+    {
+        StringBuilder sb = new StringBuilder();
+		
+		for(var i=0;i<num;i++){
+			
+			sb.Append("where TCommand"); sb.Append(i+1);
+			sb.Append(" : "); sb.AppendLine(constraint);
+		}
+		return sb.ToString();
+    }
+
+	private string Properties(int num, string namePrefix)
+    {
+        StringBuilder sb = new StringBuilder();
+		
+		for(var i=0;i<num;i++){
+			
+			sb.Append("ICommandRunner<TCommand"); sb.Append(i+1);
+			sb.Append("> "); sb.Append(namePrefix); sb.Append(i+1);
+			sb.AppendLine(" { get; }");
+		}
+		return sb.ToString();
+    }
+#>
+

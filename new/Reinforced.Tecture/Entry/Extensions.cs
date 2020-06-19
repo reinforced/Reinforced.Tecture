@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Integrate;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Entry.Builders;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry
 {
     public static class Extensions
     {
-        /// <summary>
-        /// Adds runtime to be used by Tecture
-        /// </summary>
-        /// <param name="tb">Tecture builder</param>
-        /// <param name="runtime">Tecture runtime</param>
-        /// <returns>Fluent</returns>
-        public static TectureBuilder WithRuntime(this TectureBuilder tb, ITectureRuntime runtime)
+
+        public static TectureBuilder WithChannel<TChannel>(this TectureBuilder tb, Action<ChannelConfiguration<TChannel>> cfg) where TChannel : Channel
         {
-            tb._mx.AddRuntime(runtime);
+            var cb = new ChannelConfigurationImpl<TChannel>(tb._mx);
+            cfg(cb);
             return tb;
         }
 

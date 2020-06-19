@@ -6,9 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Methodics\Reinforced.Tecture.Methodics.Orm\Reinforced.Tecture.Methodics.Orm.csproj" />
-    <ProjectReference Include="..\Reinforced.Tecture.Methodics.SqlStroke\Reinforced.Tecture.Methodics.SqlStroke.csproj" />
+    <ProjectReference Include="..\Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj" />
+    <ProjectReference Include="..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
     <ProjectReference Include="..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+    <ProjectReference Include="..\Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reunforced.Tecture.Runtimes.EFCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,9 +7,10 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Testing.Stories
 {
     [CommandCode("SAVE")]
-    public class SaveCommand : CommandBase
+    public sealed class SaveCommand : CommandBase
     {
         internal SaveCommand() { }
+
         /// <summary>
         /// Describes actions that are being performed within side effect
         /// </summary>

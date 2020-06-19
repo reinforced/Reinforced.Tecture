@@ -15,4 +15,10 @@ namespace Reinforced.Tecture.Playground.Entities
 
         public DateTime CreatedDate { get; set; }
     }
+
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }

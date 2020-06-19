@@ -6,11 +6,10 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Testing.Stories
 {
-    public class EndCommand : CommandBase
+    public sealed class EndCommand : CommandBase
     {
-        internal EndCommand()
-        {
-        }
+        internal EndCommand() { }
+
 
         /// <summary>
         /// Describes actions that are being performed within side effect

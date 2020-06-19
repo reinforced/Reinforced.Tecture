@@ -6,14 +6,14 @@ using Reinforced.Tecture.Services;
 
 namespace Reinforced.Tecture
 {
-    class ActionsQueue
+    public class ActionsQueue
     {
         private readonly Queue<object> _queue = new Queue<object>();
         private bool _isQueueRunning = false;
         private readonly bool _allowEnqueueWhileRunning;
 
         public bool HasAsyncActions { get; private set; }
-        public ActionsQueue(bool allowEnqueueWhileRunning)
+        internal ActionsQueue(bool allowEnqueueWhileRunning)
         {
             _allowEnqueueWhileRunning = allowEnqueueWhileRunning;
         }
@@ -47,7 +47,7 @@ namespace Reinforced.Tecture
             _queue.Enqueue(action);
         }
 
-        public void Run()
+        internal void Run()
         {
             _isQueueRunning = true;
 
@@ -67,7 +67,7 @@ namespace Reinforced.Tecture
             _isQueueRunning = false;
         }
 
-        public async Task RunAsync()
+        internal async Task RunAsync()
         {
             _isQueueRunning = true;
 

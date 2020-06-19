@@ -10,7 +10,10 @@
 using System;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
+
+
 
 namespace Reinforced.Tecture.Services {	
 	
@@ -20,30 +23,39 @@ namespace Reinforced.Tecture.Services {
 	/// <summary>
     /// Storage services that touches <#= i+2#> entities
     /// </summary>    
-	public class TectureService<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>>
-			   : TectureService<T1<# for(int j =0;j<=i-1;j++) { #>, T<#= j+2 #><# } #>>
+	public class TectureService<<#= GenericsStroke(i+2) #>>
+			   : TectureService
 			   where T1: class
 			   <# for(int j =0;j<=i;j++) { #>
 where T<#= j+2 #> : class
 			   <# } #>
 
     {
-		/// <summary>
-        /// Service pipeline access
-        /// </summary>
-        protected ServicePipeline<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>> Q { get; private set; }
 
-        internal override void CallInit(Pipeline pipeline)
+        protected Read<T, <#= GenericsStroke(i+2) #>> From<T>() where T : CanQuery
         {
-            Q = new ServicePipeline<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>>(pipeline);
-            Init();
-        }
+            return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer);
+        }		
 
-        internal override ServicePipeline Pipeline
+		protected Write<T, <#= GenericsStroke(i+2) #>> To<T>() where T : CanCommand
         {
-            get { return Q; }
-        }
+            return new SWrite<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer, Pipeline);
+        }	
     }
 
 <# } #>
 }
+
+<#+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

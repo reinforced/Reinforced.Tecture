@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Services;
 using Reinforced.Tecture.Transactions;
@@ -32,7 +33,7 @@ namespace Reinforced.Tecture
         /// </summary>
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
-        T From<T>() where T : class, ISource;
+        Read<T> From<T>() where T : CanQuery;
     }
 
     public interface ITecture : ITectureNoSave

@@ -5,7 +5,7 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Testing.Assumptions
 {
-    public interface IAssumption : ICommandRunner
+    public interface IAssumption : CommandRunner
     {
         Type CommandType { get; }
 

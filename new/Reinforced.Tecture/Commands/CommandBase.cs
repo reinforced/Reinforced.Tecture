@@ -26,6 +26,13 @@ namespace Reinforced.Tecture.Commands
 
     public abstract class CommandBase
     {
+
+        /// <summary>
+        /// Discriminates data source type for command.
+        /// Here I use .NET full Type's name
+        /// </summary>
+        public string ChannelId { get; internal set; }
+        
         /// <summary>
         /// Command annotation
         /// </summary>

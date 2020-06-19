@@ -1,0 +1,67 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	var implementationsCount = 8;
+#>
+
+using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Channels.Multiplexer;
+namespace Reinforced.Tecture.Channels
+{
+<# for (int i=0;i<implementationsCount;i++) {	#> 
+public interface Read<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Read<TChannel> where TChannel : CanQuery { }
+
+internal struct SRead<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+	: IQueryMultiplexer, 
+	  Read<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+	 where TChannel : CanQuery
+{
+	private readonly ChannelMultiplexer _cm;
+	public SRead(ChannelMultiplexer cm)
+	{
+		_cm = cm;
+	}
+
+	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
+	{
+		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+}
+
+public interface Write<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Write<TChannel> where TChannel : CanCommand { }
+
+internal struct SWrite<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+	: ICommandMultiplexer, 
+	  Write<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+	 where TChannel : CanCommand
+{
+	private readonly ChannelMultiplexer _cm;
+	private readonly Pipeline _pipeline;
+	public SWrite(ChannelMultiplexer cm, Pipeline p)
+	{
+		_cm = cm;
+		_pipeline = p;
+	}
+
+	public TFeature GetFeature<TFeature>() where TFeature : CommandFeature 
+	{
+		return _cm.GetCommandFeature<TChannel,TFeature>();
+	}
+
+	public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
+	{
+		command.ChannelId = typeof(Channel).FullName;
+		_pipeline.Enqueue(command);
+		return command;
+	}
+
+	 public ActionsQueue Save { get { return _pipeline.PostSaveActions;} }
+
+     public ActionsQueue Final { get { return _pipeline.FinallyActions; } }
+}
+<# } #>
+}

@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Testing
             _assumptions = assumptions;
         }
 
-        protected override Tuple<CommandRunnerGateway, ICommandRunner> GetRunner(CommandBase command)
+        protected override Tuple<CommandRunnerGateway, CommandRunner> GetRunner(CommandBase command)
         {
             var commandType = command.GetType();
             if (_assumptions.ContainsKey(commandType))
@@ -46,7 +46,7 @@ namespace Reinforced.Tecture.Testing
                     var bs = base.GetRunner(command);
                     suitable.OriginalRunner = bs.Item2;
                     var gateway = new CommandRunnerGateway(commandType, suitable.GetType());
-                    return new Tuple<CommandRunnerGateway, ICommandRunner>(gateway, suitable);
+                    return new Tuple<CommandRunnerGateway, CommandRunner>(gateway, suitable);
                 }
             }
 

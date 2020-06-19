@@ -1,4 +1,6 @@
 ﻿using System;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Integrate;
 using Reinforced.Tecture.Transactions;
@@ -9,8 +11,8 @@ namespace Reinforced.Tecture.Entry
     /// Builder that configures and assembles Tecture instance
     /// </summary>
     public class TectureBuilder
-    {
-        internal readonly RuntimeMultiplexer _mx = new RuntimeMultiplexer();
+    {        
+        internal ChannelMultiplexer _mx = new ChannelMultiplexer();
         internal ITransactionManager _transactionManager;
         internal Action<Exception> _excHandler = null;
 

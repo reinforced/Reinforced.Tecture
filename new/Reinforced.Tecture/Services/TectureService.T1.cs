@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Services
@@ -12,21 +13,16 @@ namespace Reinforced.Tecture.Services
     public class TectureService<T1> : TectureService
         where T1 : class
     {
-        /// <summary>
-        /// Service pipeline access
-        /// </summary>
-        protected ServicePipeline<T1> Q { get; private set; }
-
-        internal override void CallInit(Pipeline pipeline)
+        protected Read<T, T1> From<T>() where T : CanQuery
         {
-            Q = new ServicePipeline<T1>(pipeline);
-            Init();
+            return new SRead<T, T1>(ChannelMultiplexer);
         }
 
-        internal override ServicePipeline Pipeline
+        protected Write<T, T1> To<T>() where T : CanCommand
         {
-            get { return Q; }
+            return new SWrite<T, T1>(ChannelMultiplexer,Pipeline);
         }
+
     }
 
 }

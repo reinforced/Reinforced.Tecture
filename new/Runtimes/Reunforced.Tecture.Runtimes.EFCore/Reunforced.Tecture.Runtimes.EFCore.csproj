@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
+    <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+  </ItemGroup>
+
+</Project>

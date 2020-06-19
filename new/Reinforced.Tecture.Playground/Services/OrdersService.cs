@@ -1,53 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Reinforced.Tecture.Integrate;
-using Reinforced.Tecture.Methodics.Orm.Commands.Add;
-using Reinforced.Tecture.Methodics.Orm.Commands.Delete;
-using Reinforced.Tecture.Methodics.Orm.Commands.Update;
+﻿using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Features.Orm.Command.Add;
+using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Features.SqlStroke;
+using Reinforced.Tecture.Features.SqlStroke.Commands;
 using Reinforced.Tecture.Methodics.Orm.Queries;
-using Reinforced.Tecture.Methodics.SqlStroke;
-using Reinforced.Tecture.Methodics.SqlStroke.Commands;
-using Reinforced.Tecture.Methodics.SqlStroke.Queries;
 using Reinforced.Tecture.Playground.Entities;
-using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Services;
 
 namespace Reinforced.Tecture.Playground.Services
 {
-    class Db : ISqlSource, IOrmSource
-    {
-        public SqlStrokeRuntimeBase GetStrokeRuntime(Type[] usedTypes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Runtime<T>() where T : class, ITectureRuntime
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Retrieves query builder
-        /// </summary>
-        /// <typeparam name="T">Entity to query from</typeparam>
-        /// <returns>Query builder</returns>
-        public IQueryFor<T> Get<T>() where T : class
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    internal static class QQ
-    {
-        public static User ById(this IQueryFor<User> q, int id)
-        {
-            return q.All.FirstOrDefault(x => x.Id == id);
-        }
-    }
-
-    public class OrdersService : TectureService<User,Order>, INoContext
+    interface Db : 
+        QueryChannel<Orm>, 
+        CommandChannel<Features.Orm.Command.Orm>,
+        CommandQueryChannel<Features.SqlStroke.Queries.DirectSql, DirectSql>
+    {}
+    
+    public class OrdersService : TectureService<User,Order,Item>, INoContext
     {
         private OrdersService() { }
         
@@ -55,13 +24,10 @@ namespace Reinforced.Tecture.Playground.Services
 
         public async void Operation()
         {
-            Users.Operation();
+            var q = From<Db>().Get<User>();
 
-            var user = From<Db>().Get<User>().ById(10);
-
-            user.FirstName = "Vasya";
-
-            Q.SqlStroke<User>(u => $"UPDATE {u} SET {u.FirstName=="aaa"} WHERE {u.Id == 10}");
+            To<Db>().Add(new Item());
+            To<Db>().SqlStroke<Order>(x => $"DELETE FROM {x}");
         }
     }
 }
