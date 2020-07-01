@@ -22,10 +22,10 @@ namespace Reinforced.Tecture.Testing.Stories
         struct ValidationEntry
         {
             public FlowControl FlowControl { get; set; }
-            public CommandCheck[] Assertions { get; set; }
+            public ICommandCheck[] Assertions { get; set; }
 
             /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-            public ValidationEntry(FlowControl flowControl, CommandCheck[] assertions)
+            public ValidationEntry(FlowControl flowControl, ICommandCheck[] assertions)
             {
                 FlowControl = flowControl;
                 Assertions = assertions;
@@ -41,42 +41,19 @@ namespace Reinforced.Tecture.Testing.Stories
         {
             _story = story;
         }
-
         /// <summary>
         /// Sets validator for upcoming side-effect
         /// </summary>
-        /// <param name="assertion">Set of assertions that must take place for upcoming side-effect</param>
+        /// <param name="assertions">Set of assertions that must take place for upcoming side-effect</param>
         /// <returns>Fluent</returns>
-        public StoryValidator Then(params CommandCheck[] assertion)
+        public StoryValidator Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
         {
-            foreach (var sa in assertion)
+            foreach (var sa in assertions)
             {
                 sa.Environment = _story._environment;
             }
-            _current.Assertions = assertion;
+            _current.Assertions = assertions;
             _entries.Enqueue(_current);
-            _current = new ValidationEntry(FlowControl.Immediate, null);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets validator for upcoming side-effect
-        /// </summary>
-        /// <param name="times">Sets for how many upcoming side-effects assertion must take place</param>
-        /// <param name="assertion">Set of assertions that must take place for upcoming side-effect</param>
-        /// <returns>Fluent</returns>
-        public StoryValidator Then(int times, params CommandCheck[] assertion)
-        {
-            foreach (var sa in assertion)
-            {
-                sa.Environment = _story._environment;
-            }
-            _current.Assertions = assertion;
-            _entries.Enqueue(_current);
-            for (int i = 0; i < times - 1; i++)
-            {
-                _entries.Enqueue(new ValidationEntry(FlowControl.Immediate, assertion));
-            }
             _current = new ValidationEntry(FlowControl.Immediate, null);
             return this;
         }
@@ -98,7 +75,7 @@ namespace Reinforced.Tecture.Testing.Stories
         public void TheEnd()
         {
             var cmdsArray = _story.Commands.ToList();
-            cmdsArray.Add(new EndCommand());
+            cmdsArray.Add(new End());
             _entries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() { Environment = _story._environment } }));
             var eIdx = 0;
             while (_entries.Count > 0)

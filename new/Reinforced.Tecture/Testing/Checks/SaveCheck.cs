@@ -6,16 +6,16 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Testing.Checks
 {
-    public class SaveCheck : CommandCheck<SaveCommand>
+    public class SaveCheck : CommandCheck<Save>
     {
         internal SaveCheck() { }
 
-        protected override string GetMessage(SaveCommand command)
+        protected override string GetMessage(Save command)
         {
             return "expected saving to storage, but something went wrong";
         }
 
-        protected override bool IsActuallyValid(SaveCommand effect)
+        protected override bool IsActuallyValid(Save effect)
         {
             return true;
         }

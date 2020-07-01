@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Integrate;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Entry.Builders;
 using Reinforced.Tecture.Testing.Assumptions;
+using Reinforced.Tecture.Testing.Builders;
 
 namespace Reinforced.Tecture.Testing
 {
     public static class Extensions
     {
-        /// <summary>
-        /// Adds testing runtime to testing environment
-        /// </summary>
-        /// <param name="env">Testing environment</param>
-        /// <param name="runtime">Testing runtime</param>
-        /// <returns>Fluent</returns>
-        public static TestingEnvironment WithTestRuntime(this TestingEnvironment env, ITestingRuntime runtime)
+        public static TestingEnvironment WithChannel<TChannel>(this TestingEnvironment tb, Action<TestingChannelConfiguration<TChannel>> cfg) where TChannel : Channel
         {
-            env._mx.AddRuntime(runtime);
-            return env;
+            var cb = new TestingChannelConfigurationImpl<TChannel>(tb._mx);
+            cfg(cb);
+            return tb;
         }
 
         public static TestingEnvironment Assume(this TestingEnvironment env, Action<Assuming> assumptions)

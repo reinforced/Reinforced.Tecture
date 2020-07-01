@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Testing.Stories
             int i = 1;
             foreach (var effect in _commands)
             {
-                if (effect is SaveCommand)
+                if (effect is Save)
                 {
                     effect.Describe(tw);
                     tw.WriteLine();

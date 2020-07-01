@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Storage.Defaults.EntityFramework;
 using Reinforced.Storage.Playground.Entities;
 using Reinforced.Storage.Services;
@@ -32,7 +33,7 @@ namespace Reinforced.Storage.Playground.Services
         }
     }
 
-    public class Documents : StorageService<Document>, INoContext
+    public class Documents : StorageService<Document,User>, INoContext
     {
         private Documents()
         {
@@ -54,8 +55,16 @@ namespace Reinforced.Storage.Playground.Services
 
         public void OutdateDocumentsOfUser(int userId)
         {
-            Sql<Document>(d => $"UPDATE {d} SET {d.Status == 0} WHERE {d.UserId == userId}")
-                .Annotate("blah");
+            //Sql<Document>(d => $"UPDATE {d} SET {d.Status == 0} WHERE {d.UserId == userId}")
+            //    .Annotate("blah");
+            //Add(new User()).Annotate("poshel nahuy");
+            var users = 
+                from u in Get<User>().All
+                where u.Id == 10
+                select new {u.FirstName, u.IsActive};
+
+            
+            Sql<Document,User>((d,u) => $"DELETE FROM {d} INNER JOIN {u} ON {u.Id==d.UserId} WHERE {d.Status==0}");
         }
 
         public void MakeSomethingElse()

@@ -27,6 +27,7 @@ namespace Reinforced.Tecture.Playground.Services
 
             To<Db>().Add(new Item());
             To<Db>().SqlStroke<Order>(x => $"DELETE FROM {x}");
+
         }
     }
 }

@@ -79,21 +79,21 @@ namespace Reinforced.Storage.Playground
 
             var text = story.ToText();
 
-            //var x = story.GenerateValidation(d =>
-            //{
-            //    d.ForEffect<DirectSqlSideEffect>()
-            //        .Annotation()
-            //        .ExactCommand()
-            //        .ExactParameters();
-            //    //d.ForEffect<SaveChangesSideEffect>().Validate();
-            //    d.ForEffect<CommentSideEffect>()
-            //        .Validate();
-            //    d.ForEffect<BulkSideEffect>().Annotation().Validate();
-            //    d.ForEffect<AsyncBulkSideEffect>().Annotation().Validate();
-            //    d.ForEffect<AddSideEffect>().Annotation().Validate();
-            //    d.ForEffect<RemoveSideEffect>().Annotation().Validate();
-            //    d.ForEffect<UpdateSideEffect>().Annotation().Validate();
-            //});
+            var x = story.GenerateValidation(d =>
+            {
+                d.ForEffect<DirectSqlSideEffect>()
+                    .Annotation()
+                    .ExactCommand()
+                    .ExactParameters();
+                //d.ForEffect<SaveChangesSideEffect>().Validate();
+                d.ForEffect<CommentSideEffect>()
+                    .Validate();
+                d.ForEffect<BulkSideEffect>().Annotation().Validate();
+                d.ForEffect<AsyncBulkSideEffect>().Annotation().Validate();
+                d.ForEffect<AddSideEffect>().Annotation().Validate();
+                d.ForEffect<RemoveSideEffect>().Annotation().Validate();
+                d.ForEffect<UpdateSideEffect>().Annotation().Validate();
+            });
 
             story.Begins()
                 .Then(Remove<User>())

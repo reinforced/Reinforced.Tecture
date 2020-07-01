@@ -7,7 +7,13 @@ namespace Reinforced.Tecture.Entry
 {
     public static class Extensions
     {
-
+        /// <summary>
+        /// Configures channel
+        /// </summary>
+        /// <typeparam name="TChannel">Type of channel</typeparam>
+        /// <param name="tb">Builder</param>
+        /// <param name="cfg">Configuration action with channel configurator</param>
+        /// <returns>Fluent</returns>
         public static TectureBuilder WithChannel<TChannel>(this TectureBuilder tb, Action<ChannelConfiguration<TChannel>> cfg) where TChannel : Channel
         {
             var cb = new ChannelConfigurationImpl<TChannel>(tb._mx);

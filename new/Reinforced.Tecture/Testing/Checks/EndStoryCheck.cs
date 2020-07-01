@@ -8,16 +8,16 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Testing.Checks
 {
-    public class EndStoryCheck : CommandCheck<EndCommand>
+    public class EndStoryCheck : CommandCheck<End>
     {
         internal EndStoryCheck(){}
 
-        protected override string GetMessage(EndCommand command)
+        protected override string GetMessage(End command)
         {
             return $"story unexpectedly ends";
         }
 
-        protected override bool IsActuallyValid(EndCommand command)
+        protected override bool IsActuallyValid(End command)
         {
             return true;
         }

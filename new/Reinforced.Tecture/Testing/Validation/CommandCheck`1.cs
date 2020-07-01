@@ -6,10 +6,30 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Testing.Validation
 {
     /// <summary>
+    /// Do not inherit this interface, use <see cref="CommandCheck{TCommand}"/> instead
+    /// </summary>
+    public interface ICommandCheck
+    {
+        void Assert(CommandBase command);
+        bool IsValid(CommandBase command);
+        Type CommandType { get; }
+        TestingEnvironment Environment { get; set; }
+
+    }
+
+    /// <summary>
+    /// Do not inherit this interface, use <see cref="CommandCheck{TCommand}"/> instead
+    /// </summary>
+    public interface ICommandCheck<in TCommand> : ICommandCheck
+    {
+
+    }
+
+    /// <summary>
     /// Generic base for command assertion
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
-    public abstract class CommandCheck<TCommand> : CommandCheck where TCommand : CommandBase
+    public abstract class CommandCheck<TCommand> : ICommandCheck<TCommand> where TCommand : CommandBase
     {
         /// <summary>
         /// Gets error message (called only if command is not valid)
@@ -27,22 +47,24 @@ namespace Reinforced.Tecture.Testing.Validation
 
         protected virtual void Assert(TCommand command)
         {
-            if (!IsValid(command)) throw new AssertionException(GetMessage(command));
+            if (!IsValid(command)) throw new TectureCheckException(GetMessage(command));
         }
 
-        public override void Assert(CommandBase command)
+        public void Assert(CommandBase command)
         {
             if (command is TCommand cmd) Assert(cmd);
         }
 
-        public override Type CommandType
+        public Type CommandType
         {
             get { return typeof(TCommand); }
         }
 
-        public override bool IsValid(CommandBase command)
+        public TestingEnvironment Environment { get; set; }
+
+        public bool IsValid(CommandBase command)
         {
-            if (command is TCommand) return IsValid((TCommand)command);
+            if (command is TCommand cmd) return IsActuallyValid(cmd);
             return false;
         }
     }

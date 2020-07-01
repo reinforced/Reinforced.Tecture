@@ -6,10 +6,10 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Testing.Stories
 {
-    public sealed class EndCommand : CommandBase
+    [CommandCode("SAVE")]
+    public sealed class Save : CommandBase
     {
-        internal EndCommand() { }
-
+        internal Save() { }
 
         /// <summary>
         /// Describes actions that are being performed within side effect
@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Testing.Stories
         /// <param name="tw"></param>
         public override void Describe(TextWriter tw)
         {
-            tw.Write("::End of Story::");
+            tw.Write("====== Saved =====");
         }
     }
 }

@@ -49,13 +49,13 @@ namespace Reinforced.Tecture.Testing
         protected override void Save(IEnumerable<string> channels)
         {
             base.Save(channels);
-            _story.Enqueue(new SaveCommand());
+            _story.Enqueue(new Save());
         }
 
         protected override async Task SaveAsync(IEnumerable<string> channels)
         {
             await base.SaveAsync(channels);
-            _story.Enqueue(new SaveCommand());
+            _story.Enqueue(new Save());
         }
 
         protected override void DispatchInternal(IEnumerable<CommandBase> commands,HashSet<string> channels)

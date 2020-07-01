@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Testing.Checks
     {
         private readonly string _content;
 
-        internal CommentCheck(string content)
+        public CommentCheck(string content)
         {
             _content = content;
         }
