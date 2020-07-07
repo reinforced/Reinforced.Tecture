@@ -8,7 +8,7 @@ using Reinforced.Tecture.Testing.Stories;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Reinforced.Tecture.Testing
 {
-    partial class Generator
+    partial class CSharpTestGenerator
     {
         private CompilationUnitSyntax _result;
 

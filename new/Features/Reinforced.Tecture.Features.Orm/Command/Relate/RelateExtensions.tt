@@ -6,21 +6,30 @@
 <#
 	var implementationsCount = 8;
 #>
+using System;
+using System.Linq.Expressions;
 using Reinforced.Tecture.Commands;
+using System.Collections.Generic;
 using Reinforced.Tecture.Channels;
 
-namespace Reinforced.Tecture.Features.Orm.Command.Add
+namespace Reinforced.Tecture.Features.Orm.Command.Relate
 {
     public static partial class Extensions
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
     <# for (int j=0;j<i;j++) {	#>         
-        public static Add Add<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
+        public static Relate Relate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,TField>> key, TField related)
         {
-            return AddCore(c, entity);
-        }       
+            return RelateCore(c, entity, GetKey(key), related);
+        }
+
+        public static Relate Relate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,IEnumerable<TField>>> key, TField related)
+        {
+            return RelateCore(c, entity, GetKey(key), related);
+        }
+       
     <# } #>
-    <# } #>    
+    <# } #>
     }
 }
 

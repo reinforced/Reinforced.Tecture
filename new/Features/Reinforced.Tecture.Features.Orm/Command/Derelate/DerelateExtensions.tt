@@ -6,29 +6,30 @@
 <#
 	var implementationsCount = 8;
 #>
-
 using System;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Commands;
+using System.Collections.Generic;
 using Reinforced.Tecture.Channels;
 
-namespace Reinforced.Tecture.Features.Orm.Command.Update
+namespace Reinforced.Tecture.Features.Orm.Command.Derelate
 {
     public static partial class Extensions
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
     <# for (int j=0;j<i;j++) {	#>         
-        public static Update Update<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
+        public static Derelate Derelate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,TField>> key, TField derelated)
         {
-            return UpdateCore(c, entity);
-        }       
-
-        public static Update Update<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, params Expression<Func<T<#= j+1 #>, object>>[] properties)
-        {
-            return UpdateCore(c, entity);
+            return DeRelateCore(c, entity, GetKey(key), derelated);
         }
+
+        public static Derelate Derelate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,IEnumerable<TField>>> key, TField derelated)
+        {
+            return DeRelateCore(c, entity, GetKey(key), derelated);
+        }
+       
     <# } #>
-    <# } #>    
+    <# } #>
     }
 }
 

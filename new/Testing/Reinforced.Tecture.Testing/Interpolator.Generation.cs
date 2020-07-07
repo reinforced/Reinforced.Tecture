@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Reinforced.Tecture.Testing
 {
-    partial class Generator
+    partial class CSharpTestGenerator
     {
         private InvocationExpressionSyntax Generate(CommandBase command, CheckDescription desc)
         {

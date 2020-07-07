@@ -1,59 +1,37 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Tecture.Features.Orm.Command.Update
 {
     public static partial class Extensions
     {
-        private static Update UpdateCore(ServicePipeline ppl, object entity, LambdaExpression[] properties)
+        private static Update UpdateCore(Write<CommandChannel<Orm>> channel, object entity)
+        {
+            if (entity == null)
+                throw new TectureOrmFeatureException("Entity going to be added cannot be null");
+
+            var t = entity.GetType();
+            var fe = channel.Feature();
+
+            if (!fe.IsSubjectCore(t))
+                throw new TectureOrmFeatureException($"Entity {entity} is not a subject for addition in corresponding service");
+
+            return channel.Put(new Update(entity,t));
+        }
+
+        private static Update UpdateCore(Write<CommandChannel<Orm>> ppl, object entity, LambdaExpression[] properties)
         {
             if (entity == null)
                 throw new TectureOrmFeatureException("Entity going to be updated cannot be null");
 
             var t = entity.GetType();
+            var fe = ppl.Feature();
 
-            if (!ppl.IsSubject(t))
+            if (!fe.IsSubjectCore(t))
                 throw new TectureOrmFeatureException($"Entity {entity} is not a subject for updating in corresponding service");
 
-            return ppl.Enqueue(new Update(entity, t, properties));
-        }
-
-        private static Update UpdateCore(ServicePipeline ppl, object entity)
-        {
-            if (entity == null)
-                throw new TectureOrmFeatureException("Entity going to be updated cannot be null");
-
-            var t = entity.GetType();
-
-            if (!ppl.IsSubject(t))
-                throw new TectureOrmFeatureException($"Entity {entity} is not a subject for updating in corresponding service");
-
-            return ppl.Enqueue(new Update(entity, t));
-        }
-
-
-        /// <summary>
-        /// Updates entity in storage
-        /// </summary>
-        /// <typeparam name="TEntity">Entity type</typeparam>
-        /// <param name="pipeline">Tecture pipeline</param>
-        /// <param name="entity">Entity</param>
-        /// <returns>Update command instance</returns>
-        public static Update Update<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity)
-        {
-            return UpdateCore(pipeline, entity);
-        }
-
-        /// <summary>
-        /// Updates entity in storage
-        /// </summary>
-        /// <typeparam name="TEntity">Entity type</typeparam>
-        /// <param name="pipeline">Tecture pipeline</param>
-        /// <param name="entity">Entity</param>
-        /// <returns>Update command instance</returns>
-        public static Update Update<TEntity>(this ServicePipeline<TEntity> pipeline, TEntity entity, params Expression<Func<TEntity, object>>[] properties)
-        {
-            return UpdateCore(pipeline, entity, properties);
+            return ppl.Put(new Update(entity, t, properties));
         }
     }
 }

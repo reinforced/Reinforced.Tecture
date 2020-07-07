@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Command\Derelate\DerelateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DerelateExtensions.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>
 
@@ -16,6 +24,14 @@
     <None Update="Command\Delete\DeleteExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DeleteExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Command\Derelate\DerelateExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DerelateExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Command\Relate\RelateExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RelateExtensions.cs</LastGenOutput>
     </None>
     <None Update="Command\Update\UpdateExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -37,6 +53,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DeleteExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Command\Derelate\DerelateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DerelateExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Command\Relate\RelateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RelateExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="Command\Update\UpdateExtensions.cs">
       <DesignTime>True</DesignTime>

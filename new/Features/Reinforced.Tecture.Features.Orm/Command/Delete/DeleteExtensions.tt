@@ -4,31 +4,40 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#
-	var implementationsCount = 7;
+	var implementationsCount = 8;
 #>
+using System;
+using System.Linq.Expressions;
 using Reinforced.Tecture.Commands;
+using System.Collections.Generic;
+using Reinforced.Tecture.Channels;
 
-namespace Reinforced.Tecture.Methodics.Orm.Commands.Delete
+namespace Reinforced.Tecture.Features.Orm.Command.Delete
 {
     public static partial class Extensions
     {
-    <# for (int i=0;i<implementationsCount;i++) {	#> 
-
-        /// <summary>
-        /// Adds entity to storage
-        /// </summary>
-        /// <param name="pipeline">Tecture pipeline</param>
-        /// <param name="entity">Entity</param>
-        /// <typeparam name="TEntity">Entity type</typeparam>
-        <# for(int j =0;j<=i;j++) { #>/// <typeparam name="T<#= j+1 #>">Not used</typeparam> 
-        <# } #>
-        
-        /// <returns>Add command instance</returns>
-        public static DeleteCommand Delete<<# for(int j =0;j<=i;j++) { #>T<#= j+1 #>, <# } #>TEntity>(this ServicePipeline<<# for(int j =0;j<=i;j++) { #>T<#= j+1 #>, <# } #>TEntity> pipeline, TEntity entity)
+<# for (int i=0;i<=implementationsCount;i++) {	#> 
+    <# for (int j=0;j<i;j++) {	#>         
+        public static Delete Delete<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Orm>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
         {
-           return DeleteCore(pipeline, entity);
+            return DeleteCore(c, entity);
         }
+       
     <# } #>
-
+    <# } #>
     }
 }
+
+<#+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

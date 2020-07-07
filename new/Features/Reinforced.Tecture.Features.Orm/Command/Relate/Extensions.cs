@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using Reinforced.Tecture.Channels;
 
@@ -27,6 +28,15 @@ namespace Reinforced.Tecture.Features.Orm.Command.Relate
                 SecondaryType = secondaryType,
                 ForeignKeySpecifier = keySpecifier
             });
+        }
+
+        private static string GetKey(LambdaExpression ex)
+        {
+            var pex = ex.Body as MemberExpression;
+            if (pex==null)
+                throw new Exception($"Property lambda expected in {ex}");
+
+            return pex.Member.Name;
         }
     }
 }

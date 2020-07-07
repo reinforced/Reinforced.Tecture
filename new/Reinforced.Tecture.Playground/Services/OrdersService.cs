@@ -1,6 +1,7 @@
 ﻿using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Command.Add;
+using Reinforced.Tecture.Features.Orm.Command.Relate;
 using Reinforced.Tecture.Features.Orm.Querу;
 using Reinforced.Tecture.Features.SqlStroke;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
@@ -27,6 +28,7 @@ namespace Reinforced.Tecture.Playground.Services
 
             To<Db>().Add(new Item());
             To<Db>().SqlStroke<Order>(x => $"DELETE FROM {x}");
+            
 
         }
     }

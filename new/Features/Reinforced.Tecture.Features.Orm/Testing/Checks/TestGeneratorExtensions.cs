@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Features.Orm.Testing.Checks.Add;
+using Reinforced.Tecture.Features.Orm.Testing.Checks.Delete;
 using Reinforced.Tecture.Testing.Generation;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks
 {
     public static class TestGeneratorExtensions
     {
-        public static void WithOrmCheck(this TestGenerator tg)
+        public static void CheckOrm(this TestGenerator tg)
         {
-            tg.ChecksFor<Command.Add.Add>()
-                .GenerateCheck(v=>AddChecks.Add());
+            tg.For<Command.Add.Add>().Basic();
+            tg.For<Command.Delete.Delete>().Basic();
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Testing.Stories;
 
 namespace Reinforced.Tecture.Testing.Checks
 {
@@ -15,7 +19,7 @@ namespace Reinforced.Tecture.Testing.Checks
         /// <param name="annotationText">Annotation text</param>
         /// <returns>Annotation check</returns>
         public static AnnotationCheck Annotated(string annotationText) => new AnnotationCheck(annotationText);
-        
+
         /// <summary>
         /// Checks that save happening in this place of story
         /// </summary>
@@ -28,5 +32,7 @@ namespace Reinforced.Tecture.Testing.Checks
         /// <param name="content">Comment content (optional)</param>
         /// <returns>Comment check</returns>
         public static CommentCheck Comment(string content = null) => new CommentCheck(content);
+
+        
     }
 }
