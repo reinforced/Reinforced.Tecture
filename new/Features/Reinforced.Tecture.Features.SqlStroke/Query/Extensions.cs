@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Command;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Queries
+namespace Reinforced.Tecture.Features.SqlStroke.Query
 {
     public static partial class Extensions
     {

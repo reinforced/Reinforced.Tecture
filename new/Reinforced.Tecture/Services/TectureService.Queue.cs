@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Services
         [Unexplainable]
         protected virtual void Finally(Action action)
         {
-            Pipeline.CorePipeline.FinallyActions.Enqueue(action);
+            Pipeline.FinallyActions.Enqueue(action);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Reinforced.Tecture.Services
         [Unexplainable]
         protected virtual void Finally(Func<Task> action)
         {
-            Pipeline.CorePipeline.FinallyActions.Enqueue(action);
+            Pipeline.FinallyActions.Enqueue(action);
         }
     }
 }

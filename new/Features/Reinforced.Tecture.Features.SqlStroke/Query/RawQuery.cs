@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Command;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Queries
+namespace Reinforced.Tecture.Features.SqlStroke.Query
 {
     /// <summary>
     /// Raw SQL query

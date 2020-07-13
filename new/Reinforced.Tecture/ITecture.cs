@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Services;
 using Reinforced.Tecture.Transactions;
 

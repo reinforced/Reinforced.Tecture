@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using Reinforced.Tecture.Channels;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Queries
+namespace Reinforced.Tecture.Features.SqlStroke.Query
 {
     public static partial class Extensions
     {

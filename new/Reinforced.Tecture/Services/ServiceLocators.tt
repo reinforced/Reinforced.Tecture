@@ -77,20 +77,7 @@ namespace Reinforced.Tecture.Services {
 		/// Imports context into service
 		/// </summary>
 		void Context(T1 ctx1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #> ctx<#= j+2 #> <# } #>);
-	}
-
-	/// <summary>
-    /// Storage services that touches <#= i+2#> entities
-    /// </summary>    
-	public class TectureService<T1<# for(int j =0;j<=i;j++) { #>, T<#= j+2 #><# } #>>
-			   : TectureService<T1<# for(int j =0;j<=i-1;j++) { #>, T<#= j+2 #><# } #>>
-			   where T1: class
-			   <# for(int j =0;j<=i;j++) { #>
-where T<#= j+2 #> : class
-			   <# } #>
-    {
-		
-    }
+	}	
 
 <# } #>
 }

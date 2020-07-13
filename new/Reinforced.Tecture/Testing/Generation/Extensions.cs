@@ -15,6 +15,7 @@ namespace Reinforced.Tecture.Testing.Generation
             var gen = new TGenerator();
             configure(gen);
 
+            return null;//todo
 
         }
 

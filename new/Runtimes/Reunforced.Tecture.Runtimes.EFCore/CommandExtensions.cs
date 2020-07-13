@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Entry.Builders;
-using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Command;
 using Reunforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command;
 
 namespace Reunforced.Tecture.Runtimes.EFCore

@@ -1,6 +1,7 @@
 ﻿using System;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Entry.Builders;
+using Reinforced.Tecture.Testing.Query;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry
@@ -42,6 +43,13 @@ namespace Reinforced.Tecture.Entry
         public static TectureBuilder WithExceptionHandler(this TectureBuilder tb, Action<Exception> handler)
         {
             tb._excHandler = handler;
+            return tb;
+        }
+
+        public static TectureBuilder WithQueryStore(this TectureBuilder tb, IQueryStore qs)
+        {
+            tb._queryStore = qs;
+            qs.State = QueryMemorizeState.Put;
             return tb;
         }
 

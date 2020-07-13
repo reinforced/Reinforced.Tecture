@@ -1,6 +1,8 @@
 ﻿
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Channels.Multiplexer;
+using Reinforced.Tecture.Testing.Query;
+
 namespace Reinforced.Tecture.Channels
 {
  
@@ -12,14 +14,21 @@ internal struct SRead<TChannel, E1>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -63,14 +72,21 @@ internal struct SRead<TChannel, E1, E2>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -114,14 +130,21 @@ internal struct SRead<TChannel, E1, E2, E3>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -165,14 +188,21 @@ internal struct SRead<TChannel, E1, E2, E3, E4>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -216,14 +246,21 @@ internal struct SRead<TChannel, E1, E2, E3, E4, E5>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -267,14 +304,21 @@ internal struct SRead<TChannel, E1, E2, E3, E4, E5, E6>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -318,14 +362,21 @@ internal struct SRead<TChannel, E1, E2, E3, E4, E5, E6, E7>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 
@@ -369,14 +420,21 @@ internal struct SRead<TChannel, E1, E2, E3, E4, E5, E6, E7, E8>
 	 where TChannel : CanQuery
 {
 	private readonly ChannelMultiplexer _cm;
-	public SRead(ChannelMultiplexer cm)
+	private readonly IQueryStore _qs;
+	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
 	{
 		_cm = cm;
+		_qs = qs;
 	}
 
 	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 	{
 		return _cm.GetQueryFeature<TChannel,TFeature>();
+	}
+
+	public IQueryStore GetStore()
+	{
+		return _qs;
 	}
 }
 

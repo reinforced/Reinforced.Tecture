@@ -1,6 +1,7 @@
 ﻿using System;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing.Query;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry
@@ -10,9 +11,10 @@ namespace Reinforced.Tecture.Entry
     /// </summary>
     public class TectureBuilder
     {        
-        internal ChannelMultiplexer _mx = new ChannelMultiplexer();
+        internal readonly ChannelMultiplexer _mx = new ChannelMultiplexer();
         internal ITransactionManager _transactionManager;
         internal Action<Exception> _excHandler = null;
+        internal IQueryStore _queryStore;
 
         /// <summary>
         /// Produces Tecture instance
@@ -24,6 +26,7 @@ namespace Reinforced.Tecture.Entry
                 _mx,
                 new CommandsDispatcher(_mx),
                 false, 
+                _queryStore,
                 _transactionManager, 
                 exceptionHandler: _excHandler);
         }

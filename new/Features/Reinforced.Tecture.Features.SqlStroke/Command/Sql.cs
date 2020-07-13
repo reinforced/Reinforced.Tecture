@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Reinforced.Tecture.Commands;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Commands
+namespace Reinforced.Tecture.Features.SqlStroke.Command
 {
     [CommandCode("SQL")]
     public sealed class Sql : CommandBase

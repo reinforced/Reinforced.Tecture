@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Features.SqlStroke;
-using Reinforced.Tecture.Features.SqlStroke.Queries;
 
 namespace Reunforced.Tecture.Runtimes.EFCore.Features.Query
 {

@@ -29,7 +29,7 @@ namespace Reinforced.Tecture
                     null);
 #endif
             }
-            catch (MissingMethodException ex)
+            catch (MissingMethodException)
             {
                 throw new Exception($"Service {t} must contain private constructor");
             }

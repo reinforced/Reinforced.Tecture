@@ -1,4 +1,6 @@
-﻿namespace Reinforced.Tecture.Channels
+﻿using Reinforced.Tecture.Testing.Query;
+
+namespace Reinforced.Tecture.Channels
 {
     /// <summary>
     /// Set of infrastructure channel extensions
@@ -37,6 +39,19 @@
             var mux = r as IQueryMultiplexer;
 
             return mux.GetFeature<T>();
+        }
+
+        /// <summary>
+        /// Retrieves specified query feature for 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static IQueryStore QueryStore(this Read r)
+        {
+            var mux = r as IQueryMultiplexer;
+
+            return mux.GetStore();
         }
 
         public static T PleaseFeature<T>(this Write w) where T : CommandFeature

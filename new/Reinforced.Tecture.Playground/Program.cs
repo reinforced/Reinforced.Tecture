@@ -44,23 +44,7 @@ namespace Reinforced.Tecture.Playground
             tc.Save();
 
 
-            var te = new TestingEnvironment()
-                .Assume(x =>
-                {
-                    x.Orm(OrmAssumptions);
-                })
-                .WithOrmTesting();
-
-            var story = te.TellStory(x =>
-            {
-                x.Do<UserService>().Operation();
-            });
-
         }
 
-        private static void OrmAssumptions(OrmAssuming obj)
-        {
-            obj.Assume<Add, Order>(x => x.Id = 50);
-        }
     }
 }

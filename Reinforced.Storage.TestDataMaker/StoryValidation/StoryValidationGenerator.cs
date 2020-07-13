@@ -195,65 +195,9 @@ namespace Reinforced.Storage.TestCodeMaker.StoryValidation
 
     internal static class Formats
     {
-        public static BlockSyntax Format(this BlockSyntax mds)
-        {
-            return mds.WithOpenBraceToken(
-                    Token(
-                        TriviaList(LineFeed,Tab,Tab),
-                        SyntaxKind.OpenBraceToken,
-                        TriviaList(
-                            LineFeed)))
-                .WithCloseBraceToken(
-                    Token(
-                        TriviaList(
-                            new[]
-                            {
-                                LineFeed,
-                                Tab,Tab
-                            }),
-                        SyntaxKind.CloseBraceToken,
-                        TriviaList(
-                            LineFeed)));
-        }
+       
 
-        public static UsingDirectiveSyntax FormatUsing(this UsingDirectiveSyntax uds)
-        {
-            return uds.WithUsingKeyword(
-                    Token(
-                        TriviaList(),
-                        SyntaxKind.UsingKeyword,
-                        TriviaList(
-                            Space)))
-                .WithSemicolonToken(
-                    Token(
-                        TriviaList(),
-                        SyntaxKind.SemicolonToken,
-                        TriviaList(
-                            LineFeed)));
-        }
-
-        public static NamespaceDeclarationSyntax Format(this NamespaceDeclarationSyntax nds)
-        {
-            var newName = nds.Name.WithTrailingTrivia(LineFeed);
-
-            return nds
-                .WithName(newName)
-                .WithNamespaceKeyword(
-                    Token(
-                        TriviaList(LineFeed),
-                        SyntaxKind.NamespaceKeyword,
-                        TriviaList(Space)))
-                .WithOpenBraceToken(
-                    Token(
-                        TriviaList(),
-                        SyntaxKind.OpenBraceToken,
-                        TriviaList(LineFeed)))
-                .WithCloseBraceToken(
-                    Token(
-                        TriviaList(LineFeed),
-                        SyntaxKind.CloseBraceToken,
-                        TriviaList()));
-        }
+        
 
         public static readonly SyntaxTrivia Tab = Whitespace("\t");
 
@@ -268,36 +212,7 @@ namespace Reinforced.Storage.TestCodeMaker.StoryValidation
             return l.ToArray();
         }
 
-        public static ClassDeclarationSyntax Format(this ClassDeclarationSyntax cds)
-        {
-            var idnt = cds.Identifier.WithTrailingTrivia(LineFeed);
-            return cds
-                .WithIdentifier(idnt)
-                .WithKeyword(
-                    Token(
-                        TriviaList(Tab),
-                        SyntaxKind.ClassKeyword,
-                        TriviaList(
-                            Space)))
-                .WithOpenBraceToken(
-                    Token(
-                        TriviaList(Tab),
-                        SyntaxKind.OpenBraceToken,
-                        TriviaList(
-                            LineFeed)))
-                .WithCloseBraceToken(
-                    Token(
-                        TriviaList(
-                            new[]
-                            {
-                                LineFeed,
-                                Tab
-                            }),
-                        SyntaxKind.CloseBraceToken,
-                        TriviaList(
-                            LineFeed)));
-
-        }
+       
 
         public static UsingDirectiveSyntax Static(this UsingDirectiveSyntax uds)
         {

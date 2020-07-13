@@ -4,7 +4,7 @@ using Reinforced.Tecture.Features.Orm.Command.Add;
 using Reinforced.Tecture.Features.Orm.Command.Relate;
 using Reinforced.Tecture.Features.Orm.Querу;
 using Reinforced.Tecture.Features.SqlStroke;
-using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Command;
 using Reinforced.Tecture.Playground.Entities;
 using Reinforced.Tecture.Services;
 
@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Playground.Services
     interface Db : 
         QueryChannel<Orm>, 
         CommandChannel<Features.Orm.Command.Orm>,
-        CommandQueryChannel<Features.SqlStroke.Queries.DirectSql, DirectSql>
+        CommandQueryChannel<Features.SqlStroke.Query.DirectSql, DirectSql>
     {}
     
     public class OrdersService : TectureService<User,Order,Item>, INoContext

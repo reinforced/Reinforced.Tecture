@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Savers;
+﻿using Reinforced.Tecture.Savers;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Commands
+namespace Reinforced.Tecture.Features.SqlStroke.Command
 {
     public class DirectSql : StrokeFeatureBase, Produces<Sql>
     {

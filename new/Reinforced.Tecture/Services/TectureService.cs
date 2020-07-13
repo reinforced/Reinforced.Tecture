@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
-using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing.Query;
 
 
 namespace Reinforced.Tecture.Services
@@ -19,6 +15,7 @@ namespace Reinforced.Tecture.Services
         internal ServiceManager ServiceManager;
         internal ChannelMultiplexer ChannelMultiplexer;
         internal Pipeline Pipeline;
+        internal IQueryStore QueryStore;
         #endregion
 
         /// <summary>
@@ -63,13 +60,14 @@ namespace Reinforced.Tecture.Services
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
         /// </summary>
+#pragma warning disable 1998
         protected virtual async Task OnSaveAsync() { }
 
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data after all save changes calls.
         /// </summary>
         protected virtual async Task OnFinallyAsync() { }
-
+#pragma warning restore 1998
         /// <summary>
         /// Called right after service initialization. Use it to do things right after service is created
         /// </summary>

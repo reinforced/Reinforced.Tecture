@@ -1,11 +1,7 @@
-﻿
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Reinforced.Tecture.Channels;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Queries
+namespace Reinforced.Tecture.Features.SqlStroke.Query
 {
     public abstract class DirectSql : StrokeFeatureBase, QueryFeature
     {

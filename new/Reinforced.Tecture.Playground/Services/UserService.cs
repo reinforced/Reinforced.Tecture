@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Features.Orm.Command.Add;
 using Reinforced.Tecture.Features.Orm.Querу;
-using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Features.SqlStroke.Queries;
+using Reinforced.Tecture.Features.SqlStroke.Command;
+using Reinforced.Tecture.Features.SqlStroke.Query;
 using Reinforced.Tecture.Playground.Entities;
 using Reinforced.Tecture.Services;
 

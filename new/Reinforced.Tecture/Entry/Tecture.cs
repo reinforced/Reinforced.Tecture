@@ -4,6 +4,7 @@ using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Services;
+using Reinforced.Tecture.Testing.Query;
 using Reinforced.Tecture.Transactions;
 using Reinforced.Tecture.Transactions.Testing;
 
@@ -20,19 +21,22 @@ namespace Reinforced.Tecture.Entry
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
+        private readonly IQueryStore _queryStore;
+
         public Tecture(
             ChannelMultiplexer mx,
             CommandsDispatcher dispatcher,
             bool debugMode = false,
+            IQueryStore queryStore = null,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
             _mx = mx;
+            _queryStore = queryStore;
             _pipeline = new Pipeline(debugMode, _actions, _finallyActions);
-
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
-            _serviceManager = new ServiceManager(_pipeline,mx);
+            _serviceManager = new ServiceManager(_pipeline, _mx, _queryStore);
             _dispatcher = dispatcher;
         }
 
@@ -63,7 +67,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Data source instance</returns>
         public Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(_mx);
+            return new SRead<T>(_mx, _queryStore);
         }
 
 

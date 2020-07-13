@@ -25,13 +25,13 @@
       <LastGenOutput>ForCommand.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
-	 <None Include="Services\TectureServices.tt">
+	 <None Update="Services\TectureServices.tt">
       <LastGenOutput>TectureServices.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
-    <None Include="Services\ServiceLocators.tt">
+    <None Update="Services\ServiceLocators.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TectureServices.cs</LastGenOutput>
+      <LastGenOutput>ServiceLocators.cs</LastGenOutput>
     </None>	
   </ItemGroup>
 
@@ -65,14 +65,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ForCommand.tt</DependentUpon>
     </Compile>
+	<Compile Update="Services\ServiceLocators.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServiceLocators.tt</DependentUpon>
+    </Compile>
+	<Compile Update="Services\TectureServices.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TectureServices.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Update="NETStandard.Library" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Testing\Entities\" />
   </ItemGroup>
 
 </Project>
