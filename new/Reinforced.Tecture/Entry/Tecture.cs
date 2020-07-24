@@ -45,7 +45,7 @@ namespace Reinforced.Tecture.Entry
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
-        public T Do<T>() where T : TectureService, INoContext
+        public T Do<T>() where T : TectureServiceBase, INoContext
         {
             return _serviceManager.Do<T>();
         }
@@ -55,7 +55,7 @@ namespace Reinforced.Tecture.Entry
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Context service <typeparamref name="T"/></returns>
-        public LetBuilder<T> Let<T>() where T : TectureService, IWithContext
+        public LetBuilder<T> Let<T>() where T : TectureServiceBase, IWithContext
         {
             return _serviceManager.Let<T>();
         }

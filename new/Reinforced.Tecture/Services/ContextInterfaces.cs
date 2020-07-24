@@ -22,7 +22,7 @@ namespace Reinforced.Tecture.Services
     /// Generic service context builder
     /// </summary>
     /// <typeparam name="TService"></typeparam>
-    public class LetBuilder<TService> : LetBuilder where TService : TectureService, IWithContext
+    public class LetBuilder<TService> : LetBuilder where TService : TectureServiceBase, IWithContext
     {
         internal override Type HoistType { get { return typeof(TService); } }
 

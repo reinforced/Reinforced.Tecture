@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Entry;
-using Reinforced.Tecture.Features.Orm.Command.Add;
+using Reinforced.Tecture.Features.Orm.Commands.Add;
 using Reinforced.Tecture.Features.Orm.Testing;
 using Reinforced.Tecture.Features.Orm.Testing.Assumptions;
 using Reinforced.Tecture.Features.Orm.Testing.Checks.Add;
@@ -38,8 +38,8 @@ namespace Reinforced.Tecture.Playground
 
             ITecture tc = bld.Build();
 
-            tc.Do<OrdersService>().Operation();
-            tc.Do<UserService>().Operation();
+            tc.Do<OrdersServiceBase>().Operation();
+            tc.Do<UserServiceBase>().Operation();
 
             tc.Save();
 

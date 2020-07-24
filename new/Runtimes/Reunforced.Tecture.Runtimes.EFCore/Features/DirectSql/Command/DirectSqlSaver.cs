@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Features.SqlStroke.Command;
+using Reinforced.Tecture.Features.SqlStroke.Commands;
 using Reinforced.Tecture.Savers;
 
 namespace Reunforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command

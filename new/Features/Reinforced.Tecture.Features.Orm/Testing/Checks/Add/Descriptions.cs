@@ -6,12 +6,12 @@ using Reinforced.Tecture.Testing.Generation;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 {
-    sealed class AddCheckDescription : CheckDescription<Command.Add.Add>
+    sealed class AddCheckDescription : CheckDescription<Commands.Add.Add>
     {
         public override MethodInfo Method =>
             UseMethod(() => AddChecks.Add<object>(null));
 
-        protected override Type[] GetTypeArguments(Command.Add.Add command)
+        protected override Type[] GetTypeArguments(Commands.Add.Add command)
         {
             return new Type[] { command.EntityType };
         }
@@ -19,6 +19,6 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<Command.Add.Add> c) => c.Add(new AddCheckDescription());
+        public static void Basic(this ChecksConfigurator<Commands.Add.Add> c) => c.Add(new AddCheckDescription());
     }
 }

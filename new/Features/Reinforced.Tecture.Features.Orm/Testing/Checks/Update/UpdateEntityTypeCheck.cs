@@ -4,7 +4,7 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
 {
-    public class UpdateEntityTypeCheck<T> : CommandCheck<Command.Update.Update>, IMemorizing
+    public class UpdateEntityTypeCheck<T> : CommandCheck<Commands.Update.Update>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
 
@@ -12,13 +12,13 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
         {
             _memorizedValue = mem;
         }
-        protected override string GetMessage(Command.Update.Update command)
+        protected override string GetMessage(Commands.Update.Update command)
         {
             if (command == null) return $"expected Updateed entity of type {typeof(T).Name}, but story unexpectedly ends";
             return $"expected Updateed entity of type {typeof(T).Name}, but got one of {command.EntityType.Name}";
         }
 
-        protected override bool IsActuallyValid(Command.Update.Update effect)
+        protected override bool IsActuallyValid(Commands.Update.Update effect)
         {
             if (effect == null) return false;
             return effect.EntityType == typeof(T);
@@ -26,7 +26,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
 
         public void Memorize(CommandBase seb)
         {
-            _memorizedValue.SetValue(((Command.Update.Update)seb).Entity);
+            _memorizedValue.SetValue(((Commands.Update.Update)seb).Entity);
         }
     }
 }

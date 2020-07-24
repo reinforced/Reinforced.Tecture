@@ -35,5 +35,5 @@ namespace Reinforced.Tecture.Channels
     /// </summary>
     /// <typeparam name="TQuery"></typeparam>
     /// <typeparam name="TCommand"></typeparam>
-    public interface CommandQueryChannel<out TQuery, out TCommand> : QueryChannel<TQuery>, CommandChannel<TCommand> where TCommand : CommandFeature where TQuery : QueryFeature { }
+    public interface CommandQueryChannel<out TCommand,out TQuery> : QueryChannel<TQuery>, CommandChannel<TCommand> where TCommand : CommandFeature where TQuery : QueryFeature { }
 }

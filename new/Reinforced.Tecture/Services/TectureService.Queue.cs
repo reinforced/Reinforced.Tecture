@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Services
     /// <summary>
     /// Base class for storage service
     /// </summary>
-    public partial class TectureService
+    public partial class TectureServiceBase
     {
         /// <summary>
         /// Defers action that will be executed after .SaveChanges call and ALL actions that are in post-actions queue

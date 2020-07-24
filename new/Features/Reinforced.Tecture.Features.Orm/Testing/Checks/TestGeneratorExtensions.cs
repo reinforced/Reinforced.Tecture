@@ -11,8 +11,8 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks
     {
         public static void CheckOrm(this TestGenerator tg)
         {
-            tg.For<Command.Add.Add>().Basic();
-            tg.For<Command.Delete.Delete>().Basic();
+            tg.For<Commands.Add.Add>().Basic();
+            tg.For<Commands.Delete.Delete>().Basic();
         }
     }
 }

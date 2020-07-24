@@ -5,8 +5,8 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
     class SqlTableReference : SqlQueryExpression
     {
-        public TableParameterReference Table { get; set; }
-        public bool IsDeclaration { get; set; }
+        public TableReference Table { get; set; }
+
         public override string Serialize(List<Expression> sqlParams)
         {
             if (IsDeclaration)

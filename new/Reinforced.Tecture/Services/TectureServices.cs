@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 2 entities
     /// </summary>    
 	public class TectureService<T1, T2>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   
@@ -39,7 +39,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 3 entities
     /// </summary>    
 	public class TectureService<T1, T2, T3>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   where T3 : class
@@ -64,7 +64,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 4 entities
     /// </summary>    
 	public class TectureService<T1, T2, T3, T4>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   where T3 : class
@@ -90,7 +90,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 5 entities
     /// </summary>    
 	public class TectureService<T1, T2, T3, T4, T5>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   where T3 : class
@@ -117,7 +117,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 6 entities
     /// </summary>    
 	public class TectureService<T1, T2, T3, T4, T5, T6>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   where T3 : class
@@ -145,7 +145,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 7 entities
     /// </summary>    
 	public class TectureService<T1, T2, T3, T4, T5, T6, T7>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   where T3 : class
@@ -174,7 +174,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches 8 entities
     /// </summary>    
 	public class TectureService<T1, T2, T3, T4, T5, T6, T7, T8>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   where T2 : class
 			   where T3 : class

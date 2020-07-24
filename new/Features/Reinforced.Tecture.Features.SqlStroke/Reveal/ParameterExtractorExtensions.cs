@@ -20,11 +20,18 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             return true;
         }
 
-        public static string GetNestedTableAlias(this ParameterExpression expr, Type derivedTypeName)
+        public static string MakeNestedTableAlias(this ParameterExpression expr, Type derivedTypeName)
         {
             return string.Format("{0}_as_{1}", expr.Name, derivedTypeName.Name);
         }
-        public static string GetNestedTableAlias(this MemberExpression expr, bool takeDerived)
+
+        /// <summary>
+        /// Obtains alias for nested table
+        /// </summary>
+        /// <param name="expr">Member expression in form of x.User.Order </param>
+        /// <param name="takeDerived">Flag when we address to the column of the "parent" entity (from another table)</param>
+        /// <returns></returns>
+        public static string MakeNestedTableAlias(this MemberExpression expr, bool takeDerived)
         {
             Stack<string> path = new Stack<string>();
             if (takeDerived) path.Push("_d");
@@ -95,6 +102,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             const string AND = "AND";
             const string NOT = "NOT";
             const string ON = "ON";
+
             var searchString = "{" + argNumber + "}";
             var idx = format.IndexOf(searchString, StringComparison.InvariantCultureIgnoreCase);
             if (idx <= 0) return false;

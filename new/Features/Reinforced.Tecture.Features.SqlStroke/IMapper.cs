@@ -8,8 +8,19 @@ namespace Reinforced.Tecture.Features.SqlStroke
     {
         string GetTableName(Type t);
 
-        string GetColumnName(Type t, string propertyName);
+        /// <summary>
+        /// Obtains column name mapped to DB
+        /// </summary>
+        /// <param name="t">Entity type</param>
+        /// <param name="property">Property that is needed to obtain</param>
+        /// <returns></returns>
+        string GetColumnName(Type t, PropertyInfo property);
 
+        /// <summary>
+        /// Checks whether type is actually type of entity
+        /// </summary>
+        /// <param name="t">Type of suspect to entity</param>
+        /// <returns>True if this type represents entity in current context</returns>
         bool IsEntityType(Type t);
 
         IEnumerable<AssociationFields> GetJoinKeys(Type sourceEntity, PropertyInfo sourceColumn);

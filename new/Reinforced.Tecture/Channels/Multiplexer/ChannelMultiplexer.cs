@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Savers;
+using Reinforced.Tecture.Testing.Query;
 
 namespace Reinforced.Tecture.Channels.Multiplexer
 {
     //string key here is full type name
     class ChannelMultiplexer : IDisposable
     {
+
         private readonly Dictionary<string, Type> _namesCache = new Dictionary<string, Type>();
         private void Known(Type channel)
         {

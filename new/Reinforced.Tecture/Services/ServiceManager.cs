@@ -20,9 +20,9 @@ namespace Reinforced.Tecture.Services
         {
             public Type[] ContextTypes { get; set; }
             public object[] Context { get; set; }
-            public TectureService ServiceInstance { get; set; }
+            public TectureServiceBase ServiceBaseInstance { get; set; }
         }
-        private readonly List<TectureService> _allServices = new List<TectureService>();
+        private readonly List<TectureServiceBase> _allServices = new List<TectureServiceBase>();
 
         public void OnSave()
         {
@@ -56,27 +56,27 @@ namespace Reinforced.Tecture.Services
             }
         }
 
-        private readonly Dictionary<Type, TectureService> _noContextServicesCache = new Dictionary<Type, TectureService>();
+        private readonly Dictionary<Type, TectureServiceBase> _noContextServicesCache = new Dictionary<Type, TectureServiceBase>();
         private readonly Dictionary<Type, List<ServiceContextEntry>> _contextServices = new Dictionary<Type, List<ServiceContextEntry>>();
         private readonly Dictionary<Type, LetBuilder> _letCache = new Dictionary<Type, LetBuilder>();
 
-        private TectureService LocateExistingContextService(Type serviceType, Type[] contextTypes, object[] contextValues)
+        private TectureServiceBase LocateExistingContextService(Type serviceType, Type[] contextTypes, object[] contextValues)
         {
             if (!_contextServices.ContainsKey(serviceType)) return null;
             var entries = _contextServices[serviceType];
             var serviceEntry = entries.FirstOrDefault(d =>
                 d.ContextTypes.SequenceEqual(contextTypes) && d.Context.SequenceEqual(contextValues));
             if (serviceEntry == null) return null;
-            return serviceEntry.ServiceInstance;
+            return serviceEntry.ServiceBaseInstance;
         }
 
-        private void SaveExistingContextService(Type serviceType, Type[] contextTypes, object[] contextValues, TectureService instance)
+        private void SaveExistingContextService(Type serviceType, Type[] contextTypes, object[] contextValues, TectureServiceBase instance)
         {
             var entry = new ServiceContextEntry()
             {
                 ContextTypes = contextTypes,
                 Context = contextTypes,
-                ServiceInstance = instance
+                ServiceBaseInstance = instance
             };
             if (!_contextServices.ContainsKey(serviceType))
             {
@@ -94,7 +94,7 @@ namespace Reinforced.Tecture.Services
             _queryStore = queryStore;
         }
 
-        private TService CreateService<TService>() where TService : TectureService
+        private TService CreateService<TService>() where TService : TectureServiceBase
         {
             var service = (TService)typeof(TService).InstanceNonpublic();
             service.ServiceManager = this;
@@ -104,7 +104,7 @@ namespace Reinforced.Tecture.Services
             return service;
         }
 
-        internal TService CreateWithContext<TService>(Type[] paramTypes, object[] context) where TService : TectureService, IWithContext
+        internal TService CreateWithContext<TService>(Type[] paramTypes, object[] context) where TService : TectureServiceBase, IWithContext
         {
             var service = LocateExistingContextService(typeof(TService), paramTypes, context);
             if (service != null) return (TService)service;
@@ -129,31 +129,31 @@ namespace Reinforced.Tecture.Services
             return (TService)service;
         }
 
-        public void DestroyService(TectureService service)
+        public void DestroyService(TectureServiceBase serviceBase)
         {
-            service.ServiceManager = null;
-            service.Pipeline = null;
-            service.ChannelMultiplexer = null;
+            serviceBase.ServiceManager = null;
+            serviceBase.Pipeline = null;
+            serviceBase.ChannelMultiplexer = null;
 
-            var st = service.GetType();
-            if (service is INoContext)
+            var st = serviceBase.GetType();
+            if (serviceBase is INoContext)
             {
                 if (_noContextServicesCache.ContainsKey(st)) _noContextServicesCache.Remove(st);
             }
 
-            if (service is IWithContext)
+            if (serviceBase is IWithContext)
             {
                 if (_contextServices.ContainsKey(st))
                 {
                     var lst = _contextServices[st];
-                    lst.RemoveAll(d => d.ServiceInstance == service);
+                    lst.RemoveAll(d => d.ServiceBaseInstance == serviceBase);
                 }
             }
 
-            _allServices.Remove(service);
+            _allServices.Remove(serviceBase);
         }
 
-        public T Do<T>() where T : TectureService, INoContext
+        public T Do<T>() where T : TectureServiceBase, INoContext
         {
             if (_noContextServicesCache.ContainsKey(typeof(T))) return (T)_noContextServicesCache[typeof(T)];
             var service = CreateService<T>();
@@ -164,7 +164,7 @@ namespace Reinforced.Tecture.Services
         }
 
 
-        public LetBuilder<T> Let<T>() where T : TectureService, IWithContext
+        public LetBuilder<T> Let<T>() where T : TectureServiceBase, IWithContext
         {
             if (_letCache.ContainsKey(typeof(T))) return (LetBuilder<T>)_letCache[typeof(T)];
             var lb = new LetBuilder<T>(this);

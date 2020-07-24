@@ -5,10 +5,12 @@ using System.Linq.Expressions;
 using System.Text;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation;
+using Convert = Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation.Convert;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal
 {
-    partial class StrokeProcessor : IMapper
+    partial class StrokeProcessor
     {
         private readonly IMapper _mapper;
         public StrokeProcessor(IMapper mapper)
@@ -16,77 +18,28 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             _mapper = mapper;
         }
 
+
         public RevealedQuery RevealQuery(LambdaExpression expr)
         {
-            const string err = "SQL Storke must be in form of context.Stroke(x=>$\"SOME SQL WITH {x} AND {x.Field} USAGE\")";
-            var bdy = expr.Body as MethodCallExpression;
-            if (bdy == null) throw new Exception(err);
-            if (bdy.Method.DeclaringType != typeof(String) || bdy.Method.Name != "Format")
-            {
-                throw new Exception(err);
-            }
+            var prepared = Prepare.Query(expr);
+            var converted = Convert.Query(prepared, x => _mapper.IsEntityType(x));
 
-            var fmtExpr = bdy.Arguments[0] as ConstantExpression;
-            if (fmtExpr == null) throw new Exception(err);
-            var format = fmtExpr.Value.ToString();
-
-            int startingIndex = 1;
-            var arguments = bdy.Arguments;
-            bool longFormat = false;
-            if (bdy.Arguments.Count == 2)
-            {
-                var secondArg = bdy.Arguments[1];
-                if (secondArg.NodeType == ExpressionType.NewArrayInit)
-                {
-                    var array = secondArg as NewArrayExpression;
-                    arguments = array.Expressions;
-                    startingIndex = 0;
-                    longFormat = true;
-                }
-            }
-
-            var tbls = new Dictionary<string, TableParameterReference>();
-            foreach (var param in expr.Parameters)
-            {
-                tbls[param.Name] = new TableParameterReference(param.Type)
-                {
-                    Alias = param.Name,
-                    TableName = GetTableName(param.Type)
-                };
-            }
-
-            var visitor = new StrokeVisitor(this, format, tbls);
-            List<SqlQueryExpression> expressions = new List<SqlQueryExpression>();
-            List<string> formatArgs = new List<string>();
-            List<Expression> sqlParams = new List<Expression>();
-            for (int i = startingIndex; i < arguments.Count; i++)
-            {
-                var argIdx = longFormat ? i : i - 1;
-                visitor.ArgIdx = argIdx;
-                visitor.Visit(arguments[i]);
-                var resultAst = visitor.Retrieve();
-                resultAst.IsTop = true;
-                expressions.Add(resultAst);
-
-            }
+            
             //first pass to declare autojoined tables
             List<string> autojoins = new List<string>();
-            foreach (var resultAst in expressions)
+            foreach (var resultAst in expressions.OfType<SqlAutojoinExpression>())
             {
-                var aj = resultAst as SqlAutojoinExpression;
-                if (aj != null)
+                var aj = resultAst;
+                StringBuilder joinsOutput = new StringBuilder();
+                foreach (var paramTableRef in aj.Entities)
                 {
-                    StringBuilder joinsOutput = new StringBuilder();
-                    foreach (var paramTableRef in aj.Entities)
+                    foreach (var chld in paramTableRef.Children)
                     {
-                        foreach (var chld in paramTableRef.Children)
-                        {
-                            if (chld.IsDerivedJoin) MakeDerivedJoins(aj.Join, chld, joinsOutput);
-                            else MakeJoins(aj.Join, chld, joinsOutput);
-                        }
+                        if (chld.IsDerivedJoin) MakeDerivedJoins(aj.Join, chld, joinsOutput);
+                        else MakeJoins(aj.Join, chld, joinsOutput);
                     }
-                    autojoins.Add(joinsOutput.ToString());
                 }
+                autojoins.Add(joinsOutput.ToString());
             }
 
             //2nd pass to reveal the rest
@@ -117,12 +70,12 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             return new RevealedQuery(sqlString, parameters, visitor.UsedTypes.ToArray());
         }
 
-        private void MakeDerivedJoins(Join joinType, TableParameterReference tableRef, StringBuilder output)
+        private void MakeDerivedJoins(Join joinType, TableReference tableRef, StringBuilder output)
         {
 
         }
 
-        private void MakeJoins(Join joinType, TableParameterReference tableRef, StringBuilder output)
+        private void MakeJoins(Join joinType, TableReference tableRef, StringBuilder output)
         {
             if (!tableRef.IsDeclared)
             {
@@ -162,7 +115,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
 
         }
 
-        private static void AppendColumn(TableParameterReference tableRef, string columnName, StringBuilder output)
+        private static void AppendColumn(TableReference tableRef, string columnName, StringBuilder output)
         {
             if (string.IsNullOrEmpty(tableRef.Alias)) output.AppendFormat("[{0}]", tableRef.TableName);
             else output.AppendFormat("[{0}]", tableRef.Alias);

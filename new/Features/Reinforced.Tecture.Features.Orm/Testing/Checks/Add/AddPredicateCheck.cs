@@ -5,7 +5,7 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 {
-    public class AddPredicateCheck<T> : CommandCheck<Features.Orm.Command.Add.Add>, IMemorizing
+    public class AddPredicateCheck<T> : CommandCheck<Commands.Add.Add>, IMemorizing
     {
         private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
             _memorizedValue = mem;
         }
 
-        protected override string GetMessage(Features.Orm.Command.Add.Add command)
+        protected override string GetMessage(Commands.Add.Add command)
         {
             if (command == null) return $"expected added entity {_explanation}, but story unexpectedly ends";
             if (command.EntityType != typeof(T))
@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
             return $"expected added entity {_explanation}, but seems that it does not";
         }
 
-        protected override bool IsActuallyValid(Features.Orm.Command.Add.Add effect)
+        protected override bool IsActuallyValid(Commands.Add.Add effect)
         {
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;
@@ -38,7 +38,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 
         public void Memorize(CommandBase seb)
         {
-            _memorizedValue.SetValue(((Features.Orm.Command.Add.Add)seb).Entity);
+            _memorizedValue.SetValue(((Commands.Add.Add)seb).Entity);
         }
     }
 }

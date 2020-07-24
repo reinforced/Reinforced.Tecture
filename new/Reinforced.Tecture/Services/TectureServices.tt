@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Services {
     /// Storage services that touches <#= i+2#> entities
     /// </summary>    
 	public class TectureService<<#= GenericsStroke(i+2) #>>
-			   : TectureService
+			   : TectureServiceBase
 			   where T1: class
 			   <# for(int j =0;j<=i;j++) { #>
 where T<#= j+2 #> : class

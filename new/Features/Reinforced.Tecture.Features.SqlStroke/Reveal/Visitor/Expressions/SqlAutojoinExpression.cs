@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
     class SqlAutojoinExpression : SqlQueryExpression
     {
-        public List<TableParameterReference> Entities { get; set; }
+        public List<NestedTableReference> Entities { get; set; }
 
         public Join Join { get; set; }
 

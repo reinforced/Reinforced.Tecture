@@ -24,14 +24,15 @@ internal struct SRead<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>
 {
 	private readonly ChannelMultiplexer _cm;
 	private readonly IQueryStore _qs;
-	public SRead(ChannelMultiplexer cm, IQueryStore qs = null)
+	public SRead(ChannelMultiplexer cm, IQueryStore qs)
 	{
 		_cm = cm;
 		_qs = qs;
 	}
 
-	public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
+	public TFeature GetFeature<TFeature>(out IQueryStore qs) where TFeature : QueryFeature 
 	{
+		qs = _qs;
 		return _cm.GetQueryFeature<TChannel,TFeature>();
 	}
 

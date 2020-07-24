@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Features.SqlStroke.Command;
+using Reinforced.Tecture.Features.SqlStroke.Commands;
 
 namespace Reinforced.Tecture.Features.SqlStroke
 {
