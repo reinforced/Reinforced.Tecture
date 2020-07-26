@@ -57,16 +57,8 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
                 else throw new Exception("Invalid entity table reference: " + parentEx);
 
                 // then we construct the result
-                result = new NestedTableReference(t)
-                {
-                    Alias = alias,
-                    JoinColumn = mex.Member as PropertyInfo,
-                    Parent = parent
-                };
-
-                // and link children and parents
-                parent.Children.Add(result);
-
+                result = new NestedTableReference(t,alias, mex.Member as PropertyInfo, parent);
+                
                 // and we collect nested table
                 _nestedTables.Add(result);
             }

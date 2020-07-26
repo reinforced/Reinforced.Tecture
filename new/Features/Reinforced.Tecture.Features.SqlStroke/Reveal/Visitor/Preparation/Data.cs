@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
 {
@@ -21,5 +22,19 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
         }
 
         
+    }
+
+    class PreparedSqlQuery
+    {
+        public string QueryStructure { get; private set; }
+
+        public SqlQueryExpression[] Arguments { get; private set; }
+
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        public PreparedSqlQuery(string queryStructure, SqlQueryExpression[] arguments)
+        {
+            QueryStructure = queryStructure;
+            Arguments = arguments;
+        }
     }
 }

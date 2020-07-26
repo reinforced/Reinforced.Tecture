@@ -49,28 +49,52 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
                 return node;
             }
 
-            // reveal call of {Nest(Join.Left, x=>x.User, x=>x.User.Order)} etc expression
-            if (node.Method == _joinMethod)
+            // reveal call of {x.JoinedAs(Join.Left)}
+            if (node.Method == _joinedAsMethod)
             {
-                var result = new SqlAutojoinExpression()
+                SqlTableReference result;
+                bool success = false;
+                if (node.Arguments[0].Unconvert() is ParameterExpression jex)
                 {
-                    Entities = new List<TableReference>()
-                };
-                result.Join = (Join)(node.Arguments[0] as ConstantExpression).Value;
-                var na = node.Arguments[1] as NewArrayExpression;
-                for (int i = 0; i < na.Expressions.Count; i++)
-                {
-                    var pex = na.Expressions[i].Unconvert() as ParameterExpression;
-                    TableReference tref = null;
-                    if (pex != null)
+                    VisitParameter(jex);
+                    result = Retrieve() as SqlTableReference;
+                    if (result != null)
                     {
-                        tref = _tables[pex.Name];
+                        if (node.Arguments[1].Unconvert() is ConstantExpression cex)
+                        {
+                            if (cex.Value is Join jn)
+                            {
+                                success = true;
+                                result.ChildrenJoinedAs = jn;
+                                Return(result);
+                            }
+                        }
                     }
-                    else throw new Exception("Invalid nested aggregate: " + na.Expressions[i]);
-
-                    result.Entities.Add(tref);
                 }
-                Return(result);
+                if (!success) throw new Exception("Invalid .JoinedAs expression");
+
+                return node;
+            }
+
+            // reveal call of {x.JoinedAs(Join.Left)}
+            if (node.Method == _aliasMethod)
+            {
+                SqlTableReference result;
+                bool success = false;
+                if (node.Arguments[0].Unconvert() is ParameterExpression jex)
+                {
+                    VisitParameter(jex);
+                    result = Retrieve() as SqlTableReference;
+                    if (result != null)
+                    {
+                        success = true;
+                        result.AsAlias = true;
+                        Return(result);
+
+                    }
+                }
+                if (!success) throw new Exception("Invalid .JoinedAs expression");
+
                 return node;
             }
 
@@ -110,14 +134,17 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             }
         }
 
-        private static readonly MethodInfo _joinMethod;
+
+        private static readonly MethodInfo _joinedAsMethod;
+        private static readonly MethodInfo _aliasMethod;
         private static readonly MethodInfo _joinOverrideMethod;
         private static readonly MethodInfo _everyMethod;
         private static readonly MethodInfo _relationMethod;
         private static readonly MethodInfo _fromMethod;
         static StrokeVisitor()
         {
-            _joinMethod = typeof(StrokeJoins).GetMethod("Nest");
+            _joinedAsMethod = typeof(StrokeJoins).GetMethod("JoinedAs");
+            _aliasMethod = typeof(StrokeJoins).GetMethod("Alias");
             _joinOverrideMethod = typeof(StrokeJoins).GetMethod("Overjoin");
 
             _everyMethod = typeof(StrokeRelations).GetMethod("Every");

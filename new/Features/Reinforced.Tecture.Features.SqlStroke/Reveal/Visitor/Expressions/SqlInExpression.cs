@@ -3,13 +3,19 @@ using System.Linq.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
-    class SqlInExpression : SqlQueryExpression
+    /// <summary>
+    /// In/contains expression
+    /// </summary>
+    public class SqlInExpression : SqlQueryExpression
     {
-        public SqlQueryExpression Expression { get; set; }
+        internal SqlInExpression() { }
 
-        public object[] Range { get; set; }
+        public SqlQueryExpression Expression { get; internal set; }
 
-        internal bool Not { get; set; }
+        public object[] Range { get; internal set; }
+
+        public bool Not { get; internal set; }
+
         public override string Serialize(List<Expression> sqlParams)
         {
             sqlParams.Add(System.Linq.Expressions.Expression.Constant(Range));

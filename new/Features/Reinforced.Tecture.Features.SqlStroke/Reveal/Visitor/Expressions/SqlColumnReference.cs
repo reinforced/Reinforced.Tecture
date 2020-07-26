@@ -4,20 +4,19 @@ using System.Reflection;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
-    class SqlColumnReference : SqlQueryExpression
+    /// <summary>
+    /// Column reference expression
+    /// </summary>
+    public class SqlColumnReference : SqlQueryExpression
     {
-        public TableReference Table { get; set; }
+        /// <summary>
+        /// Table reference
+        /// </summary>
+        public TableReference Table { get; internal set; }
 
-        public PropertyInfo Column { get; set; }
-
-        public override string Serialize(List<Expression> sqlParams)
-        {
-            if (Table.IsDeclared && !IsAlias)
-            {
-                return string.Format("[{0}].[{1}]", Table.Alias, Column);
-            }
-
-            return string.Format("[{0}]", Column);
-        }
+        /// <summary>
+        /// Column that is being referenced
+        /// </summary>
+        public PropertyInfo Column { get; internal set; }
     }
 }

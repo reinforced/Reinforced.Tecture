@@ -3,12 +3,17 @@ using System.Linq.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
-    class SqlQueryLiteralExpression : SqlQueryExpression
+    /// <summary>
+    /// Literal query expression
+    /// </summary>
+    public class SqlQueryLiteralExpression : SqlQueryExpression
     {
-        public string Literal { get; set; }
-        public override string Serialize(List<Expression> sqlParams)
-        {
-            return Literal;
-        }
+        internal SqlQueryLiteralExpression() { }
+
+        /// <summary>
+        /// Verbatim literal
+        /// </summary>
+        public string Literal { get; internal set; }
+        
     }
 }

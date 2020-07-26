@@ -5,7 +5,20 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
     public abstract class SqlQueryExpression
     {
-        public bool IsTop { get; set; }
-        public abstract string Serialize(List<Expression> sqlParams);
+        /// <summary>
+        /// Gets whether expression is topmost, not nested into other expression
+        /// </summary>
+        public bool IsTop { get; internal set; }
+
+        /// <summary>
+        /// Expression position within Query Structure text
+        /// </summary>
+        public int Position { get; internal set; }
+
+        /// <summary>
+        /// Zero-based expression index
+        /// </summary>
+        public int Index { get; internal set; }
+
     }
 }

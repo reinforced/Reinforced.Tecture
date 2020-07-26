@@ -43,7 +43,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             {
                 Left = boolColumn,
                 Right = new SqlQueryLiteralExpression() { Literal = "1" },
-                Symbol = negate ? "<>" : "="
+                Operator = negate ? SqlOperator.NotEqual : SqlOperator.Equal
             };
         }
 

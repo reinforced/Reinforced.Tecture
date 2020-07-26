@@ -73,7 +73,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             if (unconverted != node) return base.Visit(unconverted);
             SqlQueryExpression operand = null;
 
-            var op = GetNodeSymbol(node.NodeType);
             Visit(node.Operand);
             operand = Retrieve();
             if (node.NodeType == ExpressionType.Not && node.Type == typeof(bool) && operand is SqlColumnReference)
@@ -83,7 +82,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
                 Return(result);
                 return node;
             }
-            Return(new SqlUnaryExpression() { Operand = operand, Symbol = op });
+            Return(new SqlUnaryExpression() { Operand = operand, Operator = node.NodeType.ToSqlOperator() });
             return node;
         }
 
@@ -121,7 +120,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             //    }
             //}
 
-            var op = GetNodeSymbol(node.NodeType);
             Visit(node.Left);
             var left = Retrieve();
             Visit(node.Right);
@@ -142,7 +140,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
                 }
             }
 
-            Return(new SqlBinaryExpression() { Left = left, Right = right, Symbol = op, IsSetSuspect = IsSpecialSetSyntax(node)});
+            Return(new SqlBinaryExpression() { Left = left, Right = right, Operator = node.NodeType.ToSqlOperator(), IsSetSuspect = IsSpecialSetSyntax(node)});
             return node;
         }
 
@@ -156,13 +154,13 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 
             if (value == null)
             {
-                Return(new SqlQueryLiteralExpression { Literal = "NULL" });
+                Return(new SqlNullExpression());
                 return node;
             }
             if (type == typeof(bool))
             {
                 var b = (bool)value;
-                Return(new SqlQueryLiteralExpression { Literal = b ? "1" : "0" });
+                Return(new SqlBooleanExpression(b));
                 return node;
             }
             Return(new SqlObjectParameter() { Parameter = value });

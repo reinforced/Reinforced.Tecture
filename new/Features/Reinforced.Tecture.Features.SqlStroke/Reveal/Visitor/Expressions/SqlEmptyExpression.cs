@@ -3,11 +3,11 @@ using System.Linq.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
-    class SqlEmptyExpression : SqlQueryExpression
+    /// <summary>
+    /// Empty SQL Expression (needed sometimes)
+    /// </summary>
+    public class SqlEmptyExpression : SqlQueryExpression
     {
-        public override string Serialize(List<Expression> sqlParams)
-        {
-            return string.Empty;
-        }
+        internal SqlEmptyExpression() { }
     }
 }

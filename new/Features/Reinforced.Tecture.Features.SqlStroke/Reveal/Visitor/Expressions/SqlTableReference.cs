@@ -3,9 +3,13 @@ using System.Linq.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
 {
-    class SqlTableReference : SqlQueryExpression
+    public class SqlTableReference : SqlQueryExpression
     {
         public TableReference Table { get; set; }
+
+        public Join ChildrenJoinedAs { get; set; } = Join.Inner;
+
+        public bool AsAlias { get; set; }
 
         public override string Serialize(List<Expression> sqlParams)
         {

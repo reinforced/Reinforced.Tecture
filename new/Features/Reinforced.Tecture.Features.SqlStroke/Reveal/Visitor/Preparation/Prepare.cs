@@ -90,10 +90,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
             var tbls = new Dictionary<string, TableReference>();
             foreach (var param in expr.Parameters)
             {
-                tbls[param.Name] = new TableReference(param.Type)
-                {
-                    Alias = param.Name
-                };
+                tbls[param.Name] = new TableReference(param.Type, param.Name);
             }
 
             return tbls;
