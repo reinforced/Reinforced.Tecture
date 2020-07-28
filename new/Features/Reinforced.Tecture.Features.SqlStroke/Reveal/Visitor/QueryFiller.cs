@@ -45,6 +45,11 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             return master.IndexOf(search, index, StringComparison.InvariantCultureIgnoreCase) == index;
         }
 
+        internal string Proceed()
+        {
+            
+        }
+
         protected virtual string OperatorText(SqlOperator op)
         {
             switch (op)
