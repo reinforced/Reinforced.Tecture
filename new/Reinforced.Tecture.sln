@@ -17,13 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Playgrou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.BulkSql", "Features\Reinforced.Tecture.Features.BulkSql\Reinforced.Tecture.Features.BulkSql.csproj", "{0A94190F-1AEB-4CE7-983B-F370429DA0AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reunforced.Tecture.Runtimes.EFCore", "Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reunforced.Tecture.Runtimes.EFCore.csproj", "{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Runtimes.EFCore", "Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj", "{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{ED1AC9EF-8C46-498B-995B-7437F35AC556}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Testing", "Testing\Reinforced.Tecture.Testing\Reinforced.Tecture.Testing.csproj", "{E39FB889-218C-4255-A7E6-C7D7D5C54153}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reinforced.Tecture.CleanPlayground", "Reinforced.Tecture.CleanPlayground\Reinforced.Tecture.CleanPlayground.csproj", "{4A22AC0D-91B4-4ECD-ACF4-571CEF6362B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.CleanPlayground", "Reinforced.Tecture.CleanPlayground\Reinforced.Tecture.CleanPlayground.csproj", "{4A22AC0D-91B4-4ECD-ACF4-571CEF6362B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

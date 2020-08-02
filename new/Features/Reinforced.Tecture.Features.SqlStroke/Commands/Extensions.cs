@@ -7,7 +7,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
 {
     public static partial class Extensions
     {
-        
         internal static StrokeProcessor GetProcessor(this Write s, Type[] usedTypes)
         {
             return s.PleaseFeature<Command>().GetProcessor(usedTypes);

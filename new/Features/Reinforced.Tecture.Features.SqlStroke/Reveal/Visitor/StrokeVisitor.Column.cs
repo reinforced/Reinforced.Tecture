@@ -25,14 +25,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
                 {
                     Table = ObtainNestedTableReference(node, false)
                 };
-
-                // todo
-                //if (_format.NeedsAlias(ArgIdx))
-                //{
-                //    nestedResult.IsDeclaration = true;
-                //    nestedResult.Table.IsDeclared = true;
-                //}
-
+                
                 return nestedResult;
             }
 
@@ -66,8 +59,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             var result = new SqlColumnReference()
             {
                 Column = colId,
-                Table = tableRef,
-                //IsAlias = _format.IsColumnAlias(ArgIdx) todo
+                Table = tableRef
             };
 
 

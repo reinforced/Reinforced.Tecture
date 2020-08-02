@@ -43,15 +43,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
         protected override Expression VisitParameter(ParameterExpression node)
         {
             var result = new SqlTableReference() { Table = _tables[node.Name] };
-
-            //if (_format.NeedsAlias(ArgIdx)) todo
-            //{
-            //    result.IsDeclaration = true;
-            //    _tables[node.Name].IsDeclared = true;
-            //}
-
             Return(result);
-
             return node;
         }
 
@@ -86,40 +78,19 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             return node;
         }
 
-
+        private bool IsSpecialSetSyntax(BinaryExpression node)
+        {
+            if (node.NodeType != ExpressionType.Or) return false;
+            if (node.Left.NodeType != ExpressionType.Or && node.Left.NodeType != ExpressionType.Equal) return false;
+            if (node.Right.NodeType != ExpressionType.Or && node.Right.NodeType != ExpressionType.Equal) return false;
+            return true;
+        }
 
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.BinaryExpression" />.</summary>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         /// <param name="node">The expression to visit.</param>
         protected override Expression VisitBinary(BinaryExpression node)
         {
-            //if (_format.IsSet(ArgIdx) && IsSpecialSetSyntax(node) && !_isParseringSet) todo
-            //{
-            //    _isParseringSet = true;
-            //    VisitSet(node);
-            //    _isParseringSet = false;
-            //    return node;
-            //}
-
-            //if (_format.IsClause(ArgIdx))
-            //{
-            //    if ((IsNullConstant(node.Left) || IsNullConstant(node.Right)))
-            //    {
-            //        if (IsNullConstant(node.Left)) Visit(node.Right);
-            //        else if (IsNullConstant(node.Right)) Visit(node.Left);
-
-            //        string oper = node.NodeType == ExpressionType.NotEqual ? "IS NOT" : "IS";
-            //        var lft = Retrieve();
-            //        Return(new SqlBinaryExpression()
-            //        {
-            //            Left = lft,
-            //            Right = new SqlQueryLiteralExpression() { Literal = "NULL" },
-            //            Symbol = oper
-            //        });
-            //        return node;
-            //    }
-            //}
-
             Visit(node.Left);
             var left = Retrieve();
             Visit(node.Right);

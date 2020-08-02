@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Features.SqlStroke.Reveal;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
 
 namespace Reinforced.Tecture.Features.SqlStroke
 {
@@ -38,7 +39,7 @@ namespace Reinforced.Tecture.Features.SqlStroke
         {
             ThrowCheckTypes(usedTypes);
            
-            return new StrokeProcessor(_runtime.Mapper);
+            return new StrokeProcessor(_runtime.Mapper, GetQueryFiller());
         }
 
         private HashSet<Type> _types = null;
@@ -46,6 +47,11 @@ namespace Reinforced.Tecture.Features.SqlStroke
         protected StrokeFeatureBase(IStrokeRuntime runtime)
         {
             _runtime = runtime;
+        }
+
+        protected QueryFiller GetQueryFiller()
+        {
+            return new QueryFiller();
         }
 
         internal HashSet<Type> Types

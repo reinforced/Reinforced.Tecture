@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 {
@@ -11,6 +13,13 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
     /// </summary>
     public class QueryFiller
     {
+
+        internal void Init(IMapper mapper,PreparedSqlQuery query)
+        {
+            Mapper = mapper;
+            QueryStructureText = query.QueryStructure;
+            Expressions = query.Arguments.ToDictionary(x => x.Position);
+        }
         /// <summary>
         /// String containing query with cut off all the parameters replaced by empty strings.
         /// So if original query was x=>"SELECT {x.Name} FROM {x}", the query structure will be
@@ -47,7 +56,20 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 
         internal string Proceed()
         {
-            
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < QueryStructureText.Length; i++)
+            {
+                if (Expressions.ContainsKey(i))
+                {
+                    result.Append(Visit(Expressions[i]));
+                }
+                else
+                {
+                    result.Append(QueryStructureText[i]);
+                }
+            }
+
+            return result.ToString();
         }
 
         protected virtual string OperatorText(SqlOperator op)

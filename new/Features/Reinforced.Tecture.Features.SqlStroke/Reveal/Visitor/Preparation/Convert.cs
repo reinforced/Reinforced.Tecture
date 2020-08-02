@@ -22,7 +22,9 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
                 positioned.Add(sql);
             }
 
-            return new PreparedSqlQuery(q.QueryStructure, positioned.ToArray());
+            return new PreparedSqlQuery(q.QueryStructure, positioned.ToArray(),visitor.UsedTypes);
         }
+
+        
     }
 }

@@ -22,6 +22,31 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             }
             return false;
         }
+
+        public static Expression Unconvert(this Expression ex)
+        {
+            if (ex.NodeType == ExpressionType.Convert)
+            {
+                var cex = ex as UnaryExpression;
+                if (cex != null) ex = cex.Operand;
+            }
+            return ex;
+        }
+
+        public static Expression GetRootMember(this MemberExpression expr)
+        {
+            var mex = expr.Expression.Unconvert();
+            var accessee = mex as MemberExpression;
+
+            var current = mex;
+            while (accessee != null)
+            {
+                current = accessee.Expression.Unconvert();
+                accessee = accessee.Expression as MemberExpression;
+            }
+            return current;
+        }
+
     }
 
     partial class StrokeVisitor
@@ -140,7 +165,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
         private static readonly MethodInfo _joinOverrideMethod;
         private static readonly MethodInfo _everyMethod;
         private static readonly MethodInfo _relationMethod;
-        private static readonly MethodInfo _fromMethod;
         static StrokeVisitor()
         {
             _joinedAsMethod = typeof(StrokeJoins).GetMethod("JoinedAs");
@@ -149,7 +173,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 
             _everyMethod = typeof(StrokeRelations).GetMethod("Every");
             _relationMethod = typeof(StrokeRelations).GetMethod("Relation");
-            _fromMethod = typeof(StrokeRelations).GetMethod("From");
         }
 
     }
