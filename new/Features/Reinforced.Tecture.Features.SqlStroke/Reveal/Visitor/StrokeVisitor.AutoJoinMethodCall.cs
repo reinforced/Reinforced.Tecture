@@ -1,54 +1,13 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 {
-    static class TypeExtensions
-    {
-        public static bool IsEnumerable(this Type t)
-        {
-            if (t.IsArray) return true;
-            if (typeof(IEnumerable).IsAssignableFrom(t)) return true;
-            if (t.IsGenericType)
-            {
-                var tg = t.GetGenericTypeDefinition();
-                if (typeof(IEnumerable<>).IsAssignableFrom(tg)) return true;
-            }
-            return false;
-        }
-
-        public static Expression Unconvert(this Expression ex)
-        {
-            if (ex.NodeType == ExpressionType.Convert)
-            {
-                var cex = ex as UnaryExpression;
-                if (cex != null) ex = cex.Operand;
-            }
-            return ex;
-        }
-
-        public static Expression GetRootMember(this MemberExpression expr)
-        {
-            var mex = expr.Expression.Unconvert();
-            var accessee = mex as MemberExpression;
-
-            var current = mex;
-            while (accessee != null)
-            {
-                current = accessee.Expression.Unconvert();
-                accessee = accessee.Expression as MemberExpression;
-            }
-            return current;
-        }
-
-    }
-
     partial class StrokeVisitor
     {
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.</summary>

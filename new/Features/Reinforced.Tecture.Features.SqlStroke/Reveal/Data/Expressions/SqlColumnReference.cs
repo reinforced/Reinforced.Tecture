@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
+namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions
 {
     /// <summary>
     /// Column reference expression

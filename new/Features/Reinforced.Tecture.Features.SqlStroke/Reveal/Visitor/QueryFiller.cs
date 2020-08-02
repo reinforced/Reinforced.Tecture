@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 {

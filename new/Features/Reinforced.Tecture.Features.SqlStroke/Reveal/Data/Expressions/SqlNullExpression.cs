@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
+﻿namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions
 {
     /// <summary>
     /// Expression denoting NULL

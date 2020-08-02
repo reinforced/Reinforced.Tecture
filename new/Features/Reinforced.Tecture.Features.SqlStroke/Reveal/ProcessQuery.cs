@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
+namespace Reinforced.Tecture.Features.SqlStroke.Reveal
 {
-    internal static class Prepare
+    internal static class ProcessQuery
     {
 
         private const string err = "SQL Storke must be in form of context.Stroke(x=>$\"SOME SQL WITH {x} AND {x.Field} USAGE\")";
@@ -96,7 +99,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
             return tbls;
         }
 
-        public static PreparedQuery Query(LambdaExpression expr)
+        public static PreparedQuery Prepare(LambdaExpression expr)
         {
             //first we determine that query is really in form of x=>$"..."
             CheckQuery(expr);
@@ -179,6 +182,24 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
             }
 
             return new PreparedQuery(queryStructure.ToString(), positioned.ToArray(), ExtractInitialTableReferences(expr));
+        }
+
+        public static PreparedSqlQuery Convert(PreparedQuery q, Func<Type, bool> isEntity)
+        {
+            List<SqlQueryExpression> positioned = new List<SqlQueryExpression>();
+            var visitor = new StrokeVisitor(q.InitialTableReferences, isEntity);
+
+            foreach (var pe in q.Arguments)
+            {
+                visitor.Visit(pe.Expression);
+                var sql = visitor.Retrieve();
+                sql.IsTop = true;
+                sql.Position = pe.Position;
+                sql.Index = pe.Index;
+                positioned.Add(sql);
+            }
+
+            return new PreparedSqlQuery(q.QueryStructure, positioned.ToArray(), visitor.UsedTypes);
         }
     }
 }

@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation;
-using Convert = Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation.Convert;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal
 {
@@ -22,8 +20,8 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
 
         public RevealedQuery RevealQuery(LambdaExpression expr)
         {
-            var prepared = Prepare.Query(expr);
-            var converted = Convert.Query(prepared, x => _mapper.IsEntityType(x));
+            var prepared = ProcessQuery.Prepare(expr);
+            var converted = ProcessQuery.Convert(prepared, x => _mapper.IsEntityType(x));
 
             _queryFillerType.Init(_mapper, converted);
 

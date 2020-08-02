@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 {

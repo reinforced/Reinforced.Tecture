@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions
+namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions
 {
     /// <summary>
     /// Unary SQL expression

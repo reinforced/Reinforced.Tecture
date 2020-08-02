@@ -1,11 +1,53 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Reveal
+namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 {
-    static class ParameterExtractorExtensions
+    static class Extensions
     {
+        public static bool IsEnumerable(this Type t)
+        {
+            if (t.IsArray) return true;
+            if (typeof(IEnumerable).IsAssignableFrom(t)) return true;
+            if (t.IsGenericType)
+            {
+                var tg = t.GetGenericTypeDefinition();
+                if (typeof(IEnumerable<>).IsAssignableFrom(tg)) return true;
+            }
+            return false;
+        }
+
+        public static Expression Unconvert(this Expression ex)
+        {
+            if (ex.NodeType == ExpressionType.Convert)
+            {
+                var cex = ex as UnaryExpression;
+                if (cex != null) ex = cex.Operand;
+            }
+            return ex;
+        }
+
+        public static Expression GetRootMember(this MemberExpression expr)
+        {
+            var mex = expr.Expression.Unconvert();
+            var accessee = mex as MemberExpression;
+
+            var current = mex;
+            while (accessee != null)
+            {
+                current = accessee.Expression.Unconvert();
+                accessee = accessee.Expression as MemberExpression;
+            }
+            return current;
+        }
+
+        internal static void AddIfNotExists<T>(this HashSet<T> hashSet, T val)
+        {
+            if (hashSet.Contains(val)) return;
+            hashSet.Add(val);
+        }
 
         public static bool IsScopedParameterAccess(this Expression expr)
         {
@@ -18,11 +60,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             if (root == null) return false;
             if (root.NodeType != ExpressionType.Parameter) return false;
             return true;
-        }
-
-        public static string MakeNestedTableAlias(this ParameterExpression expr, Type derivedTypeName)
-        {
-            return string.Format("{0}_as_{1}", expr.Name, derivedTypeName.Name);
         }
 
         /// <summary>
@@ -51,7 +88,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             return string.Join("_", path);
         }
 
-       
-        
+
     }
 }

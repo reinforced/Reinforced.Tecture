@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 {

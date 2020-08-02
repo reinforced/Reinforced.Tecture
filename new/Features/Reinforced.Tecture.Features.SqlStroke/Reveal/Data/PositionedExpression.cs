@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Expressions;
 
-namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor.Preparation
+namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Data
 {
     struct PositionedExpression
     {
