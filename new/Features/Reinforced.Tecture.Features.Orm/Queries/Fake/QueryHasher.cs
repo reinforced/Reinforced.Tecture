@@ -4,19 +4,18 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using Reinforced.Tecture.Testing.Query;
 
 namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 {
     public class QueryHasher : ExpressionVisitor, IDisposable
     {
-        private readonly MemoryStream _ms;
-        private readonly BinaryWriter _bw;
+        private readonly Hashbox _box = new Hashbox();
 
         /// <summary>Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor"></see>.</summary>
         public QueryHasher()
         {
-            _ms = new MemoryStream();
-            _bw = new BinaryWriter(_ms);
+            
         }
 
         /// <summary>Dispatches the expression to one of the more specialized visit methods in this class.</summary>
@@ -24,7 +23,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         public override Expression Visit(Expression node)
         {
-            _bw.Write((int)node.NodeType);
+            _box.Put((int)node.NodeType);
             return base.Visit(node);
         }
 
@@ -34,7 +33,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override CatchBlock VisitCatchBlock(CatchBlock node)
         {
-            _bw.Write(node.Test.GUID.ToByteArray());
+            _box.Put(node.Test.GUID.ToByteArray());
             return base.VisitCatchBlock(node);
         }
 
@@ -46,10 +45,10 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             var value = node.Value;
             var type = node.Type;
 
-            _bw.Write(type.GUID.ToByteArray());
+            _box.Put(type.GUID.ToByteArray());
             if (value != null)
             {
-               _bw.Write(value.GetHashCode());
+               _box.Put(value.GetHashCode());
             }
 
             return base.VisitConstant(node);
@@ -60,7 +59,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitGoto(GotoExpression node)
         {
-            _bw.Write((int) node.Kind);
+            _box.Put((int) node.Kind);
             return base.VisitGoto(node);
         }
 
@@ -69,7 +68,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override LabelTarget VisitLabelTarget(LabelTarget node)
         {
-            _bw.Write(node.Name);
+            _box.Put(node.Name);
             return base.VisitLabelTarget(node);
         }
 
@@ -79,7 +78,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
-            _bw.Write(node.Name);
+            _box.Put(node.Name);
             return base.VisitLambda(node);
         }
 
@@ -87,11 +86,11 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         {
             if (mi == null)
             {
-                _bw.Write(0);
+                _box.Put(0);
                 return;
             }
-            _bw.Write((byte)mi.MemberType);
-            _bw.Write(mi.Name);
+            _box.Put((byte)mi.MemberType);
+            _box.Put(mi.Name);
         }
         
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression"></see>.</summary>
@@ -118,7 +117,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         protected override MemberBinding VisitMemberBinding(MemberBinding node)
         {
             WriteMember(node.Member);
-            _bw.Write((byte) node.BindingType);
+            _box.Put((byte) node.BindingType);
             return base.VisitMemberBinding(node);
         }
 
@@ -129,7 +128,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         protected override MemberListBinding VisitMemberListBinding(MemberListBinding node)
         {
             WriteMember(node.Member);
-            _bw.Write((byte)node.BindingType);
+            _box.Put((byte)node.BindingType);
             return base.VisitMemberListBinding(node);
         }
 
@@ -139,7 +138,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
         {
             WriteMember(node.Member);
-            _bw.Write((byte) node.BindingType);
+            _box.Put((byte) node.BindingType);
             return base.VisitMemberMemberBinding(node);
         }
 
@@ -175,7 +174,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitTypeBinary(TypeBinaryExpression node)
         {
-            _bw.Write(node.TypeOperand.GUID.ToByteArray());
+            _box.Put(node.TypeOperand.GUID.ToByteArray());
             return base.VisitTypeBinary(node);
         }
 
@@ -191,32 +190,13 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 
         public string GenerateHash()
         {
-            _bw.Flush();
-            _ms.Flush();
-            var bytes = _ms.ToArray();
-
-
-            byte[] hash;
-            using (var sha = SHA256.Create())
-            {
-                hash = sha.ComputeHash(bytes);
-            }
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var b in hash)
-            {
-                sb.AppendFormat("{0:0X}", b);
-            }
-
-            return sb.ToString();
+            return _box.Compute();
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-
-            _bw?.Dispose();
-            _ms?.Dispose();
+            _box.Dispose();
         }
     }
 }

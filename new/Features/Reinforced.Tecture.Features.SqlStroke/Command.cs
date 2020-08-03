@@ -1,4 +1,5 @@
 ﻿using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Infrastructure;
 using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Features.SqlStroke

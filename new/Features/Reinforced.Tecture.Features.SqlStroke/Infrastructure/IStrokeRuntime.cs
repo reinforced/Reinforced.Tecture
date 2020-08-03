@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor;
 
-namespace Reinforced.Tecture.Features.SqlStroke
+namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
     public interface IStrokeRuntime
     {

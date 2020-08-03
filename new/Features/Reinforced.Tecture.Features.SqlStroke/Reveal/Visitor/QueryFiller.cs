@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Reinforced.Tecture.Features.SqlStroke.Infrastructure;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Data;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Data.Expressions;
 
@@ -166,7 +167,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
             foreach (var ntr in tref.Children)
             {
                 result.AppendLine();
-                result.AppendFormat(" {0} JOIN {1} ON", joinType.ToSql(), TableMakeAlias(ntr));
+                result.AppendFormat(" {0} JOIN {1} ON", JoinToString(joinType), TableMakeAlias(ntr));
                 var fields = Mapper.GetJoinKeys(tref.EntityType, ntr.JoinColumn);
                 var first = true;
                 foreach (var assocField in fields)
@@ -181,6 +182,21 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
 
                 if (ntr.Children.Count > 0) VisitChildrenReferences(ntr, joinType, result);
             }
+        }
+
+        protected virtual string JoinToString(Join join)
+        {
+            switch (join)
+            {
+                case Join.Cross: return "CROSS";
+                case Join.Inner: return "INNER";
+                case Join.Left: return "LEFT";
+                case Join.Right: return "RIGHT";
+                case Join.Outer: return "OUTER";
+                case Join.Default: return string.Empty;
+            }
+
+            throw new Exception("Unknown join type: " + join);
         }
 
         #endregion

@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             var rt = s.Feature(out IQueryStore qs);
             var p = rt.GetProcessor(usedTypes).RevealQuery(expr);
             var cmd = new Sql(p.CommandText, p.CommandParameters);
-            return new RawQuery(cmd, rt);
+            return new RawQuery(cmd, rt, qs);
         }
     }
 }

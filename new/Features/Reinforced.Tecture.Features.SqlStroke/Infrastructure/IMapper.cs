@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Reinforced.Tecture.Features.SqlStroke
+namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
     public interface IMapper
     {

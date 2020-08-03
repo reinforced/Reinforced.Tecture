@@ -27,14 +27,36 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
         {
             if (_qs != null)
             {
-
+                if (_qs.State == QueryMemorizeState.Put)
+                {
+                    var r = _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
+                    _qs.Put(Sql.Hash(),r);
+                    return r;
+                }
+                else
+                {
+                    return _qs.Get<IEnumerable<T>>(Sql.Hash());
+                }
             }
-            return _runtime.Query<T>(Sql.Command, Sql.Parameters);
+            return _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
         }
 
-        public Task<IEnumerable<T>> AsAsync<T>()
+        public async Task<IEnumerable<T>> AsAsync<T>()
         {
-            return _runtime.QueryAsync<T>(Sql.Command, Sql.Parameters);
+            if (_qs != null)
+            {
+                if (_qs.State == QueryMemorizeState.Put)
+                {
+                    var r = await _runtime.DoQueryAsync<T>(Sql.Command, Sql.Parameters);
+                    _qs.Put(Sql.Hash(), r);
+                    return r;
+                }
+                else
+                {
+                    return _qs.Get<IEnumerable<T>>(Sql.Hash());
+                }
+            }
+            return await _runtime.DoQueryAsync<T>(Sql.Command, Sql.Parameters).ConfigureAwait(false);
         }
     }
 }

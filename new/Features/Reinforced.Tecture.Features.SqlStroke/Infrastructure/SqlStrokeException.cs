@@ -1,4 +1,4 @@
-﻿namespace Reinforced.Tecture.Features.SqlStroke
+﻿namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
     class SqlStrokeException : TectureException
     {
