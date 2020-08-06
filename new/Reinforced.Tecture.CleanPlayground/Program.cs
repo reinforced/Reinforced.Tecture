@@ -26,26 +26,7 @@ namespace Reinforced.Tecture.CleanPlayground
         {
             CSharpCodeTestCollector tc = new CSharpCodeTestCollector();
 
-            tc.Put("abc", new User()
-            {
-                BirthDate = DateTime.Now,
-                FirstName = "Vasya",
-                Gender = Gender.Male,
-                LastName = "Pupkin"
-            });
-
-            tc.Put("abc2", new User()
-            {
-                BirthDate = DateTime.Now,
-                FirstName = "Masya",
-                Gender = Gender.Female,
-                LastName = "Pupkin"
-            });
-
-            tc.Put("count", 10);
-
-            tc.Put("somestr","asdfasdfasdf");
-            tc.Put("asdfasdfsaf",Gender.Female);
+            tc.Put("adfasdf", (10, 20));
 
             var u1 = new User()
             {
@@ -61,11 +42,11 @@ namespace Reinforced.Tecture.CleanPlayground
                 UserId = 10
             };
             o.User = u1;
-            u1.Orders = new List<Order>(){o};
+            u1.Orders = new List<Order>() { o };
 
-            tc.Put("adsfasdfasdf",new User[] { u1 });
+            tc.Put("adsfasdfasdf", new User[] { u1 });//<<<
 
-            var clas = tc.Proceed("TestData","Test.Data");
+            var clas = tc.Proceed("SampleTestData", "Reinforced.Tecture.CleanPlayground");
             var result = clas.NormalizeWhitespace(elasticTrivia: true).ToFullString();
             Console.ReadLine();
         }

@@ -100,7 +100,7 @@ namespace Reinforced.Tecture.Testing.Data
 
         private CompilationUnitSyntax ProduceCompilationUnit(string className, string ns)
         {
-            var usings = List<UsingDirectiveSyntax>(_usings.Select(x => UsingDirective(IdentifierName(x)).FormatUsing()));
+            var usings = List<UsingDirectiveSyntax>(_usings.OrderBy(x=>x.Length).Select(x => UsingDirective(IdentifierName(x)).FormatUsing()));
             var clas = ProduceClass(className);
             var n = NamespaceDeclaration(ParseName(ns)).Format().AddMembers(clas);
 
@@ -179,7 +179,12 @@ namespace Reinforced.Tecture.Testing.Data
             {
                 var coll = SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload,
                     ctx);
-                foreach (var s in ctx.Statements)
+                foreach (var s in ctx.Declarations)
+                {
+                    yield return s;
+                }
+
+                foreach (var s in ctx.LateBound)
                 {
                     yield return s;
                 }
@@ -190,7 +195,12 @@ namespace Reinforced.Tecture.Testing.Data
 
             var gen = _tgr.GetGeneratorFor(tdr.RecordType);
             gen.Proceed(tdr.Payload, ctx);
-            foreach (var statementSyntax in ctx.Statements)
+            foreach (var statementSyntax in ctx.Declarations)
+            {
+                yield return statementSyntax;
+            }
+
+            foreach (var statementSyntax in ctx.LateBound)
             {
                 yield return statementSyntax;
             }

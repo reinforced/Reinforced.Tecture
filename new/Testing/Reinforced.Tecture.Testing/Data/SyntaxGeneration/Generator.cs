@@ -54,7 +54,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 return t.Namespace;
             }
 
-            return null;
+            return t.Namespace;
         }
 
         private List<ExpressionSyntax> ProduceInlineableProperties(object instance, GenerationContext context)
@@ -82,9 +82,8 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             return initNodes;
         }
 
-        private List<ExpressionSyntax> ProduceNestedProperties(object instance, GenerationContext context)
+        private void ProduceNestedProperties(string instanceName, object instance, GenerationContext context)
         {
-            List<ExpressionSyntax> initNodes = new List<ExpressionSyntax>();
 
             foreach (var propertyInfo in NestedProperties)
             {
@@ -103,21 +102,23 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
                         var k = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var"))
                             .WithVariables(vbl));
-                        context.Statements.Enqueue(k);
+                        context.Declarations.Enqueue(k);
                     }
 
-                    var pName = propertyInfo.Name;
+                    var ma = MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        IdentifierName(instanceName),
+                        IdentifierName(propertyInfo.Name));
+
                     var ae = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                        IdentifierName(pName),
+                        ma,
                         IdentifierName(varName)).WithTrailingTrivia(LineFeed);
 
 
-                    initNodes.Add(ae);
+                    context.LateBound.Enqueue(ExpressionStatement(ae));
                     context.AddUsing(propertyInfo.PropertyType.Namespace);
                 }
             }
-
-            return initNodes;
         }
 
         internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context)
@@ -127,19 +128,10 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             var variables = new List<string>();
             foreach (var item in values)
             {
-                if (!context.DefinedVariable(item, out string varName))
-                {
-                    var result = generator.New(item, context);
 
-                    var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
-                        VariableDeclarator(Identifier(varName)
-                        ).WithInitializer(EqualsValueClause(result)));
-
-                    var k = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var")).WithVariables(vbl));
-                    context.Statements.Enqueue(k);
-                }
-
-                variables.Add(varName);
+                generator.New(item, context);
+                var name = context.GetDefined(item);
+                variables.Add(name);
             }
 
             var collectionStrategy = tgr.CollectionStrategies.GetStrategy(collectionType);
@@ -148,7 +140,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             return collectionStrategy.Generate(identifiers, context.Usings);
         }
 
-        private List<ExpressionSyntax> ProduceCollectionProperties(object instance, GenerationContext context)
+        private void ProduceCollectionProperties(string instanceName, object instance, GenerationContext context)
         {
             List<ExpressionSyntax> initNodes = new List<ExpressionSyntax>();
 
@@ -158,23 +150,23 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 var defValue = propertyInfo.GetValue(_defaultInstance);
                 if (defValue != value)
                 {
-                    var elementType = propertyInfo.PropertyType.GetGenericArguments()[0];
-
                     var collCreation = ProceedCollection(_tgr, propertyInfo.PropertyType, value, context);
 
+                    var ma = MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        IdentifierName(instanceName),
+                        IdentifierName(propertyInfo.Name));
 
-                    var pName = propertyInfo.Name;
                     var ae = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                        IdentifierName(pName),
+                        ma,
                         collCreation).WithTrailingTrivia(LineFeed);
 
+                    context.LateBound.Enqueue(ExpressionStatement(ae));
 
-                    initNodes.Add(ae);
+
                     context.AddUsing(propertyInfo.PropertyType.Namespace);
                 }
             }
-
-            return initNodes;
         }
 
         private ExpressionSyntax New(object instance, GenerationContext context)
@@ -188,33 +180,44 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 return ProceedCollection(_tgr, t, (IEnumerable)instance, context);
             }
 
-            var nested = ProduceNestedProperties(instance, context);
-            var initNodes = ProduceInlineableProperties(instance, context);
-            var collectionNodes = ProduceCollectionProperties(instance, context);
 
+            if (!context.DefinedVariable(instance, out string instanceName))
+            {
+                var initNodes = ProduceInlineableProperties(instance, context);
 
-            var inExp = InitializerExpression(SyntaxKind.ObjectInitializerExpression,
-                SeparatedList(initNodes.Union(nested).Union(collectionNodes).ToArray()));
+                var inExp = InitializerExpression(SyntaxKind.ObjectInitializerExpression,
+                    SeparatedList(initNodes.ToArray()));
 
-            var result = ObjectCreationExpression(ParseTypeName(TypeRef.Name))
-                .WithArgumentList(
-                    ArgumentList()
-                        .WithCloseParenToken(
-                            Token(
-                                TriviaList(),
-                                SyntaxKind.CloseParenToken,
-                                TriviaList(
-                                    LineFeed))))
-                .WithInitializer(inExp);
+                var result = ObjectCreationExpression(ParseTypeName(TypeRef.Name))
+                    .WithArgumentList(
+                        ArgumentList()
+                            .WithCloseParenToken(
+                                Token(
+                                    TriviaList(),
+                                    SyntaxKind.CloseParenToken,
+                                    TriviaList(LineFeed))))
+                    .WithInitializer(inExp);
 
-            return result;
+                var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
+                    VariableDeclarator(Identifier(instanceName)
+                    ).WithInitializer(EqualsValueClause(result)));
+
+                var assign = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var")).WithVariables(vbl));
+
+                context.Declarations.Enqueue(assign);
+
+                ProduceNestedProperties(instanceName, instance, context);
+                ProduceCollectionProperties(instanceName, instance, context);
+            }
+
+            return IdentifierName(instanceName);
         }
 
         public void Proceed(object instance, GenerationContext context)
         {
             var cre = New(instance, context);
 
-            context.Statements.Enqueue(ReturnStatement(cre));
+            context.Declarations.Enqueue(ReturnStatement(cre));
         }
     }
 }

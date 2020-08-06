@@ -21,7 +21,9 @@ namespace Reinforced.Tecture.Testing.Data
             if (!Usings.Contains(usng)) Usings.Add(usng);
         }
 
-        public Queue<StatementSyntax> Statements { get; } = new Queue<StatementSyntax>();
+        public Queue<StatementSyntax> Declarations { get; } = new Queue<StatementSyntax>();
+
+        public Queue<StatementSyntax> LateBound { get; } = new Queue<StatementSyntax>();
 
         private int _counter;
        
@@ -37,6 +39,15 @@ namespace Reinforced.Tecture.Testing.Data
             _definedObjects[target] = _counter;
             identifier = $"v{_counter}";
             return false;
+        }
+
+        public string GetDefined(object target)
+        {
+            if (_definedObjects.ContainsKey(target))
+            {
+                return $"v{_definedObjects[target]}";
+            }
+            throw new Exception("You are using it wrong");
         }
 
         private readonly Dictionary<object,int> _definedObjects = new Dictionary<object, int>();
