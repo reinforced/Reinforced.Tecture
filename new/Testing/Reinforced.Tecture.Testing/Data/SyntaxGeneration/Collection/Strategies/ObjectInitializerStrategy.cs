@@ -30,7 +30,12 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection.Strategies
 
         public ExpressionSyntax Generate(IEnumerable<ExpressionSyntax> members, HashSet<string> usings)
         {
-            return ObjectCreationExpression(_collectionType.TypeName(usings))
+            var ct = _collectionType;
+            if (_collectionType.IsAbstract || _collectionType.IsInterface)
+            {
+                ct = typeof(List<>).MakeGenericType(_collectionType.ElementType());
+            }
+            return ObjectCreationExpression(ct.TypeName(usings))
                         .WithInitializer(InitializerExpression(SyntaxKind.CollectionInitializerExpression,
                             SeparatedList<ExpressionSyntax>(WithComas(members))));
         }

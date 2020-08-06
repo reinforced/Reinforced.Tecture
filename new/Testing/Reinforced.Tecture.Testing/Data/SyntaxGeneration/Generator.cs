@@ -14,10 +14,9 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
     class Generator
     {
         private readonly TypeGeneratorRepository _tgr;
-        private CollectionStrategies _collectionStrategies;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
-        public Generator(Type typeRef, TypeGeneratorRepository tgr, CollectionStrategies collectionStrategies)
+        public Generator(Type typeRef, TypeGeneratorRepository tgr)
         {
             TypeRef = typeRef;
             _defaultInstance = Activator.CreateInstance(typeRef);
@@ -33,7 +32,6 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             }
 
             _tgr = tgr;
-            _collectionStrategies = collectionStrategies;
         }
 
         public Type TypeRef { get; set; }
@@ -65,7 +63,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
             foreach (var propertyInfo in InlineProperties)
             {
-                var value = propertyInfo.GetValue(instance);
+                var value = _tgr.Hijack.GetValue(instance, propertyInfo);
                 var defValue = propertyInfo.GetValue(_defaultInstance);
                 if (defValue != value)
                 {
@@ -90,20 +88,23 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
             foreach (var propertyInfo in NestedProperties)
             {
-                var value = propertyInfo.GetValue(instance);
+                var value = _tgr.Hijack.GetValue(instance, propertyInfo);
                 var defValue = propertyInfo.GetValue(_defaultInstance);
                 if (defValue != value)
                 {
                     var generator = _tgr.GetGeneratorFor(propertyInfo.PropertyType);
-                    var varName = context.DefineVariable();
-                    var result = generator.New(value, context);
+                    if (!context.DefinedVariable(value, out string varName))
+                    {
+                        var result = generator.New(value, context);
 
-                    var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
-                        VariableDeclarator(Identifier(varName)
-                        ).WithInitializer(EqualsValueClause(result)));
+                        var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
+                            VariableDeclarator(Identifier(varName)
+                            ).WithInitializer(EqualsValueClause(result)));
 
-                    var k = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var")).WithVariables(vbl));
-                    context.Statements.Enqueue(k);
+                        var k = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var"))
+                            .WithVariables(vbl));
+                        context.Statements.Enqueue(k);
+                    }
 
                     var pName = propertyInfo.Name;
                     var ae = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
@@ -119,17 +120,81 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             return initNodes;
         }
 
+        internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context)
+        {
+            var generator = tgr.GetGeneratorFor(collectionType.ElementType());
+
+            var variables = new List<string>();
+            foreach (var item in values)
+            {
+                if (!context.DefinedVariable(item, out string varName))
+                {
+                    var result = generator.New(item, context);
+
+                    var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
+                        VariableDeclarator(Identifier(varName)
+                        ).WithInitializer(EqualsValueClause(result)));
+
+                    var k = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var")).WithVariables(vbl));
+                    context.Statements.Enqueue(k);
+                }
+
+                variables.Add(varName);
+            }
+
+            var collectionStrategy = tgr.CollectionStrategies.GetStrategy(collectionType);
+            var identifiers = variables.Select(IdentifierName);
+
+            return collectionStrategy.Generate(identifiers, context.Usings);
+        }
+
+        private List<ExpressionSyntax> ProduceCollectionProperties(object instance, GenerationContext context)
+        {
+            List<ExpressionSyntax> initNodes = new List<ExpressionSyntax>();
+
+            foreach (var propertyInfo in CollectionProperties)
+            {
+                var value = _tgr.Hijack.GetValue(instance, propertyInfo) as IEnumerable;
+                var defValue = propertyInfo.GetValue(_defaultInstance);
+                if (defValue != value)
+                {
+                    var elementType = propertyInfo.PropertyType.GetGenericArguments()[0];
+
+                    var collCreation = ProceedCollection(_tgr, propertyInfo.PropertyType, value, context);
+
+
+                    var pName = propertyInfo.Name;
+                    var ae = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
+                        IdentifierName(pName),
+                        collCreation).WithTrailingTrivia(LineFeed);
+
+
+                    initNodes.Add(ae);
+                    context.AddUsing(propertyInfo.PropertyType.Namespace);
+                }
+            }
+
+            return initNodes;
+        }
+
         private ExpressionSyntax New(object instance, GenerationContext context)
         {
             if (instance == null)
                 return LiteralExpression(SyntaxKind.NullLiteralExpression);
 
+            var t = instance.GetType();
+            if (t.IsEnumerable())
+            {
+                return ProceedCollection(_tgr, t, (IEnumerable)instance, context);
+            }
+
             var nested = ProduceNestedProperties(instance, context);
             var initNodes = ProduceInlineableProperties(instance, context);
+            var collectionNodes = ProduceCollectionProperties(instance, context);
 
 
             var inExp = InitializerExpression(SyntaxKind.ObjectInitializerExpression,
-                SeparatedList(initNodes.Union(nested).ToArray()));
+                SeparatedList(initNodes.Union(nested).Union(collectionNodes).ToArray()));
 
             var result = ObjectCreationExpression(ParseTypeName(TypeRef.Name))
                 .WithArgumentList(

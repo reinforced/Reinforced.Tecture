@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Testing.Query
 
     public interface Collecting : TestData
     {
-        void Put<T>(string hash, T result,string description);
+        void Put<T>(string hash, T result,string description = null);
     }
 
     public interface Providing : TestData

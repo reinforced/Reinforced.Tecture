@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
 
 namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 {
     class TypeGeneratorRepository
     {
-        private readonly Dictionary<Type,Generator> _generators = new Dictionary<Type, Generator>();
+        public CollectionStrategies CollectionStrategies { get; }
+
+        public Hijack Hijack { get; }
+
+        private readonly Dictionary<Type, Generator> _generators = new Dictionary<Type, Generator>();
+
+        public TypeGeneratorRepository(Hijack hijack, CollectionStrategies collectionStrategies = null)
+        {
+            Hijack = hijack;
+            CollectionStrategies = collectionStrategies ?? new CollectionStrategies();
+        }
 
         public Generator GetGeneratorFor(Type t)
         {

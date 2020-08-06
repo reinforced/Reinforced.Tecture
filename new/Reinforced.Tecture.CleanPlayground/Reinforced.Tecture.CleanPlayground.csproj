@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj" />
+    <ProjectReference Include="..\Testing\Reinforced.Tecture.Testing\Reinforced.Tecture.Testing.csproj" />
   </ItemGroup>
 
 </Project>

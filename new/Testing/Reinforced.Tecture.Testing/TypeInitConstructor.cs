@@ -9,7 +9,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing
 {
-    internal static class TypeInitConstructor
+    public static class TypeInitConstructor
     {
         private static IEnumerable<SyntaxNodeOrToken> ComaSeparated(IEnumerable<TypeSyntax> types)
         {
@@ -20,6 +20,17 @@ namespace Reinforced.Tecture.Testing
                 else first = false;
                 yield return typeSyntax;
             }
+        }
+
+        private static string NormalizeTypeName(String typeName)
+        {
+            var idx = typeName.IndexOf("`");
+            if (idx >= 0)
+            {
+                return typeName.Substring(0, idx);
+            }
+
+            return typeName;
         }
         public static TypeSyntax TypeName(this Type t, HashSet<string> usings = null)
         {
@@ -36,11 +47,11 @@ namespace Reinforced.Tecture.Testing
             {
                 var def = t.GetGenericTypeDefinition();
                 var args = t.GetGenericArguments();
-                var gn = GenericName(Identifier(def.Name));
+                var gn = GenericName(Identifier(NormalizeTypeName(def.Name)));
                 TypeArgumentListSyntax argsSyntax;
                 argsSyntax = TypeArgumentList(
-                    args.Length == 1 
-                        ? SingletonSeparatedList(args[0].TypeName(usings)) 
+                    args.Length == 1
+                        ? SingletonSeparatedList(args[0].TypeName(usings))
                         : SeparatedList<TypeSyntax>(ComaSeparated(args.Select(v => v.TypeName(usings))))
                         );
 
@@ -65,9 +76,25 @@ namespace Reinforced.Tecture.Testing
             if (t.IsGenericType)
             {
                 var tg = t.GetGenericTypeDefinition();
-                if (typeof(IEnumerable<>).IsAssignableFrom(tg)) return true;
+                if (tg.GetInterfaces().Any(x => x.Name == "IEnumerable`1")) return true;
             }
             return false;
+        }
+
+        public static Type ElementType(this Type t)
+        {
+            if (!t.IsEnumerable())
+                return null;
+
+            if (t.IsArray) return t.GetElementType();
+            if (t.IsGenericType)
+            {
+                var tg = t.GetGenericTypeDefinition();
+                if (tg.GetInterfaces().Any(x => x.Name=="IEnumerable`1")) return t.GetGenericArguments()[0];
+            }
+
+            return typeof(object);
+
         }
 
         /// <summary>
@@ -267,8 +294,8 @@ namespace Reinforced.Tecture.Testing
         }
         private static ExpressionSyntax String(string value)
         {
-            return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, 
-                SyntaxFactory.Literal($"@\"{value}\""));
+            return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression,
+                SyntaxFactory.Literal($"@\"{value}\"", value));
         }
 
         private static ExpressionSyntax Bool(bool value)

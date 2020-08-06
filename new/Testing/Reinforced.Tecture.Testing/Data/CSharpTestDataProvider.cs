@@ -25,7 +25,7 @@ namespace Reinforced.Tecture.Testing.Data
             _hashOnlyWarn = hashOnlyWarn;
         }
 
-        protected abstract IEnumerable<ITestDataRecord> GetRecords();
+        public abstract IEnumerable<ITestDataRecord> GetRecords();
 
         private IEnumerator<ITestDataRecord> _en = null;
 
