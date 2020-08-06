@@ -9,9 +9,9 @@ namespace Reinforced.Tecture.Features.Orm
     {
         internal IQueryable<T> GetSet<T>()
         {
-            if (QueryStore != null)
+            if (TestData != null)
             {
-                return new HookQueryable<T>(Set<T>(), QueryStore);
+                return new HookQueryable<T>(Set<T>(), TestData, null);
             }
             return Set<T>();
         }
@@ -31,11 +31,11 @@ namespace Reinforced.Tecture.Features.Orm
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public abstract void Dispose();
 
-        internal void SetQueryStore(IQueryStore qs)
+        internal void SetQueryStore(TestData qs)
         {
-            if (QueryStore == null) QueryStore = qs;
+            if (TestData == null) TestData = qs;
         }
 
-        protected IQueryStore QueryStore { get; private set; }
+        protected TestData TestData { get; private set; }
     }
 }

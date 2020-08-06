@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Reinforced.Tecture.Testing.Query;
 
 namespace Reinforced.Tecture.Features.Orm.Queries.Fake
@@ -11,10 +12,10 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         private long _currentIndex = -1;
         private long _indexBeforeReset = -1;
 
-        public HookEnumerator(string hash, IEnumerator<T> original, IQueryStore queryStore)
+        public HookEnumerator(string hash, IEnumerator<T> original, Collecting testData, DescriptionHolder description)
         {
             _original = original;
-            queryStore.Put(hash, _data);
+            testData.Put(hash, _data.AsEnumerable(), description.Description);
         }
 
         public bool MoveNext()
@@ -55,10 +56,10 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         private long _currentIndex = -1;
         private long _indexBeforeReset = -1;
 
-        public HookEnumerator(string hash, IEnumerator original, IQueryStore queryStore)
+        public HookEnumerator(string hash, IEnumerator original, Collecting testData, DescriptionHolder description)
         {
             _original = original;
-            queryStore.Put(hash, _data);
+            testData.Put(hash, _data, description.Description);
         }
 
         public bool MoveNext()

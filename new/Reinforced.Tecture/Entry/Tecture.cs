@@ -21,22 +21,22 @@ namespace Reinforced.Tecture.Entry
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
-        private readonly IQueryStore _queryStore;
+        private readonly TestData _testData;
 
         public Tecture(
             ChannelMultiplexer mx,
             CommandsDispatcher dispatcher,
             bool debugMode = false,
-            IQueryStore queryStore = null,
+            TestData testData = null,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
             _mx = mx;
-            _queryStore = queryStore;
+            _testData = testData;
             _pipeline = new Pipeline(debugMode, _actions, _finallyActions);
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
-            _serviceManager = new ServiceManager(_pipeline, _mx, _queryStore);
+            _serviceManager = new ServiceManager(_pipeline, _mx, _testData);
             _dispatcher = dispatcher;
         }
 
@@ -67,7 +67,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Data source instance</returns>
         public Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(_mx, _queryStore);
+            return new SRead<T>(_mx, _testData);
         }
 
 

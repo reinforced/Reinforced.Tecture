@@ -4,5 +4,8 @@ using System.Text;
 
 namespace Reinforced.Tecture.Testing.Query
 {
-    
+    public interface IHasheable
+    {
+        void WriteData(Hashbox hb);
+    }
 }

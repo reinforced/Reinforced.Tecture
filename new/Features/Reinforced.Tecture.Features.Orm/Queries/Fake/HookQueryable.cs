@@ -11,12 +11,15 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
     {
         private readonly IQueryable<T> _baseQueryable;
         private readonly IQueryProvider _provider;
-        private readonly IQueryStore _qs;
-        public HookQueryable(IQueryable<T> baseQueryable, IQueryStore qs)
+        private readonly TestData _qs;
+        internal DescriptionHolder _description;
+
+        public HookQueryable(IQueryable<T> baseQueryable, TestData qs, DescriptionHolder descrHolder)
         {
             _baseQueryable = baseQueryable;
             _qs = qs;
-            _provider = new HookQueryProvider(baseQueryable.Provider, _qs);
+            _description = descrHolder ?? new DescriptionHolder();
+            _provider = new HookQueryProvider(baseQueryable.Provider, _qs, _description);
         }
 
 
@@ -25,12 +28,15 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         public IEnumerator<T> GetEnumerator()
         {
             var hash = Expression.CalculateHash();
-            if (_qs.State == QueryMemorizeState.Put)
-                return new HookEnumerator<T>(hash, _baseQueryable.GetEnumerator(), _qs);
+            if (_qs is Collecting data)
+                return new HookEnumerator<T>(hash, _baseQueryable.GetEnumerator(), data, _description);
 
-            var result = _qs.Get<T[]>(hash);
-
-            return new ArrayEnumerator<T>(result);
+            if (_qs is Providing testData)
+            {
+                var result = testData.Get<T[]>(hash);
+                return new ArrayEnumerator<T>(result);
+            }
+            throw new TestDataTypeMismatchException();
         }
 
         /// <summary>Returns an enumerator that iterates through a collection.</summary>
@@ -38,11 +44,16 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         IEnumerator IEnumerable.GetEnumerator()
         {
             var hash = Expression.CalculateHash();
-            if (_qs.State == QueryMemorizeState.Put)
-                return new HookEnumerator(hash, ((IEnumerable)_baseQueryable).GetEnumerator(), _qs);
+            if (_qs is Collecting data)
+                return new HookEnumerator(hash, ((IEnumerable)_baseQueryable).GetEnumerator(), data, _description);
 
-            var result = _qs.Get<Array>(hash);
-            return result.GetEnumerator();
+            if (_qs is Providing testData)
+            {
+                var result = testData.Get<Array>(hash);
+                return result.GetEnumerator();
+            }
+
+            throw new TestDataTypeMismatchException();
         }
 
         /// <summary>Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see cref="T:System.Linq.IQueryable" /> is executed.</summary>

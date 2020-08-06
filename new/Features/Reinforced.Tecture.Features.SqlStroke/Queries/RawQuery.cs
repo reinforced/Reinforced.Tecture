@@ -10,9 +10,11 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
     /// </summary>
     public class RawQuery
     {
-        private readonly IQueryStore _qs;
+        internal string _description = string.Empty;
 
-        internal RawQuery(Sql sql, Query runtime, IQueryStore qs)
+        private readonly TestData _qs;
+
+        internal RawQuery(Sql sql, Query runtime, TestData qs)
         {
             Sql = sql;
             _runtime = runtime;
@@ -27,15 +29,16 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
         {
             if (_qs != null)
             {
-                if (_qs.State == QueryMemorizeState.Put)
+                if (_qs is Collecting data)
                 {
                     var r = _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
-                    _qs.Put(Sql.Hash(),r);
+                    data.Put(Sql.Hash(), r, _description);
                     return r;
                 }
-                else
+
+                if (_qs is Providing testData)
                 {
-                    return _qs.Get<IEnumerable<T>>(Sql.Hash());
+                    return testData.Get<IEnumerable<T>>(Sql.Hash());
                 }
             }
             return _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
@@ -45,15 +48,16 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
         {
             if (_qs != null)
             {
-                if (_qs.State == QueryMemorizeState.Put)
+                if (_qs is Collecting data)
                 {
                     var r = await _runtime.DoQueryAsync<T>(Sql.Command, Sql.Parameters);
-                    _qs.Put(Sql.Hash(), r);
+                    data.Put(Sql.Hash(), r, _description);
                     return r;
                 }
-                else
+
+                if (_qs is Providing testData)
                 {
-                    return _qs.Get<IEnumerable<T>>(Sql.Hash());
+                    return testData.Get<IEnumerable<T>>(Sql.Hash());
                 }
             }
             return await _runtime.DoQueryAsync<T>(Sql.Command, Sql.Parameters).ConfigureAwait(false);

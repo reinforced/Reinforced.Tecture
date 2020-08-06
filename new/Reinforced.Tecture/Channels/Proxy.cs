@@ -4,7 +4,7 @@ namespace Reinforced.Tecture.Channels
 {
     interface IQueryMultiplexer
     {
-        TFeature GetFeature<TFeature>(out IQueryStore qs) where TFeature : QueryFeature;
+        TFeature GetFeature<TFeature>(out TestData qs) where TFeature : QueryFeature;
     }
 
     interface ICommandMultiplexer

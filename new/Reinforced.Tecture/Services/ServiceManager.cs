@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Services
     {
         private readonly Pipeline _pipeline;
         private readonly ChannelMultiplexer _mux;
-        private readonly IQueryStore _queryStore;
+        private readonly TestData _testData;
         class ServiceContextEntry
         {
             public Type[] ContextTypes { get; set; }
@@ -87,11 +87,11 @@ namespace Reinforced.Tecture.Services
             sd.Add(entry);
         }
 
-        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, IQueryStore queryStore)
+        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, TestData testData)
         {
             _pipeline = pipeline;
             _mux = mux;
-            _queryStore = queryStore;
+            _testData = testData;
         }
 
         private TService CreateService<TService>() where TService : TectureServiceBase
@@ -100,7 +100,7 @@ namespace Reinforced.Tecture.Services
             service.ServiceManager = this;
             service.Pipeline = _pipeline;
             service.ChannelMultiplexer = _mux;
-            service.QueryStore = _queryStore;
+            service.TestData = _testData;
             return service;
         }
 

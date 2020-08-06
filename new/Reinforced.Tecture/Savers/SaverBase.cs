@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing.Query;
 
 namespace Reinforced.Tecture.Savers
 {
@@ -25,6 +26,16 @@ namespace Reinforced.Tecture.Savers
         internal abstract IEnumerable<Type> ServingCommandTypes { get; }
 
         internal abstract CommandRunner GetRunner(CommandBase cb);
+
+        internal TestData TestDataInstance;
+
+        /// <summary>
+        /// Reference to test data
+        /// </summary>
+        protected TestData TestData
+        {
+            get { return TestDataInstance; }
+        }
 
         /// <summary>
         /// 

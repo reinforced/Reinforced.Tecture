@@ -14,7 +14,7 @@ namespace Reinforced.Tecture.Entry
         internal readonly ChannelMultiplexer _mx = new ChannelMultiplexer();
         internal ITransactionManager _transactionManager;
         internal Action<Exception> _excHandler = null;
-        internal IQueryStore _queryStore;
+        internal TestData TestData;
 
         /// <summary>
         /// Produces Tecture instance
@@ -26,7 +26,7 @@ namespace Reinforced.Tecture.Entry
                 _mx,
                 new CommandsDispatcher(_mx),
                 false, 
-                _queryStore,
+                TestData,
                 _transactionManager, 
                 exceptionHandler: _excHandler);
         }

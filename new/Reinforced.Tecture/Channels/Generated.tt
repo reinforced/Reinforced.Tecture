@@ -15,63 +15,74 @@ using Reinforced.Tecture.Testing.Query;
 namespace Reinforced.Tecture.Channels
 {
 <# for (int i=0;i<implementationsCount;i++) {	#> 
-public interface Read<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Read<TChannel> where TChannel : CanQuery { }
+	
+	#region Setup for <#= i+1 #> entities
 
-internal struct SRead<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-	: IQueryMultiplexer, 
-	  Read<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-	 where TChannel : CanQuery
-{
-	private readonly ChannelMultiplexer _cm;
-	private readonly IQueryStore _qs;
-	public SRead(ChannelMultiplexer cm, IQueryStore qs)
+	#region Read
+
+	public interface Read<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Read<TChannel> where TChannel : CanQuery { }
+
+	internal struct SRead<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+		: IQueryMultiplexer, 
+		  Read<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+		 where TChannel : CanQuery
 	{
-		_cm = cm;
-		_qs = qs;
+		private readonly ChannelMultiplexer _cm;
+		private readonly TestData _qs;
+		public SRead(ChannelMultiplexer cm, TestData qs)
+		{
+			_cm = cm;
+			_qs = qs;
+		}
+
+		public TFeature GetFeature<TFeature>(out TestData qs) where TFeature : QueryFeature 
+		{
+			qs = _qs;
+			return _cm.GetQueryFeature<TChannel,TFeature>();
+		}
+
+		public TestData GetStore()
+		{
+			return _qs;
+		}
 	}
 
-	public TFeature GetFeature<TFeature>(out IQueryStore qs) where TFeature : QueryFeature 
+	#endregion
+
+	#region Write
+	public interface Write<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Write<TChannel> where TChannel : CanCommand { }
+
+	internal struct SWrite<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+		: ICommandMultiplexer, 
+		  Write<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
+		 where TChannel : CanCommand
 	{
-		qs = _qs;
-		return _cm.GetQueryFeature<TChannel,TFeature>();
+		private readonly ChannelMultiplexer _cm;
+		private readonly Pipeline _pipeline;
+		public SWrite(ChannelMultiplexer cm, Pipeline p)
+		{
+			_cm = cm;
+			_pipeline = p;
+		}
+
+		public TFeature GetFeature<TFeature>() where TFeature : CommandFeature 
+		{
+			return _cm.GetCommandFeature<TChannel,TFeature>();
+		}
+
+		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
+		{
+			command.ChannelId = typeof(Channel).FullName;
+			_pipeline.Enqueue(command);
+			return command;
+		}
+
+		 public ActionsQueue Save { get { return _pipeline.PostSaveActions;} }
+
+		 public ActionsQueue Final { get { return _pipeline.FinallyActions; } }
 	}
+	#endregion 
 
-	public IQueryStore GetStore()
-	{
-		return _qs;
-	}
-}
-
-public interface Write<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Write<TChannel> where TChannel : CanCommand { }
-
-internal struct SWrite<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-	: ICommandMultiplexer, 
-	  Write<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-	 where TChannel : CanCommand
-{
-	private readonly ChannelMultiplexer _cm;
-	private readonly Pipeline _pipeline;
-	public SWrite(ChannelMultiplexer cm, Pipeline p)
-	{
-		_cm = cm;
-		_pipeline = p;
-	}
-
-	public TFeature GetFeature<TFeature>() where TFeature : CommandFeature 
-	{
-		return _cm.GetCommandFeature<TChannel,TFeature>();
-	}
-
-	public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
-	{
-		command.ChannelId = typeof(Channel).FullName;
-		_pipeline.Enqueue(command);
-		return command;
-	}
-
-	 public ActionsQueue Save { get { return _pipeline.PostSaveActions;} }
-
-     public ActionsQueue Final { get { return _pipeline.FinallyActions; } }
-}
-<# } #>
+	#endregion
+	<# } #>
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Stories;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-namespace Reinforced.Tecture.Testing
+namespace Reinforced.Tecture.Testing.Generator
 {
     internal static class Extensions
     {

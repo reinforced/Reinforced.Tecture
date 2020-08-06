@@ -23,40 +23,41 @@ namespace Reinforced.Tecture.Savers
 	/// Marking interface for feature being able to produce <#= (i+1) #> various commands
 	/// </summary>
 	public interface Produces<<#= GenericsStroke(i+1) #>> : CommandFeature
-<#= Constraints(i+1,"CommandBase") #> { }
+		<#= Constraints(i+1,"CommandBase") #>
+	{ }
 
 	/// <summary>
 	/// Saver serving <#= i+1 #> commands
 	/// </summary>
 	public abstract class Saver<<#= GenericsStroke(i+1) #>> : SaverBase
-<#= Constraints(i+1,"CommandBase") #>
-{ 
+		<#= Constraints(i+1,"CommandBase") #>
+	{ 
 
-	internal override IEnumerable<Type> ServingCommandTypes
-    {
-        get 
-		{ <# for (int j=0;j<=i;j++) {	#> 
-			yield return typeof(TCommand<#= j+1 #>); <# } #>
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{ <# for (int j=0;j<=i;j++) {	#> 
+				yield return typeof(TCommand<#= j+1 #>); <# } #>
 		
+			}
 		}
-    }
 
-	internal override ICommandRunner GetRunner(CommandBase command)
-	{
-<# for (int j=0;j<=i;j++) {	#> 
-		if (command is TCommand<#= j+1 #> cm<#= j+1 #>) return GetRunner<#= j+1 #>(cm<#= j+1 #>);<# } #>
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	<# for (int j=0;j<=i;j++) {	#> 
+			if (command is TCommand<#= j+1 #> cm<#= j+1 #>) return GetRunner<#= j+1 #>(cm<#= j+1 #>);<# } #>
 
-		throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
-	}
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
 
-<# for (int j=0;j<=i;j++) {	#> 
-	/// <summary>
-	/// Returns instance of command runner for command <typeparamref name="TCommand<#= j+1 #>"/>. 
-	/// </summary>
-	/// <param name="command">Command of type <typeparamref name="TCommand<#= j+1 #>"/> </param>
-	/// <returns>Command runner</returns>
-	protected abstract ICommandRunner<TCommand<#= j+1 #>> GetRunner<#= j+1 #>(TCommand<#= j+1 #> command);
-<# } #>
+	<# for (int j=0;j<=i;j++) {	#> 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand<#= j+1 #>"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand<#= j+1 #>"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand<#= j+1 #>> GetRunner<#= j+1 #>(TCommand<#= j+1 #> command);
+	<# } #>
 }
 
 #endregion

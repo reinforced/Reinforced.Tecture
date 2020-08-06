@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Generation;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Reinforced.Tecture.Testing
+namespace Reinforced.Tecture.Testing.Generator
 {
     partial class CSharpTestGenerator
     {

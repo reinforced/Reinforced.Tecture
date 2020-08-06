@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Testing.Query;
 
@@ -7,11 +8,13 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
     class HookQueryProvider : IQueryProvider
     {
         private readonly IQueryProvider _baseQueryProvider;
-        private readonly IQueryStore _queryStore;
-        public HookQueryProvider(IQueryProvider baseQueryProvider, IQueryStore queryStore)
+        private readonly TestData _qs;
+        private readonly DescriptionHolder _description;
+        public HookQueryProvider(IQueryProvider baseQueryProvider, TestData qs, DescriptionHolder description)
         {
             _baseQueryProvider = baseQueryProvider;
-            _queryStore = queryStore;
+            _qs = qs;
+            _description = description;
         }
 
         /// <summary>Constructs an <see cref="T:System.Linq.IQueryable" /> object that can evaluate the query represented by a specified expression tree.</summary>
@@ -29,7 +32,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             var bs = _baseQueryProvider.CreateQuery<TElement>(expression);
-            return new HookQueryable<TElement>(bs, _queryStore);
+            return new HookQueryable<TElement>(bs, _qs, _description);
         }
 
         /// <summary>Executes the query represented by a specified expression tree.</summary>
@@ -47,15 +50,20 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         public TResult Execute<TResult>(Expression expression)
         {
             var hash = expression.CalculateHash();
-            if (_queryStore.State == QueryMemorizeState.Put)
+            if (_qs is Collecting data)
             {
                 var value = _baseQueryProvider.Execute<TResult>(expression);
-                _queryStore.Put(hash,value);
+                data.Put(hash, value, _description.Description);
                 return value;
             }
 
-            var val = _queryStore.Get<TResult>(hash);
-            return val;
+            if (_qs is Providing testData)
+            {
+                var val = testData.Get<TResult>(hash);
+                return val;
+            }
+
+            throw new TestDataTypeMismatchException();
         }
     }
 }

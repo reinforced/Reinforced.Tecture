@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Services
         internal ServiceManager ServiceManager;
         internal ChannelMultiplexer ChannelMultiplexer;
         internal Pipeline Pipeline;
-        internal IQueryStore QueryStore;
+        internal TestData TestData;
         #endregion
 
         /// <summary>

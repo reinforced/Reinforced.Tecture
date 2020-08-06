@@ -46,10 +46,28 @@ namespace Reinforced.Tecture.Entry
             return tb;
         }
 
-        public static TectureBuilder WithQueryStore(this TectureBuilder tb, IQueryStore qs)
+        /// <summary>
+        /// Captures test data into selected test data source
+        /// </summary>
+        /// <param name="tb">Tecture builder</param>
+        /// <param name="qs">Test data source instance</param>
+        /// <returns>Fluent</returns>
+        public static TectureBuilder CaptureTestData(this TectureBuilder tb, Collecting qs)
         {
-            tb._queryStore = qs;
-            qs.State = QueryMemorizeState.Put;
+            tb.TestData = qs;
+            return tb;
+        }
+
+        /// <summary>
+        /// Uses specified test data source for queries
+        /// </summary>
+        /// <param name="tb">Tecture builder</param>
+        /// <param name="qs">Test data source instance</param>
+        /// <returns>Fluent</returns>
+        public static TectureBuilder WithTestData(this TectureBuilder tb, Providing qs)
+        {
+            tb.TestData = qs;
+            
             return tb;
         }
 

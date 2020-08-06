@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Stories;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-namespace Reinforced.Tecture.Testing
+namespace Reinforced.Tecture.Testing.Generator
 {
     partial class CSharpTestGenerator
     {

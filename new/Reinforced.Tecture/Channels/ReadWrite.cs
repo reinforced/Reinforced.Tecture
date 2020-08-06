@@ -15,20 +15,20 @@ namespace Reinforced.Tecture.Channels
     internal struct SRead<TChannel> : IQueryMultiplexer, Read<TChannel> where TChannel : CanQuery
     {
         private readonly ChannelMultiplexer _mx;
-        private readonly IQueryStore _qs;
-        public SRead(ChannelMultiplexer mx, IQueryStore qs)
+        private readonly TestData _qs;
+        public SRead(ChannelMultiplexer mx, TestData qs)
         {
             _mx = mx;
             _qs = qs;
         }
 
-        public TFeature GetFeature<TFeature>(out IQueryStore qs) where TFeature : QueryFeature
+        public TFeature GetFeature<TFeature>(out TestData qs) where TFeature : QueryFeature
         {
             qs = _qs;
             return _mx.GetQueryFeature<TChannel, TFeature>();
         }
 
-        public IQueryStore GetStore()
+        public TestData GetStore()
         {
             return _qs;
         }

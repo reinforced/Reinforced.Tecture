@@ -45,6 +45,14 @@ namespace Reinforced.Tecture.Testing.Query
         private readonly MemoryStream _ms;
         private readonly BinaryWriter _bw;
 
+        /// <summary>
+        /// Binary writer containing sensible data to hash
+        /// </summary>
+        public BinaryWriter Writer
+        {
+            get { return _bw; }
+        }
+
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         public Hashbox()
         {
@@ -58,12 +66,37 @@ namespace Reinforced.Tecture.Testing.Query
             _refs[o] = _ms.Position;
         }
 
+        private bool IsSimple(Type t)
+        {
+            if (t == typeof(string)) return true;
+            if (t == typeof(bool) || t==typeof(bool?)) return true;
+            if (t == typeof(DateTime) || t == typeof(DateTime?)) return true;
+            if (t == typeof(Guid) || t == typeof(Guid?)) return true;
+            if (NumericTypes.Contains(t)) return true;
+            if (t.GetTypeInfo().IsEnum) return true;
+            return false;
+        }
+
+        private void PutObjet(object o)
+        {
+            var t = o.GetType();
+            var props = t.GetRuntimeProperties();
+            foreach (var pi in props)
+            {
+                if (IsSimple(pi.PropertyType))
+                {
+                    Put(pi.GetValue(o));
+                }
+            }
+        }
+
         public void Put(object o)
         {
             if (o == null) { PutNull(); return; }
             
             if (o is DateTime dt) { Put(dt.GetHashCode()); return; }
             if (o is string s) { Put(s); return; }
+            if (o is bool b) { Put(b); return; }
             if (o is Guid g) { Put(g); return; }
 
             var to = o.GetType();
@@ -85,11 +118,16 @@ namespace Reinforced.Tecture.Testing.Query
                 }
             }
 
+            if (o is IHasheable h)
+            {
+                h.WriteData(this);
+            }
+            else
+            {
+                PutObjet(o);
+            }
 
             Remember(o);
-
-
-            
         }
 
         public string Compute()
@@ -142,6 +180,7 @@ namespace Reinforced.Tecture.Testing.Query
         public void Put(float value) { _bw.Write(value); }
         public void Put(double value) { _bw.Write(value); }
         public void Put(decimal value) { _bw.Write(value); }
+        public void Put(bool value) { _bw.Write(value); }
         public void Put(byte? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
         public void Put(sbyte? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
         public void Put(short? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
@@ -153,6 +192,7 @@ namespace Reinforced.Tecture.Testing.Query
         public void Put(float? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
         public void Put(double? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
         public void Put(decimal? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+        public void Put(bool? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
 
         public void PutNull()
         {

@@ -11,12 +11,12 @@ namespace Reinforced.Tecture.Testing
     /// </summary>
     public class TestingEnvironment
     {
-        private readonly IQueryStore _queryStore;
+        private readonly TestData _testData;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-        public TestingEnvironment(IQueryStore queryStore)
+        public TestingEnvironment(TestData testData)
         {
-            _queryStore = queryStore;
+            _testData = testData;
         }
 
         internal readonly ChannelMultiplexer _mx = new ChannelMultiplexer();
@@ -35,7 +35,7 @@ namespace Reinforced.Tecture.Testing
         public StorageStory TellStory(Action<ITectureNoSave> code)
         {
             var tcd = new TestingCommandsDispatcher(_mx);
-            var tec = new Entry.Tecture(_mx, tcd, true, _queryStore, null, OnException);
+            var tec = new Entry.Tecture(_mx, tcd, true, _testData, null, OnException);
             code(tec);
             tcd.BeginStory();
             tec.Save();
@@ -50,7 +50,7 @@ namespace Reinforced.Tecture.Testing
         public async Task<StorageStory> TellStoryAsync(Func<ITectureNoSave,Task> code)
         {
             var tcd = new TestingCommandsDispatcher(_mx);
-            var tec = new Entry.Tecture(_mx, tcd, true, _queryStore, null, OnException);
+            var tec = new Entry.Tecture(_mx, tcd, true, _testData, null, OnException);
             await code(tec);
             tcd.BeginStory();
             await tec.SaveAsync();

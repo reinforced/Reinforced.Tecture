@@ -1,15 +1,55 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing
 {
-    public static class TypeInitConstructor
+    internal static class TypeInitConstructor
     {
+        private static IEnumerable<SyntaxNodeOrToken> ComaSeparated(IEnumerable<TypeSyntax> types)
+        {
+            bool first = true;
+            foreach (var typeSyntax in types)
+            {
+                if (!first) yield return Token(SyntaxKind.CommaToken);
+                else first = false;
+                yield return typeSyntax;
+            }
+        }
+        public static TypeSyntax TypeName(this Type t, HashSet<string> usings = null)
+        {
+            if (!t.IsGenericType && !t.IsGenericTypeDefinition)
+            {
+                if (usings != null)
+                {
+                    if (!usings.Contains(t.Namespace)) usings.Add(t.Namespace);
+                }
+                return IdentifierName(t.Name);
+            }
+
+            if (t.IsGenericType)
+            {
+                var def = t.GetGenericTypeDefinition();
+                var args = t.GetGenericArguments();
+                var gn = GenericName(Identifier(def.Name));
+                TypeArgumentListSyntax argsSyntax;
+                argsSyntax = TypeArgumentList(
+                    args.Length == 1 
+                        ? SingletonSeparatedList(args[0].TypeName(usings)) 
+                        : SeparatedList<TypeSyntax>(ComaSeparated(args.Select(v => v.TypeName(usings))))
+                        );
+
+                return gn.WithTypeArgumentList(argsSyntax);
+            }
+
+            throw new Exception("Cannot generaty type name");
+        }
+
         #region Helpers
 
         /// <summary>
@@ -19,6 +59,7 @@ namespace Reinforced.Tecture.Testing
         /// <returns>True if type is enumerable (incl. array type). False otherwise.</returns>
         public static bool IsEnumerable(this Type t)
         {
+            if (t == typeof(string)) return false;
             if (t.IsArray) return true;
             if (typeof(IEnumerable).IsAssignableFrom(t)) return true;
             if (t.IsGenericType)
