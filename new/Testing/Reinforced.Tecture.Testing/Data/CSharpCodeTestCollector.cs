@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Reinforced.Tecture.Testing.Data.Format;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
 using Reinforced.Tecture.Testing.Generator;
@@ -43,10 +44,10 @@ namespace Reinforced.Tecture.Testing.Data
 
         private int _counter = 0;
 
-        private List<MethodDeclarationSyntax> _entryMethods = new List<MethodDeclarationSyntax>();
-        private List<YieldStatementSyntax> _yields = new List<YieldStatementSyntax>();
+        private readonly List<MethodDeclarationSyntax> _entryMethods = new List<MethodDeclarationSyntax>();
+        private readonly List<YieldStatementSyntax> _yields = new List<YieldStatementSyntax>();
 
-        public CompilationUnitSyntax Proceed(string className,string ns)
+        private CompilationUnitSyntax Proceed(string className, string ns)
         {
             while (_records.Count > 0)
             {
@@ -59,6 +60,9 @@ namespace Reinforced.Tecture.Testing.Data
             }
 
             var cds = ProduceCompilationUnit(className, ns);
+            CodeFormatter cf = new CodeFormatter();
+            cds = cf.Visit(cds) as CompilationUnitSyntax;
+            
             return cds;
         }
 
@@ -89,20 +93,27 @@ namespace Reinforced.Tecture.Testing.Data
 
         private ClassDeclarationSyntax ProduceClass(string className)
         {
-            var clas = ClassDeclaration(className)
-                .WithBaseList(
-                    BaseList(SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(CSharpTestDataProvider))))));
+            var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(CSharpTestDataProvider))));
+            var clas = ClassDeclaration(Identifier(TriviaList(), className, TriviaList(Space)))
+                .WithBaseList(BaseList(bs).WithColonToken(
+                    Token(
+                        TriviaList(),
+                        SyntaxKind.ColonToken,
+                        TriviaList(
+                            Space))));
+            var str = clas.ToFullString();
+
             var ov = OverrideGetRecorde();
             var methods = _entryMethods.Union(new[] { ov });
-            clas = clas.WithMembers(List<MemberDeclarationSyntax>(methods.ToArray())).Format();
+            clas = clas.WithMembers(List<MemberDeclarationSyntax>(methods.ToArray()));
             return clas;
         }
 
         private CompilationUnitSyntax ProduceCompilationUnit(string className, string ns)
         {
-            var usings = List<UsingDirectiveSyntax>(_usings.OrderBy(x=>x.Length).Select(x => UsingDirective(IdentifierName(x)).FormatUsing()));
+            var usings = List<UsingDirectiveSyntax>(_usings.OrderBy(x => x.Length).Select(x => UsingDirective(IdentifierName(x))));
             var clas = ProduceClass(className);
-            var n = NamespaceDeclaration(ParseName(ns)).Format().AddMembers(clas);
+            var n = NamespaceDeclaration(ParseName(ns)).AddMembers(clas);
 
             return CompilationUnit()
                 .WithUsings(usings)
@@ -151,7 +162,7 @@ namespace Reinforced.Tecture.Testing.Data
 
             var body = PayloadConstructionMethodBody(tdr);
 
-            return md.WithBody(Block(SeparatedList<StatementSyntax>(body)).Format())
+            return md.WithBody(Block(SeparatedList<StatementSyntax>(body)))
                 .WithModifiers(
                     TokenList(
                         new[]
@@ -208,5 +219,9 @@ namespace Reinforced.Tecture.Testing.Data
 
         #endregion
 
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public void Dispose()
+        {
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Reinforced.Tecture.Testing.Query
         
     }
 
-    public interface Collecting : TestData
+    public interface Collecting : TestData, IDisposable
     {
         void Put<T>(string hash, T result,string description = null);
     }

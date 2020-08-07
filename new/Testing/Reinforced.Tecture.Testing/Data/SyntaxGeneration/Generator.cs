@@ -100,7 +100,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                             VariableDeclarator(Identifier(varName)
                             ).WithInitializer(EqualsValueClause(result)));
 
-                        var k = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var"))
+                        var k = LocalDeclarationStatement(VariableDeclaration(Var)
                             .WithVariables(vbl));
                         context.Declarations.Enqueue(k);
                     }
@@ -169,6 +169,13 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             }
         }
 
+        private static TypeSyntax Var
+        {
+            get
+            {
+                return IdentifierName("var");
+            }
+        }
         private ExpressionSyntax New(object instance, GenerationContext context)
         {
             if (instance == null)
@@ -202,7 +209,8 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     VariableDeclarator(Identifier(instanceName)
                     ).WithInitializer(EqualsValueClause(result)));
 
-                var assign = LocalDeclarationStatement(VariableDeclaration(IdentifierName("var")).WithVariables(vbl));
+                var assign = LocalDeclarationStatement(VariableDeclaration(Var)
+                    .WithVariables(vbl));
 
                 context.Declarations.Enqueue(assign);
 

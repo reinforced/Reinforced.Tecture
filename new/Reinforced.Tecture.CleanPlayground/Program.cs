@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.CleanPlayground.Models;
+using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Data;
+using Reinforced.Tecture.Testing.Data.Format;
 
 namespace Reinforced.Tecture.CleanPlayground
 {
@@ -26,8 +30,6 @@ namespace Reinforced.Tecture.CleanPlayground
         {
             CSharpCodeTestCollector tc = new CSharpCodeTestCollector();
 
-            tc.Put("adfasdf", (10, 20));
-
             var u1 = new User()
             {
                 BirthDate = DateTime.Now,
@@ -47,8 +49,12 @@ namespace Reinforced.Tecture.CleanPlayground
             tc.Put("adsfasdfasdf", new User[] { u1 });//<<<
 
             var clas = tc.Proceed("SampleTestData", "Reinforced.Tecture.CleanPlayground");
-            var result = clas.NormalizeWhitespace(elasticTrivia: true).ToFullString();
-            Console.ReadLine();
+            CodeFormatter cf = new CodeFormatter();
+            var formatted = cf.Visit(clas) as CompilationUnitSyntax;
+            File.WriteAllText("W:\\test.cs", formatted.ToFullString());
+
+
+
         }
     }
 }
