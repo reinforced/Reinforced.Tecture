@@ -6,6 +6,24 @@ using System.Text;
 
 namespace Reinforced.Tecture.Testing.Data
 {
+    public class Result
+    {
+        internal Result() { }
+        internal bool IsSet = false;
+        internal object Value;
+
+        public void Set(object value)
+        {
+            Value = value;
+            IsSet = true;
+        }
+
+        public void Unset()
+        {
+            Value = null;
+            IsSet = false;
+        }
+    }
     public class Hijack
     {
         public class TypeHijack<T>
@@ -45,10 +63,18 @@ namespace Reinforced.Tecture.Testing.Data
 
 
         private readonly Dictionary<Type,Dictionary<PropertyInfo,Delegate>> _hijacks = new Dictionary<Type, Dictionary<PropertyInfo, Delegate>>();
-
+        private readonly List<Action<object,PropertyInfo,Result>> _allHooks = new List<Action<object, PropertyInfo, Result>>();
         internal object GetValue(object instance, PropertyInfo prop)
         {
             if (instance == null) return null;
+            
+            var result = new Result();
+            foreach (var allHook in _allHooks)
+            {
+                allHook(instance, prop, result);
+                if (result.IsSet) return result.Value;
+            }
+
             var t = prop.DeclaringType;
             if (_hijacks.ContainsKey(t))
             {
@@ -66,5 +92,11 @@ namespace Reinforced.Tecture.Testing.Data
         {
             return new TypeHijack<T>(this);
         }
+        public Hijack ForAll(Action<object, PropertyInfo, Result> hijack)
+        {
+            _allHooks.Add(hijack);
+            return this;
+        }
+
     }
 }

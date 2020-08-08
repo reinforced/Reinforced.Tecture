@@ -9,15 +9,18 @@ namespace Reinforced.Tecture.Testing.Query
         
     }
 
-    public interface Collecting : TestData, IDisposable
+    public interface Collecting : TestData
     {
         void Put<T>(string hash, T result,string description = null);
+
+        void Finish();
     }
 
     public interface Providing : TestData
     {
         T Get<T>(string hash);
     }
+
 
 
     public class TestDataTypeMismatchException : Exception

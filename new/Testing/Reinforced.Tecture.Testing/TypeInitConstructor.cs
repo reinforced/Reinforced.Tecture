@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,12 +12,12 @@ namespace Reinforced.Tecture.Testing
 {
     public static class TypeInitConstructor
     {
-        private static IEnumerable<SyntaxNodeOrToken> ComaSeparated(IEnumerable<TypeSyntax> types)
+        public static IEnumerable<SyntaxNodeOrToken> ComaSeparated<T>(this IEnumerable<T> types) where T : SyntaxNode
         {
             bool first = true;
             foreach (var typeSyntax in types)
             {
-                if (!first) yield return Token(SyntaxKind.CommaToken);
+                if (!first) yield return Token(SyntaxKind.CommaToken).WithTrailingTrivia(Space);
                 else first = false;
                 yield return typeSyntax;
             }
@@ -32,6 +33,7 @@ namespace Reinforced.Tecture.Testing
 
             return typeName;
         }
+
         public static TypeSyntax TypeName(this Type t, HashSet<string> usings = null)
         {
             if (!t.IsGenericType && !t.IsGenericTypeDefinition)
@@ -41,6 +43,13 @@ namespace Reinforced.Tecture.Testing
                     if (!usings.Contains(t.Namespace)) usings.Add(t.Namespace);
                 }
                 return IdentifierName(t.Name);
+            }
+
+            if (t.IsTuple())
+            {
+                var gens = t.GetGenericArguments();
+                var typeNames = SeparatedList<TupleElementSyntax>(gens.Select(x => TupleElement(x.TypeName(usings))).ComaSeparated());
+                return TupleType(typeNames);
             }
 
             if (t.IsGenericType)
@@ -62,6 +71,11 @@ namespace Reinforced.Tecture.Testing
         }
 
         #region Helpers
+
+        public static bool IsTuple(this Type t)
+        {
+            return t.FullName != null && t.FullName.StartsWith("System.ValueTuple`");
+        }
 
         /// <summary>
         ///     Determines if type is enumerable regardless of generic spec
@@ -90,7 +104,7 @@ namespace Reinforced.Tecture.Testing
             if (t.IsGenericType)
             {
                 var tg = t.GetGenericTypeDefinition();
-                if (tg.GetInterfaces().Any(x => x.Name=="IEnumerable`1")) return t.GetGenericArguments()[0];
+                if (tg.GetInterfaces().Any(x => x.Name == "IEnumerable`1")) return t.GetGenericArguments()[0];
             }
 
             return typeof(object);
@@ -159,7 +173,7 @@ namespace Reinforced.Tecture.Testing
         }
         #endregion
 
-        public static bool IsInlineable(Type t)
+        public static bool IsInlineable(this Type t)
         {
             if (t.IsNullable())
             {
@@ -172,9 +186,23 @@ namespace Reinforced.Tecture.Testing
             if (t == typeof(Guid)) return true;
             if (t == typeof(DateTime)) return true;
             if (t.IsEnum) return true;
+            if (t.IsTuple())
+            {
+                return t.GetGenericArguments().All(IsInlineable);
+            }
             return false;
         }
 
+        public static IEnumerable<(Type, object)> GetTupleValues(this object o)
+        {
+            var props = o.GetType().GetFields(BindingFlags.NonPublic |
+                                    BindingFlags.Instance |
+                                    BindingFlags.Public |
+                                    BindingFlags.Static |
+                                    BindingFlags.FlattenHierarchy)
+                .Where(x => x.Name.StartsWith("Item"));
+            return props.Select(x => (x.FieldType, x.GetValue(o)));
+        }
 
         public static ExpressionSyntax Construct(Type t, object value)
         {
@@ -199,6 +227,12 @@ namespace Reinforced.Tecture.Testing
 
             if (t == typeof(Guid)) return GuidValue((Guid)value);
             if (t == typeof(DateTime)) return DateTimeValue((DateTime)value);
+
+            if (t.IsTuple() && IsInlineable(t))
+            {
+                var values = value.GetTupleValues().Select(x => Argument(Construct(x.Item1, x.Item2))).ComaSeparated();
+                return TupleExpression(SeparatedList<ArgumentSyntax>(values));
+            }
 
             throw new Exception($"Add type constructor for {t}");
         }

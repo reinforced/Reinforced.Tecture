@@ -21,8 +21,8 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             TypeRef = typeRef;
             _defaultInstance = Activator.CreateInstance(typeRef);
             var properties = typeRef.GetProperties(BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.Instance);
-            InlineProperties = properties.Where(x => TypeInitConstructor.IsInlineable(x.PropertyType)).ToArray();
-            CollectionProperties = properties.Where(x => x.PropertyType.IsEnumerable()).ToArray();
+            InlineProperties = properties.Where(x => x.PropertyType.IsInlineable()).ToArray();
+            CollectionProperties = properties.Where(x => x.PropertyType.IsEnumerable() || (x.PropertyType.IsTuple() && !x.PropertyType.IsInlineable())).ToArray();
             NestedProperties =
                 properties.Where(x => !InlineProperties.Contains(x) && !CollectionProperties.Contains(x)).ToArray();
 
@@ -65,7 +65,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             {
                 var value = _tgr.Hijack.GetValue(instance, propertyInfo);
                 var defValue = propertyInfo.GetValue(_defaultInstance);
-                if (defValue != value)
+                if (!Equals(defValue, value))
                 {
                     var pName = propertyInfo.Name;
                     var ae = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
@@ -89,7 +89,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             {
                 var value = _tgr.Hijack.GetValue(instance, propertyInfo);
                 var defValue = propertyInfo.GetValue(_defaultInstance);
-                if (defValue != value)
+                if (!Equals(defValue, value))
                 {
                     var generator = _tgr.GetGeneratorFor(propertyInfo.PropertyType);
                     if (!context.DefinedVariable(value, out string varName))
@@ -121,6 +121,29 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             }
         }
 
+        internal static ExpressionSyntax ProceedTuple(TypeGeneratorRepository tgr, IEnumerable<(Type, object)> values,
+            GenerationContext context)
+        {
+            var variables = new List<ExpressionSyntax>();
+            foreach (var item in values)
+            {
+                if (item.Item1.IsInlineable() || item.Item2 == null)
+                {
+                    variables.Add(TypeInitConstructor.Construct(item.Item1, item.Item2));
+                }
+                else
+                {
+                    var generator = tgr.GetGeneratorFor(item.Item1);
+                    generator.New(item.Item2, context);
+                    var name = context.GetDefined(item.Item2);
+                    variables.Add(IdentifierName(name));
+                }
+            }
+
+            var collectionStrategy = tgr.CollectionStrategies.GetTupleStrategy(values.Select(x => x.Item1));
+            
+            return collectionStrategy.Generate(variables, context.Usings);
+        }
         internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context)
         {
             var generator = tgr.GetGeneratorFor(collectionType.ElementType());
@@ -150,7 +173,11 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 var defValue = propertyInfo.GetValue(_defaultInstance);
                 if (defValue != value)
                 {
-                    var collCreation = ProceedCollection(_tgr, propertyInfo.PropertyType, value, context);
+
+                    var collCreation =
+                        propertyInfo.PropertyType.IsTuple()
+                            ? ProceedTuple(_tgr, value.GetTupleValues(), context)
+                            : ProceedCollection(_tgr, propertyInfo.PropertyType, value, context);
 
                     var ma = MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
@@ -185,6 +212,12 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             if (t.IsEnumerable())
             {
                 return ProceedCollection(_tgr, t, (IEnumerable)instance, context);
+            }
+
+            if (t.IsTuple())
+            {
+                if (t.IsInlineable()) return TypeInitConstructor.Construct(t, instance);
+                return ProceedTuple(_tgr, instance.GetTupleValues(), context);
             }
 
 

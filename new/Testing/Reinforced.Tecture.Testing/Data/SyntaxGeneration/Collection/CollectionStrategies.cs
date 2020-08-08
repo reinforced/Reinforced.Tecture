@@ -27,6 +27,11 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection
             }
         }
 
+        public virtual ICollectionCreationStrategy GetTupleStrategy(IEnumerable<Type> tupleTypes)
+        {
+            return new TupleCreationStrategy();
+        }
+             
         public virtual ICollectionCreationStrategy GetStrategy(Type collectionType)
         {
             if (collectionType.IsArray)

@@ -126,12 +126,12 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visitor
         private static readonly MethodInfo _relationMethod;
         static StrokeVisitor()
         {
-            _joinedAsMethod = typeof(StrokeJoins).GetMethod("JoinedAs");
-            _aliasMethod = typeof(StrokeJoins).GetMethod("Alias");
-            _joinOverrideMethod = typeof(StrokeJoins).GetMethod("Overjoin");
+            _joinedAsMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.JoinedAs));
+            _aliasMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.Alias));
+            _joinOverrideMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.Overjoin));
 
-            _everyMethod = typeof(StrokeRelations).GetMethod("Every");
-            _relationMethod = typeof(StrokeRelations).GetMethod("Relation");
+            _everyMethod = typeof(StrokeRelations).GetMethod(nameof(StrokeRelations.Every));
+            _relationMethod = typeof(StrokeRelations).GetMethod(nameof(StrokeRelations.Relation));
         }
 
     }

@@ -28,7 +28,12 @@ namespace Reinforced.Tecture.CleanPlayground
 
         static void Main(string[] args)
         {
-            CSharpCodeTestCollector tc = new CSharpCodeTestCollector();
+            (int, int) v = (10, 10);
+            var t = v.GetType();
+
+            var tc =
+                CSharpTestCollectorSetup.Create("SampleTestData", typeof(Program).Namespace)
+                    .ToFile("W:\\test.cs");
 
             var u1 = new User()
             {
@@ -47,14 +52,8 @@ namespace Reinforced.Tecture.CleanPlayground
             u1.Orders = new List<Order>() { o };
 
             tc.Put("adsfasdfasdf", new User[] { u1 });//<<<
-
-            var clas = tc.Proceed("SampleTestData", "Reinforced.Tecture.CleanPlayground");
-            CodeFormatter cf = new CodeFormatter();
-            var formatted = cf.Visit(clas) as CompilationUnitSyntax;
-            File.WriteAllText("W:\\test.cs", formatted.ToFullString());
-
-
-
+            tc.Put("asfasdfasd", (10, 20));
+            tc.Finish();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -22,13 +23,15 @@ namespace Reinforced.Tecture.Testing.Data
         private readonly Hijack _hijack = new Hijack();
 
         private readonly TypeGeneratorRepository _tgr;
-        public CSharpCodeTestCollector(Action<Hijack> configureHijaks = null, CollectionStrategies collectionStrategies = null)
+        private readonly CSharpTestCollectorSetup _cfg;
+        internal CSharpCodeTestCollector(CSharpTestCollectorSetup cfg)
         {
+            _cfg = cfg;
             _usings.Add(typeof(IEnumerable).Namespace);
             _usings.Add(typeof(ITestDataRecord<>).Namespace);
-            var collectionStrategies1 = collectionStrategies ?? new CollectionStrategies();
+            var collectionStrategies1 = cfg._collectionStrategies ?? new CollectionStrategies();
             _tgr = new TypeGeneratorRepository(_hijack, collectionStrategies1);
-            configureHijaks?.Invoke(_hijack);
+            cfg._hijackConfig?.Invoke(_hijack);
         }
 
         public void Put<T>(string hash, T result, string description = null)
@@ -40,6 +43,18 @@ namespace Reinforced.Tecture.Testing.Data
                 Description = description,
                 Hash = hash
             });
+        }
+
+        public void Finish()
+        {
+            var cds = Proceed(_cfg._className, _cfg._namespace);
+            var oldFile = Path.ChangeExtension(_cfg._filenameToUpdate, "old");
+            if (File.Exists(oldFile)) File.Delete(oldFile);
+            if (File.Exists(_cfg._filenameToUpdate))
+            {
+                File.Move(_cfg._filenameToUpdate, oldFile);
+            }
+            File.WriteAllText(_cfg._filenameToUpdate, cds.ToFullString());
         }
 
         private int _counter = 0;
@@ -62,7 +77,7 @@ namespace Reinforced.Tecture.Testing.Data
             var cds = ProduceCompilationUnit(className, ns);
             CodeFormatter cf = new CodeFormatter();
             cds = cf.Visit(cds) as CompilationUnitSyntax;
-            
+
             return cds;
         }
 
@@ -122,7 +137,6 @@ namespace Reinforced.Tecture.Testing.Data
 
         #endregion
 
-
         #region Generation routine
 
         private string CurrentMethodName
@@ -179,17 +193,20 @@ namespace Reinforced.Tecture.Testing.Data
                 yield break;
             }
 
-            if (TypeInitConstructor.IsInlineable(tdr.RecordType))
+            if (tdr.RecordType.IsInlineable())
             {
                 yield return ReturnStatement(TypeInitConstructor.Construct(tdr.RecordType, tdr.Payload));
                 yield break;
             }
             var ctx = new GenerationContext(_usings);
 
-            if (tdr.RecordType.IsEnumerable())
+            if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
             {
-                var coll = SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload,
-                    ctx);
+                var coll =
+                    tdr.RecordType.IsTuple()
+                        ? SyntaxGeneration.Generator.ProceedTuple(_tgr, tdr.Payload.GetTupleValues(), ctx)
+                    : SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload, ctx);
+
                 foreach (var s in ctx.Declarations)
                 {
                     yield return s;
@@ -219,9 +236,5 @@ namespace Reinforced.Tecture.Testing.Data
 
         #endregion
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public void Dispose()
-        {
-        }
     }
 }
