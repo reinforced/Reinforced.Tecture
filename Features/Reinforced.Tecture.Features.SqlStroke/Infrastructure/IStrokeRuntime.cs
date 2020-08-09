@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.LanguageInterpolate;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.SchemaInterpolate;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
@@ -10,6 +12,10 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
         IEnumerable<Type> ServingTypes { get; }
 
         Type Channel { get; }
+
+        LanguageInterpolator GetLanguageInterpolator();
+
+        SchemaInterpolator GetSchemaInterpolator();
 
     }
 }

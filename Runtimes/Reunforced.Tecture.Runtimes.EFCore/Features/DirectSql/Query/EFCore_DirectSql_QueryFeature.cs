@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Query
 
         private readonly LazyDisposable<DbContext> _dbContext;
 
-        public EFCore_DirectSql_QueryFeature(LazyDisposable<DbContext> context, Type channel) : base(new EfCoreStokeRuntime(context, channel))
+        public EFCore_DirectSql_QueryFeature(LazyDisposable<DbContext> context, Type channel, InterpolatorFactory fac) : base(new EfCoreStokeRuntime(context, channel, fac))
         {
             _dbContext = context;
         }

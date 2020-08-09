@@ -6,6 +6,7 @@ using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Entry.Builders;
 using Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command;
 using Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Query;
+using Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Runtime;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql
 {
@@ -16,9 +17,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql
         /// </summary>
         /// <param name="conf">Channel configuration</param>
         /// <param name="context">Lazy disposable wrapper around DbContext</param>
-        public static void UseEfCoreDirectSqlCommand(this ChannelConfiguration<CommandChannel<Tecture.Features.SqlStroke.Command>> conf, LazyDisposable<DbContext> context)
+        public static void UseEfCoreDirectSqlCommand(this ChannelConfiguration<CommandChannel<Tecture.Features.SqlStroke.Command>> conf, LazyDisposable<DbContext> context, InterpolatorFactory fac = null)
         {
-            conf.ForCommand(new EFCore_DirectSql_CommandFeature(context, conf.Channel), new DirectSqlSaver(context));
+            if (fac == null) fac = new InterpolatorFactory();
+            var fe = new EFCore_DirectSql_CommandFeature(context, conf.Channel, fac);
+            conf.ForCommand(fe, new DirectSqlSaver(fe));
         }
 
         /// <summary>
@@ -26,9 +29,10 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql
         /// </summary>
         /// <param name="conf">Channel configuration</param>
         /// <param name="context">Lazy disposable wrapper around DbContext</param>
-        public static void UseEfCoreDirectSqlQuery(this ChannelConfiguration<QueryChannel<Tecture.Features.SqlStroke.Query>> conf, LazyDisposable<DbContext> context)
+        public static void UseEfCoreDirectSqlQuery(this ChannelConfiguration<QueryChannel<Tecture.Features.SqlStroke.Query>> conf, LazyDisposable<DbContext> context, InterpolatorFactory fac = null)
         {
-            conf.ForQuery(new EFCore_DirectSql_QueryFeature(context, conf.Channel));
+            if (fac == null) fac = new InterpolatorFactory();
+            conf.ForQuery(new EFCore_DirectSql_QueryFeature(context, conf.Channel, fac));
         }
 
         /// <summary>
@@ -36,10 +40,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql
         /// </summary>
         /// <param name="conf">Channel configuration</param>
         /// <param name="context">Lazy disposable wrapper around DbContext</param>
-        public static void UseEfCoreDirectSql(this ChannelConfiguration<CommandQueryChannel<Tecture.Features.SqlStroke.Command,Tecture.Features.SqlStroke.Query>> conf, LazyDisposable<DbContext> context)
+        public static void UseEfCoreDirectSql(this ChannelConfiguration<CommandQueryChannel<Tecture.Features.SqlStroke.Command, Tecture.Features.SqlStroke.Query>> conf, LazyDisposable<DbContext> context, InterpolatorFactory fac = null)
         {
-            conf.UseEfCoreDirectSqlCommand(context);
-            conf.UseEfCoreDirectSqlQuery(context);
+            if (fac == null) fac = new InterpolatorFactory();
+            conf.UseEfCoreDirectSqlCommand(context, fac);
+            conf.UseEfCoreDirectSqlQuery(context, fac);
         }
     }
 }

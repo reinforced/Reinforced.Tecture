@@ -22,6 +22,11 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
             _strokeExpression = strokeExpression;
         }
 
+        internal LambdaExpression StrokeExpression
+        {
+            get { return _strokeExpression; }
+        }
+
         private readonly LambdaExpression _strokeExpression;
 
         private InterpolatedQuery _preview;
@@ -46,14 +51,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
             }
         }
 
-        internal InterpolatedQuery Compile(IMapper mapper, LanguageInterpolator li, SchemaInterpolator schi)
-        {
-            return _strokeExpression
-                .ParseStroke()
-                .VisitStroke(mapper.IsEntityType)
-                .LanguageInterpolateStroke(li)
-                .SchemaInterpolateStroke(schi);
-        }
+        
 
         public override string ToString()
         {

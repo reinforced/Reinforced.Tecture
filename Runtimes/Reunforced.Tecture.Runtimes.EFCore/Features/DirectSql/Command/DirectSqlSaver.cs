@@ -9,28 +9,28 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
 {
     class DirectSqlSaver : Saver<Sql>
     {
-        private readonly LazyDisposable<DbContext> _context;
+        private readonly EFCore_DirectSql_CommandFeature _feature;
 
-        public DirectSqlSaver(LazyDisposable<DbContext> context)
+        public DirectSqlSaver(EFCore_DirectSql_CommandFeature feature)
         {
-            _context = context;
-            _runner = new DirectSqlRunner(context);
+            _feature = feature;
+            _runner = new DirectSqlRunner(feature);
         }
 
         protected override void Save()
         {
-            _context.Value.SaveChanges();
+            _feature.Context.Value.SaveChanges();
         }
 
         protected override Task SaveAsync()
         {
-            return _context.Value.SaveChangesAsync();
+            return _feature.Context.Value.SaveChangesAsync();
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public override void Dispose()
         {
-            _context.Dispose();
+            _feature.Dispose();
             _runner.Dispose();
         }
 

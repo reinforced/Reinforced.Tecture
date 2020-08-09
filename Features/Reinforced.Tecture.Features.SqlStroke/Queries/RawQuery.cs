@@ -27,11 +27,13 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
 
         public IEnumerable<T> As<T>() where T : class
         {
+
             if (_qs != null)
             {
                 if (_qs is Collecting data)
                 {
-                    var r = _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
+                    var compiled = _runtime.Compile(Sql);
+                    var r = _runtime.DoQuery<T>(compiled.Query, compiled.Parameters);
                     data.Put(Sql.Hash(), r, _description);
                     return r;
                 }
@@ -41,16 +43,20 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
                     return testData.Get<IEnumerable<T>>(Sql.Hash());
                 }
             }
-            return _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
+
+            var cq = _runtime.Compile(Sql);
+            return _runtime.DoQuery<T>(cq.Query, cq.Parameters);
         }
 
         public async Task<IEnumerable<T>> AsAsync<T>() where T : class
         {
+
             if (_qs != null)
             {
                 if (_qs is Collecting data)
                 {
-                    var r = await _runtime.DoQueryAsync<T>(Sql.Command, Sql.Parameters);
+                    var compiled = _runtime.Compile(Sql);
+                    var r = await _runtime.DoQueryAsync<T>(compiled.Query, compiled.Parameters);
                     data.Put(Sql.Hash(), r, _description);
                     return r;
                 }
@@ -60,7 +66,10 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
                     return testData.Get<IEnumerable<T>>(Sql.Hash());
                 }
             }
-            return await _runtime.DoQueryAsync<T>(Sql.Command, Sql.Parameters).ConfigureAwait(false);
+
+            var cq = _runtime.Compile(Sql);
+            return await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters).ConfigureAwait(false);
+
         }
     }
 }

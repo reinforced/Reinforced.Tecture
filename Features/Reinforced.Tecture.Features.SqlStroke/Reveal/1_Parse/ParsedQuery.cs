@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Reinforced.Tecture.Features.SqlStroke.Reveal.Data;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Visit;
 
 // ReSharper disable once CheckNamespace

@@ -8,11 +8,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
 {
     class DirectSqlRunner : CommandRunner<Sql>, IDisposable
     {
-        private readonly LazyDisposable<DbContext> _context;
+        private readonly EFCore_DirectSql_CommandFeature _feature;
 
-        public DirectSqlRunner(LazyDisposable<DbContext> context)
+        public DirectSqlRunner(EFCore_DirectSql_CommandFeature feature)
         {
-            _context = context;
+            _feature = feature;
         }
 
         /// <summary>
@@ -21,7 +21,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
         /// <param name="cmd">Side effect</param>
         protected override void Run(Sql cmd)
         {
-            _context.Value.Database.ExecuteSqlRaw(cmd.Command, cmd.Parameters);
+            var query = _feature.Compile(cmd);
+            _feature.Context.Value.Database.ExecuteSqlRaw(query.Query, query.Parameters);
         }
 
         /// <summary>
@@ -31,13 +32,14 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
         /// <returns>Side effect</returns>
         protected override Task RunAsync(Sql cmd)
         {
-            return _context.Value.Database.ExecuteSqlRawAsync(cmd.Command, cmd.Parameters);
+            var query = _feature.Compile(cmd);
+            return _feature.Context.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            _context.Dispose();
+            _feature.Dispose();
         }
     }
 }

@@ -12,8 +12,9 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
         {
             using (var hb = new Hashbox())
             {
-                hb.Put(cmd.Command);
-                foreach (var param in cmd.Parameters)
+                var prev = cmd.Preview;
+                hb.Put(prev.Query);
+                foreach (var param in prev.Parameters)
                 {
                     hb.Put(param);
                 }

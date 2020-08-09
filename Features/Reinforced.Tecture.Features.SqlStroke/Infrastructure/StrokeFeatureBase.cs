@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Parse;
+using Reinforced.Tecture.Features.SqlStroke.Reveal;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.LanguageInterpolate;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.SchemaInterpolate;
+using Reinforced.Tecture.Features.SqlStroke.Reveal.Visit;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
@@ -39,6 +44,17 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
         {
             _runtime = runtime;
         }
+
+        public InterpolatedQuery Compile(Sql command)
+        {
+            return command.StrokeExpression
+                .ParseStroke()
+                .VisitStroke(_runtime.Mapper.IsEntityType)
+                .LanguageInterpolateStroke(_runtime.GetLanguageInterpolator())
+                .SchemaInterpolateStroke(_runtime.GetSchemaInterpolator());
+
+        }
+
         internal HashSet<Type> Types
         {
             get { return _types ?? (_types = new HashSet<Type>(_runtime.ServingTypes)); }
