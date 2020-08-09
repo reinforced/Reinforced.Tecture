@@ -25,7 +25,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
 
         private readonly Query _runtime;
 
-        public IEnumerable<T> As<T>()
+        public IEnumerable<T> As<T>() where T : class
         {
             if (_qs != null)
             {
@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             return _runtime.DoQuery<T>(Sql.Command, Sql.Parameters);
         }
 
-        public async Task<IEnumerable<T>> AsAsync<T>()
+        public async Task<IEnumerable<T>> AsAsync<T>() where T : class
         {
             if (_qs != null)
             {

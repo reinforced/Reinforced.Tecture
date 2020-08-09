@@ -54,11 +54,11 @@ namespace Reinforced.Tecture.Testing.Stories
         public void ToText(TextWriter tw, bool codes = true)
         {
             int i = 1;
-            foreach (var effect in _commands)
+            foreach (var cmd in _commands)
             {
-                if (effect is Save)
+                if (cmd is Save)
                 {
-                    effect.Describe(tw);
+                    cmd.Describe(tw);
                     tw.WriteLine();
                     tw.WriteLine();
                     i = 1;
@@ -68,10 +68,10 @@ namespace Reinforced.Tecture.Testing.Stories
                     tw.Write($"{i}. ");
                     if (codes)
                     {
-                        var ca = effect.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
+                        var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
                         if (ca != null) tw.Write($"[{ca.Code}] ");
                     }
-                    effect.Describe(tw);
+                    cmd.Describe(tw);
                     tw.WriteLine();
                     tw.WriteLine();
                     i++;

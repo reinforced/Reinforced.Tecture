@@ -105,11 +105,11 @@ namespace Reinforced.Tecture.Entry
                 _serviceManager.OnFinally();
                 _finallyActions.Run();
 
-                if (tran != null) tran.Commit();
+                tran?.Commit();
             }
             catch (Exception ex)
             {
-                if (_exceptionHandler != null) _exceptionHandler(ex);
+                _exceptionHandler?.Invoke(ex);
                 thrown = ex;
             }
             finally
@@ -147,12 +147,12 @@ namespace Reinforced.Tecture.Entry
                 await _serviceManager.OnFinallyAsync();
                 await _finallyActions.RunAsync();
 
-                if (tran != null) tran.Commit();
+                tran?.Commit();
                 //CleanupAfterSave();
             }
             catch (Exception ex)
             {
-                if (_exceptionHandler != null) _exceptionHandler(ex);
+                _exceptionHandler?.Invoke(ex);
                 thrown = ex;
             }
             finally
@@ -173,6 +173,10 @@ namespace Reinforced.Tecture.Entry
         public void Dispose()
         {
             _mx.Dispose();
+            if (_testData is Collecting t)
+            {
+                t.Finish();
+            }
         }
     }
 }

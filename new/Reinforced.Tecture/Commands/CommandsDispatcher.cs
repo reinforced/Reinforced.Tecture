@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Commands
         }
 
 
-        public virtual void Dispatch(Pipeline queue, ActionsQueue postSave)
+        public void Dispatch(Pipeline queue, ActionsQueue postSave)
         {
             do
             {
@@ -47,7 +47,7 @@ namespace Reinforced.Tecture.Commands
             } while (queue.HasEffects);
         }
 
-        public virtual async Task DispatchAsync(Pipeline queue, ActionsQueue postSave)
+        public async Task DispatchAsync(Pipeline queue, ActionsQueue postSave)
         {
             do
             {
@@ -60,18 +60,18 @@ namespace Reinforced.Tecture.Commands
             } while (queue.HasEffects);
         }
 
-        protected virtual CommandRunner GetRunner(CommandBase command)
+        private CommandRunner GetRunner(CommandBase command)
         {
             return _mx.GetRunner(command);
         }
 
-        protected virtual void RunCommand(CommandBase command)
+        private void RunCommand(CommandBase command)
         {
             var r = GetRunner(command);
             r.RunInternal(command);
         }
 
-        protected virtual Task RunCommandAsync(CommandBase command)
+        private Task RunCommandAsync(CommandBase command)
         {
             var r = GetRunner(command);
             return r.RunInternalAsync(command);

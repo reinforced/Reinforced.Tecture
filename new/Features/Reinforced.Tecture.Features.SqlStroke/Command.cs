@@ -6,14 +6,9 @@ namespace Reinforced.Tecture.Features.SqlStroke
 {
     public class Command : StrokeFeatureBase, Produces<Sql>
     {
+        public virtual void Dispose() { }
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public virtual void Dispose()
-        {
-
-        }
-
-        public Command(IStrokeRuntime runtime) : base(runtime)
+        protected Command(IStrokeRuntime runtime) : base(runtime)
         {
         }
     }

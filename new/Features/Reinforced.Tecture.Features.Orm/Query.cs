@@ -7,7 +7,7 @@ namespace Reinforced.Tecture.Features.Orm
 {
     public abstract class Query : QueryFeature
     {
-        internal IQueryable<T> GetSet<T>()
+        internal IQueryable<T> GetSet<T>() where T : class
         {
             if (TestData != null)
             {
@@ -21,7 +21,7 @@ namespace Reinforced.Tecture.Features.Orm
         /// </summary>
         /// <typeparam name="T">Entity</typeparam>
         /// <returns>Queryable set of entities</returns>
-        protected abstract IQueryable<T> Set<T>();
+        protected abstract IQueryable<T> Set<T>() where T:class;
 
         /// <summary>
         /// Obtains query stats

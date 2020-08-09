@@ -6,6 +6,7 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Testing.Stories
 {
+    [CommandCode("END")]
     public sealed class End : CommandBase
     {
         internal End() { }

@@ -1,11 +1,12 @@
-﻿using Reinforced.Tecture.Channels;
+﻿using System;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 
 namespace Reinforced.Tecture.Entry.Builders
 {
     public interface ChannelConfiguration<out TChannel> where TChannel : Channel
     {
-
+        Type Channel { get; }
     }
 
 
@@ -13,6 +14,11 @@ namespace Reinforced.Tecture.Entry.Builders
     {
         public ChannelConfigurationImpl(ChannelMultiplexer multiplexer) : base(multiplexer, typeof(TChannel))
         {
+        }
+
+        public Type Channel
+        {
+            get { return typeof(TChannel); }
         }
     }
 }

@@ -15,9 +15,6 @@ namespace Reinforced.Tecture.Features.Orm
         protected abstract bool IsSubject(Type t);
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public void Dispose()
-        {
-            
-        }
+        public abstract void Dispose();
     }
 }

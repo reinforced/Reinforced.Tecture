@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Savers
     /// <summary>
     /// Base for all savers
     /// </summary>
-    public abstract class SaverBase
+    public abstract class SaverBase : IDisposable
     {
         internal void SaveInternal()
         {
@@ -44,5 +44,7 @@ namespace Reinforced.Tecture.Savers
 
         protected abstract Task SaveAsync();
 
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public abstract void Dispose();
     }
 }

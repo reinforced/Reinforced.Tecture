@@ -211,7 +211,13 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            //todo
+            foreach (var value in _saversPerChannels.Values)
+            {
+                foreach (var saverBase in value)
+                {
+                    saverBase.Dispose();
+                }
+            }
         }
     }
 }

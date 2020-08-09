@@ -6,6 +6,11 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
     public interface IMapper
     {
+        /// <summary>
+        /// Returns table name by entity type
+        /// </summary>
+        /// <param name="t">Entity type</param>
+        /// <returns>Table name</returns>
         string GetTableName(Type t);
 
         /// <summary>
@@ -23,6 +28,16 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
         /// <returns>True if this type represents entity in current context</returns>
         bool IsEntityType(Type t);
 
+        /// <summary>
+        /// Retrieves set of source column - target column pairs for joining tables
+        ///
+        /// Example: sourceEntity = User, sourceColumn = Order
+        /// Expected result: {From = OrderId,           To = Id}
+        ///                     ^- from "users" table    ^- from "orders" table
+        /// </summary>
+        /// <param name="sourceEntity">Type of source entity</param>
+        /// <param name="sourceColumn">PropertyInfo pointing to column with nested aggregate</param>
+        /// <returns>Set of associations</returns>
         IEnumerable<AssociationFields> GetJoinKeys(Type sourceEntity, PropertyInfo sourceColumn);
     }
 

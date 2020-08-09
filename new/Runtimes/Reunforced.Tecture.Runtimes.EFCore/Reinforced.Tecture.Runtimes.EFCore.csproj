@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.6" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj" />
     <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>

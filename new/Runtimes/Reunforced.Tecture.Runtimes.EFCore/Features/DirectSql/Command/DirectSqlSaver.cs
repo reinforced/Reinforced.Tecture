@@ -1,27 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
 using Reinforced.Tecture.Savers;
 
-namespace Reunforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
+namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
 {
     class DirectSqlSaver : Saver<Sql>
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        private readonly LazyDisposable<DbContext> _context;
+
+        public DirectSqlSaver(LazyDisposable<DbContext> context)
+        {
+            _context = context;
+            _runner = new DirectSqlRunner(context);
+        }
+
         protected override void Save()
         {
-            throw new NotImplementedException();
+            _context.Value.SaveChanges();
         }
 
         protected override Task SaveAsync()
         {
-            throw new NotImplementedException();
+            return _context.Value.SaveChangesAsync();
         }
+
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public override void Dispose()
+        {
+            _context.Dispose();
+            _runner.Dispose();
+        }
+
+        private readonly DirectSqlRunner _runner;
 
         /// <summary>
         /// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
@@ -30,7 +43,7 @@ namespace Reunforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
         /// <returns>Command runner</returns>
         protected override CommandRunner<Sql> GetRunner1(Sql command)
         {
-            throw new NotImplementedException();
+            return _runner;
         }
     }
 }
