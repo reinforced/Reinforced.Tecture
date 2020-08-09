@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Services
     {
         private readonly Pipeline _pipeline;
         private readonly ChannelMultiplexer _mux;
-        private readonly TestData _testData;
+        private readonly TestDataHolder _testData;
         class ServiceContextEntry
         {
             public Type[] ContextTypes { get; set; }
@@ -87,7 +87,7 @@ namespace Reinforced.Tecture.Services
             sd.Add(entry);
         }
 
-        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, TestData testData)
+        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, TestDataHolder testData)
         {
             _pipeline = pipeline;
             _mux = mux;

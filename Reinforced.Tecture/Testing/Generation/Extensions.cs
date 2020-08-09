@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Testing.Generation
         /// Adds check description to be used
         /// </summary>
         /// <param name="description"></param>
-        public void Add(CheckDescription<TCommand> description)
+        public void Enlist(CheckDescription<TCommand> description)
         {
             if (!_checksForCommands.ContainsKey(typeof(TCommand)))
             {

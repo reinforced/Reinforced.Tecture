@@ -10,11 +10,18 @@ namespace Reinforced.Tecture.Entry
     /// Builder that configures and assembles Tecture instance
     /// </summary>
     public class TectureBuilder
-    {        
-        internal readonly ChannelMultiplexer _mx = new ChannelMultiplexer();
+    {
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        public TectureBuilder()
+        {
+            TestDataHolder = new TestDataHolder();
+            _mx = new ChannelMultiplexer(TestDataHolder);
+        }
+
+        internal readonly TestDataHolder TestDataHolder;
+        internal readonly ChannelMultiplexer _mx;
         internal ITransactionManager _transactionManager;
         internal Action<Exception> _excHandler = null;
-        internal TestData TestData;
 
         /// <summary>
         /// Produces Tecture instance
@@ -25,8 +32,8 @@ namespace Reinforced.Tecture.Entry
             return new Tecture(
                 _mx,
                 new CommandsDispatcher(_mx),
+                TestDataHolder,
                 false, 
-                TestData,
                 _transactionManager, 
                 exceptionHandler: _excHandler);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Savers;
 using Reinforced.Tecture.Testing.Query;
@@ -9,6 +10,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
     //string key here is full type name
     class ChannelMultiplexer : IDisposable
     {
+        private readonly TestDataHolder _testDataHolder;
 
         private readonly Dictionary<string, Type> _namesCache = new Dictionary<string, Type>();
         private void Known(Type channel)
@@ -131,9 +133,15 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
         private readonly Dictionary<string, HashSet<SaverBase>> _saversPerChannels = new Dictionary<string, HashSet<SaverBase>>();
 
+        public ChannelMultiplexer(TestDataHolder testDataHolder)
+        {
+            _testDataHolder = testDataHolder;
+        }
+
         internal void RegisterSaver(Type channelType, SaverBase saver)
         {
             Known(channelType);
+            saver.TestDataHolder = _testDataHolder;
             
             if (!_saversPerChannels.ContainsKey(channelType.FullName))
             {
@@ -162,25 +170,32 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             }
         }
 
-        internal CommandRunner GetRunner(CommandBase command)
+        private SaverBase GetSaverWithCommand(Type commandType, string channelId)
         {
-            var commandType = command.GetType();
-            var channelId = command.ChannelId;
             if (!_saversPerCommandsChannel.ContainsKey(channelId))
             {
                 throw new TectureException($"Trying to obtain runner for command '{commandType.Name}' didn't suceed: unknown channel {channelId}");
             }
 
             var savers = _saversPerCommandsChannel[channelId];
-            
+
 
             if (!savers.ContainsKey(commandType))
             {
+                var bt = commandType.GetTypeInfo().BaseType;
+                if (bt != null)
+                {
+                    return GetSaverWithCommand(bt, channelId);
+                }
                 throw new TectureException($"Trying to obtain runner for command '{commandType.Name}' didn't suceed: no saver serving such command registered for {channelId}");
             }
 
-            var saver = savers[commandType];
+            return savers[commandType];
 
+        }
+        internal CommandRunner GetRunner(CommandBase command)
+        {
+            var saver = GetSaverWithCommand(command.GetType(), command.ChannelId);
             return saver.GetRunner(command);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Reinforced.Tecture.Features.Orm.Commands.Add;
+using Reinforced.Tecture.Features.Orm.PrimaryKey;
 using Reinforced.Tecture.Playground.Entities;
 using Reinforced.Tecture.Services;
 
@@ -8,11 +9,11 @@ namespace Reinforced.Tecture.Playground.Services
     {
         private Orders() { }
 
-        public Order CreateTestOrder()
+        public Expected<int> CreateTestOrder()
         {
             var o = new Order { Name = "Test"};
-            To<Db>().Add(o);
-            return o;
+            
+            return To<Db>().Add(o).Expect();
         }
     }
 }

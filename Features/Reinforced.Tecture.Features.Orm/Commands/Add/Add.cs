@@ -2,6 +2,7 @@
 using System.IO;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Add
 {
@@ -9,13 +10,14 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
     /// Command for entity addition
     /// </summary>
     [CommandCode("ADD")]
-    public sealed class Add : CommandBase
+    public class Add : CommandBase
     {
         internal Add() { }
         public object Entity { get; internal set; }
 
         public Type EntityType { get; internal set; }
 
+        internal object PkData { get; set; }
 
         /// <summary>
         /// Describes actions that are being performed within command
@@ -33,6 +35,15 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
 
 
             if (Debug != null) tw.Write($" ({Debug.Location})");
+        }
+    }
+
+    public class Add<T> : Add, IAddition<T>
+    {
+        internal Add(T entity)
+        {
+            Entity = entity;
+            EntityType = typeof(T);
         }
     }
 }

@@ -1,35 +1,47 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq.Expressions;
 using Reinforced.Tecture.CleanPlayground.Models;
-using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Data;
-using Reinforced.Tecture.Testing.Data.Format;
 
 namespace Reinforced.Tecture.CleanPlayground
 {
-    interface IO<out T> { }
-
-    class D<T> : IO<T>
+    interface IPrimaryKey { }
+    interface IPrimaryKey<T> : IPrimaryKey
     {
-
+        Expression<Func<T>> Key { get; }
     }
 
-    class Base { }
+    class Entity : IPrimaryKey<int>
+    {
+        public int Id { get; set; }
 
-    class Exact : Base { }
+        public Expression<Func<int>> Key
+        {
+            get { return () => Id; }
+        }
+    }
 
+    interface AddTest<out T> where T:IPrimaryKey
+    {
+        
+    }
+
+    static class Ext
+    {
+        public static void Do<T1>(this AddTest<IPrimaryKey<T1>> val)
+        {
+
+        }
+    }
     class Program
     {
 
         static void Main(string[] args)
         {
-            (int, int) v = (10, 10);
-            var t = v.GetType();
+            AddTest<Entity> g = null;
+
+            g.Do();
 
             var tc =
                 CSharpTestCollectorSetup.Create("SampleTestData", typeof(Program).Namespace)

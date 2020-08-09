@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Query;
 
@@ -27,14 +28,14 @@ namespace Reinforced.Tecture.Savers
 
         internal abstract CommandRunner GetRunner(CommandBase cb);
 
-        internal TestData TestDataInstance;
+        internal TestDataHolder TestDataHolder;
 
         /// <summary>
         /// Reference to test data
         /// </summary>
         protected TestData TestData
         {
-            get { return TestDataInstance; }
+            get { return TestDataHolder.Instance; }
         }
 
         /// <summary>

@@ -20,6 +20,6 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Delete
 
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<Commands.Delete.Delete> c) => c.Add(new DeleteCheckDescription());
+        public static void Basic(this ChecksConfigurator<Commands.Delete.Delete> c) => c.Enlist(new DeleteCheckDescription());
     }
 }

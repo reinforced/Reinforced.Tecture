@@ -4,14 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="Commands\Derelate\DerelateExtensions.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>DerelateExtensions.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-
+ 
   <ItemGroup>
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>
@@ -37,6 +30,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UpdateExtensions.cs</LastGenOutput>
     </None>
+    <None Update="PrimaryKey\PrimaryKey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PrimaryKey.cs</LastGenOutput>
+    </None>
+	
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +66,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>UpdateExtensions.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="PrimaryKey\PrimaryKey.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrimaryKey.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

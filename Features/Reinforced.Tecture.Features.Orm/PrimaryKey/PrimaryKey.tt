@@ -1,0 +1,89 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#
+	var implementationsCount = 8;
+#>
+
+using System;
+using System.Linq.Expressions;
+using Reinforced.Tecture.Features.Orm.Commands.Add;
+
+namespace Reinforced.Tecture.Features.Orm.PrimaryKey
+{
+
+<# for (int i=1;i<implementationsCount;i++) {	#> 
+
+		public interface IPrimaryKey<<#= GenericsStroke(i+1) #>>
+		{
+			(<#= KeyParameters(i+1) #>) PrimaryKey { get; }
+		}		
+
+		public class Expectation<<#= GenericsStroke(i+1) #>>
+        {
+            private readonly IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> _addition;
+            internal Expectation(IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> addition)
+            {
+                _addition = addition;
+            }
+            public (<#= GenericsStroke(i+1) #>) Key
+            {
+                get { return _addition.Key(); }
+            }
+        }
+<# } #>
+
+	public static partial class Extensions
+	{
+<# for (int i=1;i<implementationsCount;i++) {	#> 
+		public static (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(this IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> cmd)
+        {
+            if (cmd is Add c)
+            {
+                if (c.PkData == null)
+                    throw new TectureOrmFeatureException($"Primary key of just added {c.EntityType} could not be obtained. Addition did not run yet");
+
+                return ((<#= GenericsStroke(i+1) #>))c.PkData;
+            }
+
+            throw new TectureOrmFeatureException($".Key call is valid only on add command");
+        }
+
+        public static Expectation<<#= GenericsStroke(i+1) #>> Expect<<#= GenericsStroke(i+1) #>>(this IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> cmd)
+        {
+            return new Expectation<<#= GenericsStroke(i+1) #>>(cmd);
+        }
+<# } #>
+	}
+}
+
+<#+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+
+	private string KeyParameters(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("Expression<Func<T"); sb.Append(i+1);
+			sb.Append(">>");
+		}
+		return sb.ToString();
+    }
+#>

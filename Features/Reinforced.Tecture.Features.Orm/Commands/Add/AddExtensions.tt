@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
     <# for (int j=0;j<i;j++) {	#>         
-        public static Add Add<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
+        public static Add<T<#= j+1 #>> Add<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
         {
             return AddCore(c, entity);
         }       

@@ -1,4 +1,6 @@
-﻿using Reinforced.Tecture.Channels;
+﻿using System.Data;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Add
 {
@@ -7,7 +9,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
     /// </summary>
     public static partial class Extensions
     {
-        private static Add AddCore(Write<CommandChannel<Command>> channel, object entity)
+        private static Add<T> AddCore<T>(Write<CommandChannel<Command>> channel, T entity)
         {
             if (entity==null)
                 throw new TectureOrmFeatureException("Entity going to be added cannot be null");
@@ -18,11 +20,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
             if (!fe.IsSubjectCore(t)) 
                 throw new TectureOrmFeatureException($"Entity {entity} is not a subject for addition in corresponding service");
 
-            return channel.Put(new Add()
-            {
-                EntityType = t,
-                Entity = entity
-            });
+            return channel.Put(new Add<T>(entity));
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Fluent</returns>
         public static TectureBuilder CaptureTestData(this TectureBuilder tb, Collecting qs)
         {
-            tb.TestData = qs;
+            tb.TestDataHolder.Instance = qs;
             return tb;
         }
 
@@ -66,7 +66,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Fluent</returns>
         public static TectureBuilder WithTestData(this TectureBuilder tb, Providing qs)
         {
-            tb.TestData = qs;
+            tb.TestDataHolder.Instance = qs;
             
             return tb;
         }

@@ -20,7 +20,6 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Runners
         protected override void Run(Add cmd)
         {
             
-            
         }
 
         /// <summary>

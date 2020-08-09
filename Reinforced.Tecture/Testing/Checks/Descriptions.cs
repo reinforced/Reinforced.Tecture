@@ -11,9 +11,9 @@ namespace Reinforced.Tecture.Testing.Checks
 {
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<CommandBase> c) => c.Add(new AnnotationCheckDescription());
-        public static void Basic(this ChecksConfigurator<Comment> c) => c.Add(new CommentCheckDescription());
-        public static void Basic(this ChecksConfigurator<Save> c) => c.Add(new SaveCheckDescription());
+        public static void Basic(this ChecksConfigurator<CommandBase> c) => c.Enlist(new AnnotationCheckDescription());
+        public static void Basic(this ChecksConfigurator<Comment> c) => c.Enlist(new CommentCheckDescription());
+        public static void Basic(this ChecksConfigurator<Save> c) => c.Enlist(new SaveCheckDescription());
 
         public static void Basics(this TestGenerator tg)
         {

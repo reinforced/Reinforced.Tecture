@@ -21,13 +21,13 @@ namespace Reinforced.Tecture.Entry
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
-        private readonly TestData _testData;
+        private readonly TestDataHolder _testData;
 
         public Tecture(
             ChannelMultiplexer mx,
             CommandsDispatcher dispatcher,
+            TestDataHolder testData,
             bool debugMode = false,
-            TestData testData = null,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
@@ -67,7 +67,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Data source instance</returns>
         public Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(_mx, _testData);
+            return new SRead<T>(_mx, _testData.Instance);
         }
 
 

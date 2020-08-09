@@ -19,6 +19,6 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<Commands.Add.Add> c) => c.Add(new AddCheckDescription());
+        public static void Basic(this ChecksConfigurator<Commands.Add.Add> c) => c.Enlist(new AddCheckDescription());
     }
 }
