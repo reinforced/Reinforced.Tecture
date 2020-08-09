@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>  
+
+  <ItemGroup>
+    <None Update="Entry\Builders\ForCommand.tt">
+      <LastGenOutput>ForCommand.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Savers\Savers.tt">
+      <LastGenOutput>Savers.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Channels\Generated.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Generated.cs</LastGenOutput>
+    </None>
+    <None Update="Services\StorageServiceClass.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StorageServiceClass.cs</LastGenOutput>
+    </None>
+    <None Update="Testing\Builders\ForCommand.tt">
+      <LastGenOutput>ForCommand.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+	 <None Update="Services\TectureServices.tt">
+      <LastGenOutput>TectureServices.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Services\ServiceLocators.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceLocators.cs</LastGenOutput>
+    </None>	
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>    
+    <Compile Update="Channels\Generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Generated.tt</DependentUpon>
+    </Compile>    
+    <Compile Update="Entry\Builders\ForCommand.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ForCommand.tt</DependentUpon>
+    </Compile>    
+    <Compile Update="Savers\Savers.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Savers.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Services\StorageServiceClass.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StorageServiceClass.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Testing\Builders\ForCommand.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ForCommand.tt</DependentUpon>
+    </Compile>
+	<Compile Update="Services\ServiceLocators.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServiceLocators.tt</DependentUpon>
+    </Compile>
+	<Compile Update="Services\TectureServices.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TectureServices.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="NETStandard.Library" Version="2.0.3" />
+  </ItemGroup>
+
+</Project>

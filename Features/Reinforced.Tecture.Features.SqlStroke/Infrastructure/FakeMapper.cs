@@ -30,6 +30,9 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
         /// <returns>True if this type represents entity in current context</returns>
         public bool IsEntityType(Type t)
         {
+            if (t.IsValueType) return false;
+            if (t.IsEnum) return false;
+            if (t.Namespace == "System" || t.Namespace.StartsWith("System.")) return false;
             return true;
         }
 

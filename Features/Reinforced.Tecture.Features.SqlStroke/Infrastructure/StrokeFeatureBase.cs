@@ -7,8 +7,8 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
     public class StrokeFeatureBase
     {
         private readonly IStrokeRuntime _runtime;
-        
-        internal bool CheckTypes(Type[] usedTypes)
+
+        private bool CheckTypes(Type[] usedTypes)
         {
             foreach (var usedType in usedTypes)
             {
@@ -39,12 +39,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
         {
             _runtime = runtime;
         }
-
-        protected LanguageInterpolator GetQueryFiller()
-        {
-            return new LanguageInterpolator();
-        }
-
         internal HashSet<Type> Types
         {
             get { return _types ?? (_types = new HashSet<Type>(_runtime.ServingTypes)); }
