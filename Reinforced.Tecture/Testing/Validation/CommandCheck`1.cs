@@ -13,7 +13,6 @@ namespace Reinforced.Tecture.Testing.Validation
         void Assert(CommandBase command);
         bool IsValid(CommandBase command);
         Type CommandType { get; }
-        TestingEnvironment Environment { get; set; }
 
     }
 
@@ -60,7 +59,6 @@ namespace Reinforced.Tecture.Testing.Validation
             get { return typeof(TCommand); }
         }
 
-        public TestingEnvironment Environment { get; set; }
 
         public bool IsValid(CommandBase command)
         {

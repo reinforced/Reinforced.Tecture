@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Reinforced.Tecture.Features.Orm.Queries;
 using Reinforced.Tecture.Features.Orm.Queries.Fake;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Features.Orm
 {
@@ -9,9 +10,9 @@ namespace Reinforced.Tecture.Features.Orm
     {
         internal IQueryable<T> GetSet<T>() where T : class
         {
-            if (TestData != null)
+            if (Aux.IsHashRequired)
             {
-                return new HookQueryable<T>(Set<T>(), TestData, null);
+                return new HookQueryable<T>(Set<T>(), Aux, null);
             }
             return Set<T>();
         }
@@ -21,7 +22,7 @@ namespace Reinforced.Tecture.Features.Orm
         /// </summary>
         /// <typeparam name="T">Entity</typeparam>
         /// <returns>Queryable set of entities</returns>
-        protected abstract IQueryable<T> Set<T>() where T:class;
+        protected abstract IQueryable<T> Set<T>() where T : class;
 
         /// <summary>
         /// Obtains query stats
@@ -31,11 +32,11 @@ namespace Reinforced.Tecture.Features.Orm
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public abstract void Dispose();
 
-        internal void SetQueryStore(TestData qs)
+        internal void SetAux(Auxilary qs)
         {
-            if (TestData == null) TestData = qs;
+            if (Aux == null) Aux = qs;
         }
 
-        protected TestData TestData { get; private set; }
+        protected Auxilary Aux { get; private set; }
     }
 }

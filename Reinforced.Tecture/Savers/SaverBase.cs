@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Savers
 {
@@ -33,7 +34,7 @@ namespace Reinforced.Tecture.Savers
         /// <summary>
         /// Reference to test data
         /// </summary>
-        protected TestData TestData
+        protected ITestDataSource TestData
         {
             get { return TestDataHolder.Instance; }
         }

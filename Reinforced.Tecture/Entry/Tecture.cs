@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Services;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Testing;
+using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Transactions;
 using Reinforced.Tecture.Transactions.Testing;
 
@@ -22,7 +24,7 @@ namespace Reinforced.Tecture.Entry
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
         private readonly TestDataHolder _testData;
-
+        private readonly AuxilaryContainer _aux;
         public Tecture(
             ChannelMultiplexer mx,
             CommandsDispatcher dispatcher,
@@ -33,10 +35,11 @@ namespace Reinforced.Tecture.Entry
         {
             _mx = mx;
             _testData = testData;
+            _aux = new AuxilaryContainer(testData);
             _pipeline = new Pipeline(debugMode, _actions, _finallyActions);
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
-            _serviceManager = new ServiceManager(_pipeline, _mx, _testData);
+            _serviceManager = new ServiceManager(_pipeline, _mx, _aux);
             _dispatcher = dispatcher;
         }
 
@@ -67,9 +70,29 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Data source instance</returns>
         public Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(_mx, _testData.Instance);
+            return new SRead<T>(_mx, _aux);
         }
 
+        private TraceCollector _tc = null;
+        /// <summary>
+        /// Begins trace collection
+        /// </summary>
+        public void BeginTrace()
+        {
+            _tc = new TraceCollector();
+            _pipeline.TraceCollector = _tc;
+            _aux.TraceCollector = _tc;
+
+        }
+
+        /// <summary>
+        /// Finishes trace collection
+        /// </summary>
+        /// <returns></returns>
+        public Trace EndTrace()
+        {
+            throw new NotImplementedException();
+        }
 
         private IOuterTransaction ObtainTransaction(
             OuterTransactionMode transaction,
@@ -173,10 +196,6 @@ namespace Reinforced.Tecture.Entry
         public void Dispose()
         {
             _mx.Dispose();
-            if (_testData is Collecting t)
-            {
-                t.Finish();
-            }
         }
     }
 }

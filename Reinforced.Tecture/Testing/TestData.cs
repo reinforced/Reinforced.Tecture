@@ -1,22 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Reinforced.Tecture.Testing.Query
+namespace Reinforced.Tecture.Testing
 {
-    public interface TestData
-    {
-        
-    }
-
-    public interface Collecting : TestData
-    {
-        void Put<T>(string hash, T result,string description = null);
-
-        void Finish();
-    }
-
-    public interface Providing : TestData
+    public interface ITestDataSource
     {
         T Get<T>(string hash);
     }

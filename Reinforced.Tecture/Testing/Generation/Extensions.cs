@@ -5,12 +5,13 @@ using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Stories;
 using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Testing.Generation
 {
     public static class Extensions
     {
-        public static string GenerateTest<TGenerator>(this StorageStory s, Action<TGenerator> configure) where TGenerator : TestGenerator, new()
+        public static string GenerateTest<TGenerator>(this Trace s, Action<TGenerator> configure) where TGenerator : TestGenerator, new()
         {
             var gen = new TGenerator();
             configure(gen);

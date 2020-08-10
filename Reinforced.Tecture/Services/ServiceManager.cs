@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Services
 {
@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Services
     {
         private readonly Pipeline _pipeline;
         private readonly ChannelMultiplexer _mux;
-        private readonly TestDataHolder _testData;
+        private readonly AuxilaryContainer _aux;
         class ServiceContextEntry
         {
             public Type[] ContextTypes { get; set; }
@@ -87,11 +87,11 @@ namespace Reinforced.Tecture.Services
             sd.Add(entry);
         }
 
-        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, TestDataHolder testData)
+        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, AuxilaryContainer aux)
         {
             _pipeline = pipeline;
             _mux = mux;
-            _testData = testData;
+            _aux = aux;
         }
 
         private TService CreateService<TService>() where TService : TectureServiceBase
@@ -100,7 +100,7 @@ namespace Reinforced.Tecture.Services
             service.ServiceManager = this;
             service.Pipeline = _pipeline;
             service.ChannelMultiplexer = _mux;
-            service.TestData = _testData;
+            service.Aux = _aux;
             return service;
         }
 

@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 {
@@ -11,15 +12,15 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
     {
         private readonly IQueryable<T> _baseQueryable;
         private readonly IQueryProvider _provider;
-        private readonly TestData _qs;
-        internal DescriptionHolder _description;
+        private readonly Auxilary _aux;
+        internal readonly DescriptionHolder _description;
 
-        public HookQueryable(IQueryable<T> baseQueryable, TestData qs, DescriptionHolder descrHolder)
+        public HookQueryable(IQueryable<T> baseQueryable, Auxilary aux, DescriptionHolder descrHolder)
         {
             _baseQueryable = baseQueryable;
-            _qs = qs;
+            _aux = aux;
             _description = descrHolder ?? new DescriptionHolder();
-            _provider = new HookQueryProvider(baseQueryable.Provider, _qs, _description);
+            _provider = new HookQueryProvider(baseQueryable.Provider, _aux, _description);
         }
 
 
@@ -27,33 +28,61 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            var hash = Expression.CalculateHash();
-            if (_qs is Collecting data)
-                return new HookEnumerator<T>(hash, _baseQueryable.GetEnumerator(), data, _description);
-
-            if (_qs is Providing testData)
+            var hash = _aux.IsHashRequired ? Expression.CalculateHash() : string.Empty;
+            IEnumerator<T> result;
+            if (_aux.IsEvaluationNeeded)
             {
-                var result = testData.Get<T[]>(hash);
-                return new ArrayEnumerator<T>(result);
+                result = _baseQueryable.GetEnumerator();
             }
-            throw new TestDataTypeMismatchException();
+            else
+            {
+                result = _aux.Get<IEnumerable<T>>(hash).GetEnumerator();
+            }
+
+            if (_aux.IsTracingNeeded)
+            {
+                if (_aux.IsEvaluationNeeded)
+                {
+                    result = new HookEnumerator<T>(hash, result, _aux, _description);
+                }
+                else
+                {
+                    _aux.Query(hash, "test data", _description.Description);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>Returns an enumerator that iterates through a collection.</summary>
         /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            var hash = Expression.CalculateHash();
-            if (_qs is Collecting data)
-                return new HookEnumerator(hash, ((IEnumerable)_baseQueryable).GetEnumerator(), data, _description);
 
-            if (_qs is Providing testData)
+            var hash = _aux.IsHashRequired ? Expression.CalculateHash() : string.Empty;
+            IEnumerator result;
+            if (_aux.IsEvaluationNeeded)
             {
-                var result = testData.Get<Array>(hash);
-                return result.GetEnumerator();
+                result = _baseQueryable.GetEnumerator();
+            }
+            else
+            {
+                result = _aux.Get<IEnumerable>(hash).GetEnumerator();
             }
 
-            throw new TestDataTypeMismatchException();
+            if (_aux.IsTracingNeeded)
+            {
+                if (_aux.IsEvaluationNeeded)
+                {
+                    result = new HookEnumerator(hash, result, _aux, _description);
+                }
+                else
+                {
+                    _aux.Query(hash, "test data", _description.Description);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see cref="T:System.Linq.IQueryable" /> is executed.</summary>

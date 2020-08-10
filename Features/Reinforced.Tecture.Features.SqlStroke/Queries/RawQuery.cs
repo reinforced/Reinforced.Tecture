@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Queries
 {
@@ -12,13 +13,13 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
     {
         internal string _description = string.Empty;
 
-        private readonly TestData _qs;
+        private readonly Auxilary _a;
 
-        internal RawQuery(Sql sql, Query runtime, TestData qs)
+        internal RawQuery(Sql sql, Query runtime, Auxilary a)
         {
             Sql = sql;
             _runtime = runtime;
-            _qs = qs;
+            _a = a;
         }
 
         public Sql Sql { get; }
@@ -27,49 +28,59 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
 
         public IEnumerable<T> As<T>() where T : class
         {
-
-            if (_qs != null)
+            IEnumerable<T> result;
+            if (_a.IsEvaluationNeeded)
             {
-                if (_qs is Collecting data)
-                {
-                    var compiled = _runtime.Compile(Sql);
-                    var r = _runtime.DoQuery<T>(compiled.Query, compiled.Parameters);
-                    data.Put(Sql.Hash(), r, _description);
-                    return r;
-                }
+                var cq = _runtime.Compile(Sql);
+                result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
+            }
+            else
+            {
+                result = _a.Get<IEnumerable<T>>(Sql.Hash());
+            }
 
-                if (_qs is Providing testData)
+            if (_a.IsTracingNeeded)
+            {
+                if (_a.IsEvaluationNeeded)
                 {
-                    return testData.Get<IEnumerable<T>>(Sql.Hash());
+                    _a.Query(Sql.Hash(), result, _description);
+                }
+                else
+                {
+                    _a.Query(Sql.Hash(), "test data", _description);
                 }
             }
 
-            var cq = _runtime.Compile(Sql);
-            return _runtime.DoQuery<T>(cq.Query, cq.Parameters);
+            return result;
         }
 
         public async Task<IEnumerable<T>> AsAsync<T>() where T : class
         {
 
-            if (_qs != null)
+            IEnumerable<T> result;
+            if (_a.IsEvaluationNeeded)
             {
-                if (_qs is Collecting data)
-                {
-                    var compiled = _runtime.Compile(Sql);
-                    var r = await _runtime.DoQueryAsync<T>(compiled.Query, compiled.Parameters);
-                    data.Put(Sql.Hash(), r, _description);
-                    return r;
-                }
+                var cq = _runtime.Compile(Sql);
+                result = await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters);
+            }
+            else
+            {
+                result = _a.Get<IEnumerable<T>>(Sql.Hash());
+            }
 
-                if (_qs is Providing testData)
+            if (_a.IsTracingNeeded)
+            {
+                if (_a.IsEvaluationNeeded)
                 {
-                    return testData.Get<IEnumerable<T>>(Sql.Hash());
+                    _a.Query(Sql.Hash(), result, _description);
+                }
+                else
+                {
+                    _a.Query(Sql.Hash(), "test data", _description);
                 }
             }
 
-            var cq = _runtime.Compile(Sql);
-            return await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters).ConfigureAwait(false);
-
+            return result;
         }
     }
 }

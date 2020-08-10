@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Testing.Data
 {
-    public abstract class CSharpTestDataProvider : Providing
+    public abstract class CSharpTestDataProvider : ITestDataSource
     {
         private class HashWarning
         {

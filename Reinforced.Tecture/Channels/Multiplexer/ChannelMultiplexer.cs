@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Savers;
-using Reinforced.Tecture.Testing.Query;
 
 namespace Reinforced.Tecture.Channels.Multiplexer
 {

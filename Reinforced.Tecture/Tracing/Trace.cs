@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
+using Reinforced.Tecture.Testing.Stories;
 
-namespace Reinforced.Tecture.Testing.Stories
+namespace Reinforced.Tecture.Tracing
 {
     /// <summary>
     /// Story of applied side effects.
     /// Story can be shown as text or formally validated.
     /// You cannot construct story directly
     /// </summary>
-    public class StorageStory
+    public class Trace
     {
         private readonly CommandBase[] _commands;
-        internal readonly TestingEnvironment _environment;
         /// <summary>
         /// Effects that story consists of (order matters)
         /// </summary>
@@ -24,9 +24,8 @@ namespace Reinforced.Tecture.Testing.Stories
             get { return _commands; }
         }
 
-        internal StorageStory(Queue<CommandBase> effects, TestingEnvironment environment)
+        internal Trace(Queue<CommandBase> effects)
         {
-            _environment = environment;
             var nq = new Queue<CommandBase>(effects);
             CommandBase[] effectsArray = new CommandBase[effects.Count];
             int i = 0;
@@ -41,9 +40,9 @@ namespace Reinforced.Tecture.Testing.Stories
         /// Begins story validation
         /// </summary>
         /// <returns>Story validator</returns>
-        public StoryValidator Begins()
+        public TraceValidator Begins()
         {
-            return new StoryValidator(this);
+            return new TraceValidator(this);
         }
 
         /// <summary>

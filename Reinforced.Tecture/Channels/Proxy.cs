@@ -1,10 +1,11 @@
-﻿using Reinforced.Tecture.Testing.Query;
+﻿using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Channels
 {
     interface IQueryMultiplexer
     {
-        TFeature GetFeature<TFeature>(out TestData qs) where TFeature : QueryFeature;
+        TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature;
     }
 
     interface ICommandMultiplexer

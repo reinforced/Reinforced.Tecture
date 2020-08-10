@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Queries
 {

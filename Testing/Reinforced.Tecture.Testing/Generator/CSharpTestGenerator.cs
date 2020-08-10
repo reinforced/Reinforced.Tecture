@@ -84,7 +84,7 @@ namespace Reinforced.Tecture.Testing.Generator
         {
             var type = command.GetType();
             EnsureUsing(type);
-            return GenericName(Identifier(nameof(StoryValidator.Then)))
+            return GenericName(Identifier(nameof(TraceValidator.Then)))
                 .WithTypeArgumentList(
                     TypeArgumentList(
                         SingletonSeparatedList<TypeSyntax>(
@@ -132,7 +132,7 @@ namespace Reinforced.Tecture.Testing.Generator
             _chain = InvocationExpression(
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                             _chain,
-                            IdentifierName(nameof(StoryValidator.SomethingHappens)))
+                            IdentifierName(nameof(TraceValidator.SomethingHappens)))
                         .WithOperatorToken(Token(SyntaxKind.DotToken).WithLeadingTrivia(Formats.Tabs(4))))
                 .WithTrailingTrivia(LineFeed);
         }

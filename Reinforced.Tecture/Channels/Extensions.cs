@@ -1,4 +1,5 @@
-﻿using Reinforced.Tecture.Testing.Query;
+﻿using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Channels
 {
@@ -12,13 +13,13 @@ namespace Reinforced.Tecture.Channels
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="r"></param>
-        /// <param name="testData">Query store allowing feature to work with test data</param>
+        /// <param name="a">Auxilary tools for queries</param>
         /// <returns></returns>
-        public static T Feature<T>(this Read<QueryChannel<T>> r, out TestData testData) where T : QueryFeature
+        public static T Feature<T>(this Read<QueryChannel<T>> r, out Auxilary a) where T : QueryFeature
         {
             var mux = r as IQueryMultiplexer;
             
-            return mux.GetFeature<T>(out testData);
+            return mux.GetFeature<T>(out a);
         }
 
         public static T Feature<T>(this Write<CommandChannel<T>> w) where T : CommandFeature
@@ -33,13 +34,13 @@ namespace Reinforced.Tecture.Channels
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="r"></param>
-        /// <param name="testData">Query store allowing feature to work with test data</param>
+        /// <param name="a">Auxilary tools for queries</param>
         /// <returns></returns>
-        public static T PleaseFeature<T>(this Read r, out TestData testData) where T : QueryFeature
+        public static T PleaseFeature<T>(this Read r, out Auxilary a) where T : QueryFeature
         {
             var mux = r as IQueryMultiplexer;
 
-            return mux.GetFeature<T>(out testData);
+            return mux.GetFeature<T>(out a);
         }
 
         

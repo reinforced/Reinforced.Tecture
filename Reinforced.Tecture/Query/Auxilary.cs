@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Reinforced.Tecture.Channels.Multiplexer;
+
+namespace Reinforced.Tecture.Query
+{
+    public class Auxilary
+    {
+        private readonly AuxilaryContainer _container;
+        private readonly Type _channelType;
+
+        internal Auxilary(AuxilaryContainer container, Type channelType)
+        {
+            _container = container;
+            _channelType = channelType;
+        }
+
+        public bool IsEvaluationNeeded
+        {
+            get
+            {
+                return _container._testDataHolder.Instance == null;
+            }
+        }
+
+        public bool IsHashRequired
+        {
+            get { return IsTracingNeeded || !IsEvaluationNeeded; }
+        }
+        public bool IsTracingNeeded
+        {
+            get
+            {
+                return _container.TraceCollector != null;
+            }
+        }
+
+        public void Query<T>(string hash, T result, string description)
+        {
+            if (_container.TraceCollector != null)
+            {
+                _container.TraceCollector.Query(_channelType, hash, result, description);
+                return;
+            }
+            throw new TectureException("Test data is not presumed to be collected");
+        }
+
+        public T Get<T>(string hash)
+        {
+            if (_container._testDataHolder.Instance != null)
+            {
+                return _container._testDataHolder.Instance.Get<T>(hash);
+            }
+            throw new TectureException("Test data is not provided");
+        }
+
+    }
+}

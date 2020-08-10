@@ -1,7 +1,6 @@
 ﻿using System;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Query;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry

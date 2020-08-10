@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Features.Orm.Queries.Fake;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Features.Orm.Queries
 {
@@ -15,8 +16,8 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Query builder</returns>
         public static IQueryFor<T> Get<T>(this Read<QueryChannel<Query>> qr) where T : class
         {
-            var pr = qr.Feature(out TestData qs);
-            pr.SetQueryStore(qs);
+            var pr = qr.Feature(out Auxilary qs);
+            pr.SetAux(qs);
             return new QueryBuilder<T>(pr);
         }
 

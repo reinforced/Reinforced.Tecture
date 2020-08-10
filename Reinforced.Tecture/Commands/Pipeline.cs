@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Commands
 {
     public class Pipeline
     {
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
-        
-        public void EnqueueCommand(CommandBase effect)
+        internal TraceCollector TraceCollector = null;
+
+        public void EnqueueCommand(CommandBase cmd)
         {
             if (_debugMode)
             {
@@ -28,9 +30,10 @@ namespace Reinforced.Tecture.Commands
                 //    }
                 //}
 
-                effect.Debug = dbg;
+                cmd.Debug = dbg;
             }
-            _commandQueue.Enqueue(effect);
+            TraceCollector?.Command(cmd);
+            _commandQueue.Enqueue(cmd);
         }
 
         public TCommand Enqueue<TCommand>(TCommand cmd) where TCommand : CommandBase

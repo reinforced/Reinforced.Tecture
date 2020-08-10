@@ -1,19 +1,19 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 {
     class HookQueryProvider : IQueryProvider
     {
         private readonly IQueryProvider _baseQueryProvider;
-        private readonly TestData _qs;
+        private readonly Auxilary _aux;
         private readonly DescriptionHolder _description;
-        public HookQueryProvider(IQueryProvider baseQueryProvider, TestData qs, DescriptionHolder description)
+        public HookQueryProvider(IQueryProvider baseQueryProvider, Auxilary aux, DescriptionHolder description)
         {
             _baseQueryProvider = baseQueryProvider;
-            _qs = qs;
+            _aux = aux;
             _description = description;
         }
 
@@ -32,7 +32,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             var bs = _baseQueryProvider.CreateQuery<TElement>(expression);
-            return new HookQueryable<TElement>(bs, _qs, _description);
+            return new HookQueryable<TElement>(bs, _aux, _description);
         }
 
         /// <summary>Executes the query represented by a specified expression tree.</summary>
@@ -49,21 +49,30 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The value that results from executing the specified query.</returns>
         public TResult Execute<TResult>(Expression expression)
         {
-            var hash = expression.CalculateHash();
-            if (_qs is Collecting data)
+            string hash = _aux.IsHashRequired ? expression.CalculateHash() : string.Empty;
+            TResult result;
+            if (_aux.IsEvaluationNeeded)
             {
-                var value = _baseQueryProvider.Execute<TResult>(expression);
-                data.Put(hash, value, _description.Description);
-                return value;
+                result = _baseQueryProvider.Execute<TResult>(expression);
+            }
+            else
+            {
+                result = _aux.Get<TResult>(hash);
             }
 
-            if (_qs is Providing testData)
+            if (_aux.IsTracingNeeded)
             {
-                var val = testData.Get<TResult>(hash);
-                return val;
+                if (_aux.IsEvaluationNeeded)
+                {
+                    _aux.Query(hash, result, _description.Description ?? $"Obtaining {typeof(TResult)} via O/RM");
+                }
+                else
+                {
+                    _aux.Query(hash, "test data", _description.Description ?? $"Obtaining {typeof(TResult)} via O/RM");
+                }
             }
 
-            throw new TestDataTypeMismatchException();
+            return result;
         }
     }
 }

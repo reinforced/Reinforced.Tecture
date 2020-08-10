@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 {

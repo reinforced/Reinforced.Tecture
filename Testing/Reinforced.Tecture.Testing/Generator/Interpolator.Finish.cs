@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Stories;
+using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Reinforced.Tecture.Testing.Generator
 {
@@ -38,8 +39,8 @@ namespace Reinforced.Tecture.Testing.Generator
             var allUsings = new[]
             {
                 "System",
-                typeof(StoryValidator).Namespace,
-                typeof(StorageStory).Namespace,
+                typeof(TraceValidator).Namespace,
+                typeof(Trace).Namespace,
             }.Union(_usings).Select(d => UsingDirective(ParseName(d)).FormatUsing());
 
             var staticUsinSyntaxes = _staticUsings.Select(d => UsingDirective(ParseName(d)).Static().FormatUsing());
@@ -58,7 +59,7 @@ namespace Reinforced.Tecture.Testing.Generator
                             Parameter(
                                     Identifier(StoryVariableId))
                                 .WithType(
-                                    IdentifierName(nameof(StorageStory)).WithTrailingTrivia(Space)))));
+                                    IdentifierName(nameof(Trace)).WithTrailingTrivia(Space)))));
 
             validateMethod = validateMethod
                 .WithBody(Block(
@@ -73,7 +74,7 @@ namespace Reinforced.Tecture.Testing.Generator
             _chain = InvocationExpression(
                 MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                         _chain,
-                        IdentifierName(nameof(StoryValidator.TheEnd)))
+                        IdentifierName(nameof(TraceValidator.TheEnd)))
                     .WithOperatorToken(Token(SyntaxKind.DotToken).WithLeadingTrivia(Formats.Tabs(4))));
         }
 

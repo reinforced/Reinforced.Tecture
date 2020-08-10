@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Reinforced.Tecture.Testing.Query
+namespace Reinforced.Tecture.Query
 {
     public class Hashbox : IDisposable
     {

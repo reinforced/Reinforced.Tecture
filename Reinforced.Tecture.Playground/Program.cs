@@ -15,6 +15,7 @@ using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Testing.Generation;
 using Reinforced.Tecture.Testing.Stories;
+using Reinforced.Tecture.Tracing;
 using Reunforced.Tecture.Runtimes.EFCore;
 
 namespace Reinforced.Tecture.Playground
@@ -24,7 +25,7 @@ namespace Reinforced.Tecture.Playground
     {
         static void Main(string[] args)
         {
-            StorageStory ss = null;
+            Trace ss = null;
             ss.Begins().Then<Add>(
                 
                 );

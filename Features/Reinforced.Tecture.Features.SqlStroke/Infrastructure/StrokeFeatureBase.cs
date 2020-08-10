@@ -54,7 +54,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
                 .SchemaInterpolateStroke(_runtime.GetSchemaInterpolator());
 
         }
-
+       
         internal HashSet<Type> Types
         {
             get { return _types ?? (_types = new HashSet<Type>(_runtime.ServingTypes)); }

@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Stories;
+using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Reinforced.Tecture.Testing.Generator
 {
@@ -13,7 +14,7 @@ namespace Reinforced.Tecture.Testing.Generator
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         IdentifierName(storyVariableId).WithLeadingTrivia(Formats.Tab, Formats.Tab, Formats.Tab),
-                        IdentifierName(nameof(StorageStory.Begins))))
+                        IdentifierName(nameof(Trace.Begins))))
                 .WithTrailingTrivia(LineFeed);
         }
 

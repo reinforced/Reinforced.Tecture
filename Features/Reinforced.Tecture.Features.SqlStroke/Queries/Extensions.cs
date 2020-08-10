@@ -2,7 +2,8 @@
 using System.Linq.Expressions;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Queries
 {
@@ -10,7 +11,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
     {
         private static RawQuery QueryCore(this Read<QueryChannel<Query>> s, LambdaExpression expr, params Type[] usedTypes)
         {
-            var rt = s.Feature(out TestData qs);
+            var rt = s.Feature(out AuxilaryContainer qs);
             rt.ThrowCheckTypes(usedTypes);
             var cmd = new Sql(expr);
             return new RawQuery(cmd, rt, qs);

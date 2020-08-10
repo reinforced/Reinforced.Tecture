@@ -21,10 +21,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StorageServiceClass.cs</LastGenOutput>
     </None>
-    <None Update="Testing\Builders\ForCommand.tt">
-      <LastGenOutput>ForCommand.cs</LastGenOutput>
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </None>
 	 <None Update="Services\TectureServices.tt">
       <LastGenOutput>TectureServices.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -59,11 +55,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StorageServiceClass.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Testing\Builders\ForCommand.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ForCommand.tt</DependentUpon>
     </Compile>
 	<Compile Update="Services\ServiceLocators.cs">
       <DesignTime>True</DesignTime>

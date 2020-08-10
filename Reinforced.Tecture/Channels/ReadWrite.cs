@@ -1,6 +1,7 @@
 ﻿using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Channels
 {
@@ -15,22 +16,17 @@ namespace Reinforced.Tecture.Channels
     internal struct SRead<TChannel> : IQueryMultiplexer, Read<TChannel> where TChannel : CanQuery
     {
         private readonly ChannelMultiplexer _mx;
-        private readonly TestData _qs;
-        public SRead(ChannelMultiplexer mx, TestData qs)
+        private readonly AuxilaryContainer _a;
+        public SRead(ChannelMultiplexer mx, AuxilaryContainer a)
         {
             _mx = mx;
-            _qs = qs;
+            _a = a;
         }
 
-        public TFeature GetFeature<TFeature>(out TestData qs) where TFeature : QueryFeature
+        public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature
         {
-            qs = _qs;
+            a = _a.ForChannel(typeof(TChannel));
             return _mx.GetQueryFeature<TChannel, TFeature>();
-        }
-
-        public TestData GetStore()
-        {
-            return _qs;
         }
     }
 

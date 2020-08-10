@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
-using Reinforced.Tecture.Testing.Query;
+using Reinforced.Tecture.Query;
 
 
 namespace Reinforced.Tecture.Services
@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Services
         internal ServiceManager ServiceManager;
         internal ChannelMultiplexer ChannelMultiplexer;
         internal Pipeline Pipeline;
-        internal TestDataHolder TestData;
+        internal AuxilaryContainer Aux;
         #endregion
 
         /// <summary>

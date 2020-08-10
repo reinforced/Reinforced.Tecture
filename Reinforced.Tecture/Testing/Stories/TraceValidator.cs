@@ -6,13 +6,14 @@ using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Testing.Stories
 {
     /// <summary>
     /// Entity that is being used to validate story
     /// </summary>
-    public class StoryValidator
+    public class TraceValidator
     {
         enum FlowControl
         {
@@ -35,9 +36,9 @@ namespace Reinforced.Tecture.Testing.Stories
         private ValidationEntry _current = new ValidationEntry(FlowControl.Immediate, null);
         private readonly Queue<ValidationEntry> _entries = new Queue<ValidationEntry>();
 
-        private readonly StorageStory _story;
+        private readonly Trace _story;
 
-        internal StoryValidator(StorageStory story)
+        internal TraceValidator(Trace story)
         {
             _story = story;
         }
@@ -46,12 +47,8 @@ namespace Reinforced.Tecture.Testing.Stories
         /// </summary>
         /// <param name="assertions">Set of assertions that must take place for upcoming side-effect</param>
         /// <returns>Fluent</returns>
-        public StoryValidator Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
+        public TraceValidator Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
         {
-            foreach (var sa in assertions)
-            {
-                sa.Environment = _story._environment;
-            }
             _current.Assertions = assertions;
             _entries.Enqueue(_current);
             _current = new ValidationEntry(FlowControl.Immediate, null);
@@ -63,7 +60,7 @@ namespace Reinforced.Tecture.Testing.Stories
         /// If end is reached then validation fails
         /// </summary>
         /// <returns>Fluent</returns>
-        public StoryValidator SomethingHappens()
+        public TraceValidator SomethingHappens()
         {
             _current.FlowControl = FlowControl.TakeWhile;
             return this;
@@ -76,7 +73,7 @@ namespace Reinforced.Tecture.Testing.Stories
         {
             var cmdsArray = _story.Commands.ToList();
             cmdsArray.Add(new End());
-            _entries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() { Environment = _story._environment } }));
+            _entries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() }));
             var eIdx = 0;
             while (_entries.Count > 0)
             {

@@ -7,11 +7,11 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Testing.Data.Format;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
 using Reinforced.Tecture.Testing.Generator;
-using Reinforced.Tecture.Testing.Query;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data

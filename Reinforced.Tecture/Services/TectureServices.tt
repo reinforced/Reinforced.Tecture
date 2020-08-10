@@ -7,11 +7,8 @@
 <#
 	var implementationsCount = 7;
 #>
-using System;
-using System.Linq.Expressions;
-using System.Collections.Generic;
+
 using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Commands;
 
 
 
@@ -34,7 +31,7 @@ where T<#= j+2 #> : class
 
         protected Read<T, <#= GenericsStroke(i+2) #>> From<T>() where T : CanQuery
         {
-            return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer, TestData.Instance);
+            return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer, Aux);
         }		
 
 		protected Write<T, <#= GenericsStroke(i+2) #>> To<T>() where T : CanCommand
