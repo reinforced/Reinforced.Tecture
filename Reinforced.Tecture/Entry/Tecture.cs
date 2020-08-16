@@ -91,7 +91,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns></returns>
         public Trace EndTrace()
         {
-            throw new NotImplementedException();
+            return _tc.Finish();
         }
 
         private IOuterTransaction ObtainTransaction(

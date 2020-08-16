@@ -41,14 +41,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
 
             if (_a.IsTracingNeeded)
             {
-                if (_a.IsEvaluationNeeded)
-                {
-                    _a.Query(Sql.Hash(), result, _description);
-                }
-                else
-                {
-                    _a.Query(Sql.Hash(), "test data", _description);
-                }
+                _a.Query(Sql.Hash(), result, _description);
             }
 
             return result;
@@ -70,14 +63,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
 
             if (_a.IsTracingNeeded)
             {
-                if (_a.IsEvaluationNeeded)
-                {
-                    _a.Query(Sql.Hash(), result, _description);
-                }
-                else
-                {
-                    _a.Query(Sql.Hash(), "test data", _description);
-                }
+                _a.Query(Sql.Hash(), result, _description);
             }
 
             return result;

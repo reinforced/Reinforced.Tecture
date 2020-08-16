@@ -6,7 +6,7 @@ using Reinforced.Tecture.Testing.Stories;
 
 namespace Reinforced.Tecture.Tracing
 {
-    
+
     internal class TraceCollector
     {
         private readonly Queue<CommandBase> _traceCommands = new Queue<CommandBase>();
@@ -27,9 +27,15 @@ namespace Reinforced.Tecture.Tracing
             return new Trace(_traceCommands);
         }
 
-        public void Query<T>(Type channel,string hash, T result, string description)
+        public void Query<T>(Type channel, Type dataType, string hash, T result, string description)
         {
-            Command(new Query(channel,hash,result).Annotate(description));
+            Command(new QueryRecord(channel, dataType, hash, result, false).Annotate(description));
         }
+
+        public void TestQuery<T>(Type channel, Type dataType, string hash, T result, string description)
+        {
+            Command(new QueryRecord(channel,dataType, hash, result, true).Annotate(description));
+        }
+
     }
 }

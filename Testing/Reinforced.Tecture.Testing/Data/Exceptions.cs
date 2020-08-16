@@ -36,4 +36,13 @@ namespace Reinforced.Tecture.Testing.Data
         {
         }
     }
+
+    public class TestDataGenerationException : Exception
+    {
+        /// <summary>Initializes a new instance of the <see cref="T:System.Exception"></see> class with a specified error message.</summary>
+        /// <param name="message">The message that describes the error.</param>
+        public TestDataGenerationException(string message) : base("Unable to generate test data: " + message)
+        {
+        }
+    }
 }

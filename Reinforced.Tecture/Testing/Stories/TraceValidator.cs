@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Testing.Stories
         }
 
         private ValidationEntry _current = new ValidationEntry(FlowControl.Immediate, null);
-        private readonly Queue<ValidationEntry> _entries = new Queue<ValidationEntry>();
+        private readonly Queue<ValidationEntry> _validationEntries = new Queue<ValidationEntry>();
 
         private readonly Trace _story;
 
@@ -50,7 +50,7 @@ namespace Reinforced.Tecture.Testing.Stories
         public TraceValidator Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
         {
             _current.Assertions = assertions;
-            _entries.Enqueue(_current);
+            _validationEntries.Enqueue(_current);
             _current = new ValidationEntry(FlowControl.Immediate, null);
             return this;
         }
@@ -71,13 +71,12 @@ namespace Reinforced.Tecture.Testing.Stories
         /// </summary>
         public void TheEnd()
         {
-            var cmdsArray = _story.Commands.ToList();
-            cmdsArray.Add(new End());
-            _entries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() }));
+            var cmdsArray = _story.All.ToList();
+            _validationEntries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() }));
             var eIdx = 0;
-            while (_entries.Count > 0)
+            while (_validationEntries.Count > 0)
             {
-                var currentValidator = _entries.Dequeue();
+                var currentValidator = _validationEntries.Dequeue();
 
                 if (currentValidator.FlowControl == FlowControl.Immediate)
                 {
@@ -89,7 +88,7 @@ namespace Reinforced.Tecture.Testing.Stories
                             if (!asrt.CommandType.GetTypeInfo().IsAssignableFrom(command.GetType()))
                             {
                                 throw new TectureCheckException(
-                                    $"expected side effect of type {asrt.CommandType.Name}, but got {command.GetType().Name}");
+                                    $"expected command of type {asrt.CommandType.Name}, but got {command.GetType().Name}");
                             }
                         }
 

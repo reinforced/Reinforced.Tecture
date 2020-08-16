@@ -9,9 +9,7 @@ namespace Reinforced.Tecture.Testing.Data
     {
         string Description { get; set; }
         string Hash { get; set; }
-
         Type RecordType { get; }
-
         object Payload { get; }
     }
 
@@ -22,6 +20,12 @@ namespace Reinforced.Tecture.Testing.Data
 
     public class TestDataRecord<T> : ITestDataRecord<T>
     {
+        /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
+        public TestDataRecord(T data)
+        {
+            Data = data;
+        }
+
         public string Description { get; set; }
         public string Hash { get; set; }
         public Type RecordType

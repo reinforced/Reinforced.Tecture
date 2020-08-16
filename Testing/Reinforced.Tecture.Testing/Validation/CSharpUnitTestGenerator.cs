@@ -8,12 +8,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Generation;
 using Reinforced.Tecture.Testing.Stories;
-using static Reinforced.Tecture.Testing.Generator.Extensions;
+using static Reinforced.Tecture.Testing.Validation.Extensions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Reinforced.Tecture.Testing.Generator
+namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpTestGenerator : TestGenerator
+    partial class CSharpUnitTestGenerator : IGenerating, IValidationGenerator
     {
         private const string StoryVariableId = "story";
         private readonly string TestClassName;
@@ -23,7 +23,7 @@ namespace Reinforced.Tecture.Testing.Generator
         private HashSet<string> _usings;
         private HashSet<string> _staticUsings;
 
-        public CSharpTestGenerator(string testClassName, string testNamespaceName)
+        public CSharpUnitTestGenerator(string testClassName, string testNamespaceName)
         {
             TestClassName = testClassName;
             TestNamespaceName = testNamespaceName;
@@ -43,7 +43,7 @@ namespace Reinforced.Tecture.Testing.Generator
             if (!_staticUsings.Contains(mi.DeclaringType.Namespace)) _staticUsings.Add(mi.DeclaringType.Namespace);
         }
 
-        protected override void Before()
+        internal void Before()
         {
             _chain = MakeEmptyChain(StoryVariableId);
             _usings = new HashSet<string>();
@@ -52,7 +52,7 @@ namespace Reinforced.Tecture.Testing.Generator
 
 
 
-        protected override void Visit(CommandBase command, CheckDescription[] checks)
+        public void Visit(CommandBase command, CheckDescription[] checks)
         {
             if (checks.Length == 0)
             {

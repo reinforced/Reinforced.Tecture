@@ -6,9 +6,9 @@ using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Generation;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Reinforced.Tecture.Testing.Generator
+namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpTestGenerator
+    partial class CSharpUnitTestGenerator
     {
         private InvocationExpressionSyntax Generate(CommandBase command, CheckDescription desc)
         {

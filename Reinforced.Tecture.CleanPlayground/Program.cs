@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.CleanPlayground
             g.Do();
 
             var tc =
-                CSharpTestCollectorSetup.Create("SampleTestData", typeof(Program).Namespace)
+                CSharpTestDataGeneratorSetup.Create("SampleTestData", typeof(Program).Namespace)
                     .ToFile("W:\\test.cs");
 
             var u1 = new User()

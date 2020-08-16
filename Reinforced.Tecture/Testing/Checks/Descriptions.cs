@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Testing.Checks
         public static void Basic(this ChecksConfigurator<Comment> c) => c.Enlist(new CommentCheckDescription());
         public static void Basic(this ChecksConfigurator<Save> c) => c.Enlist(new SaveCheckDescription());
 
-        public static void Basics(this TestGenerator tg)
+        public static void Basics(this UnitTestGenerator tg)
         {
             tg.For<CommandBase>().Basic();
             tg.For<Comment>().Basic();

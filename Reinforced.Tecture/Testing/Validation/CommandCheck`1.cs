@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing.Stories;
 
 namespace Reinforced.Tecture.Testing.Validation
 {

@@ -6,13 +6,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Stories;
 using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-namespace Reinforced.Tecture.Testing.Generator
+namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpTestGenerator
+    partial class CSharpUnitTestGenerator
     {
         private CompilationUnitSyntax _result;
 
-        protected override void After()
+        internal void After()
         {
             FinishTest();
             var method = ProduceValidateMethod();
@@ -80,7 +80,7 @@ namespace Reinforced.Tecture.Testing.Generator
 
 
 
-        protected override void DumpTest(TextWriter tw)
+        public void Dump(TextWriter tw)
         {
             tw.WriteLine(_result.ToFullString());
         }

@@ -9,7 +9,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks
 {
     public static class TestGeneratorExtensions
     {
-        public static void CheckOrm(this TestGenerator tg)
+        public static void CheckOrm(this UnitTestGenerator tg)
         {
             tg.For<Commands.Add.Add>().Basic();
             tg.For<Commands.Delete.Delete>().Basic();

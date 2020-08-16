@@ -47,7 +47,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
                 }
                 else
                 {
-                    _aux.Query(hash, "test data", _description.Description);
+                    _aux.Query(hash, result, _description.Description);
                 }
             }
 
@@ -78,7 +78,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
                 }
                 else
                 {
-                    _aux.Query(hash, "test data", _description.Description);
+                    _aux.Query(hash, result, _description.Description);
                 }
             }
 

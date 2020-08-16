@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Commands;
@@ -21,7 +22,23 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         public IEnumerable<CommandBase> Commands
         {
+            get { return _commands.Where(x=>!(x is QueryRecord)).Cast<CommandBase>(); }
+        }
+
+        /// <summary>
+        /// Effects that story consists of (order matters)
+        /// </summary>
+        public IEnumerable<CommandBase> All
+        {
             get { return _commands; }
+        }
+
+        /// <summary>
+        /// Recorded queries
+        /// </summary>
+        public IEnumerable<QueryRecord> Queries
+        {
+            get { return _commands.Where(x => x is QueryRecord).Cast<QueryRecord>(); }
         }
 
         internal Trace(Queue<CommandBase> effects)

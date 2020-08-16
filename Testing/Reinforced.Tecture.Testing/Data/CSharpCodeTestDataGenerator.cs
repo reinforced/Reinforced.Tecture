@@ -11,20 +11,20 @@ using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Testing.Data.Format;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
-using Reinforced.Tecture.Testing.Generator;
+using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data
 {
-    public class CSharpCodeTestCollector : Collecting
+    internal class CSharpCodeTestDataGenerator : IGenerating
     {
         private readonly Queue<ITestDataRecord> _records = new Queue<ITestDataRecord>();
         private readonly HashSet<string> _usings = new HashSet<string>();
         private readonly Hijack _hijack = new Hijack();
 
         private readonly TypeGeneratorRepository _tgr;
-        private readonly CSharpTestCollectorSetup _cfg;
-        internal CSharpCodeTestCollector(CSharpTestCollectorSetup cfg)
+        private readonly CSharpTestDataGeneratorSetup _cfg;
+        internal CSharpCodeTestDataGenerator(CSharpTestDataGeneratorSetup cfg)
         {
             _cfg = cfg;
             _usings.Add(typeof(IEnumerable).Namespace);
@@ -34,27 +34,17 @@ namespace Reinforced.Tecture.Testing.Data
             cfg._hijackConfig?.Invoke(_hijack);
         }
 
-        public void Put<T>(string hash, T result, string description = null)
-        {
-            if (string.IsNullOrEmpty(description)) description = string.Empty;
-            _records.Enqueue(new TestDataRecord<T>()
-            {
-                Data = result,
-                Description = description,
-                Hash = hash
-            });
-        }
 
-        public void Finish()
+        internal void Proceed(IEnumerable<QueryRecord> queries)
         {
-            var cds = Proceed(_cfg._className, _cfg._namespace);
-            var oldFile = Path.ChangeExtension(_cfg._filenameToUpdate, "old");
-            if (File.Exists(oldFile)) File.Delete(oldFile);
-            if (File.Exists(_cfg._filenameToUpdate))
+            foreach (var queryRecord in queries)
             {
-                File.Move(_cfg._filenameToUpdate, oldFile);
+                var recordType = typeof(TestDataRecord<>).MakeGenericType(queryRecord.DataType);
+                ITestDataRecord tdr = Activator.CreateInstance(recordType,new[]{queryRecord.Result}) as ITestDataRecord;
+                tdr.Description = queryRecord.Annotation;
+                tdr.Hash = queryRecord.Hash;
+                _records.Enqueue(tdr);
             }
-            File.WriteAllText(_cfg._filenameToUpdate, cds.ToFullString());
         }
 
         private int _counter = 0;
@@ -236,5 +226,10 @@ namespace Reinforced.Tecture.Testing.Data
 
         #endregion
 
+        public void Dump(TextWriter tw)
+        {
+            var cds = Proceed(_cfg._className, _cfg._namespace);
+            tw.Write(cds.ToFullString());
+        }
     }
 }

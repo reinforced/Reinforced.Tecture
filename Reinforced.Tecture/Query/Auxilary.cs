@@ -40,7 +40,14 @@ namespace Reinforced.Tecture.Query
         {
             if (_container.TraceCollector != null)
             {
-                _container.TraceCollector.Query(_channelType, hash, result, description);
+                if (_container._testDataHolder.Instance != null)
+                {
+                    _container.TraceCollector.TestQuery(_channelType, typeof(T), hash, result, description);
+                }
+                else
+                {
+                    _container.TraceCollector.Query(_channelType, typeof(T), hash, result, description);
+                }
                 return;
             }
             throw new TectureException("Test data is not presumed to be collected");

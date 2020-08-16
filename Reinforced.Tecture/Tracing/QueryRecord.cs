@@ -10,14 +10,18 @@ using Reinforced.Tecture.Commands.Exact;
 namespace Reinforced.Tecture.Tracing
 {
     [CommandCode("QRY")]
-    public class Query : CommandBase
+    public class QueryRecord : CommandBase
     {
-        public Query(Type channel, string hash, object result)
+        public QueryRecord(Type channel, Type dataType, string hash, object result, bool isTestData)
         {
             Channel = channel;
             Hash = hash;
             Result = result;
+            IsTestData = isTestData;
+            DataType = dataType;
         }
+
+        public Type DataType { get;}
 
         public Type Channel { get; }
 
@@ -25,12 +29,16 @@ namespace Reinforced.Tecture.Tracing
 
         public object Result { get; }
 
+        public bool IsTestData { get; }
+
         /// <summary>
         /// Describes actions that are being performed within command
         /// </summary>
         /// <param name="tw">Log writer</param>
         public override void Describe(TextWriter tw)
         {
+            if (IsTestData) tw.Write("[TEST DATA] ");
+
             tw.Write(this.Annotation ?? $"Query made to '{Channel.Name}' ({Hash})");
             tw.Write(": ");
             if (Result == null)
