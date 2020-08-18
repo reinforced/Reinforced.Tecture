@@ -21,7 +21,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql
         {
             if (fac == null) fac = new InterpolatorFactory();
             var fe = new EFCore_DirectSql_CommandFeature(context, conf.Channel, fac);
-            conf.ForCommand(fe, new DirectSqlSaver(fe));
+            conf.ForCommand(fe, new EFCore_DirectSql_Saver(fe));
         }
 
         /// <summary>

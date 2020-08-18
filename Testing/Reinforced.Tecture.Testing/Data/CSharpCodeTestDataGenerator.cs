@@ -82,7 +82,7 @@ namespace Reinforced.Tecture.Testing.Data
                         TypeArgumentList(
                             SingletonSeparatedList<TypeSyntax>(
                                 IdentifierName(nameof(ITestDataRecord))))),
-                Identifier(nameof(CSharpTestDataProvider.GetRecords)));
+                Identifier(nameof(CSharpTestData.GetRecords)));
 
             overriden = overriden.WithModifiers(
                 TokenList(
@@ -98,7 +98,7 @@ namespace Reinforced.Tecture.Testing.Data
 
         private ClassDeclarationSyntax ProduceClass(string className)
         {
-            var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(CSharpTestDataProvider))));
+            var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(CSharpTestData))));
             var clas = ClassDeclaration(Identifier(TriviaList(), className, TriviaList(Space)))
                 .WithBaseList(BaseList(bs).WithColonToken(
                     Token(

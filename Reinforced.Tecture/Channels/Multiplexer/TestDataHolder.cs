@@ -8,6 +8,6 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 {
     class TestDataHolder
     {
-        public ITestDataSource Instance { get; set; }
+        public ITestDataSource Instance { get; internal set; }
     }
 }

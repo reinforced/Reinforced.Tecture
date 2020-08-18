@@ -55,8 +55,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Fluent</returns>
         public static TectureBuilder WithTestData(this TectureBuilder tb, ITestDataSource qs)
         {
-            tb.TestDataHolder.Instance = qs;
-            
+            tb.Aux._testDataHolder.Instance = qs;
             return tb;
         }
 

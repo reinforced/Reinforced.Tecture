@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Channels.Multiplexer
@@ -9,7 +10,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
     //string key here is full type name
     class ChannelMultiplexer : IDisposable
     {
-        private readonly TestDataHolder _testDataHolder;
+        private readonly AuxilaryContainer _auxilary;
 
         private readonly Dictionary<string, Type> _namesCache = new Dictionary<string, Type>();
         private void Known(Type channel)
@@ -132,15 +133,15 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
         private readonly Dictionary<string, HashSet<SaverBase>> _saversPerChannels = new Dictionary<string, HashSet<SaverBase>>();
 
-        public ChannelMultiplexer(TestDataHolder testDataHolder)
+        public ChannelMultiplexer(AuxilaryContainer aux)
         {
-            _testDataHolder = testDataHolder;
+            _auxilary = aux;
         }
 
         internal void RegisterSaver(Type channelType, SaverBase saver)
         {
             Known(channelType);
-            saver.TestDataHolder = _testDataHolder;
+            saver._Aux = _auxilary;
             
             if (!_saversPerChannels.ContainsKey(channelType.FullName))
             {

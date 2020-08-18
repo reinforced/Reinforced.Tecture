@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Orm\Runtime\" />
+  </ItemGroup>
+
 </Project>

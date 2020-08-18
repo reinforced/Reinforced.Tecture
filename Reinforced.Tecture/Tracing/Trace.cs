@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Stories;
@@ -39,6 +40,18 @@ namespace Reinforced.Tecture.Tracing
         public IEnumerable<QueryRecord> Queries
         {
             get { return _commands.Where(x => x is QueryRecord).Cast<QueryRecord>(); }
+        }
+
+        /// <summary>
+        /// Extracts trace of particular data channel
+        /// </summary>
+        /// <typeparam name="T">Type of channel</typeparam>
+        /// <returns>Trace containing only entries related to specified channel</returns>
+        public Trace OfChannel<T>() where T : Channel
+        {
+            var fn = typeof(T).FullName;
+            var cmds = _commands.Where(x => x.ChannelId == fn || x is Save || x is End);
+            return new Trace(new Queue<CommandBase>(cmds));
         }
 
         internal Trace(Queue<CommandBase> effects)

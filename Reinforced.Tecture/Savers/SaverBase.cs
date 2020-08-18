@@ -29,14 +29,14 @@ namespace Reinforced.Tecture.Savers
 
         internal abstract CommandRunner GetRunner(CommandBase cb);
 
-        internal TestDataHolder TestDataHolder;
+        internal AuxilaryContainer _Aux;
 
         /// <summary>
-        /// Reference to test data
+        /// Reference to test data & tracing capabilities
         /// </summary>
-        protected ITestDataSource TestData
+        protected Auxilary Aux(Type channel)
         {
-            get { return TestDataHolder.Instance; }
+            return _Aux.ForChannel(channel);
         }
 
         /// <summary>

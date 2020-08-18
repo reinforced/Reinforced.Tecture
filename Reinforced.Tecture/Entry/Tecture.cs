@@ -23,19 +23,17 @@ namespace Reinforced.Tecture.Entry
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly ITransactionManager _tranManager;
         private readonly Action<Exception> _exceptionHandler;
-        private readonly TestDataHolder _testData;
         private readonly AuxilaryContainer _aux;
         public Tecture(
             ChannelMultiplexer mx,
             CommandsDispatcher dispatcher,
-            TestDataHolder testData,
+            AuxilaryContainer aux,
             bool debugMode = false,
             ITransactionManager tranManager = null,
             Action<Exception> exceptionHandler = null)
         {
             _mx = mx;
-            _testData = testData;
-            _aux = new AuxilaryContainer(testData);
+            _aux = aux;
             _pipeline = new Pipeline(debugMode, _actions, _finallyActions);
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;

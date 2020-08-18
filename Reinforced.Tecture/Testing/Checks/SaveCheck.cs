@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Testing.Stories;
 using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Testing.Checks
 {

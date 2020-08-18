@@ -6,7 +6,7 @@ using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Testing.Data
 {
-    public abstract class CSharpTestDataProvider : ITestDataSource
+    public abstract class CSharpTestData : ITestDataSource
     {
         private class HashWarning
         {
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Testing.Data
         private readonly bool _hashOnlyWarn = false;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
-        protected CSharpTestDataProvider(bool hashOnlyWarn = false)
+        protected CSharpTestData(bool hashOnlyWarn = false)
         {
             _hashOnlyWarn = hashOnlyWarn;
         }

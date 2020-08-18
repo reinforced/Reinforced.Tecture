@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
-    class EfOrmCommandFeature : Tecture.Features.Orm.Command
+    class EfCore_Orm_CommandFeature : Tecture.Features.Orm.Command
     {
         private readonly LazyDisposable<DbContext> _context;
 
-        public EfOrmCommandFeature(LazyDisposable<DbContext> context)
+        public EfCore_Orm_CommandFeature(LazyDisposable<DbContext> context)
         {
             _context = context;
         }

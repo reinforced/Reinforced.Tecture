@@ -7,11 +7,11 @@ using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
 {
-    class DirectSqlSaver : Saver<Sql>
+    class EFCore_DirectSql_Saver : Saver<Sql>
     {
         private readonly EFCore_DirectSql_CommandFeature _feature;
 
-        public DirectSqlSaver(EFCore_DirectSql_CommandFeature feature)
+        public EFCore_DirectSql_Saver(EFCore_DirectSql_CommandFeature feature)
         {
             _feature = feature;
             _runner = new DirectSqlRunner(feature);

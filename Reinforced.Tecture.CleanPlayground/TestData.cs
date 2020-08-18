@@ -6,7 +6,7 @@ using Reinforced.Tecture.CleanPlayground.Models;
 
 namespace Reinforced.Tecture.CleanPlayground
 {
-    class SampleTestData : CSharpTestDataProvider
+    class SampleTestData : CSharpTestData
     {
         private User[] GetEntry_1()
         {
