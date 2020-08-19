@@ -16,6 +16,22 @@ namespace Reinforced.Tecture.Query
             _channelType = channelType;
         }
 
+        public bool IsSavingNeeded
+        {
+            get
+            {
+                return _container._testDataHolder.Instance == null;
+            }
+        }
+
+        public bool IsCommandRunNeeded
+        {
+            get
+            {
+                return _container._testDataHolder.Instance == null;
+            }
+        }
+
         public bool IsEvaluationNeeded
         {
             get

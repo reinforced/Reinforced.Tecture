@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 using Reinforced.Tecture.Features.Orm.Commands.Delete;
@@ -14,23 +15,46 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate>
     {
+        private readonly LazyDisposable<DbContext> _dc;
+        private readonly AddCommandRunner _add;
+        private readonly DeleteCommandRunner _del;
+        private readonly UpdateCommandRunner _upd;
+        public EfCore_Orm_Saver(LazyDisposable<DbContext> dc)
+        {
+            _dc = dc;
+            _add = new AddCommandRunner(Aux, _dc);
+            _del = new DeleteCommandRunner(Aux, _dc);
+            _upd = new UpdateCommandRunner(Aux, _dc);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         protected override void Save()
         {
-            
+            if (Aux.IsSavingNeeded)
+            {
+                _dc.Value.SaveChanges();
+            }
         }
 
         protected override Task SaveAsync()
         {
-            throw new NotImplementedException();
+            if (Aux.IsSavingNeeded)
+            {
+                return _dc.Value.SaveChangesAsync();
+            }
+            _add.RetrievePKs();
+            return Task.FromResult(0);
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public override void Dispose()
         {
-            throw new NotImplementedException();
+            if (Aux.IsSavingNeeded)
+            {
+                _dc.Dispose();
+            }
         }
 
         /// <summary>
@@ -40,7 +64,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         /// <returns>Command runner</returns>
         protected override CommandRunner<Add> GetRunner1(Add command)
         {
-            throw new NotImplementedException();
+            return _add;
         }
 
         /// <summary>
@@ -50,7 +74,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         /// <returns>Command runner</returns>
         protected override CommandRunner<Delete> GetRunner2(Delete command)
         {
-            throw new NotImplementedException();
+            return _del;
         }
 
         /// <summary>
@@ -60,7 +84,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         /// <returns>Command runner</returns>
         protected override CommandRunner<Update> GetRunner3(Update command)
         {
-            throw new NotImplementedException();
+            return _upd;
         }
 
         /// <summary>

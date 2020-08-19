@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Query
 {
-    class EfOrmQueryFeature : Tecture.Features.Orm.Query
+    class EfCore_Orm_QueryFeature : Tecture.Features.Orm.Query
     {
         private readonly LazyDisposable<DbContext> _context;
 
-        public EfOrmQueryFeature(LazyDisposable<DbContext> context)
+        public EfCore_Orm_QueryFeature(LazyDisposable<DbContext> context)
         {
             _context = context;
         }

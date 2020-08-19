@@ -19,6 +19,11 @@ namespace Reinforced.Tecture
             _getter = getter;
         }
 
+        public static LazyDisposable<T> Default()
+        {
+            return new LazyDisposable<T>(() => default(T));
+        }
+
         private readonly object _locker = new object();
 
         public T Value
@@ -47,7 +52,7 @@ namespace Reinforced.Tecture
         public void Dispose()
         {
             if (_isDisposed) return;
-            
+
             if (_isObtained)
             {
                 lock (_locker)

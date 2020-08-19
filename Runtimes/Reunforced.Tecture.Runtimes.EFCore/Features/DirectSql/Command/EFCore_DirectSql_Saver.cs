@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
@@ -14,17 +15,25 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
         public EFCore_DirectSql_Saver(EFCore_DirectSql_CommandFeature feature)
         {
             _feature = feature;
-            _runner = new DirectSqlRunner(feature);
+            _runner = new DirectSqlRunner(feature, Aux);
         }
 
         protected override void Save()
         {
-            _feature.Context.Value.SaveChanges();
+            if (Aux.IsSavingNeeded)
+            {
+                _feature.Context.Value.SaveChanges();
+            }
         }
 
         protected override Task SaveAsync()
         {
-            return _feature.Context.Value.SaveChangesAsync();
+            if (Aux.IsSavingNeeded)
+            {
+                return _feature.Context.Value.SaveChangesAsync();
+            }
+
+            return Task.FromResult(0);
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
