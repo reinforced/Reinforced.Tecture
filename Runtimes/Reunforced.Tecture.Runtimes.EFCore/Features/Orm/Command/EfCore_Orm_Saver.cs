@@ -19,12 +19,16 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         private readonly AddCommandRunner _add;
         private readonly DeleteCommandRunner _del;
         private readonly UpdateCommandRunner _upd;
+        private readonly RelateCommandRunner _rel;
+        private readonly DerelateCommandRunner _drel;
         public EfCore_Orm_Saver(LazyDisposable<DbContext> dc)
         {
             _dc = dc;
             _add = new AddCommandRunner(Aux, _dc);
             _del = new DeleteCommandRunner(Aux, _dc);
             _upd = new UpdateCommandRunner(Aux, _dc);
+            _rel = new RelateCommandRunner();
+            _drel = new DerelateCommandRunner();
         }
 
         /// <summary>
@@ -94,7 +98,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         /// <returns>Command runner</returns>
         protected override CommandRunner<Relate> GetRunner4(Relate command)
         {
-            throw new NotImplementedException();
+            return _rel;
         }
 
         /// <summary>
@@ -104,7 +108,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         /// <returns>Command runner</returns>
         protected override CommandRunner<Derelate> GetRunner5(Derelate command)
         {
-            throw new NotImplementedException();
+            return _drel;
         }
     }
 }
