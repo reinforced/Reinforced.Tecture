@@ -36,7 +36,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             }
             else
             {
-                result = _aux.Get<IEnumerable<T>>(hash).GetEnumerator();
+                result = _aux.Get<IEnumerable<T>>(hash, _description.Description).GetEnumerator();
             }
 
             if (_aux.IsTracingNeeded)
@@ -67,7 +67,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             }
             else
             {
-                result = _aux.Get<IEnumerable>(hash).GetEnumerator();
+                result = _aux.Get<IEnumerable>(hash,_description.Description).GetEnumerator();
             }
 
             if (_aux.IsTracingNeeded)

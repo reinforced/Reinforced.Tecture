@@ -41,27 +41,38 @@ namespace Reinforced.Tecture.Testing.Data
 
         private readonly Dictionary<int, HashWarning> _warnings = new Dictionary<int, HashWarning>();
 
-        public T Get<T>(string hash)
+        public T Get<T>(string hash, string description = null)
         {
             EnsureEnumerator();
             if (!_en.MoveNext())
             {
                 throw new TestDataEndsException(_counter);
             }
-            var data = _en.Current as TestDataRecord<T>;
-            if (data==null)
-            {
-                throw new TestDataTypeMismatchException(_counter, data.Description, typeof(T), data.Data != null ? data.Data.GetType() : typeof(void));
-            }
 
-            if (hash != data.Hash)
+            var k = _en.Current;
+            if (hash != _en.Current.Hash)
             {
-                if (!_hashOnlyWarn) throw new TestHashMismatchException(_counter, data.Description, hash, data.Hash);
+                if (!_hashOnlyWarn)
+                {
+                    if (!string.IsNullOrEmpty(k.Description) && !string.IsNullOrEmpty(description))
+                    {
+                        throw new QueryOrderMismatchException(_counter, k.Description, description);
+                    }
+                    throw new TestHashMismatchException(_counter, k.Description, hash, k.Hash);
+                }
                 else
                 {
-                    _warnings[_counter] = new HashWarning() { Position = _counter, Actual = hash, Expected = data.Hash };
+                    _warnings[_counter] = new HashWarning() { Position = _counter, Actual = hash, Expected = k.Hash };
                 }
             }
+
+            var data = k as TestDataRecord<T>;
+            if (data == null)
+            {
+                throw new TestDataTypeMismatchException(_counter, k.Description, typeof(T), k.Payload != null ? k.Payload.GetType() : typeof(void));
+            }
+
+
 
             return data.Data;
         }

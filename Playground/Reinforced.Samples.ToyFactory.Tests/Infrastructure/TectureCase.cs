@@ -64,6 +64,11 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         }
 
 
+        public string Text()
+        {
+            return Trace.ToText();
+        }
+
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {

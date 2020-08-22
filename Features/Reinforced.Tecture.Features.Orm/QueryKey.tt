@@ -33,18 +33,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(<#= GenericsStroke(i+1) #>)>(hash);
+                result = Aux.Get<(<#= GenericsStroke(i+1) #>)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 

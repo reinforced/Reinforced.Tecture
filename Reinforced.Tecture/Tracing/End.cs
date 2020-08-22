@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Tracing
         /// <param name="tw"></param>
         public override void Describe(TextWriter tw)
         {
-            tw.Write("::End of Story::");
+            tw.Write("======  END  =====");
         }
     }
 }

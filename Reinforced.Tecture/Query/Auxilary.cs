@@ -69,11 +69,11 @@ namespace Reinforced.Tecture.Query
             throw new TectureException("Test data is not presumed to be collected");
         }
 
-        public T Get<T>(string hash)
+        public T Get<T>(string hash, string description = null)
         {
             if (_container._testDataHolder.Instance != null)
             {
-                return _container._testDataHolder.Instance.Get<T>(hash);
+                return _container._testDataHolder.Instance.Get<T>(hash, description);
             }
             throw new TectureException("Test data is not provided");
         }

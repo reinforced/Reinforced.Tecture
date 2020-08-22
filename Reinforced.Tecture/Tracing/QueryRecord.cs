@@ -21,7 +21,7 @@ namespace Reinforced.Tecture.Tracing
             DataType = dataType;
         }
 
-        public Type DataType { get;}
+        public Type DataType { get; }
 
         public Type Channel { get; }
 
@@ -40,13 +40,18 @@ namespace Reinforced.Tecture.Tracing
             if (IsTestData) tw.Write("[TEST DATA] ");
 
             tw.Write(this.Annotation ?? $"Query made to '{Channel.Name}' ({Hash})");
+            if (IsTestData) return;
             tw.Write(": ");
             if (Result == null)
             {
                 tw.Write("result is null");
             }
 
-            if (Result is IEnumerable e)
+            if (Result is string s)
+            {
+                tw.Write(s);
+            }
+            else if (Result is IEnumerable e)
             {
                 var res = e.Cast<object>();
                 var cnt = res.Count();

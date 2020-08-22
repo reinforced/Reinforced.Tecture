@@ -14,7 +14,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
 
 			private Int32 GetEntry_2()
 			{ 
-				return 43;
+				return 47;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()

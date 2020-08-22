@@ -57,7 +57,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             }
             else
             {
-                result = _aux.Get<TResult>(hash);
+                result = _aux.Get<TResult>(hash,_description.Description);
             }
 
             if (_aux.IsTracingNeeded)

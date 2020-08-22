@@ -15,10 +15,11 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
     public class TectureTestBase
     {
         protected ITest CurrentTest { get; private set; }
-
-
+        protected ITestOutputHelper Output { get; private set; }
+        
         protected TectureTestBase(ITestOutputHelper output)
         {
+            Output = output;
             var type = output.GetType();
             var testMember = type.GetField("test", BindingFlags.Instance | BindingFlags.NonPublic);
             CurrentTest = (ITest)testMember.GetValue(output);

@@ -25,18 +25,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2)>(hash);
+                result = Aux.Get<(T1, T2)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 
@@ -68,18 +68,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2, T3)>(hash);
+                result = Aux.Get<(T1, T2, T3)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 
@@ -112,18 +112,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2, T3, T4)>(hash);
+                result = Aux.Get<(T1, T2, T3, T4)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 
@@ -157,18 +157,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2, T3, T4, T5)>(hash);
+                result = Aux.Get<(T1, T2, T3, T4, T5)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 
@@ -203,18 +203,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2, T3, T4, T5, T6)>(hash);
+                result = Aux.Get<(T1, T2, T3, T4, T5, T6)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 
@@ -250,18 +250,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2, T3, T4, T5, T6, T7)>(hash);
+                result = Aux.Get<(T1, T2, T3, T4, T5, T6, T7)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 
@@ -298,18 +298,18 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<(T1, T2, T3, T4, T5, T6, T7, T8)>(hash);
+                result = Aux.Get<(T1, T2, T3, T4, T5, T6, T7, T8)>(hash, "ORM addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash,"test data","ORM addition PK retrieval");
                 }
                 else
                 {
-                    Aux.Query(hash, result, "ORM Addition PK retrieval");
+                    Aux.Query(hash, result, "ORM addition PK retrieval");
                 }
             }
 

@@ -18,16 +18,14 @@ namespace Reinforced.Samples.ToyFactory.Tests
         [Fact]
         public void CreateTypeWorks()
         {
-            using (var c = Case
-                <CreateTypeWorks_TestData>
-                (out ITecture ctx))
-            {
-                var a = ctx.Do<Nomenclature>().CreateType("test type");
-                ctx.Save();
-                var id = ctx.From<Db>().Key(a);
+            using var c = Case<CreateTypeWorks_TestData>(out ITecture ctx);
 
-                c.Validate<CreateTypeWorks_Validation>();
-            }
+            var a = ctx.Do<Nomenclature>().CreateType("test type");
+            ctx.Save();
+            var id = ctx.From<Db>().Key(a);
+
+            Output.WriteLine(c.Text());
+            c.Validate<CreateTypeWorks_Validation>();
         }
 
         public NomenclatureTests(ITestOutputHelper helper) : base(helper)

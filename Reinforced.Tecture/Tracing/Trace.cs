@@ -90,7 +90,11 @@ namespace Reinforced.Tecture.Tracing
                     cmd.Describe(tw);
                     tw.WriteLine();
                     tw.WriteLine();
-                    i = 1;
+                } else if (cmd is End)
+                {
+                    cmd.Describe(tw);
+                    tw.WriteLine();
+                    tw.WriteLine();
                 }
                 else
                 {

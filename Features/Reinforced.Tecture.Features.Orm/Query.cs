@@ -57,7 +57,7 @@ namespace Reinforced.Tecture.Features.Orm
             }
             else
             {
-                result = Aux.Get<T>(hash);
+                result = Aux.Get<T>(hash, "ORM Addition PK retrieval");
             }
 
             if (Aux.IsTracingNeeded)

@@ -7,7 +7,7 @@ namespace Reinforced.Tecture.Testing
     /// </summary>
     public interface ITestDataSource
     {
-        T Get<T>(string hash);
+        T Get<T>(string hash, string description = null);
     }
 
     public class TestDataTypeMismatchException : Exception

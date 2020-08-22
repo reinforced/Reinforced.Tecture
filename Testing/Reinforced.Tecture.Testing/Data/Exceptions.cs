@@ -37,6 +37,15 @@ namespace Reinforced.Tecture.Testing.Data
         }
     }
 
+    public class QueryOrderMismatchException : Exception
+    {
+        /// <summary>Initializes a new instance of the <see cref="T:System.Exception"></see> class.</summary>
+        public QueryOrderMismatchException(int counter, string expectedDescription, string actualDescription)
+            : base($"Query order violation at position {counter} : '{expectedDescription}' query expected but '{actualDescription}' got")
+        {
+        }
+    }
+
     public class TestDataGenerationException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Exception"></see> class with a specified error message.</summary>

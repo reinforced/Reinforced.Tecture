@@ -36,7 +36,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             }
             else
             {
-                result = _a.Get<IEnumerable<T>>(Sql.Hash());
+                result = _a.Get<IEnumerable<T>>(Sql.Hash(), _description);
             }
 
             if (_a.IsTracingNeeded)
@@ -58,7 +58,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             }
             else
             {
-                result = _a.Get<IEnumerable<T>>(Sql.Hash());
+                result = _a.Get<IEnumerable<T>>(Sql.Hash(), _description);
             }
 
             if (_a.IsTracingNeeded)
