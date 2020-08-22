@@ -14,7 +14,6 @@ namespace Reinforced.Tecture.Testing.Validation
 
         internal void After()
         {
-            FinishTest();
             var method = ProduceValidateMethod();
             var usings = ProduceUsings();
             var r = WrapIntoModule(method, usings);
@@ -80,7 +79,7 @@ namespace Reinforced.Tecture.Testing.Validation
             return validateMethod;
         }
 
-        private void FinishTest()
+        private void TheEnd()
         {
             var ex = InvocationExpression(
                 MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,

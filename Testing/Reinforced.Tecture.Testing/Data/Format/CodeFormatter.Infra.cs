@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Testing.Data.Format
     public partial class CodeFormatter
     {
         private readonly Stack<Type> _ctx = new Stack<Type>();
-        private TabsManager Tabs { get; } = new TabsManager();
+        protected TabsManager Tabs { get; } = new TabsManager();
 
         public override SyntaxNode Visit(SyntaxNode node)
         {
@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Testing.Data.Format
             return false;
         }
 
-        private TabsScope Tab()
+        protected TabsScope Tab()
         {
             return new TabsScope(Tabs);
         }

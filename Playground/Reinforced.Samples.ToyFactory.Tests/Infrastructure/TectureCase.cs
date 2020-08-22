@@ -3,6 +3,7 @@ using System.IO;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Testing.Checks;
 using Reinforced.Tecture.Testing;
+using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 
@@ -39,17 +40,20 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
 
         public void GenerateUnitTest()
         {
-            var className = $"Validation";
-            var go = Trace.GenerateUnitTest(className, _ns, g => { g.CheckOrm(); });
-            var s = go.ToFullString();
+            var className = $"{_caseName}_Validation";
+            var go = Trace.GenerateUnitTest(className, _ns, g =>
+            {
+                g.Basics();
+                g.CheckOrm();
+            });
+            
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }
 
         public void GenerateValidation()
         {
-            var className = $"TestData";
+            var className = $"{_caseName}_TestData";
             var go = Trace.GenerateTestData(className, _ns);
-            var s = go.ToFullString();
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }
 

@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Tracing;
 using static Reinforced.Tecture.Testing.Validation.Extensions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
@@ -38,7 +39,7 @@ namespace Reinforced.Tecture.Testing.Validation
 
         private void EnsureUsingStatic(MethodInfo mi)
         {
-            if (mi.DeclaringType==null) return;
+            if (mi.DeclaringType == null) return;
             var fullName = $"{mi.DeclaringType.Namespace}.{mi.DeclaringType.Name}";
             if (!_staticUsings.Contains(fullName)) _staticUsings.Add(fullName);
         }
@@ -54,6 +55,11 @@ namespace Reinforced.Tecture.Testing.Validation
 
         public void Visit(CommandBase command, CheckDescription[] checks)
         {
+            if (command is End)
+            {
+                TheEnd();
+            }
+            else
             if (checks.Length == 0)
             {
                 Skip();
@@ -69,13 +75,17 @@ namespace Reinforced.Tecture.Testing.Validation
             }
         }
 
+
         private void Then(CommandBase command, List<InvocationExpressionSyntax> checks)
         {
+            var ann = new SyntaxAnnotation();
             var ex = InvocationExpression(
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                             IdentifierName(StoryVariableId),
                             NameThenOf(command)))
-                .WithArgumentList(FormatThenArguments(checks));
+                .WithArgumentList(FormatThenArguments(checks))
+                .WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
+
             _chain.Enqueue(ExpressionStatement(ex).WithTrailingTrivia(LineFeed).WithLeadingTrivia(Formats.Tabs(4)));
         }
 
@@ -94,23 +104,8 @@ namespace Reinforced.Tecture.Testing.Validation
 
         private ArgumentListSyntax FormatThenArguments(List<InvocationExpressionSyntax> checks)
         {
-            var args = ComaSeparatedChecks(checks);
-            var arglist = ArgumentList(SeparatedList<ArgumentSyntax>(args.ToArray()));
-            if (checks.Count > 1)
-            {
-                //wrap into multiple lines if we have several checks
-                arglist = arglist.WithOpenParenToken(
-                        Token(
-                            Formats.BrWith4Tabs(),
-                            SyntaxKind.OpenParenToken,
-                            Formats.BrWith5Tabs()))
-                    .WithCloseParenToken(
-                        Token(
-                            Formats.BrWith4Tabs(),
-                            SyntaxKind.CloseParenToken,
-                            TriviaList()));
-            }
-
+            var args = ComaSeparatedChecks(checks).Select(x => x.WithAdditionalAnnotations(Annotations.ThenArgument));
+            var arglist = ArgumentList(SeparatedList<ArgumentSyntax>(args.ToArray())).WithAdditionalAnnotations(Annotations.ThenArgument);
             return arglist;
         }
 

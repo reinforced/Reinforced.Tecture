@@ -5,7 +5,7 @@ using Reinforced.Tecture.Testing.Data;
 
 namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
 {
-		class TestData:CSharpTestData
+		class CreateTypeWorks_TestData:CSharpTestData
 		{
 			private Boolean GetEntry_1()
 			{ 
@@ -14,13 +14,13 @@ namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
 
 			private Int32 GetEntry_2()
 			{ 
-				return 28;
+				return 43;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_476379E6087AE8FB8E84C73A54BB3EAD692EBB4707CCB5BFE79534A44166BDB",
+					Hash = @"OrmQuery_D89D2325CAB36C99B50CC6CB1D6F8A81DDA18073C8CC7A0FD7820A65E89",
 					Description = @"check toy type existence"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_2()) { 

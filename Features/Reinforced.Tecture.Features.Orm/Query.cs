@@ -14,9 +14,10 @@ namespace Reinforced.Tecture.Features.Orm
     {
         internal IQueryable<T> GetSet<T>() where T : class
         {
+            IQueryable<T> set = Aux.IsEvaluationNeeded ? Set<T>() : new T[0].AsQueryable();
             if (Aux.IsHashRequired)
             {
-                return new HookQueryable<T>(Set<T>(), Aux, null);
+                return new HookQueryable<T>(set, Aux, null);
             }
             return Set<T>();
         }
@@ -45,7 +46,7 @@ namespace Reinforced.Tecture.Features.Orm
         internal T Key<T>(IAddition<IPrimaryKey<T>> keyedAddition)
         {
             var a = (Add)keyedAddition;
-            if (!a.IsExecuted) 
+            if (!a.IsExecuted)
                 throw new TectureOrmFeatureException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
             T result;
@@ -63,7 +64,7 @@ namespace Reinforced.Tecture.Features.Orm
             {
                 if (!Aux.IsEvaluationNeeded)
                 {
-                    Aux.Query(hash,"test data","ORM Addition PK retrieval");
+                    Aux.Query(hash, "test data", "ORM Addition PK retrieval");
                 }
                 else
                 {

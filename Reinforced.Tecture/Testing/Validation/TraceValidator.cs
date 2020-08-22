@@ -69,7 +69,7 @@ namespace Reinforced.Tecture.Testing.Validation
         /// </summary>
         public void TheEnd()
         {
-            var cmdsArray = _story.All.ToList();
+            var cmdsArray = _story.Commands.ToList();
             _validationEntries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() }));
             var eIdx = 0;
             while (_validationEntries.Count > 0)

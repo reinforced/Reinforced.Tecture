@@ -54,16 +54,10 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             if (value is IQueryable q)
             {
                 _box.Put(q.ElementType.FullName);
-                _box.Put(q.Provider.GetType().FullName);
-                if (q.Expression == node)
-                {
-                    _box.Put(q.Expression.ToString());
-                }
-                else
+                if (q.Expression != node)
                 {
                     Visit(q.Expression);
                 }
-
                 return node;
             }
 
