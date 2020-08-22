@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -50,12 +51,32 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         protected override Expression VisitConstant(ConstantExpression node)
         {
             var value = node.Value;
+            if (value is IQueryable q)
+            {
+                _box.Put(q.ElementType.FullName);
+                _box.Put(q.Provider.GetType().FullName);
+                if (q.Expression == node)
+                {
+                    _box.Put(q.Expression.ToString());
+                }
+                else
+                {
+                    Visit(q.Expression);
+                }
+                
+                return base.VisitConstant(node);
+            }
+            
             var type = node.Type;
 
-            _box.Put(type.GUID.ToByteArray());
+            _box.Put(type.FullName);
             if (value != null)
             {
-               _box.Put(value.GetHashCode());
+               _box.Put(value);
+            }
+            else
+            {
+                _box.PutNull();
             }
 
             return base.VisitConstant(node);

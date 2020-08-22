@@ -146,7 +146,7 @@ namespace Reinforced.Tecture.Query
             StringBuilder sb = new StringBuilder();
             foreach (var b in hash)
             {
-                sb.AppendFormat("{0:0X}", b);
+                sb.AppendFormat("{0:X1}", b);
             }
 
             return sb.ToString();

@@ -29,12 +29,19 @@ namespace Reinforced.Samples.ToyFactory.Controllers
         public ActionResult<int> CreateToyType([FromBody]CreateToyTypeDto req)
         {
             _tecture.BeginTrace();
-            var a = _tecture.Do<Nomenclature>().CreateType(req.Name + Guid.NewGuid().ToString());
-            _tecture.Save();
-            var r = _tecture.From<Db>().Key(a);
-            var t = _tecture.EndTrace();
-            var text = t.ToText();
-            return r;
+            int result = 0;
+            try
+            {
+                var a = _tecture.Do<Nomenclature>().CreateType(req.Name);
+                _tecture.Save();
+                result = _tecture.From<Db>().Key(a);
+            }
+            finally
+            {
+                var t = _tecture.EndTrace();
+                var text = t.ToText();
+            }
+            return result;
         }
 
         [HttpGet]
