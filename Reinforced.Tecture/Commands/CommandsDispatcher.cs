@@ -2,31 +2,35 @@
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Commands
 {
     /// <summary>
     /// Dispatches commands queue and implements enqueued actions
     /// </summary>
-    class CommandsDispatcher
+    sealed class CommandsDispatcher
     {
         private readonly ChannelMultiplexer _mx;
-
-        internal CommandsDispatcher(ChannelMultiplexer mx)
+        private readonly TraceCollector _tc;
+        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector tc)
         {
             _mx = mx;
+            _tc = tc;
         }
 
-        protected virtual void Save(IEnumerable<string> channels)
+        private void Save(IEnumerable<string> channels)
         {
+            _tc?.Save();
             foreach (var sideEffectSaver in _mx.GetSavers(channels))
             {
                 sideEffectSaver.SaveInternal();
             }
         }
 
-        protected virtual async Task SaveAsync(IEnumerable<string> channels)
+        private async Task SaveAsync(IEnumerable<string> channels)
         {
+            _tc?.Save();
             foreach (var sideEffectSaver in _mx.GetSavers(channels))
             {
                 await sideEffectSaver.SaveInternalAsync();
@@ -60,44 +64,34 @@ namespace Reinforced.Tecture.Commands
             } while (queue.HasEffects);
         }
 
-        private CommandRunner GetRunner(CommandBase command)
-        {
-            return _mx.GetRunner(command);
-        }
-
-        private void RunCommand(CommandBase command)
-        {
-            var r = GetRunner(command);
-            r.RunInternal(command);
-        }
-
-        private Task RunCommandAsync(CommandBase command)
-        {
-            var r = GetRunner(command);
-            return r.RunInternalAsync(command);
-        }
-
-        protected virtual void DispatchInternal(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
+        private void DispatchInternal(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
         {
             foreach (var commandBase in commands)
             {
                 if (!(commandBase is Comment))
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
-                    RunCommand(commandBase);
+                    var r = _mx.GetRunner(commandBase);
+                    r.RunInternal(commandBase);
+                    commandBase.IsExecuted = true;
                 }
             }
         }
 
-        protected virtual async Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
+        private async Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
         {
             foreach (var commandBase in commands)
             {
                 if (!(commandBase is Comment))
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
-                    var r = RunCommandAsync((commandBase));
-                    if (r != null) await r;
+                    var r1 = _mx.GetRunner(commandBase);
+                    var r = r1.RunInternalAsync(commandBase);
+                    if (r != null)
+                    {
+                        await r;
+                        commandBase.IsExecuted = true;
+                    }
                 }
             }
         }

@@ -10,6 +10,7 @@
 #>
 
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 
@@ -18,50 +19,48 @@ namespace Reinforced.Tecture.Features.Orm.PrimaryKey
 
 <# for (int i=1;i<implementationsCount;i++) {	#> 
 
-		public interface IPrimaryKey<<#= GenericsStroke(i+1) #>>
-		{
-			(<#= KeyParameters(i+1) #>) PrimaryKey { get; }
-		}		
-
-		public class Expectation<<#= GenericsStroke(i+1) #>>
-        {
-            private readonly IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> _addition;
-            internal Expectation(IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> addition)
-            {
-                _addition = addition;
-            }
-            public (<#= GenericsStroke(i+1) #>) Key
-            {
-                get { return _addition.Key(); }
-            }
-        }
+	public interface IPrimaryKey<<#= GenericsStroke(i+1) #>>
+	{
+		(<#= KeyParameters(i+1) #>) PrimaryKey { get; }
+	}
 <# } #>
 
 	public static partial class Extensions
 	{
-<# for (int i=1;i<implementationsCount;i++) {	#> 
-		public static (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(this IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> cmd)
+        private static object ToTuple((Type,object)[] tupleValues)
         {
-            if (cmd is Add c)
+            if (tupleValues.Length == 1) return tupleValues[0].Item2;
+<# for (int i=2;i<=implementationsCount;i++) {	#> 
+            if(tupleValues.Length == <#= i#>)
             {
-                if (c.PkData == null)
-                    throw new TectureOrmFeatureException($"Primary key of just added {c.EntityType} could not be obtained. Addition did not run yet");
-
-                return ((<#= GenericsStroke(i+1) #>))c.PkData;
+                var vt = typeof(System.Tuple<<#= Comas(i-1) #>>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
+                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
             }
-
-            throw new TectureOrmFeatureException($".Key call is valid only on add command");
+<# } #>
+            
+            throw new Exception($"Cannot create tuple of {tupleValues.Length} values");
         }
-
-        public static Expectation<<#= GenericsStroke(i+1) #>> Expect<<#= GenericsStroke(i+1) #>>(this IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> cmd)
+<# for (int i=1;i<implementationsCount;i++) {	#> 
+		       
+        public static (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(this IPrimaryKey<<#= GenericsStroke(i+1) #>> k)
         {
-            return new Expectation<<#= GenericsStroke(i+1) #>>(cmd);
+            var ks = k.PrimaryKey;
+            <# 
+                var s = Enumerable.Range(1,i+1).Select(x=>$"Value<T{x}>(k, ks.Item{x})").ToArray();
+            #>
+
+            return (<#= string.Join(",",s) #>);
         }
 <# } #>
 	}
 }
 
 <#+
+
+    private string Comas(int num)
+    {
+        return new string(',',num);
+    }
     private string GenericsStroke(int num)
     {
         StringBuilder sb = new StringBuilder();

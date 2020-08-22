@@ -32,7 +32,6 @@ namespace Reinforced.Tecture.Entry
         {
             return new Tecture(
                 _mx,
-                new CommandsDispatcher(_mx),
                 Aux,
                 false, 
                 _transactionManager, 

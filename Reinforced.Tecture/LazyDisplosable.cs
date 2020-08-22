@@ -5,10 +5,19 @@ using System.Text;
 namespace Reinforced.Tecture
 {
     /// <summary>
+    /// Lazy + IDisposable interface
+    /// </summary>
+    /// <typeparam name="T">Containing value</typeparam>
+    public interface ILazyDisposable<out T> : IDisposable
+    {
+        T Value { get; }
+    }
+
+    /// <summary>
     /// Lazy + IDisposable
     /// </summary>
     /// <typeparam name="T">Containing value</typeparam>
-    public class LazyDisposable<T> : IDisposable
+    public class LazyDisposable<T> : ILazyDisposable<T>
     {
         private readonly Func<T> _getter;
 

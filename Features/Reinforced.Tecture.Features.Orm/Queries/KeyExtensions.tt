@@ -1,0 +1,52 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	var implementationsCount = 8;
+#>
+
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Features.Orm.PrimaryKey;
+using Reinforced.Tecture.Query;
+namespace Reinforced.Tecture.Features.Orm.Queries
+{
+    public static partial class Extensions
+    {
+        <# for (int i=1;i<implementationsCount;i++) {	#> 
+        /// <summary>
+        /// Retrieves primary key of just added entity
+        /// </summary>
+        <# for (int j=0;j<=i;j++) { #>
+/// <typeparam name="T<#= j+1 #>">Type of key component #<#= j+1 #></typeparam>
+        <# } #>
+/// <param name="qr">Channel</param>
+        /// <param name="keyedAddition">Performed addition</param>
+        /// <returns>Primary key</returns>
+        public static (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> keyedAddition)
+        {
+            var pr = qr.Feature(out Auxilary qs);
+            pr.SetAux(qs);
+            return pr.Key(keyedAddition);
+        }
+        <# } #>
+
+    }
+}
+
+<#+
+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

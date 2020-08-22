@@ -9,6 +9,8 @@
     <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
     <ProjectReference Include="..\..\Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj" />
+    <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Data\Reinforced.Samples.ToyFactory.Data.csproj" />
+    <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj" />
   </ItemGroup>
 
 

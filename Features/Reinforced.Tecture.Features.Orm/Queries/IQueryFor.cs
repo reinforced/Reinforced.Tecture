@@ -21,13 +21,16 @@ namespace Reinforced.Tecture.Features.Orm.Queries
     /// via IStorage.Get&lt;YourEntity&gt;.YourQuery
     /// </summary>
     /// <typeparam name="TEntity">Entity type</typeparam>
-    public interface IQueryFor<TEntity> : IQueryFor
+    public interface IQueryForAll<out TEntity> : IQueryFor
     {
         /// <summary>
         /// Retrieves query for all etities of current type presenting in data source
         /// </summary>
         IQueryable<TEntity> All { get; }
+    }
 
+    public interface IQueryFor<TEntity> : IQueryForAll<TEntity>
+    {
         /// <summary>
         /// Additional Where clause that will be added to "All" set
         /// </summary>

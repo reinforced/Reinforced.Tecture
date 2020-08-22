@@ -16,7 +16,6 @@ namespace Reinforced.Tecture.Entry
     {
 
         private readonly ServiceManager _serviceManager;
-        private readonly CommandsDispatcher _dispatcher;
         private readonly ChannelMultiplexer _mx;
         internal readonly Pipeline _pipeline;
         internal readonly ActionsQueue _actions = new ActionsQueue(true);
@@ -26,7 +25,6 @@ namespace Reinforced.Tecture.Entry
         private readonly AuxilaryContainer _aux;
         public Tecture(
             ChannelMultiplexer mx,
-            CommandsDispatcher dispatcher,
             AuxilaryContainer aux,
             bool debugMode = false,
             ITransactionManager tranManager = null,
@@ -38,7 +36,6 @@ namespace Reinforced.Tecture.Entry
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
             _serviceManager = new ServiceManager(_pipeline, _mx, _aux);
-            _dispatcher = dispatcher;
         }
 
         /// <summary>
@@ -121,7 +118,8 @@ namespace Reinforced.Tecture.Entry
             {
                 _serviceManager.OnSave();
 
-                _dispatcher.Dispatch(_pipeline, _actions);
+                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector);
+                dispatcher.Dispatch(_pipeline, _actions);
 
                 _serviceManager.OnFinally();
                 _finallyActions.Run();
@@ -163,7 +161,8 @@ namespace Reinforced.Tecture.Entry
 
                 await _serviceManager.OnSaveAsync();
 
-                await _dispatcher.DispatchAsync(_pipeline, _actions);
+                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector);
+                await dispatcher.DispatchAsync(_pipeline, _actions);
 
                 await _serviceManager.OnFinallyAsync();
                 await _finallyActions.RunAsync();

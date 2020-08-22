@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Runtime
 {
     class EfCoreStokeRuntime : IStrokeRuntime
     {
-        public EfCoreStokeRuntime(LazyDisposable<DbContext> dbContext, Type channel, InterpolatorFactory fac)
+        public EfCoreStokeRuntime(ILazyDisposable<DbContext> dbContext, Type channel, InterpolatorFactory fac)
         {
 
             Mapper = new EfCoreMapper(dbContext);

@@ -9,10 +9,10 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class UpdateCommandRunner : CommandRunner<Update>
     {
-        private readonly LazyDisposable<DbContext> _dc;
+        private readonly ILazyDisposable<DbContext> _dc;
         private readonly Auxilary _aux;
 
-        public UpdateCommandRunner(Auxilary aux, LazyDisposable<DbContext> dc)
+        public UpdateCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
         {
             _aux = aux;
             _dc = dc;

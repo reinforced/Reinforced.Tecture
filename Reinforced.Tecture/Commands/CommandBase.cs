@@ -48,6 +48,16 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         /// <param name="tw">Log writer</param>
         public abstract void Describe(TextWriter tw);
+
+        /// <summary>
+        /// Gets order of command in commands queue
+        /// </summary>
+        public int Order { get; internal set; }
+
+        /// <summary>
+        /// Gets whether command was executed or not
+        /// </summary>
+        public bool IsExecuted { get; internal set; }
     }
 
     /// <summary>

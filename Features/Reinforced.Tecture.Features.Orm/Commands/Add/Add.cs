@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
 
         public Type EntityType { get; internal set; }
 
-        internal object PkData { get; set; }
+        public object PkData { get; set; }
 
         /// <summary>
         /// Describes actions that are being performed within command

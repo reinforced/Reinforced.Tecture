@@ -7,9 +7,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class EfCore_Orm_CommandFeature : Tecture.Features.Orm.Command
     {
-        private readonly LazyDisposable<DbContext> _context;
+        private readonly ILazyDisposable<DbContext> _context;
 
-        public EfCore_Orm_CommandFeature(LazyDisposable<DbContext> context)
+        public EfCore_Orm_CommandFeature(ILazyDisposable<DbContext> context)
         {
             _context = context;
         }

@@ -34,6 +34,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PrimaryKey.cs</LastGenOutput>
     </None>
+    <None Update="Queries\KeyExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KeyExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="QueryKey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryKey.cs</LastGenOutput>
+    </None>
 	
   </ItemGroup>
 
@@ -71,6 +79,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>PrimaryKey.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="Queries\KeyExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KeyExtensions.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="QueryKey.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryKey.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

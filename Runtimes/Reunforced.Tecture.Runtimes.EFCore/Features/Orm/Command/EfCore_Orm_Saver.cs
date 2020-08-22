@@ -15,13 +15,13 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate>
     {
-        private readonly LazyDisposable<DbContext> _dc;
+        private readonly ILazyDisposable<DbContext> _dc;
         private readonly AddCommandRunner _add;
         private readonly DeleteCommandRunner _del;
         private readonly UpdateCommandRunner _upd;
         private readonly RelateCommandRunner _rel;
         private readonly DerelateCommandRunner _drel;
-        public EfCore_Orm_Saver(LazyDisposable<DbContext> dc)
+        public EfCore_Orm_Saver(ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
             _add = new AddCommandRunner(Aux, _dc);
@@ -48,7 +48,6 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             {
                 return _dc.Value.SaveChangesAsync();
             }
-            _add.RetrievePKs();
             return Task.FromResult(0);
         }
 

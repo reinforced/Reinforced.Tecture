@@ -15,18 +15,9 @@ namespace Reinforced.Tecture.Features.Orm.PrimaryKey
         Expression<Func<T>> PrimaryKey { get; }
     }
 
+    /// <summary>
+    /// Minimal interface describing addition of entity with ability to retrieve primary key later
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IAddition<out T> { }
-
-    public class Expected<T>
-    {
-        private readonly IAddition<IPrimaryKey<T>> _addition;
-        internal Expected(IAddition<IPrimaryKey<T>> addition)
-        {
-            _addition = addition;
-        }
-        public T Key
-        {
-            get { return _addition.Key(); }
-        }
-    }
 }

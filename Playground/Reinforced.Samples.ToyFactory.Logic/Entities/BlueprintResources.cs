@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
-namespace Reinforced.Samples.ToyStory.Logic.Entities
+namespace Reinforced.Samples.ToyFactory.Logic.Entities
 {
     public class BlueprintResources : IPrimaryKey<int,int>
     {

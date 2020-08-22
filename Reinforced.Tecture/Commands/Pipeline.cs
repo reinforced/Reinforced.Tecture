@@ -11,6 +11,7 @@ namespace Reinforced.Tecture.Commands
 
         public void EnqueueCommand(CommandBase cmd)
         {
+            cmd.Order = _commandQueue.Count + 1;
             if (_debugMode)
             {
                 DebugInfo dbg = null;

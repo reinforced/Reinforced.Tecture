@@ -11,9 +11,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Runtime
 {
     class EfCoreMapper : IMapper
     {
-        private readonly LazyDisposable<DbContext> _context;
+        private readonly ILazyDisposable<DbContext> _context;
 
-        public EfCoreMapper(LazyDisposable<DbContext> context)
+        public EfCoreMapper(ILazyDisposable<DbContext> context)
         {
             _context = context;
         }

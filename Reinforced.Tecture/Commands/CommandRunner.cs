@@ -35,6 +35,7 @@ namespace Reinforced.Tecture.Commands
             {
                 throw new TectureException($"Something wen completely wrong: runner {this.GetType().FullName} cannot run command {command.GetType().FullName}");
             }
+
             return RunAsync((TCommand)command);
         }
 

@@ -12,38 +12,21 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class AddCommandRunner : CommandRunner<Add>
     {
-        private readonly LazyDisposable<DbContext> _dc;
+        private readonly ILazyDisposable<DbContext> _dc;
         private readonly Auxilary _aux;
-        private readonly List<IPrimaryKey> _addedWithPk = new List<IPrimaryKey>();
-        public AddCommandRunner(Auxilary aux, LazyDisposable<DbContext> dc)
+        public AddCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
         {
             _aux = aux;
             _dc = dc;
         }
 
-        internal void RetrievePKs()
-        {
-            foreach (var primaryKey in _addedWithPk)
-            {
-                SetPkData(primaryKey);
-            }
-        }
 
-        private void SetPkData(IPrimaryKey entity)
-        {
-            
-        }
-        
         /// <summary>
         /// Runs side effect 
         /// </summary>
         /// <param name="cmd">Side effect</param>
         protected override void Run(Add cmd)
         {
-            if (cmd.Entity is IPrimaryKey pk)
-            {
-                _addedWithPk.Add(pk);
-            }
             if (_aux.IsCommandRunNeeded)
             {
                 _dc.Value.Add(cmd.Entity);
