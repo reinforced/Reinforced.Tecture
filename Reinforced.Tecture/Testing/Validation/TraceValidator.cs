@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Checks;
-using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 
-namespace Reinforced.Tecture.Testing.Stories
+namespace Reinforced.Tecture.Testing.Validation
 {
     /// <summary>
     /// Entity that is being used to validate story

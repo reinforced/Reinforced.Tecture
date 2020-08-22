@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Reinforced.Tecture.Testing.Stories;
+using Reinforced.Tecture.Testing.Validation.Format;
 using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Reinforced.Tecture.Testing.Validation
@@ -17,16 +17,25 @@ namespace Reinforced.Tecture.Testing.Validation
             FinishTest();
             var method = ProduceValidateMethod();
             var usings = ProduceUsings();
-            _result = WrapIntoModule(method, usings);
+            var r = WrapIntoModule(method, usings);
+            CodeFormatter cf = new CodeFormatter();
+            r = cf.Visit(r) as CompilationUnitSyntax;
+
+            _result = r;
+
         }
 
         private CompilationUnitSyntax WrapIntoModule(MemberDeclarationSyntax validationMethod,
             UsingDirectiveSyntax[] usings)
         {
-            var clas = ClassDeclaration(TestClassName)
+            var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(ValidationBase))).WithoutTrivia());
+
+            var clas = 
+                ClassDeclaration(TestClassName)
+                .WithBaseList(BaseList(bs))
                 .WithMembers(
-                    SingletonList(validationMethod))
-                .Format();
+                    SingletonList(validationMethod));
+
             var ns = NamespaceDeclaration(ParseName(TestNamespaceName)).Format().AddMembers(clas);
 
             return CompilationUnit()
@@ -41,6 +50,7 @@ namespace Reinforced.Tecture.Testing.Validation
                 "System",
                 typeof(TraceValidator).Namespace,
                 typeof(Trace).Namespace,
+                typeof(ValidationBase).Namespace,
             }.Union(_usings).Select(d => UsingDirective(ParseName(d)).FormatUsing());
 
             var staticUsinSyntaxes = _staticUsings.Select(d => UsingDirective(ParseName(d)).Static().FormatUsing());
@@ -51,31 +61,33 @@ namespace Reinforced.Tecture.Testing.Validation
         {
             var validateMethod = MethodDeclaration(
                     PredefinedType(Token(SyntaxKind.VoidKeyword).WithTrailingTrivia(Space)),
-                    Identifier("Validate"))
-                .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword).WithLeadingTrivia(Formats.Tabs(2)).WithTrailingTrivia(Space)))
+                    Identifier(nameof(ValidationBase.Validate)))
+                .WithModifiers(TokenList(
+                    Token(SyntaxKind.ProtectedKeyword).WithLeadingTrivia(Formats.Tabs(2)).WithTrailingTrivia(Space),
+                    Token(SyntaxKind.OverrideKeyword).WithTrailingTrivia(Space)
+                    ))
                 .WithParameterList(
                     ParameterList(
                         SingletonSeparatedList(
                             Parameter(
                                     Identifier(StoryVariableId))
                                 .WithType(
-                                    IdentifierName(nameof(Trace)).WithTrailingTrivia(Space)))));
+                                    IdentifierName(nameof(TraceValidator)).WithTrailingTrivia(Space)))));
 
             validateMethod = validateMethod
-                .WithBody(Block(
-                    SingletonList<StatementSyntax>(
-                        ExpressionStatement(_chain))).Format());
+                .WithBody(Block(SeparatedList(_chain)).Format());
 
             return validateMethod;
         }
 
         private void FinishTest()
         {
-            _chain = InvocationExpression(
+            var ex = InvocationExpression(
                 MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                        _chain,
+                        IdentifierName(StoryVariableId),
                         IdentifierName(nameof(TraceValidator.TheEnd)))
-                    .WithOperatorToken(Token(SyntaxKind.DotToken).WithLeadingTrivia(Formats.Tabs(4))));
+                    );
+            _chain.Enqueue(ExpressionStatement(ex).WithLeadingTrivia(Formats.Tabs(4)).WithTrailingTrivia(LineFeed));
         }
 
 

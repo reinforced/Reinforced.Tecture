@@ -13,6 +13,7 @@ using Reinforced.Tecture.Testing.Data.SyntaxGeneration;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
 using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using CodeFormatter = Reinforced.Tecture.Testing.Validation.Format.CodeFormatter;
 
 namespace Reinforced.Tecture.Testing.Data
 {
@@ -28,6 +29,7 @@ namespace Reinforced.Tecture.Testing.Data
         {
             _cfg = cfg;
             _usings.Add(typeof(IEnumerable).Namespace);
+            _usings.Add(typeof(IEnumerable<>).Namespace);
             _usings.Add(typeof(ITestDataRecord<>).Namespace);
             var collectionStrategies1 = cfg._collectionStrategies ?? new CollectionStrategies();
             _tgr = new TypeGeneratorRepository(_hijack, collectionStrategies1);
@@ -144,14 +146,16 @@ namespace Reinforced.Tecture.Testing.Data
                 IdentifierName(nameof(ITestDataRecord.Description)),
                 TypeInitConstructor.Construct(typeof(string), trd.Description));
 
-            var data = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                IdentifierName(nameof(ITestDataRecord<int>.Data)),
-                InvocationExpression(IdentifierName(CurrentMethodName)));
+            //var data = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
+            //    IdentifierName(nameof(ITestDataRecord<int>.Data)),
+            //    InvocationExpression(IdentifierName(CurrentMethodName)));
+            var ivnokeGetData = InvocationExpression(IdentifierName(CurrentMethodName));
 
             var sto = (new SyntaxNodeOrToken[]
-                {hash, Token(SyntaxKind.CommaToken), description, Token(SyntaxKind.CommaToken), data});
+                {hash, Token(SyntaxKind.CommaToken), description});
 
             var init = ObjectCreationExpression(type)
+                .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(ivnokeGetData))))
                 .WithInitializer(InitializerExpression(SyntaxKind.ObjectInitializerExpression,
                     SeparatedList<ExpressionSyntax>(sto)));
 

@@ -16,7 +16,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <summary>Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor"></see>.</summary>
         public QueryHasher()
         {
-            
+
         }
 
         /// <summary>Dispatches the expression to one of the more specialized visit methods in this class.</summary>
@@ -30,7 +30,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             }
             else
             {
-                _box.Put((int) node.NodeType);
+                _box.Put((int)node.NodeType);
             }
             return base.Visit(node);
         }
@@ -63,23 +63,23 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
                 {
                     Visit(q.Expression);
                 }
-                
-                return base.VisitConstant(node);
+
+                return node;
             }
-            
+
             var type = node.Type;
 
             _box.Put(type.FullName);
             if (value != null)
             {
-               _box.Put(value);
+                _box.Put(value);
             }
             else
             {
                 _box.PutNull();
             }
 
-            return base.VisitConstant(node);
+            return node;
         }
 
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.GotoExpression"></see>.</summary>
@@ -87,7 +87,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitGoto(GotoExpression node)
         {
-            _box.Put((int) node.Kind);
+            _box.Put((int)node.Kind);
             return base.VisitGoto(node);
         }
 
@@ -120,14 +120,15 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             _box.Put((byte)mi.MemberType);
             _box.Put(mi.Name);
         }
-        
+
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression"></see>.</summary>
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitMember(MemberExpression node)
         {
             WriteMember(node.Member);
-            return base.VisitMember(node);
+            var r = base.VisitMember(node);
+            return r;
         }
 
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MemberAssignment"></see>.</summary>
@@ -145,11 +146,11 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         protected override MemberBinding VisitMemberBinding(MemberBinding node)
         {
             WriteMember(node.Member);
-            _box.Put((byte) node.BindingType);
+            _box.Put((byte)node.BindingType);
             return base.VisitMemberBinding(node);
         }
 
-       
+
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MemberListBinding"></see>.</summary>
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
@@ -166,7 +167,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
         {
             WriteMember(node.Member);
-            _box.Put((byte) node.BindingType);
+            _box.Put((byte)node.BindingType);
             return base.VisitMemberMemberBinding(node);
         }
 

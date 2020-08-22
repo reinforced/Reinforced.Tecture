@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Reinforced.Tecture.Testing.Stories
+namespace Reinforced.Tecture.Testing.Validation
 {
     public class TectureCheckException : TectureException
     {

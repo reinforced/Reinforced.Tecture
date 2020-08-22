@@ -6,7 +6,7 @@ using System.Text;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
-using Reinforced.Tecture.Testing.Stories;
+using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Tracing
 {

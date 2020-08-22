@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using System.Text;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Stories;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 

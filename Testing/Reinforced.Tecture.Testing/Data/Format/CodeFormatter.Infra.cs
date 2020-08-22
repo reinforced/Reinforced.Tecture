@@ -7,23 +7,6 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.Format
 {
-    class ContextScope : IDisposable
-    {
-        private readonly Stack<Type> _ctx;
-
-        public ContextScope(Stack<Type> ctx, Type c)
-        {
-            _ctx = ctx;
-            _ctx.Push(c);
-        }
-
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public void Dispose()
-        {
-            _ctx.Pop();
-        }
-    }
-
     public partial class CodeFormatter
     {
         private readonly Stack<Type> _ctx = new Stack<Type>();

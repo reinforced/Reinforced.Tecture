@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Stories;
 using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Testing.Generation

@@ -86,6 +86,8 @@ namespace Reinforced.Tecture.Entry
         /// <returns></returns>
         public Trace EndTrace()
         {
+            if (_tc==null)
+                throw new TectureException(".EndTrace is called, but trace has not been collected");
             return _tc.Finish();
         }
 

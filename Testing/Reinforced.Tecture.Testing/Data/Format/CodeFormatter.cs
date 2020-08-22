@@ -6,13 +6,6 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.Format
 {
-    enum Context
-    {
-        None,
-        ObjectInitialization
-    }
-
-
     public partial class CodeFormatter : CSharpSyntaxRewriter
     {
         /// <summary>Called when the visitor visits a CompilationUnitSyntax node.</summary>
@@ -85,6 +78,19 @@ namespace Reinforced.Tecture.Testing.Data.Format
             return r;
         }
 
+        /// <summary>Called when the visitor visits a ParameterSyntax node.</summary>
+        public override SyntaxNode VisitParameter(ParameterSyntax node)
+        {
+            var r = base.VisitParameter(node) as ParameterSyntax;
+
+            return r.WithType(r.Type.WithTrailingTrivia(Space));
+        }
+
+        /// <summary>Called when the visitor visits a ArgumentSyntax node.</summary>
+        public override SyntaxNode VisitArgument(ArgumentSyntax node)
+        {
+            return base.VisitArgument(node);
+        }
 
         /// <summary>Called when the visitor visits a MethodDeclarationSyntax node.</summary>
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
@@ -118,6 +124,8 @@ namespace Reinforced.Tecture.Testing.Data.Format
             {
                 case SyntaxKind.PrivateKeyword:
                 case SyntaxKind.PublicKeyword:
+                case SyntaxKind.ProtectedKeyword:
+                case SyntaxKind.StaticKeyword:
                 case SyntaxKind.ClassKeyword:
                 case SyntaxKind.OverrideKeyword:
                 case SyntaxKind.InternalKeyword:

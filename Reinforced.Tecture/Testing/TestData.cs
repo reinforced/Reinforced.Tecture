@@ -2,12 +2,13 @@
 
 namespace Reinforced.Tecture.Testing
 {
+    /// <summary>
+    /// Test data source supplying test data for each request
+    /// </summary>
     public interface ITestDataSource
     {
         T Get<T>(string hash);
     }
-
-
 
     public class TestDataTypeMismatchException : Exception
     {

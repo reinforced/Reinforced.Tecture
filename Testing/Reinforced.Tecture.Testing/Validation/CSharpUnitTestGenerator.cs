@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Generation;
-using Reinforced.Tecture.Testing.Stories;
 using static Reinforced.Tecture.Testing.Validation.Extensions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
@@ -15,11 +14,11 @@ namespace Reinforced.Tecture.Testing.Validation
 {
     partial class CSharpUnitTestGenerator : IGenerating, IValidationGenerator
     {
-        private const string StoryVariableId = "story";
+        private const string StoryVariableId = "flow";
         private readonly string TestClassName;
         private readonly string TestNamespaceName;
 
-        private ExpressionSyntax _chain;
+        private Queue<StatementSyntax> _chain;
         private HashSet<string> _usings;
         private HashSet<string> _staticUsings;
 
@@ -40,12 +39,13 @@ namespace Reinforced.Tecture.Testing.Validation
         private void EnsureUsingStatic(MethodInfo mi)
         {
             if (mi.DeclaringType==null) return;
-            if (!_staticUsings.Contains(mi.DeclaringType.Namespace)) _staticUsings.Add(mi.DeclaringType.Namespace);
+            var fullName = $"{mi.DeclaringType.Namespace}.{mi.DeclaringType.Name}";
+            if (!_staticUsings.Contains(fullName)) _staticUsings.Add(fullName);
         }
 
         internal void Before()
         {
-            _chain = MakeEmptyChain(StoryVariableId);
+            _chain = new Queue<StatementSyntax>();
             _usings = new HashSet<string>();
             _staticUsings = new HashSet<string>();
         }
@@ -71,24 +71,23 @@ namespace Reinforced.Tecture.Testing.Validation
 
         private void Then(CommandBase command, List<InvocationExpressionSyntax> checks)
         {
-            _chain = InvocationExpression(
+            var ex = InvocationExpression(
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                            _chain,
-                            NameThenOf(command))
-                        .WithOperatorToken(Token(SyntaxKind.DotToken).WithLeadingTrivia(Formats.Tabs(4))))
-                .WithArgumentList(FormatThenArguments(checks))
-                .WithTrailingTrivia(LineFeed);
+                            IdentifierName(StoryVariableId),
+                            NameThenOf(command)))
+                .WithArgumentList(FormatThenArguments(checks));
+            _chain.Enqueue(ExpressionStatement(ex).WithTrailingTrivia(LineFeed).WithLeadingTrivia(Formats.Tabs(4)));
         }
 
         private GenericNameSyntax NameThenOf(CommandBase command)
         {
             var type = command.GetType();
             EnsureUsing(type);
+            var tn = type.TypeName(_usings);
             return GenericName(Identifier(nameof(TraceValidator.Then)))
                 .WithTypeArgumentList(
                     TypeArgumentList(
-                        SingletonSeparatedList<TypeSyntax>(
-                            IdentifierName(type.Name))));
+                        SingletonSeparatedList(tn)));
         }
 
 
@@ -129,12 +128,13 @@ namespace Reinforced.Tecture.Testing.Validation
 
         private void Skip()
         {
-            _chain = InvocationExpression(
+            var ex = InvocationExpression(
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                            _chain,
+                            IdentifierName(StoryVariableId),
                             IdentifierName(nameof(TraceValidator.SomethingHappens)))
-                        .WithOperatorToken(Token(SyntaxKind.DotToken).WithLeadingTrivia(Formats.Tabs(4))))
+                )
                 .WithTrailingTrivia(LineFeed);
+            _chain.Enqueue(ExpressionStatement(ex).WithLeadingTrivia(Formats.Tabs(4)));
         }
     }
 }

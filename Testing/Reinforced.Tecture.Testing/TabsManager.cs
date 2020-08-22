@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace Reinforced.Tecture.Testing.Data.Format
+namespace Reinforced.Tecture.Testing
 {
     class TabsManager
     {
