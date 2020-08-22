@@ -15,7 +15,12 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
         public EFCore_DirectSql_Saver(EFCore_DirectSql_CommandFeature feature)
         {
             _feature = feature;
-            _runner = new DirectSqlRunner(feature, Aux);
+            
+        }
+
+        protected override void OnRegister()
+        {
+            _runner = new DirectSqlRunner(_feature, Aux);
         }
 
         protected override void Save()
@@ -43,7 +48,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
             _runner.Dispose();
         }
 
-        private readonly DirectSqlRunner _runner;
+        private DirectSqlRunner _runner;
 
         /// <summary>
         /// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 

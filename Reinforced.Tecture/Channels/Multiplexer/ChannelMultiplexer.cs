@@ -168,6 +168,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
                 commandSavers[saverServingCommandType] = saver;
             }
+            saver.CallOnRegister();
         }
 
         private SaverBase GetSaverWithCommand(Type commandType, string channelId)

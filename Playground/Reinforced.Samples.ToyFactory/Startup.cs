@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Reinforced.Samples.ToyFactory.Data.Context;
+using Reinforced.Samples.ToyFactory.Data;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Entry;
@@ -37,7 +37,7 @@ namespace Reinforced.Samples.ToyFactory
             {
                 ILazyDisposable<ToyFactoryDbContext> ld = new LazyDisposable<ToyFactoryDbContext>(() => sp.GetService<ToyFactoryDbContext>());
 
-                TectureBuilder tb = new TectureBuilder();
+                var tb = new TectureBuilder();
                 tb.WithChannel<Db>(c =>
                 {
                     c.UseEfCoreOrm(ld);
@@ -55,16 +55,14 @@ namespace Reinforced.Samples.ToyFactory
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
+           
             app.UseRouting();
-
-            app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action}/{id?}");
             });
         }
     }

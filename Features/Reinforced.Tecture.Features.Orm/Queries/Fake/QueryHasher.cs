@@ -23,7 +23,14 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         public override Expression Visit(Expression node)
         {
-            _box.Put((int)node.NodeType);
+            if (node == null)
+            {
+                _box.PutNull();
+            }
+            else
+            {
+                _box.Put((int) node.NodeType);
+            }
             return base.Visit(node);
         }
 

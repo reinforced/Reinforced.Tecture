@@ -16,19 +16,24 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
     class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly AddCommandRunner _add;
-        private readonly DeleteCommandRunner _del;
-        private readonly UpdateCommandRunner _upd;
+        private AddCommandRunner _add;
+        private DeleteCommandRunner _del;
+        private UpdateCommandRunner _upd;
         private readonly RelateCommandRunner _rel;
         private readonly DerelateCommandRunner _drel;
         public EfCore_Orm_Saver(ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
+            
+            _rel = new RelateCommandRunner();
+            _drel = new DerelateCommandRunner();
+        }
+
+        protected override void OnRegister()
+        {
             _add = new AddCommandRunner(Aux, _dc);
             _del = new DeleteCommandRunner(Aux, _dc);
             _upd = new UpdateCommandRunner(Aux, _dc);
-            _rel = new RelateCommandRunner();
-            _drel = new DerelateCommandRunner();
         }
 
         /// <summary>

@@ -201,7 +201,8 @@ namespace Reinforced.Tecture.Query
 
         public void Put(string s)
         {
-            _bw.Write(s);
+            if (s==null) PutNull();
+            else _bw.Write(s);
         }
 
 

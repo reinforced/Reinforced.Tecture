@@ -39,9 +39,12 @@ namespace Reinforced.Tecture.Savers
             get { return _Aux; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        internal void CallOnRegister()
+        {
+            OnRegister();
+        }
+
+        protected abstract void OnRegister();
         protected abstract void Save();
 
         protected abstract Task SaveAsync();
