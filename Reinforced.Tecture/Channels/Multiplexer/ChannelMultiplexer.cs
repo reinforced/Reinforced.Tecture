@@ -28,7 +28,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         private readonly Dictionary<string, Dictionary<string, QueryFeature>> _channelFeaturesQuery
             = new Dictionary<string, Dictionary<string, QueryFeature>>();
 
-       
+
         internal void RegisterQueryFeature(Type channelType, Type queryFeatureType, QueryFeature qf)
         {
             Known(channelType);
@@ -50,6 +50,8 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             {
                 throw new TectureException($"Query feature {queryFeatureType.Name} is already implemented for {channelType.Name}");
             }
+
+            qf._aux = _auxilary.ForChannel(channelType);
         }
 
         internal TFeature GetQueryFeature<TChannel, TFeature>()
@@ -100,6 +102,8 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             {
                 throw new TectureException($"Command feature {queryFeatureType.Name} is already implemented for {channelType.Name}");
             }
+
+            cf._aux = _auxilary.ForChannel(channelType);
         }
 
         internal TFeature GetCommandFeature<TChannel, TFeature>()
@@ -142,7 +146,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         {
             Known(channelType);
             saver._Aux = _auxilary.ForChannel(channelType);
-            
+
             if (!_saversPerChannels.ContainsKey(channelType.FullName))
             {
                 _saversPerChannels[channelType.FullName] = new HashSet<SaverBase>();
@@ -215,7 +219,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         }
 
         #endregion
-        
+
 
         internal void ValidateConfiguredChannel<TChannel>()
         {

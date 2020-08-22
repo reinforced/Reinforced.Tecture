@@ -11,10 +11,10 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
     {
         private static RawQuery QueryCore(this Read<QueryChannel<Query>> s, LambdaExpression expr, params Type[] usedTypes)
         {
-            var rt = s.Feature(out Auxilary qs);
-            rt.ThrowCheckTypes(usedTypes);
+            var rt = s.Feature();
+            rt.Tooling.ThrowCheckTypes(usedTypes);
             var cmd = new Sql(expr);
-            return new RawQuery(cmd, rt, qs);
+            return new RawQuery(cmd, rt);
         }
 
         /// <summary>

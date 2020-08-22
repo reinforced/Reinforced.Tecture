@@ -13,13 +13,12 @@ namespace Reinforced.Tecture.Channels
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="r"></param>
-        /// <param name="a">Auxilary tools for queries</param>
         /// <returns></returns>
-        public static T Feature<T>(this Read<QueryChannel<T>> r, out Auxilary a) where T : QueryFeature
+        public static T Feature<T>(this Read<QueryChannel<T>> r) where T : QueryFeature
         {
             var mux = r as IQueryMultiplexer;
             
-            return mux.GetFeature<T>(out a);
+            return mux.GetFeature<T>();
         }
 
         public static T Feature<T>(this Write<CommandChannel<T>> w) where T : CommandFeature
@@ -34,13 +33,12 @@ namespace Reinforced.Tecture.Channels
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="r"></param>
-        /// <param name="a">Auxilary tools for queries</param>
         /// <returns></returns>
-        public static T PleaseFeature<T>(this Read r, out Auxilary a) where T : QueryFeature
+        public static T PleaseFeature<T>(this Read r) where T : QueryFeature
         {
             var mux = r as IQueryMultiplexer;
 
-            return mux.GetFeature<T>(out a);
+            return mux.GetFeature<T>();
         }
 
         

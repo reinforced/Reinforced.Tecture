@@ -5,7 +5,7 @@ namespace Reinforced.Tecture.Channels
 {
     interface IQueryMultiplexer
     {
-        TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature;
+        TFeature GetFeature<TFeature>() where TFeature : QueryFeature;
     }
 
     interface ICommandMultiplexer

@@ -20,16 +20,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -85,16 +83,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -150,16 +146,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -215,16 +209,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -280,16 +272,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -345,16 +335,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -410,16 +398,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}
@@ -475,16 +461,14 @@ namespace Reinforced.Tecture.Channels
 		 where TChannel : CanQuery
 	{
 		private readonly ChannelMultiplexer _cm;
-		private readonly AuxilaryContainer _a;
-		public SRead(ChannelMultiplexer cm, AuxilaryContainer a)
+		
+		public SRead(ChannelMultiplexer cm)
 		{
-			_cm = cm;
-			_a = a;
+			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>(out Auxilary a) where TFeature : QueryFeature 
+		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
 		{
-			a = _a.ForChannel(typeof(TChannel));
 			return _cm.GetQueryFeature<TChannel,TFeature>();
 		}
 	}

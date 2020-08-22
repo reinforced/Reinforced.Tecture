@@ -14,5 +14,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
         {
             Context = context;
         }
+
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public override void Dispose()
+        {
+            Context.Dispose();
+        }
     }
 }

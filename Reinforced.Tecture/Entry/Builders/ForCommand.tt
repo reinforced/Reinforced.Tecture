@@ -28,7 +28,7 @@ namespace Reinforced.Tecture.Entry.Builders
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
 		public static void ForCommand<TFeature, <#= GenericsStroke(i+1) #>>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<<#= GenericsStroke(i+1) #>> saver)
-            where TFeature : Produces<<#= GenericsStroke(i+1) #>>
+            where TFeature : CommandFeature, Produces<<#= GenericsStroke(i+1) #>>
             <#= Constraints(i+1, "CommandBase") #>
         {
             var holder = cf as MultiplexerRegistrationDecorator;

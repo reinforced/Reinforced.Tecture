@@ -9,7 +9,7 @@ using Reinforced.Tecture.Features.SqlStroke.Reveal.Visit;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
-    public class StrokeFeatureBase
+    public class StrokeToolingWrapper
     {
         private readonly IStrokeRuntime _runtime;
 
@@ -40,7 +40,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 
         private HashSet<Type> _types = null;
 
-        protected StrokeFeatureBase(IStrokeRuntime runtime)
+        internal StrokeToolingWrapper(IStrokeRuntime runtime)
         {
             _runtime = runtime;
         }

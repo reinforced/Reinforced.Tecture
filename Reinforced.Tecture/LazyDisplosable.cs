@@ -11,6 +11,8 @@ namespace Reinforced.Tecture
     public interface ILazyDisposable<out T> : IDisposable
     {
         T Value { get; }
+
+        Type ValueType { get; }
     }
 
     /// <summary>
@@ -53,6 +55,11 @@ namespace Reinforced.Tecture
 
                 return _value;
             }
+        }
+
+        public Type ValueType
+        {
+            get { return typeof(T); }
         }
 
         private bool _isObtained = false;

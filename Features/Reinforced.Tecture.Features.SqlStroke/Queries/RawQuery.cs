@@ -15,11 +15,11 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
 
         private readonly Auxilary _a;
 
-        internal RawQuery(Sql sql, Query runtime, Auxilary a)
+        internal RawQuery(Sql sql, Query runtime)
         {
             Sql = sql;
             _runtime = runtime;
-            _a = a;
+            _a = runtime.Aux;
         }
 
         public Sql Sql { get; }
@@ -31,7 +31,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             IEnumerable<T> result;
             if (_a.IsEvaluationNeeded)
             {
-                var cq = _runtime.Compile(Sql);
+                var cq = _runtime.Tooling.Compile(Sql);
                 result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
             }
             else
@@ -53,7 +53,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             IEnumerable<T> result;
             if (_a.IsEvaluationNeeded)
             {
-                var cq = _runtime.Compile(Sql);
+                var cq = _runtime.Tooling.Compile(Sql);
                 result = await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters);
             }
             else

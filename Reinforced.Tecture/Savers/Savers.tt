@@ -22,7 +22,7 @@ namespace Reinforced.Tecture.Savers
 	/// <summary>
 	/// Marking interface for feature being able to produce <#= (i+1) #> various commands
 	/// </summary>
-	public interface Produces<<#= GenericsStroke(i+1) #>> : CommandFeature
+	public interface Produces<<#= GenericsStroke(i+1) #>>
 		<#= Constraints(i+1,"CommandBase") #>
 	{ }
 

@@ -42,16 +42,6 @@ namespace Reinforced.Tecture.Features.Orm
         /// </summary>
         public QueryStats Stats { get; } = new QueryStats();
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public abstract void Dispose();
-
-        internal void SetAux(Auxilary qs)
-        {
-            if (Aux == null) Aux = qs;
-        }
-
-        protected Auxilary Aux { get; private set; }
-
         internal T Key<T>(IAddition<IPrimaryKey<T>> keyedAddition)
         {
             var a = (Add)keyedAddition;

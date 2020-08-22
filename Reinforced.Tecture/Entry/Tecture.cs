@@ -65,7 +65,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Data source instance</returns>
         public Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(_mx, _aux);
+            return new SRead<T>(_mx);
         }
 
         private TraceCollector _tc = null;

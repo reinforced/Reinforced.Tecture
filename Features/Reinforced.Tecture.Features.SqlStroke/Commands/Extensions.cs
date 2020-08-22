@@ -9,7 +9,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
     {
         private static Sql After(this Write s, LambdaExpression expr, params Type[] usedTypes)
         {
-            s.PleaseFeature<Command>().ThrowCheckTypes(usedTypes);
+            s.PleaseFeature<Command>().Tooling.ThrowCheckTypes(usedTypes);
             var cmd = new Sql(expr);
             s.Save.Enqueue(() => s.Put(cmd));
             return cmd;
@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
 
         private static Sql Before(this Write s, LambdaExpression expr, params Type[] usedTypes)
         {
-            s.PleaseFeature<Command>().ThrowCheckTypes(usedTypes);
+            s.PleaseFeature<Command>().Tooling.ThrowCheckTypes(usedTypes);
             var cmd = new Sql(expr);
             s.Put(cmd);
             return cmd;

@@ -31,7 +31,7 @@ where T<#= j+2 #> : class
 
         protected Read<T, <#= GenericsStroke(i+2) #>> From<T>() where T : CanQuery
         {
-            return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer, Aux);
+            return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer);
         }		
 
 		protected Write<T, <#= GenericsStroke(i+2) #>> To<T>() where T : CanCommand

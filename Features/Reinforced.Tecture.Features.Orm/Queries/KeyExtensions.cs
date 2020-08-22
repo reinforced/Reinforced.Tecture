@@ -18,8 +18,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2) Key<T1, T2>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
          
@@ -34,8 +33,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2, T3) Key<T1, T2, T3>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2, T3>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
          
@@ -51,8 +49,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2, T3, T4) Key<T1, T2, T3, T4>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2, T3, T4>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
          
@@ -69,8 +66,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2, T3, T4, T5) Key<T1, T2, T3, T4, T5>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2, T3, T4, T5>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
          
@@ -88,8 +84,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2, T3, T4, T5, T6) Key<T1, T2, T3, T4, T5, T6>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
          
@@ -108,8 +103,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2, T3, T4, T5, T6, T7) Key<T1, T2, T3, T4, T5, T6, T7>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6, T7>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
          
@@ -129,8 +123,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static (T1, T2, T3, T4, T5, T6, T7, T8) Key<T1, T2, T3, T4, T5, T6, T7, T8>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6, T7, T8>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
         

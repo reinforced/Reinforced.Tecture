@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2> To<T>() where T : CanCommand
@@ -45,7 +45,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2, T3> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2, T3>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2, T3> To<T>() where T : CanCommand
@@ -71,7 +71,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2, T3, T4> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2, T3, T4>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2, T3, T4> To<T>() where T : CanCommand
@@ -98,7 +98,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2, T3, T4, T5> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2, T3, T4, T5>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2, T3, T4, T5> To<T>() where T : CanCommand
@@ -126,7 +126,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2, T3, T4, T5, T6> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5, T6>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2, T3, T4, T5, T6>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2, T3, T4, T5, T6> To<T>() where T : CanCommand
@@ -155,7 +155,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2, T3, T4, T5, T6, T7> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5, T6, T7>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2, T3, T4, T5, T6, T7>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2, T3, T4, T5, T6, T7> To<T>() where T : CanCommand
@@ -185,7 +185,7 @@ namespace Reinforced.Tecture.Services {
 
         protected Read<T, T1, T2, T3, T4, T5, T6, T7, T8> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5, T6, T7, T8>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1, T2, T3, T4, T5, T6, T7, T8>(ChannelMultiplexer);
         }		
 
 		protected Write<T, T1, T2, T3, T4, T5, T6, T7, T8> To<T>() where T : CanCommand

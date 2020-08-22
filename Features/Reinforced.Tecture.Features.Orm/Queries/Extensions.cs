@@ -17,8 +17,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Query builder</returns>
         public static IQueryFor<T> Get<T>(this Read<QueryChannel<Query>> qr) where T : class
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return new QueryBuilder<T>(pr);
         }
 
@@ -48,8 +47,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         /// <returns>Primary key</returns>
         public static T Key<T>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T>> keyedAddition)
         {
-            var pr = qr.Feature(out Auxilary qs);
-            pr.SetAux(qs);
+            var pr = qr.Feature();
             return pr.Key(keyedAddition);
         }
 

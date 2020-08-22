@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Services
     {
         protected Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(ChannelMultiplexer, Aux);
+            return new SRead<T>(ChannelMultiplexer);
         }
 
         protected Write<T> To<T>() where T : CanCommand
@@ -31,7 +31,7 @@ namespace Reinforced.Tecture.Services
     {
         protected Read<T, T1> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1>(ChannelMultiplexer, Aux);
+            return new SRead<T, T1>(ChannelMultiplexer);
         }
 
         protected Write<T, T1> To<T>() where T : CanCommand

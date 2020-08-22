@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Savers
 	/// <summary>
 	/// Marking interface for feature being able to produce 1 various commands
 	/// </summary>
-	public interface Produces<TCommand1> : CommandFeature
+	public interface Produces<TCommand1>
 		where TCommand1 : CommandBase
 
 	{ }
@@ -59,7 +59,7 @@ namespace Reinforced.Tecture.Savers
 	/// <summary>
 	/// Marking interface for feature being able to produce 2 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2> : CommandFeature
+	public interface Produces<TCommand1, TCommand2>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 
@@ -116,7 +116,7 @@ where TCommand2 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 3 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -184,7 +184,7 @@ where TCommand3 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 4 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -263,7 +263,7 @@ where TCommand4 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 5 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -353,7 +353,7 @@ where TCommand5 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 6 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -454,7 +454,7 @@ where TCommand6 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 7 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -566,7 +566,7 @@ where TCommand7 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 8 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -689,7 +689,7 @@ where TCommand8 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 9 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -823,7 +823,7 @@ where TCommand9 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 10 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -968,7 +968,7 @@ where TCommand10 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 11 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -1124,7 +1124,7 @@ where TCommand11 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 12 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -1291,7 +1291,7 @@ where TCommand12 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 13 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -1469,7 +1469,7 @@ where TCommand13 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 14 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -1658,7 +1658,7 @@ where TCommand14 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 15 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
@@ -1858,7 +1858,7 @@ where TCommand15 : CommandBase
 	/// <summary>
 	/// Marking interface for feature being able to produce 16 various commands
 	/// </summary>
-	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16> : CommandFeature
+	public interface Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16>
 		where TCommand1 : CommandBase
 where TCommand2 : CommandBase
 where TCommand3 : CommandBase
