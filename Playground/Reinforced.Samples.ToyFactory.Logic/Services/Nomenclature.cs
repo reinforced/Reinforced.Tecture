@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Commands;
@@ -14,7 +15,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
     {
         private Nomenclature() { }
 
-        public IAddition<ToyType> CreateType(string name)
+        public async Task<IAddition<ToyType>> CreateType(string name)
         {
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))
             {
@@ -22,6 +23,8 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             }
             var tt = new ToyType() { Name = name };
             var ex = To<Db>().Add(tt).Annotate("Create new toy type");
+            await Save;
+            var tw = From<Db>().Get<ToyType>().All.First();
             return ex;
         }
 

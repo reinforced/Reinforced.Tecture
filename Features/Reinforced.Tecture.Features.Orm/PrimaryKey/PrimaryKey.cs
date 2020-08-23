@@ -53,54 +53,7 @@ namespace Reinforced.Tecture.Features.Orm.PrimaryKey
 
 	public static partial class Extensions
 	{
-        private static object ToTuple((Type,object)[] tupleValues)
-        {
-            if (tupleValues.Length == 1) return tupleValues[0].Item2;
- 
-            if(tupleValues.Length == 2)
-            {
-                var vt = typeof(System.Tuple<,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
- 
-            if(tupleValues.Length == 3)
-            {
-                var vt = typeof(System.Tuple<,,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
- 
-            if(tupleValues.Length == 4)
-            {
-                var vt = typeof(System.Tuple<,,,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
- 
-            if(tupleValues.Length == 5)
-            {
-                var vt = typeof(System.Tuple<,,,,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
- 
-            if(tupleValues.Length == 6)
-            {
-                var vt = typeof(System.Tuple<,,,,,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
- 
-            if(tupleValues.Length == 7)
-            {
-                var vt = typeof(System.Tuple<,,,,,,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
- 
-            if(tupleValues.Length == 8)
-            {
-                var vt = typeof(System.Tuple<,,,,,,,>).MakeGenericType(tupleValues.Select(x=>x.Item1).ToArray());
-                return Activator.CreateInstance(vt,tupleValues.Select(x=>x.Item2).ToArray());
-            }
-            
-            throw new Exception($"Cannot create tuple of {tupleValues.Length} values");
-        }
+        
  
 		       
         public static (T1, T2) Key<T1, T2>(this IPrimaryKey<T1, T2> k)

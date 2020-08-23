@@ -20,9 +20,9 @@ namespace Reinforced.Samples.ToyFactory.Tests
 
             var a = ctx.Do<Nomenclature>().CreateType("test type");
             ctx.Save();
-            var id = ctx.From<Db>().Key(a);
-            var toyType = ctx.From<Db>().Get<ToyType>().All.First();
-
+            var r = a.Result;
+            var id = ctx.From<Db>().Key(r);
+            
             Output.WriteLine(c.Text());
             //c.Validate<CreateTypeWorks_Validation>();
         }

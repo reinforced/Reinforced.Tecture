@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Reinforced.Tecture.Testing.Validation;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.Format
@@ -22,7 +23,14 @@ namespace Reinforced.Tecture.Testing.Data.Format
             {
                 if (!(st is EmptyStatementSyntax) && !(st is BlockSyntax))
                 {
-                    r = st.WithoutTrivia().WithLeadingTrivia(Tabs.BrTabs());
+                    if (!st.HasAnnotation(Annotations.IfStatement))
+                    {
+                        r = st.WithoutTrivia().WithLeadingTrivia(Tabs.BrTabs());
+                    }
+                    else
+                    {
+                        r = r.WithLeadingTrivia(Space);
+                    }
                 }
             }
 
@@ -35,9 +43,12 @@ namespace Reinforced.Tecture.Testing.Data.Format
                 r = nds.WithEqualsToken(Token(nds.EqualsToken.Kind()).WithLeadingTrivia(Space)
                     .WithTrailingTrivia(Space));
             }
+            
             _ctx.Pop();
             return r;
         }
+
+        
 
         private bool IsWithin<T>() where T:SyntaxNode
         {

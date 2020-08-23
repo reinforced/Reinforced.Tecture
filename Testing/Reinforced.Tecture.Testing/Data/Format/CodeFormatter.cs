@@ -90,11 +90,6 @@ namespace Reinforced.Tecture.Testing.Data.Format
             return r;
         }
 
-        /// <summary>Called when the visitor visits a ArgumentSyntax node.</summary>
-        public override SyntaxNode VisitArgument(ArgumentSyntax node)
-        {
-            return base.VisitArgument(node);
-        }
 
         /// <summary>Called when the visitor visits a MethodDeclarationSyntax node.</summary>
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
@@ -139,6 +134,7 @@ namespace Reinforced.Tecture.Testing.Data.Format
                 case SyntaxKind.ReturnKeyword:
                 case SyntaxKind.StructKeyword:
                 case SyntaxKind.NewKeyword:
+                case SyntaxKind.IfKeyword:
                 case SyntaxKind.YieldKeyword:
                     return r.WithTrailingTrivia(Space);
                 case SyntaxKind.OpenBraceToken:
@@ -166,6 +162,15 @@ namespace Reinforced.Tecture.Testing.Data.Format
                 return r.WithTrailingTrivia(LineFeed);
             }
             return base.VisitAssignmentExpression(node);
+        }
+
+        /// <summary>Called when the visitor visits a BinaryExpressionSyntax node.</summary>
+        public override SyntaxNode VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+
+            var r = base.VisitBinaryExpression(node) as BinaryExpressionSyntax;
+
+            return r.WithOperatorToken(r.OperatorToken.WithLeadingTrivia(Space).WithTrailingTrivia(Space));
         }
     }
 }

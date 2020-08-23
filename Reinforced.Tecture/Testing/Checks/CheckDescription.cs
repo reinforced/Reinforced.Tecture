@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Testing.Checks
 
         public abstract Type[] MethodTypeArgumentsEvaluator(CommandBase command);
 
-        public abstract IEnumerable<ICheckParameter> CheckParameters { get; }
+        public abstract IEnumerable<ICheckParameter> GetCheckParameters(CommandBase commandBase);
 
         internal static readonly Type[] EmptyTypes = new Type[0];
 

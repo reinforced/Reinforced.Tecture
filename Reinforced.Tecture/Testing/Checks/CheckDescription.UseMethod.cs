@@ -12,9 +12,21 @@ namespace Reinforced.Tecture.Testing.Checks
     public abstract partial class CheckDescription<TCommand> : CheckDescription where TCommand : CommandBase
     {
         private readonly List<ICheckParameter> _checkParameters = new List<ICheckParameter>();
-        public override IEnumerable<ICheckParameter> CheckParameters
+
+        protected List<ICheckParameter> CheckParameters
         {
             get { return _checkParameters; }
+        }
+
+        public override IEnumerable<ICheckParameter> GetCheckParameters(CommandBase commandBase)
+        {
+            if (commandBase is TCommand tc) return GetCheckParameters(tc);
+            throw new TectureException($"Command type mismatch: ${typeof(TCommand).Name} expected but {commandBase?.GetType().Name} got");
+        }
+
+        protected virtual IEnumerable<ICheckParameter> GetCheckParameters(TCommand commandBase)
+        {
+            return _checkParameters;
         }
 
         protected MethodInfo UseMethod(
@@ -97,19 +109,19 @@ namespace Reinforced.Tecture.Testing.Checks
         {
             if (invex.Object == annotator)
             {
-
                 if (invex.Method == AnnotatorMethods.AssertionsMethod)
                 {
-                    var le = Expression.Lambda(invex.Arguments[0], command).Compile();
+                    var conv = Expression.Convert(invex.Arguments[0], typeof(object));
+                    var lamb = Expression.Lambda(conv, command);
+                    var le = lamb.Compile();
                     var cA = new AssertionCheckParameter()
                     {
-                        Extractor = null,// (Func<CommandBase, object>)le,
+                        Extractor = le,
                         Type = invex.Arguments[0].Type
                     };
                     _checkParameters.Add(cA);
                     return;
                 }
-
             }
 
             var lambda = Expression.Lambda(invex, command).Compile();

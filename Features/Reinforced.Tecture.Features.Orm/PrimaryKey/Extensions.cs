@@ -37,5 +37,32 @@ namespace Reinforced.Tecture.Features.Orm.PrimaryKey
             var pi = lex.AsPropertyExpression();
             return (T) pi.GetValue(target);
         }
+        internal static IEnumerable<T> FromTuple<T>(object tuple)
+        {
+            var tupleType = tuple.GetType();
+            if (typeof(T).IsAssignableFrom(tupleType)) yield return (T) tuple;
+            else
+            {
+                var r = tupleType.GetProperties(BindingFlags.Public | BindingFlags.GetProperty |
+                                                 BindingFlags.Instance)
+                    .Where(x=>x.Name.StartsWith("Item"))
+                    .OrderBy(x=>x.Name)
+                    .Select(p=>(T)p.GetValue(tuple));
+                foreach (var v in r)
+                {
+                    yield return v;
+                }
+            }
+        }
+
+        public static PropertyInfo[] KeyProperties(this IPrimaryKey pk)
+        {
+            var t = pk.GetType().GetProperty(nameof(IPrimaryKey<int>.PrimaryKey),BindingFlags.Public|BindingFlags.Instance);
+            
+            var keyProps = t.GetValue(pk);
+
+            var extr =  FromTuple<LambdaExpression>(keyProps).Select(x => x.AsPropertyExpression());
+            return extr.ToArray();
+        }
     }
 }
