@@ -136,9 +136,11 @@ namespace Reinforced.Tecture.Testing.Data.Format
                 case SyntaxKind.NewKeyword:
                 case SyntaxKind.IfKeyword:
                 case SyntaxKind.YieldKeyword:
+                case SyntaxKind.CommaToken:
                     return r.WithTrailingTrivia(Space);
                 case SyntaxKind.OpenBraceToken:
                 case SyntaxKind.CloseBraceToken:
+                case SyntaxKind.ColonToken:
                     return r.WithTrailingTrivia(Space).WithLeadingTrivia(Space);
             }
             return r;
