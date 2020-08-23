@@ -82,8 +82,12 @@ namespace Reinforced.Tecture.Testing.Data.Format
         public override SyntaxNode VisitParameter(ParameterSyntax node)
         {
             var r = base.VisitParameter(node) as ParameterSyntax;
+            if (r.Type != null)
+            {
+                r = r.WithType(r.Type.WithTrailingTrivia(Space));
+            }
 
-            return r.WithType(r.Type.WithTrailingTrivia(Space));
+            return r;
         }
 
         /// <summary>Called when the visitor visits a ArgumentSyntax node.</summary>

@@ -4,7 +4,7 @@ using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
-using static Reinforced.Tecture.Testing.Checks.CommonChecks;
+using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
 {
@@ -14,7 +14,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
 			{ 
 				flow.Then<Add<ToyType>>
 				(
-					Add<ToyType>(),
+					Add<ToyType>(@"Create new toy type"),
 					Annotated(@"Create new toy type")
 				);
 				flow.Then<Save>

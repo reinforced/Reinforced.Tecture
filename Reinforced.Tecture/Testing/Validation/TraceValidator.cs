@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Checks;
+using Reinforced.Tecture.Testing.BuiltInChecks;
 using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Testing.Validation

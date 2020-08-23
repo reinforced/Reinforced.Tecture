@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
+using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Services;
-using Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
@@ -18,14 +16,15 @@ namespace Reinforced.Samples.ToyFactory.Tests
         [Fact]
         public void CreateTypeWorks()
         {
-            using var c = Case<CreateTypeWorks_TestData>(out ITecture ctx);
+            using var c = Case(out ITecture ctx);
 
             var a = ctx.Do<Nomenclature>().CreateType("test type");
             ctx.Save();
             var id = ctx.From<Db>().Key(a);
+            var toyType = ctx.From<Db>().Get<ToyType>().All.First();
 
             Output.WriteLine(c.Text());
-            c.Validate<CreateTypeWorks_Validation>();
+            //c.Validate<CreateTypeWorks_Validation>();
         }
 
         public NomenclatureTests(ITestOutputHelper helper) : base(helper)

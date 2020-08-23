@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Testing.Checks;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Validation
@@ -27,24 +27,7 @@ namespace Reinforced.Tecture.Testing.Validation
             return result;
         }
 
-        private IEnumerable<ExpressionSyntax> ProduceArguments(CommandBase command, CheckDescription desc)
-        {
-            var args = desc.MethodArgumentsEvaluator(command);
-            foreach (var o in args)
-            {
-                if (o != null)
-                {
-                    var t = o.GetType();
-                    EnsureUsing(t);
-                    yield return TypeInitConstructor.Construct(t, o);
-                }
-                else
-                {
-                    yield return LiteralExpression(SyntaxKind.NullLiteralExpression);
-                }
-            }
-        }
-
+        
         private InvocationExpressionSyntax ProduceInvoke(CommandBase command, CheckDescription desc)
         {
             EnsureUsingStatic(desc.Method);

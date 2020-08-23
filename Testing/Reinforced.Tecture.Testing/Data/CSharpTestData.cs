@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Query;
 
@@ -23,6 +25,32 @@ namespace Reinforced.Tecture.Testing.Data
         protected CSharpTestData(bool hashOnlyWarn = false)
         {
             _hashOnlyWarn = hashOnlyWarn;
+        }
+
+        public T New<T>()
+        {
+            try
+            {
+                return Activator.CreateInstance<T>();
+            }
+            catch (Exception ex)
+            {
+                return (T) typeof(T).InstanceNonpublic();
+            }
+        }
+
+        public void Set<T, V>(T target, Expression<Func<T, V>> prop, V value)
+        {
+            if (prop.Body is MemberExpression mex)
+            {
+                if (mex.Member is PropertyInfo pi)
+                {
+                    if (pi.CanWrite)
+                    {
+                        pi.SetValue(target, value);
+                    }
+                }
+            }
         }
 
         public abstract IEnumerable<ITestDataRecord> GetRecords();

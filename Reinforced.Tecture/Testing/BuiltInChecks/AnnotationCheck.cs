@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Commands;
+﻿using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Validation;
 
-namespace Reinforced.Tecture.Testing.Checks
+namespace Reinforced.Tecture.Testing.BuiltInChecks
 {
     public class AnnotationCheck : CommandCheck<CommandBase>
     {

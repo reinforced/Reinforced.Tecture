@@ -3,7 +3,7 @@ using System.IO;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Testing.Checks;
 using Reinforced.Tecture.Testing;
-using Reinforced.Tecture.Testing.Checks;
+using Reinforced.Tecture.Testing.BuiltInChecks;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 

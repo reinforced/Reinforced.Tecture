@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Testing.Data;
-using Reinforced.Tecture.Testing.Generation;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 

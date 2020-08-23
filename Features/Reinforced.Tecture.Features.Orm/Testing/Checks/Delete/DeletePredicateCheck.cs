@@ -26,6 +26,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Delete
                 return
                     $"expected removed entity of type {typeof(T).Name} and {_explanation}, but got one of {command.EntityType.Name}";
             }
+            if (string.IsNullOrEmpty(_explanation)) return $"deleted {typeof(T).Name} does not meet conditions";
             return $"expected removed entity {_explanation}, but seems that it does not";
         }
 

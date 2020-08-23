@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Text;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Checks;
-using Reinforced.Tecture.Tracing;
 
-namespace Reinforced.Tecture.Testing.Generation
+namespace Reinforced.Tecture.Testing.Checks
 {
     /// <summary>
     /// Implement 

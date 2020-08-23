@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Commands.Exact;
-using Reinforced.Tecture.Testing.Generation;
-
-namespace Reinforced.Tecture.Testing.Checks
+﻿namespace Reinforced.Tecture.Testing.BuiltInChecks
 {
     /// <summary>
     /// Set of core story checks

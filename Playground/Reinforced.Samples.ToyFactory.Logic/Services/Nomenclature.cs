@@ -14,7 +14,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
     {
         private Nomenclature() { }
 
-        public IAddition<ToyType> CreateType(String name)
+        public IAddition<ToyType> CreateType(string name)
         {
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))
             {
@@ -22,6 +22,18 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             }
             var tt = new ToyType() { Name = name };
             var ex = To<Db>().Add(tt).Annotate("Create new toy type");
+            return ex;
+        }
+
+        public IAddition<Resource> CreateResource(string name)
+        {
+            if (From<Db>().Get<Resource>().All.Describe("check resource existence").Any(x => x.Name == name))
+            {
+                throw new Exception($"Cannot add resource '{name}' because it already exists");
+            }
+
+            var res = new Resource() { Name = name };
+            var ex = To<Db>().Add(res).Annotate("Create new resource");
             return ex;
         }
     }

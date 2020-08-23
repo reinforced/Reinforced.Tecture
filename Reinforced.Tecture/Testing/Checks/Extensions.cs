@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Text;
-using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Validation;
-using Reinforced.Tecture.Tracing;
+﻿using Reinforced.Tecture.Commands;
 
-namespace Reinforced.Tecture.Testing.Generation
+namespace Reinforced.Tecture.Testing.Checks
 {
     public static class Extensions
     {

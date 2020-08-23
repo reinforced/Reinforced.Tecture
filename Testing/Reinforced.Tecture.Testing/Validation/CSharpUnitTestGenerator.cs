@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Tracing;
 using static Reinforced.Tecture.Testing.Validation.Extensions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;

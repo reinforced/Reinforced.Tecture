@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Commands.Exact;
-using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Tracing;
 
-namespace Reinforced.Tecture.Testing.Checks
+namespace Reinforced.Tecture.Testing.BuiltInChecks
 {
     public static class Descriptions
     {
@@ -26,29 +23,19 @@ namespace Reinforced.Tecture.Testing.Checks
     sealed class AnnotationCheckDescription : CheckDescription<CommandBase>
     {
         public override MethodInfo Method =>
-            UseMethod(() => CommonChecks.Annotated(null));
-
-        protected override object[] GetArguments(CommandBase command)
-        {
-            return new[] { command.Annotation };
-        }
+            UseMethod((a, c) => CommonChecks.Annotated(c.Annotation));
     }
 
     sealed class CommentCheckDescription : CheckDescription<Comment>
     {
         public override MethodInfo Method =>
-            UseMethod(() => CommonChecks.Comment(null));
-
-        protected override object[] GetArguments(Comment command)
-        {
-            return new[] { command.Annotation };
-        }
+            UseMethod((a, c) => CommonChecks.Comment(c.Annotation));
     }
 
     sealed class SaveCheckDescription : CheckDescription<Save>
     {
         public override MethodInfo Method =>
-            UseMethod(() => CommonChecks.Saved());
+            UseMethod((a, c) => CommonChecks.Saved());
     }
 
 }

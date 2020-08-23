@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Features.Orm.Testing.Checks.Add;
 using Reinforced.Tecture.Features.Orm.Testing.Checks.Delete;
-using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Testing.Checks;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks
 {

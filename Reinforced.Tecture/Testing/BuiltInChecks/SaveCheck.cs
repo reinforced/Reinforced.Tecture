@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Testing.Validation;
+﻿using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 
-namespace Reinforced.Tecture.Testing.Checks
+namespace Reinforced.Tecture.Testing.BuiltInChecks
 {
     public class SaveCheck : CommandCheck<Save>
     {

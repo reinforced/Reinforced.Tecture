@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
+using Reinforced.Tecture.Testing.Validation;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
@@ -15,12 +18,27 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
     {
         private readonly TypeGeneratorRepository _tgr;
 
+        private IEnumerable<PropertyInfo> GetProperties()
+        {
+            var props = TypeRef.GetProperties(BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.Instance);
+            foreach (var propertyInfo in props)
+            {
+                if (typeof(LambdaExpression).IsAssignableFrom(propertyInfo.PropertyType))
+                    continue;
+                if (typeof(Task).IsAssignableFrom(propertyInfo.PropertyType))
+                    continue;
+                if (typeof(Delegate).IsAssignableFrom(propertyInfo.PropertyType))
+                    continue;
+                yield return propertyInfo;
+            }
+
+        }
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
         public Generator(Type typeRef, TypeGeneratorRepository tgr)
         {
             TypeRef = typeRef;
             _defaultInstance = Activator.CreateInstance(typeRef);
-            var properties = typeRef.GetProperties(BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.Instance);
+            var properties = GetProperties();
             InlineProperties = properties.Where(x => x.PropertyType.IsInlineable()).ToArray();
             CollectionProperties = properties.Where(x => x.PropertyType.IsEnumerable() || (x.PropertyType.IsTuple() && !x.PropertyType.IsInlineable())).ToArray();
             NestedProperties =
@@ -57,9 +75,9 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             return t.Namespace;
         }
 
-        private List<ExpressionSyntax> ProduceInlineableProperties(object instance, GenerationContext context)
+        private List<StatementSyntax> ProduceInlineableProperties(string instanceName, object instance, GenerationContext context)
         {
-            List<ExpressionSyntax> initNodes = new List<ExpressionSyntax>();
+            List<StatementSyntax> initNodes = new List<StatementSyntax>();
 
             foreach (var propertyInfo in InlineProperties)
             {
@@ -68,12 +86,31 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 if (!Equals(defValue, value))
                 {
                     var pName = propertyInfo.Name;
-                    var ae = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                        IdentifierName(pName),
-                        TypeInitConstructor.Construct(propertyInfo.PropertyType, value)).WithTrailingTrivia(LineFeed);
+                    // "value"
+                    var propValue = TypeInitConstructor.Construct(propertyInfo.PropertyType, value);
 
+                    //Set<X,Y>
+                    var setWithArguments = IdentifierName(nameof(CSharpTestData.Set));
 
-                    initNodes.Add(ae);
+                    var vName = "x";
+                    var ident = IdentifierName(vName);
+                    // x.Property
+                    var memberAccess = MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                        ident, IdentifierName(pName));
+
+                    // x => x.Property
+                    var propLambda = SimpleLambdaExpression(Parameter(Identifier(vName)), memberAccess);
+
+                    // instance, x=>x.Property, "value"
+                    var arguments =
+                        SeparatedList<ArgumentSyntax>(new[] { Argument(IdentifierName(instanceName)), Argument(propLambda), Argument(propValue) }
+                            .ComaSeparated());
+
+                    //Set<X,Y>(x=>x.Property,"value")
+                    var invokation = InvocationExpression(setWithArguments)
+                        .WithArgumentList(ArgumentList(arguments));
+
+                    initNodes.Add(ExpressionStatement(invokation));
                     var u = ExtractEnumUsing(propertyInfo.PropertyType);
                     context.AddUsing(u);
                 }
@@ -141,7 +178,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
             }
 
             var collectionStrategy = tgr.CollectionStrategies.GetTupleStrategy(values.Select(x => x.Item1));
-            
+
             return collectionStrategy.Generate(variables, context.Usings);
         }
         internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context)
@@ -223,20 +260,12 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
             if (!context.DefinedVariable(instance, out string instanceName))
             {
-                var initNodes = ProduceInlineableProperties(instance, context);
+                var initNodes = ProduceInlineableProperties(instanceName, instance, context);
 
-                var inExp = InitializerExpression(SyntaxKind.ObjectInitializerExpression,
-                    SeparatedList(initNodes.ToArray()));
-
-                var result = ObjectCreationExpression(ParseTypeName(TypeRef.Name))
-                    .WithArgumentList(
-                        ArgumentList()
-                            .WithCloseParenToken(
-                                Token(
-                                    TriviaList(),
-                                    SyntaxKind.CloseParenToken,
-                                    TriviaList(LineFeed))))
-                    .WithInitializer(inExp);
+                var tn = t.TypeName(context.Usings);
+                var result = InvocationExpression(GenericName(nameof(CSharpTestData.New))
+                    .WithTypeArgumentList(TypeArgumentList(
+                        SingletonSeparatedList<TypeSyntax>(tn))));
 
                 var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
                     VariableDeclarator(Identifier(instanceName)
@@ -246,6 +275,10 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     .WithVariables(vbl));
 
                 context.Declarations.Enqueue(assign);
+                foreach (var nd in initNodes)
+                {
+                    context.Declarations.Enqueue(nd);
+                }
 
                 ProduceNestedProperties(instanceName, instance, context);
                 ProduceCollectionProperties(instanceName, instance, context);

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Reinforced.Tecture.Testing.Generation;
+using Reinforced.Tecture.Testing.Checks;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 {
     sealed class AddCheckDescription : CheckDescription<Commands.Add.Add>
     {
         public override MethodInfo Method =>
-            UseMethod(() => AddChecks.Add<object>(null));
+            UseMethod((a,c) => AddChecks.Add<object>(a.Assertions(c.Entity),c.Annotation));
 
         protected override Type[] GetTypeArguments(Commands.Add.Add command)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Reinforced.Tecture.Commands;
 
-namespace Reinforced.Tecture.Testing.Generation
+namespace Reinforced.Tecture.Testing.Checks
 {
     /// <summary>
     /// Checks configurator for particular command
