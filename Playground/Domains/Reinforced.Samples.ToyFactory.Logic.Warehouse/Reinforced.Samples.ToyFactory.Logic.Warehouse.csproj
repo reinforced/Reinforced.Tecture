@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj" />
+    <ProjectReference Include="..\..\..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
+    <ProjectReference Include="..\..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+    <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Logic.Channels\Reinforced.Samples.ToyFactory.Logic.Channels.csproj" />
+  </ItemGroup>
+
+</Project>

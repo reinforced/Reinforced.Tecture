@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 
 namespace Reinforced.Samples.ToyFactory.Data
 {
-    public class ToyFactoryDbContext : DbContext
+    public partial class ToyFactoryDbContext : DbContext
     {
         private const string DefaultConnection =
-            @"Data Source=.\MSSQL2017;Initial Catalog=ToyFactory;Integrated Security=True";
+            @"Data Source=.\SQLEXPRESS;Initial Catalog=ToyFactory;Integrated Security=True";
 
         private readonly string _connectionString;
         public ToyFactoryDbContext(string connectionString)
@@ -23,10 +24,12 @@ namespace Reinforced.Samples.ToyFactory.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlueprintResources>().HasKey(x => new { x.BlueprintId, x.ResourceId });
+            OnWarehouseModelCreating(modelBuilder);
         }
         public DbSet<ToyType> ToyTypes { get; set; }
         public DbSet<Blueprint> Blueprints { get; set; }
-        public DbSet<Resource> Resources { get; set; }
         public DbSet<BlueprintResources> BlueprintResources { get; set; }
+
+        
     }
 }

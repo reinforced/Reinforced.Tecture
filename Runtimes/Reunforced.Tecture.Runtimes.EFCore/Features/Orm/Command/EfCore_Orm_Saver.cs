@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 using Reinforced.Tecture.Features.Orm.Commands.Delete;
+using Reinforced.Tecture.Features.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Features.Orm.Commands.Derelate;
 using Reinforced.Tecture.Features.Orm.Commands.Relate;
 using Reinforced.Tecture.Features.Orm.Commands.Update;
@@ -13,18 +14,20 @@ using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
-    class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate>
+    class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate, DeletePk>
     {
         private readonly ILazyDisposable<DbContext> _dc;
         private AddCommandRunner _add;
         private DeleteCommandRunner _del;
         private UpdateCommandRunner _upd;
+        private DeletePkCommandRunner _dpk;
         private readonly RelateCommandRunner _rel;
         private readonly DerelateCommandRunner _drel;
+
         public EfCore_Orm_Saver(ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
-            
+
             _rel = new RelateCommandRunner();
             _drel = new DerelateCommandRunner();
         }
@@ -34,6 +37,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             _add = new AddCommandRunner(Aux, _dc);
             _del = new DeleteCommandRunner(Aux, _dc);
             _upd = new UpdateCommandRunner(Aux, _dc);
+            _dpk = new DeletePkCommandRunner(Aux, _dc);
         }
 
         /// <summary>
@@ -113,6 +117,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         protected override CommandRunner<Derelate> GetRunner5(Derelate command)
         {
             return _drel;
+        }
+
+        protected override CommandRunner<DeletePk> GetRunner6(DeletePk command)
+        {
+            throw new NotImplementedException();
         }
     }
 }

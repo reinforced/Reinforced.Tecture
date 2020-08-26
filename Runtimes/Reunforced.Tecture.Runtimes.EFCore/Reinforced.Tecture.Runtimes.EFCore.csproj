@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\Reinforced.Tecture\TypeExtensions.cs" Link="Features\Orm\TypeExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.6" />
   </ItemGroup>

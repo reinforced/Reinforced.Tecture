@@ -1,5 +1,6 @@
 ﻿using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.BuiltInChecks
 {

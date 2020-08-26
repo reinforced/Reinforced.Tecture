@@ -5,12 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Commands.Exact;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Tracing
 {
     [CommandCode("QRY")]
-    public class QueryRecord : CommandBase
+    public class QueryRecord : CommandBase, ITracingOnly
     {
         public QueryRecord(Type channel, Type dataType, string hash, object result, bool isTestData)
         {
@@ -21,14 +21,29 @@ namespace Reinforced.Tecture.Tracing
             DataType = dataType;
         }
 
+        /// <summary>
+        /// Gets data type that is returned by the query
+        /// </summary>
         public Type DataType { get; }
 
+        /// <summary>
+        /// Gets channel this query was made to
+        /// </summary>
         public Type Channel { get; }
 
+        /// <summary>
+        /// Query hash
+        /// </summary>
         public string Hash { get; }
 
+        /// <summary>
+        /// Query result
+        /// </summary>
         public object Result { get; }
 
+        /// <summary>
+        /// Gets whether test (mock) data is returned
+        /// </summary>
         public bool IsTestData { get; }
 
         /// <summary>

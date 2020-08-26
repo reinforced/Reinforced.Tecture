@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Tracing
 {

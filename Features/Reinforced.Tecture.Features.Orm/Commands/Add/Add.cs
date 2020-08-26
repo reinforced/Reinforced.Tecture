@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Commands.Exact;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Add

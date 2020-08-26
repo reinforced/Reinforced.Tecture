@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
-using Reinforced.Tecture.Commands.Exact;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Commands
 {
@@ -68,7 +68,7 @@ namespace Reinforced.Tecture.Commands
         {
             foreach (var commandBase in commands)
             {
-                if (!(commandBase is Comment))
+                if (!(commandBase is ITracingOnly))
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r = _mx.GetRunner(commandBase);
@@ -82,7 +82,7 @@ namespace Reinforced.Tecture.Commands
         {
             foreach (var commandBase in commands)
             {
-                if (!(commandBase is Comment))
+                if (!(commandBase is ITracingOnly))
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r1 = _mx.GetRunner(commandBase);

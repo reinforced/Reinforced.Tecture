@@ -7,6 +7,7 @@ using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Tracing
 {

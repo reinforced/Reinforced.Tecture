@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Commands.Exact;
 using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.BuiltInChecks
 {

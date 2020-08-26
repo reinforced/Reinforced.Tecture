@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Commands.Exact;
 using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Tracing.Commands;
+using Reinforced.Tecture.Tracing.Commands.Cycles;
 
 
 namespace Reinforced.Tecture.Services
@@ -89,6 +90,16 @@ namespace Reinforced.Tecture.Services
         protected void Comment(string comment)
         {
             Pipeline.Enqueue(new Comment() { Annotation = comment });
+        }
+
+        protected ICycleTraceContext Cycle(string annotation = null)
+        {
+            if (Aux.TraceCollector != null)
+            {
+                return new CycleTraceContext(Pipeline,annotation);
+            }
+
+            return new FakeCycleTraceContext();
         }
     }
 

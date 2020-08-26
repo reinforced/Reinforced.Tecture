@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Reinforced.Samples.ToyFactory.Dto.Nomenclature;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
+using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
-using Reinforced.Samples.ToyFactory.Logic.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Services;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
@@ -34,7 +34,8 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             {
                 var a = _tecture.Do<Nomenclature>().CreateType(req.Name);
                 _tecture.Save();
-                result = _tecture.From<Db>().Key(a);
+                var x = a.Result;
+                result = _tecture.From<Db>().Key(x);
             }
             finally
             {

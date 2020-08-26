@@ -25,11 +25,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Samples.ToyFactory", "Playground\Reinforced.Samples.ToyFactory\Reinforced.Samples.ToyFactory.csproj", "{B1E33357-D290-430A-9038-E13C851DED1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Samples.ToyFactory.Logic", "Playground\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj", "{23C092B8-85BE-41CF-83EC-F96B07052053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Samples.ToyFactory.Logic", "Playground\Domains\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj", "{23C092B8-85BE-41CF-83EC-F96B07052053}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Samples.ToyFactory.Data", "Playground\Reinforced.Samples.ToyFactory.Data\Reinforced.Samples.ToyFactory.Data.csproj", "{6A4B1E7F-2759-4D87-82EC-70B56DB0397D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reinforced.Samples.ToyFactory.Tests", "Playground\Reinforced.Samples.ToyFactory.Tests\Reinforced.Samples.ToyFactory.Tests.csproj", "{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Samples.ToyFactory.Tests", "Playground\Reinforced.Samples.ToyFactory.Tests\Reinforced.Samples.ToyFactory.Tests.csproj", "{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Samples.ToyFactory.Logic.Warehouse", "Playground\Domains\Reinforced.Samples.ToyFactory.Logic.Warehouse\Reinforced.Samples.ToyFactory.Logic.Warehouse.csproj", "{EEAD5F39-CACA-43FC-A506-DEBA7634424F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{C26C1730-590B-416F-9258-8E3ABCB96388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reinforced.Samples.ToyFactory.Logic.Channels", "Playground\Domains\Reinforced.Samples.ToyFactory.Logic.Channels\Reinforced.Samples.ToyFactory.Logic.Channels.csproj", "{06E27764-68A9-4F27-8C95-DD8C340280CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +83,14 @@ Global
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,9 +102,12 @@ Global
 		{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B} = {0D7F1782-E14E-48CC-AA6D-85865D5F4E48}
 		{E39FB889-218C-4255-A7E6-C7D7D5C54153} = {ED1AC9EF-8C46-498B-995B-7437F35AC556}
 		{B1E33357-D290-430A-9038-E13C851DED1C} = {C424FF5E-3FC1-4C63-B9D9-31380D2AF82F}
-		{23C092B8-85BE-41CF-83EC-F96B07052053} = {C424FF5E-3FC1-4C63-B9D9-31380D2AF82F}
+		{23C092B8-85BE-41CF-83EC-F96B07052053} = {C26C1730-590B-416F-9258-8E3ABCB96388}
 		{6A4B1E7F-2759-4D87-82EC-70B56DB0397D} = {C424FF5E-3FC1-4C63-B9D9-31380D2AF82F}
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572} = {C424FF5E-3FC1-4C63-B9D9-31380D2AF82F}
+		{EEAD5F39-CACA-43FC-A506-DEBA7634424F} = {C26C1730-590B-416F-9258-8E3ABCB96388}
+		{C26C1730-590B-416F-9258-8E3ABCB96388} = {C424FF5E-3FC1-4C63-B9D9-31380D2AF82F}
+		{06E27764-68A9-4F27-8C95-DD8C340280CB} = {C26C1730-590B-416F-9258-8E3ABCB96388}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39A37FE4-0B08-4971-AEEB-2C01BBA315FD}

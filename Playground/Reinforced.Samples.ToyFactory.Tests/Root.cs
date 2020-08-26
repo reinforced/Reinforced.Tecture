@@ -23,7 +23,11 @@ namespace Reinforced.Samples.ToyFactory.Tests
         public static string FolderWithType(Type t)
         {
             var ns = t.Namespace;
-            if (ns.StartsWith(RootNamespace)) ns = ns.Substring(RootNamespace.Length, ns.Length - RootNamespace.Length );
+            if (ns.StartsWith(RootNamespace))
+            {
+                ns = ns.Substring(RootNamespace.Length, ns.Length - RootNamespace.Length);
+                ns = ns.TrimStart('.');
+            }
             var pth = ns.Replace('.', Path.DirectorySeparatorChar);
             return Path.Combine(ProjectRoot, pth);
         }

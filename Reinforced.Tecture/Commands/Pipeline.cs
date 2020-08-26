@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Commands
 {
@@ -8,6 +9,11 @@ namespace Reinforced.Tecture.Commands
     {
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
         internal TraceCollector TraceCollector = null;
+
+        /// <summary>
+        /// Gets count of commands in queue
+        /// </summary>
+        public int CommandsCount => _commandQueue.Count;
 
         public void EnqueueCommand(CommandBase cmd)
         {
@@ -33,8 +39,9 @@ namespace Reinforced.Tecture.Commands
 
                 cmd.Debug = dbg;
             }
+            
             TraceCollector?.Command(cmd);
-            _commandQueue.Enqueue(cmd);
+            if (!(cmd is ITracingOnly)) _commandQueue.Enqueue(cmd);
         }
 
         public TCommand Enqueue<TCommand>(TCommand cmd) where TCommand : CommandBase

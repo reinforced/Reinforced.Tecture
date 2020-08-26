@@ -1,5 +1,5 @@
-﻿using Reinforced.Tecture.Commands.Exact;
-using Reinforced.Tecture.Testing.Validation;
+﻿using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.BuiltInChecks
 {

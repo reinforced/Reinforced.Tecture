@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Commands.Exact;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Update
 {

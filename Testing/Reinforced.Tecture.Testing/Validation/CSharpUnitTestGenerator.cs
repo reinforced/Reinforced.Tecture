@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 using static Reinforced.Tecture.Testing.Validation.Extensions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 

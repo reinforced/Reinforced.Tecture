@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj" />
+    <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic.Channels\Reinforced.Samples.ToyFactory.Logic.Channels.csproj" />
+    <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic.Warehouse\Reinforced.Samples.ToyFactory.Logic.Warehouse.csproj" />
+    <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj" />
   </ItemGroup>
 
 </Project>
