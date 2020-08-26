@@ -17,7 +17,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.CreateBlueprintWorks
 				(
 					Add<Blueprint>(x=>
 					{ 
-						//if (x.ToyTypeId != 79) return false;
+						if (x.ToyTypeId != 79) return false;
 						return true;
 					}, @"Create blueprint"), 
 					Annotated(@"Create blueprint")

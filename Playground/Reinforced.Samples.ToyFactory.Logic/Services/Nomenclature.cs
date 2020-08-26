@@ -47,15 +47,15 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
         public IAddition<Blueprint> CreateBlueprint(int toyTypeId)
         {
             From<Db>().All<ToyType>().EnsureExists(toyTypeId);
-            
-            if (From<Db>().All<Blueprint>().Describe("check blueprint existence").Any(x => x.ToyTypeId==toyTypeId))
+
+            if (From<Db>().All<Blueprint>().Describe("check blueprint existence").Any(x => x.ToyTypeId == toyTypeId))
             {
                 throw new Exception($"Cannot add blueprint for toyType#{toyTypeId} because it already exists");
             }
 
-            var blueprint = new Blueprint();
+            var blueprint = new Blueprint() { ToyTypeId = toyTypeId };
             var toyType = From<Db>().Get<ToyType>().ById(toyTypeId);
-            
+
             var ex = To<Db>().Add(blueprint).Annotate("Create blueprint");
 
             To<Db>().Relate(blueprint, x => x.ToyType, toyType).Annotate("Ensure association with toy type");
