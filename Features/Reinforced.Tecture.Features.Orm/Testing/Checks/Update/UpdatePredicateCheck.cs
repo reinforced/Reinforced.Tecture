@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
                     $"expected updated entity of type {typeof(T).Name} and {_explanation}, but got one of {command.EntityType.Name}";
             }
             if (string.IsNullOrEmpty(_explanation)) return $"updated {typeof(T).Name} does not meet conditions";
-            return $"expected updated entity {_explanation}, but seems that it does not";
+            return $"update '{_explanation}' does not satisfy conditions";
         }
 
         protected override bool IsActuallyValid(Commands.Update.Update effect)

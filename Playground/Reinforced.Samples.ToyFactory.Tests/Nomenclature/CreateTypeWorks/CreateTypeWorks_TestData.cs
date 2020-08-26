@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Reinforced.Tecture.Testing.Data;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
+using Reinforced.Tecture.Testing.Data;
 
-namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
+namespace Reinforced.Samples.ToyFactory.Tests.Nomenclature.CreateTypeWorks
 {
 		class CreateTypeWorks_TestData : CSharpTestData
 		{

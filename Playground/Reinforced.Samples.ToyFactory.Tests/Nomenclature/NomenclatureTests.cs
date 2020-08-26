@@ -1,16 +1,13 @@
-﻿using System.Linq;
-using Reinforced.Samples.ToyFactory.Logic.Channels;
-using Reinforced.Samples.ToyFactory.Logic.Entities;
-using Reinforced.Samples.ToyFactory.Logic.Services;
-using Reinforced.Samples.ToyFactory.Tests.CreateBlueprintWorks;
-using Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks;
+﻿using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
+using Reinforced.Samples.ToyFactory.Tests.Nomenclature.CreateBlueprintWorks;
+using Reinforced.Samples.ToyFactory.Tests.Nomenclature.CreateTypeWorks;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Reinforced.Samples.ToyFactory.Tests
+namespace Reinforced.Samples.ToyFactory.Tests.Nomenclature
 {
 
     public class NomenclatureTests : TectureTestBase
@@ -20,7 +17,7 @@ namespace Reinforced.Samples.ToyFactory.Tests
         {
             using var c = Case<CreateTypeWorks_TestData>(out ITecture ctx);
 
-            var a = ctx.Do<Nomenclature>().CreateType("test type");
+            var a = ctx.Do<Logic.Services.Nomenclature>().CreateType("test type");
             ctx.Save();
             var r = a.Result;
             var id = ctx.From<Db>().Key(r);
@@ -34,7 +31,7 @@ namespace Reinforced.Samples.ToyFactory.Tests
         {
             using var c = Case<CreateBlueprintWorks_TestData>(out ITecture ctx);
             
-            var a = ctx.Do<Nomenclature>().CreateBlueprint(79);
+            var a = ctx.Do<Logic.Services.Nomenclature>().CreateBlueprint(79);
             ctx.Save();
 
             Output.WriteLine(c.Text());

@@ -1,12 +1,11 @@
-using System;
-using Reinforced.Tecture.Testing.Validation;
-using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
+using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing;
 using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 
-namespace Reinforced.Samples.ToyFactory.Tests.CreateTypeWorks
+namespace Reinforced.Samples.ToyFactory.Tests.Nomenclature.CreateTypeWorks
 {
 		class CreateTypeWorks_Validation : ValidationBase
 		{

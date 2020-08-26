@@ -1,13 +1,12 @@
-using System;
-using Reinforced.Tecture.Testing.Validation;
-using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 using Reinforced.Tecture.Features.Orm.Commands.Relate;
+using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing;
 using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 
-namespace Reinforced.Samples.ToyFactory.Tests.CreateBlueprintWorks
+namespace Reinforced.Samples.ToyFactory.Tests.Nomenclature.CreateBlueprintWorks
 {
 		class CreateBlueprintWorks_Validation : ValidationBase
 		{

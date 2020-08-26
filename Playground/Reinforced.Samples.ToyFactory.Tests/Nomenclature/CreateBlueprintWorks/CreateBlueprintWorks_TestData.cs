@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Reinforced.Tecture.Testing.Data;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
+using Reinforced.Tecture.Testing.Data;
 
-namespace Reinforced.Samples.ToyFactory.Tests.CreateBlueprintWorks
+namespace Reinforced.Samples.ToyFactory.Tests.Nomenclature.CreateBlueprintWorks
 {
 		class CreateBlueprintWorks_TestData : CSharpTestData
 		{
