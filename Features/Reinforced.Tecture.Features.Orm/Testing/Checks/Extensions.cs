@@ -7,7 +7,7 @@ using Reinforced.Tecture.Testing.Checks;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks
 {
-    public static class TestGeneratorExtensions
+    public static class Extensions
     {
         public static void CheckOrm(this UnitTestGenerator tg)
         {

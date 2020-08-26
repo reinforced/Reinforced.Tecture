@@ -12,7 +12,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Relate
             if (secondary == null) throw new TectureOrmFeatureException("Relation between null and entity is impossible. Use Derelate instead");
 
             var primaryType = primary.GetType();
-            var secondaryType = primary.GetType();
+            var secondaryType = secondary.GetType();
             var fe = channel.Feature();
 
             if (!fe.IsSubjectCore(primaryType)) throw new TectureOrmFeatureException($"Entity {primary} can not be referenced in corresponding service");

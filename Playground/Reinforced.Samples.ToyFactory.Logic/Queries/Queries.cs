@@ -11,6 +11,15 @@ namespace Reinforced.Samples.ToyFactory.Logic.Queries
 {
     public static class Queries
     {
+        public static void EnsureExists<T>(this IQueryable<T> q, int id)
+            where T : IEntity
+        {
+            if (!q.Describe($"Exists {typeof(T).Name} with Id #{id}").Any(x => x.Id == id))
+            {
+                throw new Exception($"{typeof(T).Name} with id {id} does not exist");
+            }
+        }
+
         public static T ById<T>(this IQueryFor<T> q, int id)
             where T : IEntity
         {

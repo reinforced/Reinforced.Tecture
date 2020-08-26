@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
@@ -15,7 +16,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         /// <param name="cmd">Side effect</param>
         protected override void Run(Relate cmd)
         {
-            throw new NotImplementedException();
+            var prop = cmd.PrimaryType.GetProperty(cmd.ForeignKeySpecifier,
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
+            prop.SetValue(cmd.Primary,cmd.Secondary);
         }
 
         /// <summary>

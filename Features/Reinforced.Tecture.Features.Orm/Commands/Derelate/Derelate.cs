@@ -12,10 +12,6 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Derelate
 
         public Type PrimaryType { get; internal set; }
 
-        public object Secondary { get; internal set; }
-
-        public Type SecondaryType { get; internal set; }
-
         public string ForeignKeySpecifier { get; internal set; }
 
         /// <summary>
@@ -33,10 +29,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Derelate
                 var primaryDescription = $"entity of type {PrimaryType.Name}";
                 if (Primary is IDescriptive e) primaryDescription = e.Descibe();
 
-                var secondaryyDescription = $"entity of type {SecondaryType.Name}";
-                if (Secondary is IDescriptive e2) secondaryyDescription = e2.Descibe();
-
-                tw.Write($"Remove reference from {secondaryyDescription} to {primaryDescription} by {ForeignKeySpecifier}");
+                tw.Write($"Remove reference to {primaryDescription} by {ForeignKeySpecifier}");
             }
 
             if (Debug != null) tw.Write($" ({Debug.Location})");

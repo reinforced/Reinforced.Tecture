@@ -22,6 +22,18 @@ namespace Reinforced.Tecture.Features.Orm.Queries
         }
 
         /// <summary>
+        /// Retrieves query builder for ORM query channel
+        /// </summary>
+        /// <typeparam name="T">Type of entity</typeparam>
+        /// <param name="qr">Query channel</param>
+        /// <returns>Query builder</returns>
+        public static IQueryable<T> All<T>(this Read<QueryChannel<Query>> qr) where T : class
+        {
+            var pr = qr.Feature();
+            return pr.GetSet<T>();
+        }
+
+        /// <summary>
         /// Stores query description for testing purposes
         /// </summary>
         /// <typeparam name="T">Query item type</typeparam>

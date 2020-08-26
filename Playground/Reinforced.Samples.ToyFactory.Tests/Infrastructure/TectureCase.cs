@@ -2,6 +2,7 @@
 using System.IO;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Testing.Checks;
+using Reinforced.Tecture.Features.SqlStroke.Testing;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.BuiltInChecks;
 using Reinforced.Tecture.Testing.Validation;
@@ -43,8 +44,9 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
             var className = $"{_caseName}_Validation";
             var go = Trace.GenerateUnitTest(className, _ns, g =>
             {
-                g.Basics();
                 g.CheckOrm();
+                g.CheckSql();
+                g.Basics();
             });
             
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));

@@ -18,14 +18,9 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Derelate
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
     <# for (int j=0;j<i;j++) {	#>         
-        public static Derelate Derelate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,TField>> key, TField derelated)
+        public static Derelate Derelate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,TField>> key)
         {
-            return DeRelateCore(c, entity, GetKey(key), derelated);
-        }
-
-        public static Derelate Derelate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,IEnumerable<TField>>> key, TField derelated)
-        {
-            return DeRelateCore(c, entity, GetKey(key), derelated);
+            return DeRelateCore(c, entity, GetKey(key));
         }
        
     <# } #>
