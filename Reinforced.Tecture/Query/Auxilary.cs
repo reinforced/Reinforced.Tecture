@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Channels.Multiplexer;
+using Reinforced.Tecture.Cloning;
 
 namespace Reinforced.Tecture.Query
 {
@@ -58,11 +59,11 @@ namespace Reinforced.Tecture.Query
             {
                 if (_container._testDataHolder.Instance != null)
                 {
-                    _container.TraceCollector.TestQuery(_channelType, typeof(T), hash, result, description);
+                    _container.TraceCollector.TestQuery(_channelType, typeof(T), hash, result.DeepClone(), description);
                 }
                 else
                 {
-                    _container.TraceCollector.Query(_channelType, typeof(T), hash, result, description);
+                    _container.TraceCollector.Query(_channelType, typeof(T), hash, result.DeepClone(), description);
                 }
                 return;
             }

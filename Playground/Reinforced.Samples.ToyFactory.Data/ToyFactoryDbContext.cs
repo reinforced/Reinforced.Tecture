@@ -7,7 +7,7 @@ namespace Reinforced.Samples.ToyFactory.Data
     public partial class ToyFactoryDbContext : DbContext
     {
         private const string DefaultConnection =
-            @"Data Source=.\SQLEXPRESS;Initial Catalog=ToyFactory;Integrated Security=True";
+            @"Data Source=.\MSSQL2017;Initial Catalog=ToyFactory;Integrated Security=True";
 
         private readonly string _connectionString;
         public ToyFactoryDbContext(string connectionString)
