@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Relate
@@ -39,6 +40,22 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Relate
             }
 
             if (Debug != null) tw.Write($" ({Debug.Location})");
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Relate()
+            {
+                PrimaryType = PrimaryType,
+                SecondaryType = SecondaryType,
+                Primary = Primary.DeepClone(),
+                Secondary = Secondary.DeepClone(),
+                ForeignKeySpecifier = ForeignKeySpecifier
+            };
         }
     }
 }

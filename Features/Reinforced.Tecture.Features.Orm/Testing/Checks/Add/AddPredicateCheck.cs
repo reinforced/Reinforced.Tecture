@@ -5,17 +5,19 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
 {
-    public class AddPredicateCheck<T> : CommandCheck<Commands.Add.Add>, IMemorizing
+    /// <summary>
+    /// Added object check
+    /// </summary>
+    /// <typeparam name="T">Typed entity</typeparam>
+    public class AddPredicateCheck<T> : CommandCheck<Commands.Add.Add>
     {
-        private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
         private readonly string _explanation;
 
-        public AddPredicateCheck(Func<T, bool> predicate, string explanation, Memorize<T> mem = null)
+        internal AddPredicateCheck(Func<T, bool> predicate, string explanation)
         {
             _predicate = predicate;
             _explanation = explanation;
-            _memorizedValue = mem;
         }
 
         protected override string GetMessage(Commands.Add.Add command)
@@ -36,11 +38,6 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;
             return _predicate((T) effect.Entity);
-        }
-
-        public void Memorize(CommandBase seb)
-        {
-            _memorizedValue.SetValue(((Commands.Add.Add)seb).Entity);
         }
     }
 }

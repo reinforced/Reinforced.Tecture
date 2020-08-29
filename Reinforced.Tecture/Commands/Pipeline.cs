@@ -40,7 +40,7 @@ namespace Reinforced.Tecture.Commands
                 cmd.Debug = dbg;
             }
             
-            TraceCollector?.Command(cmd);
+            TraceCollector?.Command(cmd.TraceClone());
             if (!(cmd is ITracingOnly)) _commandQueue.Enqueue(cmd);
         }
 

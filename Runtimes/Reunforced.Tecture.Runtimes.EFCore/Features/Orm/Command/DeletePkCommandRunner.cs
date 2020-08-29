@@ -42,8 +42,10 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
                     properties[i].SetValue(instance, cmd.KeyValues[i]);
                 }
 
-                var inst = _dc.Value.Attach(instance);
-                inst.State = EntityState.Deleted;
+                //var inst = _dc.Value.Entry(instance);
+                
+                //_dc.Value.Remove(inst.Entity);
+                //inst.State = EntityState.Deleted;
             }
         }
 

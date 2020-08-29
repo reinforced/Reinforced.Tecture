@@ -18,5 +18,14 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
                 tw.Write(":");
             }
         }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Cycle();
+        }
     }
 }

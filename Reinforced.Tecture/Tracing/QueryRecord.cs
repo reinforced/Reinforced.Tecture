@@ -100,6 +100,15 @@ namespace Reinforced.Tecture.Tracing
             }
         }
 
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new QueryRecord(Channel, DataType, Hash, Result, IsTestData);
+        }
+
         private string Description(object o)
         {
             if (o == null) return "null";

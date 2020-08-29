@@ -17,14 +17,25 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
     [CommandCode("SQL")]
     public sealed class Sql : CommandBase
     {
+        private readonly bool _isOnlyTracing = false;
         internal Sql(LambdaExpression strokeExpression)
         {
             _strokeExpression = strokeExpression;
         }
 
+        internal Sql(InterpolatedQuery preview)
+        {
+            _isOnlyTracing = true;
+            _preview = preview;
+        }
+
         internal LambdaExpression StrokeExpression
         {
-            get { return _strokeExpression; }
+            get
+            {
+                if (_isOnlyTracing) throw new Exception("This Sql command is only for tracing purposes");
+                return _strokeExpression;
+            }
         }
 
         private readonly LambdaExpression _strokeExpression;
@@ -78,6 +89,15 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
             }
 
             tw.Write("\t----------");
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Sql(Preview.Clone());
         }
     }
 }

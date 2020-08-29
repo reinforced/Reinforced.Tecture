@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Delete
@@ -32,6 +33,19 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Delete
 
 
             if (Debug != null) tw.Write($" ({Debug.Location})");
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Delete()
+            {
+                Entity = Entity.DeepClone(),
+                EntityType = EntityType
+            };
         }
     }
 }

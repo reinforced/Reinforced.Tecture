@@ -7,7 +7,7 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Tracing.Commands.Cycles
 {
     [CommandCode("CEND")]
-    public class EndCycle : CommandBase,ITracingOnly
+    public class EndCycle : CommandBase, ITracingOnly
     {
         internal EndCycle() { }
         public int TotalCommands { get; internal set; }
@@ -30,6 +30,15 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
                 tw.Write(TotalCommands);
                 tw.Write(" commands");
             }
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new EndCycle() { TotalCommands = TotalCommands, IterationsCount = IterationsCount };
         }
     }
 }

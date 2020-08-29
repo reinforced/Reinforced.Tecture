@@ -25,7 +25,8 @@ namespace Reinforced.Tecture.Testing.Validation
 
         protected virtual void Assert(TCommand command)
         {
-            if (!IsValid(command)) throw new TectureCheckException(GetMessage(command));
+            if (!IsValid(command)) 
+                throw new TectureCheckException(GetMessage(command));
         }
 
         public void Assert(CommandBase command)

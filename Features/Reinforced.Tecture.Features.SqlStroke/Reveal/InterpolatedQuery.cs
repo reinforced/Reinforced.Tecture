@@ -19,5 +19,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal
             Parameters = parameters;
             UsedTypes = usedTypes;
         }
+
+        internal abstract InterpolatedQuery Clone();
     }
 }

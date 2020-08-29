@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
@@ -32,7 +34,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.DeletePk
             if (string.IsNullOrEmpty(Annotation))
             {
                 tw.Write($"Delete {EntityType.Name} by PK");
-                if (KeyValues.Length>1) tw.Write("s: ");
+                if (KeyValues.Length > 1) tw.Write("s: ");
                 else tw.Write(": ");
                 var instance = CreateInstance(EntityType);
                 var properties = instance.KeyProperties();
@@ -44,6 +46,19 @@ namespace Reinforced.Tecture.Features.Orm.Commands.DeletePk
                     tw.Write(KeyValues[i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new DeletePk()
+            {
+                KeyValues = KeyValues.Select(x => x.DeepClone()).ToArray(),
+                EntityType = EntityType
+            };
         }
     }
 }

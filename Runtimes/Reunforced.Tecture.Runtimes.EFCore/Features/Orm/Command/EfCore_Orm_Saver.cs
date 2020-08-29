@@ -121,7 +121,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 
         protected override CommandRunner<DeletePk> GetRunner6(DeletePk command)
         {
-            throw new NotImplementedException();
+            return _dpk;
         }
     }
 }

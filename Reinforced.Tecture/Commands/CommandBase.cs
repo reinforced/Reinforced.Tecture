@@ -26,22 +26,60 @@ namespace Reinforced.Tecture.Commands
 
     public abstract class CommandBase
     {
+        private string _channelId;
+        private string _annotation = string.Empty;
+        private DebugInfo _debug;
+        private int _order;
+        private bool _isExecuted;
 
         /// <summary>
         /// Discriminates data source type for command.
         /// Here I use .NET full Type's name
         /// </summary>
-        public string ChannelId { get; internal set; }
-        
+        public string ChannelId
+        {
+            get { return _channelId; }
+            internal set
+            {
+                _channelId = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.ChannelId = value;
+                }
+            }
+        }
+
         /// <summary>
         /// Command annotation
         /// </summary>
-        public string Annotation { get; internal set; } = string.Empty;
+        public string Annotation
+        {
+            get { return _annotation; }
+            internal set
+            {
+                _annotation = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.Annotation = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Contains command debugging information. Available only in testing mode
         /// </summary>
-        public DebugInfo Debug { get; internal set; }
+        public DebugInfo Debug
+        {
+            get { return _debug; }
+            internal set
+            {
+                _debug = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.Debug = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Describes actions that are being performed within command
@@ -52,12 +90,55 @@ namespace Reinforced.Tecture.Commands
         /// <summary>
         /// Gets order of command in commands queue
         /// </summary>
-        public int Order { get; internal set; }
+        public int Order
+        {
+            get { return _order; }
+            internal set
+            {
+                _order = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.Order = value;
+                }
+            }
+        }
+
+        private readonly List<CommandBase> _knownClones = new List<CommandBase>();
+
 
         /// <summary>
         /// Gets whether command was executed or not
         /// </summary>
-        public bool IsExecuted { get; internal set; }
+        public bool IsExecuted
+        {
+            get { return _isExecuted; }
+            internal set
+            {
+                _isExecuted = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.IsExecuted = value;
+                }
+            }
+        }
+
+        internal CommandBase TraceClone()
+        {
+            var clone =  DeepCloneForTracing();
+            clone.ChannelId = ChannelId;
+            clone.Annotation = Annotation;
+            clone.Order = Order;
+            clone.IsExecuted = IsExecuted;
+            clone.Debug = Debug;
+            _knownClones.Add(clone);
+            return clone;
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected abstract CommandBase DeepCloneForTracing();
     }
 
     /// <summary>

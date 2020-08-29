@@ -15,14 +15,15 @@ using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 {
-    public class Manage : TectureService<Resource, MeasurementUnit>, INoContext
+    public class Manage : TectureService<Resource,MeasurementUnit>, INoContext
     {
         private Manage() { }
 
         public IAddition<MeasurementUnit> CreateMeasurementUnit(string name, string shortName)
         {
-            if (From<Db>().Get<MeasurementUnit>().All.Describe("check unit existence")
-                .Any(x => x.Name == name || x.ShortName==shortName))
+            if (From<Db>().Get<MeasurementUnit>().All
+                .Describe("check unit existence")
+                .Any(x => x.Name == name || x.ShortName == shortName))
             {
                 throw new Exception($"Cannot add measurement unit '{name}' because it already exists");
             }
@@ -31,7 +32,8 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             {
                 Name = name,
                 ShortName = shortName
-            }).Annotate($"create measurement unit '{name}' ({shortName})");
+            })
+                .Annotate($"create measurement unit '{name}' ({shortName})");
         }
 
         public void RenameMeasurementUnit(int id, string name, string shortName)

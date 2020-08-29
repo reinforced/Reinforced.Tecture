@@ -16,5 +16,14 @@ namespace Reinforced.Tecture.Tracing.Commands
         {
             tw.Write("====== Saved =====");
         }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Save();
+        }
     }
 }

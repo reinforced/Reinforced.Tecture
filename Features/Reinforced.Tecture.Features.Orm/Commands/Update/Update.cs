@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Update
@@ -28,6 +29,13 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Update
             PropertiesToUpdate = properties.Select(ReflectionCache.ParsePropertyLambda).ToArray();
         }
 
+        private Update(object entity, Type entityType, PropertyInfo[] properties)
+        {
+            Entity = entity;
+            EntityType = entityType;
+            PropertiesToUpdate = properties;
+        }
+
         /// <summary>
         /// Describes actions that are being performed within side effect
         /// </summary>
@@ -49,6 +57,15 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Update
             if (Annotation != null) description = Annotation;
             tw.Write($"Update {description}");
             if (Debug != null) tw.Write($" ({Debug.Location})");
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Update(Entity.DeepClone(), EntityType, PropertiesToUpdate);
         }
     }
 }

@@ -20,5 +20,14 @@ namespace Reinforced.Tecture.Tracing.Commands
             tw.Write(Annotation);
             if (Debug != null) tw.Write($" ({Debug.Location})");
         }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Comment();
+        }
     }
 }

@@ -94,6 +94,7 @@ namespace Reinforced.Tecture.Cloning
             statements.Add(Expression.Label(target, Expression.Constant(null, objectType)));
             var blk = Expression.Block(new[] { tmpVariable }, statements);
             var result = Expression.Lambda(blk, source, clonerParam);
+
             return result.Compile();
         }
 
@@ -105,6 +106,7 @@ namespace Reinforced.Tecture.Cloning
             var target = Expression.Parameter(objectType);
             var cloner = Expression.Parameter(typeof(DeepCloneOperator));
             var nullEx = Expression.Constant(null);
+
             List<Expression> statements = new List<Expression>();
             foreach (var pi in complex)
             {
@@ -125,8 +127,8 @@ namespace Reinforced.Tecture.Cloning
             var block = Expression.Block(statements);
 
             var lambda = Expression.Lambda(block, source, target, cloner);
-            return lambda.Compile();
 
+            return lambda.Compile();
         }
 
         public static TypeCloneTooling EmitCloneDelegate(Type objectType)

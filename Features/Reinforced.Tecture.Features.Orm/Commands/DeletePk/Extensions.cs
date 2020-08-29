@@ -8,10 +8,14 @@ namespace Reinforced.Tecture.Features.Orm.Commands.DeletePk
 {
     public static partial class Extensions
     {
-        struct DeletePkOperation<T> : IPrimaryKeyOperation<DeletePk, T>
+        class DeletePkOperationBase
         {
             internal Write Write;
             internal Type EntityType;
+        }
+        class DeletePkOperation<T> : DeletePkOperationBase, IPrimaryKeyOperation<DeletePk, T>
+        {
+            
         }
 
         /// <summary>

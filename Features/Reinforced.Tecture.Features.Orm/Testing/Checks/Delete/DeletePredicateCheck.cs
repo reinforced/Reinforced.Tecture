@@ -5,17 +5,15 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Delete
 {
-    public class DeletePredicateCheck<T> : CommandCheck<Commands.Delete.Delete>, IMemorizing
+    public class DeletePredicateCheck<T> : CommandCheck<Commands.Delete.Delete>
     {
-        private readonly Memorize<T> _memorizedValue;
         private readonly Func<T, bool> _predicate;
         private readonly string _explanation;
 
-        public DeletePredicateCheck(Func<T, bool> predicate, string explanation, Memorize<T> mem = null)
+        public DeletePredicateCheck(Func<T, bool> predicate, string explanation)
         {
             _predicate = predicate;
             _explanation = explanation;
-            _memorizedValue = mem;
         }
 
         protected override string GetMessage(Commands.Delete.Delete command)
@@ -35,11 +33,6 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Delete
             if (effect == null) return false;
             if (effect.EntityType != typeof(T)) return false;
             return _predicate((T) effect.Entity);
-        }
-
-        public void Memorize(CommandBase seb)
-        {
-            _memorizedValue.SetValue(((Commands.Delete.Delete)seb).Entity);
         }
     }
 }

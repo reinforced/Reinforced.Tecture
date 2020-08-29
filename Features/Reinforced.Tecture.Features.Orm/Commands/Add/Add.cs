@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
@@ -16,7 +17,6 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
 
         public Type EntityType { get; internal set; }
 
-        public object PkData { get; set; }
 
         /// <summary>
         /// Describes actions that are being performed within command
@@ -34,6 +34,19 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
 
 
             if (Debug != null) tw.Write($" ({Debug.Location})");
+        }
+
+        /// <summary>
+        /// Clones command for tracing purposes
+        /// </summary>
+        /// <returns>Command clone</returns>
+        protected override CommandBase DeepCloneForTracing()
+        {
+            return new Add()
+            {
+                Entity = Entity.DeepClone(),
+                EntityType = EntityType
+            };
         }
     }
 

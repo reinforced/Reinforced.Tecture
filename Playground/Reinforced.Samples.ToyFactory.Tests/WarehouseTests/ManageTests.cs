@@ -6,6 +6,7 @@ using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
+using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
 using Xunit;
@@ -30,17 +31,19 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void RenameMeasurementUnit()
         {
-            using var c = Case(out ITecture ctx);
+            using var c = Case<RenameMeasurementUnit_TestData>(out ITecture ctx);
 
             var a = ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
             var mu = ctx.From<Db>().Key(a);
             ctx.Do<Manage>().RenameMeasurementUnit(mu,"Kilo","kg");
             ctx.Save();
+            ctx.Do<Manage>().DeleteMeasurementUnit(mu);
+            ctx.Save();
 
             Output.WriteLine(c.Text());
 
-            //c.Validate();
+            c.Validate<RenameMeasurementUnit_Validation>();
         }
         public ManageTests(ITestOutputHelper output) : base(output)
         {

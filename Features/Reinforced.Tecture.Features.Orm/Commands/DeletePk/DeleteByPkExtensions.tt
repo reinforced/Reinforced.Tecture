@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Features.Orm.Commands.DeletePk
         public static DeletePk ByPk<<#= GenericsStroke(i) #>>
             (this IPrimaryKeyOperation<DeletePk, IPrimaryKey<<#= GenericsStroke(i) #>>> c, <#= GenericsStrokeParameters(i) #>)
         {
-            var a = (DeletePkOperation<IPrimaryKey<<#= GenericsStroke(i) #>>>) c;
+            var a = (DeletePkOperationBase) c;
             return DeletePkCore(a.Write, a.EntityType, <#= GenericsStrokeArguments(i) #>);
         }
     <# } #>
