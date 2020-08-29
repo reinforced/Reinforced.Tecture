@@ -22,8 +22,8 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 						if (x.Name != @"Kilograms") return false;
 						if (x.ShortName != @"kG") return false;
 						return true;
-					}, @""), 
-					Annotated(@"")
+					}, @"create measurement unit 'Kilograms' (kG)"), 
+					Annotated(@"create measurement unit 'Kilograms' (kG)")
 				);
 				flow.Then<Save>
 				(
@@ -41,7 +41,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 				);
 				flow.Then<DeletePk>
 				(
-					Annotated(@"")
+					Annotated(@"remove measurement unit#29")
 				);
 				flow.Then<Save>
 				(

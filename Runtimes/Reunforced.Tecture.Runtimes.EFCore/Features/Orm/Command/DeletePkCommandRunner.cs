@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
@@ -31,6 +35,27 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             }
         }
 
+        private EntityEntry<IPrimaryKey> FindEntry(Type t, IPrimaryKey instance, PropertyInfo[] props)
+        {
+            var values = props.Select(x => x.GetValue(instance)).ToArray();
+            var entryQuery = _dc.Value.ChangeTracker.Entries<IPrimaryKey>()
+                .Where(x=>x.Entity.GetType() == t)
+                .Where(x =>
+                {
+                    for (int i = 0; i < props.Length; i++)
+                    {
+                        if (!object.Equals(props[i].GetValue(x.Entity), values[i]))
+                            return false;
+                    }
+
+                    return true;
+                })
+                .FirstOrDefault();
+
+            if (entryQuery == null) return _dc.Value.Entry(instance);
+            return entryQuery;
+        }
+
         protected override void Run(DeletePk cmd)
         {
             if (_aux.IsCommandRunNeeded)
@@ -42,10 +67,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
                     properties[i].SetValue(instance, cmd.KeyValues[i]);
                 }
 
-                //var inst = _dc.Value.Entry(instance);
-                
-                //_dc.Value.Remove(inst.Entity);
-                //inst.State = EntityState.Deleted;
+                var entry = FindEntry(cmd.EntityType, instance, properties);
+                entry.State = EntityState.Deleted;
             }
         }
 

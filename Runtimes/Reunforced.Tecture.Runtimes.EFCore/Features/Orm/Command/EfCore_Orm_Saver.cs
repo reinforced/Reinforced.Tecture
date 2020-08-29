@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
@@ -48,6 +45,15 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             if (Aux.IsSavingNeeded)
             {
                 _dc.Value.SaveChanges();
+
+                //var changedEntriesCopy = _dc.Value.ChangeTracker.Entries()
+                //    .Where(e => e.State == EntityState.Added ||
+                //                e.State == EntityState.Modified ||
+                //                e.State == EntityState.Deleted)
+                //    .ToList();
+
+                //foreach (var entry in changedEntriesCopy)
+                //    entry.State = EntityState.Detached;
             }
         }
 
