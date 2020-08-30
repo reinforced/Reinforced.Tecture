@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Tracing;
@@ -46,12 +47,12 @@ namespace Reinforced.Tecture.Commands
 
                 if (queue.HasEffects)
                 {
-                    DispatchInternal(queue.GetEffects(),usedChannels);
+                    DispatchInternal(queue.GetEffects(), usedChannels);
                     Save(usedChannels);
                     postSave.Run();
                 }
 
-                
+
             } while (queue.HasEffects);
         }
 
@@ -77,8 +78,15 @@ namespace Reinforced.Tecture.Commands
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r = _mx.GetRunner(commandBase);
-                    r.RunInternal(commandBase);
-                    commandBase.IsExecuted = true;
+                    try
+                    {
+                        r.RunInternal(commandBase);
+                        commandBase.IsExecuted = true;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new TectureCommandRunException(commandBase, e);
+                    }
                 }
             }
         }
@@ -91,11 +99,18 @@ namespace Reinforced.Tecture.Commands
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r1 = _mx.GetRunner(commandBase);
-                    var r = r1.RunInternalAsync(commandBase);
-                    if (r != null)
+                    try
                     {
-                        await r;
-                        commandBase.IsExecuted = true;
+                        var r = r1.RunInternalAsync(commandBase);
+                        if (r != null)
+                        {
+                            await r;
+                            commandBase.IsExecuted = true;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        throw new TectureCommandRunException(commandBase, e);
                     }
                 }
             }

@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Query
             var set = _dbContext.Value.Set<T>();
             if (set==null)
                 throw new EfCoreDirectSqlException($"Cannot locate set of type '{typeof(T)}' in DbContext");
-            return set.FromSqlRaw(command, parameters);
+            return set.FromSqlRaw(command, parameters).ToArray();
         }
 
         public override Task<IEnumerable<T>> DoQueryAsync<T>(string command, object[] parameters)
@@ -23,7 +23,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Query
             var set = _dbContext.Value.Set<T>();
             if (set == null)
                 throw new EfCoreDirectSqlException($"Cannot locate set of type '{typeof(T)}' in DbContext");
-            return Task.FromResult(set.FromSqlRaw(command, parameters).AsEnumerable());
+            return Task.FromResult(set.FromSqlRaw(command, parameters).ToArray().AsEnumerable());
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

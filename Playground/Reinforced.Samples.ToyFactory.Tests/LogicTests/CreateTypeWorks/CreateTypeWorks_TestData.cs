@@ -1,7 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Testing.Data;
+using Reinforced.Samples.ToyFactory.Logic.Entities;
 
 namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 {
@@ -15,20 +16,20 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 			private ToyType GetEntry_2()
 			{ 
 				var v1 = New<ToyType>();
-				Set(v1, x=>x.Id, 79);
+				Set(v1, x=>x.Id, 1002);
 				Set(v1, x=>x.Name, @"test type");
 				return v1;
 			}
 
 			private Int32 GetEntry_3()
 			{ 
-				return 79;
+				return 1002;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_D89D2325CAB36C99B50CC6CB1D6F8A81DDA18073C8CC7A0FD7820A65E89",
+					Hash = @"OrmQuery_F1DC789FD292E34441F920118A716D7253EB66868BB4B1944758E4022EDE5",
 					Description = @"check toy type existence"
 				};
 				yield return new TestDataRecord<ToyType>(GetEntry_2()) { 

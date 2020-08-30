@@ -65,16 +65,16 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
             return new TectureCase(tec, name, $"{t.Namespace}.{name}", location, generateStuff: true);
         }
 
-        protected TectureCase Case<T>(out ITecture tec) where T : ITestDataSource, new()
+        protected TectureCase Case<T>(out ITecture tec, bool capture = false) where T : ITestDataSource, new()
         {
             var t = this.GetType();
             var tb = Configure(true);
-            tb.WithTestData(new T());
+            if (!capture) tb.WithTestData(new T());
             tec = tb.Build();
             var name = CurrentTest.TestCase.TestMethod.Method.Name;
             var location = Path.Combine(Root.FolderWithType(CurrentTest.TestCase.TestMethod.TestClass.Class.ToRuntimeType()), name);
             if (!Directory.Exists(location)) Directory.CreateDirectory(location);
-            return new TectureCase(tec, name, $"{t.Namespace}.{name}", location, generateStuff: false);
+            return new TectureCase(tec, name, $"{t.Namespace}.{name}", location, generateStuff: capture);
         }
 
 

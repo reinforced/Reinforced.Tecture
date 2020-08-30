@@ -1,10 +1,12 @@
+using System;
+using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 using Reinforced.Tecture.Features.Orm.Commands.Relate;
-using Reinforced.Tecture.Features.Orm.Testing.Checks.Add;
-using Reinforced.Tecture.Testing.BuiltInChecks;
-using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing.Commands;
+using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
+using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks
 {
@@ -12,18 +14,18 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks
 		{
 			protected override void Validate(TraceValidator flow)
 			{ 
-				flow.Then<Add<Blueprint>>
+				flow.Then<Add>
 				(
-					AddChecks.Add<Blueprint>(x=>
+					Add<Blueprint>(x=>
 					{ 
-						if (x.ToyTypeId != 79) return false;
+						if (x.ToyTypeId != 1002) return false;
 						return true;
 					}, @"Create blueprint"), 
-					CommonChecks.Annotated(@"Create blueprint")
+					Annotated(@"Create blueprint")
 				);
 				flow.Then<Relate>
 				(
-					CommonChecks.Annotated(@"Ensure association with toy type")
+					Annotated(@"Ensure association with toy type")
 				);
 				flow.Then<Save>();
 				flow.TheEnd();

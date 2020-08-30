@@ -5,6 +5,7 @@ using Reinforced.Samples.ToyFactory.Logic.Services;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks;
+//using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks;
 using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
@@ -35,18 +36,11 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
         {
             using var c = Case<CreateBlueprintWorks_TestData>(out ITecture ctx);
 
-            var a = ctx.Do<Logic.Services.Nomenclature>().CreateBlueprint(79);
+            var a = ctx.Do<Logic.Services.Nomenclature>().CreateBlueprint(1002);
             ctx.Save();
 
             Output.WriteLine(c.Text());
             c.Validate<CreateBlueprintWorks_Validation>();
-        }
-
-        [Fact]
-        public void TestResourcesAssignment()
-        {
-            
-
         }
 
         public NomenclatureTests(ITestOutputHelper helper) : base(helper)

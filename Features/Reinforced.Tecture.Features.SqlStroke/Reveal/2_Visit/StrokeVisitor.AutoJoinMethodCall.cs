@@ -60,7 +60,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visit
                 return node;
             }
 
-            // reveal call of {x.JoinedAs(Join.Left)}
+            // reveal call of {x.Alias()}
             if (node.Method == _aliasMethod)
             {
                 SqlTableReference result;

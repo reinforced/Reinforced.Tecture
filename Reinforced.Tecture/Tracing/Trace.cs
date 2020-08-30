@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         public IEnumerable<CommandBase> Commands
         {
-            get { return _commands.Where(x=>!(x is QueryRecord)).Cast<CommandBase>(); }
+            get { return _commands.Where(x=>!(x is ITracingOnly)).Cast<CommandBase>(); }
         }
 
         /// <summary>

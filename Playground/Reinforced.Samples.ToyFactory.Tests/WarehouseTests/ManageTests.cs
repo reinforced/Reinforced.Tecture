@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
-using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Tecture;
@@ -46,6 +46,43 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             c.Validate<RenameMeasurementUnit_Validation>();
         }
 
+        [Fact]
+        public void SupplyCreationPipeline()
+        {
+            using var c = Case(out ITecture ctx);
+            var m = ctx.Do<Manage>();
+            var unit = m.CreateMeasurementUnit("Kilograms", "kG");
+            ctx.Save();
+            var res1 = m.CreateResource("resource1", "kG");
+            var res2 = m.CreateResource("resource2", "kG");
+            var res3 = m.CreateResource("resource3", "kG");
+            ctx.Save();
+            var id = ctx.From<Db>().Key(res2);
+            var supply = ctx.Do<Supply>();
+
+            var supp = supply.CreateResourceSupply("Supply1", new[]
+            {
+                new ResourceItemDto()
+                {
+                    Name = "resource1", Quantity = 10
+                },
+                new ResourceItemDto()
+                {
+                    Id = id, Quantity = 10
+                },
+                new ResourceItemDto()
+                {
+                    Name = "resource3", Quantity = 10
+                },
+            });
+
+            ctx.Save();
+            var supplyId = ctx.From<Db>().Key(supp);
+            supply.FinishResourceSupply(supplyId);
+            ctx.Save();
+            supply.RemoveResourceSupply(supplyId);
+            ctx.Save();
+        }
 
         public ManageTests(ITestOutputHelper output) : base(output)
         {

@@ -136,16 +136,14 @@ namespace Reinforced.Tecture.Features.SqlStroke.Parse
 
                         // we save prevI in order to calculate balance later
                         var prevI = i;
-
+                        i++;
                         // crunch number from string, advance iterator
                         var argNumber = CrunchNumber(format, i, ref i);
 
                         // if number is successfully parsed...
-                        if (argNumber > 0)
+                        if (argNumber > -1)
                         {
-                            // iterator is already advanced, 
-                            // but we advance it even more in order to consume trailing '}'
-                            i++;
+                            // current iterator position = symbol after trailing }
                             
                             // now, all the characters between current i and newly advanced i
                             // were removed. so we increase removed count by this range

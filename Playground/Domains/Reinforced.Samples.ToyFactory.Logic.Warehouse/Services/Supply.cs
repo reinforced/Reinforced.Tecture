@@ -8,6 +8,7 @@ using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
+using Reinforced.Tecture.Features.Orm.Commands.Relate;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
 using Reinforced.Tecture.Features.Orm.Queries;
 using Reinforced.Tecture.Features.SqlStroke;
@@ -17,7 +18,7 @@ using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 {
-    public class Supply : TectureService<Resource, ResourceSupply, ResourceSupplyItem, ResourceSupplyStatusHistoryItem>
+    public class Supply : TectureService<Resource, ResourceSupply, ResourceSupplyItem, ResourceSupplyStatusHistoryItem>, INoContext
     {
         private Supply() { }
 
@@ -25,8 +26,8 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
         {
             From<Db>().All<ResourceSupply>().EnsureExists(id);
 
-            To<Db>().SqlStroke<ResourceSupplyItem>(x => $"DELETE FROM {x} WHERE {x.ResourceSupplyId == id}");
-            To<Db>().SqlStroke<ResourceSupply>(x => $"DELETE FROM {x} WHERE {x.Id == id}");
+            To<Db>().SqlStroke<ResourceSupplyItem>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.ResourceSupplyId == id}");
+            To<Db>().SqlStroke<ResourceSupply>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.Id == id}");
         }
 
         public void FinishResourceSupply(int id)
@@ -47,7 +48,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             Final.ContinueWith(() =>
             {
                 To<Db>().SqlStroke<ResourceSupply, ResourceSupplyItem>((r, item) =>
-                    $"UPDATE {r} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId})");
+                    $"UPDATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
             });
             
         }
@@ -107,6 +108,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                     };
 
                     To<Db>().Add(rsi).Annotate("add resource supply item");
+                    To<Db>().Relate(rsi, x => x.ResourceSupply, rs);
                 }
             }
 

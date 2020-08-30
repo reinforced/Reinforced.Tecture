@@ -22,6 +22,14 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.Visit
             }
         }
 
+        /// <summary>Dispatches the expression to one of the more specialized visit methods in this class.</summary>
+        /// <param name="node">The expression to visit.</param>
+        /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
+        public override Expression Visit(Expression node)
+        {
+            return base.Visit(node);
+        }
+
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.ConditionalExpression" />.</summary>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         /// <param name="node">The expression to visit.</param>

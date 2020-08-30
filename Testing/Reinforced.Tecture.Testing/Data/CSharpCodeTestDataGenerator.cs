@@ -56,6 +56,10 @@ namespace Reinforced.Tecture.Testing.Data
 
         private CompilationUnitSyntax Proceed(string className, string ns)
         {
+            if (_records.Count == 0)
+            {
+                _yields.Add(YieldStatement(SyntaxKind.YieldBreakStatement));
+            }
             while (_records.Count > 0)
             {
                 _counter++;
