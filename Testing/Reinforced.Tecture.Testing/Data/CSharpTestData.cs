@@ -94,6 +94,15 @@ namespace Reinforced.Tecture.Testing.Data
                 }
             }
 
+            if (k is AnonymousTestDataRecord tr)
+            {
+                if (!typeof(T).IsAnonymousType())
+                {
+                    throw new TestDataTypeMismatchException(_counter, k.Description, typeof(T), typeof(void));
+                }
+
+                return tr.OfType<T>();
+            }
             var data = k as ITestDataRecord<T>;
             if (data == null)
             {

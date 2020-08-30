@@ -32,8 +32,39 @@ namespace Reinforced.Tecture.Cloning
                                                    BindingFlags.Instance;
 
         private const string VarName = "result";
+
+        private static Delegate EmitShallowForAnonymousType(Type anonymousType)
+        {
+            var ctor = anonymousType.GetConstructors(CtorFlags).FirstOrDefault();
+            var parameters = ctor.GetParameters();
+            var properties = anonymousType.GetProperties(PropertyFlags).ToDictionary(x=>x.Name);
+            
+            var source = Expression.Parameter(anonymousType);
+            var clonerParam = Expression.Parameter(typeof(DeepCloneOperator));
+
+            List<Expression> arguments = new List<Expression>();
+            foreach (var pi in parameters)
+            {
+                var property = properties[pi.Name];
+                var mex = Expression.Property(source, property);
+                if (pi.ParameterType.IsInlineCloning())
+                {
+                    arguments.Add(mex);
+                }
+                else
+                {
+                    var call = Expression.Call(clonerParam, DeepCloneOperator.CloneAndDeferMethod, mex);
+                    arguments.Add(call);
+                }
+            }
+            var newEx = Expression.New(ctor,arguments.ToArray());
+            var result = Expression.Lambda(newEx, source, clonerParam);
+
+            return result.Compile();
+        }
         private static Delegate EmitShallow(Type objectType)
         {
+            if (objectType.IsAnonymousType()) return EmitShallowForAnonymousType(objectType);
             var ctor = objectType.GetConstructors(CtorFlags)
                 .FirstOrDefault(x => x.GetParameters().Length == 0);
             if (ctor == null)

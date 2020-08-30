@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
+using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
+using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
+//using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
 using Xunit;
@@ -81,9 +85,17 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var supplyId = ctx.From<Db>().Key(supp);
             supply.FinishResourceSupply(supplyId);
             ctx.Save();
-            //supply.RemoveResourceSupply(supplyId);
-            //ctx.Save();
             c.Validate<SupplyCreationPipeline_Validation>();
+            Output.WriteLine(c.Text());
+        }
+
+        [Fact]
+        public void TestAnonymousQuery()
+        {
+            using var c = Case
+                <TestAnonymousQuery_TestData>
+                (out ITecture ctx);
+            var re = ctx.From<Db>().Get<Resource>().ById(177, x => new {x.Name, x.StockQuantity});
             Output.WriteLine(c.Text());
         }
 

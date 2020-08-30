@@ -41,8 +41,17 @@ namespace Reinforced.Tecture.Testing.Data
         {
             foreach (var queryRecord in queries)
             {
+                ITestDataRecord tdr = null;
+                //if (queryRecord.DataType.IsAnonymousType())
+                //{
+                //    tdr = AnonymousTestDataRecord.FromAnonymousObject(queryRecord.Result, queryRecord.DataType);
+                //}
+                //else
+                //{
                 var recordType = typeof(TestDataRecord<>).MakeGenericType(queryRecord.DataType);
-                ITestDataRecord tdr = Activator.CreateInstance(recordType,new[]{queryRecord.Result}) as ITestDataRecord;
+                tdr =
+                    Activator.CreateInstance(recordType, new[] { queryRecord.Result }) as ITestDataRecord;
+                //}
                 tdr.Description = queryRecord.Annotation;
                 tdr.Hash = queryRecord.Hash;
                 _records.Enqueue(tdr);
@@ -139,9 +148,23 @@ namespace Reinforced.Tecture.Testing.Data
         {
             get { return $"GetEntry_{_counter}"; }
         }
+
+        private static readonly TypeSyntax AnonymousDictionaryType = typeof(Dictionary<string, object>).TypeName();
+
+        private static readonly TypeSyntax AnonymousRecordType =
+            typeof(AnonymousTestDataRecord).TypeName();
         private YieldStatementSyntax ProduceYield(ITestDataRecord trd)
         {
-            var type = trd.GetType().TypeName(_usings);
+            TypeSyntax type = null;
+            if (trd.RecordType.IsAnonymousType())
+            {
+                type = AnonymousRecordType;
+            }
+            else
+            {
+                type = trd.GetType().TypeName(_usings);
+            }
+
             var hash = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
                 IdentifierName(nameof(ITestDataRecord.Hash)),
                 TypeInitConstructor.Construct(typeof(string), trd.Hash));
@@ -169,7 +192,16 @@ namespace Reinforced.Tecture.Testing.Data
 
         private MethodDeclarationSyntax PayloadConstructionMethod(ITestDataRecord tdr)
         {
-            var retType = tdr.RecordType.TypeName(_usings);
+            TypeSyntax retType = null;
+            if (tdr.RecordType.IsAnonymousType())
+            {
+                retType = AnonymousDictionaryType;
+            }
+            else
+            {
+                retType = tdr.RecordType.TypeName(_usings);
+            }
+
             var md = MethodDeclaration(retType, CurrentMethodName);
 
             var body = PayloadConstructionMethodBody(tdr);
@@ -197,6 +229,10 @@ namespace Reinforced.Tecture.Testing.Data
                 yield break;
             }
             var ctx = new GenerationContext(_usings);
+            if (tdr is AnonymousTestDataRecord anon)
+            {
+
+            }
 
             if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
             {

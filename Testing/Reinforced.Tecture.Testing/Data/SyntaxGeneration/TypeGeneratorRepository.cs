@@ -11,15 +11,16 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
         public Hijack Hijack { get; }
 
         private readonly Dictionary<Type, Generator> _generators = new Dictionary<Type, Generator>();
-
+        private AnonymousDataGenerator _anon;
         public TypeGeneratorRepository(Hijack hijack, CollectionStrategies collectionStrategies = null)
         {
             Hijack = hijack;
             CollectionStrategies = collectionStrategies ?? new CollectionStrategies();
         }
 
-        public Generator GetGeneratorFor(Type t)
+        public IGenerator GetGeneratorFor(Type t)
         {
+
             EnsureGeneratorFor(t);
             return _generators[t];
         }
@@ -28,7 +29,9 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
         {
             if (!_generators.ContainsKey(t))
             {
-                _generators[t] = new Generator(t, this);
+                var tm = new TypeMeta(t,Hijack);
+                if (t.IsAnonymousType()) _generators[t] = new AnonymousDataGenerator(tm,this);
+                else _generators[t] = new Generator(tm, this);
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -40,6 +39,6 @@ namespace Reinforced.Tecture.Testing.Data
 
         public T Data { get; set; }
 
-        
+
     }
 }

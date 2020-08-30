@@ -76,7 +76,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         {
             if (_generateStuff)
             {
-                GenerateValidation();
+                //GenerateValidation();
                 GenerateTestData();
             }
             _instance.Dispose();

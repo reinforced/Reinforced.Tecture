@@ -27,6 +27,7 @@ namespace Reinforced.Tecture.Cloning
         internal static readonly MethodInfo DeferCloneMethod;
         internal static readonly MethodInfo DeferBindMethod;
         internal static readonly MethodInfo ResolveMethod;
+        internal static readonly MethodInfo CloneAndDeferMethod;
         static DeepCloneOperator()
         {
             ProduceColletionCloneMethod = typeof(DeepCloneOperator).GetMethod(nameof(ProduceCollectionClone),
@@ -41,6 +42,8 @@ namespace Reinforced.Tecture.Cloning
                 typeof(DeepCloneOperator).GetMethod(nameof(DeferBind), BindingFlags.NonPublic | BindingFlags.Instance);
             ResolveMethod =
                 typeof(DeepCloneOperator).GetMethod(nameof(Resolve), BindingFlags.NonPublic | BindingFlags.Instance);
+            CloneAndDeferMethod =
+                typeof(DeepCloneOperator).GetMethod(nameof(CloneAndDeferMethod), BindingFlags.NonPublic | BindingFlags.Instance);
 
         }
 
@@ -118,6 +121,15 @@ namespace Reinforced.Tecture.Cloning
         {
             if (original == null) return null;
             return Clone(original.GetType(), original);
+        }
+
+        internal object CloneAndDefer(object original)
+        {
+            if (original == null) return null;
+            var def = Clone(original.GetType(), original);
+            var t = original.GetType();
+            if (!t.IsInlineCloning()) DeferBind(t,original,def);
+            return def;
         }
 
         private object Clone(Type t, object original)
