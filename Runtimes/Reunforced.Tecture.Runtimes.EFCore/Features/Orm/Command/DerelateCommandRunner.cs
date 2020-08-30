@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Derelate;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class DerelateCommandRunner : CommandRunner<Derelate>
     {
+        private readonly ILazyDisposable<DbContext> _dc;
+        private readonly Auxilary _aux;
+
+        public DerelateCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
+        {
+            _dc = dc;
+            _aux = aux;
+        }
         private static readonly MethodInfo Def;
 
         static DerelateCommandRunner()

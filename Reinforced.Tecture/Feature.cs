@@ -17,6 +17,16 @@ namespace Reinforced.Tecture
             get { return _aux; }
         }
 
+        internal void CallOnRegister()
+        {
+            OnRegister();
+        }
+
+        protected virtual void OnRegister()
+        {
+
+        }
+
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public abstract void Dispose();
     }

@@ -9,8 +9,6 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
     {
         IMapper Mapper { get; }
 
-        IEnumerable<Type> ServingTypes { get; }
-
         Type Channel { get; }
 
         LanguageInterpolator GetLanguageInterpolator();

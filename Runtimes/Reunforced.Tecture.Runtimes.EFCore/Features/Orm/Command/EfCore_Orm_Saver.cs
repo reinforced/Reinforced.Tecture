@@ -18,15 +18,12 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         private DeleteCommandRunner _del;
         private UpdateCommandRunner _upd;
         private DeletePkCommandRunner _dpk;
-        private readonly RelateCommandRunner _rel;
-        private readonly DerelateCommandRunner _drel;
+        private RelateCommandRunner _rel;
+        private DerelateCommandRunner _drel;
 
         public EfCore_Orm_Saver(ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
-
-            _rel = new RelateCommandRunner();
-            _drel = new DerelateCommandRunner();
         }
 
         protected override void OnRegister()
@@ -35,6 +32,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             _del = new DeleteCommandRunner(Aux, _dc);
             _upd = new UpdateCommandRunner(Aux, _dc);
             _dpk = new DeletePkCommandRunner(Aux, _dc);
+            _rel = new RelateCommandRunner(Aux, _dc);
+            _drel = new DerelateCommandRunner(Aux, _dc);
         }
 
         /// <summary>

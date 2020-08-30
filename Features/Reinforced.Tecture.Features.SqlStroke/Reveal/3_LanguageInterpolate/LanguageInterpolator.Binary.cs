@@ -19,8 +19,9 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.LanguageInterpolate
             if (IsSetExpression(bex))
             {
                 _isParseringSet = true;
-                VisitSet(bex);
+                result = VisitSet(bex);
                 _isParseringSet = false;
+                return result;
             }
 
             if (!_isParseringSet && IsNullExpression(bex))

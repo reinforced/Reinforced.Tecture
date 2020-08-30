@@ -39,7 +39,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
             }
         }
 
-        public void GenerateUnitTest()
+        public void GenerateValidation()
         {
             var className = $"{_caseName}_Validation";
             var go = Trace.GenerateUnitTest(className, _ns, g =>
@@ -52,7 +52,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }
 
-        public void GenerateValidation()
+        public void GenerateTestData()
         {
             var className = $"{_caseName}_TestData";
             var go = Trace.GenerateTestData(className, _ns);
@@ -76,8 +76,8 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         {
             if (_generateStuff)
             {
-                GenerateUnitTest();
                 GenerateValidation();
+                GenerateTestData();
             }
             _instance.Dispose();
         }

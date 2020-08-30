@@ -55,15 +55,42 @@ namespace Reinforced.Tecture.Query
 
         public void Query<T>(string hash, T result, string description)
         {
+            var type = typeof(T);
+            if (typeof(T).IsInterface || typeof(T).IsAbstract)
+            {
+                type = result.GetType();
+            }
             if (_container.TraceCollector != null)
             {
                 if (_container._testDataHolder.Instance != null)
                 {
-                    _container.TraceCollector.TestQuery(_channelType, typeof(T), hash, result.DeepClone(), description);
+                    _container.TraceCollector.TestQuery(_channelType, type, hash, result.DeepClone(), description);
                 }
                 else
                 {
-                    _container.TraceCollector.Query(_channelType, typeof(T), hash, result.DeepClone(), description);
+                    _container.TraceCollector.Query(_channelType, type, hash, result.DeepClone(), description);
+                }
+                return;
+            }
+            throw new TectureException("Test data is not presumed to be collected");
+        }
+
+        public void QueryManuallyClone<T>(string hash, T result, string description)
+        {
+            var type = typeof(T);
+            if (typeof(T).IsInterface || typeof(T).IsAbstract)
+            {
+                type = result.GetType();
+            }
+            if (_container.TraceCollector != null)
+            {
+                if (_container._testDataHolder.Instance != null)
+                {
+                    _container.TraceCollector.TestQuery(_channelType, type, hash, result, description);
+                }
+                else
+                {
+                    _container.TraceCollector.Query(_channelType, type, hash, result, description);
                 }
                 return;
             }

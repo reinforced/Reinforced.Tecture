@@ -4,7 +4,7 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Tracing.Commands
 {
     [CommandCode("SAVE")]
-    public sealed class Save : CommandBase, ITracingOnly
+    public sealed class Save : CommandBase
     {
         internal Save() { }
 

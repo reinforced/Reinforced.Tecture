@@ -61,6 +61,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                 Name = name,
                 Status = ResourceSupplyStatus.Open
             };
+            var r = To<Db>().Add(rs).Annotate("add resource supply");
             var toBeAdded = items.ToArray();
             var knownIds = toBeAdded.Where(x => x.Id.HasValue).Select(x => x.Id.Value).ToArray();
             var names = toBeAdded.Where(x => !x.Id.HasValue).Select(x => x.Name).ToArray();
@@ -76,11 +77,11 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             var byNamesDict = byNames.ToDictionary(x => x.Name);
             var byIdsSet = new HashSet<int>(byIds.Select(x => x.Id));
 
-            using (Cycle("add items to suppliemnt"))
+            using (var c = Cycle("add items to suppliemnt"))
             {
                 foreach (var resourceItemDto in toBeAdded)
                 {
-                    int respurceId;
+                    int resourceId;
                     if (resourceItemDto.Id.HasValue)
                     {
                         Comment($"looking resource by id {resourceItemDto.Id}");
@@ -89,7 +90,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                             throw new Exception($"could not locate resource with id#{resourceItemDto.Id.Value}");
                         }
 
-                        respurceId = resourceItemDto.Id.Value;
+                        resourceId = resourceItemDto.Id.Value;
                     }
                     else
                     {
@@ -98,21 +99,20 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                             throw new Exception($"could not locate resource with name '{resourceItemDto.Name}'");
                         }
 
-                        respurceId = byNamesDict[resourceItemDto.Name].Id;
+                        resourceId = byNamesDict[resourceItemDto.Name].Id;
                     }
 
                     var rsi = new ResourceSupplyItem()
                     {
-                        ResourceId = respurceId,
-                        Quantity = resourceItemDto.Quantity,
+                        ResourceId = resourceId,
+                        Quantity = resourceItemDto.Quantity
                     };
 
-                    To<Db>().Add(rsi).Annotate("add resource supply item");
                     To<Db>().Relate(rsi, x => x.ResourceSupply, rs);
+                    To<Db>().Add(rsi).Annotate("add resource supply item");
+                    c.Iteration("added resource item");
                 }
             }
-
-            var r = To<Db>().Add(rs).Annotate("add resource supply");
 
             Save.ContinueWith(() =>
             {

@@ -7,6 +7,7 @@ using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
+using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
 using Xunit;
@@ -49,7 +50,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void SupplyCreationPipeline()
         {
-            using var c = Case(out ITecture ctx);
+            using var c = Case<SupplyCreationPipeline_TestData>(out ITecture ctx);
             var m = ctx.Do<Manage>();
             var unit = m.CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
@@ -80,8 +81,10 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var supplyId = ctx.From<Db>().Key(supp);
             supply.FinishResourceSupply(supplyId);
             ctx.Save();
-            supply.RemoveResourceSupply(supplyId);
-            ctx.Save();
+            //supply.RemoveResourceSupply(supplyId);
+            //ctx.Save();
+            c.Validate<SupplyCreationPipeline_Validation>();
+            Output.WriteLine(c.Text());
         }
 
         public ManageTests(ITestOutputHelper output) : base(output)

@@ -94,7 +94,7 @@ namespace Reinforced.Tecture.Testing.Data
                 }
             }
 
-            var data = k as TestDataRecord<T>;
+            var data = k as ITestDataRecord<T>;
             if (data == null)
             {
                 throw new TestDataTypeMismatchException(_counter, k.Description, typeof(T), k.Payload != null ? k.Payload.GetType() : typeof(void));

@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Relate;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
 {
     class RelateCommandRunner : CommandRunner<Relate>
     {
+        private readonly ILazyDisposable<DbContext> _dc;
+        private readonly Auxilary _aux;
+
+        public RelateCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
+        {
+            _dc = dc;
+            _aux = aux;
+        }
+
         /// <summary>
         /// Runs side effect 
         /// </summary>
@@ -19,6 +30,12 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             var prop = cmd.PrimaryType.GetProperty(cmd.ForeignKeySpecifier,
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
             prop.SetValue(cmd.Primary,cmd.Secondary);
+            if (_aux.IsCommandRunNeeded)
+            {
+                var ent = _dc.Value.Entry(cmd.Primary);
+                ent.DetectChanges();
+            }
+            
         }
 
         /// <summary>

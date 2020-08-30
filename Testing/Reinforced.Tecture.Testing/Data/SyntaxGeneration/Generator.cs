@@ -37,7 +37,15 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
         public Generator(Type typeRef, TypeGeneratorRepository tgr)
         {
             TypeRef = typeRef;
-            _defaultInstance = Activator.CreateInstance(typeRef);
+            try
+            {
+                _defaultInstance = Activator.CreateInstance(typeRef);
+            }
+            catch (Exception ex)
+            {
+                _defaultInstance = typeRef.InstanceNonpublic();
+            }
+
             var properties = GetProperties();
             InlineProperties = properties.Where(x => x.PropertyType.IsInlineable()).ToArray();
             CollectionProperties = properties.Where(x => x.PropertyType.IsEnumerable() || (x.PropertyType.IsTuple() && !x.PropertyType.IsInlineable())).ToArray();
@@ -129,19 +137,10 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 if (!Equals(defValue, value))
                 {
                     var generator = _tgr.GetGeneratorFor(propertyInfo.PropertyType);
-                    if (!context.DefinedVariable(value, out string varName))
-                    {
-                        var result = generator.New(value, context);
 
-                        var vbl = SingletonSeparatedList<VariableDeclaratorSyntax>(
-                            VariableDeclarator(Identifier(varName)
-                            ).WithInitializer(EqualsValueClause(result)));
-
-                        var k = LocalDeclarationStatement(VariableDeclaration(Var)
-                            .WithVariables(vbl));
-                        context.Declarations.Enqueue(k);
-                    }
-
+                    generator.New(value, context);
+                    var varName = context.GetDefined(value);
+                    
                     var ma = MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         IdentifierName(instanceName),
@@ -185,19 +184,24 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
         {
             var generator = tgr.GetGeneratorFor(collectionType.ElementType());
 
-            var variables = new List<string>();
+            var variables = new List<ExpressionSyntax>();
             foreach (var item in values)
             {
-
-                generator.New(item, context);
-                var name = context.GetDefined(item);
-                variables.Add(name);
+                if (item == null)
+                {
+                    variables.Add(LiteralExpression(SyntaxKind.NullLiteralExpression));
+                }
+                else
+                {
+                    generator.New(item, context);
+                    var name = context.GetDefined(item);
+                    variables.Add(IdentifierName(name));
+                }
             }
 
             var collectionStrategy = tgr.CollectionStrategies.GetStrategy(collectionType);
-            var identifiers = variables.Select(IdentifierName);
-
-            return collectionStrategy.Generate(identifiers, context.Usings);
+            
+            return collectionStrategy.Generate(variables, context.Usings);
         }
 
         private void ProduceCollectionProperties(string instanceName, object instance, GenerationContext context)

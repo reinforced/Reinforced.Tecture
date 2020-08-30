@@ -30,13 +30,15 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         {
             var hash = _aux.IsHashRequired ? Expression.CalculateHash() : string.Empty;
             IEnumerator<T> result;
+            IEnumerable<T> data = null;
             if (_aux.IsEvaluationNeeded)
             {
                 result = _baseQueryable.GetEnumerator();
             }
             else
             {
-                result = _aux.Get<IEnumerable<T>>(hash, _description.Description).GetEnumerator();
+                data = _aux.Get<IEnumerable<T>>(hash, _description.Description);
+                result = data.GetEnumerator();
             }
 
             if (_aux.IsTracingNeeded)
@@ -47,7 +49,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
                 }
                 else
                 {
-                    _aux.Query(hash, result, _description.Description);
+                    _aux.Query(hash, data, _description.Description);
                 }
             }
 
@@ -61,13 +63,15 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 
             var hash = _aux.IsHashRequired ? Expression.CalculateHash() : string.Empty;
             IEnumerator result;
+            IEnumerable data = null;
             if (_aux.IsEvaluationNeeded)
             {
                 result = _baseQueryable.GetEnumerator();
             }
             else
             {
-                result = _aux.Get<IEnumerable>(hash,_description.Description).GetEnumerator();
+                data = _aux.Get<IEnumerable>(hash, _description.Description);
+                result = data.GetEnumerator();
             }
 
             if (_aux.IsTracingNeeded)
@@ -78,7 +82,7 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
                 }
                 else
                 {
-                    _aux.Query(hash, result, _description.Description);
+                    _aux.Query(hash, data, _description.Description);
                 }
             }
 

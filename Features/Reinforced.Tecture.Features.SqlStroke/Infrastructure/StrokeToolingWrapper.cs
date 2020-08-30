@@ -6,18 +6,19 @@ using Reinforced.Tecture.Features.SqlStroke.Reveal;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.LanguageInterpolate;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.SchemaInterpolate;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.Visit;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 {
     public class StrokeToolingWrapper
     {
         private readonly IStrokeRuntime _runtime;
-
+        internal Auxilary _aux;
         private bool CheckTypes(Type[] usedTypes)
         {
             foreach (var usedType in usedTypes)
             {
-                if (!Types.Contains(usedType)) return false;
+                if (!_types.Contains(usedType)) return false;
             }
 
             return true;
@@ -27,7 +28,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
         {
             foreach (var usedType in usedTypes)
             {
-                if (!Types.Contains(usedType)) yield return usedType;
+                if (!_types.Contains(usedType)) yield return usedType;
             }
         }
 
@@ -38,26 +39,29 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 
         }
 
-        private HashSet<Type> _types = null;
+        private readonly HashSet<Type> _types;
 
-        internal StrokeToolingWrapper(IStrokeRuntime runtime)
+        internal StrokeToolingWrapper(IStrokeRuntime runtime, Auxilary aux, HashSet<Type> types)
         {
             _runtime = runtime;
+            _aux = aux;
+            _types = types;
         }
 
         public InterpolatedQuery Compile(Sql command)
         {
-            return command.StrokeExpression
-                .ParseStroke()
-                .VisitStroke(_runtime.Mapper.IsEntityType)
-                .LanguageInterpolateStroke(_runtime.GetLanguageInterpolator())
-                .SchemaInterpolateStroke(_runtime.GetSchemaInterpolator());
-
-        }
-       
-        internal HashSet<Type> Types
-        {
-            get { return _types ?? (_types = new HashSet<Type>(_runtime.ServingTypes)); }
+            if (_aux.IsEvaluationNeeded || _aux.IsCommandRunNeeded)
+            {
+                return command.StrokeExpression
+                    .ParseStroke()
+                    .VisitStroke(_runtime.Mapper.IsEntityType)
+                    .LanguageInterpolateStroke(_runtime.GetLanguageInterpolator())
+                    .SchemaInterpolateStroke(_runtime.GetSchemaInterpolator());
+            }
+            else
+            {
+                return command.Preview;
+            }
         }
     }
 }

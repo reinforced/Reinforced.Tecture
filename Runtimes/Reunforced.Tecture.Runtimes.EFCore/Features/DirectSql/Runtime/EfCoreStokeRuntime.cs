@@ -5,27 +5,23 @@ using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Features.SqlStroke.Infrastructure;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.LanguageInterpolate;
 using Reinforced.Tecture.Features.SqlStroke.Reveal.SchemaInterpolate;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Runtime
 {
     class EfCoreStokeRuntime : IStrokeRuntime
     {
+        protected Auxilary Aux { get; set; }
+
         public EfCoreStokeRuntime(ILazyDisposable<DbContext> dbContext, Type channel, InterpolatorFactory fac)
         {
-
             Mapper = new EfCoreMapper(dbContext);
-            _servingTypes = new Lazy<IEnumerable<Type>>(() => dbContext.Value.Model.GetEntityTypes().Select(x => x.ClrType));
             Channel = channel;
             _fac = fac;
         }
 
         private readonly InterpolatorFactory _fac;
-        private readonly Lazy<IEnumerable<Type>> _servingTypes;
         public IMapper Mapper { get; }
-        public IEnumerable<Type> ServingTypes
-        {
-            get { return _servingTypes.Value; }
-        }
         public Type Channel { get; }
         public LanguageInterpolator GetLanguageInterpolator()
         {

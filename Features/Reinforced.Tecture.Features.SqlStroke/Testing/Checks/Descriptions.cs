@@ -74,6 +74,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Testing.Checks
                     Extractor = NthParameter(n),
                     Type = o == null ? typeof(string) : o.GetType()
                 };
+                n++;
             }
         }
     }

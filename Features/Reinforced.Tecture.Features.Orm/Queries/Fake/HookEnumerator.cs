@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing;
@@ -14,20 +15,23 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         private long _currentIndex = -1;
         private long _indexBeforeReset = -1;
 
+
         public HookEnumerator(string hash, IEnumerator<T> original, Auxilary aux, DescriptionHolder description)
         {
             _original = original;
-            aux.Query(hash, (IEnumerable<T>)_data, description.Description);
+            aux.QueryManuallyClone(hash, (IEnumerable<T>)_data, description.Description);
         }
 
         public bool MoveNext()
         {
             var result = _original.MoveNext();
+            if (!result) return false;
+
             _currentIndex++;
             if (_currentIndex > _indexBeforeReset)
             {
                 _current = _original.Current;
-                _data.Add(_current);
+                _data.Add(_current.DeepClone());
             }
             return result;
         }
@@ -61,16 +65,18 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
         public HookEnumerator(string hash, IEnumerator original, Auxilary aux, DescriptionHolder description)
         {
             _original = original;
-            aux.Query(hash, (IEnumerable<object>) _data, description.Description);
+            aux.QueryManuallyClone(hash, (IEnumerable<object>)_data, description.Description);
         }
 
         public bool MoveNext()
         {
             var result = _original.MoveNext();
+            if (!result) return false;
+
             _currentIndex++;
             if (_currentIndex > _indexBeforeReset)
             {
-                _data.Add(_original.Current);
+                _data.Add(_original.Current.DeepClone());
             }
             return result;
         }

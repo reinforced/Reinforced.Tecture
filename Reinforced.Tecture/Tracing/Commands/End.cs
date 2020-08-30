@@ -4,7 +4,7 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Tracing.Commands
 {
     [CommandCode("END")]
-    public sealed class End : CommandBase, ITracingOnly
+    public sealed class End : CommandBase
     {
         internal End() { }
 

@@ -52,6 +52,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             }
 
             qf._aux = _auxilary.ForChannel(channelType);
+            qf.CallOnRegister();
         }
 
         internal TFeature GetQueryFeature<TChannel, TFeature>()
@@ -104,6 +105,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             }
 
             cf._aux = _auxilary.ForChannel(channelType);
+            cf.CallOnRegister();
         }
 
         internal TFeature GetCommandFeature<TChannel, TFeature>()
