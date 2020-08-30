@@ -12,6 +12,7 @@ namespace Reinforced.Tecture.Testing.Validation
     {
         private InvocationExpressionSyntax Generate(CommandBase command, CheckDescription desc)
         {
+
             var result = ProduceInvoke(command, desc);
             
             var args = ProduceArguments(command, desc).ToArray();

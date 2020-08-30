@@ -8,6 +8,8 @@ using Reinforced.Tecture.Features.Orm.Commands.Update;
 using Reinforced.Tecture.Features.Orm.Commands.DeletePk;
 using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
+using static Reinforced.Tecture.Features.Orm.Testing.Checks.Update.UpdateChecks;
+using static Reinforced.Tecture.Features.Orm.Testing.Checks.DeletePk.DeletePKChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit
 {
@@ -25,29 +27,24 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 					}, @"create measurement unit 'Kilograms' (kG)"), 
 					Annotated(@"create measurement unit 'Kilograms' (kG)")
 				);
-				flow.Then<Save>
-				(
-					Saved(), 
-					Annotated(@"")
-				);
+				flow.Then<Save>();
 				flow.Then<Update>
 				(
-					Annotated(@"")
+					Update<MeasurementUnit>(x=>
+					{ 
+						if (x.Name != @"Kilo") return false;
+						if (x.ShortName != @"kg") return false;
+						if (x.Id != 42) return false;
+						return true;
+					}, @"")
 				);
-				flow.Then<Save>
-				(
-					Saved(), 
-					Annotated(@"")
-				);
+				flow.Then<Save>();
 				flow.Then<DeletePk>
 				(
-					Annotated(@"remove measurement unit#29")
+					DeleteByPK<MeasurementUnit>(@"remove measurement unit#42", 42), 
+					Annotated(@"remove measurement unit#42")
 				);
-				flow.Then<Save>
-				(
-					Saved(), 
-					Annotated(@"")
-				);
+				flow.Then<Save>();
 				flow.TheEnd();
 			}
 

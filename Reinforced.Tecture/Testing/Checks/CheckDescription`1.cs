@@ -35,5 +35,16 @@ namespace Reinforced.Tecture.Testing.Checks
             return EmptyTypes;
         }
 
+        public override bool IsNeeded(CommandBase command)
+        {
+            if (command is TCommand tc) return IsCheckNeeded(tc);
+            return false;
+        }
+
+        protected virtual bool IsCheckNeeded(TCommand command)
+        {
+            return true;
+        }
+
     }
 }

@@ -15,7 +15,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUn
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_D08B6C21DA6DE34CA95A128C82B27357B9BD49E49D958E517895AC6948227",
+					Hash = @"OrmQuery_AB78B1DAADDAD273C885641045DBA4575D5FF2948319913F64C58E6FC40F215",
 					Description = @"check unit existence"
 				};
 			}

@@ -25,11 +25,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks
 				(
 					CommonChecks.Annotated(@"Ensure association with toy type")
 				);
-				flow.Then<Save>
-				(
-					CommonChecks.Saved(), 
-					CommonChecks.Annotated(@"")
-				);
+				flow.Then<Save>();
 				flow.TheEnd();
 			}
 

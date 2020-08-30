@@ -23,5 +23,7 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
             if (effect == null) return false;
             return effect.Annotation == _requiredAnnotation;
         }
+
+
     }
 }

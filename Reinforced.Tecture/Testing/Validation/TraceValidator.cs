@@ -5,6 +5,7 @@ using System.Reflection;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.BuiltInChecks;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.Validation
 {
@@ -13,25 +14,20 @@ namespace Reinforced.Tecture.Testing.Validation
     /// </summary>
     public class TraceValidator
     {
-        enum FlowControl
-        {
-            TakeWhile,
-            Immediate
-        }
         struct ValidationEntry
         {
-            public FlowControl FlowControl { get; set; }
+            public Type CommandType { get; set; }
             public ICommandCheck[] Assertions { get; set; }
 
             /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-            public ValidationEntry(FlowControl flowControl, ICommandCheck[] assertions)
+            public ValidationEntry(Type commandType, ICommandCheck[] assertions)
             {
-                FlowControl = flowControl;
                 Assertions = assertions;
+                CommandType = commandType;
             }
         }
 
-        private ValidationEntry _current = new ValidationEntry(FlowControl.Immediate, null);
+        private ValidationEntry _current = new ValidationEntry(null, null);
         private readonly Queue<ValidationEntry> _validationEntries = new Queue<ValidationEntry>();
 
         private readonly Trace _story;
@@ -45,23 +41,12 @@ namespace Reinforced.Tecture.Testing.Validation
         /// </summary>
         /// <param name="assertions">Set of assertions that must take place for upcoming side-effect</param>
         /// <returns>Fluent</returns>
-        public TraceValidator Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
+        public void Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
         {
+            _current.CommandType = typeof(TCommand);
             _current.Assertions = assertions;
             _validationEntries.Enqueue(_current);
-            _current = new ValidationEntry(FlowControl.Immediate, null);
-            return this;
-        }
-
-        /// <summary>
-        /// Skips side effects until next .Then validator will not fire.
-        /// If end is reached then validation fails
-        /// </summary>
-        /// <returns>Fluent</returns>
-        public TraceValidator SomethingHappens()
-        {
-            _current.FlowControl = FlowControl.TakeWhile;
-            return this;
+            _current = new ValidationEntry(null, null);
         }
 
         /// <summary>
@@ -70,15 +55,26 @@ namespace Reinforced.Tecture.Testing.Validation
         public void TheEnd()
         {
             var cmdsArray = _story.Commands.ToList();
-            _validationEntries.Enqueue(new ValidationEntry(_current.FlowControl, new[] { new EndStoryCheck() }));
+            _validationEntries.Enqueue(new ValidationEntry(typeof(End), null));
             var eIdx = 0;
             while (_validationEntries.Count > 0)
             {
                 var currentValidator = _validationEntries.Dequeue();
 
-                if (currentValidator.FlowControl == FlowControl.Immediate)
+
+                CommandBase command = eIdx >= cmdsArray.Count ? null : cmdsArray[eIdx];
+                // check command type
+                if (currentValidator.CommandType != null)
                 {
-                    CommandBase command = eIdx >= cmdsArray.Count ? null : cmdsArray[eIdx];
+                    if (!currentValidator.CommandType.IsInstanceOfType(command))
+                    {
+                        throw new TectureCheckException(
+                            $"expected command of type {currentValidator.CommandType.Name}, but got {command.GetType().Name}");
+                    }
+                }
+                //perform assertions
+                if (currentValidator.Assertions != null)
+                {
                     foreach (var asrt in currentValidator.Assertions)
                     {
                         if (command != null)
@@ -92,35 +88,9 @@ namespace Reinforced.Tecture.Testing.Validation
 
                         asrt.Assert(command);
                     }
-
-                    eIdx++;
                 }
-                else if (currentValidator.FlowControl == FlowControl.TakeWhile)
-                {
-                    int foundIdx = -1;
-                    for (int i = eIdx; i < cmdsArray.Count; i++)
-                    {
-                        CommandBase cmd = cmdsArray[i];
-                        bool allValid = true;
-                        foreach (var asrt in currentValidator.Assertions)
-                        {
-                            allValid = allValid && asrt.IsValid(cmd);
-                        }
 
-                        if (allValid)
-                        {
-                            foundIdx = i; break;
-                        }
-                    }
-
-                    if (foundIdx != -1) eIdx = foundIdx + 1;
-                    else
-                    {
-                        foreach (var asrt in currentValidator.Assertions) asrt.Assert(null);
-                    }
-                }
-                else throw new Exception("Unknown flow control");
-
+                eIdx++;
             }
 
             if (eIdx < cmdsArray.Count) throw new TectureCheckException($"story is too short. Validation is longer.");

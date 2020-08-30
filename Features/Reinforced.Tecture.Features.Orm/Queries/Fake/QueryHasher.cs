@@ -62,8 +62,9 @@ namespace Reinforced.Tecture.Features.Orm.Queries.Fake
             }
 
             var type = node.Type;
+            if (!type.IsAnonymousType()) _box.Put(type.FullName);
+            else _box.Put("anonymous");
 
-            _box.Put(type.FullName);
             if (value != null)
             {
                 _box.Put(value);

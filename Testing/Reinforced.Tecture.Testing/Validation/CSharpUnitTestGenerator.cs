@@ -63,16 +63,28 @@ namespace Reinforced.Tecture.Testing.Validation
             else
             if (checks.Length == 0)
             {
-                Skip();
+                Then(command);
             }
             else
             {
                 var validationCalls = new List<InvocationExpressionSyntax>();
                 foreach (var checkMethodDescription in checks)
                 {
-                    validationCalls.Add(Generate(command, checkMethodDescription));
+                    if (checkMethodDescription.IsNeeded(command))
+                    {
+                        validationCalls.Add(Generate(command, checkMethodDescription));
+                    }
                 }
-                Then(command, validationCalls);
+
+                if (validationCalls.Count == 0)
+                {
+                    Then(command); //needed to do not overwhelm braces
+                }
+                else
+                {
+                    Then(command, validationCalls);
+                }
+                
             }
         }
 
@@ -87,7 +99,18 @@ namespace Reinforced.Tecture.Testing.Validation
                 .WithArgumentList(FormatThenArguments(checks))
                 .WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
 
-            _chain.Enqueue(ExpressionStatement(ex).WithTrailingTrivia(LineFeed).WithLeadingTrivia(Formats.Tabs(4)));
+            _chain.Enqueue(ExpressionStatement(ex));
+        }
+
+        private void Then(CommandBase command)
+        {
+            var ann = new SyntaxAnnotation();
+            var ex = InvocationExpression(
+                    MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                        IdentifierName(StoryVariableId),
+                        NameThenOf(command)));
+
+            _chain.Enqueue(ExpressionStatement(ex));
         }
 
         private GenericNameSyntax NameThenOf(CommandBase command)
@@ -119,18 +142,6 @@ namespace Reinforced.Tecture.Testing.Validation
                 yield return Argument(validationCall);
                 first = false;
             }
-        }
-
-
-        private void Skip()
-        {
-            var ex = InvocationExpression(
-                    MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                            IdentifierName(StoryVariableId),
-                            IdentifierName(nameof(TraceValidator.SomethingHappens)))
-                )
-                .WithTrailingTrivia(LineFeed);
-            _chain.Enqueue(ExpressionStatement(ex).WithLeadingTrivia(Formats.Tabs(4)));
         }
     }
 }

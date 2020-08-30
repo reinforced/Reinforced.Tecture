@@ -125,6 +125,7 @@ namespace Reinforced.Tecture.Entry
 
                 _serviceManager.OnFinally();
                 _finallyActions.Run();
+                dispatcher.Dispatch(_pipeline, _actions);
 
                 tran?.Commit();
             }
@@ -168,7 +169,7 @@ namespace Reinforced.Tecture.Entry
 
                 await _serviceManager.OnFinallyAsync();
                 await _finallyActions.RunAsync();
-
+                await dispatcher.DispatchAsync(_pipeline, _actions);
                 tran?.Commit();
                 //CleanupAfterSave();
             }

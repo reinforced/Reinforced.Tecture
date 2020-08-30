@@ -20,11 +20,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 					}, @"Create new toy type"), 
 					CommonChecks.Annotated(@"Create new toy type")
 				);
-				flow.Then<Save>
-				(
-					CommonChecks.Saved(), 
-					CommonChecks.Annotated(@"")
-				);
+				flow.Then<Save>();
 				flow.TheEnd();
 			}
 

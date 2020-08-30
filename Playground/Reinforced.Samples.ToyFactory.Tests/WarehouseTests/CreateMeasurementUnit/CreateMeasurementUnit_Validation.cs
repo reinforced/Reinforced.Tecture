@@ -12,7 +12,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUn
 		{
 			protected override void Validate(TraceValidator flow)
 			{ 
-				flow.Then<Add<MeasurementUnit>>
+				flow.Then<Add>
 				(
 					Add<MeasurementUnit>(x=>
 					{ 

@@ -17,4 +17,9 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
             return new Type[] { command.EntityType };
         }
     }
+
+    public static class Descriptions
+    {
+        public static void Basic(this ChecksConfigurator<Commands.Update.Update> c) => c.Enlist(new UpdateCheckDescription());
+    }
 }

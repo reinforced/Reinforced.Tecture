@@ -33,6 +33,7 @@ namespace Reinforced.Tecture.Testing.Checks
 
         internal static readonly object[] EmptyObjects = new object[0];
 
+        public abstract bool IsNeeded(CommandBase command);
     }
 
     

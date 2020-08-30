@@ -19,6 +19,8 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
             return new Type[] { command.EntityType };
         }
 
+        
+
         private static object Extract(Commands.Add.Add cmd)
         {
             return cmd.Entity;

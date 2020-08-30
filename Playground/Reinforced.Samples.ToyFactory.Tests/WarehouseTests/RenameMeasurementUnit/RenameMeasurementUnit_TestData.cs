@@ -15,13 +15,13 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 
 			private Int32 GetEntry_2()
 			{ 
-				return 29;
+				return 42;
 			}
 
 			private MeasurementUnit GetEntry_3()
 			{ 
 				var v1 = New<MeasurementUnit>();
-				Set(v1, x=>x.Id, 29);
+				Set(v1, x=>x.Id, 42);
 				Set(v1, x=>x.ShortName, @"kG");
 				Set(v1, x=>x.Name, @"Kilograms");
 				return v1;
@@ -30,7 +30,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_D08B6C21DA6DE34CA95A128C82B27357B9BD49E49D958E517895AC6948227",
+					Hash = @"OrmQuery_AB78B1DAADDAD273C885641045DBA4575D5FF2948319913F64C58E6FC40F215",
 					Description = @"check unit existence"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_2()) { 
@@ -38,8 +38,8 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 					Description = @"ORM Addition PK retrieval"
 				};
 				yield return new TestDataRecord<MeasurementUnit>(GetEntry_3()) { 
-					Hash = @"OrmQuery_27746627B714EF6E8F45BA7A3ACE78D6AEBA287B9FC3D4B01DFECD5A8AF798BA",
-					Description = @"Get MeasurementUnit by Id #29 (required)"
+					Hash = @"OrmQuery_733639199A5697167B201F9165F5D2487D9588D52EC594686EF5C98F2D619B",
+					Description = @"Get MeasurementUnit by Id #42 (required)"
 				};
 			}
 

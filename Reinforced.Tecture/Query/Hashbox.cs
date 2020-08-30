@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -80,12 +81,28 @@ namespace Reinforced.Tecture.Query
         private void PutObjet(object o)
         {
             var t = o.GetType();
-            var props = t.GetRuntimeProperties();
-            foreach (var pi in props)
+            if (t.IsAnonymousType())
             {
-                if (IsSimple(pi.PropertyType))
+                var fields = t.GetRuntimeFields();
+                foreach (var pi in fields)
                 {
-                    Put(pi.GetValue(o));
+                    if (IsSimple(pi.FieldType))
+                    {
+                        Put(pi.GetValue(o));
+                    }
+                }
+                return;
+            }
+
+            var props = t.GetRuntimeProperties().ToArray();
+            if (props.Length > 0)
+            {
+                foreach (var pi in props)
+                {
+                    if (IsSimple(pi.PropertyType))
+                    {
+                        Put(pi.GetValue(o));
+                    }
                 }
             }
         }

@@ -46,6 +46,10 @@ namespace Reinforced.Tecture.Features.Orm.Commands.DeletePk
                     tw.Write(KeyValues[i]);
                 }
             }
+            else
+            {
+                tw.Write(Annotation);
+            }
         }
 
         /// <summary>

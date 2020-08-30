@@ -43,11 +43,15 @@ namespace Reinforced.Tecture.Commands
             do
             {
                 HashSet<string> usedChannels = new HashSet<string>();
-                if (queue.HasEffects) DispatchInternal(queue.GetEffects(),usedChannels);
 
-                Save(usedChannels);
+                if (queue.HasEffects)
+                {
+                    DispatchInternal(queue.GetEffects(),usedChannels);
+                    Save(usedChannels);
+                    postSave.Run();
+                }
 
-                postSave.Run();
+                
             } while (queue.HasEffects);
         }
 
@@ -56,11 +60,12 @@ namespace Reinforced.Tecture.Commands
             do
             {
                 HashSet<string> usedChannels = new HashSet<string>();
-                if (queue.HasEffects) await DispatchInternalAsync(queue.GetEffects(), usedChannels);
-
-                await SaveAsync(usedChannels);
-
-                await postSave.RunAsync();
+                if (queue.HasEffects)
+                {
+                    await DispatchInternalAsync(queue.GetEffects(), usedChannels);
+                    await SaveAsync(usedChannels);
+                    await postSave.RunAsync();
+                }
             } while (queue.HasEffects);
         }
 
