@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.BulkSql", "Features\Reinforced.Tecture.Features.BulkSql\Reinforced.Tecture.Features.BulkSql.csproj", "{0A94190F-1AEB-4CE7-983B-F370429DA0AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Runtimes.EFCore", "Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj", "{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Runtimes.EFCore", "Runtimes\Reinforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj", "{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{ED1AC9EF-8C46-498B-995B-7437F35AC556}"
 EndProject
