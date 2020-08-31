@@ -1,0 +1,11 @@
+﻿<Project>
+	<Import Project="..\Directory.Build.props"/>
+  <PropertyGroup>    
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>    
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>$(SolutionDir)build\Sample\$(MSBuildProjectName)\$(MSBuildProjectName).xml</DocumentationFile>
+    <OutputPath>$(SolutionDir)build\Sample\$(MSBuildProjectName)\</OutputPath>
+  </PropertyGroup>  
+  
+</Project>

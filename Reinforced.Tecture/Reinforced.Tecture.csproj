@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>  
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Reinforced.Tecture is architectural framework for .NET business applications built on CQRS and FP principles</Description>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>    
+  </PropertyGroup>
 
   <ItemGroup>
     <None Update="Entry\Builders\ForCommand.tt">
@@ -28,6 +32,14 @@
     <None Update="Services\ServiceLocators.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ServiceLocators.cs</LastGenOutput>
+    </None>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>	
   </ItemGroup>
 

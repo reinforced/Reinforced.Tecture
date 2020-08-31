@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>O/RM Feature fore Reinforced.Tecture</Description>
   </PropertyGroup>
 
   <ItemGroup>
