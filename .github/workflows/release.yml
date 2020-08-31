@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build -c:Release --no-restore
+    - name: Publish nuget packages
+      run: dotnet nuget push "package/*.nupkg" --skip-duplicate --api-key ${{ secrets.TECTURE_NUGET_KEY }}
