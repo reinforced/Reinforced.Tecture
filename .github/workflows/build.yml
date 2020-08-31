@@ -21,3 +21,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build -c:Release --no-restore
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+       name: code-coverage-report
+       path: package/*.nupkg
