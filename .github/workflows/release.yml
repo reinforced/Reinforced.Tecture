@@ -18,4 +18,4 @@ jobs:
     - name: Build
       run: dotnet build -c:Release --no-restore
     - name: Publish nuget packages
-      run: dotnet nuget push "package/*.nupkg" --skip-duplicate --api-key ${{ secrets.TECTURE_NUGET_KEY }}
+      run: dotnet nuget push "package/*.nupkg" -s https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ secrets.TECTURE_NUGET_KEY }}
