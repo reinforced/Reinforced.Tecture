@@ -32,7 +32,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				(
 					Add<Resource>(x=>
 					{ 
-						if (x.MeasurementUnitId != 101) return false;
+						if (x.MeasurementUnitId != 103) return false;
 						if (x.StockQuantity != 0) return false;
 						if (x.Name != @"resource1") return false;
 						return true;
@@ -43,7 +43,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				(
 					Add<Resource>(x=>
 					{ 
-						if (x.MeasurementUnitId != 101) return false;
+						if (x.MeasurementUnitId != 103) return false;
 						if (x.StockQuantity != 0) return false;
 						if (x.Name != @"resource2") return false;
 						return true;
@@ -54,7 +54,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				(
 					Add<Resource>(x=>
 					{ 
-						if (x.MeasurementUnitId != 101) return false;
+						if (x.MeasurementUnitId != 103) return false;
 						if (x.StockQuantity != 0) return false;
 						if (x.Name != @"resource3") return false;
 						return true;
@@ -68,7 +68,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					{ 
 						if (x.ItemsCount != 0) return false;
 						if (x.Status != ResourceSupplyStatus.Open) return false;
-						//if (x.CreationDate != new DateTime(2020, 8, 30, 15, 4, 11, 844, DateTimeKind.Utc)) return false;
+						//if (x.CreationDate != new DateTime(2020, 8, 31, 6, 16, 5, 232, DateTimeKind.Utc)) return false;
 						if (x.Name != @"Supply1") return false;
 						return true;
 					}, @"add resource supply"), 
@@ -81,7 +81,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					{ 
 						if (x.Quantity != 10) return false;
 						if (x.ResourceSupplyId != 0) return false;
-						if (x.ResourceId != 175) return false;
+						if (x.ResourceId != 181) return false;
 						return true;
 					}, @"add resource supply item"), 
 					Annotated(@"add resource supply item")
@@ -93,7 +93,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					{ 
 						if (x.Quantity != 10) return false;
 						if (x.ResourceSupplyId != 0) return false;
-						if (x.ResourceId != 176) return false;
+						if (x.ResourceId != 182) return false;
 						return true;
 					}, @"add resource supply item"), 
 					Annotated(@"add resource supply item")
@@ -105,7 +105,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					{ 
 						if (x.Quantity != 10) return false;
 						if (x.ResourceSupplyId != 0) return false;
-						if (x.ResourceId != 177) return false;
+						if (x.ResourceId != 183) return false;
 						return true;
 					}, @"add resource supply item"), 
 					Annotated(@"add resource supply item")
@@ -113,8 +113,10 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Save>();
 				flow.Then<Sql>
 				(
-					SqlCommand(@"UPDATE [r] SET [r].[ItemsCount] = (SELECT COUNT(*) FROM [ResourceSupplyItem] [item] WHERE [item].[ResourceSupplyId] = {0}) FROM [ResourceSupply] [r]"), 
-					SqlParameters(44)
+					SqlCommand(@"UPDATE [r] SET [r].[ItemsCount] = (SELECT COUNT(*) FROM [ResourceSupplyItem] [item]
+ WHERE [item].[ResourceSupplyId] = {0}) FROM [ResourceSupply] [r]
+"), 
+					SqlParameters(46)
 				);
 				flow.Then<Save>();
 				flow.Then<Sql>
@@ -123,15 +125,18 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
     UPDATE [res]
     SET [res].[StockQuantity] = ([res].[StockQuantity] + [item].[Quantity])
     FROM [Resource] [res]
-    INNER JOIN [ResourceSupplyItem] [item] ON [item].[ResourceId] = [res].[Id]
+
+    INNER JOIN [ResourceSupplyItem] [item]
+ ON [item].[ResourceId] = [res].[Id]
     WHERE [item].[ResourceSupplyId] = {0}
 "), 
-					SqlParameters(44)
+					SqlParameters(46)
 				);
 				flow.Then<Sql>
 				(
-					SqlCommand(@"UPDATE [r] SET [r].[Status] = {0} FROM [ResourceSupply] [r] WHERE [r].[Id] = {1}"), 
-					SqlParameters(4, 44)
+					SqlCommand(@"UPDATE [r] SET [r].[Status] = {0} FROM [ResourceSupply] [r]
+ WHERE [r].[Id] = {1}"), 
+					SqlParameters(4, 46)
 				);
 				flow.Then<Save>();
 				flow.TheEnd();

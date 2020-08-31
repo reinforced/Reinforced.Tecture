@@ -20,7 +20,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_3()
 			{ 
-				return 102;
+				return 103;
 			}
 
 			private Boolean GetEntry_4()
@@ -30,7 +30,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_5()
 			{ 
-				return 102;
+				return 103;
 			}
 
 			private Boolean GetEntry_6()
@@ -40,22 +40,22 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_7()
 			{ 
-				return 102;
+				return 103;
 			}
 
 			private Int32 GetEntry_8()
 			{ 
-				return 179;
+				return 182;
 			}
 
 			private Resource[] GetEntry_9()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 179);
+				Set(v1, x=>x.Id, 182);
 				Set(v1, x=>x.Name, @"resource2");
-				Set(v1, x=>x.MeasurementUnitId, 102);
+				Set(v1, x=>x.MeasurementUnitId, 103);
 				var v2 = New<MeasurementUnit>();
-				Set(v2, x=>x.Id, 102);
+				Set(v2, x=>x.Id, 103);
 				Set(v2, x=>x.ShortName, @"kG");
 				Set(v2, x=>x.Name, @"Kilograms");
 				Set(v1, x=>x.MeasurementUnit, v2);
@@ -65,19 +65,19 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 			private List<Resource> GetEntry_10()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 178);
+				Set(v1, x=>x.Id, 181);
 				Set(v1, x=>x.Name, @"resource1");
-				Set(v1, x=>x.MeasurementUnitId, 102);
+				Set(v1, x=>x.MeasurementUnitId, 103);
 				var v2 = New<MeasurementUnit>();
-				Set(v2, x=>x.Id, 102);
+				Set(v2, x=>x.Id, 103);
 				Set(v2, x=>x.ShortName, @"kG");
 				Set(v2, x=>x.Name, @"Kilograms");
 				var v3 = New<Resource>();
-				Set(v3, x=>x.Id, 180);
+				Set(v3, x=>x.Id, 183);
 				Set(v3, x=>x.Name, @"resource3");
-				Set(v3, x=>x.MeasurementUnitId, 102);
+				Set(v3, x=>x.MeasurementUnitId, 103);
 				var v4 = New<MeasurementUnit>();
-				Set(v4, x=>x.Id, 102);
+				Set(v4, x=>x.Id, 103);
 				Set(v4, x=>x.ShortName, @"kG");
 				Set(v4, x=>x.Name, @"Kilograms");
 				Set(v1, x=>x.MeasurementUnit, v2);
@@ -87,12 +87,12 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_11()
 			{ 
-				return 45;
+				return 46;
 			}
 
 			private Int32 GetEntry_12()
 			{ 
-				return 45;
+				return 46;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
@@ -130,7 +130,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					Description = @"ORM Addition PK retrieval"
 				};
 				yield return new TestDataRecord<Resource[]>(GetEntry_9()) { 
-					Hash = @"F99B7687CE3542826BBA56FB93A739D44EC452BE8AE214210A451E8A955F5ED",
+					Hash = @"51FA2A8C1217B05762F53ED7893F636A2F3593C9714D01EC352463C6023AD5D",
 					Description = @""
 				};
 				yield return new TestDataRecord<List<Resource>>(GetEntry_10()) { 

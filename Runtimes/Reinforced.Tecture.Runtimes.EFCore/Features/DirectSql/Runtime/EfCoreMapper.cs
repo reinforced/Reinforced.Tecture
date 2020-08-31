@@ -47,7 +47,25 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Runtime
 
         public IEnumerable<AssociationFields> GetJoinKeys(Type sourceEntity, PropertyInfo sourceColumn)
         {
-            throw new NotImplementedException();
+            var mdl = _context.Value.Model.FindEntityType(sourceEntity);
+            var fks = mdl.GetForeignKeys();
+            foreach (var foreignKey in fks)
+            {
+                if (foreignKey.DependentToPrincipal.PropertyInfo == sourceColumn)
+                {
+                    for (int i = 0; i < foreignKey.Properties.Count; i++)
+                    {
+                        var fkProperty = foreignKey.Properties[i];
+                        var pkProperty = foreignKey.PrincipalKey.Properties[i];
+
+                        yield return new AssociationFields()
+                        {
+                            To = fkProperty.GetColumnName(),
+                            From = pkProperty.GetColumnName()
+                        };
+                    }
+                }
+            }
         }
     }
 }

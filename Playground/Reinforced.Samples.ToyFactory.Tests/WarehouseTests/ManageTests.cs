@@ -5,15 +5,16 @@ using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
-//using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Features.SqlStroke.Queries;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -55,7 +56,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void SupplyCreationPipeline()
         {
-            using var c = Case(out ITecture ctx);
+            using var c = Case<SupplyCreationPipeline_TestData>(out ITecture ctx);
             var m = ctx.Do<Manage>();
             var unit = m.CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
@@ -86,6 +87,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var supplyId = ctx.From<Db>().Key(supp);
             supply.FinishResourceSupply(supplyId);
             ctx.Save();
+            c.Validate<SupplyCreationPipeline_Validation>();
             Output.WriteLine(c.Text());
         }
 
@@ -95,7 +97,22 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             using var c = Case
                 <TestAnonymousQuery_TestData>
                 (out ITecture ctx);
-            var re = ctx.From<Db>().Get<Resource>().ById(177, x => new {x.Name, x.StockQuantity});
+            var re = ctx.From<Db>().Get<Resource>().ById(183, x => new {x.Name, x.StockQuantity});
+
+            c.Validate<TestAnonymousQuery_Validation>();
+            Output.WriteLine(c.Text());
+        }
+
+        
+        [Fact(Skip = "For debug purposes")]
+        public void TestNestedSQLQuery()
+        {
+            using var c = Case(out ITecture ctx);
+            var re = ctx.From<Db>()
+                .SqlQuery<ResourceSupplyItem>
+                    (r=>$"SELECT {r.Resource.Name}, {r.ResourceSupply.ItemsCount} FROM {r} WHERE {r.ResourceSupplyId>10}")
+                .As<Resource>();
+
             Output.WriteLine(c.Text());
         }
 

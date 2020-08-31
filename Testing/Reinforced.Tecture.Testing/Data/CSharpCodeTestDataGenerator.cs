@@ -28,6 +28,7 @@ namespace Reinforced.Tecture.Testing.Data
         internal CSharpCodeTestDataGenerator(CSharpTestDataGeneratorSetup cfg)
         {
             _cfg = cfg;
+            _usings.Add(typeof(String).Namespace);
             _usings.Add(typeof(IEnumerable).Namespace);
             _usings.Add(typeof(IEnumerable<>).Namespace);
             _usings.Add(typeof(ITestDataRecord<>).Namespace);

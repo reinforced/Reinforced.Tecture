@@ -43,7 +43,14 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 
     public class AssociationFields
     {
+        /// <summary>
+        /// Primary key. E.g. User.Id
+        /// </summary>
         public string From { get; set; }
+
+        /// <summary>
+        /// Child key. E.g. Order.UserId
+        /// </summary>
         public string To { get; set; }
     }
 }

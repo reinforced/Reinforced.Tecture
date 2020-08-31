@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
-    <ProjectReference Include="..\..\Runtimes\Reunforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj" />
+    <ProjectReference Include="..\..\Runtimes\Reinforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj" />
     <ProjectReference Include="..\..\Testing\Reinforced.Tecture.Testing\Reinforced.Tecture.Testing.csproj" />
     <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic.Warehouse\Reinforced.Samples.ToyFactory.Logic.Warehouse.csproj" />
     <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj" />

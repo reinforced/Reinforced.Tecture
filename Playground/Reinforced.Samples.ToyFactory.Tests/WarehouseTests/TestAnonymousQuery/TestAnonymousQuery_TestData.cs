@@ -18,8 +18,8 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new AnonymousTestDataRecord(GetEntry_1()) { 
-					Hash = @"OrmQuery_C5A8B5DE46D4A798BDEFB92CE84F25738DFF5C9FEFBC533B1C9A2C24E9C40A",
-					Description = @"Get projection of Resource by Id #177"
+					Hash = @"OrmQuery_2EFF68D3FE5250B9C962CF6CC94EE22324F2C74AA348D393888C868BD9294",
+					Description = @"Get projection of Resource by Id #183"
 				};
 			}
 

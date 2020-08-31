@@ -67,7 +67,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.SchemaInterpolate
             foreach (var ntr in tref.Children)
             {
                 result.AppendLine();
-                result.AppendFormat(" {0} JOIN {1} ON", JoinToString(joinType), TableMakeAlias(ntr));
+                result.AppendFormat(" {0} JOIN {1} ON ", JoinToString(joinType), TableMakeAlias(ntr));
                 var fields = _mapper.GetJoinKeys(tref.EntityType, ntr.JoinColumn);
                 var first = true;
                 foreach (var assocField in fields)
@@ -82,6 +82,8 @@ namespace Reinforced.Tecture.Features.SqlStroke.Reveal.SchemaInterpolate
 
                 if (ntr.Children.Count > 0) VisitChildrenReferences(ntr, joinType, result);
             }
+
+            result.AppendLine();
         }
 
         protected virtual string TableMakeAlias(TableReference tr)

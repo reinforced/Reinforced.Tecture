@@ -38,7 +38,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Infrastructure
 
         public IEnumerable<AssociationFields> GetJoinKeys(Type sourceEntity, PropertyInfo sourceColumn)
         {
-            yield return new AssociationFields() { From = sourceColumn.Name, To = "FK" };
+            yield return new AssociationFields() { From = $"$PK$", To = $"${sourceColumn.Name}_FK$" };
         }
     }
 }
