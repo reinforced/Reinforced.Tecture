@@ -36,6 +36,36 @@ namespace Reinforced.Tecture.Features.SqlStroke.Testing.Checks
             return $"expect SQL command '{TakeFirstLine(_commandText)}', but '{TakeFirstLine(p.Query)}' got";
         }
 
+        private IEnumerable<char> WithoutWhitespace(string x)
+        {
+            for (int j = 0; j < x.Length; j++)
+            {
+                if (!char.IsWhiteSpace(x[j]))
+                    yield return x[j];
+            }
+        }
+
+        private bool TokenizeCompare(string a, string b)
+        {
+            if (a == null && b != null) return false;
+            if (a != null && b == null) return false;
+            using (var s1 = WithoutWhitespace(a).GetEnumerator())
+            using (var s2 = WithoutWhitespace(b).GetEnumerator())
+            {
+                bool c1 = s1.MoveNext();
+                bool c2 = s2.MoveNext();
+                while (c1 && c2)
+                {
+                    if (s1.Current != s2.Current)
+                        return false;
+
+                    c1 = s1.MoveNext();
+                    c2 = s2.MoveNext();
+                }
+
+                return c1 == c2;
+            }
+        }
         /// <summary>
         /// Gets whether particular command instance is valid or not
         /// </summary>
@@ -45,7 +75,8 @@ namespace Reinforced.Tecture.Features.SqlStroke.Testing.Checks
         {
             if (command == null) return false;
             var p = command.Preview;
-            return p.Query == _commandText;
+
+            return TokenizeCompare(p.Query, _commandText);
         }
     }
 }
