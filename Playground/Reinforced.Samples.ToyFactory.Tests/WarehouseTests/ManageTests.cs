@@ -19,6 +19,7 @@ using Xunit.Abstractions;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
 {
+
     public class ManageTests : TectureTestBase
     {
         [Fact]
@@ -54,7 +55,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void SupplyCreationPipeline()
         {
-            using var c = Case<SupplyCreationPipeline_TestData>(out ITecture ctx);
+            using var c = Case(out ITecture ctx);
             var m = ctx.Do<Manage>();
             var unit = m.CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
@@ -85,7 +86,6 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var supplyId = ctx.From<Db>().Key(supp);
             supply.FinishResourceSupply(supplyId);
             ctx.Save();
-            c.Validate<SupplyCreationPipeline_Validation>();
             Output.WriteLine(c.Text());
         }
 

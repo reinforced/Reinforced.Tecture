@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 205 205" style="enable-background:new 0 0 205 205;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);stroke:#EDEDED;stroke-width:8;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+	.st2{fill:#472C2C;stroke:#FFFFFF;stroke-width:6;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#FFFFFF;stroke-width:3;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#EDEDED;stroke-width:4;stroke-linecap:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#FFFFFF;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<g id="Слой_x0020_1">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="102.9" y1="881" x2="102.9" y2="1070.8" gradientTransform="matrix(1 0 0 1 0 -874)">
+		<stop  offset="0" style="stop-color:#B51F1B"/>
+		<stop  offset="1" style="stop-color:#D52B1E"/>
+	</linearGradient>
+	<path class="st0" d="M185.8,196.8H20c-6.6,0-12-5.4-12-12V19c0-6.6,5.4-12,12-12h165.8c6.6,0,12,5.4,12,12v165.8
+		C197.8,191.4,192.4,196.8,185.8,196.8z"/>
+</g>
+<path class="st1" d="M73.9,166.4c-4.9,0-9.5-2.7-12-6.9l-29.4-51c-2.5-4.3-2.5-9.6,0-13.8l29.4-51c2.5-4.3,7.1-6.9,12-6.9h58.8
+	c4.9,0,9.5,2.7,12,6.9l29.4,51c2.5,4.3,2.5,9.6,0,13.8l-29.4,51c-2.5,4.3-7.1,6.9-12,6.9H73.9z"/>
+<path class="st2" d="M74.1,160.9c-3.1,0-6-1.7-7.6-4.4l-29.2-50.6c-1.6-2.7-1.6-6,0-8.7l29.2-50.6c1.6-2.7,4.5-4.4,7.6-4.4h58.4
+	c3.1,0,6,1.7,7.6,4.4l29.2,50.6c1.6,2.7,1.6,6,0,8.7l-29.2,50.6c-1.6,2.7-4.4,4.4-7.6,4.4H74.1z"/>
+<path class="st3" d="M129,54H77.6c-1.1,0-2,0.6-2.6,1.5l-25.7,44.6c-0.5,0.9-0.5,2.1,0,3L75,147.6c0.5,0.9,1.5,1.5,2.6,1.5H129
+	c1.1,0,2-0.6,2.6-1.5l25.7-44.6c0.5-0.9,0.5-2.1,0-3l-25.7-44.6C131.1,54.6,130.1,54,129,54z"/>
+<line class="st4" x1="95.9" y1="90.1" x2="73.5" y2="129"/>
+<line class="st5" x1="90.3" y1="110.1" x2="77.9" y2="131.5"/>
+<line class="st6" x1="123.6" y1="66.3" x2="84" y2="135"/>
+<line class="st5" x1="129.7" y1="69.8" x2="117.4" y2="91.2"/>
+<line class="st4" x1="134.1" y1="72.3" x2="111.7" y2="111.1"/>
+</svg>
