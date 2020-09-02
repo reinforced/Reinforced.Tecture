@@ -1,13 +1,14 @@
-# Tecture
+# What is that?
 
-...is skeleton infrastructure framework for building multi-tenant applications with respect to DDD and CQRS principles. Tecture is built on strong type safety principles and utilizes all the C# type features in order to prevent developers from common mistakes during compile-time.
+This is experimental architectural framework for .NET applications. It is based on CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typization, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The most close project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is more wide and covers more problems. 
 
-However some things cannot be controlled over C# code, so Tecture also provides basic suggestions about your business logic architecture. These suggestions are clearly described in documentation, so it is easy to get common understanding of what is happening.
+Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinforced.Tecture/).
 
-It is one and only framework that provides clear explanations and direct answers to all typical questions that might to come when developing apps with business logic such as:
+```bash
+> Install-Package Reinforced.Tecture
+```
 
-## How to...
-- ...write queries? Where to put them?
-- ...divide application into domains?
-- ...write meaningful logic unit tests?
+Documentation is in progress.
+
+
 
