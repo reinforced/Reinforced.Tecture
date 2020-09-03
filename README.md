@@ -125,7 +125,7 @@ Output.Write(trace.ToText());
 ```
 
 ## Test
-Capture [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data), generate [validation from traces](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation), serialize them to files (like [this](https://github.com/reinforced/Reinforced.Tecture/blob/master/Playground/Reinforced.Samples.ToyFactory.Tests/WarehouseTests/SupplyCreationPipeline/SupplyCreationPipeline_TestData.cs) and [that](https://github.com/reinforced/Reinforced.Tecture/blob/master/Playground/Reinforced.Samples.ToyFactory.Tests/WarehouseTests/SupplyCreationPipeline/SupplyCreationPipeline_Validation.cs))  and combine them into data-driven unit tests
+Capture [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data), generate [validation from traces](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation), serialize them to files (like [this](https://github.com/reinforced/Reinforced.Tecture/blob/master/Playground/Reinforced.Samples.ToyFactory.Tests/WarehouseTests/SupplyCreationPipeline/SupplyCreationPipeline_TestData.cs) and [that](https://github.com/reinforced/Reinforced.Tecture/blob/master/Playground/Reinforced.Samples.ToyFactory.Tests/WarehouseTests/SupplyCreationPipeline/SupplyCreationPipeline_Validation.cs))  and combine them into data-driven infrastructure-free unit tests
 
 ```csharp
 [Fact]
