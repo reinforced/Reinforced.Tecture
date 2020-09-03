@@ -64,11 +64,6 @@ public class Orders : TectureService<Order>, INoContext
 [queries](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries) to your channels
 
 ```csharp
-///<summary>
-/// I'm entity interface...
-///</summary>
-public interface IEntity { Id {get;} }
-
 public static class Extensions
 {
 	///<summary>
@@ -78,7 +73,21 @@ public static class Extensions
 	{
 		return q.All.FirstOrDefault(x => x.Id == id);
 	}
+	
+	///<summary>
+	/// Even if you have SQL
+	///</summary>
+	public static IEnumerable<Order> GetRecentOrders(this Read<Db> db)
+	{
+		return db.SqlQuery<Order>(o => 
+			$"SELECT * FROM {o} WHERE DATEDIFF(day, {o.UpdatedAt}, GETDATE()) < 30"
+		).As<Order>();
+	}
 }
+
+// ... 
+var o = From<Db>().GetRecentOrders();
+// ...
 ```
 
 ## Integrate 
