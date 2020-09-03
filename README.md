@@ -31,7 +31,7 @@ public interface Db :
 ```
 
 ## Create 
-[services](https://github.com/reinforced/Reinforced.Tecture/wiki/Services) for business logic
+[services](https://github.com/reinforced/Reinforced.Tecture/wiki/Services) for business logic and produce [commands](https://github.com/reinforced/Reinforced.Tecture/wiki/Commands)
 
 ```csharp
 /// <summary>
