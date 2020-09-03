@@ -64,6 +64,11 @@ public class Orders : TectureService<Order>, INoContext
 [queries](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries) to your channels
 
 ```csharp
+///<summary>
+/// I'm entity interface...
+///</summary>
+public interface IEntity { Id {get;} }
+
 public static class Extensions
 {
 	///<summary>
