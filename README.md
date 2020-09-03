@@ -52,7 +52,10 @@ public class Orders : TectureService<Order>, INoContext
 		
 		// And update orders inside it
 		To<Db>.Update(order)
-				.Set(x=>x.Name, order.Name + " (draft)")
+		      .Set(x=>x.Name, order.Name + " (draft)");
+
+		// Also I can invoke other services
+		Do<Products>().AttachToOrder(order);
 	}
 }
 ```
