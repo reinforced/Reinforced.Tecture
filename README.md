@@ -67,7 +67,7 @@ public class Orders : TectureService<Order>, INoContext
 ///<summary>
 /// I'm entity interface...
 ///</summary>
-public interface IEntity { Id {get;} }
+public interface IEntity { int Id { get; } }
 
 public static class Extensions
 {
