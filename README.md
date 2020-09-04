@@ -1,6 +1,6 @@
 # What is that?
 
-This is experimental architectural framework for .NET applications. It is based on CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typization, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The most close project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
+This is experimental architecture framework for .NET applications. It is based on CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typization, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The closest project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
 
 Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinforced.Tecture/) along with its dependent packages.
 
@@ -16,7 +16,7 @@ Get in touch with [documentation](https://github.com/reinforced/Reinforced.Tectu
 
 # What can I do with it?
 
-Lots of useful stuff that you usually do when maintaining business application but much easier.
+Lots of useful stuff that you usually do while maintaining business application, but much easier.
 
 ## Define 
 [channels](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels) and use [features](https://github.com/reinforced/Reinforced.Tecture/wiki/Features):
@@ -26,7 +26,8 @@ Lots of useful stuff that you usually do when maintaining business application b
 /// Hi, I'm database communication channel
 /// </summary>
 public interface Db :
-        CommandQueryChannel<Reinforced.Tecture.Features.Orm.Command, Reinforced.Tecture.Features.Orm.Query>
+        CommandQueryChannel<Reinforced.Tecture.Features.Orm.Command, 
+		Reinforced.Tecture.Features.Orm.Query>
     { }
 ```
 
@@ -57,8 +58,8 @@ public class Orders : TectureService<Order>, INoContext
 }
 ```
 
-## Perform 
-[queries](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries) to your channels
+## Use 
+[queries](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries) inside your channels
 
 ```csharp
 ///<summary>
@@ -125,7 +126,7 @@ Output.Write(trace.ToText());
 ```
 
 ## Test
-Capture [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data), generate [validation from traces](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation), serialize them to files (like [this](https://github.com/reinforced/Reinforced.Tecture/blob/master/Playground/Reinforced.Samples.ToyFactory.Tests/WarehouseTests/SupplyCreationPipeline/SupplyCreationPipeline_TestData.cs) and [that](https://github.com/reinforced/Reinforced.Tecture/blob/master/Playground/Reinforced.Samples.ToyFactory.Tests/WarehouseTests/SupplyCreationPipeline/SupplyCreationPipeline_Validation.cs))  and combine them into data-driven infrastructure-free unit tests
+You can capture [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data) and save it in file.   Next step is to get [validation from traces](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation). In the end, turn captured data with validation trace into data-driven infrastructure-free unit tests!
 
 ```csharp
 [Fact]
