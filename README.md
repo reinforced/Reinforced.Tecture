@@ -1,6 +1,6 @@
 # What is that?
 
-This is experimental architecture framework for .NET applications. It is based on CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typization, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The closest project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
+This is experimental architecture framework for .NET applications. It is based on CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typing, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The closest project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
 
 Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinforced.Tecture/) along with its dependent packages.
 
@@ -16,7 +16,7 @@ Get in touch with [documentation](https://github.com/reinforced/Reinforced.Tectu
 
 # What can I do with it?
 
-Lots of useful stuff that you usually do while maintaining business application, but much easier.
+Lots of useful stuff that you usually do while maintaining a business application, but much easier.
 
 ## Define 
 [channels](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels) and use [features](https://github.com/reinforced/Reinforced.Tecture/wiki/Features):
