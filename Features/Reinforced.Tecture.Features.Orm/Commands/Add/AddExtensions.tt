@@ -14,7 +14,16 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
     public static partial class Extensions
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
-    <# for (int j=0;j<i;j++) {	#>         
+    <# for (int j=0;j<i;j++) {	#>       
+    
+        /// <summary>
+        /// Adds entity of type <typeparamref name="T<#= j+1 #>"/>
+        /// </summary><# for (int k=1;k<=i;k++) {	#> 
+        /// <typeparam name="T<#= k #>"></typeparam> <# } #>
+
+        /// <param name="c">ORM Channel Write End</param>
+        /// <param name="entity">Entity to add</param>
+        /// <returns>Fluent</returns>
         public static Add<T<#= j+1 #>> Add<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
         {
             return AddCore(c, entity);

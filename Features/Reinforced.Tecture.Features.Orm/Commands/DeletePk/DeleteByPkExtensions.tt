@@ -12,9 +12,22 @@ using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.DeletePk
 {
+    /// <summary>
+    /// Primary key deletion extensions
+    /// </summary>
     public static partial class Extensions
     {
     <# for (int i=1;i<implementationsCount;i++) {	#> 
+
+        /// <summary>
+        /// Deletes entity by primary key
+        /// </summary><# for (int k=1;k<=i;k++) {	#> 
+        /// <typeparam name="T<#= k #>"></typeparam> <# } #>
+        <# for (int k=1;k<=i;k++) {	#> 
+        /// <param name="v<#= k #>">Primary key field value</param> <# } #>
+
+        /// <param name="c">Delete primary key operation</param>
+        /// <returns>DeletePk command instance</returns>
         public static DeletePk ByPk<<#= GenericsStroke(i) #>>
             (this IPrimaryKeyOperation<DeletePk, IPrimaryKey<<#= GenericsStroke(i) #>>> c, <#= GenericsStrokeParameters(i) #>)
         {

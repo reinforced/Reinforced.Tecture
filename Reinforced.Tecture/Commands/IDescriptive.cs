@@ -5,6 +5,10 @@
     /// </summary>
     public interface IDescriptive
     {
+        /// <summary>
+        /// Produces entity description
+        /// </summary>
+        /// <returns>Entity description</returns>
         string Descibe();
     }
 }

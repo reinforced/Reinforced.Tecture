@@ -8,7 +8,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.Format
 {
-    public partial class CodeFormatter
+    partial class CodeFormatter
     {
         private readonly Stack<Type> _ctx = new Stack<Type>();
         protected TabsManager Tabs { get; } = new TabsManager();

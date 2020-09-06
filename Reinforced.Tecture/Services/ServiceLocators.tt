@@ -7,9 +7,6 @@
 <#
 	var implementationsCount = 7;
 #>
-using System;
-using System.Linq.Expressions;
-using System.Collections.Generic;
 
 
 namespace Reinforced.Tecture.Services {	
@@ -25,6 +22,9 @@ namespace Reinforced.Tecture.Services {
 		void Context(T ctx);
 	}
 
+	/// <summary>
+	/// Extensions for service location
+	/// </summary>
 	public static partial class DoExtensions
     {
 

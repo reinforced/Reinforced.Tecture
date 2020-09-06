@@ -2,9 +2,12 @@
 
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
-using Reinforced.Tecture.Query;
+
 namespace Reinforced.Tecture.Features.Orm.Queries
 {
+    /// <summary>
+    /// Primary key query extensions
+    /// </summary>
     public static partial class Extensions
     {
          

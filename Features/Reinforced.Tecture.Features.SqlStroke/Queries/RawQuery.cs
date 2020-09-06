@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
 using Reinforced.Tecture.Query;
-using Reinforced.Tecture.Testing;
+
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace Reinforced.Tecture.Features.SqlStroke.Queries
 {
@@ -22,10 +23,18 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             _a = runtime.Aux;
         }
 
+        /// <summary>
+        /// SQL command to be executed in order to obtain query results
+        /// </summary>
         public Sql Sql { get; }
 
         private readonly Query _runtime;
 
+        /// <summary>
+        /// Serialize query results as collection of elements of type <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Query result</returns>
         public IEnumerable<T> As<T>() where T : class
         {
             IEnumerable<T> result;
@@ -47,6 +56,11 @@ namespace Reinforced.Tecture.Features.SqlStroke.Queries
             return result;
         }
 
+        /// <summary>
+        /// Serialize query results as collection of elements of type <typeparamref name="T"/> (async)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Query result</returns>
         public async Task<IEnumerable<T>> AsAsync<T>() where T : class
         {
 

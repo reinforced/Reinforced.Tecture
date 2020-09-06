@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture
 {
+    /// <summary>
+    /// Base class for all features
+    /// </summary>
     public abstract class Feature : IDisposable
     {
         internal Auxilary _aux;
@@ -22,6 +23,9 @@ namespace Reinforced.Tecture
             OnRegister();
         }
 
+        /// <summary>
+        /// Being invoked right after feature registration in channel multiplexer
+        /// </summary>
         protected virtual void OnRegister()
         {
 

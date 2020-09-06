@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Entry.Builders
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1> saver)
+		public static void ForCommand<TFeature, TCommand1>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1> saver)
             where TFeature : CommandFeature, Produces<TCommand1>
             where TCommand1 : CommandBase
 
@@ -38,7 +38,7 @@ namespace Reinforced.Tecture.Entry.Builders
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -60,7 +60,7 @@ where TCommand2 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -84,7 +84,7 @@ where TCommand3 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -110,7 +110,7 @@ where TCommand4 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -138,7 +138,7 @@ where TCommand5 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -168,7 +168,7 @@ where TCommand6 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -200,7 +200,7 @@ where TCommand7 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -234,7 +234,7 @@ where TCommand8 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -270,7 +270,7 @@ where TCommand9 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -308,7 +308,7 @@ where TCommand10 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -348,7 +348,7 @@ where TCommand11 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -390,7 +390,7 @@ where TCommand12 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -434,7 +434,7 @@ where TCommand13 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -480,7 +480,7 @@ where TCommand14 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase
@@ -528,7 +528,7 @@ where TCommand15 : CommandBase
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Command feature instance</param>
         /// <param name="saver">Corresponding saver instance</param>
-		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16>(this ChannelConfiguration<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16> saver)
+		public static void ForCommand<TFeature, TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16>(this ChannelBinding<CommandChannel<TFeature>> cf, TFeature feature, Saver<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16> saver)
             where TFeature : CommandFeature, Produces<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16>
             where TCommand1 : CommandBase
 where TCommand2 : CommandBase

@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
         public Hijack Hijack { get; }
 
         private readonly Dictionary<Type, Generator> _generators = new Dictionary<Type, Generator>();
-        private AnonymousDataGenerator _anon;
+
         public TypeGeneratorRepository(Hijack hijack, CollectionStrategies collectionStrategies = null)
         {
             Hijack = hijack;

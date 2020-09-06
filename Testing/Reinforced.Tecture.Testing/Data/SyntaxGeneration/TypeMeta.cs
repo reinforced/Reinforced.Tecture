@@ -40,7 +40,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 {
                     DefaultInstance = Activator.CreateInstance(typeRef);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     DefaultInstance = typeRef.InstanceNonpublic();
                 }

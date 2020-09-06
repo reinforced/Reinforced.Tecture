@@ -7,6 +7,9 @@ using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Features.SqlStroke
 {
+    /// <summary>
+    /// Command tooling for SqlStroke feature
+    /// </summary>
     public abstract class Command : CommandFeature, Produces<Sql>
     {
         private StrokeToolingWrapper _tooling;

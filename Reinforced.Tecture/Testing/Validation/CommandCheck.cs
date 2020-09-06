@@ -23,23 +23,26 @@ namespace Reinforced.Tecture.Testing.Validation
         /// <returns>True if command is valid, false otherwise</returns>
         protected abstract bool IsActuallyValid(TCommand command);
 
+        /// <inheritdoc cref="ICommandCheck.Assert"/>
         protected virtual void Assert(TCommand command)
         {
             if (!IsValid(command)) 
                 throw new TectureCheckException(GetMessage(command));
         }
 
+        /// <inheritdoc cref="ICommandCheck.Assert"/>
         public void Assert(CommandBase command)
         {
             if (command is TCommand cmd) Assert(cmd);
         }
 
+        /// <inheritdoc cref="ICommandCheck.CommandType"/>
         public Type CommandType
         {
             get { return typeof(TCommand); }
         }
 
-
+        /// <inheritdoc cref="ICommandCheck.IsValid"/>
         public bool IsValid(CommandBase command)
         {
             if (command is TCommand cmd) return IsActuallyValid(cmd);

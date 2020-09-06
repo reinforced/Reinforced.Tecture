@@ -92,6 +92,11 @@ namespace Reinforced.Tecture.Services
             Pipeline.Enqueue(new Comment() { Annotation = comment });
         }
 
+        /// <summary>
+        /// Begins cycle description region
+        /// </summary>
+        /// <param name="annotation">Cycle begin annotation</param>
+        /// <returns>Cycle context</returns>
         protected ICycleTraceContext Cycle(string annotation = null)
         {
             if (Aux.TraceCollector != null)

@@ -1,10 +1,9 @@
-﻿using System;
-
+﻿// ReSharper disable UnusedTypeParameter
 namespace Reinforced.Tecture.Channels
 {
 
     /// <summary>
-    /// Common channel interfact
+    /// Common channel interface
     /// </summary>
     public interface Channel { }
 

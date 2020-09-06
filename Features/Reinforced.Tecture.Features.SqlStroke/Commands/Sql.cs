@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.SqlStroke.Infrastructure;
 using Reinforced.Tecture.Features.SqlStroke.Parse;
@@ -14,10 +12,13 @@ using Reinforced.Tecture.Features.SqlStroke.Reveal.Visit;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Commands
 {
+    /// <summary>
+    /// SQL stroke command
+    /// </summary>
     [CommandCode("SQL")]
     public sealed class Sql : CommandBase
     {
-        private readonly bool _isOnlyTracing = false;
+        private readonly bool _isOnlyTracing;
         internal Sql(LambdaExpression strokeExpression)
         {
             _strokeExpression = strokeExpression;
@@ -42,6 +43,9 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
 
         private InterpolatedQuery _preview;
 
+        /// <summary>
+        /// SQL command preview without actual DB schema mapping
+        /// </summary>
         public InterpolatedQuery Preview
         {
             get
@@ -63,7 +67,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Commands
         }
 
         
-
+        /// <inheritdoc />
         public override string ToString()
         {
             return String.Format(Preview.Query, Preview.Parameters);

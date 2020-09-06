@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Reinforced.Tecture.Cloning
 {
-    public class TypeCloneTooling
+
+    class TypeCloneTooling
     {
         /// <summary>
         /// Delegate of (instance, DeepCloneOperator) => Object

@@ -3,11 +3,15 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands.Cycles
 {
+    /// <summary>
+    /// Iteration mark command
+    /// </summary>
     [CommandCode("ITR")]
     public class Iteration : CommandBase, ITracingOnly
     {
         internal Iteration() { }
 
+        /// <inheritdoc />
         public override void Describe(TextWriter tw)
         {
             if (string.IsNullOrEmpty(Annotation))

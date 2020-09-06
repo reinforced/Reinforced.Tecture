@@ -1,20 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Update
 {
-    public sealed class Update : CommandBase
+    /// <summary>
+    /// Entity update command
+    /// </summary>
+    public class Update : CommandBase
     {
+        /// <summary>
+        /// Entity that is going to be updated
+        /// </summary>
         public object Entity { get; internal set; }
 
+        /// <summary>
+        /// Type of entity that is going to be updated
+        /// </summary>
         public Type EntityType { get; internal set; }
 
-        public PropertyInfo[] PropertiesToUpdate { get; private set; } = new PropertyInfo[0];
+
+        private readonly Dictionary<PropertyInfo, object> _updateValues = new Dictionary<PropertyInfo, object>();
+
+        /// <summary>
+        /// Properties that are going to be updated
+        /// </summary>
+        public IReadOnlyDictionary<PropertyInfo, object> UpdateValues
+        {
+            get { return _updateValues; }
+        }
 
         internal Update(object entity, Type entityType)
         {
@@ -22,18 +42,16 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Update
             EntityType = entityType;
         }
 
-        internal Update(object entity, Type entityType, LambdaExpression[] properties)
+        internal void RegisterUpdate(PropertyInfo pi, object valueToSet)
         {
-            Entity = entity;
-            EntityType = entityType;
-            PropertiesToUpdate = properties.Select(ReflectionCache.ParsePropertyLambda).ToArray();
-        }
-
-        private Update(object entity, Type entityType, PropertyInfo[] properties)
-        {
-            Entity = entity;
-            EntityType = entityType;
-            PropertiesToUpdate = properties;
+            _updateValues[pi] = valueToSet;
+            foreach (var commandBase in KnownClones)
+            {
+                if (commandBase is Update u)
+                {
+                    u.RegisterUpdate(pi, valueToSet);
+                }
+            }
         }
 
         /// <summary>
@@ -48,11 +66,11 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Update
                 return;
             }
 
-            string properties = string.Join(", ", PropertiesToUpdate.Select(d => d.Name));
+            string properties = string.Join(", ", _updateValues.Keys.Select(d => d.Name));
 
             var description = $"entity of type {EntityType.Name}";
             if (Entity is IDescriptive e) description = e.Descibe();
-            if (PropertiesToUpdate.Length > 0) description = $"{properties} of {description}";
+            if (_updateValues.Count > 0) description = $"{properties} of {description}";
 
             if (Annotation != null) description = Annotation;
             tw.Write($"Update {description}");
@@ -65,7 +83,37 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Update
         /// <returns>Command clone</returns>
         protected override CommandBase DeepCloneForTracing()
         {
-            return new Update(Entity.DeepClone(), EntityType, PropertiesToUpdate);
+            var r = new Update(Entity.DeepClone(), EntityType);
+            foreach (var updateValue in _updateValues)
+            {
+                r.RegisterUpdate(updateValue.Key, updateValue.Value.DeepClone());
+            }
+
+            return r;
+        }
+    }
+
+    /// <summary>
+    /// Entity update command
+    /// </summary>
+    public class Update<T> : Update
+    {
+        internal Update(T entity) : base(entity, typeof(T))
+        {
+        }
+
+        /// <summary>
+        /// Update exact field of the entity
+        /// </summary>
+        /// <typeparam name="TVal">Property type</typeparam>
+        /// <param name="property">Property to update</param>
+        /// <param name="value">Value to set updated property to</param>
+        /// <returns>Fluent</returns>
+        public Update<T> Set<TVal>(Expression<Func<T, TVal>> property, TVal value)
+        {
+            var prop = property.AsPropertyExpression();
+            RegisterUpdate(prop, value);
+            return this;
         }
     }
 }

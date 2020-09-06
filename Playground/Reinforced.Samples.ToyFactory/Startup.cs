@@ -35,13 +35,15 @@ namespace Reinforced.Samples.ToyFactory
             services.AddTransient<ToyFactoryDbContext>();
             services.AddTransient(sp =>
             {
-                ILazyDisposable<ToyFactoryDbContext> ld = new LazyDisposable<ToyFactoryDbContext>(() => sp.GetService<ToyFactoryDbContext>());
+                var ld = new LazyDisposable<ToyFactoryDbContext>(() => sp.GetService<ToyFactoryDbContext>());
 
                 var tb = new TectureBuilder();
+                
                 tb.WithChannel<Db>(c =>
                 {
-                    c.UseEfCoreOrm(ld);
-                    c.UseEfCoreDirectSql(ld);
+                    
+                    c.UseEfCoreDirectSqlCommand(ld);
+                    c.UseEfCoreOrmCommand(ld);
                 });
 
                 return tb.Build();

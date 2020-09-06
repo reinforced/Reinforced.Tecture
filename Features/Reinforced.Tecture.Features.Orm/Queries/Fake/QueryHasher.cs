@@ -1,15 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Features.Orm.Queries.Fake
 {
-    public class QueryHasher : ExpressionVisitor, IDisposable
+    class QueryHasher : ExpressionVisitor, IDisposable
     {
         private readonly Hashbox _box = new Hashbox();
 

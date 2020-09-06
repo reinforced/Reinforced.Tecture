@@ -8,16 +8,29 @@
 #>
 using System;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Commands;
-using System.Collections.Generic;
 using Reinforced.Tecture.Channels;
+// ReSharper disable UnusedMember.Global
 
 namespace Reinforced.Tecture.Features.Orm.Commands.Derelate
 {
+    /// <summary>
+    /// Derelate command extensions
+    /// </summary>
     public static partial class Extensions
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
-    <# for (int j=0;j<i;j++) {	#>         
+    <# for (int j=0;j<i;j++) {	#>      
+    
+        /// <summary>
+        /// Breaks one-to-many relation between two entities
+        /// </summary><# for (int k=1;k<=i;k++) {	#> 
+        /// <typeparam name="T<#= k #>"></typeparam> <# } #>
+
+        /// <typeparam name="TField"></typeparam>
+        /// <param name="c">ORM channel write end</param>
+        /// <param name="entity">Entity to create relation from</param>
+        /// <param name="key">Relation key property</param>
+        /// <returns>Relate command</returns>
         public static Derelate Derelate<<#= GenericsStroke(i) #>,TField>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, Expression<Func<T<#= j+1 #>,TField>> key)
         {
             return DeRelateCore(c, entity, GetKey(key));

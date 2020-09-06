@@ -15,11 +15,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.DeletePk
             _explanation = explanation;
         }
 
-        /// <summary>
-        /// Gets error message (called only if command is not valid)
-        /// </summary>
-        /// <param name="command">Command instance</param>
-        /// <returns>Error message</returns>
+        /// <inheritdoc />
         protected override string GetMessage(Commands.DeletePk.DeletePk command)
         {
             if (command == null) return $"expected delete by PK for {_explanation}, but story unexpectedly ends";
@@ -51,11 +47,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.DeletePk
             return $"expected delete by PK for {_explanation}, but something went wrong";
         }
 
-        /// <summary>
-        /// Gets whether particular command instance is valid or not
-        /// </summary>
-        /// <param name="command">Command instance</param>
-        /// <returns>True if command is valid, false otherwise</returns>
+        /// <inheritdoc />
         protected override bool IsActuallyValid(Commands.DeletePk.DeletePk command)
         {
             if (command == null) return false;

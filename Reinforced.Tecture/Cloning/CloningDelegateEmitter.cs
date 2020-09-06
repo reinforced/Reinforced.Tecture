@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Reinforced.Tecture.Cloning
 {
-    public static class CloningDelegateEmitter
+    static class CloningDelegateEmitter
     {
         internal static bool IsInlineCloning(this Type t)
         {

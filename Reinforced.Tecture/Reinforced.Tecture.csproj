@@ -5,7 +5,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Reinforced.Tecture is architectural framework for .NET business applications built on CQRS and FP principles</Description>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>    
+    <FileVersion>1.0.0.0</FileVersion>
+    
   </PropertyGroup>
 
   <ItemGroup>

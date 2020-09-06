@@ -10,12 +10,13 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Delete
         private readonly Func<T, bool> _predicate;
         private readonly string _explanation;
 
-        public DeletePredicateCheck(Func<T, bool> predicate, string explanation)
+        internal DeletePredicateCheck(Func<T, bool> predicate, string explanation)
         {
             _predicate = predicate;
             _explanation = explanation;
         }
 
+        /// <inheritdoc />
         protected override string GetMessage(Commands.Delete.Delete command)
         {
             if (command == null) return $"expected removed entity {_explanation}, but story unexpectedly ends";

@@ -1,8 +1,8 @@
 ﻿
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Channels.Multiplexer;
-using Reinforced.Tecture.Testing;
-using Reinforced.Tecture.Query;
+
+// ReSharper disable UnusedTypeParameter
 
 namespace Reinforced.Tecture.Channels
 {
@@ -12,6 +12,11 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 1 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
 	public interface Read<out TChannel, out E1> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1>
@@ -35,6 +40,11 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 1 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
 	public interface Write<out TChannel, out E1> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1>
@@ -75,6 +85,12 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 2 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
 	public interface Read<out TChannel, out E1, out E2> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2>
@@ -98,6 +114,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 2 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
 	public interface Write<out TChannel, out E1, out E2> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2>
@@ -138,6 +160,13 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 3 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
 	public interface Read<out TChannel, out E1, out E2, out E3> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2, E3>
@@ -161,6 +190,13 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 3 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
 	public interface Write<out TChannel, out E1, out E2, out E3> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2, E3>
@@ -201,6 +237,14 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 4 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
 	public interface Read<out TChannel, out E1, out E2, out E3, out E4> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2, E3, E4>
@@ -224,6 +268,14 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 4 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
 	public interface Write<out TChannel, out E1, out E2, out E3, out E4> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2, E3, E4>
@@ -264,6 +316,15 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 5 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
 	public interface Read<out TChannel, out E1, out E2, out E3, out E4, out E5> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2, E3, E4, E5>
@@ -287,6 +348,15 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 5 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
 	public interface Write<out TChannel, out E1, out E2, out E3, out E4, out E5> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2, E3, E4, E5>
@@ -327,6 +397,16 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 6 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
+	/// <typeparam name="E6">Entity type # 6</typeparam>
 	public interface Read<out TChannel, out E1, out E2, out E3, out E4, out E5, out E6> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2, E3, E4, E5, E6>
@@ -350,6 +430,16 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 6 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
+	/// <typeparam name="E6">Entity type # 6</typeparam>
 	public interface Write<out TChannel, out E1, out E2, out E3, out E4, out E5, out E6> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2, E3, E4, E5, E6>
@@ -390,6 +480,17 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 7 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
+	/// <typeparam name="E6">Entity type # 6</typeparam>
+	/// <typeparam name="E7">Entity type # 7</typeparam>
 	public interface Read<out TChannel, out E1, out E2, out E3, out E4, out E5, out E6, out E7> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2, E3, E4, E5, E6, E7>
@@ -413,6 +514,17 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 7 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
+	/// <typeparam name="E6">Entity type # 6</typeparam>
+	/// <typeparam name="E7">Entity type # 7</typeparam>
 	public interface Write<out TChannel, out E1, out E2, out E3, out E4, out E5, out E6, out E7> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2, E3, E4, E5, E6, E7>
@@ -453,6 +565,18 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for 8 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
+	/// <typeparam name="E6">Entity type # 6</typeparam>
+	/// <typeparam name="E7">Entity type # 7</typeparam>
+	/// <typeparam name="E8">Entity type # 8</typeparam>
 	public interface Read<out TChannel, out E1, out E2, out E3, out E4, out E5, out E6, out E7, out E8> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel, E1, E2, E3, E4, E5, E6, E7, E8>
@@ -476,6 +600,18 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for 8 entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+	/// <typeparam name="E1">Entity type # 1</typeparam>
+	/// <typeparam name="E2">Entity type # 2</typeparam>
+	/// <typeparam name="E3">Entity type # 3</typeparam>
+	/// <typeparam name="E4">Entity type # 4</typeparam>
+	/// <typeparam name="E5">Entity type # 5</typeparam>
+	/// <typeparam name="E6">Entity type # 6</typeparam>
+	/// <typeparam name="E7">Entity type # 7</typeparam>
+	/// <typeparam name="E8">Entity type # 8</typeparam>
 	public interface Write<out TChannel, out E1, out E2, out E3, out E4, out E5, out E6, out E7, out E8> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel, E1, E2, E3, E4, E5, E6, E7, E8>

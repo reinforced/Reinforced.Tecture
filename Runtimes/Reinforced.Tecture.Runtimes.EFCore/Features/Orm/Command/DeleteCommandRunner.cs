@@ -18,10 +18,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         }
 
 
-        /// <summary>
-        /// Runs side effect 
-        /// </summary>
-        /// <param name="cmd">Side effect</param>
+
+        /// <inheritdoc />
         protected override void Run(Delete cmd)
         {
             if (_aux.IsCommandRunNeeded)
@@ -32,11 +30,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             }
         }
 
-        /// <summary>
-        /// Runs side effect asynchronously
-        /// </summary>
-        /// <param name="cmd">Side effect</param>
-        /// <returns>Side effect</returns>
+
+        /// <inheritdoc />
         protected override Task RunAsync(Delete cmd)
         {
             Run(cmd);

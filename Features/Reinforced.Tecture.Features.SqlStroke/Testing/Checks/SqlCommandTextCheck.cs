@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Testing.Checks;
 using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Testing.Checks
 {
+    /// <summary>
+    /// SQL command text check
+    /// </summary>
     public class SqlCommandTextCheck : CommandCheck<Sql>
     {
         private readonly string _commandText;
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Features.SqlStroke.Testing.Checks
         private string TakeFirstLine(string s)
         {
             if (string.IsNullOrEmpty(s)) return s;
-            var i = s.IndexOf("\n");
+            var i = s.IndexOf("\n", StringComparison.Ordinal);
             return s.Substring(0, i) + " <...>";
         }
 

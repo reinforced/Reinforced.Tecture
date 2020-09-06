@@ -1,12 +1,14 @@
 ﻿using System;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Entry.Builders;
-using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry
 {
+    /// <summary>
+    /// Tecture entry point extensions
+    /// </summary>
     public static class Extensions
     {
         /// <summary>
@@ -16,9 +18,9 @@ namespace Reinforced.Tecture.Entry
         /// <param name="tb">Builder</param>
         /// <param name="cfg">Configuration action with channel configurator</param>
         /// <returns>Fluent</returns>
-        public static TectureBuilder WithChannel<TChannel>(this TectureBuilder tb, Action<ChannelConfiguration<TChannel>> cfg) where TChannel : Channel
+        public static TectureBuilder WithChannel<TChannel>(this TectureBuilder tb, Action<ChannelBinding<TChannel>> cfg) where TChannel : Channel
         {
-            var cb = new ChannelConfigurationImpl<TChannel>(tb._mx);
+            var cb = new ChannelBindingImpl<TChannel>(tb._mx);
             cfg(cb);
             return tb;
         }

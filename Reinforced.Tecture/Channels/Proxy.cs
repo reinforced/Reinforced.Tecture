@@ -1,7 +1,4 @@
-﻿using Reinforced.Tecture.Query;
-using Reinforced.Tecture.Testing;
-
-namespace Reinforced.Tecture.Channels
+﻿namespace Reinforced.Tecture.Channels
 {
     interface IQueryMultiplexer
     {

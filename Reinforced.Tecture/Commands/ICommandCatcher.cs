@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Reinforced.Tecture.Commands
 {
-
+    /// <summary>
+    /// Wrapper of commands catcher that automatically calls <see cref="ICommandCatcher.Produce"/> on dispose
+    /// </summary>
+    /// <typeparam name="TCather"></typeparam>
     public class CatchingCommands<TCather> : IDisposable 
         where TCather : ICommandCatcher
     {
         private readonly Pipeline _queue;
-        private readonly TCather _catcher;
         internal readonly string _annotation;
+
         /// <summary>
-        /// Active side-effect catcher
+        /// Gets active side-effect catcher
         /// </summary>
-        public TCather Catcher => _catcher;
+        public TCather Catcher { get; }
 
         internal CatchingCommands(TCather catcher, Pipeline queue, string annotation)
         {
-            _catcher = catcher;
+            Catcher = catcher;
             _queue = queue;
             _annotation = annotation;
         }

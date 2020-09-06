@@ -8,7 +8,7 @@ using Reinforced.Tecture.Transactions;
 namespace Reinforced.Tecture
 {
     /// <summary>
-    /// Tecture facade
+    /// Tecture core facade
     /// </summary>
     public interface ITectureNoSave : IDisposable
     {
@@ -45,6 +45,9 @@ namespace Reinforced.Tecture
         Trace EndTrace();
     }
 
+    /// <summary>
+    /// Tecture core facade with saving capabilities
+    /// </summary>
     public interface ITecture : ITectureNoSave
     {
         /// <summary>

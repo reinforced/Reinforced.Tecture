@@ -36,8 +36,15 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.DeletePk
         }
     }
 
+    /// <summary>
+    /// Descriptions
+    /// </summary>
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<Commands.DeletePk.DeletePk> c) => c.Enlist(new DeletePkDescription());
+        /// <summary>
+        /// Basic checks for DeletePk command
+        /// </summary>
+        /// <param name="c">Checks builder</param>
+        public static void Basic(this ChecksBuilderFor<Commands.DeletePk.DeletePk> c) => c.Enlist(new DeletePkDescription());
     }
 }

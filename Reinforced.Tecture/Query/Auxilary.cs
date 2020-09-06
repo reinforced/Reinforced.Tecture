@@ -6,6 +6,9 @@ using Reinforced.Tecture.Cloning;
 
 namespace Reinforced.Tecture.Query
 {
+    /// <summary>
+    /// Auxilary tooling for commands and queries processing
+    /// </summary>
     public class Auxilary
     {
         private readonly AuxilaryContainer _container;
@@ -17,6 +20,9 @@ namespace Reinforced.Tecture.Query
             _channelType = channelType;
         }
 
+        /// <summary>
+        /// Gets whether saving in saver is required
+        /// </summary>
         public bool IsSavingNeeded
         {
             get
@@ -25,6 +31,9 @@ namespace Reinforced.Tecture.Query
             }
         }
 
+        /// <summary>
+        /// Gets whether it is needed to actually run the command
+        /// </summary>
         public bool IsCommandRunNeeded
         {
             get
@@ -33,6 +42,9 @@ namespace Reinforced.Tecture.Query
             }
         }
 
+        /// <summary>
+        /// Gets whether it is actually needed to evaluate query to channel and obtain its value (no test data)
+        /// </summary>
         public bool IsEvaluationNeeded
         {
             get
@@ -41,10 +53,17 @@ namespace Reinforced.Tecture.Query
             }
         }
 
+        /// <summary>
+        /// Gets whether it is needed to compute query hash
+        /// </summary>
         public bool IsHashRequired
         {
             get { return IsTracingNeeded || !IsEvaluationNeeded; }
         }
+
+        /// <summary>
+        /// Gets whether it is needed to trace the query
+        /// </summary>
         public bool IsTracingNeeded
         {
             get
@@ -53,6 +72,13 @@ namespace Reinforced.Tecture.Query
             }
         }
 
+        /// <summary>
+        /// Traces performed query and clones its results
+        /// </summary>
+        /// <typeparam name="T">Type of query result</typeparam>
+        /// <param name="hash">Query hash</param>
+        /// <param name="result">Query result</param>
+        /// <param name="description">Query description</param>
         public void Query<T>(string hash, T result, string description)
         {
             var type = typeof(T);
@@ -75,6 +101,13 @@ namespace Reinforced.Tecture.Query
             throw new TectureException("Test data is not presumed to be collected");
         }
 
+        /// <summary>
+        /// Traces performed query without cloning its results
+        /// </summary>
+        /// <typeparam name="T">Type of query result</typeparam>
+        /// <param name="hash">Query hash</param>
+        /// <param name="result">Query result</param>
+        /// <param name="description">Query description</param>
         public void QueryManuallyClone<T>(string hash, T result, string description)
         {
             var type = typeof(T);
@@ -97,6 +130,13 @@ namespace Reinforced.Tecture.Query
             throw new TectureException("Test data is not presumed to be collected");
         }
 
+        /// <summary>
+        /// Retrieves test data for query
+        /// </summary>
+        /// <typeparam name="T">Type of query result</typeparam>
+        /// <param name="hash">Query hash</param>
+        /// <param name="description">Query description</param>
+        /// <returns>Query result</returns>
         public T Get<T>(string hash, string description = null)
         {
             if (_container._testDataHolder.Instance != null)

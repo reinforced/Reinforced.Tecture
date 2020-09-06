@@ -44,9 +44,19 @@ namespace Reinforced.Tecture.Savers
             OnRegister();
         }
 
+        /// <summary>
+        /// Being invoked when saver has been just registered in channel muliplexer
+        /// </summary>
         protected abstract void OnRegister();
+
+        /// <summary>
+        /// Actually performs saving
+        /// </summary>
         protected abstract void Save();
 
+        /// <summary>
+        /// Actually performs saving (async)
+        /// </summary>
         protected abstract Task SaveAsync();
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

@@ -7,11 +7,14 @@ using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
+using Reinforced.Tecture;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Features.Orm.Commands.Add;
 using Reinforced.Tecture.Features.Orm.Commands.Relate;
 using Reinforced.Tecture.Features.Orm.PrimaryKey;
 using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Features.SqlStroke.Commands;
+using Reinforced.Tecture.Features.SqlStroke.Queries;
 using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Services
@@ -22,6 +25,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
 
         public async Task<IAddition<ToyType>> CreateType(string name)
         {
+            To<Db>().Add(new ToyType() {Name = "New one"});
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))
             {
                 throw new Exception($"Cannot add toy type '{name}' because it already exists");
@@ -33,8 +37,12 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             return ex;
         }
 
-       
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="toyTypeId"></param>
+        /// <returns></returns>
         public IAddition<Blueprint> CreateBlueprint(int toyTypeId)
         {
             From<Db>().All<ToyType>().EnsureExists(toyTypeId);
@@ -55,6 +63,8 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
 
         public void AddResourceToBlueprint(int blueprintId, IEnumerable<ResourceWithQuantity> rwq)
         {
+            
+
             From<Db>().All<Blueprint>().EnsureExists(blueprintId);
 
             var resourceIds = rwq.Select(x => x.ResourceId).ToArray();

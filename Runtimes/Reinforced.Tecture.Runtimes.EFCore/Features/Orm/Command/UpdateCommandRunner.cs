@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Features.Orm.Commands.Delete;
 using Reinforced.Tecture.Features.Orm.Commands.Update;
+using Reinforced.Tecture.Features.Orm.PrimaryKey;
 using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
@@ -18,6 +21,16 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             _dc = dc;
         }
 
+        private EntityEntry FindEntry(Type t, object instance)
+        {
+            
+            var entryQuery = _dc.Value.ChangeTracker
+                .Entries<IPrimaryKey>()
+                .FirstOrDefault(x => x.Entity.GetType() == t);
+
+            if (entryQuery == null) return _dc.Value.Entry(instance);
+            return entryQuery;
+        }
 
         /// <summary>
         /// Runs side effect 
@@ -27,9 +40,13 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
         {
             if (_aux.IsCommandRunNeeded)
             {
-                _dc.Value.Update(cmd.Entity);
-                var ent = _dc.Value.Entry(cmd.Entity);
-                ent.State = EntityState.Modified;
+                var entry = FindEntry(cmd.EntityType, cmd.Entity);
+                foreach (var cmdUpdateValue in cmd.UpdateValues)
+                {
+                    cmdUpdateValue.Key.SetValue(cmd.Entity, cmdUpdateValue.Value);
+                    entry.Property(cmdUpdateValue.Key.Name).IsModified = true;
+                }
+                entry.State = EntityState.Modified;
             }
         }
 

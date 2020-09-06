@@ -1,6 +1,5 @@
 ﻿using System;
 using Reinforced.Tecture.Channels.Multiplexer;
-using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Transactions;
 

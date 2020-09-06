@@ -17,15 +17,19 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Update
     public static partial class Extensions
     {
 <# for (int i=0;i<=implementationsCount;i++) {	#> 
-    <# for (int j=0;j<i;j++) {	#>         
-        public static Update Update<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
-        {
-            return UpdateCore(c, entity);
-        }       
+    <# for (int j=0;j<i;j++) {	#>
 
-        public static Update Update<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity, params Expression<Func<T<#= j+1 #>, object>>[] properties)
+        /// <summary>
+        /// Registers update for entity of type <typeparamref name="T<#= j+1 #>"/>
+        /// </summary><# for (int k=1;k<=i;k++) {	#> 
+        /// <typeparam name="T<#= k #>"></typeparam> <# } #>
+
+        /// <param name="c">ORM Channel Write End</param>
+        /// <param name="entity">Entity to update</param>
+        /// <returns>Fluent</returns>
+        public static Update<T<#= j+1 #>> Update<<#= GenericsStroke(i) #>>(this Write<CommandChannel<Command>,<#= GenericsStroke(i) #>> c, T<#= j+1 #> entity)
         {
-            return UpdateCore(c, entity);
+            return UpdateCore<T<#= j+1 #>>(c, entity);
         }
     <# } #>
     <# } #>    

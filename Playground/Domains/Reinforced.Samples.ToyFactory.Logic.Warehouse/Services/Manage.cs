@@ -15,7 +15,7 @@ using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 {
-    public class Manage : TectureService<Resource,MeasurementUnit>, INoContext
+    public class Manage : TectureService<Resource, MeasurementUnit>, INoContext
     {
         private Manage() { }
 
@@ -39,9 +39,9 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
         public void RenameMeasurementUnit(int id, string name, string shortName)
         {
             var unit = From<Db>().Get<MeasurementUnit>().ByIdRequired(id);
-            unit.Name = name;
-            unit.ShortName = shortName;
-            To<Db>().Update(unit, x => x.Name, x => x.ShortName);
+            To<Db>().Update(unit)
+                .Set(x => x.Name, name)
+                .Set(x => x.ShortName, shortName);
         }
 
         public void DeleteMeasurementUnit(int id)
@@ -62,7 +62,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                 .Select(x => x.Id)
                 .First();
 
-            var res = new Resource() { Name = name, MeasurementUnitId = unit};
+            var res = new Resource() { Name = name, MeasurementUnitId = unit };
             var ex = To<Db>().Add(res).Annotate($"new resource {name}");
             return ex;
         }

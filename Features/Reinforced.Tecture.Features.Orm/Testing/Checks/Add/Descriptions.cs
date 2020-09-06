@@ -47,8 +47,15 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
         }
     }
 
+    /// <summary>
+    /// Descriptions
+    /// </summary>
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<Commands.Add.Add> c) => c.Enlist(new AddCheckDescription());
+        /// <summary>
+        /// Basic checks for Add command
+        /// </summary>
+        /// <param name="c">Checks builder</param>
+        public static void Basic(this ChecksBuilderFor<Commands.Add.Add> c) => c.Enlist(new AddCheckDescription());
     }
 }

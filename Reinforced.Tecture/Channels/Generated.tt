@@ -10,8 +10,8 @@
 
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Channels.Multiplexer;
-using Reinforced.Tecture.Testing;
-using Reinforced.Tecture.Query;
+
+// ReSharper disable UnusedTypeParameter
 
 namespace Reinforced.Tecture.Channels
 {
@@ -21,6 +21,13 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
+	/// <summary>
+	/// Channel's read end for <#= i+1 #> entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+<# for(int k=0;k<=i;k++) { #>
+	/// <typeparam name="E<#= k+1 #>">Entity type # <#= k+1 #></typeparam>
+<# } #>
 	public interface Read<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Read<TChannel> where TChannel : CanQuery { }
 
 	internal struct SRead<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
@@ -44,6 +51,13 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 
 	#region Write
+	/// <summary>
+	/// Channel's write end for <#= i+1 #> entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+<# for(int k=0;k<=i;k++) { #>
+	/// <typeparam name="E<#= k+1 #>">Entity type # <#= k+1 #></typeparam>
+<# } #>
 	public interface Write<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Write<TChannel> where TChannel : CanCommand { }
 
 	internal struct SWrite<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>

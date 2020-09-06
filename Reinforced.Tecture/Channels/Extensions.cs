@@ -9,11 +9,11 @@ namespace Reinforced.Tecture.Channels
     public static class InfrastructureChannelExtensions
     {
         /// <summary>
-        /// Retrieves specified query feature for 
+        /// Gets specified query feature for channel's read end
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="r"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of feature</typeparam>
+        /// <param name="r">Channel's read end</param>
+        /// <returns>Feature instance</returns>
         public static T Feature<T>(this Read<QueryChannel<T>> r) where T : QueryFeature
         {
             var mux = r as IQueryMultiplexer;
@@ -21,6 +21,12 @@ namespace Reinforced.Tecture.Channels
             return mux.GetFeature<T>();
         }
 
+        /// <summary>
+        /// Gets specified command feature for channel's write end
+        /// </summary>
+        /// <typeparam name="T">Type of feature</typeparam>
+        /// <param name="w">Channel's write end</param>
+        /// <returns>Feature instance</returns>
         public static T Feature<T>(this Write<CommandChannel<T>> w) where T : CommandFeature
         {
             var mux = w as ICommandMultiplexer;
@@ -29,11 +35,11 @@ namespace Reinforced.Tecture.Channels
         }
 
         /// <summary>
-        /// Retrieves specified query feature for 
+        /// Gets specified query feature for channel's read end
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="r"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type of feature</typeparam>
+        /// <param name="r">Channel's read end</param>
+        /// <returns>Feature instance</returns>
         public static T PleaseFeature<T>(this Read r) where T : QueryFeature
         {
             var mux = r as IQueryMultiplexer;
@@ -41,7 +47,12 @@ namespace Reinforced.Tecture.Channels
             return mux.GetFeature<T>();
         }
 
-        
+        /// <summary>
+        /// Gets specified query feature for channel's write end
+        /// </summary>
+        /// <typeparam name="T">Type of feature</typeparam>
+        /// <param name="w">Channel's write end</param>
+        /// <returns>Feature instance</returns>
         public static T PleaseFeature<T>(this Write w) where T : CommandFeature
         {
             var mux = w as ICommandMultiplexer;

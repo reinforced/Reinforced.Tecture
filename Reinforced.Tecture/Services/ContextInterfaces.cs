@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable UnassignedGetOnlyAutoProperty
 
 namespace Reinforced.Tecture.Services
 {
@@ -12,6 +13,9 @@ namespace Reinforced.Tecture.Services
     /// </summary>
     public interface IWithContext { }
 
+    /// <summary>
+    /// Context-bound service location builder
+    /// </summary>
     public class LetBuilder
     {
         internal virtual Type HoistType { get; }

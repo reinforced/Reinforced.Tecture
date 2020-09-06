@@ -7,7 +7,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Reinforced.Tecture.Testing.Validation.Format
 {
 
-    public partial class CodeFormatter : Data.Format.CodeFormatter
+    partial class CodeFormatter : Data.Format.CodeFormatter
     {
         /// <summary>Called when the visitor visits a ArgumentSyntax node.</summary>
         public override SyntaxNode VisitArgument(ArgumentSyntax node)

@@ -19,7 +19,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm
         /// </summary>
         /// <param name="conf">Channel configuration</param>
         /// <param name="context">Lazy disposable wrapper around DbContext</param>
-        public static void UseEfCoreOrmCommand(this ChannelConfiguration<CommandChannel<Tecture.Features.Orm.Command>> conf, ILazyDisposable<DbContext> context)
+        public static void UseEfCoreOrmCommand(this ChannelBinding<CommandChannel<Tecture.Features.Orm.Command>> conf, ILazyDisposable<DbContext> context)
         {
             var fe = new EfCore_Orm_CommandFeature(context);
             conf.ForCommand(fe, new EfCore_Orm_Saver(context));
@@ -30,7 +30,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm
         /// </summary>
         /// <param name="conf">Channel configuration</param>
         /// <param name="context">Lazy disposable wrapper around DbContext</param>
-        public static void UseEfCoreOrmQuery(this ChannelConfiguration<QueryChannel<Tecture.Features.Orm.Query>> conf, ILazyDisposable<DbContext> context)
+        public static void UseEfCoreOrmQuery(this ChannelBinding<QueryChannel<Tecture.Features.Orm.Query>> conf, ILazyDisposable<DbContext> context)
         {
             conf.ForQuery(new EfCore_Orm_QueryFeature(context));
         }
@@ -40,7 +40,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm
         /// </summary>
         /// <param name="conf">Channel configuration</param>
         /// <param name="context">Lazy disposable wrapper around DbContext</param>
-        public static void UseEfCoreOrm(this ChannelConfiguration<CommandQueryChannel<Tecture.Features.Orm.Command, Tecture.Features.Orm.Query>> conf, ILazyDisposable<DbContext> context)
+        public static void UseEfCoreOrm(this ChannelBinding<CommandQueryChannel<Tecture.Features.Orm.Command, Tecture.Features.Orm.Query>> conf, ILazyDisposable<DbContext> context)
         {
             conf.UseEfCoreOrmCommand(context);
             conf.UseEfCoreOrmQuery(context);

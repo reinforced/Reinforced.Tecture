@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Reinforced.Tecture.Features.SqlStroke
 {
+    /// <summary>
+    /// Stroke relations class. Currently is under development
+    /// </summary>
     public static class StrokeRelations
     {
         /// <summary>

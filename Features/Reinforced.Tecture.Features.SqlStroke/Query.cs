@@ -6,6 +6,9 @@ using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Features.SqlStroke
 {
+    /// <summary>
+    /// Query tooling of SqlStroke feature
+    /// </summary>
     public abstract class Query : QueryFeature
     {
         public abstract IEnumerable<T> DoQuery<T>(string command, object[] parameters) where T : class;

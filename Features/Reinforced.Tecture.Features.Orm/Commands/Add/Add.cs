@@ -13,8 +13,15 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
     public class Add : CommandBase
     {
         internal Add() { }
+
+        /// <summary>
+        /// Entity to be added
+        /// </summary>
         public object Entity { get; internal set; }
 
+        /// <summary>
+        /// Type of entity to be added
+        /// </summary>
         public Type EntityType { get; internal set; }
 
 
@@ -50,6 +57,10 @@ namespace Reinforced.Tecture.Features.Orm.Commands.Add
         }
     }
 
+    /// <summary>
+    /// Generic entity add command
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Add<T> : Add, IAddition<T>
     {
         internal Add(T entity)

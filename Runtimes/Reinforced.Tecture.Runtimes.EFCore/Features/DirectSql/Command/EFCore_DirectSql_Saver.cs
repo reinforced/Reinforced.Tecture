@@ -18,11 +18,14 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
             
         }
 
+
+        /// <inheritdoc />
         protected override void OnRegister()
         {
             _runner = new DirectSqlRunner(_feature, Aux);
         }
 
+        /// <inheritdoc />
         protected override void Save()
         {
             if (Aux.IsSavingNeeded)
@@ -31,6 +34,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
             }
         }
 
+        /// <inheritdoc />
         protected override Task SaveAsync()
         {
             if (Aux.IsSavingNeeded)
@@ -41,7 +45,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
             return Task.FromResult(0);
         }
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+
+        /// <inheritdoc />
         public override void Dispose()
         {
             _feature.Dispose();
@@ -50,11 +55,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql.Command
 
         private DirectSqlRunner _runner;
 
-        /// <summary>
-        /// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
-        /// </summary>
-        /// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
-        /// <returns>Command runner</returns>
+
+        /// <inheritdoc />
         protected override CommandRunner<Sql> GetRunner1(Sql command)
         {
             return _runner;

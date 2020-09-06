@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
+// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Reinforced.Tecture.Commands
 {
-    
+    /// <summary>
+    /// Common command extensions
+    /// </summary>
     public static class CommandExtensions
     {
         /// <summary>
@@ -24,6 +28,10 @@ namespace Reinforced.Tecture.Commands
         }
     }
 
+    /// <summary>
+    /// Base class for all commands.
+    /// Try to keep it simple and serializable
+    /// </summary>
     public abstract class CommandBase
     {
         private string _channelId;
@@ -105,6 +113,13 @@ namespace Reinforced.Tecture.Commands
 
         private readonly List<CommandBase> _knownClones = new List<CommandBase>();
 
+        /// <summary>
+        /// Collection of known clones of the command
+        /// </summary>
+        protected IEnumerable<CommandBase> KnownClones
+        {
+            get { return _knownClones; }
+        }
 
         /// <summary>
         /// Gets whether command was executed or not
@@ -166,6 +181,9 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         public string FileName { get; set; }
 
+        /// <summary>
+        /// Gets the location where debug entry occured
+        /// </summary>
         public string Location
         {
             get

@@ -18,8 +18,15 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
         }
     }
 
+    /// <summary>
+    /// Descriptions
+    /// </summary>
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<Commands.Update.Update> c) => c.Enlist(new UpdateCheckDescription());
+        /// <summary>
+        /// Basic checks for Update command
+        /// </summary>
+        /// <param name="c">Checks builder</param>
+        public static void Basic(this ChecksBuilderFor<Commands.Update.Update> c) => c.Enlist(new UpdateCheckDescription());
     }
 }

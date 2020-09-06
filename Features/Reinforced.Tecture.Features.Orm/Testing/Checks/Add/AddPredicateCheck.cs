@@ -20,6 +20,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
             _explanation = explanation;
         }
 
+        /// <inheritdoc />
         protected override string GetMessage(Commands.Add.Add command)
         {
             if (command == null) return $"expected added entity {_explanation}, but story unexpectedly ends";
@@ -33,6 +34,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Add
             return $"addition '{_explanation}' does not satisfy condition";
         }
 
+        /// <inheritdoc />
         protected override bool IsActuallyValid(Commands.Add.Add effect)
         {
             if (effect == null) return false;

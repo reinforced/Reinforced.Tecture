@@ -36,9 +36,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             _drel = new DerelateCommandRunner(Aux, _dc);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
+        /// <inheritdoc />
         protected override void Save()
         {
             if (Aux.IsSavingNeeded)
@@ -56,6 +55,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             }
         }
 
+        /// <inheritdoc />
         protected override Task SaveAsync()
         {
             if (Aux.IsSavingNeeded)
@@ -65,7 +65,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             return Task.FromResult(0);
         }
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+
+        /// <inheritdoc />
         public override void Dispose()
         {
             if (Aux.IsSavingNeeded)
@@ -74,51 +75,36 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Features.Orm.Command
             }
         }
 
-        /// <summary>
-        /// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
-        /// </summary>
-        /// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
-        /// <returns>Command runner</returns>
+
+        /// <inheritdoc />
         protected override CommandRunner<Add> GetRunner1(Add command)
         {
             return _add;
         }
 
-        /// <summary>
-        /// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
-        /// </summary>
-        /// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
-        /// <returns>Command runner</returns>
+
+        /// <inheritdoc />
         protected override CommandRunner<Delete> GetRunner2(Delete command)
         {
             return _del;
         }
 
-        /// <summary>
-        /// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
-        /// </summary>
-        /// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
-        /// <returns>Command runner</returns>
+
+        /// <inheritdoc />
         protected override CommandRunner<Update> GetRunner3(Update command)
         {
             return _upd;
         }
 
-        /// <summary>
-        /// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
-        /// </summary>
-        /// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
-        /// <returns>Command runner</returns>
+
+        /// <inheritdoc />
         protected override CommandRunner<Relate> GetRunner4(Relate command)
         {
             return _rel;
         }
 
-        /// <summary>
-        /// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
-        /// </summary>
-        /// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
-        /// <returns>Command runner</returns>
+
+        /// <inheritdoc />
         protected override CommandRunner<Derelate> GetRunner5(Derelate command)
         {
             return _drel;

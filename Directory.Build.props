@@ -17,6 +17,8 @@
     <DocumentationFile>$(SolutionDir)build\$(MSBuildProjectName)\$(MSBuildProjectName).xml</DocumentationFile>
     <OutputPath>$(SolutionDir)build\$(MSBuildProjectName)\</OutputPath>
 	<PackageOutputPath>$(SolutionDir)package\</PackageOutputPath>
+	<SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Reinforced.snk</AssemblyOriginatorKeyFile>    
   </PropertyGroup>  
   <ItemGroup>    
     <None Include="$(SolutionDir)icon.png">

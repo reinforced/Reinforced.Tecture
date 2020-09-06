@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Reinforced.Storage.Services;
-using Reinforced.Tecture.Services;
+// ReSharper disable CheckNamespace
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Reinforced.Tecture
 {
+    /// <summary>
+    /// Queue of delegates to be executed
+    /// </summary>
     public class ActionsQueue
     {
         private readonly Queue<object> _queue = new Queue<object>();
-        private bool _isQueueRunning = false;
         private readonly bool _allowEnqueueWhileRunning;
 
+        /// <summary>
+        /// Gets whether queue contains asynchronous actions
+        /// </summary>
         public bool HasAsyncActions { get; private set; }
+
         internal ActionsQueue(bool allowEnqueueWhileRunning)
         {
             _allowEnqueueWhileRunning = allowEnqueueWhileRunning;
         }
-        public bool IsRunning => _isQueueRunning;
+
+        /// <summary>
+        /// Gets whether queue is being currently executed
+        /// </summary>
+        public bool IsRunning { get; private set; }
 
         /// <summary>
         /// Defers action that will be executed after .SaveChanges call and ALL actions that are in post-actions queue
@@ -25,7 +36,7 @@ namespace Reinforced.Tecture
         /// <param name="action">Action to execute after .SaveChanges and post-actions queue completed</param>
         public void Enqueue(Action action)
         {
-            if (_isQueueRunning && !_allowEnqueueWhileRunning)
+            if (IsRunning && !_allowEnqueueWhileRunning)
             {
                 throw new Exception("Cannot enqueue more actions - one is already running");
             }
@@ -38,7 +49,7 @@ namespace Reinforced.Tecture
         /// <param name="action">Action to execute after .SaveChanges and post-actions queue completed</param>
         public void Enqueue(Func<Task> action)
         {
-            if (_isQueueRunning && !_allowEnqueueWhileRunning)
+            if (IsRunning && !_allowEnqueueWhileRunning)
             {
                 throw new Exception("Cannot enqueue more actions - one is already running");
             }
@@ -49,7 +60,7 @@ namespace Reinforced.Tecture
 
         internal void Run()
         {
-            _isQueueRunning = true;
+            IsRunning = true;
 
             var allItems = new Queue<object>(_queue);
             _queue.Clear();
@@ -61,15 +72,15 @@ namespace Reinforced.Tecture
                     a();
                     continue;
                 }
-                if (act is Func<Task> a2) throw new Exception("Cannot run async actions within sync SaveChanges");
+                if (act is Func<Task>) throw new Exception("Cannot run async actions within sync SaveChanges");
             }
 
-            _isQueueRunning = false;
+            IsRunning = false;
         }
 
         internal async Task RunAsync()
         {
-            _isQueueRunning = true;
+            IsRunning = true;
 
             var allItems = new Queue<object>(_queue);
             _queue.Clear();
@@ -82,7 +93,7 @@ namespace Reinforced.Tecture
                     if (act is Action a) a();
                 }
             }
-            _isQueueRunning = false;
+            IsRunning = false;
         }
     }
 }

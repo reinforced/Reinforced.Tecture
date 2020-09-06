@@ -10,12 +10,13 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
         private readonly Func<T, bool> _predicate;
         private readonly string _explanation;
 
-        public UpdatePredicateCheck(Func<T, bool> predicate, string explanation)
+        internal UpdatePredicateCheck(Func<T, bool> predicate, string explanation)
         {
             _predicate = predicate;
             _explanation = explanation;
         }
 
+        /// <inheritdoc />
         protected override string GetMessage(Commands.Update.Update command)
         {
             if (command == null) return $"expected updated entity {_explanation}, but story unexpectedly ends";
@@ -28,6 +29,7 @@ namespace Reinforced.Tecture.Features.Orm.Testing.Checks.Update
             return $"update '{_explanation}' does not satisfy conditions";
         }
 
+        /// <inheritdoc />
         protected override bool IsActuallyValid(Commands.Update.Update effect)
         {
             if (effect == null) return false;

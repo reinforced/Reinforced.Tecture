@@ -7,6 +7,9 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Features.SqlStroke.Testing.Checks
 {
+    /// <summary>
+    /// SQL command parameters check
+    /// </summary>
     public class SqlCommandParametersCheck : CommandCheck<Sql>
     {
         private readonly object[] _expectedParameters;

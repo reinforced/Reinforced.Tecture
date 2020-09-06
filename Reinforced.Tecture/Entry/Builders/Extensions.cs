@@ -5,6 +5,9 @@ using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Entry.Builders
 {
+    /// <summary>
+    /// Channel binding extensions
+    /// </summary>
     public static partial class Extensions
     {
         /// <summary>
@@ -13,7 +16,7 @@ namespace Reinforced.Tecture.Entry.Builders
         /// <typeparam name="TFeature">Query feature type</typeparam>
         /// <param name="cf">Channel configuration</param>
         /// <param name="feature">Feature implementation</param>
-        public static void ForQuery<TFeature>(this ChannelConfiguration<QueryChannel<TFeature>> cf, TFeature feature) where TFeature : QueryFeature
+        public static void ForQuery<TFeature>(this ChannelBinding<QueryChannel<TFeature>> cf, TFeature feature) where TFeature : QueryFeature
         {
             var holder = cf as MultiplexerRegistrationDecorator;
             holder.RegisterQueryFeature(typeof(TFeature), feature);

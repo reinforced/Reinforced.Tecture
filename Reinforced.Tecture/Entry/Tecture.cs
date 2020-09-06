@@ -5,7 +5,6 @@ using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Services;
-using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Transactions;
 using Reinforced.Tecture.Transactions.Testing;

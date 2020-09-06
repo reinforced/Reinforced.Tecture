@@ -3,11 +3,15 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands.Cycles
 {
+    /// <summary>
+    /// Cycle mark command
+    /// </summary>
     [CommandCode("CYC")]
     public class Cycle : CommandBase, ITracingOnly
     {
         internal Cycle() { }
 
+        /// <inheritdoc />
         public override void Describe(TextWriter tw)
         {
             if (string.IsNullOrEmpty(Annotation)) tw.Write("Do following in cycle:");

@@ -5,14 +5,14 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Testing.Checks
 {
     /// <summary>
-    /// Checks configurator for particular command
+    /// Checks builder for particular command
     /// </summary>
     /// <typeparam name="TCommand"></typeparam>
-    public class ChecksConfigurator<TCommand> where TCommand : CommandBase
+    public class ChecksBuilderFor<TCommand> where TCommand : CommandBase
     {
         private readonly Dictionary<Type, List<CheckDescription>> _checksForCommands;
 
-        internal ChecksConfigurator(Dictionary<Type, List<CheckDescription>> checksForCommands)
+        internal ChecksBuilderFor(Dictionary<Type, List<CheckDescription>> checksForCommands)
         {
             _checksForCommands = checksForCommands;
         }

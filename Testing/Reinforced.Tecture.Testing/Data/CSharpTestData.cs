@@ -4,10 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Reinforced.Tecture.Query;
+// ReSharper disable UnusedAutoPropertyAccessor.Local
 
 namespace Reinforced.Tecture.Testing.Data
 {
+    /// <summary>
+    /// Test data based on C# code
+    /// </summary>
     public abstract class CSharpTestData : ITestDataSource
     {
         private class HashWarning
@@ -19,7 +22,7 @@ namespace Reinforced.Tecture.Testing.Data
 
         }
 
-        private readonly bool _hashOnlyWarn = false;
+        private readonly bool _hashOnlyWarn;
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
         protected CSharpTestData(bool hashOnlyWarn = false)
@@ -27,18 +30,31 @@ namespace Reinforced.Tecture.Testing.Data
             _hashOnlyWarn = hashOnlyWarn;
         }
 
+        /// <summary>
+        /// Creates instance of type <typeparamref name="T"/> via reflection
+        /// </summary>
+        /// <typeparam name="T">Entity type</typeparam>
+        /// <returns>New instance of <typeparamref name="T"/></returns>
         public T New<T>()
         {
             try
             {
                 return Activator.CreateInstance<T>();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return (T) typeof(T).InstanceNonpublic();
+                return (T)typeof(T).InstanceNonpublic();
             }
         }
 
+        /// <summary>
+        /// Sets property of <typeparamref name="T"/> via reflection
+        /// </summary>
+        /// <typeparam name="T">Entity type</typeparam>
+        /// <typeparam name="V">Property value type</typeparam>
+        /// <param name="target">Target instance of <typeparamref name="T"/></param>
+        /// <param name="prop">Property being set</param>
+        /// <param name="value">Desired property value</param>
         public void Set<T, V>(T target, Expression<Func<T, V>> prop, V value)
         {
             if (prop.Body is MemberExpression mex)
@@ -53,9 +69,13 @@ namespace Reinforced.Tecture.Testing.Data
             }
         }
 
+        /// <summary>
+        /// Consequent set of responses to the queries
+        /// </summary>
+        /// <returns>Set of test data records</returns>
         public abstract IEnumerable<ITestDataRecord> GetRecords();
 
-        private IEnumerator<ITestDataRecord> _en = null;
+        private IEnumerator<ITestDataRecord> _en;
 
         private void EnsureEnumerator()
         {
@@ -69,6 +89,7 @@ namespace Reinforced.Tecture.Testing.Data
 
         private readonly Dictionary<int, HashWarning> _warnings = new Dictionary<int, HashWarning>();
 
+        /// <inheritdoc />
         public T Get<T>(string hash, string description = null)
         {
             EnsureEnumerator();
@@ -78,7 +99,11 @@ namespace Reinforced.Tecture.Testing.Data
             }
 
             var k = _en.Current;
-            if (hash != _en.Current.Hash)
+            if (k == null)
+            {
+                throw new TestDataEndsException(_counter);
+            }
+            if (hash != k.Hash)
             {
                 if (!_hashOnlyWarn)
                 {
@@ -114,6 +139,9 @@ namespace Reinforced.Tecture.Testing.Data
             return data.Data;
         }
 
+        /// <summary>
+        /// Collected warnings regarding test data hash mismatch
+        /// </summary>
         public string WarnigsText
         {
             get

@@ -29,11 +29,21 @@ where T<#= j+2 #> : class
 
     {
 
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
         protected Read<T, <#= GenericsStroke(i+2) #>> From<T>() where T : CanQuery
         {
             return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer);
         }		
 
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
 		protected Write<T, <#= GenericsStroke(i+2) #>> To<T>() where T : CanCommand
         {
             return new SWrite<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer, Pipeline);
