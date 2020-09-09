@@ -39,7 +39,7 @@ public interface Db :
 /// I'm orders service. And these are my type parameters (tooling). 
 ///	                  By using them I say that I can update orders and add order lines
 /// </summary>                       |                               |
-public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >, INoContext
+public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >
 {
 	private Orders() { }
 
