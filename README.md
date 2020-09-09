@@ -36,9 +36,10 @@ public interface Db :
 
 ```csharp
 /// <summary>
-/// I'm orders service, my type parameters say that I create/delete or modify orders
-/// </summary>
-public class Orders : TectureService<Order>, INoContext
+/// I'm orders service. And these are my type parameters (tooling). 
+///															By using them I say that I can update orders and add order lines
+/// </summary>                       |                               |
+public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >, INoContext
 {
 	private Orders() { }
 
@@ -46,14 +47,25 @@ public class Orders : TectureService<Order>, INoContext
 	/// And I'm business logic method
 	/// </summary>
 	/// <param name="orderId">I consume order id</param>
-	public void MarkAsDraft(int orderId)
+	/// <param name="poductId">and product id</param>
+	/// <param name="quantity">and also product quantity</param>
+	public void CreateLine(int orderId, int poductId, int quantity)
 	{
 		// I perform queries to the database
 		var order = From<Db>.Get<Order>().ById(orderId);
 		
-		// And update orders inside it
+		// My aspect allows me to add order lines
+		To<Db>().Add(new OrderLine
+				{
+						OrderId = orderId,
+						ProductId = productId,
+						Quantity = quantity
+				}
+		);
+
+		// And only update orders
 		To<Db>.Update(order)
-		      .Set(x=>x.Name, order.Name + " (draft)");
+		      .Set(x=>x.TotalQuantity, order.TotalQuantity + quantity);
 
 		// Also I can invoke other services
 		Do<Products>().AttachToOrder(order);
