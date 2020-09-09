@@ -20,19 +20,19 @@ namespace Reinforced.Tecture.Channels
     /// <summary>
     /// Flag type for data channels that supports particular methodology
     /// </summary>
-    /// <typeparam name="T">Type of supported feature</typeparam>
-    public interface QueryChannel<out T> : CanQuery where T : QueryFeature { }
+    /// <typeparam name="T">Type of supported aspect</typeparam>
+    public interface QueryChannel<out T> : CanQuery where T : QueryAspect { }
 
     /// <summary>
     /// Flag type for data channels that supports particular methodology
     /// </summary>
-    /// <typeparam name="T">Type of supported feature</typeparam>
-    public interface CommandChannel<out T> : CanCommand where T : CommandFeature { }
+    /// <typeparam name="T">Type of supported aspect</typeparam>
+    public interface CommandChannel<out T> : CanCommand where T : CommandAspect { }
 
     /// <summary>
     /// Flag type for Command/Query channels
     /// </summary>
     /// <typeparam name="TQuery"></typeparam>
     /// <typeparam name="TCommand"></typeparam>
-    public interface CommandQueryChannel<out TCommand,out TQuery> : QueryChannel<TQuery>, CommandChannel<TCommand> where TCommand : CommandFeature where TQuery : QueryFeature { }
+    public interface CommandQueryChannel<out TCommand,out TQuery> : QueryChannel<TQuery>, CommandChannel<TCommand> where TCommand : CommandAspect where TQuery : QueryAspect { }
 }

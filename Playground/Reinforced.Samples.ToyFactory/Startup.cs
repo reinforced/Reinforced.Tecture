@@ -14,8 +14,8 @@ using Reinforced.Samples.ToyFactory.Data;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Entry;
-using Reinforced.Tecture.Runtimes.EFCore.Features.DirectSql;
-using Reinforced.Tecture.Runtimes.EFCore.Features.Orm;
+using Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql;
+using Reinforced.Tecture.Runtimes.EFCore.Aspect.Orm;
 
 namespace Reinforced.Samples.ToyFactory
 {

@@ -9,55 +9,55 @@ namespace Reinforced.Tecture.Channels
     public static class InfrastructureChannelExtensions
     {
         /// <summary>
-        /// Gets specified query feature for channel's read end
+        /// Gets specified query aspect for channel's read end
         /// </summary>
-        /// <typeparam name="T">Type of feature</typeparam>
+        /// <typeparam name="T">Type of aspect</typeparam>
         /// <param name="r">Channel's read end</param>
-        /// <returns>Feature instance</returns>
-        public static T Feature<T>(this Read<QueryChannel<T>> r) where T : QueryFeature
+        /// <returns>Aspect instance</returns>
+        public static T Aspect<T>(this Read<QueryChannel<T>> r) where T : QueryAspect
         {
             var mux = r as IQueryMultiplexer;
             
-            return mux.GetFeature<T>();
+            return mux.GetAspect<T>();
         }
 
         /// <summary>
-        /// Gets specified command feature for channel's write end
+        /// Gets specified command aspect for channel's write end
         /// </summary>
-        /// <typeparam name="T">Type of feature</typeparam>
+        /// <typeparam name="T">Type of aspect</typeparam>
         /// <param name="w">Channel's write end</param>
-        /// <returns>Feature instance</returns>
-        public static T Feature<T>(this Write<CommandChannel<T>> w) where T : CommandFeature
+        /// <returns>Aspect instance</returns>
+        public static T Aspect<T>(this Write<CommandChannel<T>> w) where T : CommandAspect
         {
             var mux = w as ICommandMultiplexer;
 
-            return mux.GetFeature<T>();
+            return mux.GetAspect<T>();
         }
 
         /// <summary>
-        /// Gets specified query feature for channel's read end
+        /// Gets specified query aspect for channel's read end
         /// </summary>
-        /// <typeparam name="T">Type of feature</typeparam>
+        /// <typeparam name="T">Type of aspect</typeparam>
         /// <param name="r">Channel's read end</param>
-        /// <returns>Feature instance</returns>
-        public static T PleaseFeature<T>(this Read r) where T : QueryFeature
+        /// <returns>Aspect instance</returns>
+        public static T PleaseAspect<T>(this Read r) where T : QueryAspect
         {
             var mux = r as IQueryMultiplexer;
 
-            return mux.GetFeature<T>();
+            return mux.GetAspect<T>();
         }
 
         /// <summary>
-        /// Gets specified query feature for channel's write end
+        /// Gets specified query aspect for channel's write end
         /// </summary>
-        /// <typeparam name="T">Type of feature</typeparam>
+        /// <typeparam name="T">Type of aspect</typeparam>
         /// <param name="w">Channel's write end</param>
-        /// <returns>Feature instance</returns>
-        public static T PleaseFeature<T>(this Write w) where T : CommandFeature
+        /// <returns>Aspect instance</returns>
+        public static T PleaseAspect<T>(this Write w) where T : CommandAspect
         {
             var mux = w as ICommandMultiplexer;
 
-            return mux.GetFeature<T>();
+            return mux.GetAspect<T>();
         }
     }
 }

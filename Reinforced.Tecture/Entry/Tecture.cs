@@ -42,20 +42,11 @@ namespace Reinforced.Tecture.Entry
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
-        public T Do<T>() where T : TectureServiceBase, INoContext
+        public T Do<T>() where T : TectureServiceBase
         {
             return _serviceManager.Do<T>();
         }
 
-        /// <summary>
-        /// Obtains context service to make it to do something
-        /// </summary>
-        /// <typeparam name="T">Service type</typeparam>
-        /// <returns>Context service <typeparamref name="T"/></returns>
-        public LetBuilder<T> Let<T>() where T : TectureServiceBase, IWithContext
-        {
-            return _serviceManager.Let<T>();
-        }
 
         /// <summary>
         /// Obtains data source to query data from

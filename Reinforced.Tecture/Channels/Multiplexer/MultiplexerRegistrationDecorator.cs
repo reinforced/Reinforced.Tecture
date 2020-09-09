@@ -16,14 +16,14 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         private readonly Type _channelType;
         private readonly ChannelMultiplexer _multiplexer;
 
-        public void RegisterQueryFeature(Type queryFeatureType, QueryFeature feature)
+        public void RegisterQueryAspect(Type queryAspectType, QueryAspect aspect)
         {
-            _multiplexer.RegisterQueryFeature(_channelType, queryFeatureType, feature);
+            _multiplexer.RegisterQueryAspect(_channelType, queryAspectType, aspect);
         }
 
-        public void RegisterCommandFeature(Type commandFeatureType, CommandFeature feature)
+        public void RegisterCommandAspect(Type commandAspectType, CommandAspect aspect)
         {
-            _multiplexer.RegisterCommandFeature(_channelType, commandFeatureType, feature);
+            _multiplexer.RegisterCommandAspect(_channelType, commandAspectType, aspect);
         }
 
         public void RegisterSaver(SaverBase sb)

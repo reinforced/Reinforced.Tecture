@@ -23,9 +23,9 @@ namespace Reinforced.Tecture.Channels
             _mx = mx;
         }
 
-        public TFeature GetFeature<TFeature>() where TFeature : QueryFeature
+        public TAspect GetAspect<TAspect>() where TAspect : QueryAspect
         {
-            return _mx.GetQueryFeature<TChannel, TFeature>();
+            return _mx.GetQueryAspect<TChannel, TAspect>();
         }
     }
 
@@ -69,9 +69,9 @@ namespace Reinforced.Tecture.Channels
             _pipeline = p;
         }
 
-        public TFeature GetFeature<TFeature>() where TFeature : CommandFeature
+        public TAspect GetAspect<TAspect>() where TAspect : CommandAspect
         {
-            return _cm.GetCommandFeature<TChannel, TFeature>();
+            return _cm.GetCommandAspect<TChannel, TAspect>();
         }
 
         public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase

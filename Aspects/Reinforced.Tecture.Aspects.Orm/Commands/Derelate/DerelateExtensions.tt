@@ -1,0 +1,65 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+<#
+	var implementationsCount = 8;
+    var methodName = "Derelate";
+    var resultName = "Derelate";
+#>
+
+using System;
+using System.Linq.Expressions;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Aspects.Orm.Toolings;
+using Reinforced.Tecture.Services;
+using _ = Reinforced.Tecture.Services.Tooling;
+namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
+{
+    public static partial class Extensions
+    {
+<# for (int toolingIndex=0; toolingIndex<implementationsCount; toolingIndex++) {	#> 
+<#
+    var foldArgs = string.Join("",Enumerable.Range(1,toolingIndex).Select(x=>$",_"));    
+#>
+
+<# for (int entityIndex=1; entityIndex<=implementationsCount; entityIndex++) {	#> 
+<#
+    var entityParameters = string.Join(", ", Enumerable.Range(1,entityIndex).Select(x=> $"E{x}"));
+    var exactTooling = $"Updates<{entityParameters}>";
+    var currentEntity = $"E{entityIndex}";
+    
+#>
+        /// <summary>
+        /// Breaks one-to-many relation between entity <typeparamref name="E<#= entityIndex #>"/> and <typeparamref name="TField"/>
+        /// </summary>
+        /// <param name="c">ORM Channel Write End</param>
+        /// <param name="entity">Entity subject</param>
+        /// <param name="key">Relation navigation property</param>
+        /// <returns>Derelate command</returns>
+        public static <#= resultName #>
+            <#= methodName #><<#= entityParameters #>, TField>(this Write<CommandChannel<Command><#= foldArgs #>, <#= exactTooling #>> c, <#= currentEntity #> entity, Expression<Func<<#= currentEntity #>,TField>> key)
+        {
+            return <#= methodName #>Core(c, entity, GetKey(key));
+        }
+<# } #> 
+<# } #> 
+    }
+}
+
+<#+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

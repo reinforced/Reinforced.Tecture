@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
-using Reinforced.Tecture.Features.Orm.PrimaryKey;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement
 {

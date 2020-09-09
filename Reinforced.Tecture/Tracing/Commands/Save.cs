@@ -3,6 +3,9 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands
 {
+    /// <summary>
+    /// Synthetic command that means saving happening at the particular point
+    /// </summary>
     [CommandCode("SAVE")]
     public sealed class Save : CommandBase
     {

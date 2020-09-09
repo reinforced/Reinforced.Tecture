@@ -3,6 +3,9 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands
 {
+    /// <summary>
+    /// Synthetic command that means end of the commands queue
+    /// </summary>
     [CommandCode("END")]
     public sealed class End : CommandBase
     {

@@ -29,6 +29,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns></returns>
         public ITecture Build()
         {
+            _mx.Validate();
             return new Tecture(
                 _mx,
                 Aux,

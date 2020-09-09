@@ -2,12 +2,12 @@
 {
     interface IQueryMultiplexer
     {
-        TFeature GetFeature<TFeature>() where TFeature : QueryFeature;
+        TAspect GetAspect<TAspect>() where TAspect : QueryAspect;
     }
 
     interface ICommandMultiplexer
     {
-        TFeature GetFeature<TFeature>() where TFeature : CommandFeature;
+        TAspect GetAspect<TAspect>() where TAspect : CommandAspect;
     }
 
 }

@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands.Cycles
 {
+    /// <summary>
+    /// Synthetic command that means end of logical cycle 
+    /// </summary>
     [CommandCode("CEND")]
     public class EndCycle : CommandBase, ITracingOnly
     {
         internal EndCycle() { }
+
+        /// <summary>
+        /// Total number of commands that was produced within cycle
+        /// </summary>
         public int TotalCommands { get; internal set; }
+
+        /// <summary>
+        /// Total number of iterations happened
+        /// </summary>
         public int IterationsCount { get; internal set; }
 
+        /// <inheritdoc />
         public override void Describe(TextWriter tw)
         {
             if (string.IsNullOrEmpty(Annotation))

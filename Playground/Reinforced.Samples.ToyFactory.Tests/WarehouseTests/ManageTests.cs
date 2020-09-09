@@ -13,8 +13,8 @@ using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Queries;
-using Reinforced.Tecture.Features.SqlStroke.Queries;
+using Reinforced.Tecture.Aspects.DirectSql.Queries;
+using Reinforced.Tecture.Aspects.Orm.Queries;
 using Xunit;
 using Xunit.Abstractions;
 

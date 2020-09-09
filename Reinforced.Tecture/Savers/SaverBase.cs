@@ -32,7 +32,7 @@ namespace Reinforced.Tecture.Savers
         internal Auxilary _Aux;
 
         /// <summary>
-        /// Reference to test data & tracing capabilities
+        /// Reference to test data and tracing capabilities
         /// </summary>
         protected Auxilary Aux
         {

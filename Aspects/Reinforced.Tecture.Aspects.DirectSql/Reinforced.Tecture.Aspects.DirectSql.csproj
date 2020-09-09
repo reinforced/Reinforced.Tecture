@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Direct SQL Aspect for Reinforced.Tecture</Description>    
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Commands\Commands.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Commands.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Commands\Commands.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Commands.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

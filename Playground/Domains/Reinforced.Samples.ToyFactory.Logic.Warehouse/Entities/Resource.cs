@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
-using Reinforced.Tecture.Features.Orm.PrimaryKey;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities
 {

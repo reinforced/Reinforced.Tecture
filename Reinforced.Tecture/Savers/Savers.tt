@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
-
+// ReSharper disable UnusedTypeParameter
 namespace Reinforced.Tecture.Savers
 {
 <# for (int i=0;i<implementationsCount;i++) {	#> 
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Savers
 #region Producer/Saver pair #<#= i+1 #>
 	
 	/// <summary>
-	/// Marking interface for feature being able to produce <#= (i+1) #> various commands
+	/// Marking interface for aspect being able to produce <#= (i+1) #> various commands
 	/// </summary>
 	public interface Produces<<#= GenericsStroke(i+1) #>>
 		<#= Constraints(i+1,"CommandBase") #>

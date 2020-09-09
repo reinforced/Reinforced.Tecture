@@ -2,8 +2,8 @@
 using System.IO;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Testing.Checks;
-using Reinforced.Tecture.Features.SqlStroke.Testing;
+using Reinforced.Tecture.Aspects.DirectSql.Testing;
+using Reinforced.Tecture.Aspects.Orm.Testing.Checks;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.BuiltInChecks;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;

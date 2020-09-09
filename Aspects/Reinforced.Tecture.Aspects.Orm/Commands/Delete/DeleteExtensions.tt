@@ -1,0 +1,81 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	var implementationsCount = 8;
+    var methodName = "Delete";
+    var resultName = "Delete";
+#>
+
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Aspects.Orm.Toolings;
+using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Services;
+using _ = Reinforced.Tecture.Services.Tooling;
+using o = System.Object;
+
+namespace Reinforced.Tecture.Aspects.Orm.Commands.Delete
+{
+    public static partial class Extensions
+    {
+<# for (int toolingIndex=0; toolingIndex<implementationsCount; toolingIndex++) {	#> 
+<#
+    var foldArgs = string.Join("",Enumerable.Range(1,toolingIndex).Select(x=>$",_"));
+#>        
+
+<# for (int entityIndex=1; entityIndex<=implementationsCount; entityIndex++) {	#> 
+<#
+    var entityParameters = string.Join(", ", Enumerable.Range(1,entityIndex).Select(x=> $"E{x}"));
+    var exactTooling = $"{methodName}s<{entityParameters}>";
+    var currentEntity = $"E{entityIndex}";
+
+    var pkentityParameters = string.Join("", Enumerable.Range(1,entityIndex-1).Select(x=> $"o,"));
+#>
+        /// <summary>
+        /// <#= methodName #>s entity of type <typeparamref name="E<#= entityIndex #>"/>
+        /// </summary>
+        /// <param name="c">ORM Channel Write End</param>
+        /// <param name="entity">Entity to delete</param>
+        /// <returns>Fluent</returns>
+        public static <#= resultName #> 
+            <#= methodName #><<#= entityParameters #>>(
+            this Write<CommandChannel<Command><#= foldArgs #>, <#= exactTooling #>> c, <#= currentEntity #> entity)
+        {
+            return <#= methodName #>Core(c, entity);
+        }
+
+        /// <summary>
+        /// Deletes entity by primary key
+        /// </summary>
+        /// <typeparam name="E">Entity to be deleted</typeparam>
+        /// <param name="channel">Channel</param>
+        /// <returns>Fluent</returns>
+        public static IPrimaryKeyOperation<DeletePk.DeletePk, E> Delete<E>(this Write<CommandChannel<Command><#= foldArgs #>,Deletes<<#=pkentityParameters #>E>> channel)
+            where E : IPrimaryKey
+        {
+            return new DeletePkOperation<E>() { Write = channel, EntityType = typeof(E) };
+        }
+
+       
+<# } #> 
+<# } #> 
+    }
+}
+
+<#+
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

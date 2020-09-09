@@ -17,14 +17,7 @@ namespace Reinforced.Tecture
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
-        T Do<T>() where T : TectureServiceBase, INoContext;
-
-        /// <summary>
-        /// Obtains context service to make it to do something
-        /// </summary>
-        /// <typeparam name="T">Service type</typeparam>
-        /// <returns>Context service <typeparamref name="T"/></returns>
-        LetBuilder<T> Let<T>() where T : TectureServiceBase, IWithContext;
+        T Do<T>() where T : TectureServiceBase;
 
         /// <summary>
         /// Obtains data source to query data from

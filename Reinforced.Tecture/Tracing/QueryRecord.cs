@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Tracing
 {
+    /// <summary>
+    /// Synthetic command that means query that was made to the external system
+    /// </summary>
     [CommandCode("QRY")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
-        public QueryRecord(Type channel, Type dataType, string hash, object result, bool isTestData)
+        internal QueryRecord(Type channel, Type dataType, string hash, object result, bool isTestData)
         {
             Channel = channel;
             Hash = hash;

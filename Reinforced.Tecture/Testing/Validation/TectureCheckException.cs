@@ -2,6 +2,9 @@
 
 namespace Reinforced.Tecture.Testing.Validation
 {
+    /// <summary>
+    /// Exception that occured during check-based validation
+    /// </summary>
     public class TectureCheckException : TectureException
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Exception" /> class.</summary>

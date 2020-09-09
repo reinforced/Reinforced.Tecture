@@ -10,7 +10,7 @@ using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Services;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Aspects.Orm.Queries;
 
 namespace Reinforced.Samples.ToyFactory.Controllers
 {

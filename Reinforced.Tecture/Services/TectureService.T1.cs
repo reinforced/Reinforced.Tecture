@@ -34,19 +34,19 @@ namespace Reinforced.Tecture.Services
     }
 
     /// <summary>
-    /// Storage services that touches 1 entity
+    /// Storage services with tooling
     /// </summary> 
-    public class TectureService<T1> : TectureServiceBase
-        where T1 : class
+    public class TectureService<Tool> : TectureServiceBase
+        where Tool : Tooling
     {
         /// <summary>
         /// Gets reading end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain read end of</typeparam>
         /// <returns>Channel's read end</returns>
-        protected Read<T, T1> From<T>() where T : CanQuery
+        protected Read<T, Tool> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1>(ChannelMultiplexer);
+            return new SRead<T, Tool>(ChannelMultiplexer);
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace Reinforced.Tecture.Services
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
         /// <returns>Channel's write end</returns>
-        protected Write<T, T1> To<T>() where T : CanCommand
+        protected Write<T, Tool> To<T>() where T : CanCommand
         {
-            return new SWrite<T, T1>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool>(ChannelMultiplexer, Pipeline);
         }
 
     }

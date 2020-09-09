@@ -6,19 +6,26 @@ using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
+using Reinforced.Tecture.Aspects.DirectSql;
+using Reinforced.Tecture.Aspects.DirectSql.Commands;
+using Reinforced.Tecture.Aspects.DirectSql.Queries;
+using Reinforced.Tecture.Aspects.DirectSql.Toolings;
+using Reinforced.Tecture.Aspects.Orm.Commands.Add;
+using Reinforced.Tecture.Aspects.Orm.Commands.Relate;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Aspects.Orm.Queries;
+using Reinforced.Tecture.Aspects.Orm.Toolings;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Features.Orm.Commands.Add;
-using Reinforced.Tecture.Features.Orm.Commands.Relate;
-using Reinforced.Tecture.Features.Orm.PrimaryKey;
-using Reinforced.Tecture.Features.Orm.Queries;
-using Reinforced.Tecture.Features.SqlStroke;
-using Reinforced.Tecture.Features.SqlStroke.Commands;
-using Reinforced.Tecture.Features.SqlStroke.Queries;
 using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 {
-    public class Supply : TectureService<Resource, ResourceSupply, ResourceSupplyItem, ResourceSupplyStatusHistoryItem>, INoContext
+    public class Supply : 
+        TectureService<
+            Adds<Resource,ResourceSupply,ResourceSupplyItem>,
+            Updates<ResourceSupplyItem>,
+            MakesSqlCommands
+        >
     {
         private Supply() { }
 
@@ -26,20 +33,20 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
         {
             From<Db>().All<ResourceSupply>().EnsureExists(id);
 
-            To<Db>().SqlStroke<ResourceSupplyItem>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.ResourceSupplyId == id}");
-            To<Db>().SqlStroke<ResourceSupply>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.Id == id}");
+            To<Db>().Sql<ResourceSupplyItem>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.ResourceSupplyId == id}");
+            To<Db>().Sql<ResourceSupply>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.Id == id}");
         }
 
         public void FinishResourceSupply(int id)
         {
-            To<Db>().SqlStroke<Resource, ResourceSupplyItem>((res, item) => $@"
+            To<Db>().Sql<Resource, ResourceSupplyItem>((res, item) => $@"
     UPDATE {res.Alias()}
     SET {res.StockQuantity == res.StockQuantity + item.Quantity}
     FROM {res}
     INNER JOIN {item} ON {item.ResourceId == res.Id}
     WHERE {item.ResourceSupplyId==id}
 ");
-            To<Db>().SqlStroke<ResourceSupply>(r =>
+            To<Db>().Sql<ResourceSupply>(r =>
                 $"UPDATE {r.Alias()} SET {r.Status == ResourceSupplyStatus.Closed} FROM {r} WHERE {r.Id == id}");
         }
 
@@ -47,7 +54,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
         {
             Final.ContinueWith(() =>
             {
-                To<Db>().SqlStroke<ResourceSupply, ResourceSupplyItem>((r, item) =>
+                To<Db>().Sql<ResourceSupply, ResourceSupplyItem>((r, item) =>
                     $"UPDATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
             });
             
@@ -116,7 +123,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 
             Save.ContinueWith(() =>
             {
-                var id = From<Db>().Key(r);
+                var id = From<Db>().Key<int>(r);
                 UpdateResourceSupplyItemsCount(id);
             });
             return r;

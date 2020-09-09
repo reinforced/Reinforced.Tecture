@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Reinforced.Tecture is architectural framework for .NET business applications built on CQRS and FP principles</Description>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
     
   </PropertyGroup>
 
@@ -29,10 +29,6 @@
 	 <None Update="Services\TectureServices.tt">
       <LastGenOutput>TectureServices.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
-    </None>
-    <None Update="Services\ServiceLocators.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ServiceLocators.cs</LastGenOutput>
     </None>
     <None Include="..\icon.png">
       <Pack>True</Pack>
@@ -68,11 +64,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StorageServiceClass.tt</DependentUpon>
-    </Compile>
-	<Compile Update="Services\ServiceLocators.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ServiceLocators.tt</DependentUpon>
     </Compile>
 	<Compile Update="Services\TectureServices.cs">
       <DesignTime>True</DesignTime>

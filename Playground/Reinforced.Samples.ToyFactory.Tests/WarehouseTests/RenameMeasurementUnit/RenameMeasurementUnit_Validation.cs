@@ -2,14 +2,14 @@ using System;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
-using Reinforced.Tecture.Features.Orm.Commands.Add;
+using Reinforced.Tecture.Aspects.Orm.Commands.Add;
+using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
+using Reinforced.Tecture.Aspects.Orm.Commands.Update;
 using Reinforced.Tecture.Tracing.Commands;
-using Reinforced.Tecture.Features.Orm.Commands.Update;
-using Reinforced.Tecture.Features.Orm.Commands.DeletePk;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.Update.UpdateChecks;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.DeletePk.DeletePKChecks;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Update.UpdateChecks;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.DeletePk.DeletePKChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit
 {

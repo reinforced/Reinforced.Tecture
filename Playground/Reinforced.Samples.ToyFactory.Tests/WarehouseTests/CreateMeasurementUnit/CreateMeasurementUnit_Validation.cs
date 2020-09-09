@@ -2,8 +2,8 @@ using System;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
-using Reinforced.Tecture.Features.Orm.Commands.Add;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
+using Reinforced.Tecture.Aspects.Orm.Commands.Add;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit

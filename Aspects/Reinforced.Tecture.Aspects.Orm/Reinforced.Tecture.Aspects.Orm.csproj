@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>    
+    <Description>O/RM Aspect fore Reinforced.Tecture</Description>
+	<AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Reinforced.Tecture\TypeExtensions.cs" Link="TypeExtensions.cs" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Commands\Add\AddExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Commands\DeletePk\DeleteByPkExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DeleteByPkExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Commands\Delete\DeleteExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DeleteExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Commands\Derelate\DerelateExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DerelateExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Commands\Relate\RelateExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RelateExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="Commands\Update\UpdateExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UpdateExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="PrimaryKey\PrimaryKey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PrimaryKey.cs</LastGenOutput>
+    </None>
+    <None Update="Queries\KeyExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KeyExtensions.cs</LastGenOutput>
+    </None>
+    <None Update="QueryKey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QueryKey.cs</LastGenOutput>
+    </None>
+    <None Update="Toolings\AllEntityToolings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllEntityToolings.cs</LastGenOutput>
+    </None>
+	
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Commands\Add\AddExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Commands\DeletePk\DeleteByPkExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DeleteByPkExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Commands\Delete\DeleteExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DeleteExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Commands\Derelate\DerelateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DerelateExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Commands\Relate\RelateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RelateExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Commands\Update\UpdateExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdateExtensions.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="PrimaryKey\PrimaryKey.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrimaryKey.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="Queries\KeyExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KeyExtensions.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="QueryKey.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QueryKey.tt</DependentUpon>
+    </Compile>	
+    <Compile Update="Toolings\AllEntityToolings.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AllEntityToolings.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

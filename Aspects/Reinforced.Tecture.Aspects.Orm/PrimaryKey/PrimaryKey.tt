@@ -1,0 +1,90 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#
+	var implementationsCount = 8;
+#>
+
+using System;
+using System.Linq.Expressions;
+
+namespace Reinforced.Tecture.Aspects.Orm.PrimaryKey
+{
+
+<# for (int i=1;i<implementationsCount;i++) {	#> 
+
+    /// <summary>
+    /// Entity defining compound primary key of <#= i+1 #> fields
+    /// </summary><# for (int k=1;k<=i+1;k++) {	#> 
+    /// <typeparam name="T<#= k #>">Primary key component #<#= k #></typeparam> <# } #>    
+	public interface IPrimaryKey<<#= GenericsStroke(i+1) #>>
+	{
+        /// <summary>
+        /// Gets tuple of property expressions participating compound primary key
+        /// </summary>
+		(<#= KeyParameters(i+1) #>) PrimaryKey { get; }
+	}
+<# } #>
+
+    /// <summary>
+    /// Extensions for entities with compound primary key
+    /// </summary>
+	public static partial class Extensions
+	{
+        
+<# for (int i=1;i<implementationsCount;i++) {	#> 
+		      
+        /// <summary>
+        /// Gets tuple of compound primary key values consisting of <#= i+1 #> values
+        /// </summary><# for (int k=1;k<=i+1;k++) {	#> 
+        /// <typeparam name="T<#= k #>">Primary key component #<#= k #></typeparam> <# } #>    
+        /// <param name="k">Entity with compound primary key</param>
+        /// <returns>Compound primary key tuple</returns>
+        public static (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(this IPrimaryKey<<#= GenericsStroke(i+1) #>> k)
+        {
+            var ks = k.PrimaryKey;
+            <# 
+                var s = Enumerable.Range(1,i+1).Select(x=>$"Value<T{x}>(k, ks.Item{x})").ToArray();
+            #>
+
+            return (<#= string.Join(",",s) #>);
+        }
+<# } #>
+	}
+}
+
+<#+
+
+    private string Comas(int num)
+    {
+        return new string(',',num);
+    }
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+
+	private string KeyParameters(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("Expression<Func<T"); sb.Append(i+1);
+			sb.Append(">>");
+		}
+		return sb.ToString();
+    }
+#>

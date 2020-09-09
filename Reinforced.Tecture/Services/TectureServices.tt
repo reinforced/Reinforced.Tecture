@@ -18,13 +18,13 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches <#= i+2#> entities
+    /// Storage services with <#= i+2#> toolings
     /// </summary>    
 	public class TectureService<<#= GenericsStroke(i+2) #>>
 			   : TectureServiceBase
-			   where T1: class
+			   where Tool1: Tooling
 			   <# for(int j =0;j<=i;j++) { #>
-where T<#= j+2 #> : class
+where Tool<#= j+2 #> : Tooling
 			   <# } #>
 
     {
@@ -61,7 +61,7 @@ where T<#= j+2 #> : class
 		for(var i=0;i<num;i++){
 			if (!first) sb.Append(", ");
 			else first = false;
-			sb.Append("T"); sb.Append(i+1);
+			sb.Append("Tool"); sb.Append(i+1);
 		}
 		return sb.ToString();
     }

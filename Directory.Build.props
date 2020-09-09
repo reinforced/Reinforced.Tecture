@@ -5,22 +5,22 @@
     <Copyright>(c) 2020, Pavel B. Novikov</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryType>GitHub</RepositoryType>
-	<RepositoryUrl>https://github.com/reinforced/Reinforced.Tecture</RepositoryUrl>
+    <RepositoryUrl>https://github.com/reinforced/Reinforced.Tecture</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageProjectUrl>https://github.com/reinforced/Reinforced.Tecture</PackageProjectUrl>
-    <PackageTags>cqrs, architecture, netstandard</PackageTags>    
-	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>	
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>    
+    <PackageTags>cqrs, architecture, netstandard</PackageTags>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>$(SolutionDir)build\$(MSBuildProjectName)\$(MSBuildProjectName).xml</DocumentationFile>
     <OutputPath>$(SolutionDir)build\$(MSBuildProjectName)\</OutputPath>
-	<PackageOutputPath>$(SolutionDir)package\</PackageOutputPath>
-	<SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Reinforced.snk</AssemblyOriginatorKeyFile>    
-  </PropertyGroup>  
-  <ItemGroup>    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>$(SolutionDir)package\</PackageOutputPath>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Reinforced.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
     <None Include="$(SolutionDir)icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
