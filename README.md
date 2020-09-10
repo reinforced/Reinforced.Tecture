@@ -1,6 +1,6 @@
 # What is that?
 
-This is experimental architecture framework for .NET applications. It is buit on aspect-based principles involving some CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typing, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The closest project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
+This is experimental architecture framework for .NET applications. It is built on aspect-based principles involving some CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typing, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The closest project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
 
 Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinforced.Tecture/) along with its dependent packages.
 
@@ -39,7 +39,7 @@ public interface Db :
 /// I'm orders service. And these are my type parameters (tooling). 
 ///	                  By using them I say that I can update orders and add order lines
 /// </summary>                       |                               |
-public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >, INoContext
+public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >
 {
 	private Orders() { }
 
