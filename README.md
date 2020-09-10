@@ -143,7 +143,7 @@ var a = tecture.Do<Orders>().CreateOne("new order");
 ctx.Save();
 
 var trace = tecture.EndTrace();
-Output.Write(trace.ToText());
+Output.Write(trace.Explain());
 
 /**
  * 1. [ ->] 	Check existing order presence: 'False' obtained
