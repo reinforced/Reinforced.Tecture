@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql
 {
     public class EfCoreDirectSqlException : Exception
     {

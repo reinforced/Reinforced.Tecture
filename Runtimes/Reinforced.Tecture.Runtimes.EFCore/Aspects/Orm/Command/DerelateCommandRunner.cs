@@ -5,7 +5,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.Derelate;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Query;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.Orm.Command
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
     class DerelateCommandRunner : CommandRunner<Derelate>
     {

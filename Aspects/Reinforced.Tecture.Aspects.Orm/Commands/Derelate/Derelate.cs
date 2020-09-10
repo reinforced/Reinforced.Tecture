@@ -8,7 +8,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
     /// <summary>
     /// Command that breaks 1-to-many relation
     /// </summary>
-    [CommandCode("-REL")]
+    [CommandCode("-RF")]
     public class Derelate : CommandBase
     {
         /// <summary>

@@ -7,7 +7,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Testing.Checks.Update
     sealed class UpdateCheckDescription : CheckDescription<Commands.Update.Update>
     {
         public override MethodInfo Method =>
-            UseMethod((a, c) => UpdateChecks.Update<object>(a.Assertions(c.Entity), c.Annotation));
+            UseMethod((a, c) => UpdateChecks.Update<object>(c.UpdateValuesStringKeys, c.Annotation));
 
         protected override Type[] GetTypeArguments(Commands.Update.Update command)
         {

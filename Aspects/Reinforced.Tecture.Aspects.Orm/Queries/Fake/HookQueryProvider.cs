@@ -63,11 +63,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
             {
                 if (_aux.IsEvaluationNeeded)
                 {
-                    _aux.Query(hash, result, _description.Description ?? $"Obtaining {typeof(TResult)} via O/RM");
+                    _aux.Query(hash, result, _description.Description ?? $"Obtaining {typeof(TResult).Name} via O/RM");
                 }
                 else
                 {
-                    _aux.Query(hash, "test data", _description.Description ?? $"Obtaining {typeof(TResult)} via O/RM");
+                    _aux.Query(hash, "test data", _description.Description ?? $"Obtaining {typeof(TResult).Name} via O/RM");
                 }
             }
 

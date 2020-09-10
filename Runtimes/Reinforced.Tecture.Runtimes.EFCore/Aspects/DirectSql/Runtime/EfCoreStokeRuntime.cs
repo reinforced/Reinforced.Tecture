@@ -4,7 +4,7 @@ using Reinforced.Tecture.Aspects.DirectSql.Infrastructure;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate;
 using Reinforced.Tecture.Query;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql.Runtime
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime
 {
     class EfCoreStokeRuntime : IStrokeRuntime
     {
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql.Runtime
         private readonly InterpolatorFactory _fac;
         public IMapper Mapper { get; }
         public Type Channel { get; }
-        public Aspects.DirectSql.Reveal.LanguageInterpolate.LanguageInterpolator GetLanguageInterpolator()
+        public Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate.LanguageInterpolator GetLanguageInterpolator()
         {
             return _fac.CreateLanguageInterpolator();
         }

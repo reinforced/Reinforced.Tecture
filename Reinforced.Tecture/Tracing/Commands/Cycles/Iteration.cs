@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Iteration mark command
     /// </summary>
-    [CommandCode("ITR")]
+    [CommandCode(" } ")]
     public class Iteration : CommandBase, ITracingOnly
     {
         internal Iteration() { }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Reinforced.Tecture.Aspects.Orm.Testing.Checks.Update
 {
@@ -11,9 +12,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Testing.Checks.Update
         /// Update predicate check
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="predicate">Predicate to validate entity</param>
+        /// <param name="expected">Predicate to validate entity</param>
         /// <param name="explanation">Check explanation</param>
         /// <returns>Check instance</returns>
-        public static UpdatePredicateCheck<T> Update<T>(Func<T, bool> predicate, string explanation) => new UpdatePredicateCheck<T>(predicate, explanation);
+        public static UpdateDictionaryCheck<T> Update<T>(Dictionary<string,object> expected, string explanation) => new UpdateDictionaryCheck<T>(expected, explanation);
     }
 }

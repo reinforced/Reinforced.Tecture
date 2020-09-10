@@ -11,6 +11,8 @@ namespace Reinforced.Tecture.Testing
     /// </summary>
     public static class Extensions
     {
+
+
         /// <summary>
         /// Generates validation for trace
         /// </summary>

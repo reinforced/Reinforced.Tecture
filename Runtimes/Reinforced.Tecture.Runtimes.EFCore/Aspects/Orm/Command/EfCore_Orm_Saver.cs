@@ -9,7 +9,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.Update;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Savers;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.Orm.Command
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
     class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate, DeletePk>
     {

@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Tracing
     /// <summary>
     /// Synthetic command that means query that was made to the external system
     /// </summary>
-    [CommandCode("QRY")]
+    [CommandCode(" ->")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
         internal QueryRecord(Type channel, Type dataType, string hash, object result, bool isTestData)

@@ -36,12 +36,13 @@ namespace Reinforced.Tecture.Testing
 
         public static TypeSyntax TypeName(this Type t, HashSet<string> usings = null)
         {
+            if (usings != null)
+            {
+                if (!usings.Contains(t.Namespace)) usings.Add(t.Namespace);
+            }
             if (!t.IsGenericType && !t.IsGenericTypeDefinition)
             {
-                if (usings != null)
-                {
-                    if (!usings.Contains(t.Namespace)) usings.Add(t.Namespace);
-                }
+                
                 return IdentifierName(t.Name);
             }
 
@@ -204,9 +205,14 @@ namespace Reinforced.Tecture.Testing
             return props.Select(x => (x.FieldType, x.GetValue(o)));
         }
 
+        public static ExpressionSyntax Null()
+        {
+            return SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
+        }
+
         public static ExpressionSyntax Construct(Type t, object value)
         {
-            if (value == null) return SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
+            if (value == null) return Null();
             if (t.IsNullable())
             {
                 var nt = Nullable.GetUnderlyingType(t);

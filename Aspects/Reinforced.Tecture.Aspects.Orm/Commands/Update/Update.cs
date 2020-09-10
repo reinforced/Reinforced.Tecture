@@ -13,6 +13,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
     /// <summary>
     /// Entity update command
     /// </summary>
+    [CommandCode("UPD")]
     public class Update : CommandBase
     {
         /// <summary>
@@ -34,6 +35,14 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         public IReadOnlyDictionary<PropertyInfo, object> UpdateValues
         {
             get { return _updateValues; }
+        }
+
+        /// <summary>
+        /// Properties that are going to be updated (with string key for quick check)
+        /// </summary>
+        public Dictionary<string, object> UpdateValuesStringKeys
+        {
+            get { return _updateValues.ToDictionary(x=>x.Key.Name,x=>x.Value); }
         }
 
         internal Update(object entity, Type entityType)
@@ -69,7 +78,6 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
             if (Entity is IDescriptive e) description = e.Descibe();
             if (_updateValues.Count > 0) description = $"{properties} of {description}";
 
-            if (Annotation != null) description = Annotation;
             tw.Write($"Update {description}");
             if (Debug != null) tw.Write($" ({Debug.Location})");
         }

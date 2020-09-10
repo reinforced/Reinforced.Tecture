@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.DirectSql.Infrastructure;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql.Runtime
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime
 {
     class EfCoreMapper : IMapper
     {

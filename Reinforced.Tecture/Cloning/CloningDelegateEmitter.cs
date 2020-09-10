@@ -171,39 +171,19 @@ namespace Reinforced.Tecture.Cloning
             };
         }
 
-        internal static bool IsDictionary(this Type collectionType)
-        {
-            return typeof(IDictionary).IsAssignableFrom(collectionType);
-        }
-
-        internal static bool IsCollection(this Type collectionType)
-        {
-            if (collectionType.IsArray) return true;
-            return typeof(IEnumerable).IsAssignableFrom(collectionType);
-        }
-
-        private static readonly string Explanation =
+        internal static readonly string Explanation =
             $"Please register cloning delegate manually using {nameof(DeepCloner)}.{nameof(DeepCloner.RegisterCloner)} method";
-        internal static Type GetCollectionElementType(this Type collectionType)
-        {
-            if (collectionType.IsArray) return collectionType.GetElementType();
-            var implementingEnumerable =
-                collectionType
-                    .GetInterfaces()
-                    .Where(x => x.IsGenericType)
-                    .FirstOrDefault(x => x.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-            if (implementingEnumerable != null)
-            {
-                return implementingEnumerable.GetGenericArguments()[0];
-            }
-
-            throw new TectureCloningException(
-                $"cannot emit cloning delegate for collection '{collectionType.FullName}'. Could not determine collection element type. {Explanation}");
-        }
+        
 
         public static Expression EmitCollectionCloneExpression(Expression arrayParameter, Type collectionType)
         {
-            var elementType = GetCollectionElementType(collectionType);
+            var elementType = collectionType.GetCollectionElementType();
+            if (elementType == null)
+            {
+
+                throw new TectureCloningException(
+                    $"cannot emit cloning delegate for collection '{collectionType.FullName}'. Could not determine collection element type. {Explanation}");
+            }
             var enumerableOfType = typeof(IEnumerable<>).MakeGenericType(elementType);
 
             var ctor = collectionType.GetConstructors(CtorFlags)
@@ -236,7 +216,12 @@ namespace Reinforced.Tecture.Cloning
         }
         public static TypeCloneTooling EmitCollectionCloningDelegate(Type collectionType)
         {
-            var elementType = GetCollectionElementType(collectionType);
+            var elementType = collectionType.GetCollectionElementType();
+            if (elementType == null)
+            {
+                throw new TectureCloningException(
+                    $"cannot emit cloning delegate for collection '{collectionType.FullName}'. Could not determine collection element type. {Explanation}");
+            }
             var enumerableOfType = typeof(IEnumerable<>).MakeGenericType(elementType);
             var param = Expression.Parameter(enumerableOfType);
             var creation = EmitCollectionCloneExpression(param, collectionType);
@@ -247,27 +232,15 @@ namespace Reinforced.Tecture.Cloning
             };
         }
 
-        internal static (Type, Type) GetDictionaryParameters(this Type collectionType)
-        {
-
-            var dictionary =
-                collectionType
-                    .GetInterfaces()
-                    .Where(x => x.IsGenericType)
-                    .FirstOrDefault(x => x.GetGenericTypeDefinition() == typeof(IDictionary<,>));
-            if (dictionary != null)
-            {
-                var args = dictionary.GetGenericArguments();
-                return (args[0], args[1]);
-            }
-
-            throw new TectureCloningException(
-                $"cannot emit cloning delegate for dictionary '{collectionType.FullName}'. Could not find proper IDictionary<,> implementation. {Explanation}");
-        }
+       
 
         private static Expression EmitDictionaryCloningExpression(Expression iDictionary, Type dictionaryType)
         {
-            var (keyType, valueType) = GetDictionaryParameters(dictionaryType);
+            var (keyType, valueType) = dictionaryType.GetDictionaryParameters();
+            if (keyType == null || valueType == null)
+            {
+                throw new TectureCloningException($"cannot emit cloning delegate for dictionary '{dictionaryType.FullName}'. Cannot obtain key and value types. {Explanation}");
+            }
             var idictionaryOfType = typeof(IDictionary<,>).MakeGenericType(keyType, valueType);
 
             var ctor = dictionaryType.GetConstructors(CtorFlags)
@@ -292,7 +265,11 @@ namespace Reinforced.Tecture.Cloning
 
         public static TypeCloneTooling EmitDictionaryCloningDelegate(Type dictionaryType)
         {
-            var (keyType, valueType) = GetDictionaryParameters(dictionaryType);
+            var (keyType, valueType) = dictionaryType.GetDictionaryParameters();
+            if (keyType == null || valueType == null)
+            {
+                throw new TectureCloningException($"cannot emit cloning delegate for dictionary '{dictionaryType.FullName}'. Cannot obtain key and value types. {Explanation}");
+            }
             var idictionaryOfType = typeof(IDictionary<,>).MakeGenericType(keyType, valueType);
 
             var param = Expression.Parameter(idictionaryOfType);

@@ -8,6 +8,7 @@ using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing.Commands;
+using Reinforced.Tecture.Tracing.Commands.Cycles;
 
 namespace Reinforced.Tecture.Tracing
 {
@@ -24,7 +25,7 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         public IEnumerable<CommandBase> Commands
         {
-            get { return _commands.Where(x=>!(x is ITracingOnly)).Cast<CommandBase>(); }
+            get { return _commands.Where(x => !(x is ITracingOnly)).Cast<CommandBase>(); }
         }
 
         /// <summary>
@@ -81,34 +82,40 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         /// <param name="tw">Result writer</param>
         /// <param name="codes">Sets whether it is needed to output side-effect codes</param>
-        public void ToText(TextWriter tw, bool codes = true)
+        public void Explain(TextWriter tw, bool codes = true)
         {
             int i = 1;
+            bool didCycleBegin = false;
+            bool inCycle = false;
             foreach (var cmd in _commands)
             {
-                if (cmd is Save)
+                if (cmd is EndCycle)
                 {
-                    cmd.Describe(tw);
-                    tw.WriteLine();
-                    tw.WriteLine();
-                } else if (cmd is End)
-                {
-                    cmd.Describe(tw);
-                    tw.WriteLine();
-                    tw.WriteLine();
+                    didCycleBegin = false;
+                    inCycle = false;
                 }
-                else
+
+                if (cmd is Cycle)
                 {
-                    tw.Write($"{i}. ");
-                    if (codes)
-                    {
-                        var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
-                        if (ca != null) tw.Write($"[{ca.Code}] ");
-                    }
-                    cmd.Describe(tw);
-                    tw.WriteLine();
-                    tw.WriteLine();
-                    i++;
+                    didCycleBegin = true;
+                }
+
+
+                if (inCycle) continue;
+
+                tw.Write($"{i}. ");
+                if (codes)
+                {
+                    var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
+                    if (ca != null) tw.Write($"[{ca.Code}] \t");
+                }
+                cmd.Describe(tw);
+                tw.WriteLine();
+                i++;
+
+                if (cmd is Iteration && didCycleBegin)
+                {
+                    inCycle = true;
                 }
             }
         }
@@ -118,12 +125,12 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         /// <param name="codes">Sets whether it is needed to output side-effect codes</param>
         /// <returns>Story textual representation</returns>
-        public string ToText(bool codes = true)
+        public string Explain(bool codes = true)
         {
             StringBuilder sb = new StringBuilder();
             using (var tw = new StringWriter(sb))
             {
-                ToText(tw);
+                Explain(tw);
             }
 
             return sb.ToString();

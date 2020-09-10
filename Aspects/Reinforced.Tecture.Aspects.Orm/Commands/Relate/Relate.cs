@@ -8,7 +8,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
     /// <summary>
     /// Command that creates 1-to-many relation
     /// </summary>
-    [CommandCode("+REL")]
+    [CommandCode("REF")]
     public class Relate : CommandBase
     {
         /// <summary>

@@ -3,7 +3,7 @@ using Reinforced.Tecture.Aspects.DirectSql.Commands;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Savers;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql.Command
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
 {
     class EFCore_DirectSql_Saver : Saver<Sql>
     {

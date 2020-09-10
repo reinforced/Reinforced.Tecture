@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Cycle mark command
     /// </summary>
-    [CommandCode("CYC")]
+    [CommandCode(" { ")]
     public class Cycle : CommandBase, ITracingOnly
     {
         internal Cycle() { }

@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means end of the commands queue
     /// </summary>
-    [CommandCode("END")]
+    [CommandCode(" ! ")]
     public sealed class End : CommandBase
     {
         internal End() { }
@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Tracing.Commands
         /// <param name="tw"></param>
         public override void Describe(TextWriter tw)
         {
-            tw.Write("======  END  =====");
+            tw.Write("<END>");
         }
 
         /// <summary>

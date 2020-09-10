@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql.Runtime;
+using Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.DirectSql.Command
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
 {
-    class EFCore_DirectSql_CommandAspect : Aspects.DirectSql.Command
+    class EFCore_DirectSql_CommandAspect : Tecture.Aspects.DirectSql.Command
     {
         internal ILazyDisposable<DbContext> Context { get; }
 

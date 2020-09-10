@@ -3,9 +3,10 @@ using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
-using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
-using Reinforced.Tecture.Aspects.Orm.Commands.Update;
 using Reinforced.Tecture.Tracing.Commands;
+using System.Collections.Generic;
+using Reinforced.Tecture.Aspects.Orm.Commands.Update;
+using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
 using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Update.UpdateChecks;
@@ -30,19 +31,13 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 				flow.Then<Save>();
 				flow.Then<Update>
 				(
-					Update<MeasurementUnit>(x=>
-					{ 
-						if (x.Name != @"Kilo") return false;
-						if (x.ShortName != @"kg") return false;
-						if (x.Id != 42) return false;
-						return true;
-					}, @"")
+					Update<MeasurementUnit>(new Dictionary<String, Object>() {  { @"Name", @"Kilo" } ,  { @"ShortName", @"kg" }  } , @"")
 				);
 				flow.Then<Save>();
 				flow.Then<DeletePk>
 				(
-					DeleteByPK<MeasurementUnit>(@"remove measurement unit#42", 42), 
-					Annotated(@"remove measurement unit#42")
+					DeleteByPK<MeasurementUnit>(@"remove measurement unit#108", 108), 
+					Annotated(@"remove measurement unit#108")
 				);
 				flow.Then<Save>();
 				flow.TheEnd();

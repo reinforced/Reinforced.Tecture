@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means saving happening at the particular point
     /// </summary>
-    [CommandCode("SAVE")]
+    [CommandCode("<- ")]
     public sealed class Save : CommandBase
     {
         internal Save() { }
@@ -17,7 +17,7 @@ namespace Reinforced.Tecture.Tracing.Commands
         /// <param name="tw"></param>
         public override void Describe(TextWriter tw)
         {
-            tw.Write("====== Saved =====");
+            tw.Write("<SAVE>");
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Synthetic command that means end of logical cycle 
     /// </summary>
-    [CommandCode("CEND")]
+    [CommandCode(" . ")]
     public class EndCycle : CommandBase, ITracingOnly
     {
         internal EndCycle() { }

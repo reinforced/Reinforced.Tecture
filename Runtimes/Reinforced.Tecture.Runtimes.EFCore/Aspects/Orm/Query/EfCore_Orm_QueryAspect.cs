@@ -4,9 +4,9 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.Orm.Query
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Query
 {
-    class EfCore_Orm_QueryAspect : Aspects.Orm.Query
+    class EfCore_Orm_QueryAspect : Tecture.Aspects.Orm.Query
     {
         private readonly ILazyDisposable<DbContext> _context;
 

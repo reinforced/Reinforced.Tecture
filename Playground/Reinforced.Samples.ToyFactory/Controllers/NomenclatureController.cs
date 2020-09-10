@@ -40,7 +40,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             finally
             {
                 var t = _tecture.EndTrace();
-                var text = t.ToText();
+                var text = t.Explain();
             }
             return result;
         }

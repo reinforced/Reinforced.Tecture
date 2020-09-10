@@ -16,12 +16,11 @@ using Reinforced.Tecture.Services;
 namespace Reinforced.Samples.ToyFactory
 {
 
-    
-
     public class Program
     {
         public static void Main(string[] args)
         {
+            var x = new int[] {10, 20, 30};
             CreateHostBuilder(args).Build().Run();
         }
 

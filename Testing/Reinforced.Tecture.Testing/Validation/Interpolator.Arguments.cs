@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -34,18 +35,109 @@ namespace Reinforced.Tecture.Testing.Validation
         private ExpressionSyntax ExtractFromCommand(CommandBase command, CommandExtractCheckParameter cecp)
         {
             var value = cecp.Extractor.DynamicInvoke(command);
+            if (value == null)
+            {
+                return TypeInitConstructor.Null();
+            }
+
+            var type = value.GetType();
             ExpressionSyntax result;
-            if (cecp.Type.IsInlineable())
+            if (type.IsInlineable())
             {
                 EnsureUsing(cecp.Type);
                 result = TypeInitConstructor.Construct(cecp.Type, value);
             }
             else
             {
-                throw new Exception($"{cecp.Type} is not inlineable into tests");
+                if (type.IsDictionary())
+                {
+                    var (keyType, valueType) = type.GetDictionaryParameters();
+                    if (keyType != null && valueType != null && keyType.IsInlineable())
+                    {
+                        return MakeDictionary(value as IDictionary, keyType, valueType);
+                    }
+                }
+                else if (type.IsCollection())
+                {
+                    var elementType = type.GetCollectionElementType();
+                    if (elementType != null && elementType.IsInlineable())
+                    {
+                        return MakeCollection(value as IEnumerable, elementType);
+                    }
+                }
+                throw new Exception($"Can not inline {type} into tests");
             }
 
             return result;
+        }
+
+        private ExpressionSyntax MakeDictionary(IDictionary dct, Type keType,Type valType)
+        {
+            var inits = new List<InitializerExpressionSyntax>();
+            foreach (DictionaryEntry dictionaryEntry in dct)
+            {
+                if (dictionaryEntry.Value == null || dictionaryEntry.Value.GetType().IsInlineable())
+                {
+                    var keyExpression = TypeInitConstructor.Construct(keType, dictionaryEntry.Key);
+                    var valueExpression =
+                        dictionaryEntry.Value == null
+                            ? TypeInitConstructor.Null()
+                          : TypeInitConstructor.Construct(dictionaryEntry.Value.GetType(), dictionaryEntry.Value);
+                    inits.Add(InitializerExpression(
+                        SyntaxKind.ComplexElementInitializerExpression,
+                        SeparatedList<ExpressionSyntax>(
+                            new SyntaxNodeOrToken[]{
+                                keyExpression,
+                                Token(SyntaxKind.CommaToken),
+                                valueExpression})));
+                }
+            }
+
+            var nt = typeof(Dictionary<,>).MakeGenericType(keType, valType);
+            var newDictionary = nt.TypeName(_usings);
+            var arg = SeparatedList<ExpressionSyntax>(inits.ComaSeparated());
+
+            var objCreation = ObjectCreationExpression(newDictionary)
+                .WithArgumentList(ArgumentList())
+                .WithInitializer(
+                    InitializerExpression(
+                        SyntaxKind.CollectionInitializerExpression, arg));
+
+            return objCreation;
+        }
+
+        private ExpressionSyntax MakeCollection(IEnumerable dct, Type elementType)
+        {
+            var inits = new List<ExpressionSyntax>();
+            foreach (var value in dct)
+            {
+                if (value==null) inits.Add(TypeInitConstructor.Null());
+                else
+                {
+                    var tp = value.GetType();
+                    if (!tp.IsInlineable())
+                    {
+                        throw new Exception($"Can not inline value '{value}' of type '{tp}' into tests");
+                    }
+                    inits.Add(TypeInitConstructor.Construct(tp,value));
+                }
+            }
+
+            var arrayType = ArrayType(elementType.TypeName(_usings));
+            var arg = SeparatedList<ExpressionSyntax>(inits.ComaSeparated());
+
+            var objCreation = ArrayCreationExpression(
+                    arrayType
+                        .WithRankSpecifiers(
+                            SingletonList<ArrayRankSpecifierSyntax>(
+                                ArrayRankSpecifier(
+                                    SingletonSeparatedList<ExpressionSyntax>(
+                                        OmittedArraySizeExpression())))))
+                .WithInitializer(
+                    InitializerExpression(
+                        SyntaxKind.ArrayInitializerExpression,arg));
+
+            return objCreation;
         }
 
         private ExpressionSyntax MakeAssertions(CommandBase command, AssertionCheckParameter cecp)

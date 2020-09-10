@@ -4,7 +4,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.Delete;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Query;
 
-namespace Reinforced.Tecture.Runtimes.EFCore.Aspect.Orm.Command
+namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
     class DeleteCommandRunner : CommandRunner<Delete>
     {
