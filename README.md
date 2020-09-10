@@ -7,7 +7,7 @@ Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinfo
 ```bash
 PM> Install-Package Reinforced.Tecture
 PM> Install-Package Reinforced.Tecture.Aspects.Orm
-PM> Install-Package Reinforced.Tecture.Aspects.SqlStroke
+PM> Install-Package Reinforced.Tecture.Aspects.DirectSql
 PM> Install-Package Reinforced.Tecture.Runtimes.EfCore
 PM> Install-Package Reinforced.Tecture.Testing
 ```
