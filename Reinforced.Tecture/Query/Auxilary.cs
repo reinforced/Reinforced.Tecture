@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Cloning;
+using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Query
 {
@@ -13,11 +11,21 @@ namespace Reinforced.Tecture.Query
     {
         private readonly AuxilaryContainer _container;
         private readonly Type _channelType;
-
-        internal Auxilary(AuxilaryContainer container, Type channelType)
+        private readonly TransactionManager _transactionManager;
+        internal Auxilary(AuxilaryContainer container, Type channelType, TransactionManager transactionManager)
         {
             _container = container;
             _channelType = channelType;
+            _transactionManager = transactionManager;
+        }
+
+        /// <summary>
+        /// Obtains query transaction for channel
+        /// </summary>
+        /// <returns>Transaction</returns>
+        public ChannelTransaction GetQueryTransaction()
+        {
+            return _transactionManager.GetQueryTransaction(_channelType);
         }
 
         /// <summary>

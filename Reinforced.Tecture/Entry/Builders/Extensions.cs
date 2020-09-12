@@ -1,5 +1,6 @@
 ﻿using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
+using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry.Builders
 {
@@ -18,6 +19,17 @@ namespace Reinforced.Tecture.Entry.Builders
         {
             var holder = cf as MultiplexerRegistrationDecorator;
             holder.RegisterQueryAspect(typeof(TAspect), aspect);
+        }
+
+        /// <summary>
+        /// Registers transaction manager for particular channel
+        /// </summary>
+        /// <param name="cf">Channel configuration</param>
+        /// <param name="manager">Transaction manager for channel</param>
+        public static void WithTransactions(this ChannelBinding cf, ChannelTransactionsManager manager)
+        {
+            var holder = cf as MultiplexerRegistrationDecorator;
+            holder.TransactionManager.RegisterManager(cf.Channel,manager);
         }
     }
 }

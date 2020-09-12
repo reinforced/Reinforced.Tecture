@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Tracing.Commands;
+using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Commands
 {
@@ -14,28 +15,82 @@ namespace Reinforced.Tecture.Commands
     {
         private readonly ChannelMultiplexer _mx;
         private readonly TraceCollector _tc;
-        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector tc)
+        private readonly TransactionManager _transactionManager;
+        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector tc, TransactionManager transactionManager)
         {
             _mx = mx;
             _tc = tc;
+            _transactionManager = transactionManager;
         }
 
         private void Save(IEnumerable<string> channels)
         {
             _tc?.Save();
-            foreach (var sideEffectSaver in _mx.GetSavers(channels))
+            var trans = _transactionManager.GetSaveTransactions(channels, false);
+            List<Exception> aggregate = new List<Exception>();
+            try
             {
-                sideEffectSaver.SaveInternal();
+                foreach (var sideEffectSaver in _mx.GetSavers(channels))
+                {
+                    sideEffectSaver.SaveInternal();
+                    trans[sideEffectSaver.Channel.FullName].Commit();
+                }
             }
+            catch (Exception e)
+            {
+                aggregate.Add(e);
+            }
+            finally
+            {
+                foreach (var channelTransaction in trans)
+                {
+                    try
+                    {
+                        channelTransaction.Value.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        aggregate.Add(e);
+                    }
+                }
+            }
+
+            throw new AggregateException(aggregate);
         }
 
         private async Task SaveAsync(IEnumerable<string> channels)
         {
             _tc?.Save();
-            foreach (var sideEffectSaver in _mx.GetSavers(channels))
+            var trans = _transactionManager.GetSaveTransactions(channels, true);
+            List<Exception> aggregate = new List<Exception>();
+            try
             {
-                await sideEffectSaver.SaveInternalAsync();
+                foreach (var sideEffectSaver in _mx.GetSavers(channels))
+                {
+                    await sideEffectSaver.SaveInternalAsync();
+                    trans[sideEffectSaver.Channel.FullName].Commit();
+                }
             }
+            catch (Exception e)
+            {
+                aggregate.Add(e);
+            }
+            finally
+            {
+                foreach (var channelTransaction in trans)
+                {
+                    try
+                    {
+                        channelTransaction.Value.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        aggregate.Add(e);
+                    }
+                }
+            }
+
+            throw new AggregateException(aggregate);
         }
 
 
@@ -78,14 +133,21 @@ namespace Reinforced.Tecture.Commands
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r = _mx.GetRunner(commandBase);
+                    var tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
+                    
                     try
                     {
                         r.RunInternal(commandBase);
                         commandBase.IsExecuted = true;
+                        tran.Commit();
                     }
                     catch (Exception e)
                     {
                         throw new TectureCommandRunException(commandBase, e);
+                    }
+                    finally
+                    {
+                        tran.Dispose();
                     }
                 }
             }
@@ -99,18 +161,25 @@ namespace Reinforced.Tecture.Commands
                 {
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r1 = _mx.GetRunner(commandBase);
+                    ChannelTransaction tran = null;
                     try
                     {
                         var r = r1.RunInternalAsync(commandBase);
                         if (r != null)
                         {
+                            tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
                             await r;
                             commandBase.IsExecuted = true;
+                            tran.Commit();
                         }
                     }
                     catch (Exception e)
                     {
                         throw new TectureCommandRunException(commandBase, e);
+                    }
+                    finally
+                    {
+                        tran?.Dispose();
                     }
                 }
             }

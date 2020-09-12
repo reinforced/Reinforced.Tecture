@@ -3,19 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
 {
-    class HookQueryable : IOrderedQueryable
+    class HookQueryable<T> : IOrderedQueryable<T>
     {
-        private readonly IQueryable _baseQueryable;
+        private readonly IQueryable<T> _baseQueryable;
         private readonly IQueryProvider _provider;
         private readonly Auxilary _aux;
         internal readonly DescriptionHolder _description;
 
-        public HookQueryable(IQueryable baseQueryable, Auxilary aux, DescriptionHolder descrHolder)
+        public HookQueryable(IQueryable<T> baseQueryable, Auxilary aux, DescriptionHolder descrHolder)
         {
             _baseQueryable = baseQueryable;
             _aux = aux;
@@ -26,18 +25,18 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             var hash = _aux.IsHashRequired ? Expression.CalculateHash() : string.Empty;
-            IEnumerator result;
-            IEnumerable data = null;
+            IEnumerator<T> result;
+            IEnumerable<T> data = null;
             if (_aux.IsEvaluationNeeded)
             {
                 result = _baseQueryable.GetEnumerator();
             }
             else
             {
-                data = _aux.Get<IEnumerable>(hash, _description.Description);
+                data = _aux.Get<IEnumerable<T>>(hash, _description.Description);
                 result = data.GetEnumerator();
             }
 
@@ -45,7 +44,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
             {
                 if (_aux.IsEvaluationNeeded)
                 {
-                    result = new HookEnumerator(hash, result, _aux, _description);
+                    result = new HookEnumerator<T>(hash, result, _aux, _description);
                 }
                 else
                 {
@@ -55,7 +54,13 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
 
             return result;
         }
-        
+
+        /// <summary>Returns an enumerator that iterates through a collection.</summary>
+        /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         /// <summary>Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see cref="T:System.Linq.IQueryable" /> is executed.</summary>
         /// <returns>A <see cref="T:System.Type" /> that represents the type of the element(s) that are returned when the expression tree associated with this object is executed.</returns>

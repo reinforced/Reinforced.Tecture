@@ -46,15 +46,13 @@ namespace Reinforced.Tecture
         /// <summary>
         /// Runs commands queue
         /// </summary>
-        void Save(OuterTransactionMode transaction = OuterTransactionMode.None,
-            OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos);
+        void Save();
 
         /// <summary>
         /// Runs async commands queue
         /// </summary>
         /// <returns></returns>
-        Task SaveAsync(OuterTransactionMode transaction = OuterTransactionMode.None,
-            OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos);
+        Task SaveAsync();
     }
 
 }

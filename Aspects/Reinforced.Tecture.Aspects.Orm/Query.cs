@@ -5,6 +5,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Aspects.Orm.Queries;
 using Reinforced.Tecture.Aspects.Orm.Queries.Fake;
+using Reinforced.Tecture.Aspects.Orm.Queries.Transactional;
 
 namespace Reinforced.Tecture.Aspects.Orm
 {
@@ -20,7 +21,8 @@ namespace Reinforced.Tecture.Aspects.Orm
             {
                 return new HookQueryable<T>(set, Aux, null);
             }
-            return Set<T>();
+
+            return new TransactionalQueryable<T>(Aux, Set<T>());
         }
 
         /// <summary>
@@ -33,7 +35,6 @@ namespace Reinforced.Tecture.Aspects.Orm
         /// <summary>
         /// Returns key of just added entity
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="addCommand">Addition command</param>
         /// <param name="keyProperties">Key property</param>
         /// <returns></returns>

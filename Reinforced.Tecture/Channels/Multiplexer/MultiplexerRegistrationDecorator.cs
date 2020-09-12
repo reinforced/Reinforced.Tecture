@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Savers;
+using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Channels.Multiplexer
 {
     internal class MultiplexerRegistrationDecorator
     {
-        internal MultiplexerRegistrationDecorator(ChannelMultiplexer multiplexer, Type channelType)
+        internal MultiplexerRegistrationDecorator(ChannelMultiplexer multiplexer, Type channelType, TransactionManager transactionManager)
         {
             _multiplexer = multiplexer;
             _channelType = channelType;
+            TransactionManager = transactionManager;
         }
 
         private readonly Type _channelType;
@@ -30,5 +32,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         {
             _multiplexer.RegisterSaver(_channelType, sb);
         }
+        
+        public TransactionManager TransactionManager { get; }
     }
 }

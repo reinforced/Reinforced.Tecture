@@ -25,6 +25,11 @@ namespace Reinforced.Tecture.Savers
             return SaveAsync();
         }
 
+        /// <summary>
+        /// Gets channel type that this saver is bound to
+        /// </summary>
+        public Type Channel { get; internal set; }
+
         internal abstract IEnumerable<Type> ServingCommandTypes { get; }
 
         internal abstract CommandRunner GetRunner(CommandBase cb);

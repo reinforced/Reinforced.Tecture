@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
 {
@@ -12,15 +13,25 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         private long _currentIndex = -1;
         private long _indexBeforeReset = -1;
 
-
-        public HookEnumerator(string hash, IEnumerator<T> original, Auxilary aux, DescriptionHolder description)
+        private ChannelTransaction _tran;
+        private readonly Auxilary _auxilary;
+        public HookEnumerator(string hash, IEnumerator<T> original, Auxilary auxilary, DescriptionHolder description)
         {
+            _auxilary = auxilary;
             _original = original;
-            aux.QueryManuallyClone(hash, (IEnumerable<T>)_data, description.Description);
+            auxilary.QueryManuallyClone(hash, (IEnumerable<T>)_data, description.Description);
         }
-
+        private readonly object locker = new object();
         public bool MoveNext()
         {
+            if (_tran != null)
+            {
+                lock (locker)
+                {
+                    if (_tran != null)
+                        _tran = _auxilary.GetQueryTransaction();
+                }
+            }
             var result = _original.MoveNext();
             if (!result) return false;
 
@@ -47,6 +58,8 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
 
         public void Dispose()
         {
+            _tran?.Commit();
+            _tran?.Dispose();
             _original.Dispose();
         }
     }
@@ -59,14 +72,27 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         private long _currentIndex = -1;
         private long _indexBeforeReset = -1;
 
-        public HookEnumerator(string hash, IEnumerator original, Auxilary aux, DescriptionHolder description)
+        private ChannelTransaction _tran;
+        private readonly Auxilary _auxilary;
+        public HookEnumerator(string hash, IEnumerator original, Auxilary auxilary, DescriptionHolder description)
         {
             _original = original;
-            aux.QueryManuallyClone(hash, (IEnumerable<object>)_data, description.Description);
+            _auxilary = auxilary;
+            auxilary.QueryManuallyClone(hash, (IEnumerable<object>)_data, description.Description);
         }
 
+        private readonly object locker = new object();
         public bool MoveNext()
         {
+            if (_tran != null)
+            {
+                lock (locker)
+                {
+                    if (_tran != null)
+                        _tran = _auxilary.GetQueryTransaction();
+                }
+            }
+
             var result = _original.MoveNext();
             if (!result) return false;
 
@@ -83,6 +109,12 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
             _currentIndex = -1;
             _indexBeforeReset = _currentIndex;
             _original.Reset();
+        }
+
+        public void Dispose()
+        {
+            _tran?.Commit();
+            _tran?.Dispose();
         }
 
 

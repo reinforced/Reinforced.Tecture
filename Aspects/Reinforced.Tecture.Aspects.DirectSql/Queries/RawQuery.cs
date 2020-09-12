@@ -41,7 +41,11 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
             if (_a.IsEvaluationNeeded)
             {
                 var cq = _runtime.Tooling.Compile(Sql);
-                result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
+                using (var t = _a.GetQueryTransaction())
+                {
+                    result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
+                    t.Commit();
+                }
             }
             else
             {
@@ -68,7 +72,11 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
             if (_a.IsEvaluationNeeded)
             {
                 var cq = _runtime.Tooling.Compile(Sql);
-                result = await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters);
+                using (var t = _a.GetQueryTransaction())
+                {
+                    result = await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters);
+                    t.Commit();
+                }
             }
             else
             {

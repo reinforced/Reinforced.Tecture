@@ -147,7 +147,9 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         internal void RegisterSaver(Type channelType, SaverBase saver)
         {
             Known(channelType);
+            saver.Channel = channelType;
             saver._Aux = _auxilary.ForChannel(channelType);
+            
 
             if (!_saversPerChannels.ContainsKey(channelType.FullName))
             {

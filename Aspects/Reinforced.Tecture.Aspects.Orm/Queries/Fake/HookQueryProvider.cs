@@ -21,7 +21,8 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         /// <returns>An <see cref="T:System.Linq.IQueryable" /> that can evaluate the query represented by the specified expression tree.</returns>
         public IQueryable CreateQuery(Expression expression)
         {
-            return _baseQueryProvider.CreateQuery(expression);
+            var bs = _baseQueryProvider.CreateQuery(expression);
+            return new HookQueryable(bs,_aux,_description);
         }
 
         /// <summary>Constructs an <see cref="T:System.Linq.IQueryable`1" /> object that can evaluate the query represented by a specified expression tree.</summary>
@@ -39,7 +40,30 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         /// <returns>The value that results from executing the specified query.</returns>
         public object Execute(Expression expression)
         {
-            return _baseQueryProvider.Execute(expression);
+            string hash = _aux.IsHashRequired ? expression.CalculateHash() : string.Empty;
+            object result;
+            if (_aux.IsEvaluationNeeded)
+            {
+                result = _baseQueryProvider.Execute(expression);
+            }
+            else
+            {
+                result = _aux.Get<object>(hash, _description.Description);
+            }
+
+            if (_aux.IsTracingNeeded)
+            {
+                if (_aux.IsEvaluationNeeded)
+                {
+                    _aux.Query(hash, result, _description.Description ?? $"Obtaining query result via O/RM");
+                }
+                else
+                {
+                    _aux.Query(hash, "test data", _description.Description ?? $"Obtaining query result via O/RM");
+                }
+            }
+
+            return result;
         }
 
         /// <summary>Executes the strongly-typed query represented by a specified expression tree.</summary>

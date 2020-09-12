@@ -4,6 +4,7 @@ using System.Text;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Query
 {
@@ -14,18 +15,20 @@ namespace Reinforced.Tecture.Query
     {
         internal readonly TestDataHolder _testDataHolder;
         internal TraceCollector TraceCollector { get; set; }
-        internal AuxilaryContainer(TestDataHolder testDataHolder)
+        private readonly TransactionManager _transactionManager;
+        internal AuxilaryContainer(TestDataHolder testDataHolder, TransactionManager transactionManager)
         {
             _testDataHolder = testDataHolder;
+            _transactionManager = transactionManager;
         }
 
-        private readonly Dictionary<Type,Auxilary> _cache = new Dictionary<Type, Auxilary>();
+        private readonly Dictionary<Type, Auxilary> _cache = new Dictionary<Type, Auxilary>();
 
         internal Auxilary ForChannel(Type channelType)
         {
             if (!_cache.ContainsKey(channelType))
             {
-                _cache[channelType] = new Auxilary(this,channelType);
+                _cache[channelType] = new Auxilary(this, channelType, _transactionManager);
             }
             return _cache[channelType];
         }

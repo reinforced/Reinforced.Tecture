@@ -7,7 +7,7 @@ using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Services;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Transactions;
-using Reinforced.Tecture.Transactions.Testing;
+
 
 namespace Reinforced.Tecture.Entry
 {
@@ -19,15 +19,15 @@ namespace Reinforced.Tecture.Entry
         internal readonly Pipeline _pipeline;
         internal readonly ActionsQueue _actions = new ActionsQueue(true);
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
-        private readonly ITransactionManager _tranManager;
-        private readonly Action<Exception> _exceptionHandler;
+        private readonly TransactionManager _tranManager;
+        private readonly Func<Exception, bool> _exceptionHandler;
         private readonly AuxilaryContainer _aux;
         public Tecture(
             ChannelMultiplexer mx,
             AuxilaryContainer aux,
             bool debugMode = false,
-            ITransactionManager tranManager = null,
-            Action<Exception> exceptionHandler = null)
+            TransactionManager tranManager = null,
+            Func<Exception, bool> exceptionHandler = null)
         {
             _mx = mx;
             _aux = aux;
@@ -76,65 +76,39 @@ namespace Reinforced.Tecture.Entry
         /// <returns></returns>
         public Trace EndTrace()
         {
-            if (_tc==null)
+            if (_tc == null)
                 throw new TectureException(".EndTrace is called, but trace has not been collected");
             return _tc.Finish();
         }
 
-        private IOuterTransaction ObtainTransaction(
-            OuterTransactionMode transaction,
-            OuterTransactionIsolationLevel level)
-        {
-            if (_tranManager == null)
-                return new FakeOuterTransaction(level);
-
-            if (transaction == OuterTransactionMode.DbTransaction)
-                return _tranManager.BeginDbTransaction(level);
-            if (transaction == OuterTransactionMode.TransactionScope)
-                return _tranManager.BeginDbTransaction(level);
-            return new FakeOuterTransaction(level);
-        }
 
         /// <summary>
         /// Runs commands queue
         /// </summary>
-        public void Save(OuterTransactionMode transaction = OuterTransactionMode.None,
-            OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos)
+        public void Save()
         {
             if (_actions.IsRunning) throw new Exception(".SaveChanges cannot be called within post-save action");
             if (_finallyActions.IsRunning) throw new Exception(".SaveChanges cannot be called within finally action");
-            IOuterTransaction tran = ObtainTransaction(transaction, level);
+
 
             Exception thrown = null;
             try
             {
                 _serviceManager.OnSave();
 
-                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector);
+                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
                 dispatcher.Dispatch(_pipeline, _actions);
 
                 _serviceManager.OnFinally();
                 _finallyActions.Run();
                 dispatcher.Dispatch(_pipeline, _actions);
-
-                tran?.Commit();
             }
             catch (Exception ex)
             {
-                _exceptionHandler?.Invoke(ex);
-                thrown = ex;
-            }
-            finally
-            {
-                try
+                if (_exceptionHandler != null && !_exceptionHandler(ex))
                 {
-                    tran?.Dispose();
+                    throw;
                 }
-                catch (Exception)
-                {
-                    if (thrown == null) throw;
-                }
-                if (thrown != null) throw thrown;
             }
         }
 
@@ -142,43 +116,29 @@ namespace Reinforced.Tecture.Entry
         /// Runs async commands queue
         /// </summary>
         /// <returns></returns>
-        public async Task SaveAsync(OuterTransactionMode transaction = OuterTransactionMode.None,
-            OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos)
+        public async Task SaveAsync()
         {
             if (_actions.IsRunning) throw new Exception(".SaveAsync cannot be called within post-save action");
             if (_finallyActions.IsRunning) throw new Exception(".SaveAsync cannot be called within finally action");
-            IOuterTransaction tran = ObtainTransaction(transaction, level);
             Exception thrown = null;
             try
             {
 
                 await _serviceManager.OnSaveAsync();
 
-                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector);
+                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
                 await dispatcher.DispatchAsync(_pipeline, _actions);
 
                 await _serviceManager.OnFinallyAsync();
                 await _finallyActions.RunAsync();
                 await dispatcher.DispatchAsync(_pipeline, _actions);
-                tran?.Commit();
-                //CleanupAfterSave();
             }
             catch (Exception ex)
             {
-                _exceptionHandler?.Invoke(ex);
-                thrown = ex;
-            }
-            finally
-            {
-                try
+                if (_exceptionHandler != null && !_exceptionHandler(ex))
                 {
-                    tran?.Dispose();
+                    throw;
                 }
-                catch (Exception)
-                {
-                    if (thrown == null) throw;
-                }
-                if (thrown != null) throw thrown;
             }
         }
 

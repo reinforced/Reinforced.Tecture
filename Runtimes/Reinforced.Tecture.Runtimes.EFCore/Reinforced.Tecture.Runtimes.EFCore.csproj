@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>EntityFramework.Core Runtime for Reinforced.Tecture</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
