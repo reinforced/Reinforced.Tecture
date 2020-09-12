@@ -7,7 +7,7 @@ Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinfo
 ```bash
 PM> Install-Package Reinforced.Tecture
 PM> Install-Package Reinforced.Tecture.Aspects.Orm
-PM> Install-Package Reinforced.Tecture.Aspects.SqlStroke
+PM> Install-Package Reinforced.Tecture.Aspects.DirectSql
 PM> Install-Package Reinforced.Tecture.Runtimes.EfCore
 PM> Install-Package Reinforced.Tecture.Testing
 ```
@@ -143,14 +143,15 @@ var a = tecture.Do<Orders>().CreateOne("new order");
 ctx.Save();
 
 var trace = tecture.EndTrace();
-Output.Write(trace.ToText());
+Output.Write(trace.Explain());
 
 /**
- * 1. [QRY] Check existing order presence: 'False' obtained
- * 2. [ADD] Adding new order to the database
- * ====== Saved =====
- * 3. [SQL] Re-calculating denormalized items count
- * ====== Saved =====
+ * 1. [ ->] 	Check existing order presence: 'False' obtained
+ * 2. [ADD] 	Adding new order to the database
+ * 3. [<- ] 	<SAVE>
+ * 4. [SQL] 	Re-calculating denormalized items count
+ * 5. [<- ] 	<SAVE>
+ * 6. [ ! ] 	<END>
  */
 ```
 
