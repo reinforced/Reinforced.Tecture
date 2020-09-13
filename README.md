@@ -169,7 +169,7 @@ Output.Write(trace.Explain());
 ```
 
 ## Create unit tests without pain
-Extract [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data) from the tract and dump it into C# code. Generate [validation using the same trace](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation). Put it together to get data-driven infrastructure-free unit test
+Extract [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data) from the trace and dump it into C# code. Convert tract into [validation code](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation). Put them together to get data-driven infrastructure-free unit test
 
 ```csharp
 [Fact]
