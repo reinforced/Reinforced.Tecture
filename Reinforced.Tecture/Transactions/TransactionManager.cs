@@ -27,23 +27,27 @@ namespace Reinforced.Tecture.Transactions
                 {
                     if (!_globalTransactions.ContainsKey(channel))
                     {
-                        _globalTransactions[channel] = _transactionManagers[channel].GetGlobalTransaction();
+                        _globalTransactions[channel] =
+                            _transactionManagers.ContainsKey(channel)
+                                ? _transactionManagers[channel].GetGlobalTransaction()
+                                : ChannelTransaction.Default;
                     }
                 }
             }
         }
 
-        public Dictionary<string,ChannelTransaction> GetSaveTransactions(IEnumerable<string> channels, bool async)
+        public Dictionary<string, ChannelTransaction> GetSaveTransactions(IEnumerable<string> channels, bool async)
         {
-            List<ChannelTransaction> ctr = new List<ChannelTransaction>();
+            Dictionary<string, ChannelTransaction> result = new Dictionary<string, ChannelTransaction>();
             foreach (var channel in channels)
             {
-                if (_transactionManagers.ContainsKey(channel)) ctr.Add(_transactionManagers[channel].GetSaveTransaction(async));
-                else ctr.Add(ChannelTransaction.Default);
+                result[channel] = _transactionManagers.ContainsKey(channel)
+                    ? _transactionManagers[channel].GetSaveTransaction(async)
+                        : ChannelTransaction.Default;
             }
-            return ctr.ToDictionary(x=>x.Channel.FullName);
+            return result;
         }
-        
+
         public ChannelTransaction GetQueryTransaction(Type channel)
         {
             var result =

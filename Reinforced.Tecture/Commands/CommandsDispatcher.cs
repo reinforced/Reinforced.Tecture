@@ -54,8 +54,7 @@ namespace Reinforced.Tecture.Commands
                     }
                 }
             }
-
-            throw new AggregateException(aggregate);
+            if (aggregate.Count > 0) throw new AggregateException(aggregate);
         }
 
         private async Task SaveAsync(IEnumerable<string> channels)
@@ -90,7 +89,7 @@ namespace Reinforced.Tecture.Commands
                 }
             }
 
-            throw new AggregateException(aggregate);
+            if (aggregate.Count > 0) throw new AggregateException(aggregate);
         }
 
 

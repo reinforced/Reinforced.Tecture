@@ -105,7 +105,7 @@ namespace Reinforced.Tecture.Entry
             }
             catch (Exception ex)
             {
-                if (_exceptionHandler != null && !_exceptionHandler(ex))
+                if (_exceptionHandler == null || !_exceptionHandler(ex))
                 {
                     throw;
                 }
@@ -135,7 +135,7 @@ namespace Reinforced.Tecture.Entry
             }
             catch (Exception ex)
             {
-                if (_exceptionHandler != null && !_exceptionHandler(ex))
+                if (_exceptionHandler == null || !_exceptionHandler(ex))
                 {
                     throw;
                 }
