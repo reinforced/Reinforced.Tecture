@@ -14,25 +14,38 @@ PM> Install-Package Reinforced.Tecture.Testing
 
 Get in touch with [documentation](https://github.com/reinforced/Reinforced.Tecture/wiki)
 
-# What can I do with it?
+# Advantages
 
-Lots of useful stuff that you usually do while maintaining a business application, but much easier.
+Tecture overcomes traditional approaches of .NET application design with following features:
 
-## Define 
-[channels](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels) and use [aspects](https://github.com/reinforced/Reinforced.Tecture/wiki/Aspects):
+- Explicit and type-safe [abstraction of external systems](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels) (databases, queues etc);
+- Type-based [services](https://github.com/reinforced/Reinforced.Tecture/wiki/Services) design that does not require IoC configuration;
+- Reads and queries to external systems [implemented by extension methods](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries). Repository pattern is not needed;
+- Deferred [write operations](https://github.com/reinforced/Reinforced.Tecture/wiki/Commands) with flexible [compile-time restrictions](https://github.com/reinforced/Reinforced.Tecture/wiki/Aspects);
+- Automated [test data capture](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data);
+- Cheap and quick [infrastructure-free data-driven regression testing](https://github.com/reinforced/Reinforced.Tecture/wiki/Unit-Test);
+- Therefore, Mocks/Stubs/Fakes, interfaces and virtual methods are not needed in business logic anymore. Write less, do more;
+- [Self-explanatory](https://github.com/reinforced/Reinforced.Tecture/wiki/Tracing) business logic with [informational annotations](https://github.com/reinforced/Reinforced.Tecture/wiki/Describe) by design;
+
+Below are several pieces of code that uses Tecture:
+
+## Abstractions of external systems 
+Define [channels](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels) and use [aspects](https://github.com/reinforced/Reinforced.Tecture/wiki/Aspects):
 
 ```csharp
 /// <summary>
 /// Hi, I'm database communication channel
 /// </summary>
 public interface Db :
-        CommandQueryChannel<Reinforced.Tecture.Aspects.Orm.Command, 
-		Reinforced.Tecture.Aspects.Orm.Query>
+        CommandQueryChannel<
+	   Reinforced.Tecture.Aspects.Orm.Command, 
+	   Reinforced.Tecture.Aspects.Orm.Query
+	  >
     { }
 ```
 
-## Create 
-[services](https://github.com/reinforced/Reinforced.Tecture/wiki/Services) for business logic and produce [commands](https://github.com/reinforced/Reinforced.Tecture/wiki/Commands)
+## Organize your business logic 
+Create [services](https://github.com/reinforced/Reinforced.Tecture/wiki/Services) for business logic and produce [commands](https://github.com/reinforced/Reinforced.Tecture/wiki/Commands)
 
 ```csharp
 /// <summary>
@@ -73,8 +86,8 @@ public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >
 }
 ```
 
-## Use 
-[queries](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries) inside your channels
+## Manage read operations 
+Define [queries](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries) for your channels
 
 ```csharp
 ///<summary>
@@ -108,8 +121,8 @@ var o = From<Db>().GetRecentOrders();
 // ...
 ```
 
-## Integrate 
-[with IoC containers](https://github.com/reinforced/Reinforced.Tecture/wiki/Ioc) and use it from application
+## Conenct Tecture to your application 
+Tecture can be easily registered in any [IoC container](https://github.com/reinforced/Reinforced.Tecture/wiki/Ioc) and used from application
 
 ```csharp
 public class OrdersController : ApiController
@@ -133,8 +146,8 @@ public class OrdersController : ApiController
 }
 ```
 
-## [Trace](https://github.com/reinforced/Reinforced.Tecture/wiki/Tracing) 
-your business logic and get clear explanation what exactly happens in terms of business
+## Get explanation of your business logic
+[Trace](https://github.com/reinforced/Reinforced.Tecture/wiki/Tracing) your business logic and get clear explanation what exactly it does with external systems:
 
 ```csharp
 tecture.BeginTrace();
@@ -155,8 +168,8 @@ Output.Write(trace.Explain());
  */
 ```
 
-## Test
-You can capture [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data) and save it in file.   Next step is to get [validation from traces](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation). In the end, turn captured data with validation trace into data-driven infrastructure-free unit tests!
+## Create unit tests without pain
+Extract [test data](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data) from the tract and dump it into C# code. Generate [validation using the same trace](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation). Put it together to get data-driven infrastructure-free unit test
 
 ```csharp
 [Fact]
