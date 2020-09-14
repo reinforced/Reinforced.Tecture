@@ -58,7 +58,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         {
             var className = $"{_caseName}_TestData";
             
-            var go = Trace.GenerateTestData(className, _ns);
+            var go = Trace.GenerateData(className, _ns);
 
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }

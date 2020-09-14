@@ -6,7 +6,7 @@
     <Description>Reinforced.Tecture is architectural framework for .NET business applications built on CQRS and FP principles</Description>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <FileVersion>1.0.0.1</FileVersion>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     
   </PropertyGroup>
 
