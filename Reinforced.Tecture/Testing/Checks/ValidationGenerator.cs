@@ -21,7 +21,7 @@ namespace Reinforced.Tecture.Testing.Checks
     /// <summary>
     /// Unit test generator instance
     /// </summary>
-    public class UnitTestGenerator
+    public class ValidationGenerator
     {
         internal readonly Dictionary<Type, List<CheckDescription>> _checksForCommands = new Dictionary<Type, List<CheckDescription>>();
 

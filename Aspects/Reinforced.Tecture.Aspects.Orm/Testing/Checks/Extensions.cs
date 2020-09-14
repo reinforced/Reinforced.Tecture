@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Testing.Checks
         /// Register all checks for ORM aspect
         /// </summary>
         /// <param name="tg">Unit test generator</param>
-        public static void CheckOrm(this UnitTestGenerator tg)
+        public static void CheckOrm(this ValidationGenerator tg)
         {
             tg.For<Commands.Add.Add>().Basic();
             tg.For<Commands.Delete.Delete>().Basic();

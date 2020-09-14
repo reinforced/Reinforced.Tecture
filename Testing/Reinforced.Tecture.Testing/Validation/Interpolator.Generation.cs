@@ -8,7 +8,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpUnitTestGenerator
+    partial class CSharpValidationGenerator
     {
         private InvocationExpressionSyntax Generate(CommandBase command, CheckDescription desc)
         {

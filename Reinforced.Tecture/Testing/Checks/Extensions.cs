@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Testing.Checks
         /// <typeparam name="TCommand">Command type</typeparam>
         /// <param name="tg">Test generator</param>
         /// <returns>Checks builder</returns>
-        public static ChecksBuilderFor<TCommand> For<TCommand>(this UnitTestGenerator tg) where TCommand : CommandBase
+        public static ChecksBuilderFor<TCommand> For<TCommand>(this ValidationGenerator tg) where TCommand : CommandBase
         {
             return new ChecksBuilderFor<TCommand>(tg._checksForCommands);
         }

@@ -8,7 +8,7 @@ using Reinforced.Tecture.Tracing;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpUnitTestGenerator
+    partial class CSharpValidationGenerator
     {
         private CompilationUnitSyntax _result;
 

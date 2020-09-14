@@ -13,7 +13,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpUnitTestGenerator
+    partial class CSharpValidationGenerator
     {
         private IEnumerable<ExpressionSyntax> ProduceArguments(CommandBase command, CheckDescription desc)
         {

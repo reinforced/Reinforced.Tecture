@@ -14,7 +14,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Validation
 {
-    partial class CSharpUnitTestGenerator : IGenerating, IValidationGenerator
+    partial class CSharpValidationGenerator : IGenerating, IValidationGenerator
     {
         private const string StoryVariableId = "flow";
         private readonly string TestClassName;
@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Testing.Validation
         private HashSet<string> _usings;
         private HashSet<string> _staticUsings;
 
-        public CSharpUnitTestGenerator(string testClassName, string testNamespaceName)
+        public CSharpValidationGenerator(string testClassName, string testNamespaceName)
         {
             TestClassName = testClassName;
             TestNamespaceName = testNamespaceName;

@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
         /// Basic Tecture checks
         /// </summary>
         /// <param name="tg">Test generator</param>
-        public static void Basics(this UnitTestGenerator tg)
+        public static void Basics(this ValidationGenerator tg)
         {
             tg.For<CommandBase>().Basic();
             tg.For<Comment>().Basic();

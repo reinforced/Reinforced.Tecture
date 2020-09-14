@@ -35,7 +35,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Testing
         /// Checks set for SQL commands
         /// </summary>
         /// <param name="tg">Unit test generator</param>
-        public static void CheckSql(this UnitTestGenerator tg)
+        public static void CheckSql(this ValidationGenerator tg)
         {
             var fr = tg.For<Sql>();
             fr.Text();

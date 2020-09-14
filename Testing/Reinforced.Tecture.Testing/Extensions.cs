@@ -11,22 +11,20 @@ namespace Reinforced.Tecture.Testing
     /// </summary>
     public static class Extensions
     {
-
-
         /// <summary>
-        /// Generates validation for trace
+        /// Generates validation code for trace
         /// </summary>
         /// <param name="trace">Trace instance</param>
         /// <param name="className">Desired trace class name</param>
         /// <param name="ns">Desired trace namespace</param>
         /// <param name="config">Generator configuration</param>
         /// <returns>Generate output</returns>
-        public static GenerationOutput GenerateUnitTest(this Trace trace, string className, string ns, Action<UnitTestGenerator> config = null)
+        public static GenerationOutput GenerateValidation(this Trace trace, string className, string ns, Action<ValidationGenerator> config = null)
         {
-            UnitTestGenerator tg = new UnitTestGenerator();
+            ValidationGenerator tg = new ValidationGenerator();
             config(tg);
 
-            var generator = new CSharpUnitTestGenerator(className, ns);
+            var generator = new CSharpValidationGenerator(className, ns);
             generator.Before();
             tg.Proceed(trace.Commands,generator);
             generator.After();
@@ -41,7 +39,7 @@ namespace Reinforced.Tecture.Testing
         /// <param name="ns">Desired trace namespace</param>
         /// <param name="setup">Test data generator setup</param>
         /// <returns>Generated output</returns>
-        public static GenerationOutput GenerateTestData(this Trace trace, string className, string ns, Action<CSharpTestDataGeneratorSetup> setup = null)
+        public static GenerationOutput GenerateData(this Trace trace, string className, string ns, Action<CSharpTestDataGeneratorSetup> setup = null)
         {
             var tc = CSharpTestDataGeneratorSetup.Create(className, ns);
             setup?.Invoke(tc);

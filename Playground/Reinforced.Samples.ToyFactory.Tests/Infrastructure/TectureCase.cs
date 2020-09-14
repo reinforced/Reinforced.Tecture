@@ -44,7 +44,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         public void GenerateValidation()
         {
             var className = $"{_caseName}_Validation";
-            var go = Trace.GenerateUnitTest(className, _ns, g =>
+            var go = Trace.GenerateValidation(className, _ns, g =>
             {
                 g.CheckOrm();
                 g.CheckSql();
