@@ -146,7 +146,7 @@ namespace Reinforced.Tecture.Query
                 }
             }
 
-            if (value is IHasheable h)
+            if (value is IHashable h)
             {
                 h.WriteData(this);
             }

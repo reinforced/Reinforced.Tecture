@@ -90,7 +90,7 @@ namespace Reinforced.Tecture.Testing.Checks
                 }
                 if (a is MethodCallExpression invex)
                 {
-                    ExtractInvokation(command, annotator, invex);
+                    ExtractInvocation(command, annotator, invex);
                     continue;
                 }
 
@@ -120,7 +120,7 @@ namespace Reinforced.Tecture.Testing.Checks
             _checkParameters.Add(cC);
         }
 
-        private void ExtractInvokation(ParameterExpression command, ParameterExpression annotator, MethodCallExpression invex)
+        private void ExtractInvocation(ParameterExpression command, ParameterExpression annotator, MethodCallExpression invex)
         {
             if (invex.Object == annotator)
             {

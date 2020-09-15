@@ -9,8 +9,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
     class AddCommandRunner : CommandRunner<Add>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxilary _aux;
-        public AddCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
+        private readonly Auxiliary _aux;
+        public AddCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
         {
             _aux = aux;
             _dc = dc;

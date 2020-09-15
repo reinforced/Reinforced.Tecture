@@ -10,9 +10,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
     class RelateCommandRunner : CommandRunner<Relate>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxilary _aux;
+        private readonly Auxiliary _aux;
 
-        public RelateCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
+        public RelateCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
             _aux = aux;

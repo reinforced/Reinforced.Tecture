@@ -29,13 +29,13 @@ namespace Reinforced.Tecture.Testing.Validation
         {
             var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(ValidationBase))).WithoutTrivia());
 
-            var clas = 
+            var @class = 
                 ClassDeclaration(TestClassName)
                 .WithBaseList(BaseList(bs))
                 .WithMembers(
                     SingletonList(validationMethod));
 
-            var ns = NamespaceDeclaration(ParseName(TestNamespaceName)).Format().AddMembers(clas);
+            var ns = NamespaceDeclaration(ParseName(TestNamespaceName)).Format().AddMembers(@class);
 
             return CompilationUnit()
                 .WithUsings(List(usings.ToArray()))
@@ -52,8 +52,8 @@ namespace Reinforced.Tecture.Testing.Validation
                 typeof(ValidationBase).Namespace,
             }.Union(_usings).Select(d => UsingDirective(ParseName(d)).FormatUsing());
 
-            var staticUsinSyntaxes = _staticUsings.Select(d => UsingDirective(ParseName(d)).Static().FormatUsing());
-            return allUsings.Union(staticUsinSyntaxes).ToArray();
+            var staticUsingSyntaxes = _staticUsings.Select(d => UsingDirective(ParseName(d)).Static().FormatUsing());
+            return allUsings.Union(staticUsingSyntaxes).ToArray();
         }
 
         private MemberDeclarationSyntax ProduceValidateMethod()

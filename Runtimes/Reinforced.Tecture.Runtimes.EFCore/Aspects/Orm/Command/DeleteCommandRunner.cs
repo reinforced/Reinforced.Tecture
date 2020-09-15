@@ -9,9 +9,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
     class DeleteCommandRunner : CommandRunner<Delete>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxilary _aux;
+        private readonly Auxiliary _aux;
 
-        public DeleteCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
+        public DeleteCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
         {
             _aux = aux;
             _dc = dc;

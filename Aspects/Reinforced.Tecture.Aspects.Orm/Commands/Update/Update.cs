@@ -75,7 +75,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
             string properties = string.Join(", ", _updateValues.Keys.Select(d => d.Name));
 
             var description = $"entity of type {EntityType.Name}";
-            if (Entity is IDescriptive e) description = e.Descibe();
+            if (Entity is IDescriptive e) description = e.Describe();
             if (_updateValues.Count > 0) description = $"{properties} of {description}";
 
             tw.Write($"Update {description}");

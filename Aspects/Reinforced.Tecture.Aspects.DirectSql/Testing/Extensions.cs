@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Testing
         /// <returns>Fluent</returns>
         public static ChecksBuilderFor<Sql> Parameters(this ChecksBuilderFor<Sql> ck)
         {
-            ck.Enlist(new SqlCommandParmatersCheckDescription());
+            ck.Enlist(new SqlCommandParametersCheckDescription());
             return ck;
         }
 

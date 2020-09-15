@@ -6,11 +6,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
 {
     class TransactionalQueryProvider : IQueryProvider
     {
-        private readonly Auxilary _auxilary;
+        private readonly Auxiliary _auxiliary;
         private readonly IQueryProvider _original;
-        public TransactionalQueryProvider(Auxilary auxilary, IQueryProvider original)
+        public TransactionalQueryProvider(Auxiliary auxiliary, IQueryProvider original)
         {
-            _auxilary = auxilary;
+            _auxiliary = auxiliary;
             _original = original;
         }
 
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
         /// <returns>An <see cref="T:System.Linq.IQueryable"></see> that can evaluate the query represented by the specified expression tree.</returns>
         public IQueryable CreateQuery(Expression expression)
         {
-            return new TransactionalQueryable(_auxilary,_original.CreateQuery(expression));
+            return new TransactionalQueryable(_auxiliary,_original.CreateQuery(expression));
         }
 
         /// <summary>Constructs an <see cref="T:System.Linq.IQueryable`1"></see> object that can evaluate the query represented by a specified expression tree.</summary>
@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
         /// <returns>An <see cref="T:System.Linq.IQueryable`1"></see> that can evaluate the query represented by the specified expression tree.</returns>
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return new TransactionalQueryable<TElement>(_auxilary,_original.CreateQuery<TElement>(expression));
+            return new TransactionalQueryable<TElement>(_auxiliary,_original.CreateQuery<TElement>(expression));
         }
 
         /// <summary>Executes the query represented by a specified expression tree.</summary>
@@ -37,7 +37,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
         /// <returns>The value that results from executing the specified query.</returns>
         public object Execute(Expression expression)
         {
-            using (var t = _auxilary.GetQueryTransaction())
+            using (var t = _auxiliary.GetQueryTransaction())
             {
                 var r = _original.Execute(expression);
                 t.Commit();
@@ -51,7 +51,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
         /// <returns>The value that results from executing the specified query.</returns>
         public TResult Execute<TResult>(Expression expression)
         {
-            using (var t = _auxilary.GetQueryTransaction())
+            using (var t = _auxiliary.GetQueryTransaction())
             {
                 var r = _original.Execute<TResult>(expression);
                 t.Commit();

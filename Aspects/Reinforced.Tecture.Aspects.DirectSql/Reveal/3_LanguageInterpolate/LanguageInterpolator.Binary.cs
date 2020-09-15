@@ -19,13 +19,13 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
             string result;
             if (IsSetExpression(bex))
             {
-                _isParseringSet = true;
+                _isParsingSet = true;
                 result = VisitSet(bex);
-                _isParseringSet = false;
+                _isParsingSet = false;
                 return result;
             }
 
-            if (!_isParseringSet && IsNullExpression(bex))
+            if (!_isParsingSet && IsNullExpression(bex))
             {
                 result = VisitIsNull(bex);
             }

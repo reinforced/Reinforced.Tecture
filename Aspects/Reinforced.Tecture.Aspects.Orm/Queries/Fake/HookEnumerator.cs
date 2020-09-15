@@ -14,12 +14,12 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         private long _indexBeforeReset = -1;
 
         private ChannelTransaction _tran;
-        private readonly Auxilary _auxilary;
-        public HookEnumerator(string hash, IEnumerator<T> original, Auxilary auxilary, DescriptionHolder description)
+        private readonly Auxiliary _auxiliary;
+        public HookEnumerator(string hash, IEnumerator<T> original, Auxiliary auxiliary, DescriptionHolder description)
         {
-            _auxilary = auxilary;
+            _auxiliary = auxiliary;
             _original = original;
-            auxilary.QueryManuallyClone(hash, (IEnumerable<T>)_data, description.Description);
+            auxiliary.QueryManuallyClone(hash, (IEnumerable<T>)_data, description.Description);
         }
         private readonly object locker = new object();
         public bool MoveNext()
@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
                 lock (locker)
                 {
                     if (_tran != null)
-                        _tran = _auxilary.GetQueryTransaction();
+                        _tran = _auxiliary.GetQueryTransaction();
                 }
             }
             var result = _original.MoveNext();
@@ -73,12 +73,12 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         private long _indexBeforeReset = -1;
 
         private ChannelTransaction _tran;
-        private readonly Auxilary _auxilary;
-        public HookEnumerator(string hash, IEnumerator original, Auxilary auxilary, DescriptionHolder description)
+        private readonly Auxiliary _auxiliary;
+        public HookEnumerator(string hash, IEnumerator original, Auxiliary auxiliary, DescriptionHolder description)
         {
             _original = original;
-            _auxilary = auxilary;
-            auxilary.QueryManuallyClone(hash, (IEnumerable<object>)_data, description.Description);
+            _auxiliary = auxiliary;
+            auxiliary.QueryManuallyClone(hash, (IEnumerable<object>)_data, description.Description);
         }
 
         private readonly object locker = new object();
@@ -89,7 +89,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
                 lock (locker)
                 {
                     if (_tran != null)
-                        _tran = _auxilary.GetQueryTransaction();
+                        _tran = _auxiliary.GetQueryTransaction();
                 }
             }
 

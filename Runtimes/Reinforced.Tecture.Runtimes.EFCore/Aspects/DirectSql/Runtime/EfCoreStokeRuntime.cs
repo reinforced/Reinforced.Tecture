@@ -8,7 +8,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime
 {
     class EfCoreStokeRuntime : IStrokeRuntime
     {
-        protected Auxilary Aux { get; set; }
+        protected Auxiliary Aux { get; set; }
 
         public EfCoreStokeRuntime(ILazyDisposable<DbContext> dbContext, Type channel, InterpolatorFactory fac)
         {

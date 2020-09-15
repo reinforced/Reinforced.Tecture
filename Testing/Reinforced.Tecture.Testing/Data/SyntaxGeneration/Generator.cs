@@ -60,10 +60,10 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     .ComaSeparated());
 
             //Set<X,Y>(instance, x=>x.Property,"value")
-            var invokation = InvocationExpression(setWithArguments)
+            var invocation = InvocationExpression(setWithArguments)
                 .WithArgumentList(ArgumentList(arguments));
 
-            return invokation;
+            return invocation;
         }
         private List<StatementSyntax> ProduceInlineableProperties(string instanceName, object instance, GenerationContext context)
         {
@@ -77,9 +77,9 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     // "value"
                     var propValue = TypeInitConstructor.Construct(propertyInfo.PropertyType, Meta.Value(propertyInfo, instance));
 
-                    var invokation = SafeAssignment(instanceName, pName, propValue);
+                    var invocation = SafeAssignment(instanceName, pName, propValue);
 
-                    initNodes.Add(ExpressionStatement(invokation));
+                    initNodes.Add(ExpressionStatement(invocation));
                     var u = ExtractEnumUsing(propertyInfo.PropertyType);
                     context.AddUsing(u);
                 }

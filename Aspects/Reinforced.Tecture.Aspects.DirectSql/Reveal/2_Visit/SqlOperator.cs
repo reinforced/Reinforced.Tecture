@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 // ReSharper disable once CheckNamespace
 namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit
 {
-    public static class SqlOperatorExteions
+    public static class SqlOperatorExtensions
     {
         public static SqlOperator ToSqlOperator(this ExpressionType type)
         {

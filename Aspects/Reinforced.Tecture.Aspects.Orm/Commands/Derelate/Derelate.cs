@@ -36,7 +36,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
             else
             {
                 var primaryDescription = $"entity of type {PrimaryType.Name}";
-                if (Primary is IDescriptive e) primaryDescription = e.Descibe();
+                if (Primary is IDescriptive e) primaryDescription = e.Describe();
 
                 tw.Write($"Remove reference to {primaryDescription} by {ForeignKeySpecifier}");
             }

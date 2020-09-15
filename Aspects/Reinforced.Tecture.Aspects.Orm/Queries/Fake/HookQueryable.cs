@@ -12,10 +12,10 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
     {
         private readonly IQueryable _baseQueryable;
         private readonly IQueryProvider _provider;
-        private readonly Auxilary _aux;
+        private readonly Auxiliary _aux;
         internal readonly DescriptionHolder _description;
 
-        public HookQueryable(IQueryable baseQueryable, Auxilary aux, DescriptionHolder descrHolder)
+        public HookQueryable(IQueryable baseQueryable, Auxiliary aux, DescriptionHolder descrHolder)
         {
             _baseQueryable = baseQueryable;
             _aux = aux;

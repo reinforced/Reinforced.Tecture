@@ -14,11 +14,11 @@ namespace Reinforced.Tecture.Entry
         public TectureBuilder()
         {
             var tdh = new TestDataHolder();
-            Aux = new AuxilaryContainer(tdh, _transactionManager);
+            Aux = new AuxiliaryContainer(tdh, _transactionManager);
             _mx = new ChannelMultiplexer(Aux);
         }
 
-        internal readonly AuxilaryContainer Aux;
+        internal readonly AuxiliaryContainer Aux;
         internal readonly ChannelMultiplexer _mx;
         internal readonly TransactionManager _transactionManager = new TransactionManager();
         internal Func<Exception, bool> _excHandler = null;

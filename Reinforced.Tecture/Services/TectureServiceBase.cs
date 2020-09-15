@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Services
         internal ServiceManager ServiceManager;
         internal ChannelMultiplexer ChannelMultiplexer;
         internal Pipeline Pipeline;
-        internal AuxilaryContainer Aux;
+        internal AuxiliaryContainer Aux;
         #endregion
 
         /// <summary>

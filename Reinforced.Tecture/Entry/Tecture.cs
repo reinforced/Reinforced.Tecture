@@ -21,10 +21,10 @@ namespace Reinforced.Tecture.Entry
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly TransactionManager _tranManager;
         private readonly Func<Exception, bool> _exceptionHandler;
-        private readonly AuxilaryContainer _aux;
+        private readonly AuxiliaryContainer _aux;
         public Tecture(
             ChannelMultiplexer mx,
-            AuxilaryContainer aux,
+            AuxiliaryContainer aux,
             bool debugMode = false,
             TransactionManager tranManager = null,
             Func<Exception, bool> exceptionHandler = null)

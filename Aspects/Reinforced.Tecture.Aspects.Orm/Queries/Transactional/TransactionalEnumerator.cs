@@ -8,12 +8,12 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
     class TransactionalEnumerator<T> : IEnumerator<T>
     {
         private readonly IEnumerator<T> _original;
-        private readonly Auxilary _auxilary;
+        private readonly Auxiliary _auxiliary;
         private ChannelTransaction _tran;
-        public TransactionalEnumerator(IEnumerator<T> original, Auxilary auxilary)
+        public TransactionalEnumerator(IEnumerator<T> original, Auxiliary auxiliary)
         {
             _original = original;
-            _auxilary = auxilary;
+            _auxiliary = auxiliary;
         }
         private readonly object locker = new object();
         /// <summary>Advances the enumerator to the next element of the collection.</summary>
@@ -26,7 +26,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
                 lock (locker)
                 {
                     if (_tran != null)
-                        _tran = _auxilary.GetQueryTransaction();
+                        _tran = _auxiliary.GetQueryTransaction();
                 }
             }
             return _original.MoveNext();
@@ -66,12 +66,12 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
     class TransactionalEnumerator : IEnumerator
     {
         private readonly IEnumerator _original;
-        private readonly Auxilary _auxilary;
+        private readonly Auxiliary _auxiliary;
         private ChannelTransaction _tran;
-        public TransactionalEnumerator(IEnumerator original, Auxilary auxilary)
+        public TransactionalEnumerator(IEnumerator original, Auxiliary auxiliary)
         {
             _original = original;
-            _auxilary = auxilary;
+            _auxiliary = auxiliary;
         }
         private readonly object locker = new object();
         /// <summary>Advances the enumerator to the next element of the collection.</summary>
@@ -84,7 +84,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
                 lock (locker)
                 {
                     if (_tran != null)
-                        _tran = _auxilary.GetQueryTransaction();
+                        _tran = _auxiliary.GetQueryTransaction();
                 }
             }
             return _original.MoveNext();

@@ -10,9 +10,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
     class DerelateCommandRunner : CommandRunner<Derelate>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxilary _aux;
+        private readonly Auxiliary _aux;
 
-        public DerelateCommandRunner(Auxilary aux, ILazyDisposable<DbContext> dc)
+        public DerelateCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
             _aux = aux;

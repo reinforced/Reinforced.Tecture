@@ -1,12 +1,12 @@
 ﻿namespace Reinforced.Tecture.Query
 {
     /// <summary>
-    /// Hasheable entity 
+    /// Hashable entity 
     /// </summary>
-    public interface IHasheable
+    public interface IHashable
     {
         /// <summary>
-        /// Writes entity sensetive data into hashbox
+        /// Writes entity sensitive data into hashbox
         /// </summary>
         /// <param name="hb">Hashbox instance to write sensetive data to</param>
         void WriteData(Hashbox hb);

@@ -9,26 +9,26 @@ using Reinforced.Tecture.Transactions;
 namespace Reinforced.Tecture.Query
 {
     /// <summary>
-    /// Auxilary tools for queries testing and tracing
+    /// Auxiliary tools for queries testing and tracing
     /// </summary>
-    internal class AuxilaryContainer
+    internal class AuxiliaryContainer
     {
         internal readonly TestDataHolder _testDataHolder;
         internal TraceCollector TraceCollector { get; set; }
         private readonly TransactionManager _transactionManager;
-        internal AuxilaryContainer(TestDataHolder testDataHolder, TransactionManager transactionManager)
+        internal AuxiliaryContainer(TestDataHolder testDataHolder, TransactionManager transactionManager)
         {
             _testDataHolder = testDataHolder;
             _transactionManager = transactionManager;
         }
 
-        private readonly Dictionary<Type, Auxilary> _cache = new Dictionary<Type, Auxilary>();
+        private readonly Dictionary<Type, Auxiliary> _cache = new Dictionary<Type, Auxiliary>();
 
-        internal Auxilary ForChannel(Type channelType)
+        internal Auxiliary ForChannel(Type channelType)
         {
             if (!_cache.ContainsKey(channelType))
             {
-                _cache[channelType] = new Auxilary(this, channelType, _transactionManager);
+                _cache[channelType] = new Auxiliary(this, channelType, _transactionManager);
             }
             return _cache[channelType];
         }

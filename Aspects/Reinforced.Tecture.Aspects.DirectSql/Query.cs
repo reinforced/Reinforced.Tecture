@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql
         }
 
         private readonly IStrokeRuntime _runtime;
-        internal new Auxilary Aux
+        internal new Auxiliary Aux
         {
             get { return base.Aux; }
         }
