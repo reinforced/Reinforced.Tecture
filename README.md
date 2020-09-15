@@ -121,7 +121,7 @@ var o = From<Db>().GetRecentOrders();
 // ...
 ```
 
-## Conenct Tecture to your application 
+## Connect Tecture to your application 
 Tecture can be easily registered in any [IoC container](https://github.com/reinforced/Reinforced.Tecture/wiki/Ioc) and used from application
 
 ```csharp
