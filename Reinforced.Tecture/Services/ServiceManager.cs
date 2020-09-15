@@ -12,7 +12,7 @@ namespace Reinforced.Tecture.Services
     {
         private readonly Pipeline _pipeline;
         private readonly ChannelMultiplexer _mux;
-        private readonly AuxilaryContainer _aux;
+        private readonly AuxiliaryContainer _aux;
         class ServiceContextEntry
         {
             public Type[] ContextTypes { get; set; }
@@ -55,7 +55,7 @@ namespace Reinforced.Tecture.Services
 
         private readonly Dictionary<Type, TectureServiceBase> _noContextServicesCache = new Dictionary<Type, TectureServiceBase>();
 
-        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, AuxilaryContainer aux)
+        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, AuxiliaryContainer aux)
         {
             _pipeline = pipeline;
             _mux = mux;

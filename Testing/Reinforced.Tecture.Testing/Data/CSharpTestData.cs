@@ -142,7 +142,7 @@ namespace Reinforced.Tecture.Testing.Data
         /// <summary>
         /// Collected warnings regarding test data hash mismatch
         /// </summary>
-        public string WarnigsText
+        public string WarningsText
         {
             get
             {

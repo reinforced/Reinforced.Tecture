@@ -34,12 +34,12 @@ namespace Reinforced.Tecture.Savers
 
         internal abstract CommandRunner GetRunner(CommandBase cb);
 
-        internal Auxilary _Aux;
+        internal Auxiliary _Aux;
 
         /// <summary>
         /// Reference to test data and tracing capabilities
         /// </summary>
-        protected Auxilary Aux
+        protected Auxiliary Aux
         {
             get { return _Aux; }
         }

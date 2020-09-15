@@ -11,18 +11,18 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
     class TransactionalQueryable<T> : IOrderedQueryable<T>
     {
         private readonly IQueryable<T> _original;
-        private readonly Auxilary _auxilary;
+        private readonly Auxiliary _auxiliary;
 
-        public TransactionalQueryable(Auxilary auxilary, IQueryable<T> original)
+        public TransactionalQueryable(Auxiliary auxiliary, IQueryable<T> original)
         {
-            _auxilary = auxilary;
+            _auxiliary = auxiliary;
             _original = original;
-            Provider = new TransactionalQueryProvider(auxilary, original.Provider);
+            Provider = new TransactionalQueryProvider(auxiliary, original.Provider);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return new TransactionalEnumerator<T>(_original.GetEnumerator(), _auxilary);
+            return new TransactionalEnumerator<T>(_original.GetEnumerator(), _auxiliary);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

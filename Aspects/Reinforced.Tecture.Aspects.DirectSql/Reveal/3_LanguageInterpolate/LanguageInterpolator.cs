@@ -120,7 +120,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
         #region SET
         protected virtual bool IsSetExpression(SqlBinaryExpression bex)
         {
-            if (_isParseringSet) return false;
+            if (_isParsingSet) return false;
             if (bex.IsTop)
             {
                 return Precends(SET, bex.Position);
@@ -128,7 +128,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
 
             return false;
         }
-        protected bool _isParseringSet = false;
+        protected bool _isParsingSet = false;
         protected virtual string VisitSet(SqlBinaryExpression bex)
         {
             if (bex.Operator == SqlOperator.Equal)

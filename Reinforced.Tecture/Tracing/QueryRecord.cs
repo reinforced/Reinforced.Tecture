@@ -92,7 +92,7 @@ namespace Reinforced.Tecture.Tracing
             {
                 if (Result is IDescriptive desc)
                 {
-                    tw.Write(desc.Descibe());
+                    tw.Write(desc.Describe());
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace Reinforced.Tecture.Tracing
         private string Description(object o)
         {
             if (o == null) return "null";
-            if (o is IDescriptive descr) return descr.Descibe();
+            if (o is IDescriptive descr) return descr.Describe();
             return o.ToString();
         }
     }

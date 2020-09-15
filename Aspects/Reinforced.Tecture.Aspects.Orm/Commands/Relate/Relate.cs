@@ -46,12 +46,12 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
             else
             {
                 var primaryDescription = $"entity of type {PrimaryType.Name}";
-                if (Primary is IDescriptive e) primaryDescription = e.Descibe();
+                if (Primary is IDescriptive e) primaryDescription = e.Describe();
 
-                var secondaryyDescription = $"entity of type {SecondaryType.Name}";
-                if (Secondary is IDescriptive e2) secondaryyDescription = e2.Descibe();
+                var secondaryDescription = $"entity of type {SecondaryType.Name}";
+                if (Secondary is IDescriptive e2) secondaryDescription = e2.Describe();
 
-                tw.Write($"Reference {primaryDescription} from {secondaryyDescription} by {ForeignKeySpecifier}");
+                tw.Write($"Reference {primaryDescription} from {secondaryDescription} by {ForeignKeySpecifier}");
             }
 
             if (Debug != null) tw.Write($" ({Debug.Location})");

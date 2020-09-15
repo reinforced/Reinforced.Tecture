@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Delete
             var description = $"entity of type {EntityType.Name}";
             if (!string.IsNullOrEmpty(Annotation)) description = Annotation;
 
-            if (Entity is IDescriptive e) description = e.Descibe();
+            if (Entity is IDescriptive e) description = e.Describe();
 
             tw.Write($"Delete {description}");
 

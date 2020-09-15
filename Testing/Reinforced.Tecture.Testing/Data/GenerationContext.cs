@@ -15,10 +15,10 @@ namespace Reinforced.Tecture.Testing.Data
             Usings = usings;
         }
 
-        public void AddUsing(string usng)
+        public void AddUsing(string @using)
         {
-            if (string.IsNullOrEmpty(usng)) return;
-            if (!Usings.Contains(usng)) Usings.Add(usng);
+            if (string.IsNullOrEmpty(@using)) return;
+            if (!Usings.Contains(@using)) Usings.Add(@using);
         }
 
         public Queue<StatementSyntax> Declarations { get; } = new Queue<StatementSyntax>();

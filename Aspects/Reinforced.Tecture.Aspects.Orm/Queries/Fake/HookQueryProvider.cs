@@ -7,9 +7,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
     class HookQueryProvider : IQueryProvider
     {
         private readonly IQueryProvider _baseQueryProvider;
-        private readonly Auxilary _aux;
+        private readonly Auxiliary _aux;
         private readonly DescriptionHolder _description;
-        public HookQueryProvider(IQueryProvider baseQueryProvider, Auxilary aux, DescriptionHolder description)
+        public HookQueryProvider(IQueryProvider baseQueryProvider, Auxiliary aux, DescriptionHolder description)
         {
             _baseQueryProvider = baseQueryProvider;
             _aux = aux;

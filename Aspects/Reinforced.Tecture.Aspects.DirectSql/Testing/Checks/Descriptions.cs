@@ -12,7 +12,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Testing.Checks
         public override MethodInfo Method => UseMethod((a, c) => SqlChecks.SqlCommand(c.Preview.Query));
     }
 
-    class SqlCommandParmatersCheckDescription : CheckDescription<Sql>
+    class SqlCommandParametersCheckDescription : CheckDescription<Sql>
     {
         public override MethodInfo Method => UseMethod((a, c) => SqlChecks.SqlParameters(c.Preview.Parameters));
 

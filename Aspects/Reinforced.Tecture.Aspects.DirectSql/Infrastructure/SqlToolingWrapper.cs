@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Infrastructure
     public class SqlToolingWrapper
     {
         private readonly IStrokeRuntime _runtime;
-        internal Auxilary _aux;
+        internal Auxiliary _aux;
         private bool CheckTypes(Type[] usedTypes)
         {
             foreach (var usedType in usedTypes)
@@ -41,7 +41,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Infrastructure
 
         private readonly HashSet<Type> _types;
 
-        internal SqlToolingWrapper(IStrokeRuntime runtime, Auxilary aux, HashSet<Type> types)
+        internal SqlToolingWrapper(IStrokeRuntime runtime, Auxiliary aux, HashSet<Type> types)
         {
             _runtime = runtime;
             _aux = aux;

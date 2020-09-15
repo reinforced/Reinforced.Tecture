@@ -10,8 +10,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
     class DirectSqlRunner : CommandRunner<Sql>, IDisposable
     {
         private readonly EFCore_DirectSql_CommandAspect _aspect;
-        private readonly Auxilary _aux;
-        public DirectSqlRunner(EFCore_DirectSql_CommandAspect aspect, Auxilary aux)
+        private readonly Auxiliary _aux;
+        public DirectSqlRunner(EFCore_DirectSql_CommandAspect aspect, Auxiliary aux)
         {
             _aspect = aspect;
             _aux = aux;

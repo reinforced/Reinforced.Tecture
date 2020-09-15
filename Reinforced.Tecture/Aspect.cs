@@ -8,12 +8,12 @@ namespace Reinforced.Tecture
     /// </summary>
     public abstract class Aspect : IDisposable
     {
-        internal Auxilary _aux;
+        internal Auxiliary _aux;
 
         /// <summary>
         /// Access to test data/query tooling
         /// </summary>
-        protected Auxilary Aux
+        protected Auxiliary Aux
         {
             get { return _aux; }
         }

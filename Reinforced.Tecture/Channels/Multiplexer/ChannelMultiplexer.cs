@@ -10,7 +10,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
     //string key here is full type name
     class ChannelMultiplexer : IDisposable
     {
-        private readonly AuxilaryContainer _auxilary;
+        private readonly AuxiliaryContainer _auxiliary;
 
         private readonly Dictionary<string, Type> _namesCache = new Dictionary<string, Type>();
         private void Known(Type channel)
@@ -33,14 +33,14 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         {
             Known(channelType);
 
-            var channeId = channelType.FullName;
+            var channelId = channelType.FullName;
 
-            if (!_channelAspectQuery.ContainsKey(channeId))
+            if (!_channelAspectQuery.ContainsKey(channelId))
             {
-                _channelAspectQuery[channeId] = new Dictionary<string, QueryAspect>();
+                _channelAspectQuery[channelId] = new Dictionary<string, QueryAspect>();
             }
 
-            var aspects = _channelAspectQuery[channeId];
+            var aspects = _channelAspectQuery[channelId];
             var aspectId = queryAspectType.FullName;
             if (!aspects.ContainsKey(aspectId))
             {
@@ -51,7 +51,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 throw new TectureException($"Query aspect {queryAspectType.Name} is already implemented for {channelType.Name}");
             }
 
-            qf._aux = _auxilary.ForChannel(channelType);
+            qf._aux = _auxiliary.ForChannel(channelType);
             qf.CallOnRegister();
         }
 
@@ -86,14 +86,14 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         {
             Known(channelType);
 
-            var channeId = channelType.FullName;
+            var channelId = channelType.FullName;
 
-            if (!_channelAspectsCommand.ContainsKey(channeId))
+            if (!_channelAspectsCommand.ContainsKey(channelId))
             {
-                _channelAspectsCommand[channeId] = new Dictionary<string, CommandAspect>();
+                _channelAspectsCommand[channelId] = new Dictionary<string, CommandAspect>();
             }
 
-            var aspects = _channelAspectsCommand[channeId];
+            var aspects = _channelAspectsCommand[channelId];
             var aspectId = commandAspectType.FullName;
             if (!aspects.ContainsKey(aspectId))
             {
@@ -104,7 +104,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 throw new TectureException($"Command aspect {commandAspectType.Name} is already implemented for {channelType.Name}");
             }
 
-            cf._aux = _auxilary.ForChannel(channelType);
+            cf._aux = _auxiliary.ForChannel(channelType);
             cf.CallOnRegister();
         }
 
@@ -139,16 +139,16 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
         private readonly Dictionary<string, HashSet<SaverBase>> _saversPerChannels = new Dictionary<string, HashSet<SaverBase>>();
 
-        public ChannelMultiplexer(AuxilaryContainer aux)
+        public ChannelMultiplexer(AuxiliaryContainer aux)
         {
-            _auxilary = aux;
+            _auxiliary = aux;
         }
 
         internal void RegisterSaver(Type channelType, SaverBase saver)
         {
             Known(channelType);
             saver.Channel = channelType;
-            saver._Aux = _auxilary.ForChannel(channelType);
+            saver._Aux = _auxiliary.ForChannel(channelType);
             
 
             if (!_saversPerChannels.ContainsKey(channelType.FullName))

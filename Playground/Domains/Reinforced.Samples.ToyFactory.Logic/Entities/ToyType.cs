@@ -17,7 +17,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Entities
             get { return () => Id; }
         }
 
-        public string Descibe()
+        public string Describe()
         {
             return $"toy type {Name}";
         }

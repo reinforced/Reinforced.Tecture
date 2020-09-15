@@ -5,14 +5,14 @@ using Reinforced.Tecture.Transactions;
 namespace Reinforced.Tecture.Query
 {
     /// <summary>
-    /// Auxilary tooling for commands and queries processing
+    /// Auxiliary tooling for commands and queries processing
     /// </summary>
-    public class Auxilary
+    public class Auxiliary
     {
-        private readonly AuxilaryContainer _container;
+        private readonly AuxiliaryContainer _container;
         private readonly Type _channelType;
         private readonly TransactionManager _transactionManager;
-        internal Auxilary(AuxilaryContainer container, Type channelType, TransactionManager transactionManager)
+        internal Auxiliary(AuxiliaryContainer container, Type channelType, TransactionManager transactionManager)
         {
             _container = container;
             _channelType = channelType;

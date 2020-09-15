@@ -14,7 +14,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
     {
         internal string _description = string.Empty;
 
-        private readonly Auxilary _a;
+        private readonly Auxiliary _a;
 
         internal RawQuery(Sql sql, Query runtime)
         {

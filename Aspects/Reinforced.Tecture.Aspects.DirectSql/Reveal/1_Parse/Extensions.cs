@@ -112,7 +112,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Parse
             List<PositionedExpression> positioned = new List<PositionedExpression>();
 
             // now we build query structure
-            // it is representation of query with all the occurences of format parameters removed
+            // it is representation of query with all the occurrences of format parameters removed
             StringBuilder queryStructure = new StringBuilder();
 
             // we will remove some characters from input format query, so
