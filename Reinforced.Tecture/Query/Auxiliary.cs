@@ -1,5 +1,6 @@
 ﻿using System;
 using Reinforced.Tecture.Cloning;
+using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Query
@@ -78,6 +79,29 @@ namespace Reinforced.Tecture.Query
             {
                 return _container.TraceCollector != null;
             }
+        }
+
+        /// <summary>
+        /// Traces query that will be fulfilled later
+        /// </summary>
+        /// <typeparam name="T">Result type</typeparam>
+        /// <param name="hash">Query hash</param>
+        /// <param name="description">Query description</param>
+        /// <returns>Promised</returns>
+        public PromisedResult<T> PromiseQuery<T>(string hash, string description)
+        {
+            if (_container.TraceCollector != null)
+            {
+                if (_container._testDataHolder.Instance != null)
+                {
+                    return _container.TraceCollector.PromiseTestQuery<T>(_channelType, hash, description);
+                }
+                else
+                {
+                   return _container.TraceCollector.PromiseQuery<T>(_channelType, hash, description);
+                }
+            }
+            throw new TectureException("Test data is not presumed to be collected");
         }
 
         /// <summary>

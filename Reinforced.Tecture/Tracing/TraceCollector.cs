@@ -37,5 +37,19 @@ namespace Reinforced.Tecture.Tracing
             Command(new QueryRecord(channel,dataType, hash, result, true).Annotate(description));
         }
 
+        public PromisedResult<T> PromiseQuery<T>(Type channel, string hash, string description)
+        {
+            var cmd = new QueryRecord(channel, null, hash, null, false).Annotate(description);
+            Command(cmd);
+            return new PromisedResult<T>(cmd);
+        }
+
+        public PromisedResult<T> PromiseTestQuery<T>(Type channel, string hash, string description)
+        {
+            var cmd = new QueryRecord(channel, null, hash, null, true).Annotate(description);
+            Command(cmd);
+            return new PromisedResult<T>(cmd);
+        }
+
     }
 }

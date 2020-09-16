@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Tracing;
 
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -65,30 +67,30 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>Query result</returns>
-        public async Task<IEnumerable<T>> AsAsync<T>() where T : class
+        public Task<IEnumerable<T>> AsAsync<T>() where T : class
         {
-
-            IEnumerable<T> result;
+            PromisedResult<IEnumerable<T>> promised = null;
             if (_a.IsEvaluationNeeded)
             {
-                var cq = _runtime.Tooling.Compile(Sql);
-                using (var t = _a.GetQueryTransaction())
+
+                if (_a.IsTracingNeeded)
                 {
-                    result = await _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters);
-                    t.Commit();
+                    promised = _a.PromiseQuery<IEnumerable<T>>(Sql.Hash(), _description);
                 }
-            }
-            else
-            {
-                result = _a.Get<IEnumerable<T>>(Sql.Hash(), _description);
+
+                var cq = _runtime.Tooling.Compile(Sql);
+                var t = _a.GetQueryTransaction();
+                return _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters).ContinueWith(v =>
+                {
+                    t.Commit();
+                    t.Dispose();
+                    var res = v.Result;
+                    promised?.Fulfill(res, res.DeepClone());
+                    return res;
+                });
             }
 
-            if (_a.IsTracingNeeded)
-            {
-                _a.Query(Sql.Hash(), result, _description);
-            }
-
-            return result;
+            return Task.FromResult(_a.Get<IEnumerable<T>>(Sql.Hash(), _description));
         }
     }
 }

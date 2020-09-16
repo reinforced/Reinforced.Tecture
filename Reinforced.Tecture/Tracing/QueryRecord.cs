@@ -25,7 +25,7 @@ namespace Reinforced.Tecture.Tracing
         /// <summary>
         /// Gets data type that is returned by the query
         /// </summary>
-        public Type DataType { get; }
+        public Type DataType { get; private set; }
 
         /// <summary>
         /// Gets channel this query was made to
@@ -40,7 +40,24 @@ namespace Reinforced.Tecture.Tracing
         /// <summary>
         /// Query result
         /// </summary>
-        public object Result { get; }
+        public object Result { get; private set; }
+
+        internal void SetResult<T>(T result, T clone)
+        {
+            var type = typeof(T);
+            if (typeof(T).IsInterface || typeof(T).IsAbstract)
+            {
+                type = result.GetType();
+            }
+            Result = result;
+            DataType = type;
+            foreach (var commandBase in KnownClones)
+            {
+                var kc = (QueryRecord)commandBase;
+                kc.Result = clone;
+                kc.DataType = type;
+            }
+        }
 
         /// <summary>
         /// Gets whether test (mock) data is returned
