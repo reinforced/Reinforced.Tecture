@@ -29,6 +29,16 @@ namespace Reinforced.Tecture.Services {
         }		
 
         /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
+
+        /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
@@ -62,6 +72,16 @@ namespace Reinforced.Tecture.Services {
         {
             return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer);
         }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
 
         /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
@@ -98,6 +118,16 @@ namespace Reinforced.Tecture.Services {
         {
             return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer);
         }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
 
         /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
@@ -137,6 +167,16 @@ namespace Reinforced.Tecture.Services {
         }		
 
         /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
+
+        /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
@@ -173,6 +213,16 @@ namespace Reinforced.Tecture.Services {
         {
             return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer);
         }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
 
         /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
@@ -214,6 +264,16 @@ namespace Reinforced.Tecture.Services {
         }		
 
         /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
+
+        /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
@@ -252,6 +312,16 @@ namespace Reinforced.Tecture.Services {
         {
             return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer);
         }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
 
         /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>

@@ -22,6 +22,16 @@ namespace Reinforced.Tecture.Services
         }
 
         /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }
+
+        /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
@@ -47,6 +57,16 @@ namespace Reinforced.Tecture.Services
         protected Read<T, Tool> From<T>() where T : CanQuery
         {
             return new SRead<T, Tool>(ChannelMultiplexer);
+        }
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }
 
         /// <summary>

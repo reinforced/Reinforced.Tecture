@@ -40,6 +40,16 @@ where Tool<#= j+2 #> : Tooling
         }		
 
         /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, <#= GenericsStroke(i+2) #>> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
+
+        /// <summary>
         /// Gets writing end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
