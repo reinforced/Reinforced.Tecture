@@ -13,6 +13,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Transactional
         private readonly IQueryable _original;
         private readonly Auxiliary _auxiliary;
 
+        internal IQueryable Original
+        {
+            get { return _original; }
+        }
+
         public TransactionalQueryable(Auxiliary auxiliary, IQueryable original)
         {
             _auxiliary = auxiliary;

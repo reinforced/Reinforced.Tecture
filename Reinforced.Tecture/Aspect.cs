@@ -9,6 +9,7 @@ namespace Reinforced.Tecture
     public abstract class Aspect : IDisposable
     {
         internal Auxiliary _aux;
+        internal Type _channel;
 
         /// <summary>
         /// Access to test data/query tooling
@@ -16,6 +17,14 @@ namespace Reinforced.Tecture
         protected Auxiliary Aux
         {
             get { return _aux; }
+        }
+
+        /// <summary>
+        /// Type of channel this aspect is bound to
+        /// </summary>
+        protected Type Channel
+        {
+            get { return _channel; }
         }
 
         internal void CallOnRegister()

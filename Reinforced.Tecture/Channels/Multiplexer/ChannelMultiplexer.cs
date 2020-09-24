@@ -52,6 +52,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             }
 
             qf._aux = _auxiliary.ForChannel(channelType);
+            qf._channel = channelType;
             qf.CallOnRegister();
         }
 
@@ -105,6 +106,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             }
 
             cf._aux = _auxiliary.ForChannel(channelType);
+            cf._channel = channelType;
             cf.CallOnRegister();
         }
 

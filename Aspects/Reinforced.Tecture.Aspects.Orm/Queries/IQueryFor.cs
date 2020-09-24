@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
     public interface IQueryForAll<out TEntity> : IQueryFor
     {
         /// <summary>
-        /// Retrieves query for all etities of current type presenting in data source
+        /// Retrieves query for all entities of current type presenting in data source
         /// </summary>
         IQueryable<TEntity> All { get; }
     }

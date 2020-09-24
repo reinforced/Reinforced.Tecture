@@ -6,6 +6,7 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Aspects.Orm.Queries;
 using Reinforced.Tecture.Aspects.Orm.Queries.Fake;
 using Reinforced.Tecture.Aspects.Orm.Queries.Transactional;
+using Reinforced.Tecture.Query;
 
 namespace Reinforced.Tecture.Aspects.Orm
 {
@@ -14,6 +15,11 @@ namespace Reinforced.Tecture.Aspects.Orm
     /// </summary>
     public abstract partial class Query : QueryAspect
     {
+        internal Auxiliary Aux
+        {
+            get { return base.Aux; }
+        }
+
         internal IQueryable<T> GetSet<T>() where T : class
         {
             IQueryable<T> set = Aux.IsEvaluationNeeded ? Set<T>() : new T[0].AsQueryable();
@@ -31,6 +37,16 @@ namespace Reinforced.Tecture.Aspects.Orm
         /// <typeparam name="T">Entity</typeparam>
         /// <returns>Queryable set of entities</returns>
         protected abstract IQueryable<T> Set<T>() where T : class;
+
+        internal IAsyncQueryExecutor AsyncExecutorActually
+        {
+            get { return AsyncExecutor; }
+        }
+
+        /// <summary>
+        /// Gets asynchronous query executor instance
+        /// </summary>
+        protected abstract IAsyncQueryExecutor AsyncExecutor { get; }
 
         /// <summary>
         /// Returns key of just added entity

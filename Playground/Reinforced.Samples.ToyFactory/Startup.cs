@@ -41,9 +41,9 @@ namespace Reinforced.Samples.ToyFactory
                 
                 tb.WithChannel<Db>(c =>
                 {
-                    
+                    c.UseEfCoreOrm(ld);
                     c.UseEfCoreDirectSqlCommand(ld);
-                    c.UseEfCoreOrmCommand(ld);
+                    //c.UseEfCoreOrmCommand(ld);
                 });
 
                 return tb.Build();

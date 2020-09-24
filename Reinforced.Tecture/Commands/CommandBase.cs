@@ -35,6 +35,7 @@ namespace Reinforced.Tecture.Commands
     public abstract class CommandBase
     {
         private string _channelId;
+        private string _channelName;
         private string _annotation = string.Empty;
         private DebugInfo _debug;
         private int _order;
@@ -53,6 +54,22 @@ namespace Reinforced.Tecture.Commands
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.ChannelId = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets friendly channel name
+        /// </summary>
+        public string ChannelName
+        {
+            get { return _channelName; }
+            internal set
+            {
+                _channelName = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.ChannelName = value;
                 }
             }
         }
@@ -141,6 +158,7 @@ namespace Reinforced.Tecture.Commands
         {
             var clone =  DeepCloneForTracing();
             clone.ChannelId = ChannelId;
+            clone.ChannelName = ChannelName;
             clone.Annotation = Annotation;
             clone.Order = Order;
             clone.IsExecuted = IsExecuted;

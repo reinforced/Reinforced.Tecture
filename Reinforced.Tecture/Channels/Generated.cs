@@ -77,6 +77,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -164,6 +165,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -257,6 +259,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -356,6 +359,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -461,6 +465,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -572,6 +577,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -689,6 +695,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -812,6 +819,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}

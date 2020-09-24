@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Channels;
-using Reinforced.Tecture.Commands;
+﻿using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Tecture.Services
 {
@@ -78,7 +74,5 @@ namespace Reinforced.Tecture.Services
         {
             return new SWrite<T, Tool>(ChannelMultiplexer, Pipeline);
         }
-
     }
-
 }
