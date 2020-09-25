@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm
 {
@@ -24,31 +25,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (<#= GenericsStroke(i+1) #>) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties<#= i+1 #><<#= GenericsStroke(i+1) #>>(a)).ToArray();
-                result = (<#= TupleCast(i+1, "tmp") #>);
-            }
-            else
-            {
-                result = Aux.Get<(<#= GenericsStroke(i+1) #>)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(<#= GenericsStroke(i+1) #>)>();
+            if (p is Containing<(<#= GenericsStroke(i+1) #>)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties<#= i+1 #><<#= GenericsStroke(i+1) #>>(a)).ToArray();
+            var result = (<#= TupleCast(i+1, "tmp") #>);
+            
+            if (p is Demanding<(<#= GenericsStroke(i+1) #>)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 

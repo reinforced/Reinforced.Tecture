@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Reinforced.Tecture.Query;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
 {
     class QueryHasher : ExpressionVisitor, IDisposable
     {

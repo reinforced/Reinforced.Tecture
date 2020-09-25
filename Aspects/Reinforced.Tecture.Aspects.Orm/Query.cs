@@ -4,9 +4,9 @@ using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Aspects.Orm.Queries;
-using Reinforced.Tecture.Aspects.Orm.Queries.Fake;
-using Reinforced.Tecture.Aspects.Orm.Queries.Transactional;
+using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
 using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm
 {
@@ -23,12 +23,7 @@ namespace Reinforced.Tecture.Aspects.Orm
         internal IQueryable<T> GetSet<T>() where T : class
         {
             IQueryable<T> set = Aux.IsEvaluationNeeded ? Set<T>() : new T[0].AsQueryable();
-            if (Aux.IsHashRequired)
-            {
-                return new HookQueryable<T>(set, Aux, null);
-            }
-
-            return new TransactionalQueryable<T>(Aux, Set<T>());
+            return new WrappedQueryable<T>(set,this, new DescriptionHolder());
         }
 
         /// <summary>
@@ -68,28 +63,15 @@ namespace Reinforced.Tecture.Aspects.Orm
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
-            T result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                result = (T)(GetKey(a, GetKeyProperties<T>(a)).First());
-            }
-            else
-            {
-                result = Aux.Get<T>(hash, explanation);
-            }
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash, "test data", explanation);
-                }
-                else
-                {
-                    Aux.Query(hash, result, explanation);
-                }
-            }
+            var p = Aux.Promise<T>();
+            if (p is Containing<T> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
+
+            var result = (T)(GetKey(a, GetKeyProperties<T>(a)).First());
+            
+            if (p is Demanding<T> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
 
             return result;
         }

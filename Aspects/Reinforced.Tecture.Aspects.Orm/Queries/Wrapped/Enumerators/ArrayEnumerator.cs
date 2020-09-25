@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators
 {
     class ArrayEnumerator<T> : IEnumerator<T>
     {

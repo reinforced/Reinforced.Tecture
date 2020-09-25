@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Linq;
+using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Tracing.Commands;
 
@@ -13,13 +14,12 @@ namespace Reinforced.Tecture.Tracing
     [CommandCode(" ->")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
-        internal QueryRecord(Type channel, Type dataType, string hash, object result, bool isTestData)
+        internal QueryRecord(Type channel, bool isTestData)
         {
             Channel = channel;
-            Hash = hash;
-            Result = result;
+            ChannelId = channel.FullName;
+            ChannelName = channel.Name;
             IsTestData = isTestData;
-            DataType = dataType;
         }
 
         /// <summary>
@@ -35,14 +35,16 @@ namespace Reinforced.Tecture.Tracing
         /// <summary>
         /// Query hash
         /// </summary>
-        public string Hash { get; }
+        public string Hash { get; private set; }
+
+        public TimeSpan TimeTaken { get; private set; }
 
         /// <summary>
         /// Query result
         /// </summary>
         public object Result { get; private set; }
 
-        internal void SetResult<T>(T result, T clone)
+        internal void SetResult<T>(T result, T clone, string hash, string description,TimeSpan timeTaken)
         {
             var type = typeof(T);
             if (typeof(T).IsInterface || typeof(T).IsAbstract)
@@ -51,11 +53,17 @@ namespace Reinforced.Tecture.Tracing
             }
             Result = result;
             DataType = type;
+            Hash = hash;
+            TimeTaken = timeTaken;
+            Annotation = description;
             foreach (var commandBase in KnownClones)
             {
                 var kc = (QueryRecord)commandBase;
                 kc.Result = clone;
                 kc.DataType = type;
+                kc.Hash = hash;
+                kc.TimeTaken = timeTaken;
+                kc.Annotation = description;
             }
         }
 
@@ -124,7 +132,13 @@ namespace Reinforced.Tecture.Tracing
         /// <returns>Command clone</returns>
         protected override CommandBase DeepCloneForTracing()
         {
-            return new QueryRecord(Channel, DataType, Hash, Result, IsTestData);
+            return new QueryRecord(Channel, IsTestData)
+            {
+                DataType = DataType,
+                Hash = Hash,
+                Result = Result?.DeepClone(),
+                TimeTaken = TimeTaken
+            };
         }
 
         private string Description(object o)

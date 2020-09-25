@@ -3,55 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
+using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators;
 using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Tracing.Promises;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
 {
-    class HookQueryable<T> : IOrderedQueryable<T>
+    class WrappedQueryable<T> : IOrderedQueryable<T>, IWrappedQueryable<T>
     {
-        private readonly IQueryable<T> _baseQueryable;
-        private readonly IQueryProvider _provider;
-        private readonly Auxiliary _aux;
-        internal readonly DescriptionHolder _description;
+        public Query Aspect { get; }
 
-        public HookQueryable(IQueryable<T> baseQueryable, Auxiliary aux, DescriptionHolder descrHolder)
+        public IQueryable<T> Original { get; }
+
+        public DescriptionHolder Description { get; }
+
+        public WrappedQueryable(IQueryable<T> original, Query aspect, DescriptionHolder description)
         {
-            _baseQueryable = baseQueryable;
-            _aux = aux;
-            _description = descrHolder ?? new DescriptionHolder();
-            _provider = new HookQueryProvider(baseQueryable.Provider, _aux, _description);
+            Original = original;
+            Aspect = aspect;
+            Description = description;
         }
-
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            var hash = _aux.IsHashRequired ? Expression.CalculateHash() : string.Empty;
-            IEnumerator<T> result;
-            IEnumerable<T> data = null;
-            if (_aux.IsEvaluationNeeded)
+            var p = Aspect.Aux.Promise<IEnumerable<T>>();
+            if (p is Containing<IEnumerable<T>> c)
             {
-                result = _baseQueryable.GetEnumerator();
-            }
-            else
-            {
-                data = _aux.Get<IEnumerable<T>>(hash, _description.Description);
-                result = data.GetEnumerator();
+                var td = c.Get(Expression.CalculateHash(), Description.Description);
+                return td.GetEnumerator();
             }
 
-            if (_aux.IsTracingNeeded)
-            {
-                if (_aux.IsEvaluationNeeded)
-                {
-                    result = new HookEnumerator<T>(hash, result, _aux, _description);
-                }
-                else
-                {
-                    _aux.Query(hash, data, _description.Description);
-                }
-            }
+            var tran = Aspect.Aux.GetQueryTransaction();
+            var originalEnumerator = Original.GetEnumerator();
+            var result = new WrappedEnumerator<T>(originalEnumerator, tran);
 
+            if (p is Demanding<IEnumerable<T>> d)
+            {
+                result.Demands(d, Expression.CalculateHash(), Description);
+            }
+           
             return result;
         }
 
@@ -68,7 +61,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         {
             get
             {
-                return _baseQueryable.ElementType;
+                return Original.ElementType;
             }
         }
 
@@ -78,16 +71,19 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
         {
             get
             {
-                return _baseQueryable.Expression;
+                return Original.Expression;
             }
         }
 
-        /// <summary>Gets the query provider that is associated with this data source.</summary>
-        /// <returns>The <see cref="T:System.Linq.IQueryProvider" /> that is associated with this data source.</returns>
+        private IQueryProvider _provider;
         public IQueryProvider Provider
         {
             get
             {
+                if (_provider == null)
+                {
+                    _provider = new HookQueryProvider(Original.Provider, Aspect, Description);
+                }
                 return _provider;
             }
         }

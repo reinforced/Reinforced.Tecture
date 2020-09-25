@@ -4,6 +4,7 @@ using Reinforced.Tecture.Aspects.DirectSql.Commands;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Promises;
 
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -39,25 +40,21 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         /// <returns>Query result</returns>
         public IEnumerable<T> As<T>() where T : class
         {
+            var p = _a.Promise<IEnumerable<T>>();
+
+            if (p is Containing<IEnumerable<T>> c)
+                return c.Get(Sql.Hash(), _description);
+
             IEnumerable<T> result;
-            if (_a.IsEvaluationNeeded)
+            var cq = _runtime.Tooling.Compile(Sql);
+            using (var t = _a.GetQueryTransaction())
             {
-                var cq = _runtime.Tooling.Compile(Sql);
-                using (var t = _a.GetQueryTransaction())
-                {
-                    result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
-                    t.Commit();
-                }
-            }
-            else
-            {
-                result = _a.Get<IEnumerable<T>>(Sql.Hash(), _description);
+                result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
+                t.Commit();
             }
 
-            if (_a.IsTracingNeeded)
-            {
-                _a.Query(Sql.Hash(), result, _description);
-            }
+            if (p is Demanding<IEnumerable<T>> d)
+                d.Fullfill(result, Sql.Hash(), _description);
 
             return result;
         }
@@ -69,28 +66,23 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         /// <returns>Query result</returns>
         public Task<IEnumerable<T>> AsAsync<T>() where T : class
         {
-            PromisedResult<IEnumerable<T>> promised = null;
-            if (_a.IsEvaluationNeeded)
+            var p = _a.Promise<IEnumerable<T>>();
+
+            if (p is Containing<IEnumerable<T>> c)
             {
-
-                if (_a.IsTracingNeeded)
-                {
-                    promised = _a.PromiseQuery<IEnumerable<T>>(Sql.Hash(), _description);
-                }
-
-                var cq = _runtime.Tooling.Compile(Sql);
-                var t = _a.GetQueryTransaction();
-                return _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters).ContinueWith(v =>
-                {
-                    t.Commit();
-                    t.Dispose();
-                    var res = v.Result;
-                    promised?.Fulfill(res, res.DeepClone());
-                    return res;
-                });
+                return Task.FromResult(c.Get(Sql.Hash(), _description));
             }
 
-            return Task.FromResult(_a.Get<IEnumerable<T>>(Sql.Hash(), _description));
+            var cq = _runtime.Tooling.Compile(Sql);
+            var t = _a.GetQueryTransaction();
+            return _runtime.DoQueryAsync<T>(cq.Query, cq.Parameters).ContinueWith(v =>
+            {
+                t.Commit();
+                t.Dispose();
+                var res = v.Result;
+                if (p is Demanding<IEnumerable<T>> d) d.Fullfill(res, Sql.Hash(), _description);
+                return res;
+            });
         }
     }
 }

@@ -2,50 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Reinforced.Tecture.Aspects.Orm.Queries.Fake;
-using Reinforced.Tecture.Cloning;
-using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
+using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
+using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries
 {
     public static class AsyncExtensions
     {
-
         private static Task<U> Call<T, U>(Func<IAsyncQueryExecutor, IQueryable<T>, CancellationToken, Task<U>> method, IQueryable<T> q, CancellationToken ct)
         {
             if (q is IWrappedQueryable<T> wq)
             {
                 var aux = wq.Aspect.Aux;
-                var hash = aux.IsHashRequired ? wq.Original.Expression.CalculateHash() : string.Empty;
-                PromisedResult<U> p = null;
-                if (aux.IsTracingNeeded)
+                var p = aux.Promise<U>();
+
+                if (p is Containing<U> c)
                 {
-                    p = aux.PromiseQuery<U>(hash, wq.Description.Description);
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(), wq.Description.Description));
                 }
 
-                var result = aux.IsEvaluationNeeded
-                    ? method(wq.Aspect.AsyncExecutorActually, q, ct)
-                    : Task.FromResult(wq.Aspect.Aux.Get<U>(hash, wq.Description.Description));
-
-                if (p!=null)
+                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var result = method(wq.Aspect.AsyncExecutorActually, q, ct).ContinueWith(x =>
                 {
-                    if (aux.IsEvaluationNeeded)
+                    if (!x.IsFaulted) tran.Commit();
+                    tran.Dispose();
+                    if (p is Demanding<U> d)
                     {
-                        result = result.ContinueWith((r) =>
-                        {
-                            p.Fulfill(r.Result,r.Result.DeepClone());
-                            return r.Result;
-                        });
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(), wq.Description.Description);
                     }
-                    else
-                    {
-                        p.Fulfill(result.Result,result.Result.DeepClone());
-                    }
-                }
+
+                    return x.Result;
+                }, ct);
 
                 return result;
             }
@@ -57,32 +47,25 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (q is IWrappedQueryable<T> wq)
             {
                 var aux = wq.Aspect.Aux;
-                var hash = aux.IsHashRequired ? wq.Original.Expression.CalculateHash() : string.Empty;
-                PromisedResult<U> p = null;
-                if (aux.IsTracingNeeded)
+                var p = aux.Promise<U>();
+
+                if (p is Containing<U> c)
                 {
-                    p = aux.PromiseQuery<U>(hash, wq.Description.Description);
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(predicate), wq.Description.Description));
                 }
 
-                var result = aux.IsEvaluationNeeded
-                    ? method(wq.Aspect.AsyncExecutorActually, q, ct)
-                    : Task.FromResult(wq.Aspect.Aux.Get<U>(hash, wq.Description.Description));
+                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var result = method(wq.Aspect.AsyncExecutorActually, q, predicate, ct).ContinueWith(x =>
+                 {
+                     if (!x.IsFaulted) tran.Commit();
+                     tran.Dispose();
+                     if (p is Demanding<U> d)
+                     {
+                         d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(predicate), wq.Description.Description);
+                     }
 
-                if (p != null)
-                {
-                    if (aux.IsEvaluationNeeded)
-                    {
-                        result = result.ContinueWith((r) =>
-                        {
-                            p.Fulfill(r.Result, r.Result.DeepClone());
-                            return r.Result;
-                        });
-                    }
-                    else
-                    {
-                        p.Fulfill(result.Result, result.Result.DeepClone());
-                    }
-                }
+                     return x.Result;
+                 }, ct);
 
                 return result;
             }
@@ -91,26 +74,64 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
         private static Task<U> Call<T, U>(Func<IAsyncQueryExecutor, IQueryable<T>, Expression<Func<T, U>>, CancellationToken, Task<U>> method, IQueryable<T> q, Expression<Func<T, U>> selector, CancellationToken ct)
         {
-
-        }
-
-        private static Task<V> Call2<T, U,V>(Func<IAsyncQueryExecutor, IQueryable<T>, Expression<Func<T, U>>, CancellationToken, Task<V>> method, IQueryable<T> q, Expression<Func<T, U>> selector, CancellationToken ct)
-        {
-
-        }
-        
-        private static PromisedResult<U> Promise<T, U>(IWrappedQueryable<T> wq)
-        {
-            var aux = wq.Aspect.Aux;
-            var hash = aux.IsHashRequired ? wq.Original.Expression.CalculateHash() : string.Empty;
-            if (wq.Aspect.Aux.IsTracingNeeded)
+            if (q is IWrappedQueryable<T> wq)
             {
-                return wq.Aspect.Aux.PromiseQuery<U>(hash, wq.Description.Description);
-            }
+                var aux = wq.Aspect.Aux;
+                var p = aux.Promise<U>();
 
-            return null;
+                if (p is Containing<U> c)
+                {
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(selector), wq.Description.Description));
+                }
+
+                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var result = method(wq.Aspect.AsyncExecutorActually, q, selector, ct).ContinueWith(x =>
+                {
+                    if (!x.IsFaulted) tran.Commit();
+                    tran.Dispose();
+                    if (p is Demanding<U> d)
+                    {
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(selector), wq.Description.Description);
+                    }
+
+                    return x.Result;
+                }, ct);
+
+                return result;
+            }
+            throw new TectureOrmAspectException($"{q} does not appear to be valid ORM aspect expression");
         }
 
+        private static Task<V> Call2<T, U, V>(Func<IAsyncQueryExecutor, IQueryable<T>, Expression<Func<T, U>>, CancellationToken, Task<V>> method, IQueryable<T> q, Expression<Func<T, U>> selector, CancellationToken ct)
+        {
+            if (q is IWrappedQueryable<T> wq)
+            {
+                var aux = wq.Aspect.Aux;
+                var p = aux.Promise<V>();
+
+                if (p is Containing<V> c)
+                {
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(selector), wq.Description.Description));
+                }
+
+                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var result = method(wq.Aspect.AsyncExecutorActually, q, selector, ct).ContinueWith(x =>
+                {
+                    if (!x.IsFaulted) tran.Commit();
+                    tran.Dispose();
+                    if (p is Demanding<V> d)
+                    {
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(selector), wq.Description.Description);
+                    }
+
+                    return x.Result;
+                }, ct);
+
+                return result;
+            }
+            throw new TectureOrmAspectException($"{q} does not appear to be valid ORM aspect expression");
+        }
+       
         #region Any/All
 
         /// <summary>
@@ -2016,9 +2037,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         ///     that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource">
-        ///     The type of the elements of <paramref name="source" />.
+        ///     The type of the elements of <paramref name="q" />.
         /// </typeparam>
-        /// <param name="source">
+        /// <param name="q">
         ///     An <see cref="IQueryable{T}" /> to return the single element of.
         /// </param>
         /// <param name="item"> The object to locate in the sequence. </param>
@@ -2031,20 +2052,39 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         ///     <see langword="false" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="source" /> is <see langword="null" />.
+        ///     <paramref name="q" /> is <see langword="null" />.
         /// </exception>
         public static Task<bool> ContainsAsync<TSource>(
-            this IQueryable<TSource> source,
+            this IQueryable<TSource> q,
             TSource item,
             CancellationToken cancellationToken = default)
         {
+            if (q is IWrappedQueryable<TSource> wq)
+            {
+                var aux = wq.Aspect.Aux;
+                var p = aux.Promise<bool>();
 
+                if (p is Containing<bool> c)
+                {
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(), wq.Description.Description));
+                }
 
-            return ExecuteAsync<TSource, Task<bool>>(
-                QueryableMethods.Contains,
-                source,
-                Expression.Constant(item, typeof(TSource)),
-                cancellationToken);
+                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var result = wq.Aspect.AsyncExecutorActually.ContainsAsync(q,item,cancellationToken).ContinueWith(x =>
+                {
+                    if (!x.IsFaulted) tran.Commit();
+                    tran.Dispose();
+                    if (p is Demanding<bool> d)
+                    {
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(), wq.Description.Description);
+                    }
+
+                    return x.Result;
+                }, cancellationToken);
+
+                return result;
+            }
+            throw new TectureOrmAspectException($"{q} does not appear to be valid ORM aspect expression");
         }
 
         #endregion
@@ -2264,7 +2304,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="keySelector" /> or <paramref name="elementSelector" /> is <see langword="null" />.
         /// </exception>
-        public static async Task<Dictionary<TKey, TElement>> ToDictionaryAsync<TSource, TKey, TElement>(
+        public static Task<Dictionary<TKey, TElement>> ToDictionaryAsync<TSource, TKey, TElement>(
             this IQueryable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
@@ -2272,16 +2312,32 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             CancellationToken cancellationToken = default)
         {
 
-            Check.NotNull(keySelector, nameof(keySelector));
-            Check.NotNull(elementSelector, nameof(elementSelector));
-
-            var d = new Dictionary<TKey, TElement>(comparer);
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            if (source is IWrappedQueryable<TSource> wq)
             {
-                d.Add(keySelector(element), elementSelector(element));
-            }
+                var aux = wq.Aspect.Aux;
+                var p = aux.Promise<Dictionary<TKey, TElement>>();
 
-            return d;
+                if (p is Containing<Dictionary<TKey, TElement>> c)
+                {
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(), wq.Description.Description));
+                }
+
+                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var result = wq.Aspect.AsyncExecutorActually.ToDictionaryAsync(source,keySelector,elementSelector,comparer, cancellationToken).ContinueWith(x =>
+                {
+                    if (!x.IsFaulted) tran.Commit();
+                    tran.Dispose();
+                    if (p is Demanding<Dictionary<TKey, TElement>> d)
+                    {
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(), wq.Description.Description);
+                    }
+
+                    return x.Result;
+                }, cancellationToken);
+
+                return result;
+            }
+            throw new TectureOrmAspectException($"{source} does not appear to be valid ORM aspect expression");
         }
 
         #endregion

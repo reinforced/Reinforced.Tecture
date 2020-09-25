@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm
 {
@@ -16,31 +17,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties2<T1, T2>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2)>();
+            if (p is Containing<(T1, T2)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties2<T1, T2>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1]);
+            
+            if (p is Demanding<(T1, T2)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 
@@ -59,31 +48,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2, T3) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties3<T1, T2, T3>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2, T3)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2, T3)>();
+            if (p is Containing<(T1, T2, T3)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties3<T1, T2, T3>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2]);
+            
+            if (p is Demanding<(T1, T2, T3)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 
@@ -103,31 +80,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2, T3, T4) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties4<T1, T2, T3, T4>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2, T3, T4)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2, T3, T4)>();
+            if (p is Containing<(T1, T2, T3, T4)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties4<T1, T2, T3, T4>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3]);
+            
+            if (p is Demanding<(T1, T2, T3, T4)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 
@@ -148,31 +113,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2, T3, T4, T5) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties5<T1, T2, T3, T4, T5>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2, T3, T4, T5)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2, T3, T4, T5)>();
+            if (p is Containing<(T1, T2, T3, T4, T5)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties5<T1, T2, T3, T4, T5>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4]);
+            
+            if (p is Demanding<(T1, T2, T3, T4, T5)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 
@@ -194,31 +147,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2, T3, T4, T5, T6) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties6<T1, T2, T3, T4, T5, T6>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4], (T6) tmp[5]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2, T3, T4, T5, T6)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2, T3, T4, T5, T6)>();
+            if (p is Containing<(T1, T2, T3, T4, T5, T6)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties6<T1, T2, T3, T4, T5, T6>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4], (T6) tmp[5]);
+            
+            if (p is Demanding<(T1, T2, T3, T4, T5, T6)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 
@@ -241,31 +182,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2, T3, T4, T5, T6, T7) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties7<T1, T2, T3, T4, T5, T6, T7>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4], (T6) tmp[5], (T7) tmp[6]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2, T3, T4, T5, T6, T7)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2, T3, T4, T5, T6, T7)>();
+            if (p is Containing<(T1, T2, T3, T4, T5, T6, T7)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties7<T1, T2, T3, T4, T5, T6, T7>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4], (T6) tmp[5], (T7) tmp[6]);
+            
+            if (p is Demanding<(T1, T2, T3, T4, T5, T6, T7)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 
@@ -289,31 +218,19 @@ namespace Reinforced.Tecture.Aspects.Orm
             if (!a.IsExecuted) 
                 throw new TectureOrmAspectException($"Cannot obtain primary key: addition of '{a.Entity}' did not happen yet");
 
-            (T1, T2, T3, T4, T5, T6, T7, T8) result;
-            string hash = Aux.IsHashRequired ? $"ORM_AdditionPK_{a.Order}" : string.Empty;
-            if (Aux.IsEvaluationNeeded)
-            {
-                var tmp = GetKey(a, GetKeyProperties8<T1, T2, T3, T4, T5, T6, T7, T8>(a)).ToArray();
-                result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4], (T6) tmp[5], (T7) tmp[6], (T8) tmp[7]);
-            }
-            else
-            {
-                result = Aux.Get<(T1, T2, T3, T4, T5, T6, T7, T8)>(hash, "ORM addition PK retrieval");
-            }
+            string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            if (Aux.IsTracingNeeded)
-            {
-                if (!Aux.IsEvaluationNeeded)
-                {
-                    Aux.Query(hash,"test data","ORM addition PK retrieval");
-                }
-                else
-                {
-                    Aux.Query(hash, result, "ORM addition PK retrieval");
-                }
-            }
+            var p = Aux.Promise<(T1, T2, T3, T4, T5, T6, T7, T8)>();
+            if (p is Containing<(T1, T2, T3, T4, T5, T6, T7, T8)> c)
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;
+             var tmp = GetKey(a, GetKeyProperties8<T1, T2, T3, T4, T5, T6, T7, T8>(a)).ToArray();
+            var result = ((T1) tmp[0], (T2) tmp[1], (T3) tmp[2], (T4) tmp[3], (T5) tmp[4], (T6) tmp[5], (T7) tmp[6], (T8) tmp[7]);
+            
+            if (p is Demanding<(T1, T2, T3, T4, T5, T6, T7, T8)> d)
+                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+
+            return result;           
 
         }
 

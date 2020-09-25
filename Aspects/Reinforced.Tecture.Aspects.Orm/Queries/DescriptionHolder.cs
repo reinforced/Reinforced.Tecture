@@ -1,4 +1,4 @@
-﻿namespace Reinforced.Tecture.Aspects.Orm.Queries.Fake
+﻿namespace Reinforced.Tecture.Aspects.Orm.Queries
 {
     class DescriptionHolder
     {
