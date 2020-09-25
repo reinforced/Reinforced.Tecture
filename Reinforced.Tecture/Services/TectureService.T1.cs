@@ -40,19 +40,18 @@ namespace Reinforced.Tecture.Services
     }
 
     /// <summary>
-    /// Storage services with tooling
+    /// Storage services that does not change a thing, but only communicating reads from several channels
     /// </summary> 
-    public class TectureService<Tool> : TectureServiceBase
-        where Tool : Tooling
+    public class ReadonlyTectureService : TectureServiceBase
     {
         /// <summary>
         /// Gets reading end of channel <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Channel to obtain read end of</typeparam>
         /// <returns>Channel's read end</returns>
-        protected Read<T, Tool> From<T>() where T : CanQuery
+        protected Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool>(ChannelMultiplexer);
+            return new SRead<T>(ChannelMultiplexer);
         }
 
         /// <summary>
@@ -60,19 +59,9 @@ namespace Reinforced.Tecture.Services
         /// </summary>
         /// <typeparam name="T">Channel to obtain read end of</typeparam>
         /// <returns>Channel's read end</returns>
-        protected Read<T, Tool> In<T>() where T : CanQuery
+        protected Read<T> In<T>() where T : CanQuery
         {
             return From<T>();
-        }
-
-        /// <summary>
-        /// Gets writing end of channel <typeparamref name="T"/>
-        /// </summary>
-        /// <typeparam name="T">Channel to obtain write end of</typeparam>
-        /// <returns>Channel's write end</returns>
-        protected Write<T, Tool> To<T>() where T : CanCommand
-        {
-            return new SWrite<T, Tool>(ChannelMultiplexer, Pipeline);
         }
     }
 }

@@ -14,17 +14,16 @@ using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Tecture.Services {	
 	
-<# for (int i=0;i<implementationsCount;i++) {	#> 
+<# for (int i=0;i<=implementationsCount;i++) {	#> 
 	
 
 	/// <summary>
-    /// Storage services with <#= i+2#> toolings
+    /// Services with <#= i+2#> toolings
     /// </summary>    
-	public class TectureService<<#= GenericsStroke(i+2) #>>
+	public class TectureService<<#= GenericsStroke(i+1) #>>
 			   : TectureServiceBase
-			   where Tool1: Tooling
 			   <# for(int j =0;j<=i;j++) { #>
-where Tool<#= j+2 #> : Tooling
+where Tool<#= j+1 #> : Tooling
 			   <# } #>
 
     {
@@ -34,9 +33,9 @@ where Tool<#= j+2 #> : Tooling
         /// </summary>
         /// <typeparam name="T">Channel to obtain read end of</typeparam>
         /// <returns>Channel's read end</returns>
-        protected Read<T, <#= GenericsStroke(i+2) #>> From<T>() where T : CanQuery
+        protected Read<T, <#= GenericsStroke(i+1) #>> From<T>() where T : CanQuery
         {
-            return new SRead<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer);
+            return new SRead<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer);
         }		
 
         /// <summary>
@@ -44,7 +43,7 @@ where Tool<#= j+2 #> : Tooling
         /// </summary>
         /// <typeparam name="T">Channel to obtain read end of</typeparam>
         /// <returns>Channel's read end</returns>
-        protected Read<T, <#= GenericsStroke(i+2) #>> In<T>() where T : CanQuery
+        protected Read<T, <#= GenericsStroke(i+1) #>> In<T>() where T : CanQuery
         {
             return From<T>();
         }	
@@ -54,9 +53,41 @@ where Tool<#= j+2 #> : Tooling
         /// </summary>
         /// <typeparam name="T">Channel to obtain write end of</typeparam>
         /// <returns>Channel's write end</returns>
-		protected Write<T, <#= GenericsStroke(i+2) #>> To<T>() where T : CanCommand
+		protected Write<T, <#= GenericsStroke(i+1) #>> To<T>() where T : CanCommand
         {
-            return new SWrite<T, <#= GenericsStroke(i+2) #>>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with <#= i+2#> toolings
+    /// </summary>    
+	public class ReadonlyTectureService<<#= GenericsStroke(i+1) #>>
+			   : TectureServiceBase
+			   <# for(int j =0;j<=i;j++) { #>
+where Tool<#= j+1 #> : Tooling
+			   <# } #>
+
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, <#= GenericsStroke(i+1) #>> From<T>() where T : CanQuery
+        {
+            return new SRead<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, <#= GenericsStroke(i+1) #>> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 

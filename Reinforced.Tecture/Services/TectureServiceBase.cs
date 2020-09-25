@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Tracing.Commands;
 using Reinforced.Tecture.Tracing.Commands.Cycles;
+// ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace Reinforced.Tecture.Services
@@ -19,36 +21,30 @@ namespace Reinforced.Tecture.Services
         internal ChannelMultiplexer ChannelMultiplexer;
         internal Pipeline Pipeline;
         internal AuxiliaryContainer Aux;
+
+        internal void CallOnSave() => OnSave();
+        internal void CallOnFinally() => OnFinally();
+        internal Task CallOnSaveAsync() => OnSaveAsync();
+        internal Task CallOnFinallyAsync() => OnFinallyAsync();
+        internal void CallInit() => Init();
         #endregion
+
+        /// <summary>
+        /// Determines whether particular channel is bound or not
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        protected bool IsBound<T>() where T : Channel => ChannelMultiplexer.IsKnown(typeof(T));
 
         /// <summary>
         /// Await point to split actions before/after savechanges call
         /// </summary>
-        protected ActionsQueueTask Save
-        {
-            get { return new ActionsQueueTask(Pipeline.PostSaveActions); }
-        }
+        protected ActionsQueueTask Save => new ActionsQueueTask(Pipeline.PostSaveActions);
 
         /// <summary>
         /// Await point to split actions that must happen after everything
         /// </summary>
-        protected ActionsQueueTask Final
-        {
-            get { return new ActionsQueueTask(Pipeline.FinallyActions); }
-        }
-
-        internal void CallOnSave() { OnSave(); }
-        internal void CallOnFinally() { OnFinally(); }
-
-        internal Task CallOnSaveAsync() { return OnSaveAsync(); }
-        internal Task CallOnFinallyAsync() { return OnFinallyAsync(); }
-
-        
-
-        internal virtual void CallInit()
-        {
-            Init();
-        }
+        protected ActionsQueueTask Final => new ActionsQueueTask(Pipeline.FinallyActions);
 
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
@@ -75,7 +71,7 @@ namespace Reinforced.Tecture.Services
         /// Called right after service initialization. Use it to do things right after service is created
         /// </summary>
         protected virtual void Init() { }
-        
+
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
@@ -101,7 +97,7 @@ namespace Reinforced.Tecture.Services
         {
             if (Aux.TraceCollector != null)
             {
-                return new CycleTraceContext(Pipeline,annotation);
+                return new CycleTraceContext(Pipeline, annotation);
             }
 
             return new FakeCycleTraceContext();

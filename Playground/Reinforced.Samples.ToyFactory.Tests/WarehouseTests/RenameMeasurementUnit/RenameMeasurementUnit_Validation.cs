@@ -36,8 +36,8 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 				flow.Then<Save>();
 				flow.Then<DeletePk>
 				(
-					DeleteByPK<MeasurementUnit>(@"remove measurement unit#109", 109), 
-					Annotated(@"remove measurement unit#109")
+					DeleteByPK<MeasurementUnit>(@"remove measurement unit#1109", 1109), 
+					Annotated(@"remove measurement unit#1109")
 				);
 				flow.Then<Save>();
 				flow.TheEnd();

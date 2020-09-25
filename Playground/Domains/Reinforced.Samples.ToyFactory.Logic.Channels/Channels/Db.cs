@@ -1,5 +1,4 @@
 ﻿using Reinforced.Tecture.Aspects.DirectSql;
-using Reinforced.Tecture.Aspects.DirectSql;
 using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Channels

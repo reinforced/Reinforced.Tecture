@@ -10,10 +10,10 @@ namespace Reinforced.Tecture
     /// <summary>
     /// Tecture core facade
     /// </summary>
-    public interface ITectureNoSave : IDisposable
+    public interface ITecture : IDisposable
     {
         /// <summary>
-        /// Obtains instance of uncontexted service to make it to do something
+        /// Obtains instance of service to make it to do something
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
@@ -36,13 +36,7 @@ namespace Reinforced.Tecture
         /// </summary>
         /// <returns></returns>
         Trace EndTrace();
-    }
 
-    /// <summary>
-    /// Tecture core facade with saving capabilities
-    /// </summary>
-    public interface ITecture : ITectureNoSave
-    {
         /// <summary>
         /// Runs commands queue
         /// </summary>
@@ -54,5 +48,4 @@ namespace Reinforced.Tecture
         /// <returns></returns>
         Task SaveAsync();
     }
-
 }

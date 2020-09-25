@@ -70,16 +70,14 @@ namespace Reinforced.Tecture.Query
         /// <returns>Promised</returns>
         public Promised<T> Promise<T>()
         {
+            if (_container._testDataHolder.Instance != null)
+            {
+                return new Contains<T>(_container._testDataHolder.Instance, _container.TraceCollector, _channelType);
+            }
+
             if (_container.TraceCollector != null)
             {
-                if (_container._testDataHolder.Instance != null)
-                {
-                    return new Contains<T>(_container._testDataHolder.Instance, _container.TraceCollector, _channelType);
-                }
-                else
-                {
-                    return new Demands<T>(_container.TraceCollector,_channelType);
-                }
+                return new Demands<T>(_container.TraceCollector, _channelType);
             }
             return new Consistency<T>();
         }

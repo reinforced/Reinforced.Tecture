@@ -36,7 +36,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         public void RenameMeasurementUnit()
         {
             using var c = Case
-                <RenameMeasurementUnit_TestData>
+                //<RenameMeasurementUnit_TestData>
                 (out ITecture ctx);
 
             var a = ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
@@ -49,7 +49,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
 
             Output.WriteLine(c.Text());
 
-            c.Validate<RenameMeasurementUnit_Validation>();
+            //c.Validate<RenameMeasurementUnit_Validation>();
         }
 
         [Fact]

@@ -16,6 +16,7 @@ namespace Reinforced.Tecture.Query
         internal readonly TestDataHolder _testDataHolder;
         internal TraceCollector TraceCollector { get; set; }
         private readonly TransactionManager _transactionManager;
+
         internal AuxiliaryContainer(TestDataHolder testDataHolder, TransactionManager transactionManager)
         {
             _testDataHolder = testDataHolder;
