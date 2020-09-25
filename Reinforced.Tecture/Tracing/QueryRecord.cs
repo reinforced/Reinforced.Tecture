@@ -79,7 +79,7 @@ namespace Reinforced.Tecture.Tracing
         public override void Describe(TextWriter tw)
         {
             if (IsTestData) tw.Write("[TEST DATA] ");
-
+            else FormatTime(tw);
             tw.Write(this.Annotation ?? $"Query made to '{Channel.Name}' ({Hash})");
             if (IsTestData) return;
             tw.Write(": ");
@@ -87,8 +87,7 @@ namespace Reinforced.Tecture.Tracing
             {
                 tw.Write("result is null");
             }
-
-            if (Result is string s)
+            else if (Result is string s)
             {
                 tw.Write(s);
             }
@@ -124,6 +123,22 @@ namespace Reinforced.Tecture.Tracing
                     tw.Write($"'{Result}' obtained");
                 }
             }
+
+        }
+
+        private void FormatTime(TextWriter tw)
+        {
+            if (TimeTaken.TotalMinutes > 1)
+            {
+                tw.Write($"[{TimeTaken:mm:ss:fff}]\t");
+                return;
+            }
+            if (TimeTaken.TotalSeconds > 5)
+            {
+                tw.Write($"[{TimeTaken:ss:fff} sec]\t");
+                return;
+            }
+            tw.Write($"[{TimeTaken:fff}ms]\t");
         }
 
         /// <summary>

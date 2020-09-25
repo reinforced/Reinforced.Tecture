@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Query
@@ -23,6 +24,16 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Query
         protected override IQueryable<T> Set<T>()
         {
             return _context.Value.Set<T>();
+        }
+
+        /// <summary>
+        /// Gets asynchronous query executor instance
+        /// </summary>
+        protected override IAsyncQueryExecutor AsyncExecutor {
+            get
+            {
+                return EfCoreAsyncExecutor.Instance;
+            }
         }
 
         /// <summary>

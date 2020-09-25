@@ -52,6 +52,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             _tecture.BeginTrace();
             var r = await _tecture.From<Db>().Get<ToyType>().ByIdAsync(id);
             var trc = _tecture.EndTrace();
+            var text = trc.Explain();
             return r;
         }
     }

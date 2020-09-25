@@ -25,7 +25,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
-                var result = method(wq.Aspect.AsyncExecutorActually, q, ct).ContinueWith(x =>
+                var result = method(wq.Aspect.AsyncExecutorActually, wq.Original, ct).ContinueWith(x =>
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
@@ -55,7 +55,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
-                var result = method(wq.Aspect.AsyncExecutorActually, q, predicate, ct).ContinueWith(x =>
+                var result = method(wq.Aspect.AsyncExecutorActually, wq.Original, predicate, ct).ContinueWith(x =>
                  {
                      if (!x.IsFaulted) tran.Commit();
                      tran.Dispose();
@@ -85,7 +85,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
-                var result = method(wq.Aspect.AsyncExecutorActually, q, selector, ct).ContinueWith(x =>
+                var result = method(wq.Aspect.AsyncExecutorActually, wq.Original, selector, ct).ContinueWith(x =>
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
@@ -115,7 +115,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
-                var result = method(wq.Aspect.AsyncExecutorActually, q, selector, ct).ContinueWith(x =>
+                var result = method(wq.Aspect.AsyncExecutorActually, wq.Original, selector, ct).ContinueWith(x =>
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
@@ -2070,7 +2070,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
-                var result = wq.Aspect.AsyncExecutorActually.ContainsAsync(q,item,cancellationToken).ContinueWith(x =>
+                var result = wq.Aspect.AsyncExecutorActually.ContainsAsync(wq.Original, item,cancellationToken).ContinueWith(x =>
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
@@ -2323,7 +2323,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
-                var result = wq.Aspect.AsyncExecutorActually.ToDictionaryAsync(source,keySelector,elementSelector,comparer, cancellationToken).ContinueWith(x =>
+                var result = wq.Aspect.AsyncExecutorActually.ToDictionaryAsync(wq.Original, keySelector,elementSelector,comparer, cancellationToken).ContinueWith(x =>
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
