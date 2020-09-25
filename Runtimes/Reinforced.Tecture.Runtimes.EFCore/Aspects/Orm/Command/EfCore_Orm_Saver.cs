@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.Commands.Delete;
@@ -6,12 +7,13 @@ using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Aspects.Orm.Commands.Derelate;
 using Reinforced.Tecture.Aspects.Orm.Commands.Relate;
 using Reinforced.Tecture.Aspects.Orm.Commands.Update;
+using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
-    class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate, DeletePk>
+    class EfCore_Orm_Saver : Saver<Add, Delete, Update, Relate, Derelate, DeletePk,UpdatePk>
     {
         private readonly ILazyDisposable<DbContext> _dc;
         private AddCommandRunner _add;
@@ -20,7 +22,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         private DeletePkCommandRunner _dpk;
         private RelateCommandRunner _rel;
         private DerelateCommandRunner _drel;
-
+        private UpdatePkCommandRunner _upk;
         public EfCore_Orm_Saver(ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
@@ -34,6 +36,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
             _dpk = new DeletePkCommandRunner(Aux, _dc);
             _rel = new RelateCommandRunner(Aux, _dc);
             _drel = new DerelateCommandRunner(Aux, _dc);
+            _upk = new UpdatePkCommandRunner(Aux,_dc);
         }
 
 
@@ -42,16 +45,18 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         {
             if (Aux.IsSavingNeeded)
             {
+                _dc.Value.ChangeTracker.DetectChanges();
                 _dc.Value.SaveChanges();
 
-                //var changedEntriesCopy = _dc.Value.ChangeTracker.Entries()
-                //    .Where(e => e.State == EntityState.Added ||
-                //                e.State == EntityState.Modified ||
-                //                e.State == EntityState.Deleted)
-                //    .ToList();
+                var changedEntriesCopy = _dc.Value.ChangeTracker.Entries()
+                    .Where(e => e.State == EntityState.Added ||
+                                e.State == EntityState.Modified ||
+                                e.State == EntityState.Unchanged ||
+                                e.State == EntityState.Deleted)
+                    .ToList();
 
-                //foreach (var entry in changedEntriesCopy)
-                //    entry.State = EntityState.Detached;
+                foreach (var entry in changedEntriesCopy)
+                    entry.State = EntityState.Detached;
             }
         }
 
@@ -114,5 +119,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         {
             return _dpk;
         }
+
+        /// <inheritdoc />
+        protected override CommandRunner<UpdatePk> GetRunner7(UpdatePk command) => _upk;
     }
 }

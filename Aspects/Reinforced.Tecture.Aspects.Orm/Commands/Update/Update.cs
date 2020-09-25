@@ -16,6 +16,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
     [CommandCode("UPD")]
     public class Update : CommandBase
     {
+        internal Update() { }
         /// <summary>
         /// Gets entity that is going to be updated
         /// </summary>

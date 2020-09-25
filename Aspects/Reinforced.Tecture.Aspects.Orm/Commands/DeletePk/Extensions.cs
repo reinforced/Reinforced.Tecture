@@ -19,7 +19,6 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.DeletePk
     /// </summary>
     public static partial class Extensions
     {
-
         private static DeletePk DeletePkCore(Write channel, Type entityType, params object[] keyValues)
         {
             var f = channel.PleaseAspect<Command>();

@@ -5,6 +5,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Aspects.Orm.Commands.Derelate;
 using Reinforced.Tecture.Aspects.Orm.Commands.Relate;
 using Reinforced.Tecture.Aspects.Orm.Commands.Update;
+using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
 using Reinforced.Tecture.Savers;
 
 namespace Reinforced.Tecture.Aspects.Orm
@@ -13,7 +14,7 @@ namespace Reinforced.Tecture.Aspects.Orm
     /// <summary>
     /// ORM command aspect
     /// </summary>
-    public abstract class Command : CommandAspect, Produces<Add, Delete, Update, Relate, Derelate, DeletePk>
+    public abstract class Command : CommandAspect, Produces<Add, Delete, Update, Relate, Derelate, DeletePk, UpdatePk>
     {
         internal bool IsSubjectCore(Type t)
         {

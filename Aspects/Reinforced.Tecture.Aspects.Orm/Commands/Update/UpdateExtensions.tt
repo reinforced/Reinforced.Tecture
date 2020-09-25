@@ -9,7 +9,8 @@
     var methodName = "Update";
     var resultName = "Update";
 #>
-
+using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
 using _ = Reinforced.Tecture.Services.Tooling;
@@ -29,7 +30,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
     var exactTooling = $"{methodName}s<{entityParameters}>";
     var currentEntity = $"E{entityIndex}";
 
-    var pkentityParameters = string.Join("", Enumerable.Range(1,entityIndex-1).Select(x=> $"o,"));
+    var pkentityParameters = string.Join("", Enumerable.Range(1,entityIndex-1).Select(x=> $"_,"));
 #>
         /// <summary>
         /// <#= methodName #>s entity of type <typeparamref name="E<#= entityIndex #>"/>
@@ -42,6 +43,18 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
             this Write<CommandChannel<Command><#= foldArgs #>, <#= exactTooling #>> c, <#= currentEntity #> entity)
         {
             return <#= methodName #>Core(c, entity);
+        }
+
+        /// <summary>
+        /// Deletes entity by primary key
+        /// </summary>
+        /// <typeparam name="E">Entity to be deleted</typeparam>
+        /// <param name="channel">Channel</param>
+        /// <returns>Fluent</returns>
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> <#= methodName #><E>(this Write<CommandChannel<Command><#= foldArgs #>,Updates<<#=pkentityParameters #>E>> channel)
+            where E : IPrimaryKey
+        {
+            return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
         }
        
 <# } #> 

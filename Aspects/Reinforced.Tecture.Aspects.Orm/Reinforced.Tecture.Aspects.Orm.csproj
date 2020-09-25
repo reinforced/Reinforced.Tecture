@@ -38,6 +38,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RelateExtensions.cs</LastGenOutput>
     </None>
+    <None Update="Commands\UpdatePk\UpdatePkExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UpdatePkExtensions.cs</LastGenOutput>
+    </None>
     <None Update="Commands\Update\UpdateExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UpdateExtensions.cs</LastGenOutput>
@@ -90,6 +94,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>RelateExtensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Commands\UpdatePk\UpdatePkExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UpdatePkExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="Commands\Update\UpdateExtensions.cs">
       <DesignTime>True</DesignTime>

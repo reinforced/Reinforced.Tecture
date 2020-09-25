@@ -7,6 +7,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.Commands.Delete;
 using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Aspects.Orm.Commands.Update;
+using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Aspects.Orm.Queries;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
@@ -42,14 +43,15 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 
         public void RenameMeasurementUnit(int id, string name, string shortName)
         {
-            var unit = From<Db>().Get<MeasurementUnit>().ByIdRequired(id);
-            To<Db>().Update(unit)
+            To<Db>().Update<MeasurementUnit>()
                 .Set(x => x.Name, name)
-                .Set(x => x.ShortName, shortName);
+                .Set(x => x.ShortName, shortName)
+                .ByPk(id);
         }
 
         public void DeleteMeasurementUnit(int id)
         {
+            var mu = From<Db>().Get<MeasurementUnit>().ById(id);
             To<Db>().Delete<MeasurementUnit>().ByPk(id).Annotate($"remove measurement unit#{id}");
         }
 

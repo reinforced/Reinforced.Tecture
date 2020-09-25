@@ -28,7 +28,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
                 .Entries<IPrimaryKey>()
                 .FirstOrDefault(x => x.Entity.GetType() == t);
 
-            if (entryQuery == null) return _dc.Value.Entry(instance);
+            if (entryQuery == null)
+            {
+                var eq = _dc.Value.Entry(instance);
+                eq.State = EntityState.Modified;
+            }
             return entryQuery;
         }
 

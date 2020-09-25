@@ -35,7 +35,13 @@ namespace Reinforced.Samples.ToyFactory
             services.AddTransient<ToyFactoryDbContext>();
             services.AddTransient(sp =>
             {
-                var ld = new LazyDisposable<ToyFactoryDbContext>(() => sp.GetService<ToyFactoryDbContext>());
+                var ld = new LazyDisposable<ToyFactoryDbContext>(() =>
+                {
+                    
+                    var dc = sp.GetService<ToyFactoryDbContext>();
+                    dc.ChangeTracker.AutoDetectChangesEnabled = false;
+                    return dc;
+                });
 
                 var tb = new TectureBuilder();
                 
