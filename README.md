@@ -81,7 +81,7 @@ public class Orders : TectureService< Updates<Order>, Adds<OrderLine> >
 		      .Set(x=>x.TotalQuantity, order.TotalQuantity + quantity);
 
 		// Also I can invoke other services
-		Do<Products>().AttachToOrder(order);
+		Let<Products>().AttachToOrder(order);
 	}
 }
 ```
@@ -138,7 +138,7 @@ public class OrdersController : ApiController
 	public ActionResult PerformActionWithOrder(int id)
 	{
 		// and use it  
-		_tecture.Do<Orders>().PerformAction(id);
+		_tecture.Let<Orders>().PerformAction(id);
 		_tecture.Save();
 
 		return Ok();
@@ -152,7 +152,7 @@ public class OrdersController : ApiController
 ```csharp
 tecture.BeginTrace();
 
-var a = tecture.Do<Orders>().CreateOne("new order");
+var a = tecture.Let<Orders>().CreateOne("new order");
 ctx.Save();
 
 var trace = tecture.EndTrace();
@@ -177,7 +177,7 @@ public void Order_Creation_Works_As_Expected()
 {
 	using var c = Case<Order_Creation_Works_As_Expected_TestData>(out ITecture ctx);
 
-	var a = ctx.Do<Orders>().CreateOne("test order");
+	var a = ctx.Let<Orders>().CreateOne("test order");
 	ctx.Save();
 	
 	c.Validate<Order_Creation_Works_As_Expected_Validation>();
