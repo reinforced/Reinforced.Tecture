@@ -1,6 +1,6 @@
 # What is that?
 
-This is experimental architecture framework for .NET applications. It is built on aspect-based principles involving some CQRS and functional programming approaches. Tecture intensively utilizes C# features, strong typing, lambda expressions, extension methods and generics. Usage experience is very similar to LINQ. The closest project that does somewhat similar is [MediatR](https://github.com/jbogard/MediatR), but Tecture is wider and covers more problems. 
+This is experimental architecture framework for business .NET applications. 
 
 Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinforced.Tecture/) along with its dependent packages.
 
@@ -14,18 +14,18 @@ PM> Install-Package Reinforced.Tecture.Testing
 
 Get in touch with [documentation](https://github.com/reinforced/Reinforced.Tecture/wiki)
 
-# Advantages
+# What are benefits?
 
-Tecture overcomes traditional approaches of .NET application design with following features:
+Tecture gives you benefits depending on your role in the team. So in case if you are...
 
-- Explicit and type-safe [abstraction of external systems](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels) (databases, queues etc);
-- Type-based [services](https://github.com/reinforced/Reinforced.Tecture/wiki/Services) design that does not require IoC configuration;
-- Reads and queries to external systems [implemented by extension methods](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries). Repository pattern is not needed;
-- Deferred [write operations](https://github.com/reinforced/Reinforced.Tecture/wiki/Commands) with flexible [compile-time restrictions](https://github.com/reinforced/Reinforced.Tecture/wiki/Aspects);
-- Automated [test data capture](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data);
-- Cheap and quick [infrastructure-free data-driven regression testing](https://github.com/reinforced/Reinforced.Tecture/wiki/Unit-Test);
-- Therefore, Mocks/Stubs/Fakes, interfaces and virtual methods are not needed in business logic anymore. Write less, do more;
-- [Self-explanatory](https://github.com/reinforced/Reinforced.Tecture/wiki/Tracing) business logic with [informational annotations](https://github.com/reinforced/Reinforced.Tecture/wiki/Describe) by design;
+- **System Architect**: easy and explicit type-safe integration of your .NET application with external systems (databases, queues, etc) by the mechanism of [channels](https://github.com/reinforced/Reinforced.Tecture/wiki/Channels). More formal control over the codebase from single place by [aspects](https://github.com/reinforced/Reinforced.Tecture/wiki/Aspects). Shorter [IoC](https://github.com/reinforced/Reinforced.Tecture/wiki/IoC) configuration;
+- **System Analyst**: [self-explanatory](https://github.com/reinforced/Reinforced.Tecture/wiki/Tracing) business logic with [informational annotations](https://github.com/reinforced/Reinforced.Tecture/wiki/Describe);
+- **DevOps**: easier way to go .NET Core;
+- **QA**: [automatically generated validation](https://github.com/reinforced/Reinforced.Tecture/wiki/Generate-Validation) for honest, meaningful [infrastructure-free data-driven regression tests](https://github.com/reinforced/Reinforced.Tecture/wiki/Unit-Test) with [automated test data capture](https://github.com/reinforced/Reinforced.Tecture/wiki/Test-Data);
+- **Regular Software Engineer**: clean and safe way to implement features without necessarity to write mocks, stubs and fakes. [No more redundant interfaces](https://github.com/reinforced/Reinforced.Tecture/wiki/Services), no more [repository pattern](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries);
+- **Functional programming maniac**: giant IO monad on [commands](https://github.com/reinforced/Reinforced.Tecture/wiki/Commands), queries made with [pure functions](https://github.com/reinforced/Reinforced.Tecture/wiki/Queries);
+- **Team Lead**: cheap way to get honest 100% code coverage with tests;
+- **Product Owner**: faster feature delivery because of less code, easier feature logic discussions because of self-explanatory logic traces.
 
 Below are several pieces of code that uses Tecture:
 
