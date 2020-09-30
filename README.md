@@ -1,6 +1,6 @@
 # What is that?
 
-This is experimental architecture framework for business .NET applications. 
+This is experimental architecture framework for business applications made on .NET platform.
 
 Reinforced.Tecture [is available on NuGet](https://www.nuget.org/packages/Reinforced.Tecture/) along with its dependent packages.
 
