@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Query;
@@ -10,9 +11,13 @@ namespace Reinforced.Tecture.Channels.Multiplexer
     //string key here is full type name
     class ChannelMultiplexer : IDisposable
     {
-        private readonly AuxilaryContainer _auxilary;
+        private readonly AuxiliaryContainer _auxiliary;
 
         private readonly Dictionary<string, Type> _namesCache = new Dictionary<string, Type>();
+        internal bool IsKnown(Type channel)
+        {
+            return _knownChannels.Contains(channel);
+        }
         private void Known(Type channel)
         {
             if (!_knownChannels.Contains(channel)) _knownChannels.Add(channel);
@@ -25,110 +30,112 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
 
         #region Query
-        private readonly Dictionary<string, Dictionary<string, QueryFeature>> _channelFeaturesQuery
-            = new Dictionary<string, Dictionary<string, QueryFeature>>();
+        private readonly Dictionary<string, Dictionary<string, QueryAspect>> _channelAspectQuery
+            = new Dictionary<string, Dictionary<string, QueryAspect>>();
 
 
-        internal void RegisterQueryFeature(Type channelType, Type queryFeatureType, QueryFeature qf)
+        internal void RegisterQueryAspect(Type channelType, Type queryAspectType, QueryAspect qf)
         {
             Known(channelType);
 
-            var channeId = channelType.FullName;
+            var channelId = channelType.FullName;
 
-            if (!_channelFeaturesQuery.ContainsKey(channeId))
+            if (!_channelAspectQuery.ContainsKey(channelId))
             {
-                _channelFeaturesQuery[channeId] = new Dictionary<string, QueryFeature>();
+                _channelAspectQuery[channelId] = new Dictionary<string, QueryAspect>();
             }
 
-            var features = _channelFeaturesQuery[channeId];
-            var featureId = queryFeatureType.FullName;
-            if (!features.ContainsKey(featureId))
+            var aspects = _channelAspectQuery[channelId];
+            var aspectId = queryAspectType.FullName;
+            if (!aspects.ContainsKey(aspectId))
             {
-                features[featureId] = qf;
+                aspects[aspectId] = qf;
             }
             else
             {
-                throw new TectureException($"Query feature {queryFeatureType.Name} is already implemented for {channelType.Name}");
+                throw new TectureException($"Attempt to bind query aspect {queryAspectType.Name} twice for channel {channelType.Name}");
             }
 
-            qf._aux = _auxilary.ForChannel(channelType);
+            qf._aux = _auxiliary.ForChannel(channelType);
+            qf._channel = channelType;
             qf.CallOnRegister();
         }
 
-        internal TFeature GetQueryFeature<TChannel, TFeature>()
+        internal TAspect GetQueryAspect<TChannel, TAspect>()
             where TChannel : CanQuery
-            where TFeature : QueryFeature
+            where TAspect : QueryAspect
         {
             var ct = typeof(TChannel);
             CheckChannel(ct);
 
-            var tf = typeof(TFeature);
+            var tf = typeof(TAspect);
 
-            if (!_channelFeaturesQuery.ContainsKey(ct.FullName))
+            if (!_channelAspectQuery.ContainsKey(ct.FullName))
             {
-                throw new TectureException($"No runtime for query feature {tf.Name} of channel {ct.Name} found");
+                throw new TectureException($"Query aspect {tf.FullName} of channel {ct.Name} is not bound");
             }
 
-            var features = _channelFeaturesQuery[ct.FullName];
-            if (!features.ContainsKey(tf.FullName))
+            var aspects = _channelAspectQuery[ct.FullName];
+            if (!aspects.ContainsKey(tf.FullName))
             {
-                throw new TectureException($"No runtime for query feature {tf.Name} of channel {ct.Name} found");
+                throw new TectureException($"Query aspect {tf.FullName} of channel {ct.Name} is not bound");
             }
 
-            return (TFeature)features[tf.FullName];
+            return (TAspect)aspects[tf.FullName];
         }
         #endregion
 
         #region Command
-        private readonly Dictionary<string, Dictionary<string, CommandFeature>> _channelFeaturesCommand
-            = new Dictionary<string, Dictionary<string, CommandFeature>>();
-        internal void RegisterCommandFeature(Type channelType, Type queryFeatureType, CommandFeature cf)
+        private readonly Dictionary<string, Dictionary<string, CommandAspect>> _channelAspectsCommand
+            = new Dictionary<string, Dictionary<string, CommandAspect>>();
+        internal void RegisterCommandAspect(Type channelType, Type commandAspectType, CommandAspect cf)
         {
             Known(channelType);
 
-            var channeId = channelType.FullName;
+            var channelId = channelType.FullName;
 
-            if (!_channelFeaturesCommand.ContainsKey(channeId))
+            if (!_channelAspectsCommand.ContainsKey(channelId))
             {
-                _channelFeaturesCommand[channeId] = new Dictionary<string, CommandFeature>();
+                _channelAspectsCommand[channelId] = new Dictionary<string, CommandAspect>();
             }
 
-            var features = _channelFeaturesCommand[channeId];
-            var featureId = queryFeatureType.FullName;
-            if (!features.ContainsKey(featureId))
+            var aspects = _channelAspectsCommand[channelId];
+            var aspectId = commandAspectType.FullName;
+            if (!aspects.ContainsKey(aspectId))
             {
-                features[featureId] = cf;
+                aspects[aspectId] = cf;
             }
             else
             {
-                throw new TectureException($"Command feature {queryFeatureType.Name} is already implemented for {channelType.Name}");
+                throw new TectureException($"Attempt to bind command aspect {commandAspectType.FullName} twice for channel {channelType.Name}");
             }
 
-            cf._aux = _auxilary.ForChannel(channelType);
+            cf._aux = _auxiliary.ForChannel(channelType);
+            cf._channel = channelType;
             cf.CallOnRegister();
         }
 
-        internal TFeature GetCommandFeature<TChannel, TFeature>()
+        internal TAspect GetCommandAspect<TChannel, TAspect>()
             where TChannel : CanCommand
-            where TFeature : CommandFeature
+            where TAspect : CommandAspect
         {
             var ct = typeof(TChannel);
             CheckChannel(ct);
 
-            var tf = typeof(TFeature);
+            var tf = typeof(TAspect);
 
-            if (!_channelFeaturesCommand.ContainsKey(ct.FullName))
+            if (!_channelAspectsCommand.ContainsKey(ct.FullName))
             {
-                throw new TectureException($"No runtime for command feature {tf.Name} of channel {ct.Name} found");
+                throw new TectureException($"Command aspect {tf.FullName} of channel {ct.Name} is not bound");
             }
 
-            var features = _channelFeaturesCommand[ct.FullName];
-            if (!features.ContainsKey(tf.FullName))
+            var aspects = _channelAspectsCommand[ct.FullName];
+            if (!aspects.ContainsKey(tf.FullName))
             {
-                throw new TectureException($"No runtime for command feature {tf.Name} of channel {ct.Name} found");
+                throw new TectureException($"Command aspect {tf.FullName} of channel {ct.Name} is not bound");
             }
 
-            return (TFeature)features[tf.FullName];
+            return (TAspect)aspects[tf.FullName];
         }
 
         #endregion
@@ -139,15 +146,17 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
         private readonly Dictionary<string, HashSet<SaverBase>> _saversPerChannels = new Dictionary<string, HashSet<SaverBase>>();
 
-        public ChannelMultiplexer(AuxilaryContainer aux)
+        public ChannelMultiplexer(AuxiliaryContainer aux)
         {
-            _auxilary = aux;
+            _auxiliary = aux;
         }
 
         internal void RegisterSaver(Type channelType, SaverBase saver)
         {
             Known(channelType);
-            saver._Aux = _auxilary.ForChannel(channelType);
+            saver.Channel = channelType;
+            saver._Aux = _auxiliary.ForChannel(channelType);
+
 
             if (!_saversPerChannels.ContainsKey(channelType.FullName))
             {
@@ -223,11 +232,51 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         #endregion
 
 
-        internal void ValidateConfiguredChannel<TChannel>()
+        internal void Validate()
         {
-            var ct = typeof(TChannel);
-            CheckChannel(ct);
+            foreach (var knownChannel in _knownChannels)
+            {
+                var name = knownChannel.FullName;
 
+                var iFaces = knownChannel.GetInterfaces();
+                var commandAspects = iFaces.Where(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(CommandChannel<>))
+                    .Select(x => x.GetGenericArguments()[0]).ToArray();
+                var queryAspects = iFaces.Where(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(QueryChannel<>))
+                    .Select(x => x.GetGenericArguments()[0]).ToArray();
+
+                if (commandAspects.Length > 0)
+                {
+                    if (!_channelAspectsCommand.ContainsKey(name))
+                        throw new TectureValidationException($"Channel {knownChannel.Name} has unbound command aspects: {string.Join(", ",commandAspects.Select(x=>x.Name))}");
+                    var aspects = _channelAspectsCommand[name];
+
+                    foreach (var commandAspect in commandAspects)
+                    {
+                        if (!aspects.ContainsKey(commandAspect.FullName))
+                        {
+                            throw new TectureValidationException($"Channel {knownChannel.Name} has unbound command aspect '{commandAspect.FullName}'");
+                        }
+                    }
+
+                }
+
+                if (queryAspects.Length > 0)
+                {
+                    if (!_channelAspectQuery.ContainsKey(name))
+                        throw new TectureValidationException($"Channel {knownChannel.Name} has unbound query aspects: {string.Join(", ", queryAspects.Select(x => x.Name))}");
+
+                    var aspects = _channelAspectQuery[name];
+
+                    foreach (var queryAspect in queryAspects)
+                    {
+                        if (!aspects.ContainsKey(queryAspect.FullName))
+                        {
+                            throw new TectureValidationException($"Channel {knownChannel.Name} has unbound query aspect '{queryAspect.FullName}'");
+                        }
+                    }
+                }
+
+            }
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

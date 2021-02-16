@@ -7,6 +7,9 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection.Strategies
 {
+    /// <summary>
+    /// Creation strategy for tuple
+    /// </summary>
     public class TupleCreationStrategy : ICollectionCreationStrategy
     {
         /// <summary>

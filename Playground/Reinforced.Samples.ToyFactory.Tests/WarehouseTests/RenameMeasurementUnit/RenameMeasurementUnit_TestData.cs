@@ -15,15 +15,15 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 
 			private Int32 GetEntry_2()
 			{ 
-				return 42;
+				return 1124;
 			}
 
 			private MeasurementUnit GetEntry_3()
 			{ 
 				var v1 = New<MeasurementUnit>();
-				Set(v1, x=>x.Id, 42);
-				Set(v1, x=>x.ShortName, @"kG");
-				Set(v1, x=>x.Name, @"Kilograms");
+				Set(v1, x=>x.Id, 1124);
+				Set(v1, x=>x.ShortName, @"kg");
+				Set(v1, x=>x.Name, @"Kilo");
 				return v1;
 			}
 
@@ -35,11 +35,11 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_2()) { 
 					Hash = @"ORM_AdditionPK_1",
-					Description = @"ORM Addition PK retrieval"
+					Description = @"Get primary key of added MeasurementUnit"
 				};
 				yield return new TestDataRecord<MeasurementUnit>(GetEntry_3()) { 
-					Hash = @"OrmQuery_733639199A5697167B201F9165F5D2487D9588D52EC594686EF5C98F2D619B",
-					Description = @"Get MeasurementUnit by Id #42 (required)"
+					Hash = @"OrmQuery_2F8E2DBD895DFCE28DC35571293296F17577565245C62D9E3588252B138D18A",
+					Description = @"Get MeasurementUnit by Id #1124"
 				};
 			}
 

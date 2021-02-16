@@ -3,15 +3,19 @@ using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.BuiltInChecks
 {
+    /// <summary>
+    /// Validates comment contents
+    /// </summary>
     public class CommentCheck : CommandCheck<Comment>
     {
         private readonly string _content;
 
-        public CommentCheck(string content)
+        internal CommentCheck(string content)
         {
             _content = content;
         }
 
+        /// <inheritdoc cref="CommandCheck{TCommand}.GetMessage"/>
         protected override string GetMessage(Comment command)
         {
             var msg = string.IsNullOrEmpty(_content)
@@ -30,6 +34,7 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
             return null;
         }
 
+        /// <inheritdoc cref="CommandCheck{TCommand}.IsActuallyValid"/>
         protected override bool IsActuallyValid(Comment effect)
         {
             if (effect == null) return false;

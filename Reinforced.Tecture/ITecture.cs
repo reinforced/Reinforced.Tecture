@@ -8,23 +8,16 @@ using Reinforced.Tecture.Transactions;
 namespace Reinforced.Tecture
 {
     /// <summary>
-    /// Tecture facade
+    /// Tecture core facade
     /// </summary>
-    public interface ITectureNoSave : IDisposable
+    public interface ITecture : IDisposable
     {
         /// <summary>
-        /// Obtains instance of uncontexted service to make it to do something
+        /// Obtains instance of service to make it to do something
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
-        T Do<T>() where T : TectureServiceBase, INoContext;
-
-        /// <summary>
-        /// Obtains context service to make it to do something
-        /// </summary>
-        /// <typeparam name="T">Service type</typeparam>
-        /// <returns>Context service <typeparamref name="T"/></returns>
-        LetBuilder<T> Let<T>() where T : TectureServiceBase, IWithContext;
+        T Do<T>() where T : TectureServiceBase;
 
         /// <summary>
         /// Obtains data source to query data from
@@ -43,22 +36,16 @@ namespace Reinforced.Tecture
         /// </summary>
         /// <returns></returns>
         Trace EndTrace();
-    }
 
-    public interface ITecture : ITectureNoSave
-    {
         /// <summary>
         /// Runs commands queue
         /// </summary>
-        void Save(OuterTransactionMode transaction = OuterTransactionMode.None,
-            OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos);
+        void Save();
 
         /// <summary>
         /// Runs async commands queue
         /// </summary>
         /// <returns></returns>
-        Task SaveAsync(OuterTransactionMode transaction = OuterTransactionMode.None,
-            OuterTransactionIsolationLevel level = OuterTransactionIsolationLevel.Chaos);
+        Task SaveAsync();
     }
-
 }

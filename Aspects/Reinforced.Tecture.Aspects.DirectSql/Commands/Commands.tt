@@ -1,0 +1,62 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+	var implementationsCount = 8;
+    var methodName = "Add";
+    var resultName = "Add";    
+#>
+
+using System;
+using System.Linq.Expressions;
+using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Aspects.DirectSql.Toolings;
+using _ = Reinforced.Tecture.Services.Tooling;
+
+namespace Reinforced.Tecture.Aspects.DirectSql.Commands
+{
+    public static partial class Extensions
+    {
+<# for (int toolingIndex=0; toolingIndex<implementationsCount; toolingIndex++) {	#> 
+<#
+    var foldArgs = string.Join("",Enumerable.Range(1,toolingIndex).Select(x=>$",_"));    
+#>
+
+<# for (int entityIndex=1; entityIndex<=implementationsCount; entityIndex++) {	#> 
+<#
+var entities = Enumerable.Range(1,entityIndex).Select(x=> $"E{x}");
+    var entityParameters = string.Join(", ", entities);    
+    var currentEntity = $"E{entityIndex}";
+    
+#>
+        /// <summary>
+        /// <#= methodName #>s entity of type <typeparamref name="E<#= entityIndex #>"/>
+        /// </summary>
+        /// <param name="c">ORM Channel Write End</param>
+        /// <param name="entity">Entity to add</param>
+        /// <returns>Fluent</returns>
+        public static Sql Sql<<#= entityParameters #>>(this Write<CommandChannel<Command><#= foldArgs #>, MakesSqlCommands> c, Expression<Func<<#= entityParameters #>, string>> stroke)
+        {
+            return Before(c, stroke, <#= string.Join(", ", entities.Select(d=>$"typeof({d})")) #>);
+        }
+<# } #> 
+<# } #> 
+    }
+}
+
+<#+
+    
+    private string GenericsStroke(int num)
+    {
+        StringBuilder sb = new StringBuilder();
+		bool first = true;
+		for(var i=0;i<num;i++){
+			if (!first) sb.Append(", ");
+			else first = false;
+			sb.Append("T"); sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

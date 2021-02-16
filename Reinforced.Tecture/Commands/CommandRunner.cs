@@ -40,16 +40,16 @@ namespace Reinforced.Tecture.Commands
         }
 
         /// <summary>
-        /// Runs side effect 
+        /// Runs command
         /// </summary>
-        /// <param name="cmd">Side effect</param>
+        /// <param name="cmd">Command</param>
         protected abstract void Run(TCommand cmd);
 
         /// <summary>
-        /// Runs side effect asynchronously
+        /// Runs command asynchronously
         /// </summary>
-        /// <param name="cmd">Side effect</param>
-        /// <returns>Side effect</returns>
+        /// <param name="cmd">Command</param>
+        /// <returns>Async</returns>
         protected abstract Task RunAsync(TCommand cmd);
     }
 }

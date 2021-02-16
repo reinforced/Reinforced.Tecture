@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj" />
-    <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
+    <ProjectReference Include="..\..\Aspects\Reinforced.Tecture.Aspects.Orm\Reinforced.Tecture.Aspects.Orm.csproj" />
+    <ProjectReference Include="..\..\Aspects\Reinforced.Tecture.Aspects.DirectSql\Reinforced.Tecture.Aspects.DirectSql.csproj" />
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
     <ProjectReference Include="..\..\Runtimes\Reinforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj" />
     <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic.Channels\Reinforced.Samples.ToyFactory.Logic.Channels.csproj" />

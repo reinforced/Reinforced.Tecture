@@ -9,8 +9,9 @@ using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Services;
+using Reinforced.Samples.ToyFactory.Queries;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Aspects.Orm.Queries;
 
 namespace Reinforced.Samples.ToyFactory.Controllers
 {
@@ -40,15 +41,19 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             finally
             {
                 var t = _tecture.EndTrace();
-                var text = t.ToText();
+                var text = t.Explain();
             }
             return result;
         }
 
         [HttpGet]
-        public ToyType GetToyType(int id)
+        public async Task<ToyType> GetToyType(int id)
         {
-            return _tecture.From<Db>().Get<ToyType>().ById(id);
+            _tecture.BeginTrace();
+            var r = await _tecture.From<Db>().Get<ToyType>().ByIdAsync(id);
+            var trc = _tecture.EndTrace();
+            var text = trc.Explain();
+            return r;
         }
     }
 }

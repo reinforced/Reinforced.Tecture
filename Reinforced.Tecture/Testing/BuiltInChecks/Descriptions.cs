@@ -6,12 +6,28 @@ using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.BuiltInChecks
 {
+    /// <summary>
+    /// Descriptions
+    /// </summary>
     public static class Descriptions
     {
-        public static void Basic(this ChecksConfigurator<CommandBase> c) => c.Enlist(new AnnotationCheckDescription());
-        public static void Basic(this ChecksConfigurator<Comment> c) => c.Enlist(new CommentCheckDescription());
+        /// <summary>
+        /// Basic checks for all commands
+        /// </summary>
+        /// <param name="c">Checks builder</param>
+        public static void Basic(this ChecksBuilderFor<CommandBase> c) => c.Enlist(new AnnotationCheckDescription());
 
-        public static void Basics(this UnitTestGenerator tg)
+        /// <summary>
+        /// Basic checks for comment commands
+        /// </summary>
+        /// <param name="c">Checks builder</param>
+        public static void Basic(this ChecksBuilderFor<Comment> c) => c.Enlist(new CommentCheckDescription());
+
+        /// <summary>
+        /// Basic Tecture checks
+        /// </summary>
+        /// <param name="tg">Test generator</param>
+        public static void Basics(this ValidationGenerator tg)
         {
             tg.For<CommandBase>().Basic();
             tg.For<Comment>().Basic();

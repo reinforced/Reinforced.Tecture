@@ -6,9 +6,16 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+// ReSharper disable CommentTypo
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable RedundantJumpStatement
 
 namespace Reinforced.Tecture.Query
 {
+    /// <summary>
+    /// Utility class for SHA-256 query hashes computing
+    /// </summary>
     public class Hashbox : IDisposable
     {
         private const string NIL = "nil";
@@ -107,27 +114,31 @@ namespace Reinforced.Tecture.Query
             }
         }
 
-        public void Put(object o)
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
+        public void Put(object value)
         {
-            if (o == null) { PutNull(); return; }
+            if (value == null) { PutNull(); return; }
             
-            if (o is DateTime dt) { Put(dt.GetHashCode()); return; }
-            if (o is string s) { Put(s); return; }
-            if (o is bool b) { Put(b); return; }
-            if (o is Guid g) { Put(g); return; }
+            if (value is DateTime dt) { Put(dt.GetHashCode()); return; }
+            if (value is string s) { Put(s); return; }
+            if (value is bool b) { Put(b); return; }
+            if (value is Guid g) { Put(g); return; }
 
-            var to = o.GetType();
-            if (NumericTypes.Contains(to)) { PutNumber(o); return; }
-            if (to.GetTypeInfo().IsEnum) { Put((long)o); return; }
+            var to = value.GetType();
+            if (NumericTypes.Contains(to)) { PutNumber(value); return; }
+            if (to.GetTypeInfo().IsEnum) { Put((long)value); return; }
 
-            if (_refs.ContainsKey(o))
+            if (_refs.ContainsKey(value))
             {
                 Put(REF);
-                Put(_refs[o]);
+                Put(_refs[value]);
                 return;
             }
 
-            if (o is IEnumerable ie)
+            if (value is IEnumerable ie)
             {
                 foreach (var item in ie)
                 {
@@ -135,18 +146,22 @@ namespace Reinforced.Tecture.Query
                 }
             }
 
-            if (o is IHasheable h)
+            if (value is IHashable h)
             {
                 h.WriteData(this);
             }
             else
             {
-                PutObjet(o);
+                PutObjet(value);
             }
 
-            Remember(o);
+            Remember(value);
         }
 
+        /// <summary>
+        /// Computes hash of collected values and return string result
+        /// </summary>
+        /// <returns>Hash of collected data</returns>
         public string Compute()
         {
             _bw.Flush();
@@ -184,42 +199,178 @@ namespace Reinforced.Tecture.Query
             if (value is double t_double) { Put(t_double); return; }
             if (value is decimal t_decimal) { Put(t_decimal); return; }
         }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(Guid value) { _bw.Write(value.ToByteArray()); }
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(Guid? value) { if (value.HasValue) _bw.Write(value.Value.ToByteArray()); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(byte value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(sbyte value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(short value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(ushort value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(int value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(uint value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(long value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(ulong value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(float value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(double value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(decimal value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(bool value) { _bw.Write(value); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(byte? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(sbyte? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(short? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(ushort? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(int? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(uint? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(long? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(ulong? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(float? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(double? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(decimal? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
+
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
         public void Put(bool? value) { if (value.HasValue) _bw.Write(value.Value); else PutNull(); }
 
+        /// <summary>
+        /// Puts null value into hashbox
+        /// </summary>
         public void PutNull()
         {
             Put(NIL);
         }
 
-        public void Put(string s)
+        /// <summary>
+        /// Puts value into hashbox
+        /// </summary>
+        /// <param name="value">Value to be reflected in the hash</param>
+        public void Put(string value)
         {
-            if (s==null) PutNull();
-            else _bw.Write(s);
+            if (value==null) PutNull();
+            else _bw.Write(value);
         }
 
 

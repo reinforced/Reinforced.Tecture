@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Tracing.Commands;
+using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Tracing
 {
@@ -27,14 +28,18 @@ namespace Reinforced.Tecture.Tracing
             return new Trace(_traceCommands);
         }
 
-        public void Query<T>(Type channel, Type dataType, string hash, T result, string description)
+        public PromisedQuery<T> PromiseQuery<T>(Type channel)
         {
-            Command(new QueryRecord(channel, dataType, hash, result, false).Annotate(description));
+            var cmd = new QueryRecord(channel, false);
+            Command(cmd);
+            return new PromisedQuery<T>(cmd);
         }
 
-        public void TestQuery<T>(Type channel, Type dataType, string hash, T result, string description)
+        public PromisedQuery<T> PromiseTestQuery<T>(Type channel)
         {
-            Command(new QueryRecord(channel,dataType, hash, result, true).Annotate(description));
+            var cmd = new QueryRecord(channel, true);
+            Command(cmd);
+            return new PromisedQuery<T>(cmd);
         }
 
     }

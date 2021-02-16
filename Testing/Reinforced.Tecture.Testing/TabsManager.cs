@@ -5,7 +5,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing
 {
-    public class TabsManager
+    class TabsManager
     {
         public static readonly SyntaxTrivia TabSymbol = SyntaxFactory.Whitespace("\t");
         private int _tabsCount = 0;
@@ -79,7 +79,7 @@ namespace Reinforced.Tecture.Testing
 
     }
 
-    public class TabsScope : IDisposable
+    class TabsScope : IDisposable
     {
         private readonly TabsManager _tm;
 

@@ -1,17 +1,19 @@
 ﻿using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
-using Reinforced.Tecture.Testing;
+// ReSharper disable UnusedTypeParameter
 
 namespace Reinforced.Tecture.Channels
 {
+    /// <summary>
+    /// Channel's read end
+    /// </summary>
     public interface Read { }
 
     /// <summary>
-    /// Contextual reading interface
+    /// Channel's read end
     /// </summary>
-    /// <typeparam name="DataChannel">Type of data channel</typeparam>
-    public interface Read<out DataChannel> : Read where DataChannel : CanQuery { }
+    /// <typeparam name="TChannel">Type of data channel</typeparam>
+    public interface Read<out TChannel> : Read where TChannel : CanQuery { }
 
     internal struct SRead<TChannel> : IQueryMultiplexer, Read<TChannel> where TChannel : CanQuery
     {
@@ -21,18 +23,33 @@ namespace Reinforced.Tecture.Channels
             _mx = mx;
         }
 
-        public TFeature GetFeature<TFeature>() where TFeature : QueryFeature
+        public TAspect GetAspect<TAspect>() where TAspect : QueryAspect
         {
-            return _mx.GetQueryFeature<TChannel, TFeature>();
+            return _mx.GetQueryAspect<TChannel, TAspect>();
         }
     }
 
+    /// <summary>
+    /// Channel's write end
+    /// </summary>
     public interface Write
     {
-        TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase;
+        /// <summary>
+        /// Puts command into commands queue
+        /// </summary>
+        /// <typeparam name="TCommand">Type of command to put</typeparam>
+        /// <param name="command">Command instance</param>
+        /// <returns>Fluent</returns>
+        TCommand Put<TCommand>(TCommand command) where TCommand : CommandBase;
 
+        /// <summary>
+        /// Gets post-actions queue
+        /// </summary>
         ActionsQueue Save { get; }
 
+        /// <summary>
+        /// Gets final-actions queue
+        /// </summary>
         ActionsQueue Final { get; }
     }
 
@@ -52,9 +69,9 @@ namespace Reinforced.Tecture.Channels
             _pipeline = p;
         }
 
-        public TFeature GetFeature<TFeature>() where TFeature : CommandFeature
+        public TAspect GetAspect<TAspect>() where TAspect : CommandAspect
         {
-            return _cm.GetCommandFeature<TChannel, TFeature>();
+            return _cm.GetCommandAspect<TChannel, TAspect>();
         }
 
         public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase

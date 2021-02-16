@@ -6,23 +6,23 @@
     public partial class TectureServiceBase
     {
         /// <summary>
-        /// Obtains instance of uncontexted service to make it to do something
+        /// Obtains instance of service to make it to do something
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
         /// <returns>Service <typeparamref name="T"/></returns>
-        protected T Do<T>() where T : TectureServiceBase, INoContext
+        protected T Do<T>() where T : TectureServiceBase
         {
             return ServiceManager.Do<T>();
         }
 
         /// <summary>
-        /// Obtains context service to make it to do something
+        /// Obtains instance of service to make it to do something
         /// </summary>
         /// <typeparam name="T">Service type</typeparam>
-        /// <returns>Context service <typeparamref name="T"/></returns>
-        protected LetBuilder<T> Let<T>() where T : TectureServiceBase, IWithContext
+        /// <returns>Service <typeparamref name="T"/></returns>
+        protected T Let<T>() where T : TectureServiceBase
         {
-            return ServiceManager.Let<T>();
+            return Do<T>();
         }
     }
 }

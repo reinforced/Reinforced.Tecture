@@ -115,26 +115,26 @@ namespace Reinforced.Tecture.Testing.Data
         private ClassDeclarationSyntax ProduceClass(string className)
         {
             var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(CSharpTestData))));
-            var clas = ClassDeclaration(Identifier(TriviaList(), className, TriviaList(Space)))
+            var @class = ClassDeclaration(Identifier(TriviaList(), className, TriviaList(Space)))
                 .WithBaseList(BaseList(bs).WithColonToken(
                     Token(
                         TriviaList(),
                         SyntaxKind.ColonToken,
                         TriviaList(
                             Space))));
-            var str = clas.ToFullString();
+            var str = @class.ToFullString();
 
             var ov = OverrideGetRecorde();
             var methods = _entryMethods.Union(new[] { ov });
-            clas = clas.WithMembers(List<MemberDeclarationSyntax>(methods.ToArray()));
-            return clas;
+            @class = @class.WithMembers(List<MemberDeclarationSyntax>(methods.ToArray()));
+            return @class;
         }
 
         private CompilationUnitSyntax ProduceCompilationUnit(string className, string ns)
         {
             var usings = List<UsingDirectiveSyntax>(_usings.OrderBy(x => x.Length).Select(x => UsingDirective(IdentifierName(x))));
-            var clas = ProduceClass(className);
-            var n = NamespaceDeclaration(ParseName(ns)).AddMembers(clas);
+            var @class = ProduceClass(className);
+            var n = NamespaceDeclaration(ParseName(ns)).AddMembers(@class);
 
             return CompilationUnit()
                 .WithUsings(usings)
@@ -177,13 +177,13 @@ namespace Reinforced.Tecture.Testing.Data
             //var data = AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
             //    IdentifierName(nameof(ITestDataRecord<int>.Data)),
             //    InvocationExpression(IdentifierName(CurrentMethodName)));
-            var ivnokeGetData = InvocationExpression(IdentifierName(CurrentMethodName));
+            var invokeGetData = InvocationExpression(IdentifierName(CurrentMethodName));
 
             var sto = (new SyntaxNodeOrToken[]
                 {hash, Token(SyntaxKind.CommaToken), description});
 
             var init = ObjectCreationExpression(type)
-                .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(ivnokeGetData))))
+                .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(invokeGetData))))
                 .WithInitializer(InitializerExpression(SyntaxKind.ObjectInitializerExpression,
                     SeparatedList<ExpressionSyntax>(sto)));
 

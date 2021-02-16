@@ -10,8 +10,9 @@
 
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Channels.Multiplexer;
-using Reinforced.Tecture.Testing;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Services;
+
+// ReSharper disable UnusedTypeParameter
 
 namespace Reinforced.Tecture.Channels
 {
@@ -21,12 +22,25 @@ namespace Reinforced.Tecture.Channels
 
 	#region Read
 
-	public interface Read<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Read<TChannel> where TChannel : CanQuery { }
+	/// <summary>
+	/// Channel's read end for <#= i+1 #> entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+<# for(int k=0;k<=i;k++) { #>
+	/// <typeparam name="T<#= k+1 #>">Tooling of type # <#= k+1 #></typeparam>
+<# } #>
+	public interface Read<out TChannel <#= GenericsStroke(i+1, true) #>> : Read<TChannel<#= GenericsStroke(i) #>> 
+		where TChannel : CanQuery 
+<# for(int k=0;k<=i;k++) { #>
+		where T<#= k+1 #> : Tooling
+<# } #>	{ }
 
-	internal struct SRead<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-		: IQueryMultiplexer, 
-		  Read<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-		 where TChannel : CanQuery
+	internal struct SRead<TChannel <#= GenericsStroke(i+1) #>>
+		: IQueryMultiplexer, Read<TChannel <#= GenericsStroke(i+1) #>>
+		where TChannel : CanQuery
+<# for(int k=0;k<=i;k++) { #>
+		where T<#= k+1 #> : Tooling
+<# } #>	
 	{
 		private readonly ChannelMultiplexer _cm;
 		
@@ -35,21 +49,34 @@ namespace Reinforced.Tecture.Channels
 			_cm = cm;		
 		}
 
-		public TFeature GetFeature<TFeature>() where TFeature : QueryFeature 
+		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
-			return _cm.GetQueryFeature<TChannel,TFeature>();
+			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
 	}
 
 	#endregion
 
 	#region Write
-	public interface Write<out TChannel<# for(int j =0;j<=i;j++) { #>, out E<#= j+1 #><# } #>> : Write<TChannel> where TChannel : CanCommand { }
+	/// <summary>
+	/// Channel's write end for <#= i+1 #> entities
+	/// </summary>
+	/// <typeparam name="TChannel">Type of channel</typeparam>
+<# for(int k=0;k<=i;k++) { #>
+	/// <typeparam name="T<#= k+1 #>">Tooling of type # <#= k+1 #></typeparam>
+<# } #>
+	public interface Write<out TChannel<#= GenericsStroke(i+1, true) #>> : Write<TChannel<#= GenericsStroke(i) #>> 
+		where TChannel : CanCommand 
+<# for(int k=0;k<=i;k++) { #>
+		where T<#= k+1 #> : Tooling
+<# } #>	{ }
 
-	internal struct SWrite<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-		: ICommandMultiplexer, 
-		  Write<TChannel<# for(int j =0;j<=i;j++) { #>, E<#= j+1 #><# } #>>
-		 where TChannel : CanCommand
+	internal struct SWrite<TChannel<#= GenericsStroke(i+1) #>>
+		: ICommandMultiplexer, Write<TChannel<#= GenericsStroke(i+1) #>>
+		where TChannel : CanCommand
+<# for(int k=0;k<=i;k++) { #>
+		where T<#= k+1 #> : Tooling
+<# } #>	
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
@@ -59,14 +86,15 @@ namespace Reinforced.Tecture.Channels
 			_pipeline = p;
 		}
 
-		public TFeature GetFeature<TFeature>() where TFeature : CommandFeature 
+		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
 		{
-			return _cm.GetCommandFeature<TChannel,TFeature>();
+			return _cm.GetCommandAspect<TChannel,TAspect>();
 		}
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.ChannelId = typeof(TChannel).FullName;
+			command.ChannelName = typeof(TChannel).Name;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -80,3 +108,16 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	<# } #>
 }
+
+<#+
+    private string GenericsStroke(int num, bool nout = false)
+    {
+        StringBuilder sb = new StringBuilder();
+		for(var i=0;i<num;i++){
+			if (nout) sb.Append(", out T");
+			else sb.Append(", T");
+			sb.Append(i+1);
+		}
+		return sb.ToString();
+    }
+#>

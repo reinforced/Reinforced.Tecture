@@ -2,9 +2,9 @@ using System;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
-using Reinforced.Tecture.Features.Orm.Commands.Add;
+using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Tracing.Commands;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks

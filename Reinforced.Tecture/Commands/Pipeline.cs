@@ -5,7 +5,7 @@ using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Commands
 {
-    public class Pipeline
+    class Pipeline
     {
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
         internal TraceCollector TraceCollector = null;
@@ -20,7 +20,7 @@ namespace Reinforced.Tecture.Commands
             cmd.Order = _commandQueue.Count + 1;
             if (_debugMode)
             {
-                DebugInfo dbg = null;
+                //DebugInfo dbg = null;
                 //var st = new StackTrace();
                 //foreach (var stf in st.GetFrames())
                 //{
@@ -37,7 +37,7 @@ namespace Reinforced.Tecture.Commands
                 //    }
                 //}
 
-                cmd.Debug = dbg;
+                //cmd.Debug = dbg;
             }
             
             TraceCollector?.Command(cmd.TraceClone());

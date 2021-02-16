@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Testing.Checks;
-using Reinforced.Tecture.Features.SqlStroke.Testing;
+using Reinforced.Tecture.Aspects.DirectSql.Testing;
+using Reinforced.Tecture.Aspects.Orm.Testing.Checks;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.BuiltInChecks;
+using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 
@@ -42,20 +44,22 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         public void GenerateValidation()
         {
             var className = $"{_caseName}_Validation";
-            var go = Trace.GenerateUnitTest(className, _ns, g =>
+            var go = Trace.GenerateValidation(className, _ns, g =>
             {
                 g.CheckOrm();
                 g.CheckSql();
                 g.Basics();
             });
-            
+
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }
 
         public void GenerateTestData()
         {
             var className = $"{_caseName}_TestData";
-            var go = Trace.GenerateTestData(className, _ns);
+            
+            var go = Trace.GenerateData(className, _ns);
+
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }
 
@@ -68,7 +72,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
 
         public string Text()
         {
-            return Trace.ToText();
+            return Trace.Explain();
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

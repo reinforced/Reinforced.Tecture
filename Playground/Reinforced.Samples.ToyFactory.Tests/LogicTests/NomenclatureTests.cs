@@ -8,7 +8,7 @@ using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks;
 //using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks;
 using Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Aspects.Orm.Queries;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -22,7 +22,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
         {
             using var c = Case<CreateTypeWorks_TestData>(out ITecture ctx);
 
-            var a = ctx.Do<Logic.Services.Nomenclature>().CreateType("test type");
+            var a = ctx.Do<Nomenclature>().CreateType("test type");
             ctx.Save();
             var r = a.Result;
             var id = ctx.From<Db>().Key(r);
@@ -36,7 +36,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
         {
             using var c = Case<CreateBlueprintWorks_TestData>(out ITecture ctx);
 
-            var a = ctx.Do<Logic.Services.Nomenclature>().CreateBlueprint(1002);
+            var a = ctx.Do<Nomenclature>().CreateBlueprint(1002);
             ctx.Save();
 
             Output.WriteLine(c.Text());

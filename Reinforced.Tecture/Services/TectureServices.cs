@@ -9,23 +9,72 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 2 entities
+    /// Services with 2 toolings
     /// </summary>    
-	public class TectureService<T1, T2>
+	public class TectureService<Tool1>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
+			   where Tool1 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2>(ChannelMultiplexer);
+            return new SRead<T, Tool1>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 2 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 
@@ -33,24 +82,74 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 3 entities
+    /// Services with 3 toolings
     /// </summary>    
-	public class TectureService<T1, T2, T3>
+	public class TectureService<Tool1, Tool2>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
-			   where T3 : class
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2, T3> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2, T3> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2, T3>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 3 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 
@@ -58,25 +157,76 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 4 entities
+    /// Services with 4 toolings
     /// </summary>    
-	public class TectureService<T1, T2, T3, T4>
+	public class TectureService<Tool1, Tool2, Tool3>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
-			   where T3 : class
-			   where T4 : class
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2, T3, T4> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2, T3, T4> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2, T3, T4>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2, Tool3> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2, Tool3>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 4 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2, Tool3>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 
@@ -84,26 +234,78 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 5 entities
+    /// Services with 5 toolings
     /// </summary>    
-	public class TectureService<T1, T2, T3, T4, T5>
+	public class TectureService<Tool1, Tool2, Tool3, Tool4>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
-			   where T3 : class
-			   where T4 : class
-			   where T5 : class
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2, T3, T4, T5> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2, T3, T4, T5> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2, T3, T4, T5>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2, Tool3, Tool4> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 5 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2, Tool3, Tool4>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 
@@ -111,27 +313,80 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 6 entities
+    /// Services with 6 toolings
     /// </summary>    
-	public class TectureService<T1, T2, T3, T4, T5, T6>
+	public class TectureService<Tool1, Tool2, Tool3, Tool4, Tool5>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
-			   where T3 : class
-			   where T4 : class
-			   where T5 : class
-			   where T6 : class
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2, T3, T4, T5, T6> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5, T6>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2, T3, T4, T5, T6> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2, T3, T4, T5, T6>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 6 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2, Tool3, Tool4, Tool5>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 
@@ -139,28 +394,82 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 7 entities
+    /// Services with 7 toolings
     /// </summary>    
-	public class TectureService<T1, T2, T3, T4, T5, T6, T7>
+	public class TectureService<Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
-			   where T3 : class
-			   where T4 : class
-			   where T5 : class
-			   where T6 : class
-			   where T7 : class
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   where Tool6 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2, T3, T4, T5, T6, T7> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5, T6, T7>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2, T3, T4, T5, T6, T7> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2, T3, T4, T5, T6, T7>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 7 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   where Tool6 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 
@@ -168,29 +477,171 @@ namespace Reinforced.Tecture.Services {
 	
 
 	/// <summary>
-    /// Storage services that touches 8 entities
+    /// Services with 8 toolings
     /// </summary>    
-	public class TectureService<T1, T2, T3, T4, T5, T6, T7, T8>
+	public class TectureService<Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>
 			   : TectureServiceBase
-			   where T1: class
-			   where T2 : class
-			   where T3 : class
-			   where T4 : class
-			   where T5 : class
-			   where T6 : class
-			   where T7 : class
-			   where T8 : class
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   where Tool6 : Tooling
+			   where Tool7 : Tooling
 			   
     {
 
-        protected Read<T, T1, T2, T3, T4, T5, T6, T7, T8> From<T>() where T : CanQuery
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> From<T>() where T : CanQuery
         {
-            return new SRead<T, T1, T2, T3, T4, T5, T6, T7, T8>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer);
         }		
 
-		protected Write<T, T1, T2, T3, T4, T5, T6, T7, T8> To<T>() where T : CanCommand
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> In<T>() where T : CanQuery
         {
-            return new SWrite<T, T1, T2, T3, T4, T5, T6, T7, T8>(ChannelMultiplexer, Pipeline);
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 8 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   where Tool6 : Tooling
+			   where Tool7 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
+    }
+
+ 
+	
+
+	/// <summary>
+    /// Services with 9 toolings
+    /// </summary>    
+	public class TectureService<Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   where Tool6 : Tooling
+			   where Tool7 : Tooling
+			   where Tool8 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> In<T>() where T : CanQuery
+        {
+            return From<T>();
+        }	
+
+        /// <summary>
+        /// Gets writing end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain write end of</typeparam>
+        /// <returns>Channel's write end</returns>
+		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> To<T>() where T : CanCommand
+        {
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer, Pipeline);
+        }	
+    }
+
+    /// <summary>
+    /// Read-only service with 9 toolings
+    /// </summary>    
+	public class ReadonlyTectureService<Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>
+			   : TectureServiceBase
+			   where Tool1 : Tooling
+			   where Tool2 : Tooling
+			   where Tool3 : Tooling
+			   where Tool4 : Tooling
+			   where Tool5 : Tooling
+			   where Tool6 : Tooling
+			   where Tool7 : Tooling
+			   where Tool8 : Tooling
+			   
+    {
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> From<T>() where T : CanQuery
+        {
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer);
+        }		
+
+        /// <summary>
+        /// Gets reading end of channel <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">Channel to obtain read end of</typeparam>
+        /// <returns>Channel's read end</returns>
+        protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> In<T>() where T : CanQuery
+        {
+            return From<T>();
         }	
     }
 

@@ -1,12 +1,14 @@
 ﻿using System;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Entry.Builders;
-using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry
 {
+    /// <summary>
+    /// Tecture entry point extensions
+    /// </summary>
     public static class Extensions
     {
         /// <summary>
@@ -16,22 +18,10 @@ namespace Reinforced.Tecture.Entry
         /// <param name="tb">Builder</param>
         /// <param name="cfg">Configuration action with channel configurator</param>
         /// <returns>Fluent</returns>
-        public static TectureBuilder WithChannel<TChannel>(this TectureBuilder tb, Action<ChannelConfiguration<TChannel>> cfg) where TChannel : Channel
+        public static TectureBuilder WithChannel<TChannel>(this TectureBuilder tb, Action<ChannelBinding<TChannel>> cfg) where TChannel : Channel
         {
-            var cb = new ChannelConfigurationImpl<TChannel>(tb._mx);
+            var cb = new ChannelBindingImpl<TChannel>(tb._mx, tb._transactionManager);
             cfg(cb);
-            return tb;
-        }
-
-        /// <summary>
-        /// Points transaction manager to use
-        /// </summary>
-        /// <param name="tb">Tecture builder</param>
-        /// <param name="manager">Transaction manager instance</param>
-        /// <returns>Fluent</returns>
-        public static TectureBuilder WithTransactions(this TectureBuilder tb, ITransactionManager manager)
-        {
-            tb._transactionManager = manager;
             return tb;
         }
 
@@ -39,9 +29,9 @@ namespace Reinforced.Tecture.Entry
         /// Adds exception handling method to be used by Tecture
         /// </summary>
         /// <param name="tb">Tecture builder</param>
-        /// <param name="handler">Exception handler</param>
+        /// <param name="handler">Exception handler. Returns true if exception is handled and does not need further throw</param>
         /// <returns>Fluent</returns>
-        public static TectureBuilder WithExceptionHandler(this TectureBuilder tb, Action<Exception> handler)
+        public static TectureBuilder WithExceptionHandler(this TectureBuilder tb, Func<Exception,bool> handler)
         {
             tb._excHandler = handler;
             return tb;

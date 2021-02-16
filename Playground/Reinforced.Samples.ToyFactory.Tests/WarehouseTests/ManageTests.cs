@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Samples.ToyFactory.Logic.Channels;
+﻿using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
@@ -13,8 +10,8 @@ using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Features.Orm.Queries;
-using Reinforced.Tecture.Features.SqlStroke.Queries;
+using Reinforced.Tecture.Aspects.DirectSql.Queries;
+using Reinforced.Tecture.Aspects.Orm.Queries;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -38,7 +35,9 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void RenameMeasurementUnit()
         {
-            using var c = Case<RenameMeasurementUnit_TestData>(out ITecture ctx);
+            using var c = Case
+                //<RenameMeasurementUnit_TestData>
+                (out ITecture ctx);
 
             var a = ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
@@ -50,7 +49,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
 
             Output.WriteLine(c.Text());
 
-            c.Validate<RenameMeasurementUnit_Validation>();
+            //c.Validate<RenameMeasurementUnit_Validation>();
         }
 
         [Fact]

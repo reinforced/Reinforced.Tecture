@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
-using Reinforced.Tecture.Testing.Validation;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 {
-    class Generator : IGenerator
+    partial class Generator : IGenerator
     {
         private readonly TypeGeneratorRepository _tgr;
 
@@ -67,10 +60,10 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     .ComaSeparated());
 
             //Set<X,Y>(instance, x=>x.Property,"value")
-            var invokation = InvocationExpression(setWithArguments)
+            var invocation = InvocationExpression(setWithArguments)
                 .WithArgumentList(ArgumentList(arguments));
 
-            return invokation;
+            return invocation;
         }
         private List<StatementSyntax> ProduceInlineableProperties(string instanceName, object instance, GenerationContext context)
         {
@@ -84,9 +77,9 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     // "value"
                     var propValue = TypeInitConstructor.Construct(propertyInfo.PropertyType, Meta.Value(propertyInfo, instance));
 
-                    var invokation = SafeAssignment(instanceName, pName, propValue);
+                    var invocation = SafeAssignment(instanceName, pName, propValue);
 
-                    initNodes.Add(ExpressionStatement(invokation));
+                    initNodes.Add(ExpressionStatement(invocation));
                     var u = ExtractEnumUsing(propertyInfo.PropertyType);
                     context.AddUsing(u);
                 }
@@ -112,62 +105,6 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                     context.AddUsing(propertyInfo.PropertyType.Namespace);
                 }
             }
-        }
-
-        internal static ExpressionSyntax ProceedTuple(TypeGeneratorRepository tgr, IEnumerable<(Type, object)> values,
-            GenerationContext context)
-        {
-            var variables = new List<ExpressionSyntax>();
-            foreach (var item in values)
-            {
-                if (item.Item1.IsInlineable() || item.Item2 == null)
-                {
-                    variables.Add(TypeInitConstructor.Construct(item.Item1, item.Item2));
-                }
-                else
-                {
-                    var generator = tgr.GetGeneratorFor(item.Item1);
-                    generator.New(item.Item2, context);
-                    var name = context.GetDefined(item.Item2);
-                    variables.Add(IdentifierName(name));
-                }
-            }
-
-            var collectionStrategy = tgr.CollectionStrategies.GetTupleStrategy(values.Select(x => x.Item1));
-
-            return collectionStrategy.Generate(variables, context.Usings);
-        }
-        internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context)
-        {
-            var elementType = collectionType.ElementType();
-            var generator = elementType.IsInlineable() ? null : tgr.GetGeneratorFor(collectionType.ElementType());
-
-            var variables = new List<ExpressionSyntax>();
-            foreach (var item in values)
-            {
-                if (item == null)
-                {
-                    variables.Add(LiteralExpression(SyntaxKind.NullLiteralExpression));
-                }
-                else
-                {
-                    if (generator != null)
-                    {
-                        generator.New(item, context);
-                        var name = context.GetDefined(item);
-                        variables.Add(IdentifierName(name));
-                    }
-                    else
-                    {
-                        var inline = TypeInitConstructor.Construct(elementType, item);
-                        variables.Add(inline);
-                    }
-                }
-            }
-
-            var collectionStrategy = tgr.CollectionStrategies.GetStrategy(collectionType);
-
-            return collectionStrategy.Generate(variables, context.Usings);
         }
 
         private void ProduceCollectionProperties(string instanceName, object instance, GenerationContext context)
@@ -211,6 +148,11 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
         protected virtual ExpressionSyntax EarlyChecks(Type t, object instance, GenerationContext context)
         {
+            if (t.IsDictionary())
+            {
+                throw new Exception("TODO: implement dictionaries support in test data capture");
+            }
+
             if (t.IsEnumerable())
             {
                 return ProceedCollection(_tgr, t, (IEnumerable)instance, context);

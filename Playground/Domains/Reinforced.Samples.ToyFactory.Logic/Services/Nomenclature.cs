@@ -7,16 +7,26 @@ using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
+using Reinforced.Tecture;
+using Reinforced.Tecture.Aspects.Orm.Commands.Add;
+using Reinforced.Tecture.Aspects.Orm.Commands.Delete;
+using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
+using Reinforced.Tecture.Aspects.Orm.Commands.Derelate;
+using Reinforced.Tecture.Aspects.Orm.Commands.Relate;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Aspects.Orm.Queries;
+using Reinforced.Tecture.Aspects.Orm.Toolings;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Features.Orm.Commands.Add;
-using Reinforced.Tecture.Features.Orm.Commands.Relate;
-using Reinforced.Tecture.Features.Orm.PrimaryKey;
-using Reinforced.Tecture.Features.Orm.Queries;
 using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Services
 {
-    public class Nomenclature : TectureService<ToyType, Blueprint, Resource, BlueprintResources>, INoContext
+    public class Nomenclature : TectureService
+        <
+            Adds<ToyType, BlueprintResources>,
+            Deletes<Resource>,
+            Modifies<Blueprint>
+        >
     {
         private Nomenclature() { }
 
@@ -30,11 +40,16 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             var ex = To<Db>().Add(tt).Annotate("Create new toy type");
             await Save;
             var tw = From<Db>().Get<ToyType>().All.First();
+
             return ex;
         }
 
-       
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="toyTypeId"></param>
+        /// <returns></returns>
         public IAddition<Blueprint> CreateBlueprint(int toyTypeId)
         {
             From<Db>().All<ToyType>().EnsureExists(toyTypeId);
@@ -55,6 +70,8 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
 
         public void AddResourceToBlueprint(int blueprintId, IEnumerable<ResourceWithQuantity> rwq)
         {
+
+
             From<Db>().All<Blueprint>().EnsureExists(blueprintId);
 
             var resourceIds = rwq.Select(x => x.ResourceId).ToArray();

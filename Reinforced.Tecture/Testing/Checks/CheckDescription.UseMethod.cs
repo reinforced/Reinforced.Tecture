@@ -9,26 +9,40 @@ using Reinforced.Tecture.Testing.Validation;
 
 namespace Reinforced.Tecture.Testing.Checks
 {
-    public abstract partial class CheckDescription<TCommand> : CheckDescription where TCommand : CommandBase
+    public abstract partial class CheckDescription<TCommand> where TCommand : CommandBase
     {
         private readonly List<ICheckParameter> _checkParameters = new List<ICheckParameter>();
 
+        /// <summary>
+        /// List of check parameters collected from UseMethod call
+        /// </summary>
         protected List<ICheckParameter> CheckParameters
         {
             get { return _checkParameters; }
         }
 
+        /// <inheritdoc />
         public override IEnumerable<ICheckParameter> GetCheckParameters(CommandBase commandBase)
         {
             if (commandBase is TCommand tc) return GetCheckParameters(tc);
             throw new TectureException($"Command type mismatch: ${typeof(TCommand).Name} expected but {commandBase?.GetType().Name} got");
         }
 
+        /// <summary>
+        /// Retrieves check parameters for particular command
+        /// </summary>
+        /// <param name="commandBase">Command instance</param>
+        /// <returns>Set of check parameters</returns>
         protected virtual IEnumerable<ICheckParameter> GetCheckParameters(TCommand commandBase)
         {
             return _checkParameters;
         }
 
+        /// <summary>
+        /// Extracts check description from check factory method invokation
+        /// </summary>
+        /// <param name="marker">Check factory method invokation lambda</param>
+        /// <returns>MethodInfo of check factory method</returns>
         protected MethodInfo UseMethod(
             Expression<Func<IAnnotator, TCommand, CommandCheck<TCommand>>> marker)
         {
@@ -37,6 +51,7 @@ namespace Reinforced.Tecture.Testing.Checks
             if (invok.NodeType == ExpressionType.Convert)
             {
                 var u = invok as UnaryExpression;
+                // ReSharper disable once PossibleNullReferenceException
                 invok = u.Operand;
             }
 
@@ -75,7 +90,7 @@ namespace Reinforced.Tecture.Testing.Checks
                 }
                 if (a is MethodCallExpression invex)
                 {
-                    ExtractInvokation(command, annotator, invex);
+                    ExtractInvocation(command, annotator, invex);
                     continue;
                 }
 
@@ -105,7 +120,7 @@ namespace Reinforced.Tecture.Testing.Checks
             _checkParameters.Add(cC);
         }
 
-        private void ExtractInvokation(ParameterExpression command, ParameterExpression annotator, MethodCallExpression invex)
+        private void ExtractInvocation(ParameterExpression command, ParameterExpression annotator, MethodCallExpression invex)
         {
             if (invex.Object == annotator)
             {

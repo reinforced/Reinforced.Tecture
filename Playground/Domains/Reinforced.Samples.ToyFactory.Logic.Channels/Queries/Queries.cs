@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Reinforced.Tecture.Features.Orm.Queries;
+using Reinforced.Tecture.Aspects.Orm.Queries;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Channels.Queries
 {

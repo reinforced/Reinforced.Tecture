@@ -6,7 +6,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Reinforced.Tecture.Testing.Data.Format
 {
-    public partial class CodeFormatter : CSharpSyntaxRewriter
+    partial class CodeFormatter : CSharpSyntaxRewriter
     {
         /// <summary>Called when the visitor visits a CompilationUnitSyntax node.</summary>
         public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)

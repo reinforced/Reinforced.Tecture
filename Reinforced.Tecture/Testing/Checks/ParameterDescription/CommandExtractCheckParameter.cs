@@ -1,15 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Testing.Checks.ParameterDescription
 {
+    /// <summary>
+    /// Check parameter that will be converted to the code of constant extracted with value extracted from particular command
+    /// </summary>
     public class CommandExtractCheckParameter : ICheckParameter
     {
+        /// <summary>
+        /// Constant type
+        /// </summary>
         public Type Type { get; set; }
 
-        // command => object
+        /// <summary>
+        /// Delegate consuming command instance and returning object to be inlined into test code as constant
+        /// </summary>
         public Delegate Extractor { get; set; }
     }
 }

@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace Reinforced.Tecture.Services
 {
+    /// <summary>
+    /// Await syntax tooling for actions queue
+    /// </summary>
     public struct ActionsQueueAwaiter : INotifyCompletion
     {
         private readonly ActionsQueue _exp;
@@ -13,9 +16,20 @@ namespace Reinforced.Tecture.Services
             IsCompleted = false;
         }
 
+        /// <summary>
+        /// GetResult
+        /// </summary>
         public void GetResult() { }
+
+        /// <summary>
+        /// Gets or sets whether awaited task was executed
+        /// </summary>
         public bool IsCompleted { get; private set; }
 
+        /// <summary>
+        /// Enqueue task continuation
+        /// </summary>
+        /// <param name="continuation">Continuation</param>
         public void OnCompleted(Action continuation)
         {
             _exp.Enqueue(continuation);
@@ -35,10 +49,14 @@ namespace Reinforced.Tecture.Services
             _exp = exp;
         }
 
+        /// <summary>
+        /// GetAwaiter
+        /// </summary>
+        /// <returns>Awaiter</returns>
         public ActionsQueueAwaiter GetAwaiter() => new ActionsQueueAwaiter(_exp);
 
         /// <summary>
-        /// Enqueues action to be executed after saving
+        /// Enqueue action to be executed after saving
         /// </summary>
         /// <param name="action"></param>
         public void ContinueWith(Action action)

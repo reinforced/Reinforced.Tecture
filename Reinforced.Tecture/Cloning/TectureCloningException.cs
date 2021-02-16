@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Reinforced.Tecture.Cloning
 {
+    /// <summary>
+    /// Exception that happens during deep clone
+    /// </summary>
     public class TectureCloningException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Exception"></see> class with a specified error message.</summary>

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Features.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Entities
 {
@@ -17,7 +17,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Entities
             get { return () => Id; }
         }
 
-        public string Descibe()
+        public string Describe()
         {
             return $"toy type {Name}";
         }

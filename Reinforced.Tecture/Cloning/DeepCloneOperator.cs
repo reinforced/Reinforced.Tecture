@@ -202,6 +202,11 @@ namespace Reinforced.Tecture.Cloning
         public object CloneDictionaryData(IDictionary dic)
         {
             var (keyType, valueType) = dic.GetType().GetDictionaryParameters();
+            if (keyType == null || valueType == null)
+            {
+                throw new TectureCloningException(
+                    $"cannot emit cloning delegate for dictionary '{dic.GetType().FullName}'. Could not find proper IDictionary<,> implementation. {CloningDelegateEmitter.Explanation}");
+            }
             var g = ProduceDictionaryCloneMethod.MakeGenericMethod(keyType, valueType);
             var dictionary = g.Invoke(this, new object[] { dic });
             return dictionary;

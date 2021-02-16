@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
 namespace Reinforced.Tecture.Testing
@@ -10,6 +8,9 @@ namespace Reinforced.Tecture.Testing
         void Dump(TextWriter tw);
     }
 
+    /// <summary>
+    /// Generated code output
+    /// </summary>
     public class GenerationOutput
     {
         private readonly IGenerating _gen;
@@ -19,6 +20,10 @@ namespace Reinforced.Tecture.Testing
             _gen = gen;
         }
 
+        /// <summary>
+        /// Dumps all the generated output to string
+        /// </summary>
+        /// <returns></returns>
         public string ToFullString()
         {
             StringBuilder sb = new StringBuilder();
@@ -30,6 +35,11 @@ namespace Reinforced.Tecture.Testing
             }
         }
 
+        /// <summary>
+        /// Dumps all the generated output to file
+        /// </summary>
+        /// <param name="fileName">Full path to target file</param>
+        /// <param name="nobackup">False to create backup if file already exists</param>
         public void ToFile(string fileName,bool nobackup = false)
         {
             if (File.Exists(fileName))

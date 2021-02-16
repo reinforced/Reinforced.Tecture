@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture", "Reinforced.Tecture\Reinforced.Tecture.csproj", "{F738D6C7-FBD9-46FE-AAEA-6F2E84843F48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.Orm", "Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj", "{F33A4529-947C-429E-A2DF-44C0B3EB9E8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Aspects.Orm", "Aspects\Reinforced.Tecture.Aspects.Orm\Reinforced.Tecture.Aspects.Orm.csproj", "{F33A4529-947C-429E-A2DF-44C0B3EB9E8C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aspects", "Aspects", "{6CD9A28F-A2F7-4E8D-B244-7CE5758F5297}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtimes", "Runtimes", "{0D7F1782-E14E-48CC-AA6D-85865D5F4E48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.SqlStroke", "Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj", "{E2893CA6-0EE7-4DC8-8F89-D91BFCEFD687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Aspects.DirectSql", "Aspects\Reinforced.Tecture.Aspects.DirectSql\Reinforced.Tecture.Aspects.DirectSql.csproj", "{E2893CA6-0EE7-4DC8-8F89-D91BFCEFD687}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Features.BulkSql", "Features\Reinforced.Tecture.Features.BulkSql\Reinforced.Tecture.Features.BulkSql.csproj", "{0A94190F-1AEB-4CE7-983B-F370429DA0AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Aspects.BulkSql", "Aspects\Reinforced.Tecture.Aspects.BulkSql\Reinforced.Tecture.Aspects.BulkSql.csproj", "{0A94190F-1AEB-4CE7-983B-F370429DA0AF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reinforced.Tecture.Runtimes.EFCore", "Runtimes\Reinforced.Tecture.Runtimes.EFCore\Reinforced.Tecture.Runtimes.EFCore.csproj", "{F92CD47D-635F-42D1-9BE9-B0F0F4C69B1B}"
 EndProject
@@ -78,27 +78,21 @@ Global
 		{B1E33357-D290-430A-9038-E13C851DED1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1E33357-D290-430A-9038-E13C851DED1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E33357-D290-430A-9038-E13C851DED1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1E33357-D290-430A-9038-E13C851DED1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{23C092B8-85BE-41CF-83EC-F96B07052053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{23C092B8-85BE-41CF-83EC-F96B07052053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C092B8-85BE-41CF-83EC-F96B07052053}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23C092B8-85BE-41CF-83EC-F96B07052053}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A4B1E7F-2759-4D87-82EC-70B56DB0397D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A4B1E7F-2759-4D87-82EC-70B56DB0397D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A4B1E7F-2759-4D87-82EC-70B56DB0397D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A4B1E7F-2759-4D87-82EC-70B56DB0397D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA5691BC-88C6-475A-91F5-3E1CBFCF0572}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEAD5F39-CACA-43FC-A506-DEBA7634424F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06E27764-68A9-4F27-8C95-DD8C340280CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

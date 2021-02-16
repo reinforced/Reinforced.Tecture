@@ -2,14 +2,15 @@ using System;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
-using Reinforced.Tecture.Features.Orm.Commands.Add;
+using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Tracing.Commands;
-using Reinforced.Tecture.Features.Orm.Commands.Update;
-using Reinforced.Tecture.Features.Orm.Commands.DeletePk;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.Add.AddChecks;
+using System.Collections.Generic;
+using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
+using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Add.AddChecks;
 using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.Update.UpdateChecks;
-using static Reinforced.Tecture.Features.Orm.Testing.Checks.DeletePk.DeletePKChecks;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.UpdatePk.UpdatePkChecks;
+using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.DeletePk.DeletePKChecks;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit
 {
@@ -28,21 +29,16 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 					Annotated(@"create measurement unit 'Kilograms' (kG)")
 				);
 				flow.Then<Save>();
-				flow.Then<Update>
+				flow.Then<UpdatePk>
 				(
-					Update<MeasurementUnit>(x=>
-					{ 
-						if (x.Name != @"Kilo") return false;
-						if (x.ShortName != @"kg") return false;
-						if (x.Id != 42) return false;
-						return true;
-					}, @"")
+					UpdateByPK<MeasurementUnit>(@"", 1124), 
+					UpdatedValues<MeasurementUnit>(new Dictionary<String, Object>() {  { @"Name", @"Kilo" } ,  { @"ShortName", @"kg" }  } , @"")
 				);
 				flow.Then<Save>();
 				flow.Then<DeletePk>
 				(
-					DeleteByPK<MeasurementUnit>(@"remove measurement unit#42", 42), 
-					Annotated(@"remove measurement unit#42")
+					DeleteByPK<MeasurementUnit>(@"remove measurement unit#1124", 1124), 
+					Annotated(@"remove measurement unit#1124")
 				);
 				flow.Then<Save>();
 				flow.TheEnd();

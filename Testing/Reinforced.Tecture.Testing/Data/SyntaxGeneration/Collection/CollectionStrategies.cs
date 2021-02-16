@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection.Strategies;
 
 namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection
 {
+    /// <summary>
+    /// Collection generation strategies provider
+    /// </summary>
     public class CollectionStrategies
     {
+        /// <summary>
+        /// Gets whether particular type has particular method
+        /// </summary>
+        /// <param name="t">Type</param>
+        /// <param name="name">Method name</param>
+        /// <returns>True when type <paramref name="t"/> has method <paramref name="name"/>, false otherwise</returns>
         protected virtual bool HasMethod(Type t, string name)
         {
             try
@@ -27,11 +33,21 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection
             }
         }
 
+        /// <summary>
+        /// Obtains generation strategy for tuple
+        /// </summary>
+        /// <param name="tupleTypes">Set of types that tuple consists of</param>
+        /// <returns>Generation strategy for tuple</returns>
         public virtual ICollectionCreationStrategy GetTupleStrategy(IEnumerable<Type> tupleTypes)
         {
             return new TupleCreationStrategy();
         }
              
+        /// <summary>
+        /// Obtains generation strategy for collection
+        /// </summary>
+        /// <param name="collectionType">Collection type</param>
+        /// <returns>Generation strategy of collection <paramref name="collectionType"/></returns>
         public virtual ICollectionCreationStrategy GetStrategy(Type collectionType)
         {
             if (collectionType.IsArray)

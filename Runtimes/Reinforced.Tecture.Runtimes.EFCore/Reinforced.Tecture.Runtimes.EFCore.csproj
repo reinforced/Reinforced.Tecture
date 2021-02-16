@@ -4,10 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>EntityFramework.Core Runtime for Reinforced.Tecture</Description>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\Reinforced.Tecture\TypeExtensions.cs" Link="Features\Orm\TypeExtensions.cs" />
+    <Compile Include="..\..\Reinforced.Tecture\TypeExtensions.cs" Link="Aspects\Orm\TypeExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,13 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.Orm\Reinforced.Tecture.Features.Orm.csproj" />
-    <ProjectReference Include="..\..\Features\Reinforced.Tecture.Features.SqlStroke\Reinforced.Tecture.Features.SqlStroke.csproj" />
+    <ProjectReference Include="..\..\Aspects\Reinforced.Tecture.Aspects.Orm\Reinforced.Tecture.Aspects.Orm.csproj" />
+    <ProjectReference Include="..\..\Aspects\Reinforced.Tecture.Aspects.DirectSql\Reinforced.Tecture.Aspects.DirectSql.csproj" />
     <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Orm\Runtime\" />
+    <Folder Include="Aspects\Orm\Runtime\" />
   </ItemGroup>
 
 </Project>

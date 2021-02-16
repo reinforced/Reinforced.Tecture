@@ -25,16 +25,21 @@ namespace Reinforced.Tecture.Savers
             return SaveAsync();
         }
 
+        /// <summary>
+        /// Gets channel type that this saver is bound to
+        /// </summary>
+        public Type Channel { get; internal set; }
+
         internal abstract IEnumerable<Type> ServingCommandTypes { get; }
 
         internal abstract CommandRunner GetRunner(CommandBase cb);
 
-        internal Auxilary _Aux;
+        internal Auxiliary _Aux;
 
         /// <summary>
-        /// Reference to test data & tracing capabilities
+        /// Reference to test data and tracing capabilities
         /// </summary>
-        protected Auxilary Aux
+        protected Auxiliary Aux
         {
             get { return _Aux; }
         }
@@ -44,9 +49,19 @@ namespace Reinforced.Tecture.Savers
             OnRegister();
         }
 
+        /// <summary>
+        /// Being invoked when saver has been just registered in channel muliplexer
+        /// </summary>
         protected abstract void OnRegister();
+
+        /// <summary>
+        /// Actually performs saving
+        /// </summary>
         protected abstract void Save();
 
+        /// <summary>
+        /// Actually performs saving (async)
+        /// </summary>
         protected abstract Task SaveAsync();
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

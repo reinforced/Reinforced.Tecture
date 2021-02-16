@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Reinforced.Tecture.Testing.Checks.ParameterDescription
+﻿namespace Reinforced.Tecture.Testing.Checks.ParameterDescription
 {
+    /// <summary>
+    /// Description of particular check parameter
+    /// </summary>
     public interface ICheckParameter
     {
     }

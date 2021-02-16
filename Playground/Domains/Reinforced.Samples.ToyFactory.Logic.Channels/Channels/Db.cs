@@ -1,10 +1,11 @@
-﻿using Reinforced.Tecture.Channels;
+﻿using Reinforced.Tecture.Aspects.DirectSql;
+using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Channels
 {
     public interface Db :
-        CommandQueryChannel<Reinforced.Tecture.Features.Orm.Command, Reinforced.Tecture.Features.Orm.Query>,
-        CommandQueryChannel<Reinforced.Tecture.Features.SqlStroke.Command, Reinforced.Tecture.Features.SqlStroke.Query>
+        CommandQueryChannel<Tecture.Aspects.Orm.Command, Tecture.Aspects.Orm.Query>,
+        CommandQueryChannel<Command, Query>
     { }
 
     public interface IEntity
