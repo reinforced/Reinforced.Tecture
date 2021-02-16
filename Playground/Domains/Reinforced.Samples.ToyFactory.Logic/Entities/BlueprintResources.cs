@@ -6,6 +6,9 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Entities
 {
+    /// <summary>
+    /// Resource holds two FKs - for blueprint and for resource; and a quantity of resources needed for blueprint
+    /// </summary>
     public class BlueprintResources : IPrimaryKey<int,int>
     {
         public Resource Resource { get; internal set; }

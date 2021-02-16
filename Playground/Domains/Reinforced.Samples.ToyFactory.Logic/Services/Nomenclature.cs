@@ -32,6 +32,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
 
         public async Task<IAddition<ToyType>> CreateType(string name)
         {
+            
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))
             {
                 throw new Exception($"Cannot add toy type '{name}' because it already exists");
@@ -71,9 +72,11 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
         public void AddResourceToBlueprint(int blueprintId, IEnumerable<ResourceWithQuantity> rwq)
         {
 
-
+            //check if we have such blueprint (throws if there is no such id)
+            //it is custom ext method from Channels project
             From<Db>().All<Blueprint>().EnsureExists(blueprintId);
 
+            //get resources Ids from input
             var resourceIds = rwq.Select(x => x.ResourceId).ToArray();
 
             var count = From<Db>()
@@ -90,7 +93,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             {
                 foreach (var resourceWithQuantity in rwq)
                 {
-                    To<Db>().Add(new BlueprintResources()
+                    To<Db>().Add(new BlueprintResources() //add new resource
                     {
                         BlueprintId = blueprintId,
                         ResourceId = resourceWithQuantity.ResourceId,

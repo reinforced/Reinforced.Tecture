@@ -11,15 +11,13 @@ namespace Reinforced.Samples.ToyFactory.Data
         public DbSet<Blueprint> Blueprints { get; set; }
         public DbSet<BlueprintResources> BlueprintResources { get; set; }
 
+        public DbSet<Resource> Resources { get; set; }
         public DbSet<MeasurementUnit> MeasurementUnits { get; set; }
+        
+       
         public DbSet<ResourceSupply> ResourceSupplies { get; set; }
+        
         public DbSet<ResourceSupplyItem> ResourceSupplyItems { get; set; }
         public DbSet<ResourceSupplyStatusHistoryItem> ResourceSupplyStatusHistoryItems { get; set; }
-        public DbSet<Resource> Resources { get; set; }
-
-        private void OnWarehouseModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ResourceSupplyItem>().HasKey(x => new {x.ResourceSupplyId, x.ResourceId});
-        }
     }
 }

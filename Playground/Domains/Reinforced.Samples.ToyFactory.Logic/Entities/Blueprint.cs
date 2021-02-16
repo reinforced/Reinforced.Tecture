@@ -5,6 +5,9 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Entities
 {
+    /// <summary>
+    /// Blueprint Id holder with FK to ToyType
+    /// </summary>
     public class Blueprint : IPrimaryKey<int>, IEntity
     {
         public int Id { get; internal set; }

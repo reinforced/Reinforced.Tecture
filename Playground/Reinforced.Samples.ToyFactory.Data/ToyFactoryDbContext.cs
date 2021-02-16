@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 
 namespace Reinforced.Samples.ToyFactory.Data
 {
@@ -15,7 +16,7 @@ namespace Reinforced.Samples.ToyFactory.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlueprintResources>().HasKey(x => new {x.BlueprintId, x.ResourceId});
-            OnWarehouseModelCreating(modelBuilder);
+            modelBuilder.Entity<ResourceSupplyItem>().HasKey(x => new {x.ResourceSupplyId, x.ResourceId});
         }
     }
 }
