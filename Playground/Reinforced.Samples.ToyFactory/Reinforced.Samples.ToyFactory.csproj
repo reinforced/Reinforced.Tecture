@@ -15,5 +15,9 @@
     <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Data\Reinforced.Samples.ToyFactory.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
+  </ItemGroup>
+
 
 </Project>

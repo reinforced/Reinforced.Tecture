@@ -52,8 +52,6 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 
         private void UpdateResourceSupplyItemsCount(int supplyId)
         {
-            // var byIds = From<Db>().SqlQuery<> //get Id's from db which are present in new supply?
-            //     (x => $"SELECT * FROM {x} WHERE {knownIds.Contains(x.Id)}").As<Resource>();
             Final.ContinueWith(() =>
             {
                 To<Db>().Sql<ResourceSupply, ResourceSupplyItem>((r, item) =>

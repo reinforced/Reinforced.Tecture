@@ -6,8 +6,9 @@ using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
-using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
+
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
+using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.Test;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.DirectSql.Queries;
@@ -53,6 +54,26 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         }
 
         [Fact]
+        public void Test()
+        {
+            using var c = Case
+                <Test_TestData>
+                (out ITecture ctx);
+            var m = ctx.Do<Manage>();
+            var unit = m.CreateMeasurementUnit("Kilograms", "kG");
+            ctx.Save();
+            var res1 = m.CreateResource("resource1", "kG");
+            var res2 = m.CreateResource("resource2", "kG");
+            var res3 = m.CreateResource("resource3", "kG");
+            var res4 = m.CreateResource("resource4", "kG");
+            ctx.Save();
+            Output.WriteLine(c.Text());
+            c.Validate<Test_Validation>();
+            
+          
+        }
+        
+        [Fact]
         public void SupplyCreationPipeline()
         {
             using var c = Case<SupplyCreationPipeline_TestData>(out ITecture ctx);
@@ -62,6 +83,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var res1 = m.CreateResource("resource1", "kG");
             var res2 = m.CreateResource("resource2", "kG");
             var res3 = m.CreateResource("resource3", "kG");
+          
             ctx.Save();
             var id = ctx.From<Db>().Key(res2);
             var supply = ctx.Do<Supply>();
@@ -79,7 +101,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
                 new ResourceItemDto()
                 {
                     Name = "resource3", Quantity = 10
-                },
+                 }
             });
 
             ctx.Save();

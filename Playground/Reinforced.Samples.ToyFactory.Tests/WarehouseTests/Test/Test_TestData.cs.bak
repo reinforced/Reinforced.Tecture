@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Reinforced.Tecture.Testing.Data;
 
-namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit
+namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.Test
 {
-		class RenameMeasurementUnit_TestData : CSharpTestData
+		class Test_TestData : CSharpTestData
 		{
 			private Boolean GetEntry_1()
+			{ 
+				return false;
+			}
+
+			private Boolean GetEntry_2()
 			{ 
 				return true;
 			}
@@ -17,6 +22,10 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUn
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
 					Hash = @"OrmQuery_453C31866DD6BD48D2E31F78EC2AD153828D26DAB1C5EC2AF7C2829A94A424",
 					Description = @"check unit existence"
+				};
+				yield return new TestDataRecord<Boolean>(GetEntry_2()) { 
+					Hash = @"OrmQuery_46177FB019BB168CA5823D5C92DCBA70ED790402C49D48E8CD1BC6AB085B937",
+					Description = @"check resource existence"
 				};
 			}
 

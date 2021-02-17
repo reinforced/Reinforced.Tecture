@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Data\Reinforced.Samples.ToyFactory.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WarehouseTests\Test" />
+  </ItemGroup>
+
 </Project>

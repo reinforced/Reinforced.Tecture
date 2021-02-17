@@ -22,22 +22,26 @@ using Reinforced.Tecture.Services;
 namespace Reinforced.Samples.ToyFactory.Logic.Services
 {
     public class Nomenclature : TectureService
-        <
-            Adds<ToyType, BlueprintResources>,
-            Deletes<Resource>,
-            Modifies<Blueprint>
-        >
+    <
+        Adds<ToyType, BlueprintResources>,
+        Deletes<Resource>,
+        Modifies<Blueprint>
+    >
     {
-        private Nomenclature() { }
+        private Nomenclature()
+        {
+        }
+
+        
 
         public async Task<IAddition<ToyType>> CreateType(string name)
         {
-            
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))
             {
                 throw new Exception($"Cannot add toy type '{name}' because it already exists");
             }
-            var tt = new ToyType() { Name = name };
+
+            var tt = new ToyType() {Name = name};
             var ex = To<Db>().Add(tt).Annotate("Create new toy type");
             await Save;
             var tw = From<Db>().Get<ToyType>().All.First();
@@ -60,7 +64,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
                 throw new Exception($"Cannot add blueprint for toyType#{toyTypeId} because it already exists");
             }
 
-            var blueprint = new Blueprint() { ToyTypeId = toyTypeId };
+            var blueprint = new Blueprint() {ToyTypeId = toyTypeId};
             var toyType = From<Db>().Get<ToyType>().ById(toyTypeId);
 
             var ex = To<Db>().Add(blueprint).Annotate("Create blueprint");
@@ -71,7 +75,6 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
 
         public void AddResourceToBlueprint(int blueprintId, IEnumerable<ResourceWithQuantity> rwq)
         {
-
             //check if we have such blueprint (throws if there is no such id)
             //it is custom ext method from Channels project
             From<Db>().All<Blueprint>().EnsureExists(blueprintId);
