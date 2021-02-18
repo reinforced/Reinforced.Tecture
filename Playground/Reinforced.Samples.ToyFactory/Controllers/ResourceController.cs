@@ -22,9 +22,8 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             _tecture = tecture;
         }
         
-        //change status on some resourceSupply
-        //this change should be added in ResourceSupplyHistoryItems table
-
+   
+        
         [HttpPost]
         [Route("CreateResource")]
         public async Task<ActionResult<int>> CreateResource([FromBody] CreateResourceDto req)
@@ -63,6 +62,26 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             return ret.ConvertAll(t => new ResourceDto {Id = t.Id, Name = t.Name, StockQuantity = t.StockQuantity});
         }
         
+        
+        [HttpPost]
+        [Route("ChangeSupplyStatus")]
+        public async Task<ActionResult<int>> ChangeSupplyStatus([FromBody] ChangeStatusDto req)
+        {
+            _tecture.BeginTrace();
+            int result;
+            try
+            {
+                var a = _tecture.Do<ResourcesService>().ChangeResource(req.Id, req.NewStatus);
+                await _tecture.SaveAsync();
+                result = _tecture.From<Db>().Key(a);
+            }
+            finally
+            {
+                _tecture.EndTrace();
+            }
+
+            return result;
+        }
         
     }
 }
