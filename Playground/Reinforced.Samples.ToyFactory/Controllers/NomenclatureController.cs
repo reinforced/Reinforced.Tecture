@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Reinforced.Samples.ToyFactory.Dto.Nomenclature;
+using Reinforced.Samples.ToyFactory.Dto.ToyType;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
@@ -30,26 +30,8 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             _tecture = tecture;
         }
 
-        [HttpPost]
-        [Route("CreateToyType")]
-        public ActionResult<int> CreateToyType([FromBody]CreateToyTypeDto req)
-        {
-            _tecture.BeginTrace();
-            int result = 0;
-            try
-            {
-                var a = _tecture.Do<Nomenclature>().CreateType(req.Name);
-                _tecture.Save();
-                var x = a.Result;
-                result = _tecture.From<Db>().Key(x);
-            }
-            finally
-            {
-                var t = _tecture.EndTrace();
-                var text = t.Explain();
-            }
-            return result;
-        }
+      
+        
 
         [HttpGet]
         [Route("Test")]

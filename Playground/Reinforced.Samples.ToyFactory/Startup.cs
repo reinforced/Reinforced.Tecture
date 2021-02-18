@@ -32,7 +32,7 @@ namespace Reinforced.Samples.ToyFactory
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          
+             
             
             services.AddControllers();
             services.AddTransient<ToyFactoryDbContext>();
@@ -56,8 +56,7 @@ namespace Reinforced.Samples.ToyFactory
 
                 return tb.Build();
             });
-            services.AddMvcCore().AddApiExplorer();
-            services.AddSwaggerGen();
+           
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -72,6 +71,7 @@ namespace Reinforced.Samples.ToyFactory
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -84,7 +84,6 @@ namespace Reinforced.Samples.ToyFactory
             
             app.UseEndpoints(endpoints =>
             {
-              //  endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action}/{id?}");

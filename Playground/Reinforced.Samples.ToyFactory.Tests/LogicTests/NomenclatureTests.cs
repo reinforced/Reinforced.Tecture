@@ -22,7 +22,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
         {
             using var c = Case<CreateTypeWorks_TestData>(out ITecture ctx);
 
-            var a = ctx.Do<Nomenclature>().CreateType("test type");
+            var a = ctx.Do<ToyTypeService>().CreateType("test type");
             ctx.Save();
             var r = a.Result;
             var id = ctx.From<Db>().Key(r);
