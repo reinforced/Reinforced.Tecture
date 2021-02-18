@@ -30,8 +30,6 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             _tecture = tecture;
         }
 
-      
-        
 
         [HttpGet]
         [Route("Test")]
@@ -44,23 +42,6 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             return r;
         }
 
-        [HttpGet(Name = "Test")]
-        public Task<int> Test()
-        {
-            _tecture.BeginTrace();
-            int result = 0;
-            try
-            {
-                var a = _tecture.Do<Manage>().CreateMeasurementUnit("testBig","testShort");
-                _tecture.Save();
-                result = _tecture.From<Db>().Key(a);
-            }
-            finally
-            {
-                var t = _tecture.EndTrace();
-                var text = t.Explain();
-            }
-            return Task.FromResult(result);
-        }
+       
     }
 }

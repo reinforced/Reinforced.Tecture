@@ -81,7 +81,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             }
 
             var diff = (DateTime.Now - start);
-            _logger.LogDebug($"Get request took {diff.TotalMilliseconds}");//Get request took 1639,8445 (cold start)
+            _logger.LogDebug($"Get request took {diff.TotalMilliseconds}");//Get request took 1639,8445 (cold start with trace enabled)
 
 
             return ret.ConvertAll(t => new ToyTypeDto{Id = t.Id,Name = t.Name});

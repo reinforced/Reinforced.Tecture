@@ -36,7 +36,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
         {
             using var c = Case<CreateBlueprintWorks_TestData>(out ITecture ctx);
 
-            var a = ctx.Do<Nomenclature>().CreateBlueprint(1002);
+            var a = ctx.Do<BlueprintService>().CreateBlueprint(1002);
             ctx.Save();
 
             Output.WriteLine(c.Text());
