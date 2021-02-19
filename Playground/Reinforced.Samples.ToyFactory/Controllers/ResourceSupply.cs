@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Reinforced.Samples.ToyFactory.Dto.ResourceSupply;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Services;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.Orm.Queries;
@@ -29,8 +31,10 @@ namespace Reinforced.Samples.ToyFactory.Controllers
                 var a = _tecture.Do<SupplyService>().CreateResourceSupply(input.Name,input.Items);
                 await _tecture.SaveAsync();
                 result = _tecture.From<Db>().Key(a);
+                _tecture.Do<ResourcesService>().AddEntity(result.Value, ResourceSupplyStatus.Closed);
+                await _tecture.SaveAsync();
             }
-            catch
+            catch(Exception e)
             {
                 return new BadRequestResult();
             }

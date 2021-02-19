@@ -46,9 +46,9 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             return From<Db>().Get<Resource>().All;
         }
 
-        public IAddition<ResourceSupplyStatusHistoryItem> ChangeResource(int resourceSuppyId, ResourceSupplyStatus newStatus)
+        public IAddition<ResourceSupplyStatusHistoryItem> AddEntity(int resourceSupplyId, ResourceSupplyStatus newStatus)
         {
-            var rs = From<Db>().Get<ResourceSupply>().ById(resourceSuppyId);
+            var rs = From<Db>().Get<ResourceSupply>().ById(resourceSupplyId);
             ResourceSupplyStatusHistoryItem prev = null;
             try
             {

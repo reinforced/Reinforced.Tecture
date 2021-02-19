@@ -35,6 +35,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
                 var a = _tecture.Do<ResourcesService>().CreateResource(req.Name, req.MeasurementUnit);
                 await _tecture.SaveAsync();
                 result = _tecture.From<Db>().Key(a);
+                
             }
             finally
             {
@@ -71,7 +72,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             int result;
             try
             {
-                var a = _tecture.Do<ResourcesService>().ChangeResource(req.Id, req.NewStatus);
+                var a = _tecture.Do<ResourcesService>().AddEntity(req.Id, req.NewStatus);
                 await _tecture.SaveAsync();
                 result = _tecture.From<Db>().Key(a);
             }

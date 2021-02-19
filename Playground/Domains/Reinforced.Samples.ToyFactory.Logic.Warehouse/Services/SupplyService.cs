@@ -23,7 +23,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
     public class SupplyService : 
         TectureService<
             Adds<Resource,ResourceSupply,ResourceSupplyItem>,
-            Updates<ResourceSupplyItem>,
+            Updates<Resource,ResourceSupplyItem>,
             MakesSqlCommands
         >
     {
@@ -37,28 +37,33 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             To<Db>().Sql<ResourceSupply>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.Id == id}");
         }
 
-        public void FinishResourceSupply(int id)
-        {
-            To<Db>().Sql<Resource, ResourceSupplyItem>((res, item) => $@"
-    UPDATE {res.Alias()}
-    SET {res.StockQuantity == res.StockQuantity + item.Quantity}
-    FROM {res}
-    INNER JOIN {item} ON {item.ResourceId == res.Id}
-    WHERE {item.ResourceSupplyId==id}
-");
-            To<Db>().Sql<ResourceSupply>(r =>
-                $"UPDATE {r.Alias()} SET {r.Status == ResourceSupplyStatus.Closed} FROM {r} WHERE {r.Id == id}");
-        }
-
-        private void UpdateResourceSupplyItemsCount(int supplyId)
+        private void FinishResourceSupply(int idOfResourceSupply)
         {
             Final.ContinueWith(() =>
             {
-                To<Db>().Sql<ResourceSupply, ResourceSupplyItem>((r, item) =>
-                    $"UPDATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
+                var resources = From<Db>().All<Resource>();
+                var resourceSupplyItems = From<Db>().All<ResourceSupplyItem>().
+                    Where(r => r.ResourceSupplyId == idOfResourceSupply);
+                    
+                var resWithNewQuantity = 
+                    resources.Join(resourceSupplyItems, x => x.Id, y => y.ResourceId,
+                    (resource, item) => new {resource.Id, resource.StockQuantity, item.Quantity}).ToList();
+                foreach (var x1 in resWithNewQuantity)
+                {
+                    var newQuantity = x1.StockQuantity + x1.Quantity;
+                    var id = x1.Id;
+                    //To<Db>().Update<Resource>().Set(x => x.StockQuantity, newQuantity).ByPk(x1.Id);
+                    To<Db>().Sql<Resource>(r =>
+                        $"UPDATE Resources SET StockQuantity = {newQuantity} WHERE Id = {id}");
+                }
+
+                To<Db>().Sql<ResourceSupply>(r =>
+                    $"UPDATE ResourceSupplies SET Status = {ResourceSupplyStatus.Closed} WHERE Id = {idOfResourceSupply}");
+                
             });
-            
         }
+
+        
 
         /// <summary>
         /// Creates or adds supply of some resources
@@ -73,7 +78,8 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             {
                 CreationDate = DateTime.UtcNow,
                 Name = name,
-                Status = ResourceSupplyStatus.Open
+                Status = ResourceSupplyStatus.Open,
+                ItemsCount = (int)items.Sum(i=>i.Quantity)
             };
             var r = To<Db>().Add(rs).Annotate("add resource supply"); //add record of resource supply to db
             var toBeAdded = items.ToArray();
@@ -134,11 +140,11 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                     c.Iteration("added resource item"); //add information for debug purposes
                 }
             }
-
+            
+           
             Save.ContinueWith(() => //Action after save
             {
                 var id = From<Db>().Key(r); //get id of this ResourceSupply
-                UpdateResourceSupplyItemsCount(id); //and update it's item count
                 FinishResourceSupply(id);
             });
             return r;
