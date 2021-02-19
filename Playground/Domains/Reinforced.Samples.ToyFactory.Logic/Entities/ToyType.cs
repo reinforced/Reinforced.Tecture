@@ -6,11 +6,14 @@ using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Entities
 {
+    /// <summary>
+    /// Type of toy, most basic element for toys  
+    /// </summary>
     public class ToyType : IPrimaryKey<int>, IEntity, IDescriptive
     {
-        public int Id { get; internal set; }
+        public int Id { get;  set; }
 
-        public string Name { get; internal set; }
+        public string Name { get; set; }
 
         public Expression<Func<int>> PrimaryKey
         {

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto
 {
+    /// <summary>
+    /// Using to add list of resources to warehouse
+    /// </summary>
     public class ResourceItemDto
     {
         public string Name { get; set; }

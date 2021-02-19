@@ -5,6 +5,9 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities
 {
+    /// <summary>
+    /// Names for measurement unit
+    /// </summary>
     public class MeasurementUnit : IPrimaryKey<int>, IEntity
     {
         public int Id { get; internal set; }

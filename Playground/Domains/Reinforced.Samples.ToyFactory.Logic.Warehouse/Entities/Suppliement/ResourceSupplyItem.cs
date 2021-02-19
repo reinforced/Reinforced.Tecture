@@ -4,6 +4,9 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement
 {
+    /// <summary>
+    /// Joining table for resource definition and resource in warehouse 
+    /// </summary>
     public class ResourceSupplyItem : IPrimaryKey<int,int>
     {
         internal ResourceSupplyItem() { }

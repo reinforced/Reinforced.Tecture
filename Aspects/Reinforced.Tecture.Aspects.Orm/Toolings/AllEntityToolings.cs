@@ -173,7 +173,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 1 entities
+    /// Service tooling that deletes, updates 1 entities
     /// </summary>
     public interface Modifies<out T1> : 
 		Adds<T1>, 
@@ -182,7 +182,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 2 entities
+    /// Service tooling that  deletes, updates 2 entities
     /// </summary>
     public interface Modifies<out T1, out T2> : 
 		Adds<T1, T2>, 
@@ -191,7 +191,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 3 entities
+    /// Service tooling that  deletes, updates 3 entities
     /// </summary>
     public interface Modifies<out T1, out T2, out T3> : 
 		Adds<T1, T2, T3>, 
@@ -200,7 +200,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 4 entities
+    /// Service tooling that  deletes, updates 4 entities
     /// </summary>
     public interface Modifies<out T1, out T2, out T3, out T4> : 
 		Adds<T1, T2, T3, T4>, 
@@ -209,7 +209,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 5 entities
+    /// Service tooling that  deletes, updates 5 entities
     /// </summary>
     public interface Modifies<out T1, out T2, out T3, out T4, out T5> : 
 		Adds<T1, T2, T3, T4, T5>, 
@@ -218,7 +218,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 6 entities
+    /// Service tooling that  deletes, updates 6 entities
     /// </summary>
     public interface Modifies<out T1, out T2, out T3, out T4, out T5, out T6> : 
 		Adds<T1, T2, T3, T4, T5, T6>, 
@@ -227,7 +227,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Toolings
  
     
     /// <summary>
-    /// Service tooling that adds, deletes, updates 7 entities
+    /// Service tooling that  deletes, updates 7 entities
     /// </summary>
     public interface Modifies<out T1, out T2, out T3, out T4, out T5, out T6, out T7> : 
 		Adds<T1, T2, T3, T4, T5, T6, T7>, 

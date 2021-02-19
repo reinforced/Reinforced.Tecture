@@ -5,6 +5,9 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities
 {
+    /// <summary>
+    /// Amount of some resource in stock, measured in defined unit
+    /// </summary>
     public class Resource : IPrimaryKey<int>, IEntity
     {
         internal Resource() { }

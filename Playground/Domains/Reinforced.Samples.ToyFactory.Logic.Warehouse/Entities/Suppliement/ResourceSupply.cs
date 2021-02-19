@@ -13,6 +13,9 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement
         Sorting,
         Closed
     }
+    /// <summary>
+    /// Current supply in warehouse for some resource
+    /// </summary>
     public class ResourceSupply : IPrimaryKey<int>, IEntity
     {
         internal ResourceSupply() { }

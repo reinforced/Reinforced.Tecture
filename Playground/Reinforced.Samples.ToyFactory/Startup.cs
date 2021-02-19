@@ -16,6 +16,7 @@ using Reinforced.Tecture;
 using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm;
+using Microsoft.OpenApi.Models;
 
 namespace Reinforced.Samples.ToyFactory
 {
@@ -31,6 +32,8 @@ namespace Reinforced.Samples.ToyFactory
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+             
+            
             services.AddControllers();
             services.AddTransient<ToyFactoryDbContext>();
             services.AddTransient(sp =>
@@ -53,6 +56,11 @@ namespace Reinforced.Samples.ToyFactory
 
                 return tb.Build();
             });
+           
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +70,15 @@ namespace Reinforced.Samples.ToyFactory
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
            
             app.UseRouting();
             
@@ -70,6 +87,7 @@ namespace Reinforced.Samples.ToyFactory
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action}/{id?}");
+
             });
         }
     }

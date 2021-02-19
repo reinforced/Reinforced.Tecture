@@ -7,6 +7,9 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement
 {
+    /// <summary>
+    /// Change tracker for resources in warehouse
+    /// </summary>
     public class ResourceSupplyStatusHistoryItem : IPrimaryKey<int>, IEntity
     {
         internal ResourceSupplyStatusHistoryItem() { }
