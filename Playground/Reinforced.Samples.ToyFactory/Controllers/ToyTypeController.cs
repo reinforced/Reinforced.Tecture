@@ -35,7 +35,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             int result;
             try
             {
-                var a = await _tecture.Do<ToyTypeService>().CreateType(req.Name);
+                var a =  _tecture.Do<ToyTypeService>().CreateType(req.Name);
                 await _tecture.SaveAsync();
                 result = _tecture.From<Db>().Key(a);
             }

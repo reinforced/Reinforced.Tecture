@@ -29,14 +29,12 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             }
         }
         
-        public async Task<IAddition<ToyType>> CreateType(string name)
+        public IAddition<ToyType> CreateType(string name)
         {
             CheckAndThrowIfToyTypeExists(name);
 
             var tt = new ToyType {Name = name};
             var ex = To<Db>().Add(tt).Annotate("Create new toy type");
-            await Save;
-
             return ex;
         }
 
