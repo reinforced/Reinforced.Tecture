@@ -17,8 +17,6 @@ namespace Reinforced.Tecture.Tracing
         internal QueryRecord(Type channel, bool isTestData)
         {
             Channel = channel;
-            ChannelId = channel.FullName;
-            ChannelName = channel.Name;
             IsTestData = isTestData;
         }
 
