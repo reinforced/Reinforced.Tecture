@@ -1,7 +1,8 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing.Checks;
-using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Tracing.Commands;
 
 namespace Reinforced.Tecture.Testing.BuiltInChecks
@@ -15,7 +16,13 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
         /// Basic checks for all commands
         /// </summary>
         /// <param name="c">Checks builder</param>
-        public static void Basic(this ChecksBuilderFor<CommandBase> c) => c.Enlist(new AnnotationCheckDescription());
+        public static void Annotated(this ChecksBuilderFor<CommandBase> c) => c.Enlist(new AnnotationCheckDescription());
+
+        /// <summary>
+        /// Basic checks for all commands
+        /// </summary>
+        /// <param name="c">Checks builder</param>
+        public static void Type(this ChecksBuilderFor<CommandBase> c) => c.Enlist(new ChannelTypeCheckDescription());
 
         /// <summary>
         /// Basic checks for comment commands
@@ -29,7 +36,8 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
         /// <param name="tg">Test generator</param>
         public static void Basics(this ValidationGenerator tg)
         {
-            tg.For<CommandBase>().Basic();
+            tg.For<CommandBase>().Type();
+            tg.For<CommandBase>().Annotated();
             tg.For<Comment>().Basic();
         }
     }
@@ -42,6 +50,27 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
         protected override bool IsCheckNeeded(CommandBase command)
         {
             return !string.IsNullOrEmpty(command.Annotation);
+        }
+    }
+
+    sealed class ChannelTypeCheckDescription : CheckDescription<CommandBase>
+    {
+        public override MethodInfo Method =>
+            UseMethod((a, c) => CommonChecks.To<Channelless>());
+
+        /// <summary>
+        /// Gets list of check factory method type parameters from particular command
+        /// </summary>
+        /// <param name="command">Command instance</param>
+        /// <returns>Types array to parametrize check factory by</returns>
+        protected override Type[] GetTypeArguments(CommandBase command)
+        {
+            return new[] {command.Channel};
+        }
+
+        protected override bool IsCheckNeeded(CommandBase command)
+        {
+            return command.Channel != null;
         }
     }
 

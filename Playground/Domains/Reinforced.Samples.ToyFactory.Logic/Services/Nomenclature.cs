@@ -7,12 +7,15 @@ using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
+using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.Commands.Delete;
 using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Aspects.Orm.Commands.Derelate;
 using Reinforced.Tecture.Aspects.Orm.Commands.Relate;
+using Reinforced.Tecture.Aspects.Orm.Commands.Update;
+using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Aspects.Orm.Queries;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
@@ -21,25 +24,41 @@ using Reinforced.Tecture.Services;
 
 namespace Reinforced.Samples.ToyFactory.Logic.Services
 {
+    class Sample : TectureService
+        <
+            Updates<Resource,ResourceSupply>
+        >
+    {
+        public void Test()
+        {
+            To<Db>().Update<Resource>().Set(x => x.MeasurementUnitId, 50).ByPk(1);
+            To<Db>().Update<ResourceSupply>().Set(x => x.Name, "111").ByPk(10);
+            
+        }
+    }
+
     public class Nomenclature : TectureService
         <
             Adds<ToyType, BlueprintResources>,
             Deletes<Resource>,
             Modifies<Blueprint>
-        >
+    >
     {
         private Nomenclature() { }
 
         public async Task<IAddition<ToyType>> CreateType(string name)
         {
+
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))
             {
                 throw new Exception($"Cannot add toy type '{name}' because it already exists");
             }
             var tt = new ToyType() { Name = name };
             var ex = To<Db>().Add(tt).Annotate("Create new toy type");
-            await Save;
-            var tw = From<Db>().Get<ToyType>().All.First();
+            Then(() =>
+            {
+                var tw = From<Db>().Get<ToyType>().All.First();
+            });
 
             return ex;
         }

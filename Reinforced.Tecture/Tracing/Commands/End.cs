@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands
@@ -9,7 +10,10 @@ namespace Reinforced.Tecture.Tracing.Commands
     [CommandCode(" ! ")]
     public sealed class End : CommandBase
     {
-        internal End() { }
+        internal End()
+        {
+            Channel = typeof(Channelless);
+        }
 
 
         /// <summary>

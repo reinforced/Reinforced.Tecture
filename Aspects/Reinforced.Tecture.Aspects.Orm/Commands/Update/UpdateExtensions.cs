@@ -4,6 +4,7 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
 using _ = Reinforced.Tecture.Services.Tooling;
+using o = System.Object;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
 {
@@ -58,7 +59,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -84,7 +85,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -110,7 +111,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -136,7 +137,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -162,7 +163,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -188,7 +189,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -214,7 +215,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -270,7 +271,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -296,7 +297,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -322,7 +323,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -348,7 +349,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -374,7 +375,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -400,7 +401,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -426,7 +427,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -482,7 +483,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -508,7 +509,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -534,7 +535,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -560,7 +561,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -586,7 +587,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -612,7 +613,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -638,7 +639,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -694,7 +695,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -720,7 +721,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -746,7 +747,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -772,7 +773,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -798,7 +799,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -824,7 +825,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -850,7 +851,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -906,7 +907,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -932,7 +933,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -958,7 +959,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -984,7 +985,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1010,7 +1011,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1036,7 +1037,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1062,7 +1063,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1118,7 +1119,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1144,7 +1145,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1170,7 +1171,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1196,7 +1197,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1222,7 +1223,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1248,7 +1249,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1274,7 +1275,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1330,7 +1331,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1356,7 +1357,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1382,7 +1383,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1408,7 +1409,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1434,7 +1435,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1460,7 +1461,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1486,7 +1487,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1542,7 +1543,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1568,7 +1569,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1594,7 +1595,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1620,7 +1621,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1646,7 +1647,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1672,7 +1673,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };
@@ -1698,7 +1699,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <typeparam name="E">Entity to be deleted</typeparam>
         /// <param name="channel">Channel</param>
         /// <returns>Fluent</returns>
-        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<_,_,_,_,_,_,_,E>> channel)
+        public static IPrimaryKeyOperation<UpdatePk.UpdatePk, E> Update<E>(this Write<CommandChannel<Command>,_,_,_,_,_,_,_,Updates<o,o,o,o,o,o,o,E>> channel)
             where E : IPrimaryKey
         {
             return new UpdatePkOperation<E>() { Write = channel, EntityType = typeof(E) };

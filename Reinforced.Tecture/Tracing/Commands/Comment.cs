@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands
@@ -9,7 +10,10 @@ namespace Reinforced.Tecture.Tracing.Commands
     [CommandCode("COMMENT")]
     public sealed class Comment : CommandBase, ITracingOnly
     {
-        internal Comment() { }
+        internal Comment()
+        {
+            Channel = typeof(Channelless);
+        }
 
         /// <summary>
         /// Describes actions that are being performed within command

@@ -17,7 +17,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 				(
 					Add<ToyType>(x=>
 					{ 
-						if (x.Name != @"test type") return false;
+						if (x.Name != @"test type2") return false;
 						return true;
 					}, @"Create new toy type"), 
 					Annotated(@"Create new toy type")

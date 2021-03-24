@@ -76,7 +76,7 @@ namespace Reinforced.Tecture.Channels
 
         public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
         {
-            command.ChannelId = typeof(Channel).FullName;
+            command.Channel = typeof(Channel);
             _pipeline.Enqueue(command);
             return command;
         }

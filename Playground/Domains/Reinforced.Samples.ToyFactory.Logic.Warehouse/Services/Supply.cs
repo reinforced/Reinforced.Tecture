@@ -52,7 +52,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
 
         private void UpdateResourceSupplyItemsCount(int supplyId)
         {
-            Final.ContinueWith(() =>
+            Finally(() =>
             {
                 To<Db>().Sql<ResourceSupply, ResourceSupplyItem>((r, item) =>
                     $"UPDATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
@@ -121,7 +121,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
                 }
             }
 
-            Save.ContinueWith(() =>
+            Then(() =>
             {
                 var id = From<Db>().Key<int>(r);
                 UpdateResourceSupplyItemsCount(id);

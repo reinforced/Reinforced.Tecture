@@ -16,17 +16,17 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
         }
 
         /// <inheritdoc cref="CommandCheck{TCommand}.GetMessage"/>
-        protected override string GetMessage(CommandBase effect)
+        protected override string GetMessage(CommandBase command)
         {
-            if (effect == null) return $"expected effect with annotation '{_requiredAnnotation}', but story unexpectedly ended";
-            return $"expected effect with annotation '{_requiredAnnotation}', but got with '{effect.Annotation}' one";
+            if (command == null) return $"expected command with annotation '{_requiredAnnotation}', but story unexpectedly ends";
+            return $"expected command with annotation '{_requiredAnnotation}', but got with '{command.Annotation}' one";
         }
 
         /// <inheritdoc cref="CommandCheck{TCommand}.IsActuallyValid"/>
-        protected override bool IsActuallyValid(CommandBase effect)
+        protected override bool IsActuallyValid(CommandBase command)
         {
-            if (effect == null) return false;
-            return effect.Annotation == _requiredAnnotation;
+            if (command == null) return false;
+            return command.Annotation == _requiredAnnotation;
         }
 
 

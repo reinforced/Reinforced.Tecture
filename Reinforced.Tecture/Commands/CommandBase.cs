@@ -34,8 +34,8 @@ namespace Reinforced.Tecture.Commands
     /// </summary>
     public abstract class CommandBase
     {
-        private string _channelId;
-        private string _channelName;
+        private Type _channel;
+
         private string _annotation = string.Empty;
         private DebugInfo _debug;
         private int _order;
@@ -45,34 +45,30 @@ namespace Reinforced.Tecture.Commands
         /// Discriminates data source type for command.
         /// Here I use .NET full Type's name
         /// </summary>
-        public string ChannelId
+        public Type Channel
         {
-            get { return _channelId; }
+            get { return _channel; }
             internal set
             {
-                _channelId = value;
+                _channel = value;
                 foreach (var commandBase in _knownClones)
                 {
-                    commandBase.ChannelId = value;
+                    commandBase.Channel = value;
                 }
             }
         }
 
         /// <summary>
+        /// Discriminates data source type for command.
+        /// Here I use .NET full Type's name
+        /// </summary>
+        public string ChannelId => _channel.FullName;
+
+
+        /// <summary>
         /// Gets friendly channel name
         /// </summary>
-        public string ChannelName
-        {
-            get { return _channelName; }
-            internal set
-            {
-                _channelName = value;
-                foreach (var commandBase in _knownClones)
-                {
-                    commandBase.ChannelName = value;
-                }
-            }
-        }
+        public string ChannelName => _channel.Name;
 
         /// <summary>
         /// Command annotation
@@ -156,9 +152,8 @@ namespace Reinforced.Tecture.Commands
 
         internal CommandBase TraceClone()
         {
-            var clone =  DeepCloneForTracing();
-            clone.ChannelId = ChannelId;
-            clone.ChannelName = ChannelName;
+            var clone = DeepCloneForTracing();
+            clone.Channel = Channel;
             clone.Annotation = Annotation;
             clone.Order = Order;
             clone.IsExecuted = IsExecuted;

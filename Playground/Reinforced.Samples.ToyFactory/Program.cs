@@ -9,13 +9,15 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
+using Reinforced.Tecture;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Services;
+// ReSharper disable ArrangeTypeModifiers
+// ReSharper disable ArrangeTypeMemberModifiers
 
 namespace Reinforced.Samples.ToyFactory
 {
-
     public class Program
     {
         public static void Main(string[] args)

@@ -37,16 +37,6 @@ namespace Reinforced.Tecture.Services
         protected bool IsBound<T>() where T : Channel => ChannelMultiplexer.IsKnown(typeof(T));
 
         /// <summary>
-        /// Await point to split actions before/after savechanges call
-        /// </summary>
-        protected ActionsQueueTask Save => new ActionsQueueTask(Pipeline.PostSaveActions);
-
-        /// <summary>
-        /// Await point to split actions that must happen after everything
-        /// </summary>
-        protected ActionsQueueTask Final => new ActionsQueueTask(Pipeline.FinallyActions);
-
-        /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
         /// </summary>
         protected virtual void OnSave() { }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands.Cycles
@@ -9,7 +10,10 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     [CommandCode(" . ")]
     public class EndCycle : CommandBase, ITracingOnly
     {
-        internal EndCycle() { }
+        internal EndCycle()
+        {
+            Channel = typeof(Channelless);
+        }
 
         /// <summary>
         /// Total number of commands that was produced within cycle

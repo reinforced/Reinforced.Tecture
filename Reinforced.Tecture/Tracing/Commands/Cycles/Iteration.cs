@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
 
 namespace Reinforced.Tecture.Tracing.Commands.Cycles
@@ -9,7 +10,10 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     [CommandCode(" } ")]
     public class Iteration : CommandBase, ITracingOnly
     {
-        internal Iteration() { }
+        internal Iteration()
+        {
+            Channel = typeof(Channelless);
+        }
 
         /// <inheritdoc />
         public override void Describe(TextWriter tw)

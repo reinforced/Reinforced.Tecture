@@ -9,12 +9,12 @@ namespace Reinforced.Tecture.Channels
 {
  
 	
-	#region Setup for 1 entities
+	#region Setup for 1 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 1 entities
+	/// Channel's read end for 1 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -23,7 +23,7 @@ namespace Reinforced.Tecture.Channels
 		where T1 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1>
+	internal readonly struct SRead<TChannel , T1>
 		: IQueryMultiplexer, Read<TChannel , T1>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -46,7 +46,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 1 entities
+	/// Channel's write end for 1 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -55,7 +55,7 @@ namespace Reinforced.Tecture.Channels
 		where T1 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1>
+	internal readonly struct SWrite<TChannel, T1>
 		: ICommandMultiplexer, Write<TChannel, T1>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -76,8 +76,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -91,12 +90,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 2 entities
+	#region Setup for 2 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 2 entities
+	/// Channel's read end for 2 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -107,7 +106,7 @@ namespace Reinforced.Tecture.Channels
 		where T2 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2>
+	internal readonly struct SRead<TChannel , T1, T2>
 		: IQueryMultiplexer, Read<TChannel , T1, T2>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -131,7 +130,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 2 entities
+	/// Channel's write end for 2 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -142,7 +141,7 @@ namespace Reinforced.Tecture.Channels
 		where T2 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2>
+	internal readonly struct SWrite<TChannel, T1, T2>
 		: ICommandMultiplexer, Write<TChannel, T1, T2>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -164,8 +163,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -179,12 +177,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 3 entities
+	#region Setup for 3 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 3 entities
+	/// Channel's read end for 3 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -197,7 +195,7 @@ namespace Reinforced.Tecture.Channels
 		where T3 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2, T3>
+	internal readonly struct SRead<TChannel , T1, T2, T3>
 		: IQueryMultiplexer, Read<TChannel , T1, T2, T3>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -222,7 +220,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 3 entities
+	/// Channel's write end for 3 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -235,7 +233,7 @@ namespace Reinforced.Tecture.Channels
 		where T3 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2, T3>
+	internal readonly struct SWrite<TChannel, T1, T2, T3>
 		: ICommandMultiplexer, Write<TChannel, T1, T2, T3>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -258,8 +256,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -273,12 +270,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 4 entities
+	#region Setup for 4 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 4 entities
+	/// Channel's read end for 4 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -293,7 +290,7 @@ namespace Reinforced.Tecture.Channels
 		where T4 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2, T3, T4>
+	internal readonly struct SRead<TChannel , T1, T2, T3, T4>
 		: IQueryMultiplexer, Read<TChannel , T1, T2, T3, T4>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -319,7 +316,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 4 entities
+	/// Channel's write end for 4 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -334,7 +331,7 @@ namespace Reinforced.Tecture.Channels
 		where T4 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2, T3, T4>
+	internal readonly struct SWrite<TChannel, T1, T2, T3, T4>
 		: ICommandMultiplexer, Write<TChannel, T1, T2, T3, T4>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -358,8 +355,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -373,12 +369,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 5 entities
+	#region Setup for 5 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 5 entities
+	/// Channel's read end for 5 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -395,7 +391,7 @@ namespace Reinforced.Tecture.Channels
 		where T5 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2, T3, T4, T5>
+	internal readonly struct SRead<TChannel , T1, T2, T3, T4, T5>
 		: IQueryMultiplexer, Read<TChannel , T1, T2, T3, T4, T5>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -422,7 +418,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 5 entities
+	/// Channel's write end for 5 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -439,7 +435,7 @@ namespace Reinforced.Tecture.Channels
 		where T5 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2, T3, T4, T5>
+	internal readonly struct SWrite<TChannel, T1, T2, T3, T4, T5>
 		: ICommandMultiplexer, Write<TChannel, T1, T2, T3, T4, T5>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -464,8 +460,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -479,12 +474,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 6 entities
+	#region Setup for 6 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 6 entities
+	/// Channel's read end for 6 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -503,7 +498,7 @@ namespace Reinforced.Tecture.Channels
 		where T6 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2, T3, T4, T5, T6>
+	internal readonly struct SRead<TChannel , T1, T2, T3, T4, T5, T6>
 		: IQueryMultiplexer, Read<TChannel , T1, T2, T3, T4, T5, T6>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -531,7 +526,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 6 entities
+	/// Channel's write end for 6 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -550,7 +545,7 @@ namespace Reinforced.Tecture.Channels
 		where T6 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2, T3, T4, T5, T6>
+	internal readonly struct SWrite<TChannel, T1, T2, T3, T4, T5, T6>
 		: ICommandMultiplexer, Write<TChannel, T1, T2, T3, T4, T5, T6>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -576,8 +571,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -591,12 +585,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 7 entities
+	#region Setup for 7 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 7 entities
+	/// Channel's read end for 7 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -617,7 +611,7 @@ namespace Reinforced.Tecture.Channels
 		where T7 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2, T3, T4, T5, T6, T7>
+	internal readonly struct SRead<TChannel , T1, T2, T3, T4, T5, T6, T7>
 		: IQueryMultiplexer, Read<TChannel , T1, T2, T3, T4, T5, T6, T7>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -646,7 +640,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 7 entities
+	/// Channel's write end for 7 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -667,7 +661,7 @@ namespace Reinforced.Tecture.Channels
 		where T7 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2, T3, T4, T5, T6, T7>
+	internal readonly struct SWrite<TChannel, T1, T2, T3, T4, T5, T6, T7>
 		: ICommandMultiplexer, Write<TChannel, T1, T2, T3, T4, T5, T6, T7>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -694,8 +688,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -709,12 +702,12 @@ namespace Reinforced.Tecture.Channels
 	#endregion
 	 
 	
-	#region Setup for 8 entities
+	#region Setup for 8 toolings
 
 	#region Read
 
 	/// <summary>
-	/// Channel's read end for 8 entities
+	/// Channel's read end for 8 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -737,7 +730,7 @@ namespace Reinforced.Tecture.Channels
 		where T8 : Tooling
 	{ }
 
-	internal struct SRead<TChannel , T1, T2, T3, T4, T5, T6, T7, T8>
+	internal readonly struct SRead<TChannel , T1, T2, T3, T4, T5, T6, T7, T8>
 		: IQueryMultiplexer, Read<TChannel , T1, T2, T3, T4, T5, T6, T7, T8>
 		where TChannel : CanQuery
 		where T1 : Tooling
@@ -767,7 +760,7 @@ namespace Reinforced.Tecture.Channels
 
 	#region Write
 	/// <summary>
-	/// Channel's write end for 8 entities
+	/// Channel's write end for 8 toolings
 	/// </summary>
 	/// <typeparam name="TChannel">Type of channel</typeparam>
 	/// <typeparam name="T1">Tooling of type # 1</typeparam>
@@ -790,7 +783,7 @@ namespace Reinforced.Tecture.Channels
 		where T8 : Tooling
 	{ }
 
-	internal struct SWrite<TChannel, T1, T2, T3, T4, T5, T6, T7, T8>
+	internal readonly struct SWrite<TChannel, T1, T2, T3, T4, T5, T6, T7, T8>
 		: ICommandMultiplexer, Write<TChannel, T1, T2, T3, T4, T5, T6, T7, T8>
 		where TChannel : CanCommand
 		where T1 : Tooling
@@ -818,8 +811,7 @@ namespace Reinforced.Tecture.Channels
 
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
-			command.ChannelId = typeof(TChannel).FullName;
-			command.ChannelName = typeof(TChannel).Name;
+			command.Channel = typeof(TChannel);
 			_pipeline.Enqueue(command);
 			return command;
 		}

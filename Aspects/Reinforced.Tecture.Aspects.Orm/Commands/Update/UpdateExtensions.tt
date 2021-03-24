@@ -14,6 +14,7 @@ using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
 using _ = Reinforced.Tecture.Services.Tooling;
+using o = System.Object;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
 {
@@ -30,7 +31,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
     var exactTooling = $"{methodName}s<{entityParameters}>";
     var currentEntity = $"E{entityIndex}";
 
-    var pkentityParameters = string.Join("", Enumerable.Range(1,entityIndex-1).Select(x=> $"_,"));
+    var pkentityParameters = string.Join("", Enumerable.Range(1,entityIndex-1).Select(x=> $"o,"));
 #>
         /// <summary>
         /// <#= methodName #>s entity of type <typeparamref name="E<#= entityIndex #>"/>

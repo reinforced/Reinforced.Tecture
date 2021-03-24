@@ -20,14 +20,16 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
         [Fact]
         public void CreateTypeWorks()
         {
-            using var c = Case<CreateTypeWorks_TestData>(out ITecture ctx);
+            using var c = Case
+                <CreateTypeWorks_TestData>
+                (out ITecture ctx);
 
-            var a = ctx.Do<Nomenclature>().CreateType("test type");
+            var a = ctx.Do<Nomenclature>().CreateType("test type2");
             ctx.Save();
             var r = a.Result;
             var id = ctx.From<Db>().Key(r);
 
-            Output.WriteLine(c.Text());
+            //Output.WriteLine(c.Text());
             c.Validate<CreateTypeWorks_Validation>();
         }
 

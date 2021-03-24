@@ -35,4 +35,9 @@ namespace Reinforced.Tecture.Channels
     /// <typeparam name="TQuery"></typeparam>
     /// <typeparam name="TCommand"></typeparam>
     public interface CommandQueryChannel<out TCommand,out TQuery> : QueryChannel<TQuery>, CommandChannel<TCommand> where TCommand : CommandAspect where TQuery : QueryAspect { }
+
+    /// <summary>
+    /// Nil (empty) channel
+    /// </summary>
+    public interface Channelless : Channel { }
 }
