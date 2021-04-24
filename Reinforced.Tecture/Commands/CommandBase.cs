@@ -106,7 +106,17 @@ namespace Reinforced.Tecture.Commands
         /// Describes actions that are being performed within command
         /// </summary>
         /// <param name="tw">Log writer</param>
-        public abstract void Describe(TextWriter tw);
+        public virtual void Describe(TextWriter tw)
+        {
+            if (!string.IsNullOrEmpty(Annotation))
+            {
+                tw.Write(Annotation);
+                if (Debug != null)
+                {
+                    tw.Write($" ({Debug.Location})");
+                }
+            }
+        }
 
         /// <summary>
         /// Gets order of command in commands queue

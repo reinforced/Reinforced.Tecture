@@ -91,7 +91,6 @@ namespace Reinforced.Tecture.Testing.Validation
 
         private void Then(CommandBase command, List<InvocationExpressionSyntax> checks)
         {
-            var ann = new SyntaxAnnotation();
             var ex = InvocationExpression(
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                             IdentifierName(StoryVariableId),
@@ -104,7 +103,6 @@ namespace Reinforced.Tecture.Testing.Validation
 
         private void Then(CommandBase command)
         {
-            var ann = new SyntaxAnnotation();
             var ex = InvocationExpression(
                     MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                         IdentifierName(StoryVariableId),

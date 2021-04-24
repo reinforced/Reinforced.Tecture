@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing.Commands;
 using Reinforced.Tecture.Tracing.Commands.Cycles;
@@ -109,8 +108,8 @@ namespace Reinforced.Tecture.Tracing
                 {
                     tw.Write('[');
                     var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
-                    if (ca != null) tw.Write($"{ca.Code}] ");
-                    else tw.Write("] ");
+                    tw.Write(ca != null ? $"{ca.Code} " : cmd.GetType().Name);
+                    tw.Write("] ");
                 }
                 tw.Write("\t");
 

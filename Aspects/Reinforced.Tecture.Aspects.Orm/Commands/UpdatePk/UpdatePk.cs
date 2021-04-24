@@ -55,12 +55,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
         /// <param name="tw">Log writer</param>
         public override void Describe(TextWriter tw)
         {
-            if (!string.IsNullOrEmpty(Annotation))
-            {
-                tw.Write(Annotation);
-                return;
-            }
-
+            base.Describe(tw);
+            if (!string.IsNullOrEmpty(Annotation)) return;
+            
             string properties = string.Join(", ", _updateValues.Keys.Select(d => d.Name));
 
             var description = $"entity of type {EntityType.Name}";

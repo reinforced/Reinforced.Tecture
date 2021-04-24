@@ -28,7 +28,6 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Add
         /// <inheritdoc />
         public override void Describe(TextWriter tw)
         {
-
             var description = $"entity of type {EntityType.Name}";
             if (!string.IsNullOrEmpty(Annotation)) description = Annotation;
 

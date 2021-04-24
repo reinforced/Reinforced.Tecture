@@ -67,11 +67,8 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <inheritdoc />
         public override void Describe(TextWriter tw)
         {
-            if (!string.IsNullOrEmpty(Annotation))
-            {
-                tw.Write(Annotation);
-                return;
-            }
+            base.Describe(tw);
+            if (!string.IsNullOrEmpty(Annotation)) return;
 
             string properties = string.Join(", ", _updateValues.Keys.Select(d => d.Name));
 
