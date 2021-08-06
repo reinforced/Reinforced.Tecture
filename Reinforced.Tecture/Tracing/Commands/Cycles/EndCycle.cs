@@ -7,12 +7,12 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Synthetic command that means end of logical cycle 
     /// </summary>
-    [CommandCode(" . ")]
+    [CommandCode(" ◎ ")]
     public class EndCycle : CommandBase, ITracingOnly
     {
         internal EndCycle()
         {
-            Channel = typeof(Channelless);
+            Channel = typeof(NoChannel);
         }
 
         /// <summary>

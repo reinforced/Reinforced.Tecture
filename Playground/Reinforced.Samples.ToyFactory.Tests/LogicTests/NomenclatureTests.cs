@@ -29,7 +29,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
             var r = a.Result;
             var id = ctx.From<Db>().Key(r);
 
-            //Output.WriteLine(c.Text());
+            Output.WriteLine(c.Text());
             c.Validate<CreateTypeWorks_Validation>();
         }
 

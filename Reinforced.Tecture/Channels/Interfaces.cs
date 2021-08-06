@@ -39,5 +39,5 @@ namespace Reinforced.Tecture.Channels
     /// <summary>
     /// Nil (empty) channel
     /// </summary>
-    public interface Channelless : Channel { }
+    public interface NoChannel : Channel { }
 }

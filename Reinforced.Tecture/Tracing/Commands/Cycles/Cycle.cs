@@ -7,12 +7,12 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Cycle mark command
     /// </summary>
-    [CommandCode(" { ")]
+    [CommandCode(" ↻ ")]
     public class Cycle : CommandBase, ITracingOnly
     {
         internal Cycle()
         {
-            Channel = typeof(Channelless);
+            Channel = typeof(NoChannel);
         }
 
         /// <inheritdoc />

@@ -7,12 +7,12 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means end of the commands queue
     /// </summary>
-    [CommandCode(" ! ")]
+    [CommandCode("◼")]
     public sealed class End : CommandBase
     {
         internal End()
         {
-            Channel = typeof(Channelless);
+            Channel = typeof(NoChannel);
         }
 
 
@@ -22,7 +22,7 @@ namespace Reinforced.Tecture.Tracing.Commands
         /// <param name="tw"></param>
         public override void Describe(TextWriter tw)
         {
-            tw.Write("<END>");
+            tw.Write("End");
         }
 
         /// <summary>

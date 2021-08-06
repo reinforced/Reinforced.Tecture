@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Testing.BuiltInChecks
     sealed class ChannelTypeCheckDescription : CheckDescription<CommandBase>
     {
         public override MethodInfo Method =>
-            UseMethod((a, c) => CommonChecks.To<Channelless>());
+            UseMethod((a, c) => CommonChecks.To<NoChannel>());
 
         /// <summary>
         /// Gets list of check factory method type parameters from particular command

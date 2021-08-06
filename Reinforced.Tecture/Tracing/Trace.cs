@@ -103,15 +103,16 @@ namespace Reinforced.Tecture.Tracing
                 if (inCycle) continue;
 
                 tw.Write($"{i}. ");
-                if (!string.IsNullOrEmpty(cmd.ChannelName)) tw.Write($"[{cmd.ChannelName}] ");
+                
+                if (!string.IsNullOrEmpty(cmd.ChannelName)) tw.Write($"{cmd.ChannelName} ");
+                else tw.Write(" ");
                 if (codes)
                 {
-                    tw.Write('[');
                     var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
-                    tw.Write(ca != null ? $"{ca.Code} " : cmd.GetType().Name);
-                    tw.Write("] ");
+                    tw.Write(ca != null ? $"{ca.Code}" : cmd.GetType().Name);
                 }
-                tw.Write("\t");
+                tw.Write(" ");
+                //tw.Write("\t");
 
                 cmd.Describe(tw);
                 tw.WriteLine();

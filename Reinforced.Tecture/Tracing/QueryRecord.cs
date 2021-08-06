@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Tracing
     /// <summary>
     /// Synthetic command that means query that was made to the external system
     /// </summary>
-    [CommandCode(" ->")]
+    [CommandCode("▷")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
         internal QueryRecord(Type channel, bool isTestData)
@@ -26,15 +26,13 @@ namespace Reinforced.Tecture.Tracing
         public Type DataType { get; private set; }
 
         /// <summary>
-        /// Gets channel this query was made to
-        /// </summary>
-        public Type Channel { get; }
-
-        /// <summary>
         /// Query hash
         /// </summary>
         public string Hash { get; private set; }
 
+        /// <summary>
+        /// The time query evaluation took
+        /// </summary>
         public TimeSpan TimeTaken { get; private set; }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace Reinforced.Tecture.Tracing
         /// <param name="tw">Log writer</param>
         public override void Describe(TextWriter tw)
         {
-            if (IsTestData) tw.Write("[TEST DATA] ");
+            if (IsTestData) tw.Write("[Mock] ");
             else FormatTime(tw);
             tw.Write(this.Annotation ?? $"Query made to '{Channel.Name}' ({Hash})");
             if (IsTestData) return;
@@ -133,7 +131,7 @@ namespace Reinforced.Tecture.Tracing
             }
             if (TimeTaken.TotalSeconds > 5)
             {
-                tw.Write($"[{TimeTaken:ss:fff} sec]\t");
+                tw.Write($"[{TimeTaken:ss:fff} s]\t");
                 return;
             }
             tw.Write($"[{TimeTaken:fff}ms]\t");

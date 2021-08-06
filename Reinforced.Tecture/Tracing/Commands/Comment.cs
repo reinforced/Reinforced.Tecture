@@ -7,12 +7,12 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Command that does nothing except explainig things
     /// </summary>
-    [CommandCode("COMMENT")]
+    [CommandCode("//")]
     public sealed class Comment : CommandBase, ITracingOnly
     {
         internal Comment()
         {
-            Channel = typeof(Channelless);
+            Channel = typeof(NoChannel);
         }
 
         /// <summary>

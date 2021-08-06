@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Reinforced.Tecture.Channels;
+
 // ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -68,7 +70,7 @@ namespace Reinforced.Tecture.Commands
         /// <summary>
         /// Gets friendly channel name
         /// </summary>
-        public string ChannelName => _channel.Name;
+        public string ChannelName => typeof(NoChannel).IsAssignableFrom(_channel) ? string.Empty : _channel.Name;
 
         /// <summary>
         /// Command annotation
@@ -215,7 +217,8 @@ namespace Reinforced.Tecture.Commands
                 if (SourceService != null) address.Enqueue(SourceService.Name);
                 if (SourceMethod != null)
                 {
-                    if (SourceMethod.GetCustomAttribute<CompilerGeneratedAttribute>() != null) address.Enqueue("anonymous method");
+                    if (SourceMethod.GetCustomAttribute<CompilerGeneratedAttribute>() != null)
+                        address.Enqueue("anonymous method");
                     else address.Enqueue(SourceMethod.Name);
                 }
 
