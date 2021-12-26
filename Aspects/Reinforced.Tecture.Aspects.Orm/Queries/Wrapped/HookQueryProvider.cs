@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
 using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
-using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
@@ -11,11 +10,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
     {
         public IQueryProvider Original { get; }
 
-        public Query Aspect { get; }
+        public Orm.Query Aspect { get; }
 
         public DescriptionHolder Description { get; }
 
-        public HookQueryProvider(IQueryProvider original, Query aspect, DescriptionHolder description)
+        public HookQueryProvider(IQueryProvider original, Orm.Query aspect, DescriptionHolder description)
         {
             Original = original;
             Aspect = aspect;

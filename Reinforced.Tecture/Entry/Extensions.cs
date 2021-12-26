@@ -25,6 +25,12 @@ namespace Reinforced.Tecture.Entry
             return tb;
         }
 
+        public static TectureBuilder WithIoc(this TectureBuilder tb, Func<Type, object> iocResolver)
+        {
+            tb._resolver = iocResolver;
+            return tb;
+        }
+
         /// <summary>
         /// Adds exception handling method to be used by Tecture
         /// </summary>
@@ -45,7 +51,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Fluent</returns>
         public static TectureBuilder WithTestData(this TectureBuilder tb, ITestDataSource qs)
         {
-            tb.Aux._testDataHolder.Instance = qs;
+            tb.Aux._testDataProvider.Instance = qs;
             return tb;
         }
 

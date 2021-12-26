@@ -59,16 +59,10 @@ namespace Reinforced.Tecture.Testing.Data
         public string Hash { get; set; }
 
         /// <inheritdoc />
-        public Type RecordType
-        {
-            get { return typeof(T); }
-        }
+        public Type RecordType => typeof(T);
 
         /// <inheritdoc />
-        public object Payload
-        {
-            get { return Data; }
-        }
+        public object Payload => Data;
 
         /// <inheritdoc />
         public T Data { get; set; }

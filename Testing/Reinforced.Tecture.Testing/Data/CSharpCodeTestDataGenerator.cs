@@ -7,7 +7,6 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Testing.Data.Format;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration;
 using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
@@ -43,12 +42,6 @@ namespace Reinforced.Tecture.Testing.Data
             foreach (var queryRecord in queries)
             {
                 ITestDataRecord tdr = null;
-                //if (queryRecord.DataType.IsAnonymousType())
-                //{
-                //    tdr = AnonymousTestDataRecord.FromAnonymousObject(queryRecord.Result, queryRecord.DataType);
-                //}
-                //else
-                //{
                 var recordType = typeof(TestDataRecord<>).MakeGenericType(queryRecord.DataType);
                 tdr =
                     Activator.CreateInstance(recordType, new[] { queryRecord.Result }) as ITestDataRecord;

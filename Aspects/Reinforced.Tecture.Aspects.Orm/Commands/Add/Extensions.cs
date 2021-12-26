@@ -7,7 +7,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Add
     /// </summary>
     public static partial class Extensions
     {
-        private static Add<T> AddCore<T>(Write<CommandChannel<Command>> channel, T entity)
+        private static Add<T> AddCore<T>(Write<CommandChannel<Orm.Command>> channel, T entity)
         {
             if (entity==null)
                 throw new TectureOrmAspectException("Entity going to be added cannot be null");

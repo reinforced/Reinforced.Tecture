@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Add
         {
             return new Add()
             {
-                Entity = Entity.DeepClone(),
+                Entity = DeepCloner.DeepClone(Entity),
                 EntityType = EntityType
             };
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Transactions;
 

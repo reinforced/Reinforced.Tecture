@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing.Commands;
 using Reinforced.Tecture.Tracing.Commands.Cycles;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -20,7 +21,7 @@ namespace Reinforced.Tecture.Services
         internal ServiceManager ServiceManager;
         internal ChannelMultiplexer ChannelMultiplexer;
         internal Pipeline Pipeline;
-        internal AuxiliaryContainer Aux;
+        internal TestingContextContainer Aux;
 
         internal void CallOnSave() => OnSave();
         internal void CallOnFinally() => OnFinally();
@@ -61,10 +62,16 @@ namespace Reinforced.Tecture.Services
         /// Called right after service initialization. Use it to do things right after service is created
         /// </summary>
         protected virtual void Init() { }
+        
+        /// <summary>
+        /// Called right before service disposal
+        /// </summary>
+        protected virtual void OnDispose(){ }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
+            OnDispose();
             ServiceManager.DestroyService(this);
         }
 

@@ -35,7 +35,7 @@ namespace Reinforced.Tecture.Cloning
         /// </summary>
         /// <param name="original">Original object</param>
         /// <returns>Object clone</returns>
-        public static object DeepClone(this object original)
+        public static object DeepClone(object original)
         {
             if (original == null) return null;
             if (original.GetType().IsInlineCloning()) return original;
@@ -50,7 +50,7 @@ namespace Reinforced.Tecture.Cloning
         /// </summary>
         /// <param name="original">Original object</param>
         /// <returns>Object clone</returns>
-        public static T DeepClone<T>(this T original)
+        public static T DeepClone<T>(T original)
         {
             if (original == null) return original;
             if (typeof(T).IsInlineCloning()) return original;

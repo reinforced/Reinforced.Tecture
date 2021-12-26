@@ -3,6 +3,7 @@ using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
 using Reinforced.Tecture.Services;
 using _ = Reinforced.Tecture.Services.Tooling;
+using static Reinforced.Tecture.Aspects.Orm.Orm;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Add
 {

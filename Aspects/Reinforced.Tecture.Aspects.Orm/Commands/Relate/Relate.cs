@@ -64,8 +64,8 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
             {
                 PrimaryType = PrimaryType,
                 SecondaryType = SecondaryType,
-                Primary = Primary.DeepClone(),
-                Secondary = Secondary.DeepClone(),
+                Primary = DeepCloner.DeepClone(Primary),
+                Secondary = DeepCloner.DeepClone(Secondary),
                 ForeignKeySpecifier = ForeignKeySpecifier
             };
         }

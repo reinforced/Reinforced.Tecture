@@ -6,14 +6,15 @@ using Reinforced.Tecture.Aspects.DirectSql.Reveal;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.DirectSql.Infrastructure
 {
     public class SqlToolingWrapper
     {
         private readonly IStrokeRuntime _runtime;
-        internal Auxiliary _aux;
+        internal TestingContext _aux;
         private bool CheckTypes(Type[] usedTypes)
         {
             foreach (var usedType in usedTypes)
@@ -41,7 +42,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Infrastructure
 
         private readonly HashSet<Type> _types;
 
-        internal SqlToolingWrapper(IStrokeRuntime runtime, Auxiliary aux, HashSet<Type> types)
+        internal SqlToolingWrapper(IStrokeRuntime runtime, TestingContext aux, HashSet<Type> types)
         {
             _runtime = runtime;
             _aux = aux;

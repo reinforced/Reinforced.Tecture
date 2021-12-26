@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Reinforced.Tecture.Cloning;
-using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Tracing.Promises;
 using Reinforced.Tecture.Transactions;
 

@@ -46,7 +46,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators
             _currentIndex++;
             if (_currentIndex > _indexBeforeReset)
             {
-                _data.Add(current.DeepClone());
+                _data.Add(DeepCloner.DeepClone(current));
             }
         }
 

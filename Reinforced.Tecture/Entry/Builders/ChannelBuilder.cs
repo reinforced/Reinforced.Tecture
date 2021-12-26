@@ -26,17 +26,13 @@ namespace Reinforced.Tecture.Entry.Builders
     }
 
 
-    internal sealed class ChannelBindingImpl<TChannel> : MultiplexerRegistrationDecorator, ChannelBinding<TChannel> where TChannel : Channel
+    internal sealed class ChannelBindingImpl<TChannel> : ChannelConfigurator, ChannelBinding<TChannel> where TChannel : Channel
     {
         public ChannelBindingImpl(ChannelMultiplexer multiplexer, TransactionManager transactionManager) : base(multiplexer, typeof(TChannel), transactionManager)
         {
             
         }
 
-        public Type Channel
-        {
-            get { return typeof(TChannel); }
-        }
-
+        public Type Channel => typeof(TChannel);
     }
 }

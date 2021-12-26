@@ -1,4 +1,4 @@
-﻿using Reinforced.Tecture.Query;
+﻿using Reinforced.Tecture.Aspects;
 using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Channels

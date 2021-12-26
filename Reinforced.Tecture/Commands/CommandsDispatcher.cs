@@ -25,15 +25,15 @@ namespace Reinforced.Tecture.Commands
 
         private void Save(IEnumerable<string> channels)
         {
-            _tc?.Save();
+            
             var trans = _transactionManager.GetSaveTransactions(channels, false);
             List<Exception> aggregate = new List<Exception>();
             try
             {
-                foreach (var sideEffectSaver in _mx.GetSavers(channels))
+                foreach (var commandAspect in _mx.GetCommandAspectsForChannels(channels))
                 {
-                    sideEffectSaver.SaveInternal();
-                    trans[sideEffectSaver.Channel.FullName].Commit();
+                    commandAspect.SaveInternal();
+                    trans[commandAspect._channel.FullName].Commit();
                 }
             }
             catch (Exception e)
@@ -59,15 +59,14 @@ namespace Reinforced.Tecture.Commands
 
         private async Task SaveAsync(IEnumerable<string> channels)
         {
-            _tc?.Save();
             var trans = _transactionManager.GetSaveTransactions(channels, true);
             List<Exception> aggregate = new List<Exception>();
             try
             {
-                foreach (var sideEffectSaver in _mx.GetSavers(channels))
+                foreach (var commandAspect in _mx.GetCommandAspectsForChannels(channels))
                 {
-                    await sideEffectSaver.SaveInternalAsync();
-                    trans[sideEffectSaver.Channel.FullName].Commit();
+                    await commandAspect.SaveInternalAsync();
+                    trans[commandAspect._channel.FullName].Commit();
                 }
             }
             catch (Exception e)
@@ -103,10 +102,9 @@ namespace Reinforced.Tecture.Commands
                 {
                     DispatchInternal(queue.GetEffects(), usedChannels);
                     Save(usedChannels);
-                    postSave.Run();
                 }
-
-
+                _tc?.Save();
+                postSave.Run();
             } while (queue.HasEffects);
         }
 
@@ -119,8 +117,9 @@ namespace Reinforced.Tecture.Commands
                 {
                     await DispatchInternalAsync(queue.GetEffects(), usedChannels);
                     await SaveAsync(usedChannels);
-                    await postSave.RunAsync();
                 }
+                _tc?.Save();
+                await postSave.RunAsync();
             } while (queue.HasEffects);
         }
 

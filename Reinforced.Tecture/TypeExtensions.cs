@@ -71,31 +71,54 @@ namespace Reinforced.Tecture
                    && type.Attributes.HasFlag(TypeAttributes.NotPublic);
         }
 
-        internal static object InstanceNonpublic(this Type t, params object[] parameters)
+        internal static object InstanceNonpublic(this Type t, Func<Type,object> resolver = null)
         {
-            try
+            var ctors = t.GetTypeInfo().DeclaredConstructors.ToArray();
+            if (ctors.Length == 0)
+                throw new MissingMethodException(
+                    $"Service {t} cannot be created because of missing at least one private parameterless constructor");
+            
+            if (resolver == null)
             {
-#if NETCOREAPP1_0
-            var dc = t.GetTypeInfo().DeclaredConstructors;
-            var needed = dc.Where(d=>d.GetParameters().Length == parameters.Length).FirstOrDefault();
-            return needed.Invoke(parameters);
-#elif NETSTANDARD1_5
-            var dc = t.GetTypeInfo().DeclaredConstructors;
-            var needed = dc.Where(d=>d.GetParameters().Length == parameters.Length).FirstOrDefault();
-            return needed.Invoke(parameters);
-#elif NETSTANDARD1_6
-                var dc = t.GetTypeInfo().DeclaredConstructors;
-                var needed = dc.Where(d => d.GetParameters().Length == parameters.Length).FirstOrDefault();
-                return needed.Invoke(parameters);
-#else
-                return Activator.CreateInstance(t, BindingFlags.NonPublic | BindingFlags.Instance, null, parameters,
-                    null);
-#endif
+                var ctor = ctors.FirstOrDefault(x => x.IsPrivate && x.GetParameters().Length == 0);
+                if (ctor == null)
+                {
+                    throw new MissingMethodException(
+                        $"Service {t} cannot be created because IoC resolver is not specified and service is missing private parameterless constructor");
+                }
+                return ctor.Invoke(new object[0]);
             }
-            catch (MissingMethodException)
+
+            var ctorsWithParams = ctors.Where(x => x.IsPrivate).OrderByDescending(x => x.GetParameters().Length);
+
+            foreach (var ctorWithParam in ctorsWithParams)
             {
-                throw new Exception($"Service {t} must contain private constructor");
+                var parameters = ctorWithParam.GetParameters();
+                if (parameters.Length == 0) return ctorWithParam.Invoke(new object[0]);
+
+                bool inappropriate = false;
+                var paramsValues = parameters.Select(v =>
+                    {
+                        object retVal = null;
+                        try
+                        {
+                            retVal = resolver(v.ParameterType);
+                        }
+                        catch (Exception)
+                        {
+                            inappropriate = true;
+                        }
+
+                        return retVal;
+                    })
+                    .ToArray();
+                
+                if (inappropriate) continue;
+                return ctorWithParam.Invoke(paramsValues);
             }
+            
+            throw new MissingMethodException(
+                $"Service {t} cannot be created because appropriate constructor cannot be found");
         }
     }
 }

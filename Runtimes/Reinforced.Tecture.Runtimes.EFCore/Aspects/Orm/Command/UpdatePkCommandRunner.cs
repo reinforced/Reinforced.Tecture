@@ -4,20 +4,22 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Aspects.Orm.Commands.Update;
 using Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
     class UpdatePkCommandRunner : CommandRunner<UpdatePk>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxiliary _aux;
+        private readonly TestingContext _aux;
 
-        public UpdatePkCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
+        public UpdatePkCommandRunner(TestingContext aux, ILazyDisposable<DbContext> dc)
         {
             _aux = aux;
             _dc = dc;

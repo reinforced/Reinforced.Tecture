@@ -15,7 +15,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
 
         internal override InterpolatedQuery Clone()
         {
-            return new SchemaInterpolatedQuery(Query, Parameters.Select(x => x.DeepClone()).ToArray(), UsedTypes);
+            return new SchemaInterpolatedQuery(Query, Parameters.Select(x => DeepCloner.DeepClone(x)).ToArray(), UsedTypes);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.DeletePk
         {
             return new DeletePk()
             {
-                KeyValues = KeyValues.Select(x => x.DeepClone()).ToArray(),
+                KeyValues = KeyValues.Select(x => DeepCloner.DeepClone(x)).ToArray(),
                 EntityType = EntityType
             };
         }

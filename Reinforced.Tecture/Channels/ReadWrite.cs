@@ -1,4 +1,5 @@
-﻿using Reinforced.Tecture.Channels.Multiplexer;
+﻿using Reinforced.Tecture.Aspects;
+using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 // ReSharper disable UnusedTypeParameter
 
@@ -76,7 +77,7 @@ namespace Reinforced.Tecture.Channels
 
         public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
         {
-            command.Channel = typeof(Channel);
+            command.Channel = typeof(TChannel);
             _pipeline.Enqueue(command);
             return command;
         }

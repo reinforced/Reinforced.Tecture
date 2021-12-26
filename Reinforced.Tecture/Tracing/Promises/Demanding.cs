@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Tracing.Promises
         /// <param name="clone">Result instance clone</param>
         /// <param name="hash">Result hash</param>
         /// <param name="description">Result description</param>
-        void Fullfill(T result, T clone, string hash, string description);
+        void Fullfill(T result, T clone, string hash, string description = null);
 
         /// <summary>
         /// Fulfills query demand with exact result.
@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Tracing.Promises
         /// <param name="result">Results instance</param>
         /// <param name="hash">Result hash</param>
         /// <param name="description">Result description</param>
-        void Fullfill(T result, string hash, string description);
+        void Fullfill(T result, string hash, string description = null);
     }
 
     class Demands<T> : Demanding<T>
@@ -38,14 +38,14 @@ namespace Reinforced.Tecture.Tracing.Promises
             _promised = traceCollector.PromiseQuery<T>(channelType);
         }
 
-        public void Fullfill(T result, T clone, string hash, string description)
+        public void Fullfill(T result, T clone, string hash, string description = null)
         {
             _promised.Fulfill(result, clone, hash, description);
         }
 
-        public void Fullfill(T result, string hash, string description)
+        public void Fullfill(T result, string hash, string description = null)
         {
-            _promised.Fulfill(result, result.DeepClone(), hash, description);
+            _promised.Fulfill(result, DeepCloner.DeepClone(result), hash, description);
         }
     }
 }

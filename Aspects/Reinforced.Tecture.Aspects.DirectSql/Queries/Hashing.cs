@@ -1,5 +1,5 @@
 ﻿using Reinforced.Tecture.Aspects.DirectSql.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Aspects.DirectSql.Queries
 {

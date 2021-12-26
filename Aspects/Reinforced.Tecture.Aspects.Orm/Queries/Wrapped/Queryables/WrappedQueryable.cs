@@ -5,20 +5,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
 using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators;
-using Reinforced.Tecture.Query;
 using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
 {
     class WrappedQueryable : IOrderedQueryable
     {
-        public Query Aspect { get; }
+        public Orm.Query Aspect { get; }
 
         public IQueryable Original { get; }
 
         public DescriptionHolder Description { get; }
 
-        public WrappedQueryable(IQueryable original, Query aspect, DescriptionHolder description)
+        public WrappedQueryable(IQueryable original, Orm.Query aspect, DescriptionHolder description)
         {
             Original = original;
             Aspect = aspect;

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
 {

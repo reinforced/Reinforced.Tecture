@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Channels;
+using static Reinforced.Tecture.Aspects.Orm.Orm;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
 {

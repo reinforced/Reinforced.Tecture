@@ -1,18 +1,20 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Aspects.Orm.Commands.Relate;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
     class RelateCommandRunner : CommandRunner<Relate>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxiliary _aux;
+        private readonly TestingContext _aux;
 
-        public RelateCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
+        public RelateCommandRunner(TestingContext aux, ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
             _aux = aux;

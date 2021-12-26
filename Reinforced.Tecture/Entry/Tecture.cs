@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Services;
+using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Transactions;
 
@@ -21,20 +22,22 @@ namespace Reinforced.Tecture.Entry
         internal readonly ActionsQueue _finallyActions = new ActionsQueue(false);
         private readonly TransactionManager _tranManager;
         private readonly Func<Exception, bool> _exceptionHandler;
-        private readonly AuxiliaryContainer _aux;
+        private readonly TestingContextContainer _aux;
+        
         public Tecture(
             ChannelMultiplexer mx,
-            AuxiliaryContainer aux,
+            TestingContextContainer aux,
             bool debugMode = false,
             TransactionManager tranManager = null,
-            Func<Exception, bool> exceptionHandler = null)
+            Func<Exception, bool> exceptionHandler = null,
+            Func<Type,object> iocResolver = null)
         {
             _mx = mx;
             _aux = aux;
             _pipeline = new Pipeline(debugMode, _actions, _finallyActions);
             _tranManager = tranManager;
             _exceptionHandler = exceptionHandler;
-            _serviceManager = new ServiceManager(_pipeline, _mx, _aux);
+            _serviceManager = new ServiceManager(_pipeline, _mx, _aux, iocResolver);
         }
 
         /// <summary>
@@ -101,7 +104,7 @@ namespace Reinforced.Tecture.Entry
 
                 _serviceManager.OnFinally();
                 _finallyActions.Run();
-                dispatcher.Dispatch(_pipeline, _actions);
+                if (_pipeline.HasEffects) dispatcher.Dispatch(_pipeline, _actions);
             }
             catch (Exception ex)
             {
@@ -131,7 +134,7 @@ namespace Reinforced.Tecture.Entry
 
                 await _serviceManager.OnFinallyAsync();
                 await _finallyActions.RunAsync();
-                await dispatcher.DispatchAsync(_pipeline, _actions);
+                if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, _actions);
             }
             catch (Exception ex)
             {
@@ -146,6 +149,7 @@ namespace Reinforced.Tecture.Entry
         public void Dispose()
         {
             _mx.Dispose();
+            _serviceManager.Dispose();
         }
     }
 }

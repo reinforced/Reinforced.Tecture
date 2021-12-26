@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
-using Reinforced.Tecture.Cloning;
-using Reinforced.Tecture.Query;
-using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing.Promises;
+using static Reinforced.Tecture.Aspects.DirectSql.DirectSql;
 
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -17,7 +16,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
     {
         internal string _description = string.Empty;
 
-        private readonly Auxiliary _a;
+        private readonly TestingContext _a;
 
         internal RawQuery(Sql sql, Query runtime)
         {

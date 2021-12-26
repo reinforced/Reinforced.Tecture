@@ -1,4 +1,7 @@
 ﻿// ReSharper disable UnusedTypeParameter
+
+using Reinforced.Tecture.Aspects;
+
 namespace Reinforced.Tecture.Channels
 {
 

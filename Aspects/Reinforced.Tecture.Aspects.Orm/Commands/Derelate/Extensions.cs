@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Channels;
+using static Reinforced.Tecture.Aspects.Orm.Orm;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
 {

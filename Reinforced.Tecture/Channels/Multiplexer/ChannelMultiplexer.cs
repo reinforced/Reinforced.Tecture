@@ -2,41 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Reinforced.Tecture.Aspects;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
-using Reinforced.Tecture.Savers;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Channels.Multiplexer
 {
     //string key here is full type name
     class ChannelMultiplexer : IDisposable
     {
-        private readonly AuxiliaryContainer _auxiliary;
-
-        private readonly Dictionary<string, Type> _namesCache = new Dictionary<string, Type>();
-        internal bool IsKnown(Type channel)
+        private readonly TestingContextContainer _testingContext;
+        
+        public ChannelMultiplexer(TestingContextContainer testingContext)
         {
-            return _knownChannels.Contains(channel);
+            _testingContext = testingContext;
         }
-        private void Known(Type channel)
+
+        #region Channels
+
+        internal bool IsKnown(Type channel) => _knownChannels.Contains(channel);
+
+        private void EnsureKnown(Type channel)
         {
             if (!_knownChannels.Contains(channel)) _knownChannels.Add(channel);
         }
+        
         private readonly HashSet<Type> _knownChannels = new HashSet<Type>();
-        private void CheckChannel(Type tchannel)
+        
+        private void AssertChannelKnown(Type tchannel)
         {
             if (!_knownChannels.Contains(tchannel)) throw new TectureException($"Unknown channel {tchannel.Name}");
         }
 
+        #endregion
+       
+
 
         #region Query
-        private readonly Dictionary<string, Dictionary<string, QueryAspect>> _channelAspectQuery
-            = new Dictionary<string, Dictionary<string, QueryAspect>>();
-
-
+        private readonly Dictionary<string, Dictionary<string, QueryAspect>> _channelAspectQuery = new Dictionary<string, Dictionary<string, QueryAspect>>();
         internal void RegisterQueryAspect(Type channelType, Type queryAspectType, QueryAspect qf)
         {
-            Known(channelType);
+            EnsureKnown(channelType);
 
             var channelId = channelType.FullName;
 
@@ -56,7 +63,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 throw new TectureException($"Attempt to bind query aspect {queryAspectType.Name} twice for channel {channelType.Name}");
             }
 
-            qf._aux = _auxiliary.ForChannel(channelType);
+            qf._aux = _testingContext.ForChannel(channelType);
             qf._channel = channelType;
             qf.CallOnRegister();
         }
@@ -66,7 +73,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             where TAspect : QueryAspect
         {
             var ct = typeof(TChannel);
-            CheckChannel(ct);
+            AssertChannelKnown(ct);
 
             var tf = typeof(TAspect);
 
@@ -86,11 +93,15 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         #endregion
 
         #region Command
-        private readonly Dictionary<string, Dictionary<string, CommandAspect>> _channelAspectsCommand
-            = new Dictionary<string, Dictionary<string, CommandAspect>>();
+        
+        private readonly Dictionary<string, Dictionary<string, CommandAspect>> _channelAspectsCommand = new Dictionary<string, Dictionary<string, CommandAspect>>();
+        private readonly Dictionary<string, Dictionary<Type, CommandAspect>> _channelCommandAspect = new Dictionary<string, Dictionary<Type, CommandAspect>>();
+
+        
+
         internal void RegisterCommandAspect(Type channelType, Type commandAspectType, CommandAspect cf)
         {
-            Known(channelType);
+            EnsureKnown(channelType);
 
             var channelId = channelType.FullName;
 
@@ -101,6 +112,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
             var aspects = _channelAspectsCommand[channelId];
             var aspectId = commandAspectType.FullName;
+            
             if (!aspects.ContainsKey(aspectId))
             {
                 aspects[aspectId] = cf;
@@ -110,7 +122,24 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 throw new TectureException($"Attempt to bind command aspect {commandAspectType.FullName} twice for channel {channelType.Name}");
             }
 
-            cf._aux = _auxiliary.ForChannel(channelType);
+            if (!_channelCommandAspect.ContainsKey(channelId))
+            {
+                _channelCommandAspect[channelId] = new Dictionary<Type, CommandAspect>();
+            }
+
+            var servingCommands = _channelCommandAspect[channelId];
+            foreach (var cfServingCommandType in cf.ServingCommandTypes)
+            {
+                if (servingCommands.ContainsKey(cfServingCommandType))
+                {
+                    throw new TectureException(
+                        $"Command {cfServingCommandType.Name} is already being served by command aspect {commandAspectType.FullName} in context of channel {channelId}");
+                }
+
+                servingCommands[cfServingCommandType] = cf;
+            }
+
+            cf._aux = _testingContext.ForChannel(channelType);
             cf._channel = channelType;
             cf.CallOnRegister();
         }
@@ -120,7 +149,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             where TAspect : CommandAspect
         {
             var ct = typeof(TChannel);
-            CheckChannel(ct);
+            AssertChannelKnown(ct);
 
             var tf = typeof(TAspect);
 
@@ -138,62 +167,14 @@ namespace Reinforced.Tecture.Channels.Multiplexer
             return (TAspect)aspects[tf.FullName];
         }
 
-        #endregion
-
-        #region Savers
-        private readonly Dictionary<string, Dictionary<Type, SaverBase>> _saversPerCommandsChannel
-            = new Dictionary<string, Dictionary<Type, SaverBase>>();
-
-        private readonly Dictionary<string, HashSet<SaverBase>> _saversPerChannels = new Dictionary<string, HashSet<SaverBase>>();
-
-        public ChannelMultiplexer(AuxiliaryContainer aux)
+        private CommandAspect GetAspectWithCommand(Type commandType, string channelId)
         {
-            _auxiliary = aux;
-        }
-
-        internal void RegisterSaver(Type channelType, SaverBase saver)
-        {
-            Known(channelType);
-            saver.Channel = channelType;
-            saver._Aux = _auxiliary.ForChannel(channelType);
-
-
-            if (!_saversPerChannels.ContainsKey(channelType.FullName))
-            {
-                _saversPerChannels[channelType.FullName] = new HashSet<SaverBase>();
-            }
-
-            var chSavers = _saversPerChannels[channelType.FullName];
-
-            if (!chSavers.Contains(saver)) chSavers.Add(saver);
-
-            if (!_saversPerCommandsChannel.ContainsKey(channelType.FullName))
-            {
-                _saversPerCommandsChannel[channelType.FullName] = new Dictionary<Type, SaverBase>();
-            }
-
-            var commandSavers = _saversPerCommandsChannel[channelType.FullName];
-
-            foreach (var saverServingCommandType in saver.ServingCommandTypes)
-            {
-                if (commandSavers.ContainsKey(saverServingCommandType))
-                {
-                    throw new TectureException($"Trying to register {saver.GetType().FullName} saver, but there is already runner {commandSavers[saverServingCommandType].GetType().FullName} registered for command '{saverServingCommandType.Name}' ");
-                }
-
-                commandSavers[saverServingCommandType] = saver;
-            }
-            saver.CallOnRegister();
-        }
-
-        private SaverBase GetSaverWithCommand(Type commandType, string channelId)
-        {
-            if (!_saversPerCommandsChannel.ContainsKey(channelId))
+            if (!_channelCommandAspect.ContainsKey(channelId))
             {
                 throw new TectureException($"Trying to obtain runner for command '{commandType.Name}' didn't suceed: unknown channel {channelId}");
             }
 
-            var savers = _saversPerCommandsChannel[channelId];
+            var savers = _channelCommandAspect[channelId];
 
 
             if (!savers.ContainsKey(commandType))
@@ -201,9 +182,9 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 var bt = commandType.GetTypeInfo().BaseType;
                 if (bt != null)
                 {
-                    return GetSaverWithCommand(bt, channelId);
+                    return GetAspectWithCommand(bt, channelId);
                 }
-                throw new TectureException($"Trying to obtain runner for command '{commandType.Name}' didn't suceed: no saver serving such command registered for {channelId}");
+                throw new TectureException($"Trying to obtain runner for command '{commandType.Name}' didn't suceed: no command aspect servicing command registered for {channelId}");
             }
 
             return savers[commandType];
@@ -211,19 +192,19 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         }
         internal CommandRunner GetRunner(CommandBase command)
         {
-            var saver = GetSaverWithCommand(command.GetType(), command.ChannelId);
+            var saver = GetAspectWithCommand(command.GetType(), command.ChannelId);
             return saver.GetRunner(command);
         }
 
-        internal IEnumerable<SaverBase> GetSavers(IEnumerable<string> channels)
+        internal IEnumerable<CommandAspect> GetCommandAspectsForChannels(IEnumerable<string> channels)
         {
             foreach (var channel in channels)
             {
-                if (_saversPerChannels.ContainsKey(channel))
+                if (_channelAspectsCommand.ContainsKey(channel))
                 {
-                    foreach (var saverBase in _saversPerChannels[channel])
+                    foreach (var commandAspect in _channelAspectsCommand[channel].Values)
                     {
-                        yield return saverBase;
+                        yield return commandAspect;
                     }
                 }
             }
@@ -282,11 +263,19 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            foreach (var value in _saversPerChannels.Values)
+            foreach (var channelQueryAspects in _channelAspectQuery.Values)
             {
-                foreach (var saverBase in value)
+                foreach (var queryAspect in channelQueryAspects.Values)
                 {
-                    saverBase.Dispose();
+                    queryAspect.Dispose();
+                }
+            }
+
+            foreach (var channelCommandAspects in _channelAspectsCommand.Values)
+            {
+                foreach (var commandAspect in channelCommandAspects.Values)
+                {
+                    commandAspect.Dispose();
                 }
             }
         }

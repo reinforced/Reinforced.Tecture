@@ -4,19 +4,21 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 {
     class DeletePkCommandRunner : CommandRunner<DeletePk>
     {
         private readonly ILazyDisposable<DbContext> _dc;
-        private readonly Auxiliary _aux;
+        private readonly TestingContext _aux;
 
-        public DeletePkCommandRunner(Auxiliary aux, ILazyDisposable<DbContext> dc)
+        public DeletePkCommandRunner(TestingContext aux, ILazyDisposable<DbContext> dc)
         {
             _dc = dc;
             _aux = aux;

@@ -4,9 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Reinforced.Tecture is architectural framework for .NET business applications built on CQRS and FP principles</Description>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    
     
   </PropertyGroup>
 
@@ -17,6 +18,10 @@
     </None>
     <None Update="Savers\Savers.tt">
       <LastGenOutput>Savers.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Aspects\CommandAspect.Generated.tt">
+      <LastGenOutput>CommandAspect.Generated.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
     <None Update="Channels\Generated.tt">
@@ -46,6 +51,11 @@
   </ItemGroup>
 
   <ItemGroup>    
+    <Compile Update="Aspects\CommandAspect.Generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommandAspect.Generated.tt</DependentUpon>
+    </Compile>    
     <Compile Update="Channels\Generated.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

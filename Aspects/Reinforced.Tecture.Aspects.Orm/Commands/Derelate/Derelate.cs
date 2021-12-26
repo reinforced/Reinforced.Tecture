@@ -49,7 +49,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
         {
             return new Derelate()
             {
-                Primary = Primary.DeepClone(),
+                Primary = DeepCloner.DeepClone(Primary),
                 PrimaryType = PrimaryType,
                 ForeignKeySpecifier = ForeignKeySpecifier
             };

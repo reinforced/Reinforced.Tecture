@@ -15,6 +15,7 @@ using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Aspects.Orm.Toolings;
 using _ = Reinforced.Tecture.Services.Tooling;
 using o = System.Object;
+using static Reinforced.Tecture.Aspects.Orm.Orm;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
 {

@@ -1,9 +1,13 @@
-﻿using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
-using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
-using Reinforced.Tecture.Aspects.Orm.Toolings;
+﻿
+
 using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Aspects.Orm.Toolings;
+using Reinforced.Tecture.Aspects.Orm.Commands.DeletePk;
+using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Services;
 using _ = Reinforced.Tecture.Services.Tooling;
 using o = System.Object;
+using static Reinforced.Tecture.Aspects.Orm.Orm;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Delete
 {

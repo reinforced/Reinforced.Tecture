@@ -42,7 +42,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
             Adds<ToyType, BlueprintResources>,
             Deletes<Resource>,
             Modifies<Blueprint>
-    >
+        >
     {
         private Nomenclature() { }
 

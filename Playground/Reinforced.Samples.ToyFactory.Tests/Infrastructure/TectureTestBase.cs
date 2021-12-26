@@ -4,6 +4,7 @@ using System.Reflection;
 using Reinforced.Samples.ToyFactory.Data;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Tecture;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm;

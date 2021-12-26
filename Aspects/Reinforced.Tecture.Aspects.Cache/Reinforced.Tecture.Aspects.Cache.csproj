@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>    
+    </PropertyGroup>
+    
+
+    <ItemGroup>
+      <Folder Include="Commands\Native" />
+      <Folder Include="Commands\String" />
+      <Folder Include="Commands\Typed" />
+      <Folder Include="Queries\Native" />
+      <Folder Include="Queries\String" />
+      <Folder Include="Queries\Typed" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
+    </ItemGroup>
+
+</Project>

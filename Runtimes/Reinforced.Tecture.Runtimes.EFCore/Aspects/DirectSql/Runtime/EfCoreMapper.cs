@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.DirectSql.Infrastructure;
+using Reinforced.Tecture.Aspects.Orm;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime
 {

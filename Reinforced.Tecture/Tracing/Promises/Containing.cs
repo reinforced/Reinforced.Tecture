@@ -12,7 +12,7 @@ namespace Reinforced.Tecture.Tracing.Promises
     /// <typeparam name="T">Type of test data</typeparam>
     public interface Containing<T> : Promised<T>
     {
-        T Get(string hash, string description);
+        T Get(string hash, string description = null);
     }
 
     internal class Contains<T> : Containing<T>
@@ -29,10 +29,10 @@ namespace Reinforced.Tecture.Tracing.Promises
             }
         }
 
-        public T Get(string hash, string description)
+        public T Get(string hash, string description = null)
         {
             var result = _source.Get<T>(hash, description);
-            _promised?.Fulfill(result, result.DeepClone(), hash, description);
+            _promised?.Fulfill(result, DeepCloner.DeepClone(result), hash, description);
             return result;
         }
     }

@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Services
 {
 
-    class ServiceManager
+    internal class ServiceManager : IDisposable
     {
         private readonly Pipeline _pipeline;
         private readonly ChannelMultiplexer _mux;
-        private readonly AuxiliaryContainer _aux;
-        class ServiceContextEntry
-        {
-            public Type[] ContextTypes { get; set; }
-            public object[] Context { get; set; }
-            public TectureServiceBase ServiceBaseInstance { get; set; }
-        }
+        private readonly TestingContextContainer _aux;
+        private readonly Func<Type, object> _resolver;
+        
         private readonly List<TectureServiceBase> _allServices = new List<TectureServiceBase>();
 
         public void OnSave()
@@ -55,16 +53,17 @@ namespace Reinforced.Tecture.Services
 
         private readonly Dictionary<Type, TectureServiceBase> _noContextServicesCache = new Dictionary<Type, TectureServiceBase>();
 
-        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, AuxiliaryContainer aux)
+        public ServiceManager(Pipeline pipeline, ChannelMultiplexer mux, TestingContextContainer aux, Func<Type, object> resolver)
         {
             _pipeline = pipeline;
             _mux = mux;
             _aux = aux;
+            _resolver = resolver;
         }
 
         private TService CreateService<TService>() where TService : TectureServiceBase
         {
-            var service = (TService)typeof(TService).InstanceNonpublic();
+            var service = (TService)typeof(TService).InstanceNonpublic(_resolver);
             service.ServiceManager = this;
             service.Pipeline = _pipeline;
             service.ChannelMultiplexer = _mux;
@@ -72,7 +71,6 @@ namespace Reinforced.Tecture.Services
             return service;
         }
 
-        
         public void DestroyService(TectureServiceBase serviceBase)
         {
             serviceBase.ServiceManager = null;
@@ -93,6 +91,15 @@ namespace Reinforced.Tecture.Services
             service.CallInit();
             _allServices.Add(service);
             return service;
+        }
+
+        public void Dispose()
+        {
+            var allSvcs = _allServices.ToArray();
+            foreach (var serviceBase in allSvcs)
+            {
+                serviceBase.Dispose();
+            }
         }
     }
 }

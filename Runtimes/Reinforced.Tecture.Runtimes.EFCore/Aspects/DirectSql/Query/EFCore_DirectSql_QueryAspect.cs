@@ -4,11 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Query
 {
-    class EFCore_DirectSql_QueryAspect : Tecture.Aspects.DirectSql.Query
+    class EFCore_DirectSql_QueryAspect : Tecture.Aspects.DirectSql.DirectSql.Query
     {
         public override IEnumerable<T> DoQuery<T>(string command, object[] parameters)
         {

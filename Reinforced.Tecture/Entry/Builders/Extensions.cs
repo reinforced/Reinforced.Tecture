@@ -1,4 +1,5 @@
-﻿using Reinforced.Tecture.Channels;
+﻿using Reinforced.Tecture.Aspects;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Transactions;
 
@@ -17,7 +18,7 @@ namespace Reinforced.Tecture.Entry.Builders
         /// <param name="aspect">Aspect implementation</param>
         public static void ForQuery<TAspect>(this ChannelBinding<QueryChannel<TAspect>> cf, TAspect aspect) where TAspect : QueryAspect
         {
-            var holder = cf as MultiplexerRegistrationDecorator;
+            var holder = cf as ChannelConfigurator;
             holder.RegisterQueryAspect(typeof(TAspect), aspect);
         }
 
@@ -28,7 +29,7 @@ namespace Reinforced.Tecture.Entry.Builders
         /// <param name="manager">Transaction manager for channel</param>
         public static void WithTransactions(this ChannelBinding cf, ChannelTransactionsManager manager)
         {
-            var holder = cf as MultiplexerRegistrationDecorator;
+            var holder = cf as ChannelConfigurator;
             holder.TransactionManager.RegisterManager(cf.Channel,manager);
         }
     }

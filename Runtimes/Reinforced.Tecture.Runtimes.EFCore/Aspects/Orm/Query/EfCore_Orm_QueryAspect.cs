@@ -7,7 +7,7 @@ using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Query
 {
-    class EfCore_Orm_QueryAspect : Tecture.Aspects.Orm.Query
+    class EfCore_Orm_QueryAspect : Tecture.Aspects.Orm.Orm.Query
     {
         private readonly ILazyDisposable<DbContext> _context;
 

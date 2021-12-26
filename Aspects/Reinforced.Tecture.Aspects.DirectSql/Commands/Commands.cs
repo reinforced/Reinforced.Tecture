@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Aspects.DirectSql.Toolings;
 using _ = Reinforced.Tecture.Services.Tooling;
+using static Reinforced.Tecture.Aspects.DirectSql.DirectSql;
 
 namespace Reinforced.Tecture.Aspects.DirectSql.Commands
 {

@@ -37,7 +37,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Delete
         {
             return new Delete()
             {
-                Entity = Entity.DeepClone(),
+                Entity = DeepCloner.DeepClone(Entity),
                 EntityType = EntityType
             };
         }

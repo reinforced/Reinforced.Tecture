@@ -56,35 +56,19 @@ namespace Reinforced.Tecture.Testing.Validation
 
         public void Visit(CommandBase command, CheckDescription[] checks)
         {
-            if (command is End)
-            {
-                TheEnd();
-            }
-            else
-            if (checks.Length == 0)
-            {
-                Then(command);
-            }
+            if (command is End) TheEnd();
+            else if (checks.Length == 0) Then(command);
             else
             {
                 var validationCalls = new List<InvocationExpressionSyntax>();
                 foreach (var checkMethodDescription in checks)
-                {
                     if (checkMethodDescription.IsNeeded(command))
-                    {
                         validationCalls.Add(Generate(command, checkMethodDescription));
-                    }
-                }
 
                 if (validationCalls.Count == 0)
-                {
                     Then(command); //needed to do not overwhelm braces
-                }
                 else
-                {
                     Then(command, validationCalls);
-                }
-                
             }
         }
 

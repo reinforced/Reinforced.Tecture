@@ -40,13 +40,14 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         public object Result { get; private set; }
 
-        internal void SetResult<T>(T result, T clone, string hash, string description,TimeSpan timeTaken)
+        internal void SetResult<T>(T result, T clone, string hash, string description, TimeSpan timeTaken)
         {
             var type = typeof(T);
             if (typeof(T).IsInterface || typeof(T).IsAbstract)
             {
                 type = result.GetType();
             }
+
             Result = result;
             DataType = type;
             Hash = hash;
@@ -54,7 +55,7 @@ namespace Reinforced.Tecture.Tracing
             Annotation = description;
             foreach (var commandBase in KnownClones)
             {
-                var kc = (QueryRecord)commandBase;
+                var kc = (QueryRecord) commandBase;
                 kc.Result = clone;
                 kc.DataType = type;
                 kc.Hash = hash;
@@ -105,6 +106,7 @@ namespace Reinforced.Tecture.Tracing
                         else first = false;
                         tw.Write(Description(re));
                     }
+
                     tw.Write("}");
                 }
             }
@@ -119,7 +121,6 @@ namespace Reinforced.Tecture.Tracing
                     tw.Write($"'{Result}' obtained");
                 }
             }
-
         }
 
         private void FormatTime(TextWriter tw)
@@ -129,11 +130,13 @@ namespace Reinforced.Tecture.Tracing
                 tw.Write($"[{TimeTaken:mm:ss:fff}]\t");
                 return;
             }
+
             if (TimeTaken.TotalSeconds > 5)
             {
                 tw.Write($"[{TimeTaken:ss:fff} s]\t");
                 return;
             }
+
             tw.Write($"[{TimeTaken:fff}ms]\t");
         }
 
@@ -147,7 +150,7 @@ namespace Reinforced.Tecture.Tracing
             {
                 DataType = DataType,
                 Hash = Hash,
-                Result = Result?.DeepClone(),
+                Result = DeepCloner.DeepClone(Result),
                 TimeTaken = TimeTaken
             };
         }

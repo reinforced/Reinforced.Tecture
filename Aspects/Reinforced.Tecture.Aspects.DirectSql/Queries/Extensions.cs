@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
 using Reinforced.Tecture.Channels;
+using static Reinforced.Tecture.Aspects.DirectSql.DirectSql;
 
 namespace Reinforced.Tecture.Aspects.DirectSql.Queries
 {

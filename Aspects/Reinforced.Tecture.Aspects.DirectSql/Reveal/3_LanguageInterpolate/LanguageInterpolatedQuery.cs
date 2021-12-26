@@ -16,7 +16,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
 
         internal override InterpolatedQuery Clone()
         {
-            return new LanguageInterpolatedQuery(Query, Parameters.Select(x => x.DeepClone()).ToArray(), UsedTypes);
+            return new LanguageInterpolatedQuery(Query, Parameters.Select(x => DeepCloner.DeepClone(x)).ToArray(), UsedTypes);
         }
     }
 

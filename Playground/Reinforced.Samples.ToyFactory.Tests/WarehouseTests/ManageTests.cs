@@ -42,7 +42,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var a = ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
             var mu = ctx.From<Db>().Key(a);
-            ctx.Do<Manage>().RenameMeasurementUnit(mu,"Kilo","kg");
+            ctx.Let<Manage>().RenameMeasurementUnit(mu,"Kilo","kg");
             ctx.Save();
             ctx.Do<Manage>().DeleteMeasurementUnit(mu);
             ctx.Save();
@@ -86,8 +86,9 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             var supplyId = ctx.From<Db>().Key(supp);
             supply.FinishResourceSupply(supplyId);
             ctx.Save();
-            c.Validate<SupplyCreationPipeline_Validation>();
             Output.WriteLine(c.Text());
+            c.Validate<SupplyCreationPipeline_Validation>();
+            
         }
 
         [Fact]

@@ -1,4 +1,6 @@
-﻿namespace Reinforced.Tecture.Channels
+﻿using Reinforced.Tecture.Aspects;
+
+namespace Reinforced.Tecture.Channels
 {
     interface IQueryMultiplexer
     {

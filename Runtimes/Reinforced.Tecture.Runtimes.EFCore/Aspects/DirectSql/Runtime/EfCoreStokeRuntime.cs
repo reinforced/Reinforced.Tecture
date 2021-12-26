@@ -2,13 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.DirectSql.Infrastructure;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Aspects.Orm;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Runtime
 {
     class EfCoreStokeRuntime : IStrokeRuntime
     {
-        protected Auxiliary Aux { get; set; }
+        protected TestingContext Aux { get; set; }
 
         public EfCoreStokeRuntime(ILazyDisposable<DbContext> dbContext, Type channel, InterpolatorFactory fac)
         {

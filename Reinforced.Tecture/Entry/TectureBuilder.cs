@@ -1,6 +1,7 @@
 ﻿using System;
 using Reinforced.Tecture.Channels.Multiplexer;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Transactions;
 
 namespace Reinforced.Tecture.Entry
@@ -13,15 +14,16 @@ namespace Reinforced.Tecture.Entry
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         public TectureBuilder()
         {
-            var tdh = new TestDataHolder();
-            Aux = new AuxiliaryContainer(tdh, _transactionManager);
+            var tdh = new TestDataProvider();
+            Aux = new TestingContextContainer(tdh, _transactionManager);
             _mx = new ChannelMultiplexer(Aux);
         }
 
-        internal readonly AuxiliaryContainer Aux;
+        internal readonly TestingContextContainer Aux;
         internal readonly ChannelMultiplexer _mx;
         internal readonly TransactionManager _transactionManager = new TransactionManager();
         internal Func<Exception, bool> _excHandler = null;
+        internal Func<Type, object> _resolver = null;
 
         /// <summary>
         /// Produces Tecture instance
@@ -35,7 +37,8 @@ namespace Reinforced.Tecture.Entry
                 Aux,
                 false,
                 _transactionManager,
-                exceptionHandler: _excHandler);
+                exceptionHandler: _excHandler,
+                _resolver);
         }
     }
 }

@@ -86,9 +86,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
         /// <returns>Command clone</returns>
         protected override CommandBase DeepCloneForTracing()
         {
-            var r = new UpdatePk(_updateValues.ToDictionary(x=>x.Key,x=>x.Value.DeepClone()))
+            var r = new UpdatePk(_updateValues.ToDictionary(x=>x.Key,x=>DeepCloner.DeepClone(x.Value)))
             {
-                KeyValues = KeyValues.Select(x => x.DeepClone()).ToArray(),
+                KeyValues = KeyValues.Select(x => DeepCloner.DeepClone(x)).ToArray(),
                 EntityType = EntityType
             };
             return r;

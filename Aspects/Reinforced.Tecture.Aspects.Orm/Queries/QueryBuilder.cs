@@ -7,9 +7,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 {
     internal class QueryBuilder<TEntity> : IQueryFor<TEntity> where TEntity : class
     {
-        protected readonly Query Src;
+        protected readonly Orm.Query Src;
         
-        public QueryBuilder(Query src)
+        public QueryBuilder(Orm.Query src)
         {
             Src = src;
             

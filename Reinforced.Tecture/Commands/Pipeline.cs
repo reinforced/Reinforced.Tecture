@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Tracing.Commands;
 
@@ -7,7 +10,11 @@ namespace Reinforced.Tecture.Commands
 {
     class Pipeline
     {
+        private readonly object QueueLocker = new object();
+        
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
+        
+        
         internal TraceCollector TraceCollector = null;
 
         /// <summary>
@@ -17,31 +24,34 @@ namespace Reinforced.Tecture.Commands
 
         public void EnqueueCommand(CommandBase cmd)
         {
-            cmd.Order = _commandQueue.Count + 1;
-            if (_debugMode)
+            lock (QueueLocker)
             {
-                //DebugInfo dbg = null;
-                //var st = new StackTrace();
-                //foreach (var stf in st.GetFrames())
-                //{
-                //    var m = stf.GetMethod();
-                //    if (m != null && m.DeclaringType != null && typeof(TectureService).IsAssignableFrom(m.DeclaringType))
-                //    {
-                //        //if (m.GetCustomAttribute<UnexplainableAttribute>() != null) continue;
-                //        dbg = new DebugInfo();
-                //        dbg.SourceService = m.DeclaringType;
-                //        dbg.SourceMethod = m;
-                //        dbg.LineNumber = stf.GetFileLineNumber();
-                //        dbg.FileName = stf.GetFileName();
-                //        break;
-                //    }
-                //}
+                cmd.Order = _commandQueue.Count + 1;
+                if (_debugMode)
+                {
+                    //DebugInfo dbg = null;
+                    //var st = new StackTrace();
+                    //foreach (var stf in st.GetFrames())
+                    //{
+                    //    var m = stf.GetMethod();
+                    //    if (m != null && m.DeclaringType != null && typeof(TectureService).IsAssignableFrom(m.DeclaringType))
+                    //    {
+                    //        //if (m.GetCustomAttribute<UnexplainableAttribute>() != null) continue;
+                    //        dbg = new DebugInfo();
+                    //        dbg.SourceService = m.DeclaringType;
+                    //        dbg.SourceMethod = m;
+                    //        dbg.LineNumber = stf.GetFileLineNumber();
+                    //        dbg.FileName = stf.GetFileName();
+                    //        break;
+                    //    }
+                    //}
 
-                //cmd.Debug = dbg;
-            }
+                    //cmd.Debug = dbg;
+                }
             
-            TraceCollector?.Command(cmd.TraceClone());
-            if (!(cmd is ITracingOnly)) _commandQueue.Enqueue(cmd);
+                TraceCollector?.Command(cmd.TraceClone());
+                if (!(cmd is ITracingOnly)) _commandQueue.Enqueue(cmd);    
+            }
         }
 
         public TCommand Enqueue<TCommand>(TCommand cmd) where TCommand : CommandBase
@@ -83,7 +93,11 @@ namespace Reinforced.Tecture.Commands
         internal IEnumerable<CommandBase> GetEffects()
         {
             var nq = new Queue<CommandBase>(_commandQueue);
-            _commandQueue.Clear();
+            lock (QueueLocker)
+            {
+                _commandQueue.Clear();
+            }
+            
             while (nq.Count > 0)
             {
                 yield return nq.Dequeue();

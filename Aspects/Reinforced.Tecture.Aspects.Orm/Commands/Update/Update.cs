@@ -83,10 +83,10 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <inheritdoc />
         protected override CommandBase DeepCloneForTracing()
         {
-            var r = new Update(Entity.DeepClone(), EntityType);
+            var r = new Update(DeepCloner.DeepClone(Entity), EntityType);
             foreach (var updateValue in _updateValues)
             {
-                r.RegisterUpdate(updateValue.Key, updateValue.Value.DeepClone());
+                r.RegisterUpdate(updateValue.Key, DeepCloner.DeepClone(updateValue.Value));
             }
 
             return r;

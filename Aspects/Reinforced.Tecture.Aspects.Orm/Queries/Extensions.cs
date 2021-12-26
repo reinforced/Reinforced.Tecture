@@ -14,7 +14,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         /// <typeparam name="T">Type of entity</typeparam>
         /// <param name="qr">Query channel</param>
         /// <returns>Query builder</returns>
-        public static IQueryFor<T> Get<T>(this Read<QueryChannel<Query>> qr) where T : class
+        public static IQueryFor<T> Get<T>(this Read<QueryChannel<Orm.Query>> qr) where T : class
         {
             var pr = qr.Aspect();
             return new QueryBuilder<T>(pr);
@@ -26,7 +26,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         /// <typeparam name="T">Type of entity</typeparam>
         /// <param name="qr">Query channel</param>
         /// <returns>Query builder</returns>
-        public static IQueryable<T> All<T>(this Read<QueryChannel<Query>> qr) where T : class
+        public static IQueryable<T> All<T>(this Read<QueryChannel<Orm.Query>> qr) where T : class
         {
             var pr = qr.Aspect();
             return pr.GetSet<T>();
@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         /// <param name="qr">Channel</param>
         /// <param name="keyedAddition">Performed addition</param>
         /// <returns>Primary key</returns>
-        public static T Key<T>(this Read<QueryChannel<Query>> qr, IAddition<IPrimaryKey<T>> keyedAddition)
+        public static T Key<T>(this Read<QueryChannel<Orm.Query>> qr, IAddition<IPrimaryKey<T>> keyedAddition)
         {
             var pr = qr.Aspect();
             return pr.Key(keyedAddition);

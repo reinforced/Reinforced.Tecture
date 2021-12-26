@@ -4,7 +4,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
 {
     internal interface IWrappedQueryable<out T>
     {
-        Query Aspect { get; }
+        Orm.Query Aspect { get; }
         IQueryable<T> Original { get; }
         DescriptionHolder Description { get; }
     }

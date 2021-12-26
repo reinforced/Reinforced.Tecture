@@ -3,15 +3,16 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Query;
+using Reinforced.Tecture.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
 {
     class DirectSqlRunner : CommandRunner<Sql>, IDisposable
     {
         private readonly EFCore_DirectSql_CommandAspect _aspect;
-        private readonly Auxiliary _aux;
-        public DirectSqlRunner(EFCore_DirectSql_CommandAspect aspect, Auxiliary aux)
+        private readonly TestingContext _aux;
+        public DirectSqlRunner(EFCore_DirectSql_CommandAspect aspect, TestingContext aux)
         {
             _aspect = aspect;
             _aux = aux;
