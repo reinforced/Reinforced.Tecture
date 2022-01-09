@@ -2,7 +2,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
 {
     public static class StopHashingCrutch
     {

@@ -57,13 +57,10 @@ namespace Reinforced.Tecture.Queries
         /// <summary>
         /// Binary writer containing sensible data to hash
         /// </summary>
-        public BinaryWriter Writer
-        {
-            get { return _bw; }
-        }
+        public BinaryWriter Writer => _bw;
 
-        private bool _debugMode;
-        public List<object> ObjectsLog { get; } = new List<object>();
+        private readonly bool _debugMode;
+        public List<object> ObjectsLog { get; } = null;
 
         private void Log(object entry)
         {
@@ -77,6 +74,10 @@ namespace Reinforced.Tecture.Queries
         public Hashbox(bool debugMode = false)
         {
             _debugMode = debugMode;
+            if (_debugMode)
+            {
+                ObjectsLog = new List<object>();
+            }
             _ms = new MemoryStream();
             _bw = new BinaryWriter(_ms);
         }

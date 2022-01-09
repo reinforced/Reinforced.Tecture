@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
-using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
 using Reinforced.Tecture.Tracing.Promises;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
 {
-    class HookQueryProvider : IQueryProvider
+    class TracedQueryProvider : IQueryProvider
     {
         public IQueryProvider Original { get; }
 
@@ -14,7 +13,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
 
         public DescriptionHolder Description { get; }
 
-        public HookQueryProvider(IQueryProvider original, Orm.Query aspect, DescriptionHolder description)
+        public TracedQueryProvider(IQueryProvider original, Orm.Query aspect, DescriptionHolder description)
         {
             Original = original;
             Aspect = aspect;
@@ -24,13 +23,13 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
         public IQueryable CreateQuery(Expression expression)
         {
             var bs = Original.CreateQuery(expression);
-            return new WrappedQueryable(bs, Aspect, Description);
+            return new TracedQueryable(bs, Aspect, Description);
         }
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             var bs = Original.CreateQuery<TElement>(expression);
-            return new WrappedQueryable<TElement>(bs, Aspect, Description,false);
+            return new TracedQueryable<TElement>(bs, Aspect, Description,false);
         }
 
         public object Execute(Expression expression)

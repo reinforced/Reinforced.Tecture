@@ -59,7 +59,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 
         protected override void Run(DeletePk cmd)
         {
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 var instance = CreateInstance(cmd.EntityType);
                 var properties = instance.KeyProperties();

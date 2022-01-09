@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         {
             get
             {
-                if (Aux.IsCommandRunNeeded || Aux.IsEvaluationNeeded)
+                if (!Aux.ProvidesTestData)
                 {
                     return new HashSet<Type>(Context.Value.Model.GetEntityTypes().Select(x => x.ClrType));
                 }
@@ -54,7 +54,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <inheritdoc />
         protected override void Save()
         {
-            if (Aux.IsSavingNeeded)
+            if (!Aux.ProvidesTestData)
             {
                 Context.Value.SaveChanges();
             }
@@ -63,7 +63,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <inheritdoc />
         protected override Task SaveAsync()
         {
-            if (Aux.IsSavingNeeded)
+            if (!Aux.ProvidesTestData)
             {
                 return Context.Value.SaveChangesAsync();
             }

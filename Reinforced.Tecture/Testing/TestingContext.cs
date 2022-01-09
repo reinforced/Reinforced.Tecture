@@ -26,19 +26,14 @@ namespace Reinforced.Tecture.Testing
         public ChannelTransaction GetQueryTransaction() => _transactionManager.GetQueryTransaction(_channelType);
 
         /// <summary>
-        /// Gets whether saving in saver is required
+        /// Gets whether test data is provided and query to real sources is not needed
         /// </summary>
-        public bool IsSavingNeeded => _container._testDataProvider.Instance == null;
+        public bool ProvidesTestData => _container._testDataProvider.Instance != null;
 
         /// <summary>
-        /// Gets whether it is needed to actually run the command
+        /// Gets whether channel queries and commands will be captured
         /// </summary>
-        public bool IsCommandRunNeeded => _container._testDataProvider.Instance == null;
-
-        /// <summary>
-        /// Gets whether it is actually needed to evaluate query to channel and obtain its value (no test data)
-        /// </summary>
-        public bool IsEvaluationNeeded => _container._testDataProvider.Instance == null;
+        public bool CollectsTestData => _container.TraceCollector != null;
 
         /// <summary>
         /// Traces query that will be fulfilled later

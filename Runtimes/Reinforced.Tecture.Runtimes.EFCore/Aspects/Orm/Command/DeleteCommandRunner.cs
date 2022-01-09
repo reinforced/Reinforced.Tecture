@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <inheritdoc />
         protected override void Run(Delete cmd)
         {
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 _dc.Value.Remove(cmd.Entity);
                 var ent = _dc.Value.Entry(cmd.Entity);

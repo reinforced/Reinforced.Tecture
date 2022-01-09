@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Query
         {
             get
             {
-                if (Aux.IsCommandRunNeeded || Aux.IsEvaluationNeeded)
+                if (!Aux.ProvidesTestData)
                 {
                     return new HashSet<Type>(_dbContext.Value.Model.GetEntityTypes().Select(x => x.ClrType));
                 }

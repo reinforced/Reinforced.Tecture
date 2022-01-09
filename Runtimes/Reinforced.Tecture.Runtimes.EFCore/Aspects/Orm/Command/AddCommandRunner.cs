@@ -23,7 +23,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <inheritdoc />
         protected override void Run(Add cmd)
         {
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 _dc.Value.Add(cmd.Entity);
                 var ent = _dc.Value.Entry(cmd.Entity);

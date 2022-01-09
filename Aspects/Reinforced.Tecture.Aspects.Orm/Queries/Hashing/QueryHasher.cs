@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
+using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping;
 using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
 {
     class QueryHasher : ExpressionVisitor, IDisposable
     {
-        public Hashbox Box { get; } =  new Hashbox(true);
+        public Hashbox Box { get; } =  new Hashbox();
 
         /// <summary>Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor"></see>.</summary>
         public QueryHasher()

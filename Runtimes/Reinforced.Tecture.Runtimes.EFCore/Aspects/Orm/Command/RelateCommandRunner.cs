@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
             var prop = cmd.PrimaryType.GetProperty(cmd.ForeignKeySpecifier,
                 BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
             prop.SetValue(cmd.Primary,cmd.Secondary);
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 var ent = _dc.Value.Entry(cmd.Primary);
                 ent.DetectChanges();

@@ -36,7 +36,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <inheritdoc />
         protected override void Save()
         {
-            if (Aux.IsSavingNeeded)
+            if (!Aux.ProvidesTestData)
             {
                 _context.Value.ChangeTracker.DetectChanges();
                 _context.Value.SaveChanges();
@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <inheritdoc />
         protected override Task SaveAsync()
         {
-            if (Aux.IsSavingNeeded)
+            if (!Aux.ProvidesTestData)
             {
                 return _context.Value.SaveChangesAsync();
             }
@@ -67,8 +67,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <inheritdoc />
         public override void Dispose()
         {
-            _context.Dispose();
-            if (Aux.IsSavingNeeded)
+            if (!Aux.ProvidesTestData)
             {
                 _context.Dispose();
             }

@@ -51,7 +51,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Infrastructure
 
         public InterpolatedQuery Compile(Sql command)
         {
-            if (_aux.IsEvaluationNeeded || _aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 return command.StrokeExpression
                     .ParseStroke()

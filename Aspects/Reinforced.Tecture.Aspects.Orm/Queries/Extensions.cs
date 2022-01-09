@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
-using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
+using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping;
 using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries
@@ -41,7 +41,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         /// <returns>Fluent</returns>
         public static IQueryable<T> Describe<T>(this IQueryable<T> q, string description)
         {
-            if (q is WrappedQueryable<T> ht)
+            if (q is TracedQueryable<T> ht)
             {
                 ht.Description.Description = description;
             }

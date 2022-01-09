@@ -65,7 +65,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <param name="cmd">Side effect</param>
         protected override void Run(UpdatePk cmd)
         {
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 var instance = CreateInstance(cmd.EntityType);
                 var properties = instance.KeyProperties();

@@ -1,32 +1,15 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Tracing.Promises;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Enumerators.Generic
 {
-    interface IDemander<T> : IDisposable
-    {
-        void MoveNext(T current);
-        void Reset();
-    }
-
-    class EmptyDemander<T> : IDemander<T>
-    {
-        private EmptyDemander() { }
-        public void MoveNext(T current) { }
-        public void Reset() { }
-
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public void Dispose() { }
-
-        public static readonly EmptyDemander<T> Instance = new EmptyDemander<T>();
-    }
-
     class Demander<T> : IDemander<T>
     {
         private readonly Demanding<IEnumerable<T>> _demanding;
+        private readonly Demanding<IEnumerable> _demandingNonGeneric;
+        
         private readonly string _hash;
         private readonly DescriptionHolder _description;
         private readonly List<T> _data;
@@ -40,6 +23,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators
             _description = description;
             _data = new List<T>();
         }
+        
 
         public void MoveNext(T current)
         {

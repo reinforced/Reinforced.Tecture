@@ -46,6 +46,27 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             return result;
         }
 
+        public class IdName
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+        [HttpGet]
+        public async Task<IdName[]> All()
+        {
+            var result =
+                await _tecture.From<Db>().Get<ToyType>()
+                    .All
+                    .Select(x => new IdName()
+                    {
+                        Id = x.Id,
+                        Name = x.Name
+                    }).ToArrayAsync();
+
+
+            return result;
+        }
+
         [HttpGet]
         public async Task<ToyType> GetToyType(int id)
         {

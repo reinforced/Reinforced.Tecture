@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <param name="cmd">Side effect</param>
         protected override void Run(Sql cmd)
         {
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
                 _aspect.Context.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
@@ -38,7 +38,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <returns>Side effect</returns>
         protected override Task RunAsync(Sql cmd)
         {
-            if (_aux.IsCommandRunNeeded)
+            if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
                 return _aspect.Context.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);

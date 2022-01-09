@@ -1,74 +1,59 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
-using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Enumerators;
+using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Enumerators.Nongeneric;
 using Reinforced.Tecture.Tracing.Promises;
 
-namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
+namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
 {
-    class WrappedQueryable<T> : IOrderedQueryable<T>, IWrappedQueryable<T>
+    class TracedQueryable : IOrderedQueryable
     {
         public Orm.Query Aspect { get; }
 
-        public IQueryable<T> Original { get; }
+        public IQueryable Original { get; }
 
         public DescriptionHolder Description { get; }
 
-        private Expression _originalExpression;
-
-        public WrappedQueryable(IQueryable<T> original, Orm.Query aspect, DescriptionHolder description, bool stopHashingCrutch)
+        public TracedQueryable(IQueryable original, Orm.Query aspect, DescriptionHolder description)
         {
             Original = original;
-            _originalExpression = original.Expression;
-            if (stopHashingCrutch)
-            {
-                _originalExpression = StopHashingCrutch.Apply<T>(_originalExpression);
-            }
             Aspect = aspect;
             Description = description;
         }
 
+        public IQueryable CreateNewOriginal(Expression cleanExpression = null) =>
+            cleanExpression != null
+                ? Original.Provider.CreateQuery(cleanExpression)
+                : Original;
+        
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-            var p = Aspect.Aux.Promise<IEnumerable<T>>();
+            var p = Aspect.Aux.Promise<IEnumerable>();
 
             ExpressionHashData hash = null;
-            if (p is Containing<IEnumerable<T>> || p is Demanding<IEnumerable<T>>)
+            if (p is Containing<IEnumerable> || p is Demanding<IEnumerable>)
                 hash = Expression.CalculateHash();
             
-            if (p is Containing<IEnumerable<T>> c)
+            if (p is Containing<IEnumerable> c)
             {
                 var td = c.Get(hash.Hash, Description.Description);
                 return td.GetEnumerator();
             }
 
-            var newOriginal =
-                hash != null
-                    ? Original.Provider.CreateQuery<T>(hash.ModifiedExpression)
-                    : Original;
-
             var tran = Aspect.Aux.GetQueryTransaction();
-            var originalEnumerator = newOriginal.GetEnumerator();
-            var result = new WrappedEnumerator<T>(originalEnumerator, tran);
+            var originalEnumerator = CreateNewOriginal(hash?.ModifiedExpression).GetEnumerator();
+            var result = new TracedEnumerator(originalEnumerator, tran);
 
-            if (p is Demanding<IEnumerable<T>> d)
+            if (p is Demanding<IEnumerable> d)
             {
                 result.Demands(d, hash.Hash, Description);
             }
            
             return result;
-        }
-
-        /// <summary>Returns an enumerator that iterates through a collection.</summary>
-        /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
 
         /// <summary>Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see cref="T:System.Linq.IQueryable" /> is executed.</summary>
@@ -87,18 +72,20 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
         {
             get
             {
-                return _originalExpression;
+                return Original.Expression;
             }
         }
 
+
         private IQueryProvider _provider;
+
         public IQueryProvider Provider
         {
             get
             {
                 if (_provider == null)
                 {
-                    _provider = new HookQueryProvider(Original.Provider, Aspect, Description);
+                    _provider = new TracedQueryProvider(Original.Provider, Aspect, Description);
                 }
                 return _provider;
             }
