@@ -7,9 +7,11 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Iteration mark command
     /// </summary>
-    [CommandCode(" ^ ")]
+    [CommandCode(" + ")]
     public class Iteration : CommandBase, ITracingOnly
     {
+        public override bool IsExecutable => false;
+        
         internal Iteration()
         {
             Channel = typeof(NoChannel);

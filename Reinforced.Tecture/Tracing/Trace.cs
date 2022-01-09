@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -81,7 +82,7 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         /// <param name="tw">Result writer</param>
         /// <param name="codes">Sets whether it is needed to output side-effect codes</param>
-        public void Explain(TextWriter tw, bool codes = true)
+        public void Explain(TextWriter tw, Action<CommandBase,TextWriter> commandTemplate = null)
         {
             int i = 1;
             bool didCycleBegin = false;
@@ -102,20 +103,31 @@ namespace Reinforced.Tecture.Tracing
 
                 if (inCycle) continue;
 
-                tw.Write($"{i}. ");
-                
-                if (!string.IsNullOrEmpty(cmd.ChannelName)) tw.Write($"{cmd.ChannelName} ");
-                else tw.Write(" ");
-                if (codes)
+                if (commandTemplate == null)
                 {
+                    if (!cmd.IsExecutable) tw.Write("   ");
+                    else tw.Write(cmd.IsExecuted?"[v]":"[x]");
+                    tw.Write($" {i}. ");
+
+                    if (!string.IsNullOrEmpty(cmd.ChannelName)) tw.Write($"{cmd.ChannelName} ");
+                    else tw.Write(" ");
+
                     var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
                     tw.Write(ca != null ? $"{ca.Code}" : cmd.GetType().Name);
-                }
-                tw.Write(" ");
-                //tw.Write("\t");
 
-                cmd.Describe(tw);
-                tw.WriteLine();
+                    tw.Write(" ");
+                    //tw.Write("\t");
+    
+                    cmd.Describe(tw);
+                    tw.WriteLine();
+
+                    if (cmd.Exception != null)
+                    {
+                        tw.WriteLine($"[ERROR] {cmd.Exception.Message}");   
+                    }
+                }
+                else commandTemplate(cmd, tw);
+
                 i++;
 
                 if (cmd is Iteration && didCycleBegin)
@@ -129,13 +141,15 @@ namespace Reinforced.Tecture.Tracing
         /// Turns story into human-readable text
         /// </summary>
         /// <param name="codes">Sets whether it is needed to output side-effect codes</param>
+        /// <param name="commandTemplate">Template for command serialization</param>
         /// <returns>Story textual representation</returns>
-        public string Explain(bool codes = true)
+        public string Explain(Action<CommandBase,TextWriter> commandTemplate = null)
         {
             StringBuilder sb = new StringBuilder();
             using (var tw = new StringWriter(sb))
             {
-                Explain(tw);
+                Explain(tw,commandTemplate);
+                tw.Flush();
             }
 
             return sb.ToString();

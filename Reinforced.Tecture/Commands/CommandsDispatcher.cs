@@ -141,6 +141,7 @@ namespace Reinforced.Tecture.Commands
                     }
                     catch (Exception e)
                     {
+                        commandBase.Exception = e;
                         throw new TectureCommandRunException(commandBase, e);
                     }
                     finally
@@ -173,6 +174,7 @@ namespace Reinforced.Tecture.Commands
                     }
                     catch (Exception e)
                     {
+                        commandBase.Exception = e;
                         throw new TectureCommandRunException(commandBase, e);
                     }
                     finally

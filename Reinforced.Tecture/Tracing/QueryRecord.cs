@@ -14,6 +14,8 @@ namespace Reinforced.Tecture.Tracing
     [CommandCode("-> ")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
+        public override bool IsExecutable => false;
+        
         internal QueryRecord(Type channel, bool isTestData)
         {
             Channel = channel;

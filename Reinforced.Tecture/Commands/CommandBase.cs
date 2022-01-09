@@ -43,6 +43,7 @@ namespace Reinforced.Tecture.Commands
         private DebugInfo _debug;
         private int _order;
         private bool _isExecuted;
+        private Exception _exception;
 
         /// <summary>
         /// Discriminates data source type for command.
@@ -67,7 +68,11 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         public string ChannelId => _channel.FullName;
 
-
+        /// <summary>
+        /// Gets whether command is executable
+        /// </summary>
+        public virtual bool IsExecutable => true;
+        
         /// <summary>
         /// Gets friendly channel name
         /// </summary>
@@ -146,6 +151,22 @@ namespace Reinforced.Tecture.Commands
         protected IEnumerable<CommandBase> KnownClones
         {
             get { return _knownClones; }
+        }
+        
+        /// <summary>
+        /// Gets whether command was executed or not
+        /// </summary>
+        public Exception Exception
+        {
+            get { return _exception; }
+            internal set
+            {
+                _exception = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.Exception = value;
+                }
+            }
         }
 
         /// <summary>

@@ -7,6 +7,7 @@ using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Services;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Tracing.Commands;
 using Reinforced.Tecture.Transactions;
 
 
@@ -80,7 +81,10 @@ namespace Reinforced.Tecture.Entry
         {
             if (_tc == null)
                 throw new TectureException(".EndTrace is called, but trace has not been collected");
-            return _tc.Finish();
+
+            var tc = _tc;
+            _tc = null;
+            return tc.Finish();
         }
 
 
@@ -108,6 +112,15 @@ namespace Reinforced.Tecture.Entry
                 Exception thrown2 = null;
                 try
                 {
+                    if (_tc != null)
+                    {
+                        _tc.Command(new Comment()
+                        {
+                            Annotation = "<<< Finally block >>>",
+                            Channel = typeof(NoChannel),
+                            IsExecuted = true
+                        });
+                    }
                     _serviceManager.OnFinally(thrown);
                     _finallyActions.Run();
                     if (_pipeline.HasEffects) dispatcher.Dispatch(_pipeline, null);
@@ -160,6 +173,16 @@ namespace Reinforced.Tecture.Entry
                 Exception thrown2 = null;
                 try
                 {
+                    if (_tc != null)
+                    {
+                        _tc.Command(new Comment()
+                        {
+                            Annotation = "<<< Finally block >>>",
+                            Channel = typeof(NoChannel),
+                            IsExecuted = true
+                        });
+                    }
+                    
                     await _serviceManager.OnFinallyAsync(thrown);
                     await _finallyActions.RunAsync();
                     if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, null);

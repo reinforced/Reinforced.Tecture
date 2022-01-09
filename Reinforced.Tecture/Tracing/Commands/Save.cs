@@ -10,6 +10,8 @@ namespace Reinforced.Tecture.Tracing.Commands
     [CommandCode(" <-")]
     public sealed class Save : CommandBase
     {
+        public override bool IsExecutable => false;
+        
         internal Save()
         {
             Channel = typeof(NoChannel);

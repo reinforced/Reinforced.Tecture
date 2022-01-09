@@ -10,6 +10,8 @@ namespace Reinforced.Tecture.Tracing.Commands
     [CommandCode("// ")]
     public sealed class Comment : CommandBase, ITracingOnly
     {
+        public override bool IsExecutable => false;
+        
         internal Comment()
         {
             Channel = typeof(NoChannel);

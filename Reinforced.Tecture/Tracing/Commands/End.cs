@@ -10,6 +10,8 @@ namespace Reinforced.Tecture.Tracing.Commands
     [CommandCode(" ! ")]
     public sealed class End : CommandBase
     {
+        public override bool IsExecutable => false;
+        
         internal End()
         {
             Channel = typeof(NoChannel);
