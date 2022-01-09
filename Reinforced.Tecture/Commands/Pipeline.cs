@@ -73,23 +73,6 @@ namespace Reinforced.Tecture.Commands
             FinallyActions = finallyActions;
         }
 
-        private readonly Stack<ICommandCatcher> _catchersStack = new Stack<ICommandCatcher>();
-
-        public CatchingCommands<T> Catch<T>(T sideEffectCatcher, string annotation = null) where T : ICommandCatcher
-        {
-            _catchersStack.Push(sideEffectCatcher);
-            return new CatchingCommands<T>(sideEffectCatcher, this, annotation);
-        }
-
-        internal void FinishCatch<T>(CatchingCommands<T> catching) where T : ICommandCatcher
-        {
-            var c = _catchersStack.Pop();
-            if (c != (ICommandCatcher)catching.Catcher)
-                throw new Exception("Command catchers stack imbalance");
-
-            if (_catchersStack.Count == 0) EnqueueCommand(c.Produce().Annotate(catching._annotation));
-            else _catchersStack.Peek().Catch(c.Produce().Annotate(catching._annotation));
-        }
         internal IEnumerable<CommandBase> GetEffects()
         {
             var nq = new Queue<CommandBase>(_commandQueue);

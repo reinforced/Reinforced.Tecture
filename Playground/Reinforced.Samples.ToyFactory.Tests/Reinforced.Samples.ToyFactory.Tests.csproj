@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -20,6 +20,13 @@
     <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic.Warehouse\Reinforced.Samples.ToyFactory.Logic.Warehouse.csproj" />
     <ProjectReference Include="..\Domains\Reinforced.Samples.ToyFactory.Logic\Reinforced.Samples.ToyFactory.Logic.csproj" />
     <ProjectReference Include="..\Reinforced.Samples.ToyFactory.Data\Reinforced.Samples.ToyFactory.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="LogicTests\CreateTypeWorks" />
+    <Folder Include="WarehouseTests\RenameMeasurementUnit" />
+    <Folder Include="WarehouseTests\SupplyCreationPipeline" />
+    <Folder Include="WarehouseTests\TestAnonymousQuery" />
   </ItemGroup>
 
 </Project>

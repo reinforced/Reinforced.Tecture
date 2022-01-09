@@ -1,12 +1,7 @@
 ﻿using System;
 using System.IO;
-using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Tecture;
-using Reinforced.Tecture.Aspects.DirectSql.Testing;
-using Reinforced.Tecture.Aspects.Orm.Testing.Checks;
 using Reinforced.Tecture.Testing;
-using Reinforced.Tecture.Testing.BuiltInChecks;
-using Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
 
@@ -44,12 +39,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
         public void GenerateValidation()
         {
             var className = $"{_caseName}_Validation";
-            var go = Trace.GenerateValidation(className, _ns, g =>
-            {
-                g.CheckOrm();
-                g.CheckSql();
-                g.Basics();
-            });
+            var go = Trace.GenerateValidation(className, _ns);
 
             go.ToFile(Path.Combine(_rootDir, $"{className}.cs"));
         }

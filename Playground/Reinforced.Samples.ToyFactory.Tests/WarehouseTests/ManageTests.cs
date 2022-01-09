@@ -8,7 +8,8 @@ using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
-using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
+//using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
+//using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.TestAnonymousQuery;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.DirectSql.Queries;
 using Reinforced.Tecture.Aspects.Orm.Queries;
@@ -23,7 +24,9 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void CreateMeasurementUnit()
         {
-            using var c = Case<CreateMeasurementUnit_TestData>(out ITecture ctx);
+            using var c = Case
+                <CreateMeasurementUnit_TestData>
+                (out ITecture ctx);
 
             ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
 
@@ -55,7 +58,9 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void SupplyCreationPipeline()
         {
-            using var c = Case<SupplyCreationPipeline_TestData>(out ITecture ctx);
+            using var c = Case
+               <SupplyCreationPipeline_TestData>
+                (out ITecture ctx);
             var m = ctx.Do<Manage>();
             var unit = m.CreateMeasurementUnit("Kilograms", "kG");
             ctx.Save();
@@ -95,11 +100,11 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         public void TestAnonymousQuery()
         {
             using var c = Case
-                <TestAnonymousQuery_TestData>
+                //<TestAnonymousQuery_TestData>
                 (out ITecture ctx);
             var re = ctx.From<Db>().Get<Resource>().ById(183, x => new {x.Name, x.StockQuantity});
 
-            c.Validate<TestAnonymousQuery_Validation>();
+            //c.Validate<TestAnonymousQuery_Validation>();
             Output.WriteLine(c.Text());
         }
 

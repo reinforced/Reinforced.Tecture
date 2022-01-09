@@ -2,6 +2,7 @@
 using System.IO;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
 {
@@ -14,26 +15,31 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
         /// <summary>
         /// Gets primary end of relation
         /// </summary>
+        [Validated]
         public object Primary { get; internal set; }
 
         /// <summary>
         /// Gets type of primary end of relation
         /// </summary>
+        [Validated]
         public Type PrimaryType { get; internal set; }
 
         /// <summary>
         /// Gets secondary end of relation
         /// </summary>
+        [Validated]
         public object Secondary { get; internal set; }
 
         /// <summary>
         /// Gets type of secondary end of relation
         /// </summary>
+        [Validated]
         public Type SecondaryType { get; internal set; }
 
         /// <summary>
         /// Gets foreign key to create relation by
         /// </summary>
+        [Validated]
         public string ForeignKeySpecifier { get; internal set; }
 
         /// <inheritdoc />

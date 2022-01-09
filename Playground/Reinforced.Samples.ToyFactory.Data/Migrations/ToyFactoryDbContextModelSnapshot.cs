@@ -2,9 +2,10 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reinforced.Samples.ToyFactory.Data;
+
+#nullable disable
 
 namespace Reinforced.Samples.ToyFactory.Data.Migrations
 {
@@ -15,16 +16,14 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Reinforced.Samples.ToyFactory.Logic.Entities.Blueprint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("ToyTypeId")
                         .HasColumnType("int");
@@ -45,7 +44,7 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("Quantity")
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.HasKey("BlueprintId", "ResourceId");
 
@@ -58,11 +57,10 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -73,14 +71,13 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ShortName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -91,17 +88,16 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("MeasurementUnitId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<double>("StockQuantity")
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -114,17 +110,16 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("ItemsCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -143,7 +138,7 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("Quantity")
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.HasKey("ResourceSupplyId", "ResourceId");
 
@@ -156,14 +151,13 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Next")
                         .HasColumnType("int");
@@ -188,6 +182,8 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasForeignKey("ToyTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ToyType");
                 });
 
             modelBuilder.Entity("Reinforced.Samples.ToyFactory.Logic.Entities.BlueprintResources", b =>
@@ -203,6 +199,10 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Blueprint");
+
+                    b.Navigation("Resource");
                 });
 
             modelBuilder.Entity("Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Resource", b =>
@@ -212,6 +212,8 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasForeignKey("MeasurementUnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("MeasurementUnit");
                 });
 
             modelBuilder.Entity("Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement.ResourceSupplyItem", b =>
@@ -227,6 +229,10 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasForeignKey("ResourceSupplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Resource");
+
+                    b.Navigation("ResourceSupply");
                 });
 
             modelBuilder.Entity("Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement.ResourceSupplyStatusHistoryItem", b =>
@@ -236,6 +242,8 @@ namespace Reinforced.Samples.ToyFactory.Data.Migrations
                         .HasForeignKey("ResourceSupplyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ResourceSupply");
                 });
 #pragma warning restore 612, 618
         }

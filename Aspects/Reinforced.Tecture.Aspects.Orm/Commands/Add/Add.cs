@@ -3,6 +3,7 @@ using System.IO;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Add
 {
@@ -17,11 +18,13 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Add
         /// <summary>
         /// Entity to be added
         /// </summary>
+        [Validated("added entity")]
         public object Entity { get; internal set; }
 
         /// <summary>
         /// Type of entity to be added
         /// </summary>
+        [Validated("type of added entity")]
         public Type EntityType { get; internal set; }
 
 

@@ -17,9 +17,16 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
 
         public DescriptionHolder Description { get; }
 
-        public WrappedQueryable(IQueryable<T> original, Orm.Query aspect, DescriptionHolder description)
+        private Expression _originalExpression;
+
+        public WrappedQueryable(IQueryable<T> original, Orm.Query aspect, DescriptionHolder description, bool stopHashingCrutch)
         {
             Original = original;
+            _originalExpression = original.Expression;
+            if (stopHashingCrutch)
+            {
+                _originalExpression = StopHashingCrutch.Apply<T>(_originalExpression);
+            }
             Aspect = aspect;
             Description = description;
         }
@@ -29,19 +36,29 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
         public IEnumerator<T> GetEnumerator()
         {
             var p = Aspect.Aux.Promise<IEnumerable<T>>();
+
+            ExpressionHashData hash = null;
+            if (p is Containing<IEnumerable<T>> || p is Demanding<IEnumerable<T>>)
+                hash = Expression.CalculateHash();
+            
             if (p is Containing<IEnumerable<T>> c)
             {
-                var td = c.Get(Expression.CalculateHash(), Description.Description);
+                var td = c.Get(hash.Hash, Description.Description);
                 return td.GetEnumerator();
             }
 
+            var newOriginal =
+                hash != null
+                    ? Original.Provider.CreateQuery<T>(hash.ModifiedExpression)
+                    : Original;
+
             var tran = Aspect.Aux.GetQueryTransaction();
-            var originalEnumerator = Original.GetEnumerator();
+            var originalEnumerator = newOriginal.GetEnumerator();
             var result = new WrappedEnumerator<T>(originalEnumerator, tran);
 
             if (p is Demanding<IEnumerable<T>> d)
             {
-                result.Demands(d, Expression.CalculateHash(), Description);
+                result.Demands(d, hash.Hash, Description);
             }
            
             return result;
@@ -70,7 +87,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
         {
             get
             {
-                return Original.Expression;
+                return _originalExpression;
             }
         }
 

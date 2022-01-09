@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
 using Reinforced.Tecture.Queries;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
 {
     class QueryHasher : ExpressionVisitor, IDisposable
     {
-        private readonly Hashbox _box = new Hashbox();
+        public Hashbox Box { get; } =  new Hashbox(true);
 
         /// <summary>Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor"></see>.</summary>
         public QueryHasher()
@@ -23,11 +24,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         {
             if (node == null)
             {
-                _box.PutNull();
+                Box.PutNull();
             }
             else
             {
-                _box.Put((int)node.NodeType);
+                Box.Put((int)node.NodeType);
             }
             return base.Visit(node);
         }
@@ -38,7 +39,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override CatchBlock VisitCatchBlock(CatchBlock node)
         {
-            _box.Put(node.Test.GUID.ToByteArray());
+            Box.Put(node.Test.GUID.ToByteArray());
             return base.VisitCatchBlock(node);
         }
 
@@ -50,7 +51,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
             var value = node.Value;
             if (value is IQueryable q)
             {
-                _box.Put(q.ElementType.FullName);
+                Box.Put(q.ElementType.FullName);
                 if (q.Expression != node)
                 {
                     Visit(q.Expression);
@@ -59,16 +60,16 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
             }
 
             var type = node.Type;
-            if (!type.IsAnonymousType()) _box.Put(type.FullName);
-            else _box.Put("anonymous");
+            if (!type.IsAnonymousType()) Box.Put(type.FullName);
+            else Box.Put("anonymous");
 
             if (value != null)
             {
-                _box.Put(value);
+                Box.Put(value);
             }
             else
             {
-                _box.PutNull();
+                Box.PutNull();
             }
 
             return node;
@@ -79,7 +80,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitGoto(GotoExpression node)
         {
-            _box.Put((int)node.Kind);
+            Box.Put((int)node.Kind);
             return base.VisitGoto(node);
         }
 
@@ -88,7 +89,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override LabelTarget VisitLabelTarget(LabelTarget node)
         {
-            _box.Put(node.Name);
+            Box.Put(node.Name);
             return base.VisitLabelTarget(node);
         }
 
@@ -98,7 +99,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
-            _box.Put(node.Name);
+            Box.Put(node.Name);
             return base.VisitLambda(node);
         }
 
@@ -106,11 +107,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         {
             if (mi == null)
             {
-                _box.Put(0);
+                Box.Put(0);
                 return;
             }
-            _box.Put((byte)mi.MemberType);
-            _box.Put(mi.Name);
+            Box.Put((byte)mi.MemberType);
+            Box.Put(mi.Name);
         }
 
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression"></see>.</summary>
@@ -119,8 +120,23 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         protected override Expression VisitMember(MemberExpression node)
         {
             WriteMember(node.Member);
-            var r = base.VisitMember(node);
-            return r;
+            if (node.Expression is ConstantExpression ce)
+            {
+                var props = ce.Type
+                    .GetProperties()
+                    .FirstOrDefault(v => v.Name == node.Member.Name);
+                
+                var fields = ce.Type
+                    .GetFields()
+                    .FirstOrDefault(v => v.Name == node.Member.Name);
+                object val = props != null ? props.GetValue(ce.Value)
+                    : fields != null ? fields.GetValue(ce.Value)
+                    : null;
+                Box.Put(val);
+
+                return node;
+            }
+            return base.VisitMember(node);
         }
 
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.MemberAssignment"></see>.</summary>
@@ -138,7 +154,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         protected override MemberBinding VisitMemberBinding(MemberBinding node)
         {
             WriteMember(node.Member);
-            _box.Put((byte)node.BindingType);
+            Box.Put((byte)node.BindingType);
             return base.VisitMemberBinding(node);
         }
 
@@ -149,7 +165,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         protected override MemberListBinding VisitMemberListBinding(MemberListBinding node)
         {
             WriteMember(node.Member);
-            _box.Put((byte)node.BindingType);
+            Box.Put((byte)node.BindingType);
             return base.VisitMemberListBinding(node);
         }
 
@@ -159,7 +175,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
         {
             WriteMember(node.Member);
-            _box.Put((byte)node.BindingType);
+            Box.Put((byte)node.BindingType);
             return base.VisitMemberMemberBinding(node);
         }
 
@@ -168,17 +184,23 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
+            if (node.Method.DeclaringType == typeof(StopHashingCrutch))
+            {
+                return node.Arguments[0];
+            }
             WriteMember(node.Method);
             return base.VisitMethodCall(node);
         }
+        
+        
 
         /// <summary>Visits the <see cref="T:System.Linq.Expressions.ParameterExpression"></see>.</summary>
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            //todo
-            return base.VisitParameter(node);
+            Box.Put(node.Name);
+            return node;
         }
 
         /// <summary>Visits the children of the <see cref="T:System.Linq.Expressions.SwitchExpression"></see>.</summary>
@@ -195,7 +217,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
         /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitTypeBinary(TypeBinaryExpression node)
         {
-            _box.Put(node.TypeOperand.GUID.ToByteArray());
+            Box.Put(node.TypeOperand.GUID.ToByteArray());
             return base.VisitTypeBinary(node);
         }
 
@@ -211,13 +233,13 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Hashing
 
         public string GenerateHash()
         {
-            return _box.Compute();
+            return Box.Compute();
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            _box.Dispose();
+            Box.Dispose();
         }
     }
 }

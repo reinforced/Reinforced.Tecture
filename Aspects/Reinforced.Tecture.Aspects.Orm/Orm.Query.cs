@@ -23,7 +23,7 @@ namespace Reinforced.Tecture.Aspects.Orm
             internal IQueryable<T> GetSet<T>() where T : class
             {
                 IQueryable<T> set = Aux.IsEvaluationNeeded ? Set<T>() : new T[0].AsQueryable();
-                return new WrappedQueryable<T>(set, this, new DescriptionHolder());
+                return new WrappedQueryable<T>(set, this, new DescriptionHolder(),true);
             }
     
             /// <summary>

@@ -30,19 +30,23 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             var bs = Original.CreateQuery<TElement>(expression);
-            return new WrappedQueryable<TElement>(bs, Aspect, Description);
+            return new WrappedQueryable<TElement>(bs, Aspect, Description,false);
         }
 
         public object Execute(Expression expression)
         {
             var p = Aspect.Aux.Promise<object>();
+            ExpressionHashData hash = null;
+            if (p is Containing<object> || p is Demanding<object>)
+                hash = expression.CalculateHash();
+            
             if (p is Containing<object> c)
-                return c.Get(expression.CalculateHash(), Description.Description);
+                return c.Get(hash.Hash, Description.Description);
 
-            var result = Original.Execute(expression);
+            var result = Original.Execute(hash==null?expression:hash.ModifiedExpression);
 
             if (p is Demanding<object> d)
-                d.Fullfill(result, expression.CalculateHash(), Description.Description);
+                d.Fullfill(result, hash.Hash, Description.Description);
 
             return result;
         }
@@ -54,13 +58,17 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped
         public TResult Execute<TResult>(Expression expression)
         {
             var p = Aspect.Aux.Promise<TResult>();
+            ExpressionHashData hash = null;
+            if (p is Containing<TResult> || p is Demanding<TResult>)
+                hash = expression.CalculateHash();
+            
             if (p is Containing<TResult> c)
-                return c.Get(expression.CalculateHash(), Description.Description);
+                return c.Get(hash.Hash, Description.Description);
 
-            var result = Original.Execute<TResult>(expression);
+            var result = Original.Execute<TResult>(hash==null?expression:hash.ModifiedExpression);
 
             if (p is Demanding<TResult> d)
-                d.Fullfill(result, expression.CalculateHash(), Description.Description);
+                d.Fullfill(result, hash.Hash, Description.Description);
 
             return result;
         }

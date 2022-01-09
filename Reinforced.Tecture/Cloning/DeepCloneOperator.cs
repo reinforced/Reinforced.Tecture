@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -14,7 +15,7 @@ namespace Reinforced.Tecture.Cloning
 
     class DeepCloneOperator
     {
-        private readonly Dictionary<Type, TypeCloneTooling> _cloneDelegates = new Dictionary<Type, TypeCloneTooling>();
+        private readonly ConcurrentDictionary<Type, TypeCloneTooling> _cloneDelegates = new ConcurrentDictionary<Type, TypeCloneTooling>();
 
         private readonly Queue<object> _instanceQueue = new Queue<object>();
         private readonly Queue<LateBoundEntry> _lateBoundQueue = new Queue<LateBoundEntry>();
@@ -104,7 +105,7 @@ namespace Reinforced.Tecture.Cloning
             }
         }
 
-        public DeepCloneOperator(Dictionary<Type, TypeCloneTooling> cloneDelegates)
+        public DeepCloneOperator(ConcurrentDictionary<Type, TypeCloneTooling> cloneDelegates)
         {
             _cloneDelegates = cloneDelegates;
         }
@@ -113,7 +114,15 @@ namespace Reinforced.Tecture.Cloning
         {
             if (original == null) return null;
             _instanceQueue.Enqueue(original);
-            Proceed();
+            try
+            {
+                Proceed();
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
             return _alreadyCloned[original];
         }
 

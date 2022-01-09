@@ -1,5 +1,5 @@
 ﻿using System;
-using Reinforced.Tecture.Testing.Checks;
+using System.Collections.Generic;
 using Reinforced.Tecture.Testing.Data;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
@@ -17,16 +17,13 @@ namespace Reinforced.Tecture.Testing
         /// <param name="trace">Trace instance</param>
         /// <param name="className">Desired trace class name</param>
         /// <param name="ns">Desired trace namespace</param>
-        /// <param name="config">Generator configuration</param>
+        /// <param name="optOutChecks">Opt-out check flags</param>
         /// <returns>Generate output</returns>
-        public static GenerationOutput GenerateValidation(this Trace trace, string className, string ns, Action<ValidationGenerator> config = null)
+        public static GenerationOutput GenerateValidation(this Trace trace, string className, string ns, HashSet<string> optOutChecks = null)
         {
-            ValidationGenerator tg = new ValidationGenerator();
-            config(tg);
-
-            var generator = new CSharpValidationGenerator(className, ns);
+            var generator = new ValidationGenerator(className, ns);
             generator.Before();
-            tg.Proceed(trace.Commands,generator);
+            generator.Generate(trace.Commands);
             generator.After();
             return new GenerationOutput(generator);
         }

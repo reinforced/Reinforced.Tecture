@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Services;
@@ -78,14 +79,14 @@ namespace Reinforced.Tecture.Tests.Services
             public int FinallyAsyncCount { get; private set; }
 
             protected override void OnSave() => SaveCount++;
-            protected override void OnFinally() => FinallyCount++;
+            protected override void OnFinally(Exception ex) => FinallyCount++;
             protected override Task OnSaveAsync()
             {
                 SaveAsyncCount++;
                 return Task.CompletedTask;
             }
             
-            protected override Task OnFinallyAsync()
+            protected override Task OnFinallyAsync(Exception ex)
             {
                 FinallyAsyncCount++;
                 return Task.CompletedTask;

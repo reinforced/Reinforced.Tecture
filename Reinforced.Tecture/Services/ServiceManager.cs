@@ -27,11 +27,11 @@ namespace Reinforced.Tecture.Services
             }
         }
 
-        public void OnFinally()
+        public void OnFinally(Exception exceptionHappened)
         {
             foreach (var srv in _allServices)
             {
-                srv.CallOnFinally();
+                srv.CallOnFinally(exceptionHappened);
             }
         }
 
@@ -43,11 +43,11 @@ namespace Reinforced.Tecture.Services
             }
         }
 
-        public async Task OnFinallyAsync()
+        public async Task OnFinallyAsync(Exception exceptionHappened)
         {
             foreach (var srv in _allServices)
             {
-                await srv.CallOnFinallyAsync();
+                await srv.CallOnFinallyAsync(exceptionHappened);
             }
         }
 

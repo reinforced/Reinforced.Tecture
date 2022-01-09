@@ -21,7 +21,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
                 if (p is Containing<U> c)
                 {
-                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(), wq.Description.Description));
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateJustHash(), wq.Description.Description));
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
@@ -31,7 +31,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     tran.Dispose();
                     if (p is Demanding<U> d)
                     {
-                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(), wq.Description.Description);
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateJustHash(), wq.Description.Description);
                     }
 
                     return x.Result;
@@ -51,7 +51,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
                 if (p is Containing<U> c)
                 {
-                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(predicate), wq.Description.Description));
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateJustHash(predicate), wq.Description.Description));
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
@@ -61,7 +61,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                      tran.Dispose();
                      if (p is Demanding<U> d)
                      {
-                         d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(predicate), wq.Description.Description);
+                         d.Fullfill(x.Result, wq.Original.Expression.CalculateJustHash(predicate), wq.Description.Description);
                      }
 
                      return x.Result;
@@ -81,7 +81,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
                 if (p is Containing<U> c)
                 {
-                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(selector), wq.Description.Description));
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateJustHash(selector), wq.Description.Description));
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
@@ -91,7 +91,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     tran.Dispose();
                     if (p is Demanding<U> d)
                     {
-                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(selector), wq.Description.Description);
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateJustHash(selector), wq.Description.Description);
                     }
 
                     return x.Result;
@@ -111,7 +111,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
                 if (p is Containing<V> c)
                 {
-                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(selector), wq.Description.Description));
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateJustHash(selector), wq.Description.Description));
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
@@ -121,7 +121,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     tran.Dispose();
                     if (p is Demanding<V> d)
                     {
-                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(selector), wq.Description.Description);
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateJustHash(selector), wq.Description.Description);
                     }
 
                     return x.Result;
@@ -2066,7 +2066,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
                 if (p is Containing<bool> c)
                 {
-                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(), wq.Description.Description));
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateJustHash(), wq.Description.Description));
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
@@ -2076,7 +2076,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     tran.Dispose();
                     if (p is Demanding<bool> d)
                     {
-                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(), wq.Description.Description);
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateJustHash(), wq.Description.Description);
                     }
 
                     return x.Result;
@@ -2319,7 +2319,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
                 if (p is Containing<Dictionary<TKey, TElement>> c)
                 {
-                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateHash(), wq.Description.Description));
+                    return Task.FromResult(c.Get(wq.Original.Expression.CalculateJustHash(), wq.Description.Description));
                 }
 
                 var tran = wq.Aspect.Aux.GetQueryTransaction();
@@ -2329,7 +2329,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     tran.Dispose();
                     if (p is Demanding<Dictionary<TKey, TElement>> d)
                     {
-                        d.Fullfill(x.Result, wq.Original.Expression.CalculateHash(), wq.Description.Description);
+                        d.Fullfill(x.Result, wq.Original.Expression.CalculateJustHash(), wq.Description.Description);
                     }
 
                     return x.Result;

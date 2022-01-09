@@ -9,6 +9,7 @@ using Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.DirectSql.Commands
 {
@@ -66,6 +67,11 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Commands
             }
         }
 
+        [Validated("query text")]
+        public string QueryText => Preview.Query.Trim();
+
+        [Validated("query parameters collection")]
+        public object[] QueryParameters => Preview.Parameters;
         
         /// <inheritdoc />
         public override string ToString()

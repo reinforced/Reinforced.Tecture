@@ -7,7 +7,7 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means end of the commands queue
     /// </summary>
-    [CommandCode("◼")]
+    [CommandCode(" ! ")]
     public sealed class End : CommandBase
     {
         internal End()

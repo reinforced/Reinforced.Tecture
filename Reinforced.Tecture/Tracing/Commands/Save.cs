@@ -7,7 +7,7 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means saving happening at the particular point
     /// </summary>
-    [CommandCode("◀")]
+    [CommandCode(" <-")]
     public sealed class Save : CommandBase
     {
         internal Save()

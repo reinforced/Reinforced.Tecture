@@ -7,10 +7,10 @@ namespace Reinforced.Samples.ToyFactory.Data
     public partial class ToyFactoryDbContext : DbContext
     {
         private const string DefaultConnection =
-            @"Data Source=.\MSSQL2017;Initial Catalog=ToyFactory;Integrated Security=True";
+            @"server=127.0.0.1;port=4444;password=1qaz2wsx;user id=root;database=test;pooling=True;characterset=utf8;allowuservariables=True;convertzerodatetime=True;defaultcommandtimeout=720";
 
         private readonly string _connectionString;
-        public ToyFactoryDbContext(string connectionString)
+        private ToyFactoryDbContext(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -18,7 +18,7 @@ namespace Reinforced.Samples.ToyFactory.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            optionsBuilder.UseMySql(_connectionString,new MariaDbServerVersion("10.8"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

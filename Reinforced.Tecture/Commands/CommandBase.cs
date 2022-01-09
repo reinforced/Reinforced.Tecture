@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Reinforced.Tecture.Channels;
+using Reinforced.Tecture.Testing;
 
 // ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -75,6 +76,7 @@ namespace Reinforced.Tecture.Commands
         /// <summary>
         /// Command annotation
         /// </summary>
+        [Validated("Annotation")]
         public string Annotation
         {
             get { return _annotation; }

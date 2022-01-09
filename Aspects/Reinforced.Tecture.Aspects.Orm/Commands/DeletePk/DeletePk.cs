@@ -4,6 +4,7 @@ using System.Linq;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.DeletePk
 {
@@ -16,11 +17,13 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.DeletePk
         /// <summary>
         /// Gets entity type to be deleted
         /// </summary>
+        [Validated("type of entity to delete")]
         public Type EntityType { get; internal set; }
 
         /// <summary>
         /// Gets primary key values
         /// </summary>
+        [Validated("primary key")]
         public object[] KeyValues { get; internal set; }
 
         private IPrimaryKey CreateInstance(Type t)

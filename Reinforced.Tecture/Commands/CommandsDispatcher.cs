@@ -14,12 +14,12 @@ namespace Reinforced.Tecture.Commands
     sealed class CommandsDispatcher
     {
         private readonly ChannelMultiplexer _mx;
-        private readonly TraceCollector _tc;
+        private readonly TraceCollector _traceCollector;
         private readonly TransactionManager _transactionManager;
-        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector tc, TransactionManager transactionManager)
+        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector traceCollector, TransactionManager transactionManager)
         {
             _mx = mx;
-            _tc = tc;
+            _traceCollector = traceCollector;
             _transactionManager = transactionManager;
         }
 
@@ -103,8 +103,8 @@ namespace Reinforced.Tecture.Commands
                     DispatchInternal(queue.GetEffects(), usedChannels);
                     Save(usedChannels);
                 }
-                _tc?.Save();
-                postSave.Run();
+                _traceCollector?.Save();
+                postSave?.Run();
             } while (queue.HasEffects);
         }
 
@@ -118,8 +118,8 @@ namespace Reinforced.Tecture.Commands
                     await DispatchInternalAsync(queue.GetEffects(), usedChannels);
                     await SaveAsync(usedChannels);
                 }
-                _tc?.Save();
-                await postSave.RunAsync();
+                _traceCollector?.Save();
+                if (postSave!=null) await postSave.RunAsync();
             } while (queue.HasEffects);
         }
 
@@ -165,7 +165,7 @@ namespace Reinforced.Tecture.Commands
                         var r = r1.RunInternalAsync(commandBase);
                         if (r != null)
                         {
-                            tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
+                            tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, true);
                             await r;
                             commandBase.IsExecuted = true;
                             tran.Commit();

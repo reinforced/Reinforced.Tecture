@@ -2,6 +2,7 @@
 using System.IO;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
 {
@@ -14,16 +15,19 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Derelate
         /// <summary>
         /// Gets primary end of relation
         /// </summary>
+        [Validated]
         public object Primary { get; internal set; }
 
         /// <summary>
         /// Gets secondary end of relation
         /// </summary>
+        [Validated]
         public Type PrimaryType { get; internal set; }
 
         /// <summary>
         /// Gets foreign key to break relation by
         /// </summary>
+        [Validated]
         public string ForeignKeySpecifier { get; internal set; }
 
         /// <inheritdoc />

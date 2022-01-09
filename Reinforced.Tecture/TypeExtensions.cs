@@ -80,7 +80,7 @@ namespace Reinforced.Tecture
             
             if (resolver == null)
             {
-                var ctor = ctors.FirstOrDefault(x => x.IsPrivate && x.GetParameters().Length == 0);
+                var ctor = ctors.FirstOrDefault(x => (x.IsPrivate || x.IsAssembly) && x.GetParameters().Length == 0);
                 if (ctor == null)
                 {
                     throw new MissingMethodException(

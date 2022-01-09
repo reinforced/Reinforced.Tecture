@@ -2,6 +2,7 @@
 using System.IO;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Delete
 {
@@ -13,8 +14,10 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Delete
     {
         internal Delete() { }
 
+        [Validated("entity to remove")]
         public object Entity { get; internal set; }
 
+        [Validated("type of entity to delete")]
         public Type EntityType { get; internal set; }
 
 

@@ -20,7 +20,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_3()
 			{ 
-				return 103;
+				return 28;
 			}
 
 			private Boolean GetEntry_4()
@@ -30,7 +30,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_5()
 			{ 
-				return 103;
+				return 28;
 			}
 
 			private Boolean GetEntry_6()
@@ -40,110 +40,95 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_7()
 			{ 
-				return 103;
+				return 28;
 			}
 
 			private Int32 GetEntry_8()
 			{ 
-				return 182;
+				return 80;
 			}
 
 			private Resource[] GetEntry_9()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 182);
+				Set(v1, x=>x.Id, 80);
 				Set(v1, x=>x.Name, @"resource2");
-				Set(v1, x=>x.MeasurementUnitId, 103);
-				var v2 = New<MeasurementUnit>();
-				Set(v2, x=>x.Id, 103);
-				Set(v2, x=>x.ShortName, @"kG");
-				Set(v2, x=>x.Name, @"Kilograms");
-				Set(v1, x=>x.MeasurementUnit, v2);
+				Set(v1, x=>x.MeasurementUnitId, 28);
 				return new Resource[] { v1 } ;
 			}
 
 			private List<Resource> GetEntry_10()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 181);
+				Set(v1, x=>x.Id, 79);
 				Set(v1, x=>x.Name, @"resource1");
-				Set(v1, x=>x.MeasurementUnitId, 103);
-				var v2 = New<MeasurementUnit>();
-				Set(v2, x=>x.Id, 103);
-				Set(v2, x=>x.ShortName, @"kG");
-				Set(v2, x=>x.Name, @"Kilograms");
-				var v3 = New<Resource>();
-				Set(v3, x=>x.Id, 183);
-				Set(v3, x=>x.Name, @"resource3");
-				Set(v3, x=>x.MeasurementUnitId, 103);
-				var v4 = New<MeasurementUnit>();
-				Set(v4, x=>x.Id, 103);
-				Set(v4, x=>x.ShortName, @"kG");
-				Set(v4, x=>x.Name, @"Kilograms");
-				Set(v1, x=>x.MeasurementUnit, v2);
-				Set(v3, x=>x.MeasurementUnit, v4);
-				return new List<Resource> { v1, v3 } ;
+				Set(v1, x=>x.MeasurementUnitId, 28);
+				var v2 = New<Resource>();
+				Set(v2, x=>x.Id, 81);
+				Set(v2, x=>x.Name, @"resource3");
+				Set(v2, x=>x.MeasurementUnitId, 28);
+				return new List<Resource> { v1, v2 } ;
 			}
 
 			private Int32 GetEntry_11()
 			{ 
-				return 46;
+				return 4;
 			}
 
 			private Int32 GetEntry_12()
 			{ 
-				return 46;
+				return 4;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_AB78B1DAADDAD273C885641045DBA4575D5FF2948319913F64C58E6FC40F215",
+					Hash = @"OrmQuery_64CFEF39AE33876A96A7D1358C1AD1F48A33BA27542F673AE894478DA1F9EBD",
 					Description = @"check unit existence"
 				};
 				yield return new TestDataRecord<Boolean>(GetEntry_2()) { 
-					Hash = @"OrmQuery_45C7667053E7DAE7F7346A921198CE3C7C78EADF6C1B962D8E62DFE30A1",
+					Hash = @"OrmQuery_959DC5E6E283AE49551B247D488BA887F7F5E944D8C25776FDBF0756A83DCA",
 					Description = @"check resource existence"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_3()) { 
-					Hash = @"OrmQuery_9A8DF285F5C79AFAA766CC82625165EB448BABC8E2DA9E16667526773D9BC061",
+					Hash = @"OrmQuery_23FCA21CF5135EF61DDD712A5EDE57C584AB1531F5850E0E4ADF7B648C61F52",
 					Description = @"lookup measurement unit by name (kG)"
 				};
 				yield return new TestDataRecord<Boolean>(GetEntry_4()) { 
-					Hash = @"OrmQuery_2E9D46B6980CAA970EC2128E19070F8FA79453BDCA2FDCE3346F6EA54E328",
+					Hash = @"OrmQuery_F40ECA89EC3265AB9568E18CAE06EA9CED5A148D96255F8F21AC1C145A971A",
 					Description = @"check resource existence"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_5()) { 
-					Hash = @"OrmQuery_EEF899C488CDCF57D677A0718DDA4BA2A4E380BE266F8AC276D05456707111",
+					Hash = @"OrmQuery_23FCA21CF5135EF61DDD712A5EDE57C584AB1531F5850E0E4ADF7B648C61F52",
 					Description = @"lookup measurement unit by name (kG)"
 				};
 				yield return new TestDataRecord<Boolean>(GetEntry_6()) { 
-					Hash = @"OrmQuery_95D682E873265ACCA3D3CDD6EEBE58E4DC39DF093AD6AC1575D5C1D617924A",
+					Hash = @"OrmQuery_18B42C5BA7A7036808A8CE9EC656F238EF090B670C7FCE126C3E81E355FB2C3",
 					Description = @"check resource existence"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_7()) { 
-					Hash = @"OrmQuery_FD3F6ACB04164A82CDDDD4B8EEA086E7D46C29C9E7329A565621A3C24235",
+					Hash = @"OrmQuery_23FCA21CF5135EF61DDD712A5EDE57C584AB1531F5850E0E4ADF7B648C61F52",
 					Description = @"lookup measurement unit by name (kG)"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_8()) { 
 					Hash = @"ORM_AdditionPK_2",
-					Description = @"ORM Addition PK retrieval"
+					Description = @"Get primary key of added Resource"
 				};
 				yield return new TestDataRecord<Resource[]>(GetEntry_9()) { 
-					Hash = @"51FA2A8C1217B05762F53ED7893F636A2F3593C9714D01EC352463C6023AD5D",
+					Hash = @"6D7B846772A5E7ED90F4247E1C6A48E2ACDFE8C8333206CD6A0D0A34C3697",
 					Description = @""
 				};
 				yield return new TestDataRecord<List<Resource>>(GetEntry_10()) { 
-					Hash = @"OrmQuery_F547945F9D123386677AC037DDC725878CA5318DDCA7A5F4ABF512633193D",
+					Hash = @"OrmQuery_18C159F5FCCBF781B9F5A187A624382F67A35643C63B5DFC691C0744D6BBD",
 					Description = @"lookup resources by 2 names"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_11()) { 
 					Hash = @"ORM_AdditionPK_1",
-					Description = @"ORM Addition PK retrieval"
+					Description = @"Get primary key of added ResourceSupply"
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_12()) { 
 					Hash = @"ORM_AdditionPK_1",
-					Description = @"ORM Addition PK retrieval"
+					Description = @"Get primary key of added ResourceSupply"
 				};
 			}
 

@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Reinforced.Samples.ToyFactory.Data;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
+using Reinforced.Samples.ToyFactory.Tests.Infrastructure.Maria;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Entry;
@@ -39,6 +40,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
             }
         }
 
+        
         private TectureBuilder Configure(bool fake)
         {
             TectureBuilder tb = new TectureBuilder();
@@ -50,7 +52,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
                     : new LazyDisposable<ToyFactoryDbContext>(() => new ToyFactoryDbContext());
 
                 c.UseEfCoreOrm(ld);
-                c.UseEfCoreDirectSql(ld);
+                c.UseEfCoreDirectSql(ld,new MariaInterpolation());
             });
             return tb;
         }

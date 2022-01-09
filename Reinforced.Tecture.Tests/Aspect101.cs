@@ -16,6 +16,13 @@ namespace Reinforced.Tecture.Tests.Channels
             ca.CommandCounter++;
             return w.Put(new Aspect101.TestCommand(payload, ca.CommandCounter));
         }
+        
+        public static Aspect101.BuggyCommand PutBuggyCommand(this Write<CommandChannel<Aspect101.Command>> w, string payload)
+        {
+            var ca = w.Aspect();
+            ca.CommandCounter++;
+            return w.Put(new Aspect101.BuggyCommand(payload, ca.CommandCounter));
+        }
 
         public static string GetRandomString(this Read<QueryChannel<Aspect101.Query>> r) => r.Aspect().GetRandomString();
     }
@@ -37,19 +44,24 @@ namespace Reinforced.Tecture.Tests.Channels
             public override void Dispose() { }
         }
 
-        public class Command : CommandAspect<TestCommand>
+        public class Command : CommandAspect<TestCommand, BuggyCommand>
         {
             public int CommandCounter { get; set; }
             
             public int RegisterCount { get; private set; }
             protected override void OnRegister() => RegisterCount++;
-            
-
             public TestRunner TestRunnerInstance { get; private set; }
+            public BuggyRunner BuggyRunnerInstance { get; private set; }
             protected override CommandRunner<TestCommand> GetRunner1(TestCommand command)
             {
                 if(TestRunnerInstance==null) TestRunnerInstance = new TestRunner();
                 return TestRunnerInstance;
+            }
+
+            protected override CommandRunner<BuggyCommand> GetRunner2(BuggyCommand command)
+            {
+                if(BuggyRunnerInstance==null) BuggyRunnerInstance = new BuggyRunner();
+                return BuggyRunnerInstance;
             }
 
             public int Saves { get; private set; }
@@ -70,6 +82,24 @@ namespace Reinforced.Tecture.Tests.Channels
             public List<TestCommand> CommandsRunAsync { get; } = new List<TestCommand>();
             protected override async Task RunAsync(TestCommand cmd) => CommandsRunAsync.Add(cmd);
         }
+        
+        public class BuggyRunner : CommandRunner<BuggyCommand>
+        {
+            public bool Invoked { get; private set; }
+            public bool InvokedAsync { get; private set; }
+            
+            protected override void Run(BuggyCommand cmd)
+            {
+                Invoked = true;
+                throw new Exception("buggy");
+            }
+
+            protected override async Task RunAsync(BuggyCommand cmd)
+            {
+                InvokedAsync = true;
+                throw new Exception("async buggy");
+            }
+        }
 
         public class TestCommand : CommandBase
         {
@@ -77,6 +107,23 @@ namespace Reinforced.Tecture.Tests.Channels
             public int GlobalOrder { get; }
 
             public TestCommand(string payload, int order)
+            {
+                Payload = payload;
+                GlobalOrder = order;
+            }
+
+            protected override CommandBase DeepCloneForTracing()
+            {
+                return new TestCommand(Payload, GlobalOrder);
+            }
+        }
+        
+        public class BuggyCommand : CommandBase
+        {
+            public string Payload { get; }
+            public int GlobalOrder { get; }
+
+            public BuggyCommand(string payload, int order)
             {
                 Payload = payload;
                 GlobalOrder = order;

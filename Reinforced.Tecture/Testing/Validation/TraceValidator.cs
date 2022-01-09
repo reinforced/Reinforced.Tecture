@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Commands;
-using Reinforced.Tecture.Testing.BuiltInChecks;
 using Reinforced.Tecture.Tracing;
 using Reinforced.Tecture.Tracing.Commands;
 
@@ -17,13 +16,15 @@ namespace Reinforced.Tecture.Testing.Validation
         struct ValidationEntry
         {
             public Type CommandType { get; set; }
-            public ICommandCheck[] Assertions { get; set; }
+            public Type ChannelType { get; set; }
+            public Delegate Assertion { get; set; }
 
             /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-            public ValidationEntry(Type commandType, ICommandCheck[] assertions)
+            public ValidationEntry(Type commandType, Delegate assertion)
             {
-                Assertions = assertions;
+                Assertion = assertion;
                 CommandType = commandType;
+                ChannelType = null;
             }
         }
 
@@ -36,15 +37,30 @@ namespace Reinforced.Tecture.Testing.Validation
         {
             _story = story;
         }
+        
         /// <summary>
         /// Sets validator for upcoming side-effect
         /// </summary>
-        /// <param name="assertions">Set of assertions that must take place for upcoming side-effect</param>
+        /// <param name="assertions">Assertion delegate</param>
         /// <returns>Fluent</returns>
-        public void Then<TCommand>(params ICommandCheck<TCommand>[] assertions) where TCommand : CommandBase
+        public void Then<TCommand>(Action<TCommand> assertions = null) where TCommand : CommandBase
         {
             _current.CommandType = typeof(TCommand);
-            _current.Assertions = assertions;
+            _current.Assertion = assertions;
+            _validationEntries.Enqueue(_current);
+            _current = new ValidationEntry(null, null);
+        }
+        
+        /// <summary>
+        /// Sets validator for upcoming side-effect
+        /// </summary>
+        /// <param name="assertions">Assertion delegate</param>
+        /// <returns>Fluent</returns>
+        public void Then<TChannel,TCommand>(Action<TCommand> assertions = null) where TCommand : CommandBase
+        {
+            _current.CommandType = typeof(TCommand);
+            _current.Assertion = assertions;
+            _current.ChannelType = typeof(TChannel);
             _validationEntries.Enqueue(_current);
             _current = new ValidationEntry(null, null);
         }
@@ -63,37 +79,39 @@ namespace Reinforced.Tecture.Testing.Validation
 
 
                 CommandBase command = eIdx >= cmdsArray.Count ? null : cmdsArray[eIdx];
+                
                 // check command type
                 if (currentValidator.CommandType != null)
                 {
                     if (!currentValidator.CommandType.IsInstanceOfType(command))
                     {
-                        throw new TectureCheckException(
+                        throw new TectureValidationException(
                             $"expected command of type {currentValidator.CommandType.Name}, but got {command.GetType().Name}");
                     }
                 }
-                //perform assertions
-                if (currentValidator.Assertions != null)
+                
+                // check channel type
+                if (currentValidator.ChannelType != null)
                 {
-                    foreach (var asrt in currentValidator.Assertions)
+                    if (command != null)
+                        if (currentValidator.ChannelType != command.Channel)
+                            throw new TectureValidationException(
+                                $"expected command for channel {currentValidator.ChannelType.Name}, but got {command.Channel.Name}");
+                }
+                
+                //perform assertions
+                if (currentValidator.Assertion != null)
+                {
+                    if (command != null)
                     {
-                        if (command != null)
-                        {
-                            if (!asrt.CommandType.GetTypeInfo().IsAssignableFrom(command.GetType()))
-                            {
-                                throw new TectureCheckException(
-                                    $"expected command of type {asrt.CommandType.Name}, but got {command.GetType().Name}");
-                            }
-                        }
-
-                        asrt.Assert(command);
+                        currentValidator.Assertion.DynamicInvoke(command);
                     }
                 }
 
                 eIdx++;
             }
 
-            if (eIdx < cmdsArray.Count) throw new TectureCheckException($"story is too short. Validation is longer.");
+            if (eIdx < cmdsArray.Count) throw new TectureValidationException($"story is too short. Validation is longer.");
         }
     }
 }

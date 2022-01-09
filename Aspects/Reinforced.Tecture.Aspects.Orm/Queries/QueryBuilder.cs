@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries
 {

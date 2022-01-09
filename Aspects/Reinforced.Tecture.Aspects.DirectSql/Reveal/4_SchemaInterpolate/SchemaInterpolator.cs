@@ -15,11 +15,11 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
     /// </summary>
     public class SchemaInterpolator
     {
-        private readonly IMapper _mapper;
+        protected readonly IMapper Mapper;
 
         public SchemaInterpolator(IMapper mapper)
         {
-            _mapper = mapper;
+            Mapper = mapper;
         }
 
         internal SchemaInterpolatedQuery Proceed(LanguageInterpolatedQuery query)
@@ -69,7 +69,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
             {
                 result.AppendLine();
                 result.AppendFormat(" {0} JOIN {1} ON ", JoinToString(joinType), TableMakeAlias(ntr));
-                var fields = _mapper.GetJoinKeys(tref.EntityType, ntr.JoinColumn);
+                var fields = Mapper.GetJoinKeys(tref.EntityType, ntr.JoinColumn);
                 var first = true;
                 foreach (var assocField in fields)
                 {
@@ -89,18 +89,18 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
 
         protected virtual string TableMakeAlias(TableReference tr)
         {
-            if (string.IsNullOrEmpty(tr.Alias)) return $"[{_mapper.GetTableName(tr.EntityType)}]";
-            return $"[{_mapper.GetTableName(tr.EntityType)}] [{tr.Alias}]";
+            if (string.IsNullOrEmpty(tr.Alias)) return $"[{Mapper.GetTableName(tr.EntityType)}]";
+            return $"[{Mapper.GetTableName(tr.EntityType)}] [{tr.Alias}]";
         }
         protected virtual string TableAlias(TableReference tr)
         {
-            if (string.IsNullOrEmpty(tr.Alias)) return $"[{_mapper.GetTableName(tr.EntityType)}]";
+            if (string.IsNullOrEmpty(tr.Alias)) return $"[{Mapper.GetTableName(tr.EntityType)}]";
             return $"[{tr.Alias}]";
         }
 
         protected virtual string VisitColumnReference(SqlColumnReference expr)
         {
-            return VisitColumnReference(expr.Table, _mapper.GetColumnName(expr.Table.EntityType, expr.Column));
+            return VisitColumnReference(expr.Table, Mapper.GetColumnName(expr.Table.EntityType, expr.Column));
         }
 
         protected virtual string VisitColumnReference(TableReference tr, string colName)

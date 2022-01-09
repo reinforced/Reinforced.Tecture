@@ -1,0 +1,24 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Reinforced.Tecture.Testing.Data;
+
+namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks
+{
+		class CreateBlueprintWorks_TestData : CSharpTestData
+		{
+			private Boolean GetEntry_1()
+			{ 
+				return false;
+			}
+
+			public override IEnumerable<ITestDataRecord> GetRecords()
+			{ 
+				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
+					Hash = @"OrmQuery_D97F78CED2D8E63BEE3727892981FA235E248DA25C75FA4157B576C85DCC17AD",
+					Description = @"Exists ToyType with Id #1002"
+				};
+			}
+
+		}
+}

@@ -33,7 +33,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
 
             if (p is Containing<IEnumerable<object>> c)
             {
-                var td = c.Get(Expression.CalculateHash(), Description.Description);
+                var td = c.Get(Expression.CalculateJustHash(), Description.Description);
                 return td.GetEnumerator();
             }
 
@@ -43,7 +43,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Wrapped.Queryables
 
             if (p is Demanding<IEnumerable<object>> d)
             {
-                result.Demands(d, Expression.CalculateHash(), Description);
+                result.Demands(d, Expression.CalculateJustHash(), Description);
             }
 
             return result;

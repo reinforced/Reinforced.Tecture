@@ -5,9 +5,9 @@ using Reinforced.Tecture.Commands;
 namespace Reinforced.Tecture.Tracing.Commands
 {
     /// <summary>
-    /// Command that does nothing except explainig things
+    /// Command that does nothing except explaining things
     /// </summary>
-    [CommandCode("//")]
+    [CommandCode("// ")]
     public sealed class Comment : CommandBase, ITracingOnly
     {
         internal Comment()

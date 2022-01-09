@@ -186,6 +186,8 @@ namespace Reinforced.Tecture.Testing
             if (t == typeof(string)) return true;
             if (t == typeof(Guid)) return true;
             if (t == typeof(DateTime)) return true;
+            if (typeof(Type).IsAssignableFrom(t)) 
+                return true;
             if (t.IsEnum) return true;
             if (t.IsTuple())
             {
@@ -213,6 +215,10 @@ namespace Reinforced.Tecture.Testing
         public static ExpressionSyntax Construct(Type t, object value)
         {
             if (value == null) return Null();
+            if (value is Type tn)
+            {
+                return TypeOfExpression(tn.TypeName());
+            }
             if (t.IsNullable())
             {
                 var nt = Nullable.GetUnderlyingType(t);

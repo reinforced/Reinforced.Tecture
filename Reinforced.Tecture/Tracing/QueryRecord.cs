@@ -11,7 +11,7 @@ namespace Reinforced.Tecture.Tracing
     /// <summary>
     /// Synthetic command that means query that was made to the external system
     /// </summary>
-    [CommandCode("▷")]
+    [CommandCode("-> ")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
         internal QueryRecord(Type channel, bool isTestData)
@@ -127,13 +127,13 @@ namespace Reinforced.Tecture.Tracing
         {
             if (TimeTaken.TotalMinutes > 1)
             {
-                tw.Write($"[{TimeTaken:mm:ss:fff}]\t");
+                tw.Write($"[{TimeTaken:mm\\:ss\\:fff}]\t");
                 return;
             }
 
             if (TimeTaken.TotalSeconds > 5)
             {
-                tw.Write($"[{TimeTaken:ss:fff} s]\t");
+                tw.Write($"[{TimeTaken:ss\\:fff} s]\t");
                 return;
             }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -12,8 +13,9 @@ namespace Reinforced.Tecture.Transactions
         private readonly Dictionary<string, ChannelTransactionsManager> _transactionManagers =
             new Dictionary<string, ChannelTransactionsManager>();
 
-        private readonly Dictionary<string, ChannelTransaction> _globalTransactions = new Dictionary<string, ChannelTransaction>();
-
+        private readonly ConcurrentDictionary<string, ChannelTransaction> _globalTransactions = new ConcurrentDictionary<string, ChannelTransaction>();
+        private readonly object _locker = new object();
+        
         public void RegisterManager(Type channel, ChannelTransactionsManager ctm)
         {
             _transactionManagers[channel.FullName] = ctm;
@@ -54,7 +56,7 @@ namespace Reinforced.Tecture.Transactions
                 _transactionManagers.ContainsKey(channel.FullName)
                     ? _transactionManagers[channel.FullName].GetQueryTransaction()
                     : ChannelTransaction.Default;
-            EnsureGlobal(channel.FullName);
+            if (result!=ChannelTransaction.Default) EnsureGlobal(channel.FullName);
             return result;
         }
 
@@ -64,11 +66,10 @@ namespace Reinforced.Tecture.Transactions
                 _transactionManagers.ContainsKey(channelFullName)
                     ? _transactionManagers[channelFullName].GetCommandTransaction(command, async)
                     : ChannelTransaction.Default;
-            EnsureGlobal(channelFullName);
+            
+            if (result!=ChannelTransaction.Default) EnsureGlobal(channelFullName);
             return result;
         }
-
-        private readonly object _locker = new object();
 
         public void FinishAllGlobalTransactions()
         {

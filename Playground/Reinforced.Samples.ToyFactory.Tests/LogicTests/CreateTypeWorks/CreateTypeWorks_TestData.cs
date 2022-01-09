@@ -16,24 +16,24 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 			private ToyType GetEntry_2()
 			{ 
 				var v1 = New<ToyType>();
-				Set(v1, x=>x.Id, 1002);
-				Set(v1, x=>x.Name, @"test type");
+				Set(v1, x=>x.Id, 32);
+				Set(v1, x=>x.Name, @"test type2");
 				return v1;
 			}
 
 			private Int32 GetEntry_3()
 			{ 
-				return 1003;
+				return 32;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_C5AA2E972EC6147BB57D28A39C52F64114389AD2A919A31CFA5548AC2731736",
+					Hash = @"OrmQuery_3241C66C12C82F8E81E7DC4A39E3B8C316ACC7CCD0F6D37C6E519C43BB3E531",
 					Description = @"check toy type existence"
 				};
 				yield return new TestDataRecord<ToyType>(GetEntry_2()) { 
-					Hash = @"OrmQuery_24F8CA228FEEEDEF1FFB466BB13B353EC1A3C5D4AB928AE2EDD86C5A14D9",
+					Hash = @"OrmQuery_F7D8A6ED24C427B3D81EE2B65FB779C63D6FCF5FC8AC32EC56756A1EA4A25",
 					Description = null
 				};
 				yield return new TestDataRecord<Int32>(GetEntry_3()) { 

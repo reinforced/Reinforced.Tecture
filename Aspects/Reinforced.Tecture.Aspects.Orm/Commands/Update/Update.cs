@@ -7,6 +7,7 @@ using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
 {
@@ -20,11 +21,13 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <summary>
         /// Gets entity that is going to be updated
         /// </summary>
+        [Validated("entity to be update")]
         public object Entity { get; internal set; }
 
         /// <summary>
         /// Gets type of entity that is going to be updated
         /// </summary>
+        [Validated("type of entity to update")]
         public Type EntityType { get; internal set; }
 
 
@@ -41,6 +44,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
         /// <summary>
         /// Properties that are going to be updated (with string key for quick check)
         /// </summary>
+        [Validated("updated values")]
         public Dictionary<string, object> UpdateValuesStringKeys
         {
             get { return _updateValues.ToDictionary(x=>x.Key.Name,x=>x.Value); }

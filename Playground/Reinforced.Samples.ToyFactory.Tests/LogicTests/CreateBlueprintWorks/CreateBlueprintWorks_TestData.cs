@@ -21,24 +21,24 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateBlueprintWorks
 			private ToyType GetEntry_3()
 			{ 
 				var v1 = New<ToyType>();
-				Set(v1, x=>x.Id, 1002);
-				Set(v1, x=>x.Name, @"test type");
+				Set(v1, x=>x.Id, 32);
+				Set(v1, x=>x.Name, @"test type2");
 				return v1;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
 			{ 
 				yield return new TestDataRecord<Boolean>(GetEntry_1()) { 
-					Hash = @"OrmQuery_FEDF12D01C5A92BE793C8C9A1E2BBA6B2EF49F38D6C787B61195909AB7814C52",
-					Description = @"Exists ToyType with Id #1002"
+					Hash = @"OrmQuery_889BAD76EA1CBA5ADF2BA777D9CA1C8BCD12D2C20D8BD81982FED99AE66241",
+					Description = @"Exists ToyType with Id #32"
 				};
 				yield return new TestDataRecord<Boolean>(GetEntry_2()) { 
-					Hash = @"OrmQuery_60D4B01265E1C2985AC496B35BE9E5B6AB10C2635F3048A4F12544C99B57CFC6",
+					Hash = @"OrmQuery_F555F139FCA269BF8D85195307757B4B0467EFA6620A4665E8A924D504F80",
 					Description = @"check blueprint existence"
 				};
 				yield return new TestDataRecord<ToyType>(GetEntry_3()) { 
-					Hash = @"OrmQuery_73EB1F8673A3B81BBBED1E0929FA23B0E8E289BB3F4DA2F6D09669815AB162",
-					Description = @"Get ToyType by Id #1002"
+					Hash = @"OrmQuery_72E2BAE12A177BA43B52C8D7578526DCB76D5EB850F3C8E3C78FAAAF53144",
+					Description = @"Get ToyType by Id #32"
 				};
 			}
 

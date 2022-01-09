@@ -27,7 +27,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
             if (_aux.IsCommandRunNeeded)
             {
                 var query = _aspect.Compile(cmd);
-                _aspect.Context.Value.Database.ExecuteSqlRaw(query.Query, query.Parameters);
+                _aspect.Context.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
         public void Dispose()
         {
-            _aspect.Dispose();
+            //_aspect.Dispose(); violation of Demeter Law. I played with not my own toys
         }
     }
 }

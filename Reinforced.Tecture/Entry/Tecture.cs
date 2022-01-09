@@ -14,7 +14,6 @@ namespace Reinforced.Tecture.Entry
 {
     internal class Tecture : ITecture
     {
-
         private readonly ServiceManager _serviceManager;
         private readonly ChannelMultiplexer _mx;
         internal readonly Pipeline _pipeline;
@@ -23,14 +22,14 @@ namespace Reinforced.Tecture.Entry
         private readonly TransactionManager _tranManager;
         private readonly Func<Exception, bool> _exceptionHandler;
         private readonly TestingContextContainer _aux;
-        
+
         public Tecture(
             ChannelMultiplexer mx,
             TestingContextContainer aux,
             bool debugMode = false,
             TransactionManager tranManager = null,
             Func<Exception, bool> exceptionHandler = null,
-            Func<Type,object> iocResolver = null)
+            Func<Type, object> iocResolver = null)
         {
             _mx = mx;
             _aux = aux;
@@ -62,6 +61,7 @@ namespace Reinforced.Tecture.Entry
         }
 
         private TraceCollector _tc = null;
+
         /// <summary>
         /// Begins trace collection
         /// </summary>
@@ -70,7 +70,6 @@ namespace Reinforced.Tecture.Entry
             _tc = new TraceCollector();
             _pipeline.TraceCollector = _tc;
             _aux.TraceCollector = _tc;
-
         }
 
         /// <summary>
@@ -93,24 +92,46 @@ namespace Reinforced.Tecture.Entry
             if (_actions.IsRunning) throw new Exception(".SaveChanges cannot be called within post-save action");
             if (_finallyActions.IsRunning) throw new Exception(".SaveChanges cannot be called within finally action");
 
-
             Exception thrown = null;
+            CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
             try
             {
                 _serviceManager.OnSave();
-
-                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
                 dispatcher.Dispatch(_pipeline, _actions);
-
-                _serviceManager.OnFinally();
-                _finallyActions.Run();
-                if (_pipeline.HasEffects) dispatcher.Dispatch(_pipeline, _actions);
             }
             catch (Exception ex)
             {
-                if (_exceptionHandler == null || !_exceptionHandler(ex))
+                thrown = ex;
+            }
+            finally
+            {
+                Exception thrown2 = null;
+                try
                 {
-                    throw;
+                    _serviceManager.OnFinally(thrown);
+                    _finallyActions.Run();
+                    if (_pipeline.HasEffects) dispatcher.Dispatch(_pipeline, null);
+                }
+                catch (Exception finException)
+                {
+                    thrown2 = finException;
+                }
+
+                if (thrown2 != null)
+                {
+                    if (thrown == null) thrown = thrown2;
+                    else
+                    {
+                        thrown = new AggregateException(thrown, thrown2);
+                    }
+                }
+
+                if (thrown != null)
+                {
+                    if (_exceptionHandler == null || !_exceptionHandler(thrown))
+                    {
+                        throw thrown;
+                    }
                 }
             }
         }
@@ -124,23 +145,45 @@ namespace Reinforced.Tecture.Entry
             if (_actions.IsRunning) throw new Exception(".SaveAsync cannot be called within post-save action");
             if (_finallyActions.IsRunning) throw new Exception(".SaveAsync cannot be called within finally action");
             Exception thrown = null;
+            CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
             try
             {
-
                 await _serviceManager.OnSaveAsync();
-
-                CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
                 await dispatcher.DispatchAsync(_pipeline, _actions);
-
-                await _serviceManager.OnFinallyAsync();
-                await _finallyActions.RunAsync();
-                if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, _actions);
             }
             catch (Exception ex)
             {
-                if (_exceptionHandler == null || !_exceptionHandler(ex))
+                thrown = ex;
+            }
+            finally
+            {
+                Exception thrown2 = null;
+                try
                 {
-                    throw;
+                    await _serviceManager.OnFinallyAsync(thrown);
+                    await _finallyActions.RunAsync();
+                    if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, null);
+                }
+                catch (Exception finException)
+                {
+                    thrown2 = finException;
+                }
+
+                if (thrown2 != null)
+                {
+                    if (thrown == null) thrown = thrown2;
+                    else
+                    {
+                        thrown = new AggregateException(thrown, thrown2);
+                    }
+                }
+
+                if (thrown != null)
+                {
+                    if (_exceptionHandler == null || !_exceptionHandler(thrown))
+                    {
+                        throw thrown;
+                    }
                 }
             }
         }

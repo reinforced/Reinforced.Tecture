@@ -1,11 +1,12 @@
 using System;
 using Reinforced.Tecture.Testing.Validation;
 using Reinforced.Tecture.Tracing;
+using Reinforced.Tecture.Testing.Validation.Assertion;
 using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
+using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Tecture.Tracing.Commands;
-using static Reinforced.Tecture.Aspects.Orm.Testing.Checks.Add.AddChecks;
-using static Reinforced.Tecture.Testing.BuiltInChecks.CommonChecks;
+using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 {
@@ -13,16 +14,21 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests.CreateTypeWorks
 		{
 			protected override void Validate(TraceValidator flow)
 			{ 
-				flow.Then<Add>
-				(
-					Add<ToyType>(x=>
+				flow.Then<Db, Add>
+				(c=>
 					{ 
-						if (x.Name != @"test type2") return false;
-						return true;
-					}, @"Create new toy type"), 
-					Annotated(@"Create new toy type")
+						Assert.Equal(As<ToyType>(c.Entity).Id, 0, "Id of property Entity of command 'Create new toy type' has invalid value");
+						Assert.Equal(As<ToyType>(c.Entity).Name, @"test type2", "Name of property Entity of command 'Create new toy type' has invalid value");
+						Assert.Equal(c.EntityType, typeof(ToyType), "property EntityType of command 'Create new toy type' has invalid value");
+						Assert.Equal(c.Annotation, @"Create new toy type", "Annotation has invalid value");
+					}
 				);
-				flow.Then<Save>();
+				flow.Then<NoChannel, Save>
+				(c=>
+					{ 
+						Assert.Equal(c.Annotation, @"", "Annotation has invalid value");
+					}
+				);
 				flow.TheEnd();
 			}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -13,7 +14,7 @@ namespace Reinforced.Tecture.Cloning
     public static class DeepCloner
     {
 
-        private static readonly Dictionary<Type, TypeCloneTooling> _cloneDelegates = new Dictionary<Type, TypeCloneTooling>();
+        private static readonly ConcurrentDictionary<Type, TypeCloneTooling> _cloneDelegates = new ConcurrentDictionary<Type, TypeCloneTooling>();
 
         /// <summary>
         /// Registers personal clone delegate for particular type

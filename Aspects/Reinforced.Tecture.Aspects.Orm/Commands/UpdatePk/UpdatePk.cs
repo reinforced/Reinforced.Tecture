@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
 {
@@ -23,13 +24,14 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
         /// <summary>
         /// Gets primary key values
         /// </summary>
+        [Validated("primary key")]
         public object[] KeyValues { get; internal set; }
 
         /// <summary>
         /// Gets type of entity that is going to be updated
         /// </summary>
+        [Validated("type of entity to update")]
         public Type EntityType { get; internal set; }
-
 
         private readonly Dictionary<PropertyInfo, object> _updateValues;
 
@@ -44,6 +46,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
         /// <summary>
         /// Properties that are going to be updated (with string key for quick check)
         /// </summary>
+        [Validated("updated values")]
         public Dictionary<string, object> UpdateValuesStringKeys
         {
             get { return _updateValues.ToDictionary(x => x.Key.Name, x => x.Value); }
