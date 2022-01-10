@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Aspects\Reinforced.Tecture.Aspects.Orm\Reinforced.Tecture.Aspects.Orm.csproj" />
     <ProjectReference Include="..\..\..\Aspects\Reinforced.Tecture.Aspects.DirectSql\Reinforced.Tecture.Aspects.DirectSql.csproj" />
     <ProjectReference Include="..\..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
@@ -12,6 +13,9 @@ namespace Reinforced.Samples.ToyFactory.Logic.Entities
         public ToyType ToyType { get; internal set; }
 
         public int ToyTypeId { get; internal set; }
+
+        [Required]
+        public string Name { get; set; }
 
         public Expression<Func<int>> PrimaryKey
         {

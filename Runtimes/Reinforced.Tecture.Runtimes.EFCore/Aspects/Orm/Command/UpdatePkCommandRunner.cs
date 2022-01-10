@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 
             if (entryQuery == null)
             {
-                return _dc.Value.Update(instance);
+                return _dc.Value.Entry(instance);
             }
             return entryQuery;
         }
@@ -80,8 +80,8 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
                     cmdUpdateValue.Key.SetValue(instance, cmdUpdateValue.Value);
                     entry.Property(cmdUpdateValue.Key.Name).IsModified = true;
                 }
-                entry.State = EntityState.Modified;
-                _dc.Value.Update(entry.Entity);
+                //entry.State = EntityState.Modified;
+                //_dc.Value.Update(entry.Entity);
             }
         }
 

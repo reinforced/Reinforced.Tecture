@@ -25,8 +25,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.LogicTests
 
             var a = ctx.Do<Nomenclature>().CreateType("test type2");
             ctx.Save();
-            var r = a.Result;
-            var id = ctx.From<Db>().Key(r);
+            var id = ctx.From<Db>().Key(a);
 
             Output.WriteLine(c.Text());
             c.Validate<CreateTypeWorks_Validation>();

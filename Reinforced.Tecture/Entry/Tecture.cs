@@ -121,6 +121,7 @@ namespace Reinforced.Tecture.Entry
                             IsExecuted = true
                         });
                     }
+
                     _serviceManager.OnFinally(thrown);
                     _finallyActions.Run();
                     if (_pipeline.HasEffects) dispatcher.Dispatch(_pipeline, null);
@@ -128,6 +129,18 @@ namespace Reinforced.Tecture.Entry
                 catch (Exception finException)
                 {
                     thrown2 = finException;
+                }
+                finally
+                {
+                    if (_tc != null)
+                    {
+                        _tc.Command(new Comment()
+                        {
+                            Annotation = "<<< End of Finally block >>>",
+                            Channel = typeof(NoChannel),
+                            IsExecuted = true
+                        });
+                    }
                 }
 
                 if (thrown2 != null)

@@ -46,7 +46,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Services
     {
         private Nomenclature() { }
 
-        public async Task<IAddition<ToyType>> CreateType(string name)
+        public IAddition<ToyType> CreateType(string name)
         {
 
             if (From<Db>().Get<ToyType>().All.Describe("check toy type existence").Any(x => x.Name == name))

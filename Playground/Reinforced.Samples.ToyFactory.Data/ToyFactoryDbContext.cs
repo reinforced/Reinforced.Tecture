@@ -24,6 +24,10 @@ namespace Reinforced.Samples.ToyFactory.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlueprintResources>().HasKey(x => new { x.BlueprintId, x.ResourceId });
+
+            modelBuilder.Entity<Blueprint>()
+                .Property(x => x.Name)
+                .IsRequired();
             OnWarehouseModelCreating(modelBuilder);
         }
         public DbSet<ToyType> ToyTypes { get; set; }

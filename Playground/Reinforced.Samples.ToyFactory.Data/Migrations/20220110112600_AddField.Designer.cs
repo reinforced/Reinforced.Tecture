@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reinforced.Samples.ToyFactory.Data;
 
 namespace Reinforced.Samples.ToyFactory.Data.Migrations
 {
     [DbContext(typeof(ToyFactoryDbContext))]
-    partial class ToyFactoryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220110112600_AddField")]
+    partial class AddField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

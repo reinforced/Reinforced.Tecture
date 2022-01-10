@@ -35,7 +35,7 @@ namespace Reinforced.Samples.ToyFactory.Controllers
             {
                 var a = _tecture.Do<Nomenclature>().CreateType(req.Name);
                 _tecture.Save();
-                var x = a.Result;
+                var x = a;
                 result = _tecture.From<Db>().Key(x);
             }
             finally
