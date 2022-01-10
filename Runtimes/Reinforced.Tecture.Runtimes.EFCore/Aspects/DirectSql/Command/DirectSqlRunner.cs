@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
@@ -27,7 +28,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
             if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
-                _aspect.Context.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
+                _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
             }
         }
 
@@ -36,12 +37,12 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// </summary>
         /// <param name="cmd">Side effect</param>
         /// <returns>Side effect</returns>
-        protected override Task RunAsync(Sql cmd)
+        protected override Task RunAsync(Sql cmd,CancellationToken token = default)
         {
             if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
-                return _aspect.Context.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
+                return _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
             }
 
             return Task.FromResult(0);

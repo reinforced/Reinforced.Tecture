@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.Orm;
@@ -51,7 +52,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// </summary>
         /// <param name="cmd">Side effect</param>
         /// <returns>Side effect</returns>
-        protected override Task RunAsync(Derelate cmd)
+        protected override Task RunAsync(Derelate cmd,CancellationToken token = default)
         {
             Run(cmd);
             return Task.FromResult(0);

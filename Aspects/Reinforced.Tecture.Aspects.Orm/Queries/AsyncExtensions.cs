@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         {
             if (q is ITracedQueryable<T> wq)
             {
-                var aux = wq.Aspect.Aux;
+                var aux = wq.Aspect.Context;
                 var p = aux.Promise<U>();
                 ExpressionHashData hash = null;
                 if (p is Containing<U> || p is Demanding<U>)
@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     return Task.FromResult(c.Get(hash.Hash, wq.Description.Description));
                 }
 
-                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var tran = wq.Aspect.Context.GetQueryTransaction();
                 var result = method(wq.Aspect.AsyncExecutorActually, wq.CreateNewOriginal(hash?.ModifiedExpression), ct)
                     .ContinueWith(x =>
                     {
@@ -58,7 +58,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         {
             if (q is ITracedQueryable<T> wq)
             {
-                var aux = wq.Aspect.Aux;
+                var aux = wq.Aspect.Context;
                 var p = aux.Promise<U>();
 
                 ExpressionHashData hash = null;
@@ -70,7 +70,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     return Task.FromResult(c.Get(hash.Hash, wq.Description.Description));
                 }
 
-                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var tran = wq.Aspect.Context.GetQueryTransaction();
                 var result = method(wq.Aspect.AsyncExecutorActually, wq.CreateNewOriginal(hash?.ModifiedExpression),
                     predicate, ct).ContinueWith(x =>
                 {
@@ -99,7 +99,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         {
             if (q is ITracedQueryable<T> wq)
             {
-                var aux = wq.Aspect.Aux;
+                var aux = wq.Aspect.Context;
                 var p = aux.Promise<U>();
                 ExpressionHashData hash = null;
                 if (p is Containing<U> || p is Demanding<U>)
@@ -110,7 +110,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     return Task.FromResult(c.Get(hash.Hash, wq.Description.Description));
                 }
 
-                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var tran = wq.Aspect.Context.GetQueryTransaction();
                 var result = method(wq.Aspect.AsyncExecutorActually, wq.CreateNewOriginal(hash?.ModifiedExpression),
                     selector, ct).ContinueWith(x =>
                 {
@@ -139,7 +139,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         {
             if (q is ITracedQueryable<T> wq)
             {
-                var aux = wq.Aspect.Aux;
+                var aux = wq.Aspect.Context;
                 var p = aux.Promise<V>();
 
                 ExpressionHashData hash = null;
@@ -151,7 +151,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     return Task.FromResult(c.Get(hash.Hash, wq.Description.Description));
                 }
 
-                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var tran = wq.Aspect.Context.GetQueryTransaction();
                 var result = method(wq.Aspect.AsyncExecutorActually, wq.CreateNewOriginal(hash?.ModifiedExpression),
                     selector, ct).ContinueWith(x =>
                 {
@@ -2106,7 +2106,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         {
             if (q is ITracedQueryable<TSource> wq)
             {
-                var aux = wq.Aspect.Aux;
+                var aux = wq.Aspect.Context;
                 var p = aux.Promise<bool>();
 
                 ExpressionHashData hash = null;
@@ -2119,7 +2119,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                         c.Get(hash.Hash, wq.Description.Description));
                 }
 
-                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var tran = wq.Aspect.Context.GetQueryTransaction();
                 var result = wq.Aspect.AsyncExecutorActually.ContainsAsync(wq.CreateNewOriginal(hash?.ModifiedExpression), item, cancellationToken)
                     .ContinueWith(x =>
                     {
@@ -2369,7 +2369,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         {
             if (source is ITracedQueryable<TSource> wq)
             {
-                var aux = wq.Aspect.Aux;
+                var aux = wq.Aspect.Context;
                 var p = aux.Promise<Dictionary<TKey, TElement>>();
                 ExpressionHashData hash = null;
                 if (p is Containing<Dictionary<TKey, TElement>>
@@ -2382,7 +2382,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                         c.Get(hash.Hash, wq.Description.Description));
                 }
 
-                var tran = wq.Aspect.Aux.GetQueryTransaction();
+                var tran = wq.Aspect.Context.GetQueryTransaction();
                 var result = wq.Aspect.AsyncExecutorActually
                     .ToDictionaryAsync(wq.CreateNewOriginal(hash?.ModifiedExpression), keySelector, elementSelector, comparer, cancellationToken)
                     .ContinueWith(x =>

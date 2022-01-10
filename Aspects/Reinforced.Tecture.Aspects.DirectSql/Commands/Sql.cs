@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using Reinforced.Tecture.Aspects.DirectSql.Infrastructure;
 using Reinforced.Tecture.Aspects.DirectSql.Parse;
 using Reinforced.Tecture.Aspects.DirectSql.Reveal;
@@ -16,9 +17,10 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Commands
     /// <summary>
     /// SQL stroke command
     /// </summary>
-    [CommandCode("SQL")]
     public sealed class Sql : CommandBase
     {
+        public override string Code => "SQL";
+        
         private readonly bool _isOnlyTracing;
         internal Sql(LambdaExpression strokeExpression)
         {
@@ -73,17 +75,20 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Commands
         [Validated("query parameters collection")]
         public object[] QueryParameters => Preview.Parameters;
         
-        /// <inheritdoc />
-        public override string ToString()
+        protected override string ToStringActually()
         {
-            return String.Format(Preview.Query, Preview.Parameters);
+            var sb = new StringBuilder();
+            using (var tw = new StringWriter(sb))
+            {
+                Describe(tw);
+                tw.Flush();
+            }
+
+            return sb.ToString();
         }
-        
-        /// <summary>
-        /// Describes actions that are being performed within side effect
-        /// </summary>
-        /// <param name="tw"></param>
-        public override void Describe(TextWriter tw)
+
+        /// <inheritdoc cref="CommandBase" />
+        private void Describe(TextWriter tw)
         {
             if (!string.IsNullOrEmpty(Annotation)) tw.Write(Annotation);
             else tw.Write("Direct SQL will be sent to DB");

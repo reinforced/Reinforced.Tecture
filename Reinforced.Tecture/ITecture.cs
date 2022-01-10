@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Services;
@@ -46,6 +47,6 @@ namespace Reinforced.Tecture
         /// Runs async commands queue
         /// </summary>
         /// <returns></returns>
-        Task SaveAsync();
+        Task SaveAsync(CancellationToken token = default);
     }
 }

@@ -59,7 +59,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         public void SupplyCreationPipeline()
         {
             using var c = Case
-               <SupplyCreationPipeline_TestData>
+               //<SupplyCreationPipeline_TestData>
                 (out ITecture ctx);
             var m = ctx.Do<Manage>();
             var unit = m.CreateMeasurementUnit("Kilograms", "kG");
@@ -92,7 +92,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             supply.FinishResourceSupply(supplyId);
             ctx.Save();
             Output.WriteLine(c.Text());
-            c.Validate<SupplyCreationPipeline_Validation>();
+            //c.Validate<SupplyCreationPipeline_Validation>();
             
         }
 

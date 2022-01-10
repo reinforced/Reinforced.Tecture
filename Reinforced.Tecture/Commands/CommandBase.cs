@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Testing;
 
@@ -43,7 +41,10 @@ namespace Reinforced.Tecture.Commands
         private DebugInfo _debug;
         private int _order;
         private bool _isExecuted;
+        private TimeSpan _timeTaken = TimeSpan.Zero;
         private Exception _exception;
+
+        public virtual string Code => string.Empty;
 
         /// <summary>
         /// Discriminates data source type for command.
@@ -51,7 +52,7 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         public Type Channel
         {
-            get { return _channel; }
+            get => _channel;
             internal set
             {
                 _channel = value;
@@ -84,7 +85,7 @@ namespace Reinforced.Tecture.Commands
         [Validated("Annotation")]
         public string Annotation
         {
-            get { return _annotation; }
+            get => _annotation;
             internal set
             {
                 _annotation = value;
@@ -100,7 +101,7 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         public DebugInfo Debug
         {
-            get { return _debug; }
+            get => _debug;
             internal set
             {
                 _debug = value;
@@ -111,20 +112,20 @@ namespace Reinforced.Tecture.Commands
             }
         }
 
-        /// <summary>
-        /// Describes actions that are being performed within command
-        /// </summary>
-        /// <param name="tw">Log writer</param>
-        public virtual void Describe(TextWriter tw)
+        private readonly Lazy<string> _toString;
+        protected CommandBase()
         {
-            if (!string.IsNullOrEmpty(Annotation))
-            {
-                tw.Write(Annotation);
-                if (Debug != null)
-                {
-                    tw.Write($" ({Debug.Location})");
-                }
-            }
+            _toString = new Lazy<string>(ToStringActually);
+        }
+
+        public sealed override string ToString()
+        {
+            return _toString.Value;
+        }
+
+        protected virtual string ToStringActually()
+        {
+            return Annotation ?? "Command";
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         public int Order
         {
-            get { return _order; }
+            get => _order;
             internal set
             {
                 _order = value;
@@ -148,17 +149,14 @@ namespace Reinforced.Tecture.Commands
         /// <summary>
         /// Collection of known clones of the command
         /// </summary>
-        protected IEnumerable<CommandBase> KnownClones
-        {
-            get { return _knownClones; }
-        }
-        
+        protected IEnumerable<CommandBase> KnownClones => _knownClones;
+
         /// <summary>
         /// Gets whether command was executed or not
         /// </summary>
         public Exception Exception
         {
-            get { return _exception; }
+            get => _exception;
             internal set
             {
                 _exception = value;
@@ -174,7 +172,7 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         public bool IsExecuted
         {
-            get { return _isExecuted; }
+            get => _isExecuted;
             internal set
             {
                 _isExecuted = value;
@@ -184,6 +182,23 @@ namespace Reinforced.Tecture.Commands
                 }
             }
         }
+
+        /// <summary>
+        /// Gets the time that particular command execution or query evaluation took
+        /// </summary>
+        public TimeSpan TimeTaken
+        {
+            get => _timeTaken;
+            internal set
+            {
+                _timeTaken = value;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.TimeTaken = value;
+                }
+            }
+        }
+        
 
         internal CommandBase TraceClone()
         {
@@ -202,54 +217,5 @@ namespace Reinforced.Tecture.Commands
         /// </summary>
         /// <returns>Command clone</returns>
         protected abstract CommandBase DeepCloneForTracing();
-    }
-
-    /// <summary>
-    /// Provides debug information about occuring command
-    /// </summary>
-    public class DebugInfo
-    {
-        /// <summary>
-        /// Service that has initiated command. Available in debug only.
-        /// </summary>
-        public Type SourceService { get; internal set; }
-
-        /// <summary>
-        /// Service that command was initiated. Available in debug only.
-        /// </summary>
-        public MethodBase SourceMethod { get; internal set; }
-
-        /// <summary>
-        /// Source line where command was initiated
-        /// </summary>
-        public int LineNumber { get; internal set; }
-
-        /// <summary>
-        /// File name where command was initiated from
-        /// </summary>
-        public string FileName { get; set; }
-
-        /// <summary>
-        /// Gets the location where debug entry occured
-        /// </summary>
-        public string Location
-        {
-            get
-            {
-                Queue<string> address = new Queue<string>();
-                if (SourceService != null) address.Enqueue(SourceService.Name);
-                if (SourceMethod != null)
-                {
-                    if (SourceMethod.GetCustomAttribute<CompilerGeneratedAttribute>() != null)
-                        address.Enqueue("anonymous method");
-                    else address.Enqueue(SourceMethod.Name);
-                }
-
-                if (!string.IsNullOrEmpty(FileName)) address.Enqueue($"file: {FileName}");
-                if (LineNumber != 0) address.Enqueue($"line: {LineNumber}");
-
-                return string.Join(", ", address);
-            }
-        }
     }
 }

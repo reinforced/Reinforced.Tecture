@@ -8,7 +8,6 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Enumerators.Generic
     class Demander<T> : IDemander<T>
     {
         private readonly Demanding<IEnumerable<T>> _demanding;
-        private readonly Demanding<IEnumerable> _demandingNonGeneric;
         
         private readonly string _hash;
         private readonly DescriptionHolder _description;

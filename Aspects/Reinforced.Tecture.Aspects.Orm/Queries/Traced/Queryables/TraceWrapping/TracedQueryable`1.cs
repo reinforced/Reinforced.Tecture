@@ -40,7 +40,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            var p = Aspect.Aux.Promise<IEnumerable<T>>();
+            var p = Aspect.Context.Promise<IEnumerable<T>>();
 
             ExpressionHashData hash = null;
             if (p is Containing<IEnumerable<T>> || p is Demanding<IEnumerable<T>>)
@@ -52,7 +52,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
                 return td.GetEnumerator();
             }
 
-            var tran = Aspect.Aux.GetQueryTransaction();
+            var tran = Aspect.Context.GetQueryTransaction();
             var originalEnumerator = CreateNewOriginal(hash?.ModifiedExpression).GetEnumerator();
             var result = new WrappedEnumerator<T>(originalEnumerator, tran);
 

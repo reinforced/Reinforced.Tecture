@@ -60,8 +60,12 @@ namespace Reinforced.Tecture.Testing.Data.Format
                 var cds = base.VisitClassDeclaration(node) as ClassDeclarationSyntax;
 
                 return cds.WithoutTrivia()
+                    .AddModifiers(
+                            Token(SyntaxKind.PublicKeyword).WithTrailingTrivia(Space),
+                            Token(SyntaxKind.PartialKeyword).WithTrailingTrivia(Space)
+                            )
                     .WithLeadingTrivia(Tabs.BrTabs())
-                    .WithKeyword(Token(SyntaxKind.ClassKeyword).WithTrailingTrivia(Space).WithLeadingTrivia(Tabs.BrTabs()))
+                    .WithKeyword(Token(SyntaxKind.ClassKeyword).WithTrailingTrivia(Space))
                     .WithOpenBraceToken(Token(SyntaxKind.OpenBraceToken).WithLeadingTrivia(Tabs.BrTabs()))
                     .WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(Tabs.BrTabs()));
             }

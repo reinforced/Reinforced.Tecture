@@ -6,7 +6,7 @@ using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline
 {
-		class SupplyCreationPipeline_TestData : CSharpTestData
+		public partial class SupplyCreationPipeline_TestData : CSharpTestData
 		{
 			private Boolean GetEntry_1()
 			{ 
@@ -20,7 +20,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_3()
 			{ 
-				return 28;
+				return 43;
 			}
 
 			private Boolean GetEntry_4()
@@ -30,7 +30,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_5()
 			{ 
-				return 28;
+				return 43;
 			}
 
 			private Boolean GetEntry_6()
@@ -40,44 +40,44 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_7()
 			{ 
-				return 28;
+				return 43;
 			}
 
 			private Int32 GetEntry_8()
 			{ 
-				return 80;
+				return 122;
 			}
 
 			private Resource[] GetEntry_9()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 80);
+				Set(v1, x=>x.Id, 122);
 				Set(v1, x=>x.Name, @"resource2");
-				Set(v1, x=>x.MeasurementUnitId, 28);
+				Set(v1, x=>x.MeasurementUnitId, 43);
 				return new Resource[] { v1 } ;
 			}
 
 			private List<Resource> GetEntry_10()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 79);
+				Set(v1, x=>x.Id, 121);
 				Set(v1, x=>x.Name, @"resource1");
-				Set(v1, x=>x.MeasurementUnitId, 28);
+				Set(v1, x=>x.MeasurementUnitId, 43);
 				var v2 = New<Resource>();
-				Set(v2, x=>x.Id, 81);
+				Set(v2, x=>x.Id, 123);
 				Set(v2, x=>x.Name, @"resource3");
-				Set(v2, x=>x.MeasurementUnitId, 28);
+				Set(v2, x=>x.MeasurementUnitId, 43);
 				return new List<Resource> { v1, v2 } ;
 			}
 
 			private Int32 GetEntry_11()
 			{ 
-				return 4;
+				return 18;
 			}
 
 			private Int32 GetEntry_12()
 			{ 
-				return 4;
+				return 18;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
@@ -115,7 +115,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					Description = @"Get primary key of added Resource"
 				};
 				yield return new TestDataRecord<Resource[]>(GetEntry_9()) { 
-					Hash = @"6D7B846772A5E7ED90F4247E1C6A48E2ACDFE8C8333206CD6A0D0A34C3697",
+					Hash = @"6CAD25B6FA360FE42B0AA6BD661F16917C29BC7CB67CDB453BD1C37AE8C385",
 					Description = @""
 				};
 				yield return new TestDataRecord<List<Resource>>(GetEntry_10()) { 

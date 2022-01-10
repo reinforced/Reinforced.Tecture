@@ -21,7 +21,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2)>();
+            var p = Context.Promise<(T1, T2)>();
             if (p is Containing<(T1, T2)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
@@ -52,7 +52,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2, T3)>();
+            var p = Context.Promise<(T1, T2, T3)>();
             if (p is Containing<(T1, T2, T3)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
@@ -84,7 +84,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2, T3, T4)>();
+            var p = Context.Promise<(T1, T2, T3, T4)>();
             if (p is Containing<(T1, T2, T3, T4)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
@@ -117,7 +117,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2, T3, T4, T5)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5)>();
             if (p is Containing<(T1, T2, T3, T4, T5)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
@@ -151,7 +151,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2, T3, T4, T5, T6)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5, T6)>();
             if (p is Containing<(T1, T2, T3, T4, T5, T6)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
@@ -186,7 +186,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2, T3, T4, T5, T6, T7)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5, T6, T7)>();
             if (p is Containing<(T1, T2, T3, T4, T5, T6, T7)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
@@ -222,7 +222,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(T1, T2, T3, T4, T5, T6, T7, T8)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5, T6, T7, T8)>();
             if (p is Containing<(T1, T2, T3, T4, T5, T6, T7, T8)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 

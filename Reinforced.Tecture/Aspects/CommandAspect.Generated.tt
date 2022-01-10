@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#
-	var implementationsCount = 16;
+	var implementationsCount = 64;
 #>
 
 using System;

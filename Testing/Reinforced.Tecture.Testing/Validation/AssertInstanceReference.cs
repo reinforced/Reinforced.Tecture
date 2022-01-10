@@ -148,8 +148,7 @@ namespace Reinforced.Tecture.Testing.Validation
         {
             var enumer = Value as System.Collections.IDictionary;
             var declaredKv = ActualType.GetDictionaryParameters();
-            int idx = 0;
-            
+
             foreach (var key in enumer.Keys)
             {
                 var value = enumer[key];

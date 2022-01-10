@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Aspects.Orm.Commands.Delete;
@@ -34,7 +35,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 
 
         /// <inheritdoc />
-        protected override Task RunAsync(Delete cmd)
+        protected override Task RunAsync(Delete cmd,CancellationToken token = default)
         {
             Run(cmd);
             return Task.FromResult(0);

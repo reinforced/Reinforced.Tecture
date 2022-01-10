@@ -8,8 +8,8 @@ namespace Reinforced.Tecture.Aspects.Time
     {
         internal Query()
         {
-            _dateTimeWrapper = new Lazy<DateTimeWrapper>(() => new DateTimeWrapper(this.Aux));
-            _dateTimeOffsetWrapper = new Lazy<DateTimeOffsetWrapper>(() => new DateTimeOffsetWrapper(Aux));
+            _dateTimeWrapper = new Lazy<DateTimeWrapper>(() => new DateTimeWrapper(this.Context));
+            _dateTimeOffsetWrapper = new Lazy<DateTimeOffsetWrapper>(() => new DateTimeOffsetWrapper(Context));
         }
 
         private readonly Lazy<DateTimeWrapper> _dateTimeWrapper;

@@ -33,7 +33,7 @@ namespace Reinforced.Tecture.Tests.Channels.Commands
 
             var trace = tecture.EndTrace();
 
-            Assert.Equal(4, trace.All.Count());
+            Assert.Equal(5, trace.All.Count());
             var cmd = trace.All.FirstOrDefault() as Comment;
 
             Assert.NotNull(cmd);
@@ -74,13 +74,18 @@ namespace Reinforced.Tecture.Tests.Channels.Commands
 
             var explanation = trace.Explain();
             const string expectedExplanation =
-@"    1.   {  In cycle Test Cycle:
+@"    1.   {  Test Cycle
     2.  //  Test
-    3.   +  --- Cycle iteration ---
-    4.   }  Test Cycle ends in 3 iterations and 0 commands
-    5.   <- Save
-    6.  //  <<< Finally block >>>
-    7.   !  End
+    3.   +  Loop iteration
+    4.  //  Test
+    5.   +  Loop iteration
+    6.  //  Test
+    7.   +  Loop iteration
+    8.   }  Test Cycle
+    9.   <- Save
+    10.  //  <<< Finally block >>>
+    11.  //  <<< End of Finally block >>>
+    12.   !  End
 ";              
             
             Assert.Equal(expectedExplanation, explanation);

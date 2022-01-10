@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
@@ -11,9 +12,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.DeletePk
     /// <summary>
     /// Command for deletion by primary key
     /// </summary>
-    [CommandCode("DPK")]
     public class DeletePk : CommandBase
     {
+        public override string Code => "DPK";
         /// <summary>
         /// Gets entity type to be deleted
         /// </summary>
@@ -37,8 +38,21 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.DeletePk
                 return (IPrimaryKey)t.InstanceNonpublic();
             }
         }
-        /// <inheritdoc />
-        public override void Describe(TextWriter tw)
+        
+        protected override string ToStringActually()
+        {
+            var sb = new StringBuilder();
+            using (var tw = new StringWriter(sb))
+            {
+                Describe(tw);
+                tw.Flush();
+            }
+
+            return sb.ToString();
+        }
+
+        /// <inheritdoc cref="CommandBase" />
+        private void Describe(TextWriter tw)
         {
             if (string.IsNullOrEmpty(Annotation))
             {

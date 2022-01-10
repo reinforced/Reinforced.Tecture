@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Reinforced.Tecture.Commands
 {
@@ -10,7 +11,7 @@ namespace Reinforced.Tecture.Commands
     {
         internal abstract void RunInternal(CommandBase command);
 
-        internal abstract Task RunInternalAsync(CommandBase command);
+        internal abstract Task RunInternalAsync(CommandBase command,CancellationToken token = default);
     }
 
     /// <summary>
@@ -29,14 +30,14 @@ namespace Reinforced.Tecture.Commands
             Run((TCommand) command);
         }
 
-        internal override Task RunInternalAsync(CommandBase command)
+        internal override Task RunInternalAsync(CommandBase command,CancellationToken token = default)
         {
             if (!(command is TCommand))
             {
                 throw new TectureException($"Something wen completely wrong: runner {this.GetType().FullName} cannot run command {command.GetType().FullName}");
             }
 
-            return RunAsync((TCommand)command);
+            return RunAsync((TCommand)command, token);
         }
 
         /// <summary>
@@ -49,7 +50,8 @@ namespace Reinforced.Tecture.Commands
         /// Runs command asynchronously
         /// </summary>
         /// <param name="cmd">Command</param>
+        /// <param name="token">Cancellation token</param>
         /// <returns>Async</returns>
-        protected abstract Task RunAsync(TCommand cmd);
+        protected abstract Task RunAsync(TCommand cmd,CancellationToken token = default);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Services;
@@ -80,13 +81,13 @@ namespace Reinforced.Tecture.Tests.Services
 
             protected override void OnSave() => SaveCount++;
             protected override void OnFinally(Exception ex) => FinallyCount++;
-            protected override Task OnSaveAsync()
+            protected override Task OnSaveAsync(CancellationToken token = default)
             {
                 SaveAsyncCount++;
                 return Task.CompletedTask;
             }
             
-            protected override Task OnFinallyAsync(Exception ex)
+            protected override Task OnFinallyAsync(Exception ex,CancellationToken token = default)
             {
                 FinallyAsyncCount++;
                 return Task.CompletedTask;

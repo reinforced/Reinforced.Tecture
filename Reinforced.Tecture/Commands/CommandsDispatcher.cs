@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Tracing;
@@ -16,7 +18,9 @@ namespace Reinforced.Tecture.Commands
         private readonly ChannelMultiplexer _mx;
         private readonly TraceCollector _traceCollector;
         private readonly TransactionManager _transactionManager;
-        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector traceCollector, TransactionManager transactionManager)
+
+        internal CommandsDispatcher(ChannelMultiplexer mx, TraceCollector traceCollector,
+            TransactionManager transactionManager)
         {
             _mx = mx;
             _traceCollector = traceCollector;
@@ -25,7 +29,6 @@ namespace Reinforced.Tecture.Commands
 
         private void Save(IEnumerable<string> channels)
         {
-            
             var trans = _transactionManager.GetSaveTransactions(channels, false);
             List<Exception> aggregate = new List<Exception>();
             try
@@ -54,10 +57,11 @@ namespace Reinforced.Tecture.Commands
                     }
                 }
             }
+
             if (aggregate.Count > 0) throw new AggregateException(aggregate);
         }
 
-        private async Task SaveAsync(IEnumerable<string> channels)
+        private async Task SaveAsync(IEnumerable<string> channels,CancellationToken token = default)
         {
             var trans = _transactionManager.GetSaveTransactions(channels, true);
             List<Exception> aggregate = new List<Exception>();
@@ -65,7 +69,7 @@ namespace Reinforced.Tecture.Commands
             {
                 foreach (var commandAspect in _mx.GetCommandAspectsForChannels(channels))
                 {
-                    await commandAspect.SaveInternalAsync();
+                    await commandAspect.SaveInternalAsync(token);
                     trans[commandAspect._channel.FullName].Commit();
                 }
             }
@@ -98,28 +102,60 @@ namespace Reinforced.Tecture.Commands
             {
                 HashSet<string> usedChannels = new HashSet<string>();
 
-                if (queue.HasEffects)
+                Stopwatch sw = null;
+                try
                 {
-                    DispatchInternal(queue.GetEffects(), usedChannels);
-                    Save(usedChannels);
+                    if (queue.HasEffects)
+                    {
+                        DispatchInternal(queue.GetEffects(), usedChannels);
+                        if (_traceCollector != null)
+                        {
+                            sw = new Stopwatch();
+                            sw.Start();
+                        }
+
+                        Save(usedChannels);
+                    }
                 }
-                _traceCollector?.Save();
+                finally
+                {
+                    if (sw != null) sw.Stop();
+                }
+
+                _traceCollector?.Save(sw?.Elapsed ?? TimeSpan.Zero);
+
                 postSave?.Run();
             } while (queue.HasEffects);
         }
 
-        public async Task DispatchAsync(Pipeline queue, ActionsQueue postSave)
+        public async Task DispatchAsync(Pipeline queue, ActionsQueue postSave,CancellationToken token = default)
         {
             do
             {
                 HashSet<string> usedChannels = new HashSet<string>();
-                if (queue.HasEffects)
+                Stopwatch sw = null;
+                try
                 {
-                    await DispatchInternalAsync(queue.GetEffects(), usedChannels);
-                    await SaveAsync(usedChannels);
+                    if (queue.HasEffects)
+                    {
+                        await DispatchInternalAsync(queue.GetEffects(), usedChannels, token);
+                        if (_traceCollector != null)
+                        {
+                            sw = new Stopwatch();
+                            sw.Start();
+                        }
+
+                        await SaveAsync(usedChannels, token);
+                    }
                 }
-                _traceCollector?.Save();
-                if (postSave!=null) await postSave.RunAsync();
+                finally
+                {
+                    if (sw != null) sw.Stop();
+                }
+
+                _traceCollector?.Save(sw?.Elapsed ?? TimeSpan.Zero);
+
+                if (postSave != null) await postSave.RunAsync(token);
             } while (queue.HasEffects);
         }
 
@@ -132,11 +168,23 @@ namespace Reinforced.Tecture.Commands
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r = _mx.GetRunner(commandBase);
                     var tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
-                    
+                    Stopwatch sw = null;
+                    if (_traceCollector != null)
+                    {
+                        sw = new Stopwatch();
+                        sw.Start();
+                    }
+
                     try
                     {
                         r.RunInternal(commandBase);
                         commandBase.IsExecuted = true;
+                        if (_traceCollector != null)
+                        {
+                            sw?.Stop();
+                            commandBase.TimeTaken = sw?.Elapsed ?? TimeSpan.Zero;
+                        }
+
                         tran.Commit();
                     }
                     catch (Exception e)
@@ -152,7 +200,7 @@ namespace Reinforced.Tecture.Commands
             }
         }
 
-        private async Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
+        private async Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels,CancellationToken token = default)
         {
             foreach (var commandBase in commands)
             {
@@ -163,12 +211,25 @@ namespace Reinforced.Tecture.Commands
                     ChannelTransaction tran = null;
                     try
                     {
-                        var r = r1.RunInternalAsync(commandBase);
+                        Stopwatch sw = null;
+                        if (_traceCollector != null)
+                        {
+                            sw = new Stopwatch();
+                            sw.Start();
+                        }
+
+                        var r = r1.RunInternalAsync(commandBase, token);
                         if (r != null)
                         {
                             tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, true);
                             await r;
                             commandBase.IsExecuted = true;
+                            if (_traceCollector != null)
+                            {
+                                sw.Stop();
+                                commandBase.TimeTaken = sw.Elapsed;
+                            }
+
                             tran.Commit();
                         }
                     }

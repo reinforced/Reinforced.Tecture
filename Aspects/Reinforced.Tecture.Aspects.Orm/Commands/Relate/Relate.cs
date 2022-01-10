@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Testing;
@@ -9,9 +10,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
     /// <summary>
     /// Command that creates 1-to-many relation
     /// </summary>
-    [CommandCode("REF")]
     public class Relate : CommandBase
     {
+        public override string Code => "RF+";
         /// <summary>
         /// Gets primary end of relation
         /// </summary>
@@ -42,8 +43,20 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Relate
         [Validated]
         public string ForeignKeySpecifier { get; internal set; }
 
-        /// <inheritdoc />
-        public override void Describe(TextWriter tw)
+        protected override string ToStringActually()
+        {
+            var sb = new StringBuilder();
+            using (var tw = new StringWriter(sb))
+            {
+                Describe(tw);
+                tw.Flush();
+            }
+
+            return sb.ToString();
+        }
+
+        /// <inheritdoc cref="CommandBase" />
+        private void Describe(TextWriter tw)
         {
             if (!string.IsNullOrEmpty(Annotation))
             {

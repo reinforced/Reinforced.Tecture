@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
 
         public object Execute(Expression expression)
         {
-            var p = Aspect.Aux.Promise<object>();
+            var p = Aspect.Context.Promise<object>();
             ExpressionHashData hash = null;
             if (p is Containing<object> || p is Demanding<object>)
                 hash = expression.CalculateHash();
@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         /// <returns>The value that results from executing the specified query.</returns>
         public TResult Execute<TResult>(Expression expression)
         {
-            var p = Aspect.Aux.Promise<TResult>();
+            var p = Aspect.Context.Promise<TResult>();
             ExpressionHashData hash = null;
             if (p is Containing<TResult> || p is Demanding<TResult>)
                 hash = expression.CalculateHash();

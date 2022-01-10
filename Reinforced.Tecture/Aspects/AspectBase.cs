@@ -9,24 +9,18 @@ namespace Reinforced.Tecture.Aspects
     /// </summary>
     public abstract class AspectBase : IDisposable
     {
-        internal TestingContext _aux;
+        internal TestingContext _context;
         internal Type _channel;
 
         /// <summary>
         /// Access to test data/query tooling
         /// </summary>
-        protected TestingContext Aux
-        {
-            get { return _aux; }
-        }
+        protected TestingContext Context => _context;
 
         /// <summary>
         /// Type of channel this aspect is bound to
         /// </summary>
-        protected Type Channel
-        {
-            get { return _channel; }
-        }
+        protected Type Channel => _channel;
 
         internal void CallOnRegister()
         {

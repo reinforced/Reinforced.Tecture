@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects.DirectSql.Infrastructure;
 using Reinforced.Tecture.Queries;
@@ -30,7 +31,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql
             /// <param name="command">SQL command</param>
             /// <param name="parameters">Command parameters</param>
             /// <returns>Set of deserialized records</returns>
-            public abstract Task<IEnumerable<T>> DoQueryAsync<T>(string command, object[] parameters) where T : class;
+            public abstract Task<IEnumerable<T>> DoQueryAsync<T>(string command, object[] parameters,CancellationToken token=default) where T : class;
 
             private SqlToolingWrapper _tooling;
 
@@ -40,7 +41,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql
                 {
                     if (_tooling == null)
                     {
-                        _tooling = new SqlToolingWrapper(_runtime, Aux, ServingTypes);
+                        _tooling = new SqlToolingWrapper(_runtime, Context, ServingTypes);
                     }
 
                     return _tooling;
@@ -49,10 +50,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql
 
             private readonly IStrokeRuntime _runtime;
 
-            internal new TestingContext Aux
-            {
-                get { return base.Aux; }
-            }
+            internal new TestingContext Context => Context;
 
             /// <inheritdoc />
             protected Query(IStrokeRuntime runtime)

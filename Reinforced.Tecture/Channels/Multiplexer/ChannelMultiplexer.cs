@@ -63,7 +63,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 throw new TectureException($"Attempt to bind query aspect {queryAspectType.Name} twice for channel {channelType.Name}");
             }
 
-            qf._aux = _testingContext.ForChannel(channelType);
+            qf._context = _testingContext.ForChannel(channelType);
             qf._channel = channelType;
             qf.CallOnRegister();
         }
@@ -139,7 +139,7 @@ namespace Reinforced.Tecture.Channels.Multiplexer
                 servingCommands[cfServingCommandType] = cf;
             }
 
-            cf._aux = _testingContext.ForChannel(channelType);
+            cf._context = _testingContext.ForChannel(channelType);
             cf._channel = channelType;
             cf.CallOnRegister();
         }

@@ -7,25 +7,17 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means end of the commands queue
     /// </summary>
-    [CommandCode(" ! ")]
     public sealed class End : CommandBase
     {
         public override bool IsExecutable => false;
+        public override string Code => " ! ";
         
         internal End()
         {
             Channel = typeof(NoChannel);
         }
 
-
-        /// <summary>
-        /// Describes actions that are being performed within side effect
-        /// </summary>
-        /// <param name="tw"></param>
-        public override void Describe(TextWriter tw)
-        {
-            tw.Write("End");
-        }
+        protected override string ToStringActually() => "End";
 
         /// <summary>
         /// Clones command for tracing purposes

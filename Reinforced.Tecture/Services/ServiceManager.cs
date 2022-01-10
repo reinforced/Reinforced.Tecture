@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
@@ -35,7 +36,7 @@ namespace Reinforced.Tecture.Services
             }
         }
 
-        public async Task OnSaveAsync()
+        public async Task OnSaveAsync(CancellationToken token = default)
         {
             foreach (var srv in _allServices)
             {
@@ -43,11 +44,11 @@ namespace Reinforced.Tecture.Services
             }
         }
 
-        public async Task OnFinallyAsync(Exception exceptionHappened)
+        public async Task OnFinallyAsync(Exception exceptionHappened,CancellationToken token = default)
         {
             foreach (var srv in _allServices)
             {
-                await srv.CallOnFinallyAsync(exceptionHappened);
+                await srv.CallOnFinallyAsync(exceptionHappened,token);
             }
         }
 

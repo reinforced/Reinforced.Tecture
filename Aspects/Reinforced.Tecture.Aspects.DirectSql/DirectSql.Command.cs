@@ -21,7 +21,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql
                 {
                     if (_tooling == null)
                     {
-                        _tooling = new SqlToolingWrapper(_runtime, Aux, ServingTypes);
+                        _tooling = new SqlToolingWrapper(_runtime, Context, ServingTypes);
                     }
 
                     return _tooling;

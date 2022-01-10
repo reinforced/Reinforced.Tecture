@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 // ReSharper disable CheckNamespace
 // ReSharper disable MemberCanBePrivate.Global
@@ -57,6 +58,21 @@ namespace Reinforced.Tecture
             HasAsyncActions = true;
             _queue.Enqueue(action);
         }
+        
+        /// <summary>
+        /// Defers async action that will be executed after .SaveChanges call and ALL actions that are in post-actions queue
+        /// </summary>
+        /// <param name="action">Action to execute after .SaveChanges and post-actions queue completed</param>
+        public void Enqueue(Func<CancellationToken,Task> action)
+        {
+            if (IsRunning && !_allowEnqueueWhileRunning)
+            {
+                throw new Exception("Cannot enqueue more actions - one is already running");
+            }
+
+            HasAsyncActions = true;
+            _queue.Enqueue(action);
+        }
 
         internal void Run()
         {
@@ -78,7 +94,7 @@ namespace Reinforced.Tecture
             IsRunning = false;
         }
 
-        internal async Task RunAsync()
+        internal async Task RunAsync(CancellationToken token = default)
         {
             IsRunning = true;
 
@@ -88,6 +104,7 @@ namespace Reinforced.Tecture
             {
                 var act = allItems.Dequeue();
                 if (act is Func<Task> a2) await a2();
+                else if (act is Func<CancellationToken,Task> a3) await a3(token);
                 else
                 {
                     if (act is Action a) a();

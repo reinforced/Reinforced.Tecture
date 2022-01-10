@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
@@ -63,6 +64,7 @@ namespace Reinforced.Tecture.Entry
 
         private TraceCollector _tc = null;
 
+        
         /// <summary>
         /// Begins trace collection
         /// </summary>
@@ -132,15 +134,12 @@ namespace Reinforced.Tecture.Entry
                 }
                 finally
                 {
-                    if (_tc != null)
+                    _tc?.Command(new Comment()
                     {
-                        _tc.Command(new Comment()
-                        {
-                            Annotation = "<<< End of Finally block >>>",
-                            Channel = typeof(NoChannel),
-                            IsExecuted = true
-                        });
-                    }
+                        Annotation = "<<< End of Finally block >>>",
+                        Channel = typeof(NoChannel),
+                        IsExecuted = true
+                    });
                 }
 
                 if (thrown2 != null)
@@ -166,7 +165,7 @@ namespace Reinforced.Tecture.Entry
         /// Runs async commands queue
         /// </summary>
         /// <returns></returns>
-        public async Task SaveAsync()
+        public async Task SaveAsync(CancellationToken token = default)
         {
             if (_actions.IsRunning) throw new Exception(".SaveAsync cannot be called within post-save action");
             if (_finallyActions.IsRunning) throw new Exception(".SaveAsync cannot be called within finally action");
@@ -174,8 +173,8 @@ namespace Reinforced.Tecture.Entry
             CommandsDispatcher dispatcher = new CommandsDispatcher(_mx, _aux.TraceCollector, _tranManager);
             try
             {
-                await _serviceManager.OnSaveAsync();
-                await dispatcher.DispatchAsync(_pipeline, _actions);
+                await _serviceManager.OnSaveAsync(token);
+                await dispatcher.DispatchAsync(_pipeline, _actions, token);
             }
             catch (Exception ex)
             {
@@ -196,13 +195,21 @@ namespace Reinforced.Tecture.Entry
                         });
                     }
                     
-                    await _serviceManager.OnFinallyAsync(thrown);
-                    await _finallyActions.RunAsync();
-                    if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, null);
+                    await _serviceManager.OnFinallyAsync(thrown, token);
+                    await _finallyActions.RunAsync(token);
+                    if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, null, token);
                 }
                 catch (Exception finException)
                 {
                     thrown2 = finException;
+                }finally
+                {
+                    _tc?.Command(new Comment()
+                    {
+                        Annotation = "<<< End of Finally block >>>",
+                        Channel = typeof(NoChannel),
+                        IsExecuted = true
+                    });
                 }
 
                 if (thrown2 != null)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.Orm;
@@ -19,12 +20,13 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Query
             return set.FromSqlRaw(command, parameters).ToArray();
         }
 
-        public override Task<IEnumerable<T>> DoQueryAsync<T>(string command, object[] parameters)
+        public override async Task<IEnumerable<T>> DoQueryAsync<T>(string command, object[] parameters,CancellationToken token=default)
         {
             var set = _dbContext.Value.Set<T>();
             if (set == null)
                 throw new EfCoreDirectSqlException($"Cannot locate set of type '{typeof(T)}' in DbContext");
-            return Task.FromResult(set.FromSqlRaw(command, parameters).ToArray().AsEnumerable());
+            var r = await EntityFrameworkQueryableExtensions.ToArrayAsync(set.FromSqlRaw(command, parameters), token);
+            return r.AsEnumerable();
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
@@ -44,7 +46,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Query
         {
             get
             {
-                if (!Aux.ProvidesTestData)
+                if (!Context.ProvidesTestData)
                 {
                     return new HashSet<Type>(_dbContext.Value.Model.GetEntityTypes().Select(x => x.ClrType));
                 }

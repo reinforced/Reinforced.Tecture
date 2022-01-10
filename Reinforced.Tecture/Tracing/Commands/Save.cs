@@ -7,24 +7,17 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Synthetic command that means saving happening at the particular point
     /// </summary>
-    [CommandCode(" <-")]
     public sealed class Save : CommandBase
     {
         public override bool IsExecutable => false;
+        public override string Code => " <-";
         
         internal Save()
         {
             Channel = typeof(NoChannel);
         }
 
-        /// <summary>
-        /// Describes actions that are being performed within side effect
-        /// </summary>
-        /// <param name="tw"></param>
-        public override void Describe(TextWriter tw)
-        {
-            tw.Write("Save");
-        }
+        protected override string ToStringActually() => "Save";
 
         /// <summary>
         /// Clones command for tracing purposes

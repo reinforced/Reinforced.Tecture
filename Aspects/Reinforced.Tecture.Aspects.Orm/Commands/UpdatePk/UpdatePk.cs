@@ -13,9 +13,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
     /// <summary>
     /// Update-by-primary key command
     /// </summary>
-    [CommandCode("UPK")]
     public class UpdatePk : CommandBase
     {
+        public override string Code => "UPK";
         internal UpdatePk(Dictionary<PropertyInfo, object> updateValues)
         {
             _updateValues = updateValues;
@@ -52,13 +52,21 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.UpdatePk
             get { return _updateValues.ToDictionary(x => x.Key.Name, x => x.Value); }
         }
 
-        /// <summary>
-        /// Describes actions that are being performed within command
-        /// </summary>
-        /// <param name="tw">Log writer</param>
-        public override void Describe(TextWriter tw)
+        protected override string ToStringActually()
         {
-            base.Describe(tw);
+            var sb = new StringBuilder();
+            using (var tw = new StringWriter(sb))
+            {
+                Describe(tw);
+                tw.Flush();
+            }
+
+            return sb.ToString();
+        }
+
+        /// <inheritdoc cref="CommandBase" />
+        private void Describe(TextWriter tw)
+        {
             if (!string.IsNullOrEmpty(Annotation)) return;
             
             string properties = string.Join(", ", _updateValues.Keys.Select(d => d.Name));

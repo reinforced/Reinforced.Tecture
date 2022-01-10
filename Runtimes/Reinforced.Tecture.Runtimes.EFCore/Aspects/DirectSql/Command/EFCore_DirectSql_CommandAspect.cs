@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Reinforced.Tecture.Aspects;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
 using Reinforced.Tecture.Aspects.Orm;
 using Reinforced.Tecture.Commands;
@@ -13,12 +15,12 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
 {
     class EFCore_DirectSql_CommandAspect : Tecture.Aspects.DirectSql.DirectSql.Command
     {
-        internal ILazyDisposable<DbContext> Context { get; }
+        internal ILazyDisposable<DbContext> DbContext { get; }
 
-        public EFCore_DirectSql_CommandAspect(ILazyDisposable<DbContext> context, Type channel, InterpolatorFactory fac) 
-            : base(new EfCoreStokeRuntime(context, channel, fac))
+        public EFCore_DirectSql_CommandAspect(ILazyDisposable<DbContext> dbContext, Type channel, InterpolatorFactory fac) 
+            : base(new EfCoreStokeRuntime(dbContext, channel, fac))
         {
-            Context = context;
+            DbContext = dbContext;
             
         }
 
@@ -27,13 +29,13 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         {
             get
             {
-                if (!Aux.ProvidesTestData)
+                if (!Context.ProvidesTestData)
                 {
-                    return new HashSet<Type>(Context.Value.Model.GetEntityTypes().Select(x => x.ClrType));
+                    return new HashSet<Type>(DbContext.Value.Model.GetEntityTypes().Select(x => x.ClrType));
                 }
                 else
                 {
-                    var tp = Context.ValueType;
+                    var tp = DbContext.ValueType;
                     var allDbSets = tp.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                         .Where(x => x.PropertyType.IsGenericType && x.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>));
 
@@ -48,24 +50,24 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <inheritdoc />
         protected override void OnRegister()
         {
-            _runner = new DirectSqlRunner(this, Aux);
+            _runner = new DirectSqlRunner(this, Context);
         }
 
         /// <inheritdoc />
         protected override void Save()
         {
-            if (!Aux.ProvidesTestData)
+            if (!Context.ProvidesTestData)
             {
-                Context.Value.SaveChanges();
+                DbContext.Value.SaveChanges();
             }
         }
 
         /// <inheritdoc />
-        protected override Task SaveAsync()
+        protected override Task SaveAsync(CancellationToken token = default)
         {
-            if (!Aux.ProvidesTestData)
+            if (!Context.ProvidesTestData)
             {
-                return Context.Value.SaveChangesAsync();
+                return DbContext.Value.SaveChangesAsync(token);
             }
 
             return Task.FromResult(0);
@@ -75,7 +77,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// <inheritdoc />
         public override void Dispose()
         {
-            Context.Dispose();
+            DbContext.Dispose();
             _runner.Dispose();
         }
 

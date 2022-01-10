@@ -20,14 +20,14 @@ namespace Reinforced.Tecture.Aspects.Orm
         /// </summary>
         public abstract partial class Query : QueryAspect
         {
-            internal TestingContext Aux => base.Aux;
+            internal new TestingContext Context => base.Context;
 
             internal IQueryable<T> GetSet<T>() where T : class
             {
-                IQueryable<T> set = Aux.ProvidesTestData ? new T[0].AsQueryable() : Set<T>();
+                IQueryable<T> set = Context.ProvidesTestData ? new T[0].AsQueryable() : Set<T>();
 
                 return
-                    Aux.CollectsTestData ? (IQueryable<T>) 
+                    Context.CollectsTestData ? (IQueryable<T>) 
                         new TracedQueryable<T>(set, this, new DescriptionHolder(), true)
                         : new QueryableWithAsyncExecutor<T>(AsyncExecutorActually, set);
             }
@@ -68,7 +68,7 @@ namespace Reinforced.Tecture.Aspects.Orm
 
                 string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-                var p = Aux.Promise<T>();
+                var p = Context.Promise<T>();
                 if (p is Containing<T> c)
                     return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 

@@ -109,6 +109,11 @@ namespace Reinforced.Tecture.Testing.Data
         {
             var bs = SingletonSeparatedList<BaseTypeSyntax>(SimpleBaseType(IdentifierName(nameof(CSharpTestData))));
             var @class = ClassDeclaration(Identifier(TriviaList(), className, TriviaList(Space)))
+                // .WithModifiers(
+                //     TokenList(
+                //         new []{
+                //             Token(SyntaxKind.PublicKeyword),
+                //             Token(SyntaxKind.PartialKeyword)}))
                 .WithBaseList(BaseList(bs).WithColonToken(
                     Token(
                         TriviaList(),

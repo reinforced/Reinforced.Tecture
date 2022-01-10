@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -61,7 +62,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// </summary>
         /// <param name="cmd">Side effect</param>
         /// <returns>Side effect</returns>
-        protected override Task RunAsync(Update cmd)
+        protected override Task RunAsync(Update cmd,CancellationToken token = default)
         {
             Run(cmd);
             return Task.FromResult(0);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects;
 using Reinforced.Tecture.Channels;
@@ -37,7 +38,7 @@ namespace Reinforced.Tecture.Tests.Channels
             private int _queryCounter = 0;
             public string GetRandomString()
             {
-                var promised = Aux.Promise<string>();
+                var promised = Context.Promise<string>();
                 return promised.ResolveReference(() => Guid.NewGuid().ToString(), () => $"Rng_{_queryCounter++}");
             }
             
@@ -68,7 +69,7 @@ namespace Reinforced.Tecture.Tests.Channels
             protected override void Save() => Saves++;
             
             public int SavesAsync { get; private set; }
-            protected override async Task SaveAsync() => SavesAsync++;
+            protected override async Task SaveAsync(CancellationToken token = default) => SavesAsync++;
             
             public int DisposeCount { get; private set; }
             public override void Dispose() => DisposeCount++;
@@ -80,7 +81,7 @@ namespace Reinforced.Tecture.Tests.Channels
             protected override void Run(TestCommand cmd) => CommandsRun.Add(cmd);
 
             public List<TestCommand> CommandsRunAsync { get; } = new List<TestCommand>();
-            protected override async Task RunAsync(TestCommand cmd) => CommandsRunAsync.Add(cmd);
+            protected override async Task RunAsync(TestCommand cmd,CancellationToken token = default) => CommandsRunAsync.Add(cmd);
         }
         
         public class BuggyRunner : CommandRunner<BuggyCommand>
@@ -94,7 +95,7 @@ namespace Reinforced.Tecture.Tests.Channels
                 throw new Exception("buggy");
             }
 
-            protected override async Task RunAsync(BuggyCommand cmd)
+            protected override async Task RunAsync(BuggyCommand cmd,CancellationToken token = default)
             {
                 InvokedAsync = true;
                 throw new Exception("async buggy");

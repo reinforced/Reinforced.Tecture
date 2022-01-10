@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Tracing.Commands;
@@ -11,10 +12,10 @@ namespace Reinforced.Tecture.Tracing
     /// <summary>
     /// Synthetic command that means query that was made to the external system
     /// </summary>
-    [CommandCode("-> ")]
     public class QueryRecord : CommandBase, ITracingOnly
     {
         public override bool IsExecutable => false;
+        public override string Code => "-> ";
         
         internal QueryRecord(Type channel, bool isTestData)
         {
@@ -31,11 +32,6 @@ namespace Reinforced.Tecture.Tracing
         /// Query hash
         /// </summary>
         public string Hash { get; private set; }
-
-        /// <summary>
-        /// The time query evaluation took
-        /// </summary>
-        public TimeSpan TimeTaken { get; private set; }
 
         /// <summary>
         /// Query result
@@ -75,11 +71,23 @@ namespace Reinforced.Tecture.Tracing
         /// Describes actions that are being performed within command
         /// </summary>
         /// <param name="tw">Log writer</param>
-        public override void Describe(TextWriter tw)
+        protected override string ToStringActually()
+        {
+            var sb = new StringBuilder();
+            using (var tw = new StringWriter(sb))
+            {
+                Describe(tw);
+                tw.Flush();
+            }
+
+            return sb.ToString();
+        }
+
+        /// <inheritdoc cref="CommandBase" />
+        private void Describe(TextWriter tw)
         {
             if (IsTestData) tw.Write("[Mock] ");
-            else FormatTime(tw);
-            tw.Write(this.Annotation ?? $"Query made to '{Channel.Name}' ({Hash})");
+            tw.Write(string.IsNullOrEmpty(this.Annotation)? $"Query made to '{Channel.Name}' ({Hash})": Annotation);
             if (IsTestData) return;
             tw.Write(": ");
             if (Result == null)
@@ -125,23 +133,7 @@ namespace Reinforced.Tecture.Tracing
             }
         }
 
-        private void FormatTime(TextWriter tw)
-        {
-            if (TimeTaken.TotalMinutes > 1)
-            {
-                tw.Write($"[{TimeTaken:mm\\:ss\\:fff}]\t");
-                return;
-            }
-
-            if (TimeTaken.TotalSeconds > 5)
-            {
-                tw.Write($"[{TimeTaken:ss\\:fff} s]\t");
-                return;
-            }
-
-            tw.Write($"[{TimeTaken:fff}ms]\t");
-        }
-
+        
         /// <summary>
         /// Clones command for tracing purposes
         /// </summary>

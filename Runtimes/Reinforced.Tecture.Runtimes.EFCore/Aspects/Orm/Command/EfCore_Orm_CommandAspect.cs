@@ -18,7 +18,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 
     protected override bool IsSubject(Type t)
     {
-        if (!Aux.ProvidesTestData)
+        if (!Context.ProvidesTestData)
         {
             return _context.Value.Model.FindEntityType(t) != null;
         }

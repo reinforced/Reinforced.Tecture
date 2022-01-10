@@ -1814,5 +1814,20789 @@ namespace Reinforced.Tecture.Aspects
 
 #endregion
 
+ 
+
+#region Command aspect for #17 commands
+	
+	/// <summary>
+	/// Saver serving 17 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #18 commands
+	
+	/// <summary>
+	/// Saver serving 18 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #19 commands
+	
+	/// <summary>
+	/// Saver serving 19 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #20 commands
+	
+	/// <summary>
+	/// Saver serving 20 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #21 commands
+	
+	/// <summary>
+	/// Saver serving 21 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #22 commands
+	
+	/// <summary>
+	/// Saver serving 22 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #23 commands
+	
+	/// <summary>
+	/// Saver serving 23 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #24 commands
+	
+	/// <summary>
+	/// Saver serving 24 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #25 commands
+	
+	/// <summary>
+	/// Saver serving 25 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #26 commands
+	
+	/// <summary>
+	/// Saver serving 26 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #27 commands
+	
+	/// <summary>
+	/// Saver serving 27 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #28 commands
+	
+	/// <summary>
+	/// Saver serving 28 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #29 commands
+	
+	/// <summary>
+	/// Saver serving 29 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #30 commands
+	
+	/// <summary>
+	/// Saver serving 30 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #31 commands
+	
+	/// <summary>
+	/// Saver serving 31 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #32 commands
+	
+	/// <summary>
+	/// Saver serving 32 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #33 commands
+	
+	/// <summary>
+	/// Saver serving 33 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #34 commands
+	
+	/// <summary>
+	/// Saver serving 34 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #35 commands
+	
+	/// <summary>
+	/// Saver serving 35 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #36 commands
+	
+	/// <summary>
+	/// Saver serving 36 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #37 commands
+	
+	/// <summary>
+	/// Saver serving 37 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #38 commands
+	
+	/// <summary>
+	/// Saver serving 38 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #39 commands
+	
+	/// <summary>
+	/// Saver serving 39 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #40 commands
+	
+	/// <summary>
+	/// Saver serving 40 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #41 commands
+	
+	/// <summary>
+	/// Saver serving 41 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #42 commands
+	
+	/// <summary>
+	/// Saver serving 42 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #43 commands
+	
+	/// <summary>
+	/// Saver serving 43 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #44 commands
+	
+	/// <summary>
+	/// Saver serving 44 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #45 commands
+	
+	/// <summary>
+	/// Saver serving 45 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #46 commands
+	
+	/// <summary>
+	/// Saver serving 46 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #47 commands
+	
+	/// <summary>
+	/// Saver serving 47 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #48 commands
+	
+	/// <summary>
+	/// Saver serving 48 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #49 commands
+	
+	/// <summary>
+	/// Saver serving 49 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #50 commands
+	
+	/// <summary>
+	/// Saver serving 50 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #51 commands
+	
+	/// <summary>
+	/// Saver serving 51 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #52 commands
+	
+	/// <summary>
+	/// Saver serving 52 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #53 commands
+	
+	/// <summary>
+	/// Saver serving 53 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #54 commands
+	
+	/// <summary>
+	/// Saver serving 54 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #55 commands
+	
+	/// <summary>
+	/// Saver serving 55 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #56 commands
+	
+	/// <summary>
+	/// Saver serving 56 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #57 commands
+	
+	/// <summary>
+	/// Saver serving 57 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #58 commands
+	
+	/// <summary>
+	/// Saver serving 58 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #59 commands
+	
+	/// <summary>
+	/// Saver serving 59 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58, TCommand59> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+		where TCommand59 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58);  
+				yield return typeof(TCommand59); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58); 
+			if (command is TCommand59 cm59) return GetRunner59(cm59);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand59"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand59"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand59> GetRunner59(TCommand59 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #60 commands
+	
+	/// <summary>
+	/// Saver serving 60 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58, TCommand59, TCommand60> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+		where TCommand59 : CommandBase
+		where TCommand60 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58);  
+				yield return typeof(TCommand59);  
+				yield return typeof(TCommand60); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58); 
+			if (command is TCommand59 cm59) return GetRunner59(cm59); 
+			if (command is TCommand60 cm60) return GetRunner60(cm60);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand59"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand59"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand59> GetRunner59(TCommand59 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand60"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand60"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand60> GetRunner60(TCommand60 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #61 commands
+	
+	/// <summary>
+	/// Saver serving 61 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58, TCommand59, TCommand60, TCommand61> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+		where TCommand59 : CommandBase
+		where TCommand60 : CommandBase
+		where TCommand61 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58);  
+				yield return typeof(TCommand59);  
+				yield return typeof(TCommand60);  
+				yield return typeof(TCommand61); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58); 
+			if (command is TCommand59 cm59) return GetRunner59(cm59); 
+			if (command is TCommand60 cm60) return GetRunner60(cm60); 
+			if (command is TCommand61 cm61) return GetRunner61(cm61);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand59"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand59"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand59> GetRunner59(TCommand59 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand60"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand60"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand60> GetRunner60(TCommand60 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand61"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand61"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand61> GetRunner61(TCommand61 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #62 commands
+	
+	/// <summary>
+	/// Saver serving 62 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58, TCommand59, TCommand60, TCommand61, TCommand62> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+		where TCommand59 : CommandBase
+		where TCommand60 : CommandBase
+		where TCommand61 : CommandBase
+		where TCommand62 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58);  
+				yield return typeof(TCommand59);  
+				yield return typeof(TCommand60);  
+				yield return typeof(TCommand61);  
+				yield return typeof(TCommand62); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58); 
+			if (command is TCommand59 cm59) return GetRunner59(cm59); 
+			if (command is TCommand60 cm60) return GetRunner60(cm60); 
+			if (command is TCommand61 cm61) return GetRunner61(cm61); 
+			if (command is TCommand62 cm62) return GetRunner62(cm62);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand59"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand59"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand59> GetRunner59(TCommand59 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand60"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand60"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand60> GetRunner60(TCommand60 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand61"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand61"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand61> GetRunner61(TCommand61 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand62"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand62"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand62> GetRunner62(TCommand62 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #63 commands
+	
+	/// <summary>
+	/// Saver serving 63 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58, TCommand59, TCommand60, TCommand61, TCommand62, TCommand63> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+		where TCommand59 : CommandBase
+		where TCommand60 : CommandBase
+		where TCommand61 : CommandBase
+		where TCommand62 : CommandBase
+		where TCommand63 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58);  
+				yield return typeof(TCommand59);  
+				yield return typeof(TCommand60);  
+				yield return typeof(TCommand61);  
+				yield return typeof(TCommand62);  
+				yield return typeof(TCommand63); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58); 
+			if (command is TCommand59 cm59) return GetRunner59(cm59); 
+			if (command is TCommand60 cm60) return GetRunner60(cm60); 
+			if (command is TCommand61 cm61) return GetRunner61(cm61); 
+			if (command is TCommand62 cm62) return GetRunner62(cm62); 
+			if (command is TCommand63 cm63) return GetRunner63(cm63);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand59"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand59"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand59> GetRunner59(TCommand59 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand60"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand60"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand60> GetRunner60(TCommand60 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand61"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand61"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand61> GetRunner61(TCommand61 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand62"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand62"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand62> GetRunner62(TCommand62 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand63"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand63"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand63> GetRunner63(TCommand63 command);
+	}
+
+#endregion
+
+ 
+
+#region Command aspect for #64 commands
+	
+	/// <summary>
+	/// Saver serving 64 commands
+	/// </summary>
+	public abstract class CommandAspect<TCommand1, TCommand2, TCommand3, TCommand4, TCommand5, TCommand6, TCommand7, TCommand8, TCommand9, TCommand10, TCommand11, TCommand12, TCommand13, TCommand14, TCommand15, TCommand16, TCommand17, TCommand18, TCommand19, TCommand20, TCommand21, TCommand22, TCommand23, TCommand24, TCommand25, TCommand26, TCommand27, TCommand28, TCommand29, TCommand30, TCommand31, TCommand32, TCommand33, TCommand34, TCommand35, TCommand36, TCommand37, TCommand38, TCommand39, TCommand40, TCommand41, TCommand42, TCommand43, TCommand44, TCommand45, TCommand46, TCommand47, TCommand48, TCommand49, TCommand50, TCommand51, TCommand52, TCommand53, TCommand54, TCommand55, TCommand56, TCommand57, TCommand58, TCommand59, TCommand60, TCommand61, TCommand62, TCommand63, TCommand64> : CommandAspect
+		where TCommand1 : CommandBase
+		where TCommand2 : CommandBase
+		where TCommand3 : CommandBase
+		where TCommand4 : CommandBase
+		where TCommand5 : CommandBase
+		where TCommand6 : CommandBase
+		where TCommand7 : CommandBase
+		where TCommand8 : CommandBase
+		where TCommand9 : CommandBase
+		where TCommand10 : CommandBase
+		where TCommand11 : CommandBase
+		where TCommand12 : CommandBase
+		where TCommand13 : CommandBase
+		where TCommand14 : CommandBase
+		where TCommand15 : CommandBase
+		where TCommand16 : CommandBase
+		where TCommand17 : CommandBase
+		where TCommand18 : CommandBase
+		where TCommand19 : CommandBase
+		where TCommand20 : CommandBase
+		where TCommand21 : CommandBase
+		where TCommand22 : CommandBase
+		where TCommand23 : CommandBase
+		where TCommand24 : CommandBase
+		where TCommand25 : CommandBase
+		where TCommand26 : CommandBase
+		where TCommand27 : CommandBase
+		where TCommand28 : CommandBase
+		where TCommand29 : CommandBase
+		where TCommand30 : CommandBase
+		where TCommand31 : CommandBase
+		where TCommand32 : CommandBase
+		where TCommand33 : CommandBase
+		where TCommand34 : CommandBase
+		where TCommand35 : CommandBase
+		where TCommand36 : CommandBase
+		where TCommand37 : CommandBase
+		where TCommand38 : CommandBase
+		where TCommand39 : CommandBase
+		where TCommand40 : CommandBase
+		where TCommand41 : CommandBase
+		where TCommand42 : CommandBase
+		where TCommand43 : CommandBase
+		where TCommand44 : CommandBase
+		where TCommand45 : CommandBase
+		where TCommand46 : CommandBase
+		where TCommand47 : CommandBase
+		where TCommand48 : CommandBase
+		where TCommand49 : CommandBase
+		where TCommand50 : CommandBase
+		where TCommand51 : CommandBase
+		where TCommand52 : CommandBase
+		where TCommand53 : CommandBase
+		where TCommand54 : CommandBase
+		where TCommand55 : CommandBase
+		where TCommand56 : CommandBase
+		where TCommand57 : CommandBase
+		where TCommand58 : CommandBase
+		where TCommand59 : CommandBase
+		where TCommand60 : CommandBase
+		where TCommand61 : CommandBase
+		where TCommand62 : CommandBase
+		where TCommand63 : CommandBase
+		where TCommand64 : CommandBase
+
+	{ 
+
+		internal override IEnumerable<Type> ServingCommandTypes
+		{
+			get 
+			{  
+				yield return typeof(TCommand1);  
+				yield return typeof(TCommand2);  
+				yield return typeof(TCommand3);  
+				yield return typeof(TCommand4);  
+				yield return typeof(TCommand5);  
+				yield return typeof(TCommand6);  
+				yield return typeof(TCommand7);  
+				yield return typeof(TCommand8);  
+				yield return typeof(TCommand9);  
+				yield return typeof(TCommand10);  
+				yield return typeof(TCommand11);  
+				yield return typeof(TCommand12);  
+				yield return typeof(TCommand13);  
+				yield return typeof(TCommand14);  
+				yield return typeof(TCommand15);  
+				yield return typeof(TCommand16);  
+				yield return typeof(TCommand17);  
+				yield return typeof(TCommand18);  
+				yield return typeof(TCommand19);  
+				yield return typeof(TCommand20);  
+				yield return typeof(TCommand21);  
+				yield return typeof(TCommand22);  
+				yield return typeof(TCommand23);  
+				yield return typeof(TCommand24);  
+				yield return typeof(TCommand25);  
+				yield return typeof(TCommand26);  
+				yield return typeof(TCommand27);  
+				yield return typeof(TCommand28);  
+				yield return typeof(TCommand29);  
+				yield return typeof(TCommand30);  
+				yield return typeof(TCommand31);  
+				yield return typeof(TCommand32);  
+				yield return typeof(TCommand33);  
+				yield return typeof(TCommand34);  
+				yield return typeof(TCommand35);  
+				yield return typeof(TCommand36);  
+				yield return typeof(TCommand37);  
+				yield return typeof(TCommand38);  
+				yield return typeof(TCommand39);  
+				yield return typeof(TCommand40);  
+				yield return typeof(TCommand41);  
+				yield return typeof(TCommand42);  
+				yield return typeof(TCommand43);  
+				yield return typeof(TCommand44);  
+				yield return typeof(TCommand45);  
+				yield return typeof(TCommand46);  
+				yield return typeof(TCommand47);  
+				yield return typeof(TCommand48);  
+				yield return typeof(TCommand49);  
+				yield return typeof(TCommand50);  
+				yield return typeof(TCommand51);  
+				yield return typeof(TCommand52);  
+				yield return typeof(TCommand53);  
+				yield return typeof(TCommand54);  
+				yield return typeof(TCommand55);  
+				yield return typeof(TCommand56);  
+				yield return typeof(TCommand57);  
+				yield return typeof(TCommand58);  
+				yield return typeof(TCommand59);  
+				yield return typeof(TCommand60);  
+				yield return typeof(TCommand61);  
+				yield return typeof(TCommand62);  
+				yield return typeof(TCommand63);  
+				yield return typeof(TCommand64); 		
+			}
+		}
+
+		internal override CommandRunner GetRunner(CommandBase command)
+		{
+	 
+			if (command is TCommand1 cm1) return GetRunner1(cm1); 
+			if (command is TCommand2 cm2) return GetRunner2(cm2); 
+			if (command is TCommand3 cm3) return GetRunner3(cm3); 
+			if (command is TCommand4 cm4) return GetRunner4(cm4); 
+			if (command is TCommand5 cm5) return GetRunner5(cm5); 
+			if (command is TCommand6 cm6) return GetRunner6(cm6); 
+			if (command is TCommand7 cm7) return GetRunner7(cm7); 
+			if (command is TCommand8 cm8) return GetRunner8(cm8); 
+			if (command is TCommand9 cm9) return GetRunner9(cm9); 
+			if (command is TCommand10 cm10) return GetRunner10(cm10); 
+			if (command is TCommand11 cm11) return GetRunner11(cm11); 
+			if (command is TCommand12 cm12) return GetRunner12(cm12); 
+			if (command is TCommand13 cm13) return GetRunner13(cm13); 
+			if (command is TCommand14 cm14) return GetRunner14(cm14); 
+			if (command is TCommand15 cm15) return GetRunner15(cm15); 
+			if (command is TCommand16 cm16) return GetRunner16(cm16); 
+			if (command is TCommand17 cm17) return GetRunner17(cm17); 
+			if (command is TCommand18 cm18) return GetRunner18(cm18); 
+			if (command is TCommand19 cm19) return GetRunner19(cm19); 
+			if (command is TCommand20 cm20) return GetRunner20(cm20); 
+			if (command is TCommand21 cm21) return GetRunner21(cm21); 
+			if (command is TCommand22 cm22) return GetRunner22(cm22); 
+			if (command is TCommand23 cm23) return GetRunner23(cm23); 
+			if (command is TCommand24 cm24) return GetRunner24(cm24); 
+			if (command is TCommand25 cm25) return GetRunner25(cm25); 
+			if (command is TCommand26 cm26) return GetRunner26(cm26); 
+			if (command is TCommand27 cm27) return GetRunner27(cm27); 
+			if (command is TCommand28 cm28) return GetRunner28(cm28); 
+			if (command is TCommand29 cm29) return GetRunner29(cm29); 
+			if (command is TCommand30 cm30) return GetRunner30(cm30); 
+			if (command is TCommand31 cm31) return GetRunner31(cm31); 
+			if (command is TCommand32 cm32) return GetRunner32(cm32); 
+			if (command is TCommand33 cm33) return GetRunner33(cm33); 
+			if (command is TCommand34 cm34) return GetRunner34(cm34); 
+			if (command is TCommand35 cm35) return GetRunner35(cm35); 
+			if (command is TCommand36 cm36) return GetRunner36(cm36); 
+			if (command is TCommand37 cm37) return GetRunner37(cm37); 
+			if (command is TCommand38 cm38) return GetRunner38(cm38); 
+			if (command is TCommand39 cm39) return GetRunner39(cm39); 
+			if (command is TCommand40 cm40) return GetRunner40(cm40); 
+			if (command is TCommand41 cm41) return GetRunner41(cm41); 
+			if (command is TCommand42 cm42) return GetRunner42(cm42); 
+			if (command is TCommand43 cm43) return GetRunner43(cm43); 
+			if (command is TCommand44 cm44) return GetRunner44(cm44); 
+			if (command is TCommand45 cm45) return GetRunner45(cm45); 
+			if (command is TCommand46 cm46) return GetRunner46(cm46); 
+			if (command is TCommand47 cm47) return GetRunner47(cm47); 
+			if (command is TCommand48 cm48) return GetRunner48(cm48); 
+			if (command is TCommand49 cm49) return GetRunner49(cm49); 
+			if (command is TCommand50 cm50) return GetRunner50(cm50); 
+			if (command is TCommand51 cm51) return GetRunner51(cm51); 
+			if (command is TCommand52 cm52) return GetRunner52(cm52); 
+			if (command is TCommand53 cm53) return GetRunner53(cm53); 
+			if (command is TCommand54 cm54) return GetRunner54(cm54); 
+			if (command is TCommand55 cm55) return GetRunner55(cm55); 
+			if (command is TCommand56 cm56) return GetRunner56(cm56); 
+			if (command is TCommand57 cm57) return GetRunner57(cm57); 
+			if (command is TCommand58 cm58) return GetRunner58(cm58); 
+			if (command is TCommand59 cm59) return GetRunner59(cm59); 
+			if (command is TCommand60 cm60) return GetRunner60(cm60); 
+			if (command is TCommand61 cm61) return GetRunner61(cm61); 
+			if (command is TCommand62 cm62) return GetRunner62(cm62); 
+			if (command is TCommand63 cm63) return GetRunner63(cm63); 
+			if (command is TCommand64 cm64) return GetRunner64(cm64);
+			throw new TectureException($"No runner for command {command.GetType().Name} found in {this.GetType().Name}");
+		}
+
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand1"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand1"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand1> GetRunner1(TCommand1 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand2"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand2"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand2> GetRunner2(TCommand2 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand3"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand3"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand3> GetRunner3(TCommand3 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand4"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand4"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand4> GetRunner4(TCommand4 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand5"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand5"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand5> GetRunner5(TCommand5 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand6"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand6"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand6> GetRunner6(TCommand6 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand7"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand7"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand7> GetRunner7(TCommand7 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand8"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand8"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand8> GetRunner8(TCommand8 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand9"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand9"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand9> GetRunner9(TCommand9 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand10"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand10"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand10> GetRunner10(TCommand10 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand11"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand11"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand11> GetRunner11(TCommand11 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand12"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand12"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand12> GetRunner12(TCommand12 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand13"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand13"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand13> GetRunner13(TCommand13 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand14"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand14"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand14> GetRunner14(TCommand14 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand15"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand15"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand15> GetRunner15(TCommand15 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand16"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand16"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand16> GetRunner16(TCommand16 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand17"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand17"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand17> GetRunner17(TCommand17 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand18"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand18"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand18> GetRunner18(TCommand18 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand19"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand19"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand19> GetRunner19(TCommand19 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand20"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand20"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand20> GetRunner20(TCommand20 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand21"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand21"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand21> GetRunner21(TCommand21 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand22"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand22"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand22> GetRunner22(TCommand22 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand23"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand23"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand23> GetRunner23(TCommand23 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand24"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand24"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand24> GetRunner24(TCommand24 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand25"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand25"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand25> GetRunner25(TCommand25 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand26"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand26"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand26> GetRunner26(TCommand26 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand27"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand27"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand27> GetRunner27(TCommand27 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand28"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand28"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand28> GetRunner28(TCommand28 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand29"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand29"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand29> GetRunner29(TCommand29 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand30"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand30"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand30> GetRunner30(TCommand30 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand31"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand31"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand31> GetRunner31(TCommand31 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand32"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand32"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand32> GetRunner32(TCommand32 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand33"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand33"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand33> GetRunner33(TCommand33 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand34"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand34"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand34> GetRunner34(TCommand34 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand35"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand35"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand35> GetRunner35(TCommand35 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand36"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand36"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand36> GetRunner36(TCommand36 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand37"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand37"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand37> GetRunner37(TCommand37 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand38"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand38"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand38> GetRunner38(TCommand38 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand39"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand39"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand39> GetRunner39(TCommand39 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand40"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand40"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand40> GetRunner40(TCommand40 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand41"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand41"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand41> GetRunner41(TCommand41 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand42"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand42"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand42> GetRunner42(TCommand42 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand43"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand43"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand43> GetRunner43(TCommand43 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand44"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand44"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand44> GetRunner44(TCommand44 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand45"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand45"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand45> GetRunner45(TCommand45 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand46"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand46"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand46> GetRunner46(TCommand46 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand47"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand47"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand47> GetRunner47(TCommand47 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand48"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand48"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand48> GetRunner48(TCommand48 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand49"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand49"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand49> GetRunner49(TCommand49 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand50"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand50"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand50> GetRunner50(TCommand50 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand51"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand51"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand51> GetRunner51(TCommand51 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand52"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand52"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand52> GetRunner52(TCommand52 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand53"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand53"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand53> GetRunner53(TCommand53 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand54"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand54"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand54> GetRunner54(TCommand54 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand55"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand55"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand55> GetRunner55(TCommand55 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand56"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand56"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand56> GetRunner56(TCommand56 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand57"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand57"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand57> GetRunner57(TCommand57 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand58"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand58"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand58> GetRunner58(TCommand58 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand59"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand59"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand59> GetRunner59(TCommand59 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand60"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand60"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand60> GetRunner60(TCommand60 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand61"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand61"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand61> GetRunner61(TCommand61 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand62"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand62"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand62> GetRunner62(TCommand62 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand63"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand63"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand63> GetRunner63(TCommand63 command);
+	 
+		/// <summary>
+		/// Returns instance of command runner for command <typeparamref name="TCommand64"/>. 
+		/// </summary>
+		/// <param name="command">Command of type <typeparamref name="TCommand64"/> </param>
+		/// <returns>Command runner</returns>
+		protected abstract CommandRunner<TCommand64> GetRunner64(TCommand64 command);
+	}
+
+#endregion
+
 }
 

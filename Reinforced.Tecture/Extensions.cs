@@ -27,5 +27,31 @@ namespace Reinforced.Tecture
         {
             return t.From<T>();
         }
+        
+        /// <summary>
+        /// Turns command time taken into human-readeable string
+        /// </summary>
+        /// <param name="timeTaken"></param>
+        /// <returns></returns>
+        public static string FormatCommandTimeTaken(this TimeSpan timeTaken)
+        {
+            if (timeTaken.TotalMinutes > 1)
+            {
+                return $"{timeTaken:mm\\:ss\\:fff}";
+            }
+
+            if (timeTaken.TotalSeconds > 5)
+            {
+                return $"{timeTaken:ss\\:fff} s";
+            }
+
+            if (timeTaken.TotalMilliseconds < 1)
+            {
+                var val = (int) (timeTaken.TotalMilliseconds * 1000);
+                return $"{val:000}μs";
+            }
+
+            return $"{timeTaken:fff}ms";
+        }
     }
 }

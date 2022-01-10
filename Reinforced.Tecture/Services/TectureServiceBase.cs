@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Channels.Multiplexer;
@@ -26,8 +27,8 @@ namespace Reinforced.Tecture.Services
 
         internal void CallOnSave() => OnSave();
         internal void CallOnFinally(Exception exceptionHappened) => OnFinally(exceptionHappened);
-        internal Task CallOnSaveAsync() => OnSaveAsync();
-        internal Task CallOnFinallyAsync(Exception exceptionHappened) => OnFinallyAsync(exceptionHappened);
+        internal Task CallOnSaveAsync(CancellationToken token = default) => OnSaveAsync(token);
+        internal Task CallOnFinallyAsync(Exception exceptionHappened,CancellationToken token = default) => OnFinallyAsync(exceptionHappened,token);
         internal void CallInit() => Init();
         #endregion
 
@@ -52,12 +53,12 @@ namespace Reinforced.Tecture.Services
         /// Aggregating service pattern. Override this method to write aggregated data before save changes call. Use await Save; if necessary
         /// </summary>
 #pragma warning disable 1998
-        protected virtual async Task OnSaveAsync() { }
+        protected virtual async Task OnSaveAsync(CancellationToken token = default) { }
 
         /// <summary>
         /// Aggregating service pattern. Override this method to write aggregated data after all save changes calls.
         /// </summary>
-        protected virtual async Task OnFinallyAsync(Exception exceptionHappened) { }
+        protected virtual async Task OnFinallyAsync(Exception exceptionHappened,CancellationToken token = default) { }
 #pragma warning restore 1998
         /// <summary>
         /// Called right after service initialization. Use it to do things right after service is created
@@ -80,7 +81,6 @@ namespace Reinforced.Tecture.Services
         /// Comments some activity. Comment goes directly to pipeline queue as fake side-effect
         /// </summary>
         /// <param name="comment">Comment text</param>
-        [Unexplainable]
         protected void Comment(string comment)
         {
             Pipeline.Enqueue(new Comment() { Annotation = comment });

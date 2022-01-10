@@ -20,6 +20,7 @@ namespace Reinforced.Tecture.Tracing
     public class Trace
     {
         private readonly CommandBase[] _commands;
+
         /// <summary>
         /// Effects that story consists of (order matters)
         /// </summary>
@@ -65,6 +66,7 @@ namespace Reinforced.Tecture.Tracing
             {
                 effectsArray[i++] = nq.Dequeue();
             }
+
             _commands = effectsArray;
         }
 
@@ -78,81 +80,24 @@ namespace Reinforced.Tecture.Tracing
         }
 
         /// <summary>
-        /// Turns story into human-readable text
+        /// Turns trace into human-readeable text
         /// </summary>
-        /// <param name="tw">Result writer</param>
-        /// <param name="codes">Sets whether it is needed to output side-effect codes</param>
-        public void Explain(TextWriter tw, Action<CommandBase,TextWriter> commandTemplate = null)
+        /// <returns>String containing trace explanation</returns>
+        public string Explain()
         {
-            int i = 1;
-            bool didCycleBegin = false;
-            bool inCycle = false;
-            foreach (var cmd in _commands)
-            {
-                if (cmd is EndCycle)
-                {
-                    didCycleBegin = false;
-                    inCycle = false;
-                }
-
-                if (cmd is Cycle)
-                {
-                    didCycleBegin = true;
-                }
-
-
-                if (inCycle) continue;
-
-                if (commandTemplate == null)
-                {
-                    if (!cmd.IsExecutable) tw.Write("   ");
-                    else tw.Write(cmd.IsExecuted?"[v]":"[x]");
-                    tw.Write($" {i}. ");
-
-                    if (!string.IsNullOrEmpty(cmd.ChannelName)) tw.Write($"{cmd.ChannelName} ");
-                    else tw.Write(" ");
-
-                    var ca = cmd.GetType().GetTypeInfo().GetCustomAttribute<CommandCodeAttribute>();
-                    tw.Write(ca != null ? $"{ca.Code}" : cmd.GetType().Name);
-
-                    tw.Write(" ");
-                    //tw.Write("\t");
-    
-                    cmd.Describe(tw);
-                    tw.WriteLine();
-
-                    if (cmd.Exception != null)
-                    {
-                        tw.WriteLine($"[ERROR] {cmd.Exception.Message}");   
-                    }
-                }
-                else commandTemplate(cmd, tw);
-
-                i++;
-
-                if (cmd is Iteration && didCycleBegin)
-                {
-                    inCycle = true;
-                }
-            }
+            var explainer = new TraceExplainer();
+            explainer.ExplainTrace(this);
+            return explainer.ToString();
         }
-
+        
         /// <summary>
-        /// Turns story into human-readable text
+        /// Turns trace into human-readeable text using specified trace explainer
         /// </summary>
-        /// <param name="codes">Sets whether it is needed to output side-effect codes</param>
-        /// <param name="commandTemplate">Template for command serialization</param>
-        /// <returns>Story textual representation</returns>
-        public string Explain(Action<CommandBase,TextWriter> commandTemplate = null)
+        /// <param name="explainer">Trace explainer</param>
+        /// <returns></returns>
+        public void Explain(TraceExplainer explainer)
         {
-            StringBuilder sb = new StringBuilder();
-            using (var tw = new StringWriter(sb))
-            {
-                Explain(tw,commandTemplate);
-                tw.Flush();
-            }
-
-            return sb.ToString();
+            explainer.ExplainTrace(this);
         }
     }
 }

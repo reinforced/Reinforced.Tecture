@@ -7,28 +7,17 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Iteration mark command
     /// </summary>
-    [CommandCode(" + ")]
     public class Iteration : CommandBase, ITracingOnly
     {
         public override bool IsExecutable => false;
         
+        public override string Code => " + ";
         internal Iteration()
         {
             Channel = typeof(NoChannel);
         }
 
-        /// <inheritdoc />
-        public override void Describe(TextWriter tw)
-        {
-            if (string.IsNullOrEmpty(Annotation))
-            {
-                tw.Write("--- Cycle iteration ---");
-            }
-            else
-            {
-                tw.Write($"--- {Annotation} ---");
-            }
-        }
+        protected override string ToStringActually() => "Loop iteration";
 
         /// <summary>
         /// Clones command for tracing purposes

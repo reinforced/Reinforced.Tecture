@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Tracing.Commands;
@@ -12,19 +13,27 @@ namespace Reinforced.Tecture.Tracing
     {
         private readonly Queue<CommandBase> _traceCommands = new Queue<CommandBase>();
 
+        public TraceCollector()
+        {
+            _stopwatch.Start();
+        }
+
+        private readonly Stopwatch _stopwatch = new Stopwatch();
+        
         internal void Command(CommandBase command)
         {
             _traceCommands.Enqueue(command);
         }
 
-        internal void Save()
+        internal void Save(TimeSpan timeTaken)
         {
-            Command(new Save());
+            Command(new Save(){TimeTaken = timeTaken});
         }
 
         internal Trace Finish()
         {
-            Command(new End());
+            _stopwatch.Stop();
+            Command(new End(){TimeTaken = _stopwatch.Elapsed});
             return new Trace(_traceCommands);
         }
 

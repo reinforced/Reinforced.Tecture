@@ -7,10 +7,11 @@ namespace Reinforced.Tecture.Tracing.Commands
     /// <summary>
     /// Command that does nothing except explaining things
     /// </summary>
-    [CommandCode("// ")]
     public sealed class Comment : CommandBase, ITracingOnly
     {
         public override bool IsExecutable => false;
+        
+        public override string Code => "// ";
         
         internal Comment()
         {

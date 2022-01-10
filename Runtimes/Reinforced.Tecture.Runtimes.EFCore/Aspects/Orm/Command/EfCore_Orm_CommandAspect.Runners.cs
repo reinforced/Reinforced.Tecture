@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
@@ -24,19 +25,19 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
 
         protected override void OnRegister()
         {
-            _add = new AddCommandRunner(Aux, _context);
-            _del = new DeleteCommandRunner(Aux, _context);
-            _upd = new UpdateCommandRunner(Aux, _context);
-            _dpk = new DeletePkCommandRunner(Aux, _context);
-            _rel = new RelateCommandRunner(Aux, _context);
-            _drel = new DerelateCommandRunner(Aux, _context);
-            _upk = new UpdatePkCommandRunner(Aux, _context);
+            _add = new AddCommandRunner(Context, _context);
+            _del = new DeleteCommandRunner(Context, _context);
+            _upd = new UpdateCommandRunner(Context, _context);
+            _dpk = new DeletePkCommandRunner(Context, _context);
+            _rel = new RelateCommandRunner(Context, _context);
+            _drel = new DerelateCommandRunner(Context, _context);
+            _upk = new UpdatePkCommandRunner(Context, _context);
         }
 
         /// <inheritdoc />
         protected override void Save()
         {
-            if (!Aux.ProvidesTestData)
+            if (!Context.ProvidesTestData)
             {
                 _context.Value.ChangeTracker.DetectChanges();
                 _context.Value.SaveChanges();
@@ -54,11 +55,11 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         }
 
         /// <inheritdoc />
-        protected override Task SaveAsync()
+        protected override Task SaveAsync(CancellationToken token = default)
         {
-            if (!Aux.ProvidesTestData)
+            if (!Context.ProvidesTestData)
             {
-                return _context.Value.SaveChangesAsync();
+                return _context.Value.SaveChangesAsync(token);
             }
 
             return Task.FromResult(0);
@@ -67,7 +68,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
         /// <inheritdoc />
         public override void Dispose()
         {
-            if (!Aux.ProvidesTestData)
+            if (!Context.ProvidesTestData)
             {
                 _context.Dispose();
             }

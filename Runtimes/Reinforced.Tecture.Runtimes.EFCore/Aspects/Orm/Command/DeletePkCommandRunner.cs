@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -30,7 +31,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
             {
                 return (IPrimaryKey) Activator.CreateInstance(t);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return (IPrimaryKey) t.InstanceNonpublic();
             }
@@ -73,7 +74,7 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm.Command
             }
         }
 
-        protected override Task RunAsync(DeletePk cmd)
+        protected override Task RunAsync(DeletePk cmd,CancellationToken token = default)
         {
             Run(cmd);
             return Task.FromResult(0);

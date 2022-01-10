@@ -31,6 +31,10 @@ namespace Reinforced.Tecture.Testing.Validation
 
             var @class = 
                 ClassDeclaration(TestClassName)
+                    // .WithModifiers(
+                    //     TokenList(new []{
+                    //             Token(SyntaxKind.PublicKeyword),
+                    //             Token(SyntaxKind.PartialKeyword)}))
                 .WithBaseList(BaseList(bs))
                 .WithMembers(
                     SingletonList(validationMethod));

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
 using Reinforced.Tecture.Cloning;
 using Reinforced.Tecture.Commands;
@@ -14,9 +15,9 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
     /// <summary>
     /// Entity update command
     /// </summary>
-    [CommandCode("UPD")]
     public class Update : CommandBase
     {
+        public override string Code => "UPD";
         internal Update() { }
         /// <summary>
         /// Gets entity that is going to be updated
@@ -68,10 +69,21 @@ namespace Reinforced.Tecture.Aspects.Orm.Commands.Update
             }
         }
 
-        /// <inheritdoc />
-        public override void Describe(TextWriter tw)
+        protected override string ToStringActually()
         {
-            base.Describe(tw);
+            var sb = new StringBuilder();
+            using (var tw = new StringWriter(sb))
+            {
+                Describe(tw);
+                tw.Flush();
+            }
+
+            return sb.ToString();
+        }
+
+        /// <inheritdoc cref="CommandBase" />
+        private void Describe(TextWriter tw)
+        {
             if (!string.IsNullOrEmpty(Annotation)) return;
 
             string properties = string.Join(", ", _updateValues.Keys.Select(d => d.Name));

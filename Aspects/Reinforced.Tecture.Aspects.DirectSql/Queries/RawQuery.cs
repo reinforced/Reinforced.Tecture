@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
 using Reinforced.Tecture.Testing;
@@ -22,7 +23,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         {
             Sql = sql;
             _runtime = runtime;
-            _a = runtime.Aux;
+            _a = runtime.Context;
         }
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>Query result</returns>
-        public Task<IEnumerable<T>> AsAsync<T>() where T : class
+        public Task<IEnumerable<T>> AsAsync<T>(CancellationToken token=default) where T : class
         {
             var p = _a.Promise<IEnumerable<T>>();
 
@@ -81,7 +82,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
                 var res = v.Result;
                 if (p is Demanding<IEnumerable<T>> d) d.Fullfill(res, Sql.Hash(), _description);
                 return res;
-            });
+            }, token);
         }
     }
 }

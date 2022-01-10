@@ -7,11 +7,12 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
     /// <summary>
     /// Synthetic command that means end of logical cycle 
     /// </summary>
-    [CommandCode(" } ")]
     public class EndCycle : CommandBase, ITracingOnly
     {
         public override bool IsExecutable => false;
-        
+
+        public override string Code => " } ";
+
         internal EndCycle()
         {
             Channel = typeof(NoChannel);
@@ -27,25 +28,8 @@ namespace Reinforced.Tecture.Tracing.Commands.Cycles
         /// </summary>
         public int IterationsCount { get; internal set; }
 
-        /// <inheritdoc />
-        public override void Describe(TextWriter tw)
-        {
-            if (string.IsNullOrEmpty(Annotation))
-            {
-                tw.Write("Cycle ends in ");
-                tw.Write(IterationsCount);
-                tw.Write("iterations");
-            }
-            else
-            {
-                tw.Write(Annotation);
-                tw.Write(" ends in ");
-                tw.Write(IterationsCount);
-                tw.Write(" iterations and ");
-                tw.Write(TotalCommands);
-                tw.Write(" commands");
-            }
-        }
+        protected override string ToStringActually()
+            => $"Loop ends in {IterationsCount} iterations producing {TotalCommands} commands";
 
         /// <summary>
         /// Clones command for tracing purposes

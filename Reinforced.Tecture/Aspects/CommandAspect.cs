@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Commands;
 
@@ -15,7 +16,7 @@ namespace Reinforced.Tecture.Aspects
 
         internal void SaveInternal() => Save();
 
-        internal Task SaveInternalAsync() => SaveAsync();
+        internal Task SaveInternalAsync(CancellationToken token = default) => SaveAsync(token);
 
         /// <summary>
         /// Actually performs saving
@@ -25,7 +26,7 @@ namespace Reinforced.Tecture.Aspects
         /// <summary>
         /// Actually performs saving (async)
         /// </summary>
-        protected abstract Task SaveAsync();
+        protected abstract Task SaveAsync(CancellationToken token = default);
         
         internal abstract CommandRunner GetRunner(CommandBase cb);
     }
