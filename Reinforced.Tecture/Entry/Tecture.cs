@@ -62,6 +62,8 @@ namespace Reinforced.Tecture.Entry
             return new SRead<T>(_mx);
         }
 
+        public bool IsTracing => _tc != null;
+
         private TraceCollector _tc = null;
 
 

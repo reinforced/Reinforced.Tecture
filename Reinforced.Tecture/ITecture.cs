@@ -26,6 +26,11 @@ namespace Reinforced.Tecture
         /// <typeparam name="T">Type of data source</typeparam>
         /// <returns>Data source instance</returns>
         Read<T> From<T>() where T : CanQuery;
+        
+        /// <summary>
+        /// Gets whether trace is already being collected
+        /// </summary>
+        bool IsTracing { get; }
 
         /// <summary>
         /// Begins trace collection
