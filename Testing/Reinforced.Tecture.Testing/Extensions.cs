@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using Microsoft.CodeAnalysis.CSharp;
 using Reinforced.Tecture.Testing.Data;
 using Reinforced.Tecture.Testing.Validation;
+using Reinforced.Tecture.Testing.Validation.Format;
 using Reinforced.Tecture.Tracing;
 
 namespace Reinforced.Tecture.Testing
@@ -11,6 +14,30 @@ namespace Reinforced.Tecture.Testing
     /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Generates assertions code for an object instance
+        /// </summary>
+        /// <param name="obj">Object to validate</param>
+        /// <param name="variableName">Variable name</param>
+        /// <typeparam name="T">Type of object to validate</typeparam>
+        /// <returns>C# code to assert on this object</returns>
+        public static string GenerateAssertions<T>(this T obj, string variableName)
+        {
+            var expr = SyntaxFactory.IdentifierName(variableName);
+            var assertRef = new AssertInstanceReference(obj, typeof(T), expr, variableName, new HashSet<string>());
+            var result = TypeAssertionGenerator.AssertionFor(assertRef);
+            var sb = new StringBuilder();
+            var formatter = new CodeFormatter();
+            foreach (var invocationExpressionSyntax in result)
+            {
+                var statement = SyntaxFactory.ExpressionStatement(invocationExpressionSyntax);
+                var node = formatter.Visit(statement);
+                sb.AppendLine(node.ToString());
+            }
+
+            return sb.ToString();
+        }
+        
         /// <summary>
         /// Generates validation code for trace
         /// </summary>

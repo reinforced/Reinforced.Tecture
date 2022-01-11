@@ -14,6 +14,7 @@ using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.DirectSql.Queries;
 using Reinforced.Tecture.Aspects.Orm.Queries;
+using Reinforced.Tecture.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -56,9 +57,23 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             c.Validate<RenameMeasurementUnit_Validation>();
         }
 
+        class IdName
+        {
+            public IdName(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
         [Fact]
         public void SupplyCreationPipeline()
         {
+            var array = new IdName[] { new IdName(10, "A"), new IdName(20, "B") };
+            var assertions = array[0].GenerateAssertions("x");
+            
             using var c = Case
                //<SupplyCreationPipeline_TestData>
                 (out ITecture ctx);
