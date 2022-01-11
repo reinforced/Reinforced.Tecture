@@ -71,9 +71,6 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public void SupplyCreationPipeline()
         {
-            var array = new IdName[] { new IdName(10, "A"), new IdName(20, "B") };
-            var assertions = array[0].GenerateAssertions("x");
-            
             using var c = Case
                //<SupplyCreationPipeline_TestData>
                 (out ITecture ctx);

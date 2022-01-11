@@ -19,12 +19,16 @@ namespace Reinforced.Tecture.Testing
         /// </summary>
         /// <param name="obj">Object to validate</param>
         /// <param name="variableName">Variable name</param>
+        /// <param name="assertionName">Reference to assertion name</param>
         /// <typeparam name="T">Type of object to validate</typeparam>
         /// <returns>C# code to assert on this object</returns>
-        public static string GenerateAssertions<T>(this T obj, string variableName)
+        public static string GenerateAssertions<T>(this T obj, string variableName, string assertionName = "Assert")
         {
             var expr = SyntaxFactory.IdentifierName(variableName);
-            var assertRef = new AssertInstanceReference(obj, typeof(T), expr, variableName, new HashSet<string>());
+            var assertRef = new AssertInstanceReference(obj, typeof(T), expr, variableName, new HashSet<string>())
+            {
+                AssertionName = assertionName
+            };
             var result = TypeAssertionGenerator.AssertionFor(assertRef);
             var sb = new StringBuilder();
             var formatter = new CodeFormatter();

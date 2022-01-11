@@ -15,11 +15,11 @@ namespace Reinforced.Tecture.Testing.Validation
         {
             if (instance.Value == null)
             {
-                yield return AssertionNull(instance.Expression, $"{instance.Path} must be null");
+                yield return AssertionNull(instance.AssertionName,instance.Expression, $"{instance.Path} must be null");
             }
             else
             {
-                if (instance.ActualType.IsByRef) yield return AssertionNotNull(instance.Expression,$"{instance.Path} must not be null");
+                if (!instance.ActualType.IsValueType) yield return AssertionNotNull(instance.AssertionName,instance.Expression,$"{instance.Path} must not be null");
 
                 foreach (var expr in AssertionForNotNull(instance))
                     yield return expr;
@@ -32,14 +32,14 @@ namespace Reinforced.Tecture.Testing.Validation
             if (instance.ActualType == typeof(bool))
             {
                 var tValue = (bool)instance.Value;
-                if (tValue) expression = AssertionTrue(instance.Expression, $"{instance.Path} must be true");
-                else expression = AssertionFalse(instance.Expression, $"{instance.Path} must be false");
+                if (tValue) expression = AssertionTrue(instance.AssertionName,instance.Expression, $"{instance.Path} must be true");
+                else expression = AssertionFalse(instance.AssertionName,instance.Expression, $"{instance.Path} must be false");
             }
             if (instance.ActualType == typeof(bool?))
             {
                 var tValue = (bool?)instance.Value;
-                if (tValue.Value) expression = AssertionTrue(instance.Expression, $"{instance.Path} must be true");
-                else expression = AssertionFalse(instance.Expression, $"{instance.Path} must be false");
+                if (tValue.Value) expression = AssertionTrue(instance.AssertionName,instance.Expression, $"{instance.Path} must be true");
+                else expression = AssertionFalse(instance.AssertionName,instance.Expression, $"{instance.Path} must be false");
             }
 
             return expression != null;
@@ -56,7 +56,7 @@ namespace Reinforced.Tecture.Testing.Validation
             if (instance.ActualType.IsInlineable())
             {
                 var inlined = TypeInitConstructor.Construct(instance.ActualType, instance.Value);
-                yield return AssertionEquals(instance.Expression, inlined, $"{instance.Path} has invalid value");
+                yield return AssertionEquals(instance.AssertionName,instance.Expression, inlined, $"{instance.Path} has invalid value");
                 yield break;
             }
 
@@ -64,7 +64,7 @@ namespace Reinforced.Tecture.Testing.Validation
             {
                 var dicParams = instance.ActualType.GetDictionaryParameters();
                 yield return AssertionEquals(
-
+                    instance.AssertionName,
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         instance.Expression,
@@ -98,7 +98,7 @@ namespace Reinforced.Tecture.Testing.Validation
                     arguments.Add((WrapIntoLambda(setOfChecks,lValueTuple.Item1)));
                 }
 
-                yield return AssertForCollection(arguments.ToArray());
+                yield return AssertForCollection(instance.AssertionName,arguments.ToArray());
                 yield break;
             }
 
@@ -141,12 +141,12 @@ namespace Reinforced.Tecture.Testing.Validation
                         )
                     );
 
-        private static InvocationExpressionSyntax AssertWithArguments(string methodName, params ExpressionSyntax[] arguments)
+        private static InvocationExpressionSyntax AssertWithArguments(string assertClass, string methodName, params ExpressionSyntax[] arguments)
             =>  //Assert.{methodName}({arguments});
                 InvocationExpression(
                         MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
-                            IdentifierName("Assert"),
+                            IdentifierName(assertClass),
                             IdentifierName(methodName)))
                     .WithArgumentList(
                         ArgumentList(
@@ -159,28 +159,28 @@ namespace Reinforced.Tecture.Testing.Validation
             => // "{value}" (string)
                 LiteralExpression(SyntaxKind.StringLiteralExpression, Literal(value));
 
-        private static InvocationExpressionSyntax AssertionNull(ExpressionSyntax expressionSyntax, string explanation)
+        private static InvocationExpressionSyntax AssertionNull(string assertClass, ExpressionSyntax expressionSyntax, string explanation)
             => // Assert.Null({expressionSyntax}, {explanation})
-                AssertWithArguments(nameof(AssertExtensions.Null), expressionSyntax, T(explanation));
+                AssertWithArguments(assertClass,nameof(AssertExtensions.Null), expressionSyntax, T(explanation));
         
-        private static InvocationExpressionSyntax AssertionEquals(ExpressionSyntax actual, ExpressionSyntax expected, string explanation)
+        private static InvocationExpressionSyntax AssertionEquals(string assertClass, ExpressionSyntax actual, ExpressionSyntax expected, string explanation)
             => // Assert.Equals({actual}, {expected}, {explanation})
-                AssertWithArguments(nameof(AssertExtensions.Equal), actual, expected, T(explanation));
+                AssertWithArguments(assertClass,nameof(AssertExtensions.Equal), actual, expected, T(explanation));
         
-        private static InvocationExpressionSyntax AssertionNotNull(ExpressionSyntax expressionSyntax, string explanation)
+        private static InvocationExpressionSyntax AssertionNotNull(string assertClass, ExpressionSyntax expressionSyntax, string explanation)
             => // Assert.NotNull({expressionSyntax}, {explanation})
-                AssertWithArguments(nameof(AssertExtensions.NotNull), expressionSyntax, T(explanation));
+                AssertWithArguments(assertClass,nameof(AssertExtensions.NotNull), expressionSyntax, T(explanation));
         
-        private static InvocationExpressionSyntax AssertionTrue(ExpressionSyntax expressionSyntax, string explanation)
+        private static InvocationExpressionSyntax AssertionTrue(string assertClass, ExpressionSyntax expressionSyntax, string explanation)
             => // Assert.True({expressionSyntax}, {explanation})
-                AssertWithArguments(nameof(AssertExtensions.True), expressionSyntax, T(explanation));
+                AssertWithArguments(assertClass,nameof(AssertExtensions.True), expressionSyntax, T(explanation));
         
-        private static InvocationExpressionSyntax AssertionFalse(ExpressionSyntax expressionSyntax, string explanation)
+        private static InvocationExpressionSyntax AssertionFalse(string assertClass, ExpressionSyntax expressionSyntax, string explanation)
             => // Assert.False({expressionSyntax}, {explanation})
-                AssertWithArguments(nameof(AssertExtensions.False), expressionSyntax, T(explanation));
+                AssertWithArguments(assertClass,nameof(AssertExtensions.False), expressionSyntax, T(explanation));
         
-        private static InvocationExpressionSyntax AssertForCollection(ExpressionSyntax[] arguments)
+        private static InvocationExpressionSyntax AssertForCollection(string assertClass, ExpressionSyntax[] arguments)
             => // Assert.Collection({expressionSyntax}, {explanation})
-                AssertWithArguments(nameof(AssertExtensions.Collection), arguments);
+                AssertWithArguments(assertClass,nameof(AssertExtensions.Collection), arguments);
     }
 }

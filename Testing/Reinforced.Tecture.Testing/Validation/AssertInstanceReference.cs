@@ -24,6 +24,8 @@ namespace Reinforced.Tecture.Testing.Validation
 
         public int IterationDepth { get; set; }
 
+        public string AssertionName { get; set; } = "Assert";
+
         public override string ToString()
         {
             return $"{Value} ({Path}), {DeclaredType.Name}/{(ActualType == null ? "null" : ActualType.Name)}";
@@ -90,7 +92,10 @@ namespace Reinforced.Tecture.Testing.Validation
                     anon ? (ExpressionSyntax)AnonymousProperty(Expression, prop,Usings) : RegularProperty(Expression, prop)
                     ;
                 yield return new AssertInstanceReference(value, prop.PropertyType,
-                    expression, $"{prop.Name} of {Path}", Usings);
+                    expression, $"{prop.Name} of {Path}", Usings)
+                {
+                    AssertionName = AssertionName
+                };
             }
         }
         
@@ -133,6 +138,7 @@ namespace Reinforced.Tecture.Testing.Validation
                     Usings)
 
                 {
+                    AssertionName = AssertionName,
                     IterationDepth = this.IterationDepth + 1
                 };
 
@@ -160,6 +166,7 @@ namespace Reinforced.Tecture.Testing.Validation
                     Usings)
 
                 {
+                    AssertionName = AssertionName,
                     IterationDepth = this.IterationDepth + 1
                 };
                 
