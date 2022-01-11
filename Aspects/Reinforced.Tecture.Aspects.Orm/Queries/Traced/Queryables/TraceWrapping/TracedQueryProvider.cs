@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
 using Reinforced.Tecture.Tracing.Promises;
@@ -29,7 +30,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             var bs = Original.CreateQuery<TElement>(expression);
-            return new TracedQueryable<TElement>(bs, Aspect, Description,false);
+            return new TracedQueryable<TElement>(bs, Aspect, Description, false);
         }
 
         public object Execute(Expression expression)
@@ -38,16 +39,24 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
             ExpressionHashData hash = null;
             if (p is Containing<object> || p is Demanding<object>)
                 hash = expression.CalculateHash();
-            
+
             if (p is Containing<object> c)
                 return c.Get(hash.Hash, Description.Description);
 
-            var result = Original.Execute(hash==null?expression:hash.ModifiedExpression);
+            try
+            {
+                var result = Original.Execute(hash == null ? expression : hash.ModifiedExpression);
+                if (p is NotifyCompleted<object> nc) nc.Fulfill(Description.Description);
 
-            if (p is Demanding<object> d)
-                d.Fullfill(result, hash.Hash, Description.Description);
-
-            return result;
+                if (p is Demanding<object> d)
+                    d.Fulfill(result, hash.Hash, Description.Description);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                if (p is Catching<object> d) d.Fulfill(ex, Description.Description);
+                throw;
+            }
         }
 
         /// <summary>Executes the strongly-typed query represented by a specified expression tree.</summary>
@@ -57,19 +66,29 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         public TResult Execute<TResult>(Expression expression)
         {
             var p = Aspect.Context.Promise<TResult>();
+            
             ExpressionHashData hash = null;
             if (p is Containing<TResult> || p is Demanding<TResult>)
                 hash = expression.CalculateHash();
             
-            if (p is Containing<TResult> c)
-                return c.Get(hash.Hash, Description.Description);
+            try
+            {
+                if (p is Containing<TResult> c)
+                    return c.Get(hash.Hash, Description.Description);
+               
+                    var result = Original.Execute<TResult>(hash == null ? expression : hash.ModifiedExpression);
+                    if (p is NotifyCompleted<TResult> nc) nc.Fulfill(Description.Description);
+                    
+                    if (p is Demanding<TResult> d)
+                        d.Fulfill(result, hash.Hash, Description.Description);
 
-            var result = Original.Execute<TResult>(hash==null?expression:hash.ModifiedExpression);
-
-            if (p is Demanding<TResult> d)
-                d.Fullfill(result, hash.Hash, Description.Description);
-
-            return result;
+                    return result;
+            }
+            catch (Exception ex)
+            {
+                if (p is Catching<TResult> d) d.Fulfill(ex, Description.Description);
+                throw;
+            }
         }
     }
 }

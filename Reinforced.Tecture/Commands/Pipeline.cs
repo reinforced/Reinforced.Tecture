@@ -11,10 +11,10 @@ namespace Reinforced.Tecture.Commands
     class Pipeline
     {
         private readonly object QueueLocker = new object();
-        
+
         private readonly Queue<CommandBase> _commandQueue = new Queue<CommandBase>();
-        
-        
+
+
         internal TraceCollector TraceCollector = null;
 
         /// <summary>
@@ -48,9 +48,18 @@ namespace Reinforced.Tecture.Commands
 
                     //cmd.Debug = dbg;
                 }
-            
-                TraceCollector?.Command(cmd.TraceClone());
-                if (!(cmd is ITracingOnly)) _commandQueue.Enqueue(cmd);    
+
+                if (TraceCollector?.LightMode == true)
+                {
+                    cmd._lightMode = true;
+                    TraceCollector?.Command(cmd);
+                }
+                else
+                {
+                    TraceCollector?.Command(cmd.TraceClone());
+                }
+
+                if (!(cmd is ITracingOnly)) _commandQueue.Enqueue(cmd);
             }
         }
 
@@ -80,7 +89,7 @@ namespace Reinforced.Tecture.Commands
             {
                 _commandQueue.Clear();
             }
-            
+
             while (nq.Count > 0)
             {
                 yield return nq.Dequeue();

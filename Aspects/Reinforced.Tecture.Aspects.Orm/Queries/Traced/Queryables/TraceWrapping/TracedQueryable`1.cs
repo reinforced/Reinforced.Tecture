@@ -45,23 +45,34 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
             ExpressionHashData hash = null;
             if (p is Containing<IEnumerable<T>> || p is Demanding<IEnumerable<T>>)
                 hash = Expression.CalculateHash();
-            
-            if (p is Containing<IEnumerable<T>> c)
+            try
             {
-                var td = c.Get(hash.Hash, Description.Description);
-                return td.GetEnumerator();
+                if (p is Containing<IEnumerable<T>> c)
+                {
+                    var td = c.Get(hash.Hash, Description.Description);
+                    return td.GetEnumerator();
+                }
+
+                var tran = Aspect.Context.GetQueryTransaction();
+                var originalEnumerator = CreateNewOriginal(hash?.ModifiedExpression).GetEnumerator();
+                if (p is NotifyCompleted<IEnumerable<T>> nc) nc.Fulfill(Description.Description);
+               
+
+                if (p is Demanding<IEnumerable<T>> d)
+                {
+                    var result = new WrappedEnumerator<T>(originalEnumerator, tran);
+                    result.Demands(d, hash.Hash, Description);
+                    return result;
+                }
+
+                return originalEnumerator;
             }
-
-            var tran = Aspect.Context.GetQueryTransaction();
-            var originalEnumerator = CreateNewOriginal(hash?.ModifiedExpression).GetEnumerator();
-            var result = new WrappedEnumerator<T>(originalEnumerator, tran);
-
-            if (p is Demanding<IEnumerable<T>> d)
+            catch (Exception ex)
             {
-                result.Demands(d, hash.Hash, Description);
+                if (p is Catching<IEnumerable<T>> d) 
+                    d.Fulfill(ex, Description.Description);
+                throw;
             }
-           
-            return result;
         }
 
         /// <summary>Returns an enumerator that iterates through a collection.</summary>

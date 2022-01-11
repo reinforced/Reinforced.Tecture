@@ -35,22 +35,12 @@ namespace Reinforced.Tecture.Aspects.DirectSql
 
             private SqlToolingWrapper _tooling;
 
-            internal SqlToolingWrapper Tooling
-            {
-                get
-                {
-                    if (_tooling == null)
-                    {
-                        _tooling = new SqlToolingWrapper(_runtime, Context, ServingTypes);
-                    }
-
-                    return _tooling;
-                }
-            }
+            internal SqlToolingWrapper Tooling => 
+                _tooling ?? (_tooling = new SqlToolingWrapper(_runtime, Context, ServingTypes));
 
             private readonly IStrokeRuntime _runtime;
 
-            internal new TestingContext Context => Context;
+            internal new TestingContext Context => base.Context;
 
             /// <inheritdoc />
             protected Query(IStrokeRuntime runtime)

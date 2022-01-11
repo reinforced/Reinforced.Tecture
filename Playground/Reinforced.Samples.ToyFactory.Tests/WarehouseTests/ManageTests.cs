@@ -1,4 +1,5 @@
-﻿using Reinforced.Samples.ToyFactory.Logic.Channels;
+﻿using System;
+using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
@@ -61,38 +62,47 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             using var c = Case
                //<SupplyCreationPipeline_TestData>
                 (out ITecture ctx);
-            var m = ctx.Do<Manage>();
-            var unit = m.CreateMeasurementUnit("Kilograms", "kG");
-            ctx.Save();
-            var res1 = m.CreateResource("resource1", "kG");
-            var res2 = m.CreateResource("resource2", "kG");
-            var res3 = m.CreateResource("resource3", "kG");
-            ctx.Save();
-            var id = ctx.From<Db>().Key(res2);
-            var supply = ctx.Do<Supply>();
-
-            var supp = supply.CreateResourceSupply("Supply1", new[]
+            try
             {
-                new ResourceItemDto()
-                {
-                    Name = "resource1", Quantity = 10
-                },
-                new ResourceItemDto()
-                {
-                    Id = id, Quantity = 10
-                },
-                new ResourceItemDto()
-                {
-                    Name = "resource3", Quantity = 10
-                },
-            });
+                var m = ctx.Do<Manage>();
+                var unit = m.CreateMeasurementUnit("Kilograms", "kG");
+                ctx.Save();
+                var res1 = m.CreateResource("resource1", "kG");
+                var res2 = m.CreateResource("resource2", "kG");
+                var res3 = m.CreateResource("resource3", "kG");
+                ctx.Save();
+                var id = ctx.From<Db>().Key(res2);
+                var supply = ctx.Do<Supply>();
 
-            ctx.Save();
-            var supplyId = ctx.From<Db>().Key(supp);
-            supply.FinishResourceSupply(supplyId);
-            ctx.Save();
-            Output.WriteLine(c.Text());
-            //c.Validate<SupplyCreationPipeline_Validation>();
+                var supp = supply.CreateResourceSupply("Supply1", new[]
+                {
+                    new ResourceItemDto()
+                    {
+                        Name = "resource1", Quantity = 10
+                    },
+                    new ResourceItemDto()
+                    {
+                        Id = id, Quantity = 10
+                    },
+                    new ResourceItemDto()
+                    {
+                        Name = "resource3", Quantity = 10
+                    },
+                });
+
+                ctx.Save();
+                var supplyId = ctx.From<Db>().Key(supp);
+                supply.FinishResourceSupply(supplyId);
+                ctx.Save();
+            }
+            catch(Exception ex)
+            {
+                var text = c.Text();
+                Output.WriteLine(c.Text());
+                //c.Validate<SupplyCreationPipeline_Validation>();    
+            }
+
+            
             
         }
 

@@ -9,5 +9,9 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql
         public EfCoreDirectSqlException(string message) : base(message)
         {
         }
+
+        public EfCoreDirectSqlException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

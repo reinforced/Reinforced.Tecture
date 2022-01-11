@@ -39,7 +39,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 						Assert.Equal(As<Resource>(c.Entity).Id, 0, "Id of added entity has invalid value");
 						Assert.Equal(As<Resource>(c.Entity).Name, @"resource1", "Name of added entity has invalid value");
 						Assert.Equal(As<Resource>(c.Entity).StockQuantity, 0, "StockQuantity of added entity has invalid value");
-						Assert.Equal(As<Resource>(c.Entity).MeasurementUnitId, 43, "MeasurementUnitId of added entity has invalid value");
+						Assert.Equal(As<Resource>(c.Entity).MeasurementUnitId, 55, "MeasurementUnitId of added entity has invalid value");
 						Assert.Null(As<Resource>(c.Entity).MeasurementUnit, "MeasurementUnit of added entity must be null");
 						Assert.Equal(c.EntityType, typeof(Resource), "type of added entity has invalid value");
 						Assert.Equal(c.Annotation, @"new resource resource1", "Annotation has invalid value");
@@ -51,7 +51,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 						Assert.Equal(As<Resource>(c.Entity).Id, 0, "Id of added entity has invalid value");
 						Assert.Equal(As<Resource>(c.Entity).Name, @"resource2", "Name of added entity has invalid value");
 						Assert.Equal(As<Resource>(c.Entity).StockQuantity, 0, "StockQuantity of added entity has invalid value");
-						Assert.Equal(As<Resource>(c.Entity).MeasurementUnitId, 43, "MeasurementUnitId of added entity has invalid value");
+						Assert.Equal(As<Resource>(c.Entity).MeasurementUnitId, 55, "MeasurementUnitId of added entity has invalid value");
 						Assert.Null(As<Resource>(c.Entity).MeasurementUnit, "MeasurementUnit of added entity must be null");
 						Assert.Equal(c.EntityType, typeof(Resource), "type of added entity has invalid value");
 						Assert.Equal(c.Annotation, @"new resource resource2", "Annotation has invalid value");
@@ -63,7 +63,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 						Assert.Equal(As<Resource>(c.Entity).Id, 0, "Id of added entity has invalid value");
 						Assert.Equal(As<Resource>(c.Entity).Name, @"resource3", "Name of added entity has invalid value");
 						Assert.Equal(As<Resource>(c.Entity).StockQuantity, 0, "StockQuantity of added entity has invalid value");
-						Assert.Equal(As<Resource>(c.Entity).MeasurementUnitId, 43, "MeasurementUnitId of added entity has invalid value");
+						Assert.Equal(As<Resource>(c.Entity).MeasurementUnitId, 55, "MeasurementUnitId of added entity has invalid value");
 						Assert.Null(As<Resource>(c.Entity).MeasurementUnit, "MeasurementUnit of added entity must be null");
 						Assert.Equal(c.EntityType, typeof(Resource), "type of added entity has invalid value");
 						Assert.Equal(c.Annotation, @"new resource resource3", "Annotation has invalid value");
@@ -79,7 +79,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				(c=>
 					{ 
 						Assert.Equal(As<ResourceSupply>(c.Entity).Name, @"Supply1", "Name of added entity has invalid value");
-						Assert.Equal(As<ResourceSupply>(c.Entity).CreationDate, new DateTime(2022, 1, 10, 19, 46, 50, 658, DateTimeKind.Utc), "CreationDate of added entity has invalid value");
+						Assert.Equal(As<ResourceSupply>(c.Entity).CreationDate, new DateTime(2022, 1, 11, 0, 27, 24, 967, DateTimeKind.Utc), "CreationDate of added entity has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Entity).Status, ResourceSupplyStatus.Open, "Status of added entity has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Entity).ItemsCount, 0, "ItemsCount of added entity has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Entity).Id, 0, "Id of added entity has invalid value");
@@ -90,14 +90,14 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Relate>
 				(c=>
 					{ 
-						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceId, 121, "ResourceId of property Primary of command Relate has invalid value");
+						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceId, 157, "ResourceId of property Primary of command Relate has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Primary).Resource, "Resource of property Primary of command Relate must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceSupplyId, 0, "ResourceSupplyId of property Primary of command Relate has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Primary).ResourceSupply, "ResourceSupply of property Primary of command Relate must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Primary).Quantity, 10, "Quantity of property Primary of command Relate has invalid value");
 						Assert.Equal(c.PrimaryType, typeof(ResourceSupplyItem), "property PrimaryType of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Name, @"Supply1", "Name of property Secondary of command Relate has invalid value");
-						Assert.Equal(As<ResourceSupply>(c.Secondary).CreationDate, new DateTime(2022, 1, 10, 19, 46, 50, 658, DateTimeKind.Utc), "CreationDate of property Secondary of command Relate has invalid value");
+						Assert.Equal(As<ResourceSupply>(c.Secondary).CreationDate, new DateTime(2022, 1, 11, 0, 27, 24, 967, DateTimeKind.Utc), "CreationDate of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Status, ResourceSupplyStatus.Open, "Status of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).ItemsCount, 0, "ItemsCount of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Id, 0, "Id of property Secondary of command Relate has invalid value");
@@ -109,7 +109,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Add>
 				(c=>
 					{ 
-						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceId, 121, "ResourceId of added entity has invalid value");
+						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceId, 157, "ResourceId of added entity has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Entity).Resource, "Resource of added entity must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceSupplyId, 0, "ResourceSupplyId of added entity has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Entity).ResourceSupply, "ResourceSupply of added entity must be null");
@@ -121,14 +121,14 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Relate>
 				(c=>
 					{ 
-						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceId, 122, "ResourceId of property Primary of command Relate has invalid value");
+						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceId, 158, "ResourceId of property Primary of command Relate has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Primary).Resource, "Resource of property Primary of command Relate must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceSupplyId, 0, "ResourceSupplyId of property Primary of command Relate has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Primary).ResourceSupply, "ResourceSupply of property Primary of command Relate must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Primary).Quantity, 10, "Quantity of property Primary of command Relate has invalid value");
 						Assert.Equal(c.PrimaryType, typeof(ResourceSupplyItem), "property PrimaryType of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Name, @"Supply1", "Name of property Secondary of command Relate has invalid value");
-						Assert.Equal(As<ResourceSupply>(c.Secondary).CreationDate, new DateTime(2022, 1, 10, 19, 46, 50, 658, DateTimeKind.Utc), "CreationDate of property Secondary of command Relate has invalid value");
+						Assert.Equal(As<ResourceSupply>(c.Secondary).CreationDate, new DateTime(2022, 1, 11, 0, 27, 24, 967, DateTimeKind.Utc), "CreationDate of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Status, ResourceSupplyStatus.Open, "Status of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).ItemsCount, 0, "ItemsCount of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Id, 0, "Id of property Secondary of command Relate has invalid value");
@@ -140,7 +140,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Add>
 				(c=>
 					{ 
-						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceId, 122, "ResourceId of added entity has invalid value");
+						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceId, 158, "ResourceId of added entity has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Entity).Resource, "Resource of added entity must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceSupplyId, 0, "ResourceSupplyId of added entity has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Entity).ResourceSupply, "ResourceSupply of added entity must be null");
@@ -152,14 +152,14 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Relate>
 				(c=>
 					{ 
-						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceId, 123, "ResourceId of property Primary of command Relate has invalid value");
+						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceId, 159, "ResourceId of property Primary of command Relate has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Primary).Resource, "Resource of property Primary of command Relate must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Primary).ResourceSupplyId, 0, "ResourceSupplyId of property Primary of command Relate has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Primary).ResourceSupply, "ResourceSupply of property Primary of command Relate must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Primary).Quantity, 10, "Quantity of property Primary of command Relate has invalid value");
 						Assert.Equal(c.PrimaryType, typeof(ResourceSupplyItem), "property PrimaryType of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Name, @"Supply1", "Name of property Secondary of command Relate has invalid value");
-						Assert.Equal(As<ResourceSupply>(c.Secondary).CreationDate, new DateTime(2022, 1, 10, 19, 46, 50, 658, DateTimeKind.Utc), "CreationDate of property Secondary of command Relate has invalid value");
+						Assert.Equal(As<ResourceSupply>(c.Secondary).CreationDate, new DateTime(2022, 1, 11, 0, 27, 24, 967, DateTimeKind.Utc), "CreationDate of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Status, ResourceSupplyStatus.Open, "Status of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).ItemsCount, 0, "ItemsCount of property Secondary of command Relate has invalid value");
 						Assert.Equal(As<ResourceSupply>(c.Secondary).Id, 0, "Id of property Secondary of command Relate has invalid value");
@@ -171,7 +171,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Add>
 				(c=>
 					{ 
-						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceId, 123, "ResourceId of added entity has invalid value");
+						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceId, 159, "ResourceId of added entity has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Entity).Resource, "Resource of added entity must be null");
 						Assert.Equal(As<ResourceSupplyItem>(c.Entity).ResourceSupplyId, 0, "ResourceSupplyId of added entity has invalid value");
 						Assert.Null(As<ResourceSupplyItem>(c.Entity).ResourceSupply, "ResourceSupply of added entity must be null");
@@ -189,11 +189,11 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 				flow.Then<Db, Sql>
 				(c=>
 					{ 
-						Assert.Equal(c.QueryText, @"UPDATE [r] SET [r].[ItemsCount] = (SELECT COUNT(*) FROM [ResourceSupplyItem] [item]
+						Assert.Equal(c.QueryText, @"UPATE [r] SET [r].[ItemsCount] = (SELECT COUNT(*) FROM [ResourceSupplyItem] [item]
  WHERE [item].[ResourceSupplyId] = {0}) FROM [ResourceSupply] [r]", "query text has invalid value");
 						Assert.Collection(c.QueryParameters, "query parameters collection must be composed correctly", r0_0=>
 						{ 
-							Assert.Equal(As<Int32>(r0_0), 18, "item #0 of query parameters collection has invalid value");
+							Assert.Equal(As<Int32>(r0_0), 22, "item #0 of query parameters collection has invalid value");
 						});
 						Assert.Equal(c.Annotation, @"", "Annotation has invalid value");
 					}
@@ -216,7 +216,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
     WHERE [item].[ResourceSupplyId] = {0}", "query text has invalid value");
 						Assert.Collection(c.QueryParameters, "query parameters collection must be composed correctly", r0_0=>
 						{ 
-							Assert.Equal(As<Int32>(r0_0), 18, "item #0 of query parameters collection has invalid value");
+							Assert.Equal(As<Int32>(r0_0), 22, "item #0 of query parameters collection has invalid value");
 						});
 						Assert.Equal(c.Annotation, @"", "Annotation has invalid value");
 					}
@@ -231,7 +231,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 							Assert.Equal(As<Int32>(r0_0), 4, "item #0 of query parameters collection has invalid value");
 						}, r0_0=>
 						{ 
-							Assert.Equal(As<Int32>(r0_0), 18, "item #0 of query parameters collection has invalid value");
+							Assert.Equal(As<Int32>(r0_0), 22, "item #0 of query parameters collection has invalid value");
 						});
 						Assert.Equal(c.Annotation, @"", "Annotation has invalid value");
 					}

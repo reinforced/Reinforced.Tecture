@@ -37,23 +37,33 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
             ExpressionHashData hash = null;
             if (p is Containing<IEnumerable> || p is Demanding<IEnumerable>)
                 hash = Expression.CalculateHash();
-            
-            if (p is Containing<IEnumerable> c)
+            try
             {
-                var td = c.Get(hash.Hash, Description.Description);
-                return td.GetEnumerator();
+                if (p is Containing<IEnumerable> c)
+                {
+                    var td = c.Get(hash.Hash, Description.Description);
+                    return td.GetEnumerator();
+                }
+
+                var tran = Aspect.Context.GetQueryTransaction();
+                var originalEnumerator = CreateNewOriginal(hash?.ModifiedExpression).GetEnumerator();
+                if (p is NotifyCompleted<IEnumerable> nc) nc.Fulfill(Description.Description);
+
+                if (p is Demanding<IEnumerable> d)
+                {
+                    var result = new TracedEnumerator(originalEnumerator, tran);
+                    result.Demands(d, hash.Hash, Description);
+                    return result;
+                }
+
+                return originalEnumerator;
             }
-
-            var tran = Aspect.Context.GetQueryTransaction();
-            var originalEnumerator = CreateNewOriginal(hash?.ModifiedExpression).GetEnumerator();
-            var result = new TracedEnumerator(originalEnumerator, tran);
-
-            if (p is Demanding<IEnumerable> d)
+            catch (Exception ex)
             {
-                result.Demands(d, hash.Hash, Description);
+                if (p is Catching<IEnumerable> d) 
+                    d.Fulfill(ex, Description.Description);
+                throw;
             }
-           
-            return result;
         }
 
         /// <summary>Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see cref="T:System.Linq.IQueryable" /> is executed.</summary>

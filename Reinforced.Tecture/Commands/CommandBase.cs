@@ -43,8 +43,15 @@ namespace Reinforced.Tecture.Commands
         private bool _isExecuted;
         private TimeSpan _timeTaken = TimeSpan.Zero;
         private Exception _exception;
+        internal bool _lightMode = false;
 
         public virtual string Code => string.Empty;
+        
+        
+        /// <summary>
+        /// Gets whether command is captured in light mode, so does not contain majority of data
+        /// </summary>
+        public bool IsLightMode => _lightMode;
 
         /// <summary>
         /// Discriminates data source type for command.
@@ -56,6 +63,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _channel = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.Channel = value;
@@ -89,6 +97,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _annotation = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.Annotation = value;
@@ -105,6 +114,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _debug = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.Debug = value;
@@ -137,6 +147,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _order = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.Order = value;
@@ -160,6 +171,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _exception = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.Exception = value;
@@ -176,6 +188,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _isExecuted = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.IsExecuted = value;
@@ -192,6 +205,7 @@ namespace Reinforced.Tecture.Commands
             internal set
             {
                 _timeTaken = value;
+                if (_lightMode) return;
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.TimeTaken = value;
@@ -202,6 +216,9 @@ namespace Reinforced.Tecture.Commands
 
         internal CommandBase TraceClone()
         {
+            if (_lightMode)
+                throw new TectureException("Light commands are not suitable for cloning. Check the logic");
+            
             var clone = DeepCloneForTracing();
             clone.Channel = Channel;
             clone.Annotation = Annotation;

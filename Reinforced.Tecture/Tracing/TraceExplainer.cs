@@ -94,6 +94,31 @@ namespace Reinforced.Tecture.Tracing
 
         protected virtual bool ShouldSkip(CommandBase command) => false;
 
+        private static void RevealException(Exception ex, StringBuilder sb, int level)
+        {
+            if (ex is AggregateException ae)
+            {
+                foreach (var innerException in ae.InnerExceptions)
+                {
+                    RevealException(innerException,sb,level+1);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < level; i++)
+                {
+                    sb.Append("\t");
+                }
+            
+                sb.AppendLine(ex.Message);
+
+                if (ex.InnerException != null)
+                {
+                    RevealException(ex.InnerException,sb,level+1);
+                }    
+            }
+        }
+        
         /// <summary>
         /// Generic explainer suitable for any command type
         /// </summary>
@@ -114,7 +139,7 @@ namespace Reinforced.Tecture.Tracing
             else Writer.Write(" ");
 
 
-            Writer.Write(string.IsNullOrEmpty(command.Code) ? command.GetType().Name : $"{command.Code}");
+            Writer.Write(string.IsNullOrEmpty(command.Code) ? command.GetType().Name : $"[{command.Code}] ");
 
             Writer.Write(" ");
             if (!string.IsNullOrEmpty(command.Annotation)) Writer.Write(command.Annotation);
@@ -124,7 +149,16 @@ namespace Reinforced.Tecture.Tracing
 
             if (command.Exception != null)
             {
-                Writer.WriteLine($"[ERROR] {command.Exception.Message}");
+                Writer.WriteLine($"[ERROR]");
+                var sb = new StringBuilder();
+                RevealException(command.Exception,sb,0);
+                Writer.Write(sb.ToString());
+                if (!string.IsNullOrEmpty(command.Exception.StackTrace))
+                {
+                    Writer.WriteLine("---");
+                    Writer.WriteLine(command.Exception.StackTrace);
+                }
+                Writer.WriteLine($"[/ERROR]");
             }
         }
     }

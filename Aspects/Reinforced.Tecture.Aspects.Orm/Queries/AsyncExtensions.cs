@@ -35,9 +35,16 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     {
                         if (!x.IsFaulted) tran.Commit();
                         tran.Dispose();
-                        if (p is Demanding<U> d)
+                        if (x.Exception != null)
                         {
-                            d.Fullfill(x.Result, hash.Hash, wq.Description.Description);
+                            if (p is Catching<U> de)
+                                de.Fulfill(x.Exception,wq.Description.Description);
+                        }
+                        else
+                        {
+                            if (p is NotifyCompleted<U> nc) nc.Fulfill(wq.Description.Description);
+                            if (p is Demanding<U> d) 
+                                d.Fulfill(x.Result, hash.Hash, wq.Description.Description);
                         }
 
                         return x.Result;
@@ -76,9 +83,17 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
-                    if (p is Demanding<U> d)
+                    if (x.Exception != null)
                     {
-                        d.Fullfill(x.Result, hash.Hash, wq.Description.Description);
+                        if (p is Catching<U> de)
+                            de.Fulfill(x.Exception,wq.Description.Description);
+                    }
+                    else
+                    {
+                        if (p is NotifyCompleted<U> nc) 
+                            nc.Fulfill(wq.Description.Description);
+                        if (p is Demanding<U> d)
+                            d.Fulfill(x.Result, hash.Hash, wq.Description.Description);
                     }
 
                     return x.Result;
@@ -116,10 +131,19 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
-                    if (p is Demanding<U> d)
+                    if (x.Exception != null)
                     {
-                        d.Fullfill(x.Result, hash.Hash, wq.Description.Description);
+                        if (p is Catching<U> de)
+                            de.Fulfill(x.Exception,wq.Description.Description);
                     }
+                    else
+                    {
+                        if (p is NotifyCompleted<U> nc) 
+                            nc.Fulfill(wq.Description.Description);
+                        if (p is Demanding<U> d) 
+                            d.Fulfill(x.Result, hash.Hash, wq.Description.Description);
+                    }
+                    
 
                     return x.Result;
                 }, ct);
@@ -157,9 +181,16 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                 {
                     if (!x.IsFaulted) tran.Commit();
                     tran.Dispose();
-                    if (p is Demanding<V> d)
+                    if (x.Exception != null)
                     {
-                        d.Fullfill(x.Result, hash.Hash, wq.Description.Description);
+                        if (p is Catching<V> de)
+                            de.Fulfill(x.Exception,wq.Description.Description);
+                    }
+                    else
+                    {
+                        if (p is NotifyCompleted<V> nc) nc.Fulfill(wq.Description.Description);
+                        if (p is Demanding<V> d)
+                            d.Fulfill(x.Result, hash.Hash, wq.Description.Description);   
                     }
 
                     return x.Result;
@@ -2125,10 +2156,17 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     {
                         if (!x.IsFaulted) tran.Commit();
                         tran.Dispose();
-                        if (p is Demanding<bool> d)
+                        if (x.Exception != null)
                         {
-                            d.Fullfill(x.Result, hash.Hash,
-                                wq.Description.Description);
+                            if (p is Catching<bool> de)
+                                de.Fulfill(x.Exception,wq.Description.Description);
+                        }
+                        else
+                        {
+                            if (p is NotifyCompleted<bool> nc)
+                                nc.Fulfill(wq.Description.Description);
+                            if (p is Demanding<bool> d)
+                                d.Fulfill(x.Result, hash.Hash, wq.Description.Description);
                         }
 
                         return x.Result;
@@ -2389,11 +2427,20 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
                     {
                         if (!x.IsFaulted) tran.Commit();
                         tran.Dispose();
-                        if (p is Demanding<Dictionary<TKey, TElement>> d)
+                        if (x.Exception != null)
                         {
-                            d.Fullfill(x.Result, hash.Hash,
-                                wq.Description.Description);
+                            if (p is Catching<Dictionary<TKey, TElement>> de)
+                                de.Fulfill(x.Exception,wq.Description.Description);
                         }
+                        else
+                        {
+                            if (p is NotifyCompleted<Dictionary<TKey, TElement>> nc) 
+                                nc.Fulfill(wq.Description.Description);
+                            
+                            if (p is Demanding<Dictionary<TKey, TElement>> d)
+                                d.Fulfill(x.Result, hash.Hash, wq.Description.Description);
+                        }
+                        
 
                         return x.Result;
                     }, cancellationToken);

@@ -74,18 +74,18 @@ namespace Reinforced.Tecture.Tests.Channels.Commands
 
             var explanation = trace.Explain();
             const string expectedExplanation =
-@"    1.   {  Test Cycle
-    2.  //  Test
-    3.   +  Loop iteration
-    4.  //  Test
-    5.   +  Loop iteration
-    6.  //  Test
-    7.   +  Loop iteration
-    8.   }  Test Cycle
-    9.   <- Save
-    10.  //  <<< Finally block >>>
-    11.  //  <<< End of Finally block >>>
-    12.   !  End
+@"    1.  [ { ]  Test Cycle
+    2.  [// ]  Test
+    3.  [ + ]  Loop iteration
+    4.  [// ]  Test
+    5.  [ + ]  Loop iteration
+    6.  [// ]  Test
+    7.  [ + ]  Loop iteration
+    8.  [ } ]  Test Cycle
+    9.  [ <-]  Save
+    10.  [// ]  <<< Finally block >>>
+    11.  [// ]  <<< End of Finally block >>>
+    12.  [ ! ]  End
 ";              
             
             Assert.Equal(expectedExplanation, explanation);

@@ -30,7 +30,13 @@ namespace Reinforced.Tecture
         /// <summary>
         /// Begins trace collection
         /// </summary>
-        void BeginTrace();
+        /// <param name="lightMode">
+        /// Enable light mode. It will be not possible to generate tests or validation
+        /// from this trace, but is still stays informative enough</param>
+        /// <param name="profiling">
+        /// Enable or disable profiling while collecting trace (stopwatches)
+        /// </param>
+        void BeginTrace(bool lightMode = false, bool profiling = true);
 
         /// <summary>
         /// Finishes trace collection

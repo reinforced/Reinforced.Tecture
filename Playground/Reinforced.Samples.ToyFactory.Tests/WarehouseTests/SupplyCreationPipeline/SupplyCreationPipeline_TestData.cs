@@ -20,7 +20,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_3()
 			{ 
-				return 43;
+				return 55;
 			}
 
 			private Boolean GetEntry_4()
@@ -30,7 +30,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_5()
 			{ 
-				return 43;
+				return 55;
 			}
 
 			private Boolean GetEntry_6()
@@ -40,44 +40,44 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 
 			private Int32 GetEntry_7()
 			{ 
-				return 43;
+				return 55;
 			}
 
 			private Int32 GetEntry_8()
 			{ 
-				return 122;
+				return 158;
 			}
 
 			private Resource[] GetEntry_9()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 122);
+				Set(v1, x=>x.Id, 158);
 				Set(v1, x=>x.Name, @"resource2");
-				Set(v1, x=>x.MeasurementUnitId, 43);
+				Set(v1, x=>x.MeasurementUnitId, 55);
 				return new Resource[] { v1 } ;
 			}
 
 			private List<Resource> GetEntry_10()
 			{ 
 				var v1 = New<Resource>();
-				Set(v1, x=>x.Id, 121);
+				Set(v1, x=>x.Id, 157);
 				Set(v1, x=>x.Name, @"resource1");
-				Set(v1, x=>x.MeasurementUnitId, 43);
+				Set(v1, x=>x.MeasurementUnitId, 55);
 				var v2 = New<Resource>();
-				Set(v2, x=>x.Id, 123);
+				Set(v2, x=>x.Id, 159);
 				Set(v2, x=>x.Name, @"resource3");
-				Set(v2, x=>x.MeasurementUnitId, 43);
+				Set(v2, x=>x.MeasurementUnitId, 55);
 				return new List<Resource> { v1, v2 } ;
 			}
 
 			private Int32 GetEntry_11()
 			{ 
-				return 18;
+				return 22;
 			}
 
 			private Int32 GetEntry_12()
 			{ 
-				return 18;
+				return 22;
 			}
 
 			public override IEnumerable<ITestDataRecord> GetRecords()
@@ -115,7 +115,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipel
 					Description = @"Get primary key of added Resource"
 				};
 				yield return new TestDataRecord<Resource[]>(GetEntry_9()) { 
-					Hash = @"6CAD25B6FA360FE42B0AA6BD661F16917C29BC7CB67CDB453BD1C37AE8C385",
+					Hash = @"D144B49489B767283F23175268EE381B371CBB54D3E28FEE4C99EBBE6F94",
 					Description = @""
 				};
 				yield return new TestDataRecord<List<Resource>>(GetEntry_10()) { 

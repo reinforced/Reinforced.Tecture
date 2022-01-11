@@ -48,23 +48,39 @@ namespace Reinforced.Samples.ToyFactory.Controllers
 
         public class IdName
         {
+            public IdName()
+            {
+                throw new Exception("Hha!");
+            }
+
             public int Id { get; set; }
             public string Name { get; set; }
         }
         [HttpGet]
         public async Task<IdName[]> All()
         {
-            var result =
-                await _tecture.From<Db>().Get<ToyType>()
-                    .All
-                    .Select(x => new IdName()
-                    {
-                        Id = x.Id,
-                        Name = x.Name
-                    }).ToArrayAsync();
+            _tecture.BeginTrace(true);
+            try
+            {
+                var result =
+                    await _tecture.From<Db>().Get<ToyType>()
+                        .All
+                        .Select(x => new IdName()
+                        {
+                            Id = (int)(object)x.Name,
+                            Name = x.Name,
+
+                        }).ToArrayAsync();
 
 
-            return result;
+
+                return result;
+            }
+            finally
+            {
+                var trace = _tecture.EndTrace();
+                var s = trace.Explain();
+            }
         }
 
         [HttpGet]

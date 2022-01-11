@@ -19,6 +19,11 @@ namespace Reinforced.Tecture.Tracing
     /// </summary>
     public class Trace
     {
+        /// <summary>
+        /// Gets whether trace is light, so does not contain enough data to generate test data or validation
+        /// </summary>
+        public bool IsLightTrace { get; private set; }
+        
         private readonly CommandBase[] _commands;
 
         /// <summary>
@@ -54,11 +59,12 @@ namespace Reinforced.Tecture.Tracing
         {
             var fn = typeof(T).FullName;
             var cmds = _commands.Where(x => x.ChannelId == fn || x is Save || x is End);
-            return new Trace(new Queue<CommandBase>(cmds));
+            return new Trace(new Queue<CommandBase>(cmds),IsLightTrace);
         }
 
-        internal Trace(Queue<CommandBase> effects)
+        internal Trace(Queue<CommandBase> effects, bool isLightTrace)
         {
+            IsLightTrace = isLightTrace;
             var nq = new Queue<CommandBase>(effects);
             CommandBase[] effectsArray = new CommandBase[effects.Count];
             int i = 0;
@@ -76,6 +82,8 @@ namespace Reinforced.Tecture.Tracing
         /// <returns>Story validator</returns>
         public TraceValidator Begins()
         {
+            if (IsLightTrace)
+                throw new TectureException("Cannot validate light trace");
             return new TraceValidator(this);
         }
 

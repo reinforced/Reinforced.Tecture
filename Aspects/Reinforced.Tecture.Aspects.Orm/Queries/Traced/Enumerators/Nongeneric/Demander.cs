@@ -41,7 +41,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Enumerators.Nongeneric
 
         public void Dispose()
         {
-            _demanding.Fullfill(_data, _data, _hash, _description.Description);
+            _demanding.Fulfill(_data, _data, _hash, _description.Description);
         }
     }
 }

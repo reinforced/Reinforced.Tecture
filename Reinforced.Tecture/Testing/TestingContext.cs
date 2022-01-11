@@ -34,6 +34,12 @@ namespace Reinforced.Tecture.Testing
         /// Gets whether channel queries and commands will be captured
         /// </summary>
         public bool CollectsTestData => _container.TraceCollector != null;
+        
+        /// <summary>
+        /// Gets whether trace collects data in light mode
+        /// </summary>
+        public bool? LightMode => _container?.TraceCollector.LightMode;
+        
 
         /// <summary>
         /// Traces query that will be fulfilled later
@@ -49,6 +55,10 @@ namespace Reinforced.Tecture.Testing
 
             if (_container.TraceCollector != null)
             {
+                if (_container.TraceCollector.LightMode)
+                {
+                    return new LightDemands<T>(_container.TraceCollector, _channelType);
+                }
                 return new Demands<T>(_container.TraceCollector, _channelType);
             }
             return new Consistency<T>();

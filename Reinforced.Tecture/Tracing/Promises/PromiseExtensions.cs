@@ -17,24 +17,37 @@ namespace Reinforced.Tecture.Tracing.Promises
             Func<string> description = null)
             where T : struct
         {
-            T result;
-            if (promise is Containing<T> c)
+            try
             {
-                var hashString = hashFactory();
-                result = c.Get(hashString, description?.Invoke());
-            }
-            else
-            {
-                result = valueFactory();
-            }
+                T result;
+                if (promise is Containing<T> c)
+                {
+                    var hashString = hashFactory();
+                    result = c.Get(hashString, description?.Invoke());
+                }
+                else
+                {
+                    result = valueFactory();
+                    if (promise is NotifyCompleted<T> nc) nc.Fulfill(description?.Invoke());
+                }
 
-            if (promise is Demanding<T> d)
-            {
-                var hashString = hashFactory();
-                d.Fullfill(result, result, hashString, description?.Invoke());
-            }
+                if (promise is Demanding<T> d)
+                {
+                    var hashString = hashFactory();
+                    d.Fulfill(result, result, hashString, description?.Invoke());
+                }
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                if (promise is Catching<T> d)
+                {
+                    d.Fulfill(ex, description?.Invoke());
+                }
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -50,31 +63,44 @@ namespace Reinforced.Tecture.Tracing.Promises
             Func<string> description = null, Func<T, T> clone = null)
             where T : class
         {
-            T result;
-            if (promise is Containing<T> c)
+            try
             {
-                var hashString = hashFactory();
-                result = c.Get(hashString, description?.Invoke());
-            }
-            else
-            {
-                result = valueFactory();
-            }
-
-            if (promise is Demanding<T> d)
-            {
-                var hashString = hashFactory();
-                if (clone != null)
+                T result;
+                if (promise is Containing<T> c)
                 {
-                    d.Fullfill(result, clone(result), hashString, description?.Invoke());
+                    var hashString = hashFactory();
+                    result = c.Get(hashString, description?.Invoke());
                 }
                 else
                 {
-                    d.Fullfill(result, hashString, description?.Invoke());
+                    result = valueFactory();
+                    if (promise is NotifyCompleted<T> nc) nc.Fulfill(description?.Invoke());
                 }
-            }
 
-            return result;
+                if (promise is Demanding<T> d)
+                {
+                    var hashString = hashFactory();
+                    if (clone != null)
+                    {
+                        d.Fulfill(result, clone(result), hashString, description?.Invoke());
+                    }
+                    else
+                    {
+                        d.Fulfill(result, hashString, description?.Invoke());
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                if (promise is Catching<T> d)
+                {
+                    d.Fulfill(ex, description?.Invoke());
+                }
+
+                throw;
+            }
         }
     }
 }

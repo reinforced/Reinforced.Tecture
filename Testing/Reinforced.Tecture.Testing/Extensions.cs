@@ -21,6 +21,9 @@ namespace Reinforced.Tecture.Testing
         /// <returns>Generate output</returns>
         public static GenerationOutput GenerateValidation(this Trace trace, string className, string ns, HashSet<string> optOutChecks = null)
         {
+            if (trace.IsLightTrace)
+                throw new TectureException("Cannot generate validation using light trace");
+            
             var generator = new ValidationGenerator(className, ns);
             generator.Before();
             generator.Generate(trace.Commands);
@@ -38,6 +41,9 @@ namespace Reinforced.Tecture.Testing
         /// <returns>Generated output</returns>
         public static GenerationOutput GenerateData(this Trace trace, string className, string ns, Action<CSharpTestDataGeneratorSetup> setup = null)
         {
+            if (trace.IsLightTrace)
+                throw new TectureException("Cannot capture test data using light trace");
+            
             var tc = CSharpTestDataGeneratorSetup.Create(className, ns);
             setup?.Invoke(tc);
 

@@ -38,6 +38,42 @@ namespace Reinforced.Tecture.Tracing
         /// </summary>
         public object Result { get; private set; }
 
+        internal void SetException<T>(Exception ex, string description, TimeSpan timeTaken)
+        {
+            var type = typeof(T);
+            if (typeof(T).IsInterface || typeof(T).IsAbstract)
+            {
+                type = typeof(object);
+            }
+            Result = null;
+            DataType = type;
+            Hash = String.Empty;
+            TimeTaken = timeTaken;
+            Annotation = description;
+            Exception = ex;
+            if (_lightMode) return;
+            foreach (var commandBase in KnownClones)
+            {
+                var kc = (QueryRecord) commandBase;
+                kc.Result = null;
+                kc.DataType = type;
+                kc.Hash = String.Empty;
+                kc.TimeTaken = timeTaken;
+                kc.Annotation = description;
+            }
+        }
+        
+        internal void SetLightResult<T>(string description, TimeSpan timeTaken)
+        {
+            var type = typeof(T);
+            
+            Result = null;
+            DataType = type;
+            Hash = "<cut>";
+            TimeTaken = timeTaken;
+            Annotation = description;
+        }
+
         internal void SetResult<T>(T result, T clone, string hash, string description, TimeSpan timeTaken)
         {
             var type = typeof(T);
@@ -51,6 +87,7 @@ namespace Reinforced.Tecture.Tracing
             Hash = hash;
             TimeTaken = timeTaken;
             Annotation = description;
+            if (_lightMode) return;
             foreach (var commandBase in KnownClones)
             {
                 var kc = (QueryRecord) commandBase;
@@ -73,6 +110,12 @@ namespace Reinforced.Tecture.Tracing
         /// <param name="tw">Log writer</param>
         protected override string ToStringActually()
         {
+            if (_lightMode)
+            {
+                if (!string.IsNullOrEmpty(Annotation)) return Annotation;
+                return $"{(IsTestData ? "[Mock] " : "")} Query made to '{Channel.Name}'. Result is not captured.";
+            }
+                
             var sb = new StringBuilder();
             using (var tw = new StringWriter(sb))
             {

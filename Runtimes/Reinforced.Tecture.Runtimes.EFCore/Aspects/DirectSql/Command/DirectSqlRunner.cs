@@ -28,7 +28,14 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
             if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
-                _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
+                try
+                {
+                    _aspect.DbContext.Value.Database.ExecuteSqlRaw(query.Query, query.Parameters);
+                }
+                catch (Exception ex)
+                {
+                    throw new EfCoreDirectSqlException($"Error executing query:\r\n{query.Query}\r\n", ex);
+                }
             }
         }
 
@@ -42,7 +49,14 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
             if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
-                return _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters);
+                try
+                {
+                    return _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters,token);
+                }
+                catch (Exception ex)
+                {
+                    throw new EfCoreDirectSqlException($"Error executing query:\r\n{query.Query}\r\n", ex);
+                }
             }
 
             return Task.FromResult(0);

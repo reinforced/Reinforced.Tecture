@@ -55,7 +55,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             Finally(() =>
             {
                 To<Db>().Sql<ResourceSupply, ResourceSupplyItem>((r, item) =>
-                    $"UPDATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
+                    $"UPATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
             });
             
         }

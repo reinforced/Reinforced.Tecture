@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
@@ -27,8 +28,10 @@ namespace Reinforced.Tecture.Aspects.Orm
                 IQueryable<T> set = Context.ProvidesTestData ? new T[0].AsQueryable() : Set<T>();
 
                 return
-                    Context.CollectsTestData ? (IQueryable<T>) 
-                        new TracedQueryable<T>(set, this, new DescriptionHolder(), true)
+                    Context.CollectsTestData
+                        ? (IQueryable<T>)
+                        new TracedQueryable<T>(set, this, new DescriptionHolder(),
+                            Context.LightMode != true)
                         : new QueryableWithAsyncExecutor<T>(AsyncExecutorActually, set);
             }
 
@@ -72,12 +75,21 @@ namespace Reinforced.Tecture.Aspects.Orm
                 if (p is Containing<T> c)
                     return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 
-                var result = (T)(GetKey(a, GetKeyProperties<T>(a)).First());
+                try
+                {
+                    var result = (T)(GetKey(a, GetKeyProperties<T>(a)).First());
+                    if (p is NotifyCompleted<T> nc) nc.Fulfill(explanation);
+                    if (p is Demanding<T> d)
+                        d.Fulfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
 
-                if (p is Demanding<T> d)
-                    d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
-
-                return result;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    if (p is Catching<T> d)
+                        d.Fulfill(ex, explanation);
+                    throw;
+                }
             }
 
             private IEnumerable<PropertyInfo> GetKeyProperties<T>(Add addition)

@@ -64,15 +64,18 @@ namespace Reinforced.Tecture.Entry
 
         private TraceCollector _tc = null;
 
-        
+
         /// <summary>
         /// Begins trace collection
         /// </summary>
-        public void BeginTrace()
+        public void BeginTrace(bool lightMode = false, bool profiling = true)
         {
-            _tc = new TraceCollector();
-            _pipeline.TraceCollector = _tc;
-            _aux.TraceCollector = _tc;
+            if (_tc == null)
+            {
+                _tc = new TraceCollector(lightMode, profiling);
+                _pipeline.TraceCollector = _tc;
+                _aux.TraceCollector = _tc;
+            }
         }
 
         /// <summary>
@@ -194,7 +197,7 @@ namespace Reinforced.Tecture.Entry
                             IsExecuted = true
                         });
                     }
-                    
+
                     await _serviceManager.OnFinallyAsync(thrown, token);
                     await _finallyActions.RunAsync(token);
                     if (_pipeline.HasEffects) await dispatcher.DispatchAsync(_pipeline, null, token);
@@ -202,7 +205,8 @@ namespace Reinforced.Tecture.Entry
                 catch (Exception finException)
                 {
                     thrown2 = finException;
-                }finally
+                }
+                finally
                 {
                     _tc?.Command(new Comment()
                     {

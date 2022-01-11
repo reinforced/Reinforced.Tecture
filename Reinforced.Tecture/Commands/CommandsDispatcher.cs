@@ -61,7 +61,7 @@ namespace Reinforced.Tecture.Commands
             if (aggregate.Count > 0) throw new AggregateException(aggregate);
         }
 
-        private async Task SaveAsync(IEnumerable<string> channels,CancellationToken token = default)
+        private async Task SaveAsync(IEnumerable<string> channels, CancellationToken token = default)
         {
             var trans = _transactionManager.GetSaveTransactions(channels, true);
             List<Exception> aggregate = new List<Exception>();
@@ -101,14 +101,15 @@ namespace Reinforced.Tecture.Commands
             do
             {
                 HashSet<string> usedChannels = new HashSet<string>();
-
-                Stopwatch sw = null;
-                try
+                if (queue.HasEffects)
                 {
-                    if (queue.HasEffects)
+                    RunCommands(queue.GetEffects(), usedChannels);
+                    Stopwatch sw = null;
+                    Exception thrown = null;
+
+                    try
                     {
-                        DispatchInternal(queue.GetEffects(), usedChannels);
-                        if (_traceCollector != null)
+                        if (_traceCollector != null && _traceCollector.Profiling)
                         {
                             sw = new Stopwatch();
                             sw.Start();
@@ -116,50 +117,71 @@ namespace Reinforced.Tecture.Commands
 
                         Save(usedChannels);
                     }
+                    catch (Exception ex)
+                    {
+                        thrown = ex;
+                        throw new TectureSaveException(ex);
+                    }
+                    finally
+                    {
+                        if (sw != null) sw.Stop();
+                        _traceCollector?.Save(sw?.Elapsed ?? TimeSpan.Zero, thrown);
+                    }
                 }
-                finally
+                else
                 {
-                    if (sw != null) sw.Stop();
+                    _traceCollector?.Save(TimeSpan.Zero, null);
                 }
-
-                _traceCollector?.Save(sw?.Elapsed ?? TimeSpan.Zero);
 
                 postSave?.Run();
             } while (queue.HasEffects);
         }
 
-        public async Task DispatchAsync(Pipeline queue, ActionsQueue postSave,CancellationToken token = default)
+        public async Task DispatchAsync(Pipeline queue, ActionsQueue postSave, CancellationToken token = default)
         {
             do
             {
                 HashSet<string> usedChannels = new HashSet<string>();
-                Stopwatch sw = null;
-                try
-                {
-                    if (queue.HasEffects)
-                    {
-                        await DispatchInternalAsync(queue.GetEffects(), usedChannels, token);
-                        if (_traceCollector != null)
-                        {
-                            sw = new Stopwatch();
-                            sw.Start();
-                        }
 
+
+                if (queue.HasEffects)
+                {
+                    await RunCommandsAsync(queue.GetEffects(), usedChannels, token);
+
+                    Stopwatch sw = null;
+                    Exception thrown = null;
+                    if (_traceCollector != null && _traceCollector.Profiling)
+                    {
+                        sw = new Stopwatch();
+                        sw.Start();
+                    }
+
+                    try
+                    {
                         await SaveAsync(usedChannels, token);
                     }
+                    catch (Exception ex)
+                    {
+                        thrown = ex;
+                        throw new TectureSaveException(ex);
+                    }
+                    finally
+                    {
+                        if (sw != null) sw.Stop();
+                        _traceCollector?.Save(sw?.Elapsed ?? TimeSpan.Zero, thrown);
+                    }
                 }
-                finally
+                else
                 {
-                    if (sw != null) sw.Stop();
+                    _traceCollector?.Save(TimeSpan.Zero, null);
                 }
 
-                _traceCollector?.Save(sw?.Elapsed ?? TimeSpan.Zero);
 
                 if (postSave != null) await postSave.RunAsync(token);
             } while (queue.HasEffects);
         }
 
-        private void DispatchInternal(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
+        private void RunCommands(IEnumerable<CommandBase> commands, HashSet<string> usedChannels)
         {
             foreach (var commandBase in commands)
             {
@@ -169,7 +191,7 @@ namespace Reinforced.Tecture.Commands
                     var r = _mx.GetRunner(commandBase);
                     var tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
                     Stopwatch sw = null;
-                    if (_traceCollector != null)
+                    if (_traceCollector != null && _traceCollector.Profiling)
                     {
                         sw = new Stopwatch();
                         sw.Start();
@@ -179,12 +201,6 @@ namespace Reinforced.Tecture.Commands
                     {
                         r.RunInternal(commandBase);
                         commandBase.IsExecuted = true;
-                        if (_traceCollector != null)
-                        {
-                            sw?.Stop();
-                            commandBase.TimeTaken = sw?.Elapsed ?? TimeSpan.Zero;
-                        }
-
                         tran.Commit();
                     }
                     catch (Exception e)
@@ -195,12 +211,18 @@ namespace Reinforced.Tecture.Commands
                     finally
                     {
                         tran.Dispose();
+                        if (_traceCollector != null && _traceCollector.Profiling)
+                        {
+                            sw?.Stop();
+                            commandBase.TimeTaken = sw?.Elapsed ?? TimeSpan.Zero;
+                        }
                     }
                 }
             }
         }
 
-        private async Task DispatchInternalAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels,CancellationToken token = default)
+        private async Task RunCommandsAsync(IEnumerable<CommandBase> commands, HashSet<string> usedChannels,
+            CancellationToken token = default)
         {
             foreach (var commandBase in commands)
             {
@@ -209,27 +231,21 @@ namespace Reinforced.Tecture.Commands
                     if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
                     var r1 = _mx.GetRunner(commandBase);
                     ChannelTransaction tran = null;
+                    Stopwatch sw = null;
+                    if (_traceCollector != null && _traceCollector.Profiling)
+                    {
+                        sw = new Stopwatch();
+                        sw.Start();
+                    }
+
                     try
                     {
-                        Stopwatch sw = null;
-                        if (_traceCollector != null)
-                        {
-                            sw = new Stopwatch();
-                            sw.Start();
-                        }
-
                         var r = r1.RunInternalAsync(commandBase, token);
                         if (r != null)
                         {
                             tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, true);
                             await r;
                             commandBase.IsExecuted = true;
-                            if (_traceCollector != null)
-                            {
-                                sw.Stop();
-                                commandBase.TimeTaken = sw.Elapsed;
-                            }
-
                             tran.Commit();
                         }
                     }
@@ -241,6 +257,11 @@ namespace Reinforced.Tecture.Commands
                     finally
                     {
                         tran?.Dispose();
+                        if (_traceCollector != null && _traceCollector.Profiling)
+                        {
+                            sw.Stop();
+                            commandBase.TimeTaken = sw.Elapsed;
+                        }
                     }
                 }
             }

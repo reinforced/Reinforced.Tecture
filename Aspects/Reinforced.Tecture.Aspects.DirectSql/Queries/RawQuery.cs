@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
@@ -47,14 +48,24 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
 
             IEnumerable<T> result;
             var cq = _runtime.Tooling.Compile(Sql);
-            using (var t = _a.GetQueryTransaction())
+            try
             {
-                result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
-                t.Commit();
+                using (var t = _a.GetQueryTransaction())
+                {
+                    result = _runtime.DoQuery<T>(cq.Query, cq.Parameters);
+                    if (p is NotifyCompleted<IEnumerable<T>> nc) nc.Fulfill($"{_description}. {cq.Query}");
+                    t.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (p is Catching<IEnumerable<T>> de)
+                    de.Fulfill(ex, $"{_description}. {cq.Query}");
+                throw;
             }
 
             if (p is Demanding<IEnumerable<T>> d)
-                d.Fullfill(result, Sql.Hash(), _description);
+                d.Fulfill(result, Sql.Hash(), _description);
 
             return result;
         }
@@ -79,9 +90,21 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
             {
                 t.Commit();
                 t.Dispose();
-                var res = v.Result;
-                if (p is Demanding<IEnumerable<T>> d) d.Fullfill(res, Sql.Hash(), _description);
-                return res;
+                if (v.Exception != null)
+                {
+                    if (p is Catching<IEnumerable<T>> de)
+                        de.Fulfill(v.Exception,$"{_description}. {cq.Query}");
+                    return v.Result;
+                }
+                else
+                {
+                    var res = v.Result;
+                    if (p is NotifyCompleted<IEnumerable<T>> nc)
+                        nc.Fulfill($"{_description}. {cq.Query}");
+                    
+                    if (p is Demanding<IEnumerable<T>> d) d.Fulfill(res, Sql.Hash(), _description);
+                    return v.Result;
+                }
             }, token);
         }
     }

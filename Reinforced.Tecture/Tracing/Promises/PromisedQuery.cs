@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Reinforced.Tecture.Cloning;
 
 namespace Reinforced.Tecture.Tracing.Promises
@@ -34,7 +35,31 @@ namespace Reinforced.Tecture.Tracing.Promises
         public void Fulfill(T result, T clone, string hash, string description)
         {
             _sw.Stop();
-            _record.SetResult<T>(result, clone, hash, description, _sw.Elapsed);
+            _record.SetResult(result, clone, hash, description, _sw.Elapsed);
+        }
+        
+        /// <summary>
+        /// Provide promised result
+        /// </summary>
+        /// <param name="result">Query result</param>
+        /// <param name="clone">Result clone</param>
+        /// <param name="hash">Query hash</param>
+        /// <param name="description">Query description</param>
+        public void LightFulfill(string description)
+        {
+            _sw.Stop();
+            _record.SetLightResult<T>(description, _sw.Elapsed);
+        }
+        
+        /// <summary>
+        /// Fulfills promise with error
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="description"></param>
+        public void FulfillError(Exception ex, string description)
+        {
+            _sw.Stop();
+            _record.SetException<T>(ex, description, _sw.Elapsed);
         }
     }
 }

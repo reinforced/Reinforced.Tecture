@@ -7,6 +7,7 @@
 <#
 	var implementationsCount = 8;
 #>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -29,17 +30,27 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Aux.Promise<(<#= GenericsStroke(i+1) #>)>();
+            var p = Context.Promise<(<#= GenericsStroke(i+1) #>)>();
             if (p is Containing<(<#= GenericsStroke(i+1) #>)> c)
-                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
+                return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
+            try
+            {
+                var tmp = GetKey(a, GetKeyProperties<#= i+1 #><<#= GenericsStroke(i+1) #>>(a)).ToArray();            
+                var result = (<#= TupleCast(i+1, "tmp") #>);
+                if (p is NotifyCompleted<(<#= GenericsStroke(i+1) #>)> nc)
+                    nc.Fulfill(explanation);
 
-             var tmp = GetKey(a, GetKeyProperties<#= i+1 #><<#= GenericsStroke(i+1) #>>(a)).ToArray();
-            var result = (<#= TupleCast(i+1, "tmp") #>);
-            
-            if (p is Demanding<(<#= GenericsStroke(i+1) #>)> d)
-                d.Fullfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
+                if (p is Demanding<(<#= GenericsStroke(i+1) #>)> d)
+                    d.Fulfill(result, $"ORM_AdditionPK_{a.Order}", explanation);
 
-            return result;           
+                return result;    
+            }
+            catch (Exception ex)
+            {
+                if (p is Catching<(<#= GenericsStroke(i+1) #>)> de)
+                    de.Fulfill(ex, explanation);
+                throw;
+            }       
 
         }
 
