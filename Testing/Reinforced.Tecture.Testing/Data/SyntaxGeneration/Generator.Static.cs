@@ -33,7 +33,8 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
             return collectionStrategy.Generate(variables, context.Usings);
         }
-        internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context)
+        internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context,
+            bool forceArray = false)
         {
             var elementType = collectionType.ElementType();
             var generator = elementType.IsInlineable() ? null : tgr.GetGeneratorFor(collectionType.ElementType());
@@ -59,6 +60,29 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                         variables.Add(inline);
                     }
                 }
+            }
+
+            if (elementType.IsAnonymousType())
+            {
+                elementType = typeof(Dictionary<string, object>);
+            }
+
+            if (generator is AnonymousDataGenerator && forceArray)
+            {
+                var typeName = elementType.TypeName(context.Usings);
+                
+                return ArrayCreationExpression(
+                        ArrayType(typeName)
+                            .WithRankSpecifiers(
+                                SingletonList<ArrayRankSpecifierSyntax>(
+                                    ArrayRankSpecifier(
+                                        SingletonSeparatedList<ExpressionSyntax>(
+                                            OmittedArraySizeExpression())))))
+                    .WithInitializer(
+                        InitializerExpression(
+                            SyntaxKind.ArrayInitializerExpression,
+                            SeparatedList<ExpressionSyntax>(
+                                variables.ComaSeparated())));
             }
 
             var collectionStrategy = tgr.CollectionStrategies.GetStrategy(collectionType);

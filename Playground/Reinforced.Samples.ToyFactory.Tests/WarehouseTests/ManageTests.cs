@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
+using Reinforced.Samples.ToyFactory.Logic.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
@@ -25,17 +27,15 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
     public class ManageTests : TectureTestBase
     {
         [Fact]
-        public void CreateMeasurementUnit()
+        public async Task CreateMeasurementUnit()
         {
             using var c = Case
                 <CreateMeasurementUnit_TestData>
                 (out ITecture ctx);
 
-            ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
-            ctx.Save();
-            var allUnits = ctx.From<Db>().Get<MeasurementUnit>()
-                .All.Select(x => new { x.Name, x.ShortName })
-                .ToArray();
+            var allUnits = await ctx.From<Db>().Get<Blueprint>()
+                .All.Select(x => new { x.Name, x.ToyType })
+                .ToArrayAsync();
             Output.WriteLine(c.Text());
 
             c.Validate<CreateMeasurementUnit_Validation>();

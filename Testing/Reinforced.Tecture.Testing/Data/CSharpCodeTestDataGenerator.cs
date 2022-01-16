@@ -262,17 +262,14 @@ namespace Reinforced.Tecture.Testing.Data
             }
 
             var ctx = new GenerationContext(_usings);
-            if (tdr is AnonymousTestDataRecord anon)
-            {
-            }
-
+            
             if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
             {
                 var coll =
                     tdr.RecordType.IsTuple()
                         ? SyntaxGeneration.Generator.ProceedTuple(_tgr, tdr.Payload.GetTupleValues(), ctx)
                         : SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload,
-                            ctx);
+                            ctx,forceArray:true);
 
                 foreach (var s in ctx.Declarations)
                 {
