@@ -31,7 +31,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         public async Task CreateMeasurementUnit()
         {
             // using var c = Case
-            //     <CreateMeasurementUnit_TestData>
+            //    // <CreateMeasurementUnit_TestData>
             //     (out ITecture ctx);
             //
             // var test = ctx.From<Logic.Channels.System>()
@@ -39,7 +39,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             //
             // Output.WriteLine(c.Text());
             //
-            // c.Validate<CreateMeasurementUnit_Validation>();
+            // //c.Validate<CreateMeasurementUnit_Validation>();
         }
 
         [Fact]

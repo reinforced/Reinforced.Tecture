@@ -346,7 +346,7 @@ namespace Reinforced.Tecture.Testing
         private static ExpressionSyntax String(string value)
         {
             return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression,
-                SyntaxFactory.Literal($"@\"{value}\"", value));
+                SyntaxFactory.Literal($"@\"{value}\"", value.Replace("\"","\"\"")));
         }
 
         private static ExpressionSyntax Bool(bool value)
