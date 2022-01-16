@@ -59,8 +59,9 @@ namespace Reinforced.Tecture
             if (type == null)
                 throw new ArgumentNullException("type");
 
+            var hasAttribtue = Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute), false);
             // HACK: The only way to detect anonymous types right now.
-            return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute), false)
+            return hasAttribtue
                    && (
                        type.IsGenericType && type.Name.Contains("AnonymousType")
                        ||

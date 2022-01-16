@@ -105,6 +105,10 @@ namespace Reinforced.Tecture.Testing
             if (t.IsGenericType)
             {
                 var tg = t.GetGenericTypeDefinition();
+                if (t.IsInterface)
+                {
+                    if (t.Name == "IEnumerable`1") return t.GetGenericArguments()[0];
+                }
                 if (tg.GetInterfaces().Any(x => x.Name == "IEnumerable`1")) return t.GetGenericArguments()[0];
             }
 

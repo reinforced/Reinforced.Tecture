@@ -24,6 +24,7 @@ namespace Reinforced.Tecture.Testing.Data
 
         private readonly TypeGeneratorRepository _tgr;
         private readonly CSharpTestDataGeneratorSetup _cfg;
+
         internal CSharpCodeTestDataGenerator(CSharpTestDataGeneratorSetup cfg)
         {
             _cfg = cfg;
@@ -42,6 +43,7 @@ namespace Reinforced.Tecture.Testing.Data
             foreach (var queryRecord in queries)
             {
                 ITestDataRecord tdr = null;
+
                 var recordType = typeof(TestDataRecord<>).MakeGenericType(queryRecord.DataType);
                 tdr =
                     Activator.CreateInstance(recordType, new[] { queryRecord.Result }) as ITestDataRecord;
@@ -63,6 +65,7 @@ namespace Reinforced.Tecture.Testing.Data
             {
                 _yields.Add(YieldStatement(SyntaxKind.YieldBreakStatement));
             }
+
             while (_records.Count > 0)
             {
                 _counter++;
@@ -131,7 +134,7 @@ namespace Reinforced.Tecture.Testing.Data
         private CompilationUnitSyntax ProduceCompilationUnit(string className, string ns)
         {
             var usings = List<UsingDirectiveSyntax>(
-                _usings.Where(x=>!string.IsNullOrEmpty(x))
+                _usings.Where(x => !string.IsNullOrEmpty(x))
                     .OrderBy(x => x.Length)
                     .Select(x => UsingDirective(IdentifierName(x))));
             var @class = ProduceClass(className);
@@ -155,12 +158,19 @@ namespace Reinforced.Tecture.Testing.Data
 
         private static readonly TypeSyntax AnonymousRecordType =
             typeof(AnonymousTestDataRecord).TypeName();
+        
+        private static readonly TypeSyntax AnonymousCollectionRecordType =
+            typeof(AnonymousCollectionTestDataRecord).TypeName();
+
         private YieldStatementSyntax ProduceYield(ITestDataRecord trd)
         {
             TypeSyntax type = null;
             if (trd.RecordType.IsAnonymousType())
             {
                 type = AnonymousRecordType;
+            }else if (trd.RecordType.IsCollection() && trd.RecordType.ElementType().IsAnonymousType())
+            {
+                type = AnonymousCollectionRecordType;
             }
             else
             {
@@ -181,7 +191,7 @@ namespace Reinforced.Tecture.Testing.Data
             var invokeGetData = InvocationExpression(IdentifierName(CurrentMethodName));
 
             var sto = (new SyntaxNodeOrToken[]
-                {hash, Token(SyntaxKind.CommaToken), description});
+                { hash, Token(SyntaxKind.CommaToken), description });
 
             var init = ObjectCreationExpression(type)
                 .WithArgumentList(ArgumentList(SingletonSeparatedList(Argument(invokeGetData))))
@@ -192,12 +202,31 @@ namespace Reinforced.Tecture.Testing.Data
                 init);
         }
 
+        private TypeSyntax GetCollectionReturnType(Type collectionType)
+        {
+            var ct = collectionType;
+
+            if (collectionType.IsAbstract || collectionType.IsInterface)
+            {
+                ct = typeof(List<object>);
+            }
+            if (collectionType.ElementType().IsAnonymousType())
+            {
+                ct = (typeof(IEnumerable<Dictionary<string,object>>));
+            }
+
+            return ct.TypeName(_usings);
+        }
+        
         private MethodDeclarationSyntax PayloadConstructionMethod(ITestDataRecord tdr)
         {
             TypeSyntax retType = null;
             if (tdr.RecordType.IsAnonymousType())
             {
                 retType = AnonymousDictionaryType;
+            }else if (tdr.RecordType.IsCollection())
+            {
+                retType = GetCollectionReturnType(tdr.RecordType);
             }
             else
             {
@@ -214,7 +243,8 @@ namespace Reinforced.Tecture.Testing.Data
                         new[]
                         {
                             Token(SyntaxKind.PrivateKeyword)
-                        })); ;
+                        }));
+            ;
         }
 
         private IEnumerable<StatementSyntax> PayloadConstructionMethodBody(ITestDataRecord tdr)
@@ -230,10 +260,10 @@ namespace Reinforced.Tecture.Testing.Data
                 yield return ReturnStatement(TypeInitConstructor.Construct(tdr.RecordType, tdr.Payload));
                 yield break;
             }
+
             var ctx = new GenerationContext(_usings);
             if (tdr is AnonymousTestDataRecord anon)
             {
-
             }
 
             if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
@@ -241,7 +271,8 @@ namespace Reinforced.Tecture.Testing.Data
                 var coll =
                     tdr.RecordType.IsTuple()
                         ? SyntaxGeneration.Generator.ProceedTuple(_tgr, tdr.Payload.GetTupleValues(), ctx)
-                    : SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload, ctx);
+                        : SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload,
+                            ctx);
 
                 foreach (var s in ctx.Declarations)
                 {

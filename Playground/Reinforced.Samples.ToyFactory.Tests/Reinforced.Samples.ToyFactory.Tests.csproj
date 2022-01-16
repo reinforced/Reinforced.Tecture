@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="LogicTests\CreateTypeWorks" />
+    <Folder Include="WarehouseTests\CreateMeasurementUnit" />
     <Folder Include="WarehouseTests\RenameMeasurementUnit" />
     <Folder Include="WarehouseTests\SupplyCreationPipeline" />
     <Folder Include="WarehouseTests\TestAnonymousQuery" />

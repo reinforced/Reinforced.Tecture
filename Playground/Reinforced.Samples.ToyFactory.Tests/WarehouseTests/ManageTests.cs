@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Logic.Channels.Queries;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Dto;
@@ -31,7 +32,10 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
                 (out ITecture ctx);
 
             ctx.Do<Manage>().CreateMeasurementUnit("Kilograms", "kG");
-
+            ctx.Save();
+            var allUnits = ctx.From<Db>().Get<MeasurementUnit>()
+                .All.Select(x => new { x.Name, x.ShortName })
+                .ToArray();
             Output.WriteLine(c.Text());
 
             c.Validate<CreateMeasurementUnit_Validation>();

@@ -31,13 +31,21 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration.Collection.Strategies
         public ExpressionSyntax Generate(IEnumerable<ExpressionSyntax> members, HashSet<string> usings)
         {
             var ct = _collectionType;
+
             if (_collectionType.IsAbstract || _collectionType.IsInterface)
             {
-                ct = typeof(List<>).MakeGenericType(_collectionType.ElementType());
+                ct = typeof(List<object>);
             }
+            if (_collectionType.ElementType().IsAnonymousType())
+            {
+                var genCollection = _collectionType.GetGenericTypeDefinition();
+                ct = genCollection.MakeGenericType(typeof(Dictionary<string,object>));
+            }
+
+
             return ObjectCreationExpression(ct.TypeName(usings))
-                        .WithInitializer(InitializerExpression(SyntaxKind.CollectionInitializerExpression,
-                            SeparatedList<ExpressionSyntax>(WithComas(members))));
+                .WithInitializer(InitializerExpression(SyntaxKind.CollectionInitializerExpression,
+                    SeparatedList<ExpressionSyntax>(WithComas(members))));
         }
     }
 }

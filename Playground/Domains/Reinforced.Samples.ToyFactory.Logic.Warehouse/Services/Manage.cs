@@ -24,6 +24,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
     {
         public IAddition<MeasurementUnit> CreateMeasurementUnit(string name, string shortName)
         {
+           
             if (From<Db>().Get<MeasurementUnit>().All
                 .Describe("check unit existence")
                 .Any(x => x.Name == name || x.ShortName == shortName))
