@@ -24,6 +24,12 @@ namespace Reinforced.Tecture.Testing.Validation.Assertion
                 throw new TectureValidationException(comment ?? $"{nameof(AssertExtensions.Null)} failed");
         }
         
+        public static void Null<T>(this IAssert a,T? actual, string comment = "") where T:struct
+        {
+            if (actual!=null)
+                throw new TectureValidationException(comment ?? $"{nameof(AssertExtensions.Null)} failed");
+        }
+        
         public static void NotNull<T>(this IAssert a,T actual, string comment = "") where T:class
         {
             if (actual==null)

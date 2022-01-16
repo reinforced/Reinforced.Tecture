@@ -130,7 +130,10 @@ namespace Reinforced.Tecture.Testing.Data
 
         private CompilationUnitSyntax ProduceCompilationUnit(string className, string ns)
         {
-            var usings = List<UsingDirectiveSyntax>(_usings.OrderBy(x => x.Length).Select(x => UsingDirective(IdentifierName(x))));
+            var usings = List<UsingDirectiveSyntax>(
+                _usings.Where(x=>!string.IsNullOrEmpty(x))
+                    .OrderBy(x => x.Length)
+                    .Select(x => UsingDirective(IdentifierName(x))));
             var @class = ProduceClass(className);
             var n = NamespaceDeclaration(ParseName(ns)).AddMembers(@class);
 

@@ -141,8 +141,9 @@ namespace Reinforced.Tecture.Testing.Validation
                     AssertionName = AssertionName,
                     IterationDepth = this.IterationDepth + 1
                 };
-
+                
                 yield return ($"r{IterationDepth}_{idx}", instance);
+                idx++;
             }
         }
         public int KeysCount()
