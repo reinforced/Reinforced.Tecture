@@ -216,7 +216,7 @@ namespace Reinforced.Tecture.Testing
             return SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
         }
 
-        public static ExpressionSyntax Construct(Type t, object value)
+        public static ExpressionSyntax Construct(Type t, object value, HashSet<string> usings = null)
         {
             if (value == null) return Null();
             if (value is Type tn)
@@ -238,7 +238,7 @@ namespace Reinforced.Tecture.Testing
             if (t == typeof(bool)) return Bool((bool)value);
             if (t.IsEnum)
             {
-                return EnumValue(t, value);
+                return EnumValue(t, value,usings);
             }
 
             if (t == typeof(Guid)) return GuidValue((Guid)value);
@@ -322,8 +322,9 @@ namespace Reinforced.Tecture.Testing
                                     SyntaxFactory.Literal(strGuid))))));
         }
 
-        private static ExpressionSyntax EnumValue(Type t, object value)
+        private static ExpressionSyntax EnumValue(Type t, object value, HashSet<string> usings)
         {
+            usings?.Add(t.Namespace);
             var valName = Enum.GetName(t, value);
             return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
                 SyntaxFactory.IdentifierName(t.Name),

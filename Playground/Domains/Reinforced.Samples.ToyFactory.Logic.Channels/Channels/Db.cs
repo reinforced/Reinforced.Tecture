@@ -10,6 +10,12 @@ namespace Reinforced.Samples.ToyFactory.Logic.Channels
         CommandQueryChannel<DirectSql.Command,DirectSql.Query>
     { }
 
+    public interface System :
+        QueryChannel<Reinforced.Tecture.Aspects.Time.Query>
+    {
+        
+    }
+
     public interface IEntity
     {
         int Id { get; }

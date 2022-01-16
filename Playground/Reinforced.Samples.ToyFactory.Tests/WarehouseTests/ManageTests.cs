@@ -9,7 +9,7 @@ using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Entities.Suppliement;
 using Reinforced.Samples.ToyFactory.Logic.Warehouse.Services;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure;
-using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
+//using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
 using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 //using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.RenameMeasurementUnit;
@@ -17,6 +17,7 @@ using Reinforced.Samples.ToyFactory.Tests.WarehouseTests.SupplyCreationPipeline;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.DirectSql.Queries;
 using Reinforced.Tecture.Aspects.Orm.Queries;
+using Reinforced.Tecture.Aspects.Time.Queries;
 using Reinforced.Tecture.Testing;
 using Xunit;
 using Xunit.Abstractions;
@@ -29,16 +30,16 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
         [Fact]
         public async Task CreateMeasurementUnit()
         {
-            using var c = Case
-                <CreateMeasurementUnit_TestData>
-                (out ITecture ctx);
-
-            var allUnits = await ctx.From<Db>().Get<Blueprint>()
-                .All.Select(x => new { x.Name, x.ToyType })
-                .ToArrayAsync();
-            Output.WriteLine(c.Text());
-
-            c.Validate<CreateMeasurementUnit_Validation>();
+            // using var c = Case
+            //     <CreateMeasurementUnit_TestData>
+            //     (out ITecture ctx);
+            //
+            // var test = ctx.From<Logic.Channels.System>()
+            //     .Date().Test;
+            //
+            // Output.WriteLine(c.Text());
+            //
+            // c.Validate<CreateMeasurementUnit_Validation>();
         }
 
         [Fact]

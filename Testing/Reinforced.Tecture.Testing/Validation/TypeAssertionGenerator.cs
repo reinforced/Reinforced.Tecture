@@ -55,7 +55,7 @@ namespace Reinforced.Tecture.Testing.Validation
             
             if (instance.ActualType.IsInlineable())
             {
-                var inlined = TypeInitConstructor.Construct(instance.ActualType, instance.Value);
+                var inlined = TypeInitConstructor.Construct(instance.ActualType, instance.Value,instance.Usings);
                 yield return AssertionEquals(instance.AssertionName,instance.Expression, inlined, $"{instance.Path} has invalid value");
                 yield break;
             }

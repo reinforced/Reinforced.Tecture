@@ -158,7 +158,7 @@ namespace Reinforced.Tecture.Testing.Data
 
         private static readonly TypeSyntax AnonymousRecordType =
             typeof(AnonymousTestDataRecord).TypeName();
-        
+
         private static readonly TypeSyntax AnonymousCollectionRecordType =
             typeof(AnonymousCollectionTestDataRecord).TypeName();
 
@@ -168,7 +168,8 @@ namespace Reinforced.Tecture.Testing.Data
             if (trd.RecordType.IsAnonymousType())
             {
                 type = AnonymousRecordType;
-            }else if (trd.RecordType.IsCollection() && trd.RecordType.ElementType().IsAnonymousType())
+            }
+            else if (trd.RecordType.IsCollection() && trd.RecordType.ElementType().IsAnonymousType())
             {
                 type = AnonymousCollectionRecordType;
             }
@@ -210,21 +211,23 @@ namespace Reinforced.Tecture.Testing.Data
             {
                 ct = typeof(List<object>);
             }
+
             if (collectionType.ElementType().IsAnonymousType())
             {
-                ct = (typeof(IEnumerable<Dictionary<string,object>>));
+                ct = (typeof(IEnumerable<Dictionary<string, object>>));
             }
 
             return ct.TypeName(_usings);
         }
-        
+
         private MethodDeclarationSyntax PayloadConstructionMethod(ITestDataRecord tdr)
         {
             TypeSyntax retType = null;
             if (tdr.RecordType.IsAnonymousType())
             {
                 retType = AnonymousDictionaryType;
-            }else if (tdr.RecordType.IsCollection())
+            }
+            else if (tdr.RecordType.IsCollection())
             {
                 retType = GetCollectionReturnType(tdr.RecordType);
             }
@@ -262,14 +265,14 @@ namespace Reinforced.Tecture.Testing.Data
             }
 
             var ctx = new GenerationContext(_usings);
-            
+
             if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
             {
                 var coll =
                     tdr.RecordType.IsTuple()
                         ? SyntaxGeneration.Generator.ProceedTuple(_tgr, tdr.Payload.GetTupleValues(), ctx)
                         : SyntaxGeneration.Generator.ProceedCollection(_tgr, tdr.RecordType, (IEnumerable)tdr.Payload,
-                            ctx,forceArray:true);
+                            ctx, forceArray: true);
 
                 foreach (var s in ctx.Declarations)
                 {
@@ -286,16 +289,17 @@ namespace Reinforced.Tecture.Testing.Data
             }
 
             var gen = _tgr.GetGeneratorFor(tdr.RecordType);
-            gen.Proceed(tdr.Payload, ctx);
-            foreach (var statementSyntax in ctx.Declarations)
+            var result = gen.New(tdr.Payload, ctx);
+            while (ctx.Declarations.Count > 0)
             {
-                yield return statementSyntax;
+                yield return ctx.Declarations.Dequeue();
             }
-
-            foreach (var statementSyntax in ctx.LateBound)
+            while (ctx.LateBound.Count > 0)
             {
-                yield return statementSyntax;
+                yield return ctx.LateBound.Dequeue();
             }
+            yield return ReturnStatement(result);
+            
         }
 
         #endregion

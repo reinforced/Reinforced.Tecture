@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing.Promises;
@@ -14,8 +15,7 @@ namespace Reinforced.Tecture.Aspects.Time.Queries
         {
             _testingContext = testingContext;
         }
-        
-        
+
         /// <summary>Gets a <see cref="T:System.DateTime" /> object that is set to the current date and time on this computer, expressed as the local time.</summary>
         /// <returns>An object whose value is the current local date and time.</returns>
         public DateTime Now

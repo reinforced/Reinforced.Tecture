@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Aspects\Reinforced.Tecture.Aspects.Orm\Reinforced.Tecture.Aspects.Orm.csproj" />
     <ProjectReference Include="..\..\..\Aspects\Reinforced.Tecture.Aspects.DirectSql\Reinforced.Tecture.Aspects.DirectSql.csproj" />
+    <ProjectReference Include="..\..\..\Aspects\Reinforced.Tecture.Aspects.Time\Reinforced.Tecture.Aspects.Time.csproj" />
     <ProjectReference Include="..\..\..\Reinforced.Tecture\Reinforced.Tecture.csproj" />
   </ItemGroup>
 

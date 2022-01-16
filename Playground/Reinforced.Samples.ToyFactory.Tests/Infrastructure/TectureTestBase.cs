@@ -6,6 +6,7 @@ using Reinforced.Samples.ToyFactory.Logic.Channels;
 using Reinforced.Samples.ToyFactory.Tests.Infrastructure.Maria;
 using Reinforced.Tecture;
 using Reinforced.Tecture.Aspects.Orm;
+using Reinforced.Tecture.Aspects.Time;
 using Reinforced.Tecture.Entry;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql;
 using Reinforced.Tecture.Runtimes.EFCore.Aspects.Orm;
@@ -54,6 +55,7 @@ namespace Reinforced.Samples.ToyFactory.Tests.Infrastructure
                 c.UseEfCoreOrm(ld);
                 c.UseEfCoreDirectSql(ld,new MariaInterpolation());
             });
+            tb.WithChannel<Logic.Channels.System>(x => x.UseDateTime());
             return tb;
         }
 

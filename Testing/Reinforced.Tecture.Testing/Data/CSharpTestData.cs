@@ -144,9 +144,6 @@ namespace Reinforced.Tecture.Testing.Data
             {
                 throw new TestDataTypeMismatchException(_counter, k.Description, typeof(T), k.Payload != null ? k.Payload.GetType() : typeof(void));
             }
-
-
-
             return data.Data;
         }
 

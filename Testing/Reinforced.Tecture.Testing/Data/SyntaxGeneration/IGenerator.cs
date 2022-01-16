@@ -13,9 +13,8 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
     {
         public static void Proceed(this IGenerator gen, object instance, GenerationContext context)
         {
-            var cre = gen.New(instance, context);
+            
 
-            context.Declarations.Enqueue(ReturnStatement(cre));
         }
     }
 }
