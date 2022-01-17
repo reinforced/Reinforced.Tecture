@@ -43,23 +43,22 @@ namespace Reinforced.Tecture.Runtimes.EFCore.Aspects.DirectSql.Command
         /// Runs side effect asynchronously
         /// </summary>
         /// <param name="cmd">Side effect</param>
+        /// <param name="token">Cancellation token</param>
         /// <returns>Side effect</returns>
-        protected override Task RunAsync(Sql cmd,CancellationToken token = default)
+        protected override async Task RunAsync(Sql cmd,CancellationToken token = default)
         {
             if (!_aux.ProvidesTestData)
             {
                 var query = _aspect.Compile(cmd);
                 try
                 {
-                    return _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters,token);
+                    await _aspect.DbContext.Value.Database.ExecuteSqlRawAsync(query.Query, query.Parameters,token);
                 }
                 catch (Exception ex)
                 {
                     throw new EfCoreDirectSqlException($"Error executing query:\r\n{query.Query}\r\n", ex);
                 }
             }
-
-            return Task.FromResult(0);
         }
 
         /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

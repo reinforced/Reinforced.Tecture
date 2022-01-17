@@ -44,6 +44,8 @@ namespace Reinforced.Tecture.Testing.Data
         /// <returns>Anonymous type instance</returns>
         public static T OfType<T>(Dictionary<string, object> data)
         {
+            if (data == null) return default(T);
+            
             var anonymousType = typeof(T);
             var ctor = anonymousType.GetConstructors(CtorFlags).FirstOrDefault();
             if (ctor == null)
@@ -61,6 +63,7 @@ namespace Reinforced.Tecture.Testing.Data
         /// <returns>Anonymous type instance</returns>
         public static object OfType(Dictionary<string, object> data, Type anonymousType)
         {
+            if (data == null) return null;
             var ctor = anonymousType.GetConstructors(CtorFlags).FirstOrDefault();
             if (ctor == null)
                 throw new Exception("Anonymous type implemenatation in .NET has been unexpectidly changed");
