@@ -34,6 +34,12 @@ namespace Reinforced.Tecture.Testing.Data.Format
                     r = r.WithExpressions(SeparatedList<ExpressionSyntax>(ex)).WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(Tabs.BrTabs_Prev()));
                 }
 
+                if (r.IsKind(SyntaxKind.CollectionInitializerExpression))
+                {
+                    var ex = r.Expressions.Select(x => x.WithoutTrivia().WithLeadingTrivia(Tabs.BrTabs())).ToArray();
+                    r = r.WithExpressions(SeparatedList<ExpressionSyntax>(ex)).WithCloseBraceToken(Token(SyntaxKind.CloseBraceToken).WithLeadingTrivia(Tabs.BrTabs_Prev()));
+                }
+
                 return r;
             }
         }

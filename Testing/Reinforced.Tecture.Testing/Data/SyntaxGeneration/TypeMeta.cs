@@ -48,14 +48,17 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
             var properties = GetProperties();
             InlineProperties = properties.Where(x => x.PropertyType.IsInlineable()).ToArray();
-            CollectionProperties = properties.Where(x => x.PropertyType.IsEnumerable() || (x.PropertyType.IsTuple() && !x.PropertyType.IsInlineable())).ToArray();
+            CollectionProperties = properties.Where(x => (!x.PropertyType.IsDictionary() && x.PropertyType.IsEnumerable()) || (x.PropertyType.IsTuple() && !x.PropertyType.IsInlineable())).ToArray();
+            DictionaryProperties = properties.Where(x => x.PropertyType.IsDictionary()).ToArray();
             NestedProperties =
-                properties.Where(x => !InlineProperties.Contains(x) && !CollectionProperties.Contains(x)).ToArray();
+                properties.Where(x => !InlineProperties.Contains(x) && !CollectionProperties.Contains(x) && !DictionaryProperties.Contains(x)).ToArray();
         }
 
         public Type TypeRef { get; private set; }
         public PropertyInfo[] InlineProperties { get; private set; }
         public PropertyInfo[] CollectionProperties { get; private set; }
+        
+        public PropertyInfo[] DictionaryProperties { get; private set; }
         public PropertyInfo[] NestedProperties { get; private set; }
 
         public object DefaultInstance { get; private set; }

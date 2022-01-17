@@ -144,6 +144,7 @@ namespace Reinforced.Tecture.Cloning
         private object Clone(Type t, object original)
         {
             if (original == null) return null;
+            if (t.IsValueType) return original;
             if (_alreadyCloned.ContainsKey(original)) return _alreadyCloned[original];
 
             if (original is IDictionary dic) return CloneDictionary(dic);

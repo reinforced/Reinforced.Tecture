@@ -128,6 +128,24 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
                 }
             }
         }
+        
+        private void ProduceDictionaryProperties(string instanceName, object instance, GenerationContext context)
+        {
+            foreach (var propertyInfo in Meta.DictionaryProperties)
+            {
+                if (!Meta.IsDefault(propertyInfo, instance))
+                {
+                    var value = Meta.Value(propertyInfo, instance);
+                    var collCreation =
+                        ProceedDictionary(_tgr,propertyInfo.PropertyType,value as IDictionary,context);
+
+                    var ae = SafeAssignment(instanceName, propertyInfo.Name, collCreation);
+
+                    context.LateBound.Enqueue(ExpressionStatement(ae));
+                    context.AddUsing(propertyInfo.PropertyType.Namespace);
+                }
+            }
+        }
 
         private static TypeSyntax Var
         {
@@ -197,6 +215,7 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
                 ProduceNestedProperties(instanceName, instance, context);
                 ProduceCollectionProperties(instanceName, instance, context);
+                ProduceDictionaryProperties(instanceName, instance, context);
             }
 
             return IdentifierName(instanceName);

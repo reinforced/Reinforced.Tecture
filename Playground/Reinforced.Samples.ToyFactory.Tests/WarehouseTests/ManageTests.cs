@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Reinforced.Samples.ToyFactory.Logic.Channels;
@@ -24,6 +25,22 @@ using Xunit.Abstractions;
 
 namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
 {
+    class TestClassB
+    {
+        public string Name { get; set; }
+    }
+    class TestClassA
+    {
+        public TestClassA()
+        {
+            TestField = new Dictionary<Guid, TestClassB>();
+            TestField[Guid.NewGuid()] = new TestClassB() { Name = "AAA" };
+            TestField[Guid.NewGuid()] = new TestClassB() { Name = "BBB" };
+            TestField[Guid.NewGuid()] = new TestClassB() { Name = "CCC" };
+        }
+
+        public Dictionary<Guid,TestClassB> TestField { get; set; }
+    }
 
     public class ManageTests : TectureTestBase
     {
@@ -33,13 +50,13 @@ namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests
             // using var c = Case
             //    // <CreateMeasurementUnit_TestData>
             //     (out ITecture ctx);
-            //
+            // var instance = new TestClassA();
             // var test = ctx.From<Logic.Channels.System>()
-            //     .Date().Test;
+            //     .Date().Test2(instance);
             //
             // Output.WriteLine(c.Text());
             //
-            // //c.Validate<CreateMeasurementUnit_Validation>();
+            //c.Validate<CreateMeasurementUnit_Validation>();
         }
 
         [Fact]

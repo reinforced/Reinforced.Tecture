@@ -265,8 +265,23 @@ namespace Reinforced.Tecture.Testing.Data
             }
 
             var ctx = new GenerationContext(_usings);
+            if (tdr.RecordType.IsDictionary())
+            {
+                var dict = Generator.ProceedDictionary(_tgr, tdr.RecordType, (IDictionary)tdr.Payload, ctx);
+                foreach (var s in ctx.Declarations)
+                {
+                    yield return s;
+                }
 
-            if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
+                foreach (var s in ctx.LateBound)
+                {
+                    yield return s;
+                }
+
+                yield return ReturnStatement(dict);
+                yield break;
+                
+            }else if (tdr.RecordType.IsEnumerable() || tdr.RecordType.IsTuple())
             {
                 var coll =
                     tdr.RecordType.IsTuple()

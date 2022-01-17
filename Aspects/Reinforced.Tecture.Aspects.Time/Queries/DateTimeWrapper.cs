@@ -16,6 +16,18 @@ namespace Reinforced.Tecture.Aspects.Time.Queries
             _testingContext = testingContext;
         }
 
+        public T Test<T>(T instance) where T:struct
+        {
+            var p = _testingContext.Promise<T>();
+            return p.ResolveValue(() => instance, () => $"Test_{_order++}");
+        }
+        
+        public T Test2<T>(T instance) where T:class
+        {
+            var p = _testingContext.Promise<T>();
+            return p.ResolveReference(() => instance, () => $"Test_{_order++}");
+        }
+
         /// <summary>Gets a <see cref="T:System.DateTime" /> object that is set to the current date and time on this computer, expressed as the local time.</summary>
         /// <returns>An object whose value is the current local date and time.</returns>
         public DateTime Now

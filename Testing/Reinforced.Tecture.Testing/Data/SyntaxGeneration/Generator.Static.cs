@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
@@ -33,6 +34,99 @@ namespace Reinforced.Tecture.Testing.Data.SyntaxGeneration
 
             return collectionStrategy.Generate(variables, context.Usings);
         }
+        
+        internal static ExpressionSyntax ProceedDictionary(TypeGeneratorRepository tgr, Type dictionaryType, IDictionary values, GenerationContext context)
+        {
+            var dictionaryTypes = dictionaryType.GetDictionaryParameters();
+
+            var keyType = dictionaryTypes.Item1;
+            var valueType = dictionaryTypes.Item2;
+            
+            var keyGenerator = keyType.IsInlineable() ? null : tgr.GetGeneratorFor(keyType);
+            var valueGenerator = valueType.IsInlineable() ? null : tgr.GetGeneratorFor(valueType);
+
+            var keyValues = new List<(ExpressionSyntax, ExpressionSyntax)>();
+            
+            foreach (var key in values.Keys)
+            {
+                ExpressionSyntax keySyntax;
+                ExpressionSyntax valueSyntax;
+                
+                var value = values[key];
+
+                if (key == null)
+                    keySyntax = LiteralExpression(SyntaxKind.NullLiteralExpression);
+                else
+                {
+                    if (keyGenerator != null)
+                    {
+                        keyGenerator.New(key, context);
+                        var name = context.GetDefined(key);
+                        keySyntax = IdentifierName(name);
+                    }
+                    else
+                    {
+                        keySyntax = TypeInitConstructor.Construct(keyType, key,context.Usings);
+                    }
+                }
+                
+                if (value == null)
+                    valueSyntax = LiteralExpression(SyntaxKind.NullLiteralExpression);
+                else
+                {
+                    if (valueGenerator != null)
+                    {
+                        valueGenerator.New(value, context);
+                        var name = context.GetDefined(value);
+                        valueSyntax = IdentifierName(name);
+                    }
+                    else
+                    {
+                        valueSyntax = TypeInitConstructor.Construct(keyType, key,context.Usings);
+                    }
+                }
+                keyValues.Add((keySyntax,valueSyntax));
+            }
+
+            var initializers = new List<InitializerExpressionSyntax>();
+
+            foreach (var keyValue in keyValues)
+            {
+                initializers.Add(InitializerExpression(
+                    SyntaxKind.ComplexElementInitializerExpression,
+                    SeparatedList<ExpressionSyntax>(
+                        new SyntaxNodeOrToken[]
+                        {
+                            keyValue.Item1,
+                            Token(SyntaxKind.CommaToken),
+                            keyValue.Item2
+                        })));
+            }
+            
+            var dictionaryCreation = ObjectCreationExpression(
+                    GenericName(
+                            Identifier("Dictionary"))
+                        .WithTypeArgumentList(
+                            TypeArgumentList(
+                                SeparatedList<TypeSyntax>(
+                                    new SyntaxNodeOrToken[]
+                                    {
+                                        keyType.TypeName(context.Usings),
+                                        Token(SyntaxKind.CommaToken),
+                                        valueType.TypeName(context.Usings)
+                                    }))))
+                .WithArgumentList(ArgumentList())
+                .WithInitializer(
+                    InitializerExpression(
+                        SyntaxKind.CollectionInitializerExpression,
+                        SeparatedList<ExpressionSyntax>(
+                            initializers.ComaSeparated()
+                            )));
+            
+
+            return dictionaryCreation;
+        }
+        
         internal static ExpressionSyntax ProceedCollection(TypeGeneratorRepository tgr, Type collectionType, IEnumerable values, GenerationContext context,
             bool forceArray = false)
         {
