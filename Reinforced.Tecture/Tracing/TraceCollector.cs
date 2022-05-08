@@ -47,21 +47,23 @@ namespace Reinforced.Tecture.Tracing
             return new Trace(_traceCommands, LightMode);
         }
 
-        public PromisedQuery<T> PromiseQuery<T>(Type channel)
+        public PromisedQuery<T> PromiseQuery<T>(Type channel,Type service)
         {
             var cmd = new QueryRecord(channel, false)
             {
-                _lightMode = LightMode
+                _lightMode = LightMode,
+                Service = service
             };
             Command(cmd);
             return new PromisedQuery<T>(cmd);
         }
 
-        public PromisedQuery<T> PromiseTestQuery<T>(Type channel)
+        public PromisedQuery<T> PromiseTestQuery<T>(Type channel,Type service)
         {
             var cmd = new QueryRecord(channel, true)
             {
-                _lightMode = LightMode
+                _lightMode = LightMode,
+                Service = service
             };
             Command(cmd);
             return new PromisedQuery<T>(cmd);

@@ -8,6 +8,7 @@ using Reinforced.Tecture.Aspects.Orm.Queries;
 using Reinforced.Tecture.Aspects.Orm.Queries.Traced;
 using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.AsyncExecutionAdapter;
 using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Queries;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing.Promises;
@@ -23,7 +24,7 @@ namespace Reinforced.Tecture.Aspects.Orm
         {
             internal new TestingContext Context => base.Context;
 
-            internal IQueryable<T> GetSet<T>() where T : class
+            internal IQueryable<T> GetSet<T>(Read read) where T : class
             {
                 IQueryable<T> set = Context.ProvidesTestData ? new T[0].AsQueryable() : Set<T>();
 
@@ -31,7 +32,7 @@ namespace Reinforced.Tecture.Aspects.Orm
                     Context.CollectsTestData
                         ? (IQueryable<T>)
                         new TracedQueryable<T>(set, this, new DescriptionHolder(),
-                            Context.LightMode != true)
+                            Context.LightMode != true,read)
                         : new QueryableWithAsyncExecutor<T>(AsyncExecutorActually, set);
             }
 
@@ -62,7 +63,7 @@ namespace Reinforced.Tecture.Aspects.Orm
             /// </summary>
             public QueryStats Stats { get; } = new QueryStats();
 
-            internal T Key<T>(IAddition<IPrimaryKey<T>> keyedAddition)
+            internal T Key<T>(IAddition<IPrimaryKey<T>> keyedAddition,Read read)
             {
                 var a = (Add)keyedAddition;
                 if (!a.IsExecuted)
@@ -71,7 +72,7 @@ namespace Reinforced.Tecture.Aspects.Orm
 
                 string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-                var p = Context.Promise<T>();
+                var p = Context.Promise<T>(read);
                 if (p is Containing<T> c)
                     return c.Get($"ORM_AdditionPK_{a.Order}", explanation);
 

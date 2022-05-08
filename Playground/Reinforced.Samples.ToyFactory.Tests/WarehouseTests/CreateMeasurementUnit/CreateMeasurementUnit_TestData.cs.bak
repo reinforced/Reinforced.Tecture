@@ -1,0 +1,37 @@
+// using System;
+// using System.Collections;
+// using System.Collections.Generic;
+// using Reinforced.Tecture.Testing.Data;
+// using Reinforced.Samples.ToyFactory.Tests.WarehouseTests;
+//
+// namespace Reinforced.Samples.ToyFactory.Tests.WarehouseTests.CreateMeasurementUnit
+// {
+// 		public partial class CreateMeasurementUnit_TestData : CSharpTestData
+// 		{
+// 			private TestClassA GetEntry_1()
+// 			{ 
+// 				var v1 = New<TestClassA>();
+// 				var v2 = New<TestClassB>();
+// 				Set(v2, x=>x.Name, @"AAA");
+// 				var v3 = New<TestClassB>();
+// 				Set(v3, x=>x.Name, @"BBB");
+// 				var v4 = New<TestClassB>();
+// 				Set(v4, x=>x.Name, @"CCC");
+// 				Set(v1, x=>x.TestField, new Dictionary<Guid, TestClassB>() { 
+// 					{ Guid.Parse("ff7d6255-109d-49ed-a0ab-78725ec48a65"), v2 },
+// 					{ Guid.Parse("daf9ecff-cb8e-4eb0-a57b-b9bae5ce2ce2"), v3 },
+// 					{ Guid.Parse("0e6fce10-8ec9-47b2-b156-55bbdd083057"), v4 }
+// 				});
+// 				return v1;
+// 			}
+//
+// 			public override IEnumerable<ITestDataRecord> GetRecords()
+// 			{ 
+// 				yield return new TestDataRecord<TestClassA>(GetEntry_1()) { 
+// 					Hash = @"Test_0",
+// 					Description = null
+// 				};
+// 			}
+//
+// 		}
+// }

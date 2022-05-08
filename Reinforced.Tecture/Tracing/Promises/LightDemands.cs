@@ -6,9 +6,9 @@ namespace Reinforced.Tecture.Tracing.Promises
     {
         private PromisedQuery<T> _promised;
         
-        public LightDemands(TraceCollector traceCollector, Type channelType)
+        public LightDemands(TraceCollector traceCollector, Type channelType,Type serviceType)
         {
-            _promised = traceCollector.PromiseQuery<T>(channelType);
+            _promised = traceCollector.PromiseQuery<T>(channelType,serviceType);
         }
 
         public void Fulfill(Exception error, string description = null)

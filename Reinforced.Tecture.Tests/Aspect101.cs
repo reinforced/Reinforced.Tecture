@@ -25,7 +25,7 @@ namespace Reinforced.Tecture.Tests.Channels
             return w.Put(new Aspect101.BuggyCommand(payload, ca.CommandCounter));
         }
 
-        public static string GetRandomString(this Read<QueryChannel<Aspect101.Query>> r) => r.Aspect().GetRandomString();
+        public static string GetRandomString(this Read<QueryChannel<Aspect101.Query>> r) => r.Aspect().GetRandomString(r);
     }
 
     public class Aspect101
@@ -36,9 +36,9 @@ namespace Reinforced.Tecture.Tests.Channels
             protected override void OnRegister() => RegisterCount++;
             
             private int _queryCounter = 0;
-            public string GetRandomString()
+            public string GetRandomString(Read r)
             {
-                var promised = Context.Promise<string>();
+                var promised = Context.Promise<string>(r);
                 return promised.ResolveReference(() => Guid.NewGuid().ToString(), () => $"Rng_{_queryCounter++}");
             }
             

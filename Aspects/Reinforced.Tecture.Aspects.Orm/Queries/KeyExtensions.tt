@@ -31,7 +31,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         public static (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(this Read<QueryChannel<Orm.Query>> qr, IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> keyedAddition)
         {
             var pr = qr.Aspect();
-            return pr.Key(keyedAddition);
+            return pr.Key(keyedAddition, qr);
         }
         <# } #>
 

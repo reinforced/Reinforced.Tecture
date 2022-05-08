@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm
@@ -22,7 +23,7 @@ public sealed partial class Orm
     public abstract partial class Query
     {
         <# for (int i=1;i<implementationsCount;i++) {	#> 
-        internal (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> keyedAddition)
+        internal (<#= GenericsStroke(i+1) #>) Key<<#= GenericsStroke(i+1) #>>(IAddition<IPrimaryKey<<#= GenericsStroke(i+1) #>>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -30,7 +31,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(<#= GenericsStroke(i+1) #>)>();
+            var p = Context.Promise<(<#= GenericsStroke(i+1) #>)>(read);
             if (p is Containing<(<#= GenericsStroke(i+1) #>)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try

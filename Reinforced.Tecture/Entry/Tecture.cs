@@ -59,7 +59,7 @@ namespace Reinforced.Tecture.Entry
         /// <returns>Data source instance</returns>
         public Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(_mx);
+            return new SRead<T>(_mx,typeof(NoService));
         }
 
         public bool IsTracing => _tc != null;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
 using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Enumerators.Generic;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
@@ -16,10 +17,11 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         public IQueryable<T> Original { get; }
 
         public DescriptionHolder Description { get; }
+        public Read Read { get; }
+        
+        private readonly Expression _originalExpression;
 
-        private Expression _originalExpression;
-
-        public TracedQueryable(IQueryable<T> original, Orm.Query aspect, DescriptionHolder description, bool stopHashingCrutch)
+        public TracedQueryable(IQueryable<T> original, Orm.Query aspect, DescriptionHolder description, bool stopHashingCrutch, Read read)
         {
             Original = original;
             _originalExpression = original.Expression;
@@ -29,6 +31,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
             }
             Aspect = aspect;
             Description = description;
+            Read = read;
         }
 
         public IQueryable<T> CreateNewOriginal(Expression cleanExpression = null) =>
@@ -40,7 +43,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            var p = Aspect.Context.Promise<IEnumerable<T>>();
+            var p = Aspect.Context.Promise<IEnumerable<T>>(Read);
 
             ExpressionHashData hash = null;
             if (p is Containing<IEnumerable<T>> || p is Demanding<IEnumerable<T>>)
@@ -109,7 +112,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
             {
                 if (_provider == null)
                 {
-                    _provider = new TracedQueryProvider(Original.Provider, Aspect, Description);
+                    _provider = new TracedQueryProvider(Original.Provider, Aspect, Description,Read);
                 }
                 return _provider;
             }

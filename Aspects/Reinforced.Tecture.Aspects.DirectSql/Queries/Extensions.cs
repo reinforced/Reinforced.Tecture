@@ -13,7 +13,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
             var rt = s.Aspect();
             rt.Tooling.ThrowCheckTypes(usedTypes);
             var cmd = new Sql(expr);
-            return new RawQuery(cmd, rt);
+            return new RawQuery(cmd, rt,s);
         }
 
         /// <summary>

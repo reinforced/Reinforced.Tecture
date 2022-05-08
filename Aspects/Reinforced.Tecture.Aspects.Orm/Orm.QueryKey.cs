@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Reinforced.Tecture.Aspects.Orm.Commands.Add;
 using Reinforced.Tecture.Aspects.Orm.PrimaryKey;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm
@@ -14,7 +15,7 @@ public sealed partial class Orm
     public abstract partial class Query
     {
          
-        internal (T1, T2) Key<T1, T2>(IAddition<IPrimaryKey<T1, T2>> keyedAddition)
+        internal (T1, T2) Key<T1, T2>(IAddition<IPrimaryKey<T1, T2>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -22,7 +23,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2)>();
+            var p = Context.Promise<(T1, T2)>(read);
             if (p is Containing<(T1, T2)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try
@@ -55,7 +56,7 @@ public sealed partial class Orm
             yield return pk.Item2.AsPropertyExpression(); 
         }
          
-        internal (T1, T2, T3) Key<T1, T2, T3>(IAddition<IPrimaryKey<T1, T2, T3>> keyedAddition)
+        internal (T1, T2, T3) Key<T1, T2, T3>(IAddition<IPrimaryKey<T1, T2, T3>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -63,7 +64,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2, T3)>();
+            var p = Context.Promise<(T1, T2, T3)>(read);
             if (p is Containing<(T1, T2, T3)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try
@@ -97,7 +98,7 @@ public sealed partial class Orm
             yield return pk.Item3.AsPropertyExpression(); 
         }
          
-        internal (T1, T2, T3, T4) Key<T1, T2, T3, T4>(IAddition<IPrimaryKey<T1, T2, T3, T4>> keyedAddition)
+        internal (T1, T2, T3, T4) Key<T1, T2, T3, T4>(IAddition<IPrimaryKey<T1, T2, T3, T4>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -105,7 +106,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2, T3, T4)>();
+            var p = Context.Promise<(T1, T2, T3, T4)>(read);
             if (p is Containing<(T1, T2, T3, T4)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try
@@ -140,7 +141,7 @@ public sealed partial class Orm
             yield return pk.Item4.AsPropertyExpression(); 
         }
          
-        internal (T1, T2, T3, T4, T5) Key<T1, T2, T3, T4, T5>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5>> keyedAddition)
+        internal (T1, T2, T3, T4, T5) Key<T1, T2, T3, T4, T5>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -148,7 +149,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2, T3, T4, T5)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5)>(read);
             if (p is Containing<(T1, T2, T3, T4, T5)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try
@@ -184,7 +185,7 @@ public sealed partial class Orm
             yield return pk.Item5.AsPropertyExpression(); 
         }
          
-        internal (T1, T2, T3, T4, T5, T6) Key<T1, T2, T3, T4, T5, T6>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6>> keyedAddition)
+        internal (T1, T2, T3, T4, T5, T6) Key<T1, T2, T3, T4, T5, T6>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -192,7 +193,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2, T3, T4, T5, T6)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5, T6)>(read);
             if (p is Containing<(T1, T2, T3, T4, T5, T6)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try
@@ -229,7 +230,7 @@ public sealed partial class Orm
             yield return pk.Item6.AsPropertyExpression(); 
         }
          
-        internal (T1, T2, T3, T4, T5, T6, T7) Key<T1, T2, T3, T4, T5, T6, T7>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6, T7>> keyedAddition)
+        internal (T1, T2, T3, T4, T5, T6, T7) Key<T1, T2, T3, T4, T5, T6, T7>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6, T7>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -237,7 +238,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2, T3, T4, T5, T6, T7)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5, T6, T7)>(read);
             if (p is Containing<(T1, T2, T3, T4, T5, T6, T7)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try
@@ -275,7 +276,7 @@ public sealed partial class Orm
             yield return pk.Item7.AsPropertyExpression(); 
         }
          
-        internal (T1, T2, T3, T4, T5, T6, T7, T8) Key<T1, T2, T3, T4, T5, T6, T7, T8>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6, T7, T8>> keyedAddition)
+        internal (T1, T2, T3, T4, T5, T6, T7, T8) Key<T1, T2, T3, T4, T5, T6, T7, T8>(IAddition<IPrimaryKey<T1, T2, T3, T4, T5, T6, T7, T8>> keyedAddition, Read read)
         {
             var a = (Add)keyedAddition;
             if (!a.IsExecuted) 
@@ -283,7 +284,7 @@ public sealed partial class Orm
 
             string explanation = $"Get primary key of added {a.EntityType.Name}";
 
-            var p = Context.Promise<(T1, T2, T3, T4, T5, T6, T7, T8)>();
+            var p = Context.Promise<(T1, T2, T3, T4, T5, T6, T7, T8)>(read);
             if (p is Containing<(T1, T2, T3, T4, T5, T6, T7, T8)> c)
                 return c.Get($"ORM_AdditionPK_{a.Order}", explanation);             
             try

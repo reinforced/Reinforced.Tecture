@@ -7,7 +7,6 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 {
     public static partial class Extensions
     {
-
         /// <summary>
         /// Retrieves query builder for ORM query channel
         /// </summary>
@@ -17,7 +16,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         public static IQueryFor<T> Get<T>(this Read<QueryChannel<Orm.Query>> qr) where T : class
         {
             var pr = qr.Aspect();
-            return new QueryBuilder<T>(pr);
+            return new QueryBuilder<T>(pr, qr);
         }
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         public static IQueryable<T> All<T>(this Read<QueryChannel<Orm.Query>> qr) where T : class
         {
             var pr = qr.Aspect();
-            return pr.GetSet<T>();
+            return pr.GetSet<T>(qr);
         }
 
         /// <summary>
@@ -59,8 +58,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         public static T Key<T>(this Read<QueryChannel<Orm.Query>> qr, IAddition<IPrimaryKey<T>> keyedAddition)
         {
             var pr = qr.Aspect();
-            return pr.Key(keyedAddition);
+            return pr.Key(keyedAddition, qr);
         }
-
     }
 }

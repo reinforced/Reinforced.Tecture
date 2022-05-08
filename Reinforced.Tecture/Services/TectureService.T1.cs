@@ -14,7 +14,7 @@ namespace Reinforced.Tecture.Services
         /// <returns>Channel's read end</returns>
         protected Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(ChannelMultiplexer);
+            return new SRead<T>(ChannelMultiplexer,GetType());
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Reinforced.Tecture.Services
         /// <returns>Channel's write end</returns>
         protected Write<T> To<T>() where T : CanCommand
         {
-            return new SWrite<T>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T>(ChannelMultiplexer, Pipeline, GetType());
         }
 
     }
@@ -51,7 +51,7 @@ namespace Reinforced.Tecture.Services
         /// <returns>Channel's read end</returns>
         protected Read<T> From<T>() where T : CanQuery
         {
-            return new SRead<T>(ChannelMultiplexer);
+            return new SRead<T>(ChannelMultiplexer,GetType());
         }
 
         /// <summary>

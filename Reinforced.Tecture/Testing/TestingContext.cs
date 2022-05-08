@@ -1,4 +1,5 @@
 ﻿using System;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Tracing.Promises;
 using Reinforced.Tecture.Transactions;
 
@@ -44,22 +45,23 @@ namespace Reinforced.Tecture.Testing
         /// <summary>
         /// Traces query that will be fulfilled later
         /// </summary>
-        /// <typeparam name="T">Result type</typeparam>
-        /// <returns>Promised</returns>
-        public Promised<T> Promise<T>()
+        /// <param name="read">ReadingEnd of channel</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public Promised<T> Promise<T>(Read read)
         {
             if (_container._testDataProvider.Instance != null)
             {
-                return new Contains<T>(_container._testDataProvider.Instance, _container.TraceCollector, _channelType);
+                return new Contains<T>(_container._testDataProvider.Instance, _container.TraceCollector, _channelType,read.Service);
             }
 
             if (_container.TraceCollector != null)
             {
                 if (_container.TraceCollector.LightMode)
                 {
-                    return new LightDemands<T>(_container.TraceCollector, _channelType);
+                    return new LightDemands<T>(_container.TraceCollector, _channelType,read.Service);
                 }
-                return new Demands<T>(_container.TraceCollector, _channelType);
+                return new Demands<T>(_container.TraceCollector, _channelType,read.Service);
             }
             return new Consistency<T>();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Reinforced.Tecture.Aspects.DirectSql.Commands;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Testing;
 using Reinforced.Tecture.Tracing.Promises;
 using static Reinforced.Tecture.Aspects.DirectSql.DirectSql;
@@ -19,11 +20,13 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         internal string _description = string.Empty;
 
         private readonly TestingContext _a;
+        private readonly Read _read;
 
-        internal RawQuery(Sql sql, Query runtime)
+        internal RawQuery(Sql sql, Query runtime, Read read)
         {
             Sql = sql;
             _runtime = runtime;
+            _read = read;
             _a = runtime.Context;
         }
 
@@ -41,7 +44,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         /// <returns>Query result</returns>
         public IEnumerable<T> As<T>() where T : class
         {
-            var p = _a.Promise<IEnumerable<T>>();
+            var p = _a.Promise<IEnumerable<T>>(_read);
 
             if (p is Containing<IEnumerable<T>> c)
                 return c.Get(Sql.Hash(), _description);
@@ -77,7 +80,7 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Queries
         /// <returns>Query result</returns>
         public Task<IEnumerable<T>> AsAsync<T>(CancellationToken token=default) where T : class
         {
-            var p = _a.Promise<IEnumerable<T>>();
+            var p = _a.Promise<IEnumerable<T>>(_read);
 
             if (p is Containing<IEnumerable<T>> c)
             {

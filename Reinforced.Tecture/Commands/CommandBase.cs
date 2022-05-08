@@ -41,6 +41,7 @@ namespace Reinforced.Tecture.Commands
         private DebugInfo _debug;
         private int _order;
         private bool _isExecuted;
+        private Type _service;
         private TimeSpan _timeTaken = TimeSpan.Zero;
         private Exception _exception;
         internal bool _lightMode = false;
@@ -209,6 +210,23 @@ namespace Reinforced.Tecture.Commands
                 foreach (var commandBase in _knownClones)
                 {
                     commandBase.TimeTaken = value;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets service type where command was received from
+        /// </summary>
+        public Type Service
+        {
+            get => _service;
+            internal set
+            {
+                _service = value;
+                if (_lightMode) return;
+                foreach (var commandBase in _knownClones)
+                {
+                    commandBase.Service = value;
                 }
             }
         }

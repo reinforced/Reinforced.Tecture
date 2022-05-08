@@ -24,7 +24,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1>(ChannelMultiplexer);
+            return new SRead<T, Tool1>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -64,7 +64,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1>(ChannelMultiplexer);
+            return new SRead<T, Tool1>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -139,7 +139,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2, Tool3> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2, Tool3>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2, Tool3>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -216,7 +216,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2, Tool3, Tool4> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -295,7 +295,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -376,7 +376,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -459,7 +459,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -498,7 +498,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -518,7 +518,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -544,7 +544,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -584,7 +584,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -604,7 +604,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's write end</returns>
 		protected Write<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> To<T>() where T : CanCommand
         {
-            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -631,7 +631,7 @@ namespace Reinforced.Tecture.Services {
         /// <returns>Channel's read end</returns>
         protected Read<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8> From<T>() where T : CanQuery
         {
-            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer);
+            return new SRead<T, Tool1, Tool2, Tool3, Tool4, Tool5, Tool6, Tool7, Tool8>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>

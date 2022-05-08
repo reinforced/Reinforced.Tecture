@@ -19,7 +19,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (q is ITracedQueryable<T> wq)
             {
                 var aux = wq.Aspect.Context;
-                var p = aux.Promise<U>();
+                var p = aux.Promise<U>(wq.Read);
                 ExpressionHashData hash = null;
                 if (p is Containing<U> || p is Demanding<U>)
                     hash = wq.Original.Expression.CalculateHash();
@@ -66,7 +66,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (q is ITracedQueryable<T> wq)
             {
                 var aux = wq.Aspect.Context;
-                var p = aux.Promise<U>();
+                var p = aux.Promise<U>(wq.Read);
 
                 ExpressionHashData hash = null;
                 if (p is Containing<U> || p is Demanding<U>)
@@ -115,7 +115,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (q is ITracedQueryable<T> wq)
             {
                 var aux = wq.Aspect.Context;
-                var p = aux.Promise<U>();
+                var p = aux.Promise<U>(wq.Read);
                 ExpressionHashData hash = null;
                 if (p is Containing<U> || p is Demanding<U>)
                     hash = wq.Original.Expression.CalculateHash(selector);
@@ -164,7 +164,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (q is ITracedQueryable<T> wq)
             {
                 var aux = wq.Aspect.Context;
-                var p = aux.Promise<V>();
+                var p = aux.Promise<V>(wq.Read);
 
                 ExpressionHashData hash = null;
                 if (p is Containing<V> || p is Demanding<V>)
@@ -2138,7 +2138,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (q is ITracedQueryable<TSource> wq)
             {
                 var aux = wq.Aspect.Context;
-                var p = aux.Promise<bool>();
+                var p = aux.Promise<bool>(wq.Read);
 
                 ExpressionHashData hash = null;
                 if (p is Containing<bool> || p is Demanding<bool>)
@@ -2408,7 +2408,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
             if (source is ITracedQueryable<TSource> wq)
             {
                 var aux = wq.Aspect.Context;
-                var p = aux.Promise<Dictionary<TKey, TElement>>();
+                var p = aux.Promise<Dictionary<TKey, TElement>>(wq.Read);
                 ExpressionHashData hash = null;
                 if (p is Containing<Dictionary<TKey, TElement>>
                     || p is Demanding<Dictionary<TKey, TElement>>)

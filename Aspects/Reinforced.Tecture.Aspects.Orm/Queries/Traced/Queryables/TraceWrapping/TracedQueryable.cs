@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Reinforced.Tecture.Aspects.Orm.Queries.Hashing;
 using Reinforced.Tecture.Aspects.Orm.Queries.Traced.Enumerators.Nongeneric;
+using Reinforced.Tecture.Channels;
 using Reinforced.Tecture.Tracing.Promises;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
@@ -15,12 +16,15 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         public IQueryable Original { get; }
 
         public DescriptionHolder Description { get; }
+        
+        public Read Read { get; }
 
-        public TracedQueryable(IQueryable original, Orm.Query aspect, DescriptionHolder description)
+        public TracedQueryable(IQueryable original, Orm.Query aspect, DescriptionHolder description, Read read)
         {
             Original = original;
             Aspect = aspect;
             Description = description;
+            Read = read;
         }
 
         public IQueryable CreateNewOriginal(Expression cleanExpression = null) =>
@@ -32,7 +36,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator GetEnumerator()
         {
-            var p = Aspect.Context.Promise<IEnumerable>();
+            var p = Aspect.Context.Promise<IEnumerable>(Read);
 
             ExpressionHashData hash = null;
             if (p is Containing<IEnumerable> || p is Demanding<IEnumerable>)
@@ -95,7 +99,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.TraceWrapping
             {
                 if (_provider == null)
                 {
-                    _provider = new TracedQueryProvider(Original.Provider, Aspect, Description);
+                    _provider = new TracedQueryProvider(Original.Provider, Aspect, Description,Read);
                 }
                 return _provider;
             }

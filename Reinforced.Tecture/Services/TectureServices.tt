@@ -35,7 +35,7 @@ where Tool<#= j+1 #> : Tooling
         /// <returns>Channel's read end</returns>
         protected Read<T, <#= GenericsStroke(i+1) #>> From<T>() where T : CanQuery
         {
-            return new SRead<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer);
+            return new SRead<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>
@@ -55,7 +55,7 @@ where Tool<#= j+1 #> : Tooling
         /// <returns>Channel's write end</returns>
 		protected Write<T, <#= GenericsStroke(i+1) #>> To<T>() where T : CanCommand
         {
-            return new SWrite<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer, Pipeline);
+            return new SWrite<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer, Pipeline, GetType());
         }	
     }
 
@@ -77,7 +77,7 @@ where Tool<#= j+1 #> : Tooling
         /// <returns>Channel's read end</returns>
         protected Read<T, <#= GenericsStroke(i+1) #>> From<T>() where T : CanQuery
         {
-            return new SRead<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer);
+            return new SRead<T, <#= GenericsStroke(i+1) #>>(ChannelMultiplexer, this.GetType());
         }		
 
         /// <summary>

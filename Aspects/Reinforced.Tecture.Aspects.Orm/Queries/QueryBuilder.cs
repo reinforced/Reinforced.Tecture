@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Reinforced.Tecture.Channels;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries
 {
     internal class QueryBuilder<TEntity> : IQueryFor<TEntity> where TEntity : class
     {
-        protected readonly Orm.Query Src;
-        
-        public QueryBuilder(Orm.Query src)
+        private readonly Orm.Query _src;
+        private readonly Read _read;
+        public QueryBuilder(Orm.Query src, Read read)
         {
-            Src = src;
-            
-            if (Src != null)
+            _src = src;
+            _read = read;
+
+            if (_src != null)
             {
                 if (!src.Stats.OnlineCollectionUsageStats.ContainsKey(typeof(TEntity)))
                 {
@@ -27,7 +29,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
 
         public IQueryable<TEntity> All
         {
-            get { return _allCached ?? (_allCached = ApplyThats(Src.GetSet<TEntity>())); }
+            get { return _allCached ?? (_allCached = ApplyThats(_src.GetSet<TEntity>(_read))); }
         }
 
      
@@ -47,7 +49,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries
         
         public IQueryable<T> Joined<T>() where T : class
         {
-            var t = Src.GetSet<T>();
+            var t = _src.GetSet<T>(_read);
             return t;
         }
 

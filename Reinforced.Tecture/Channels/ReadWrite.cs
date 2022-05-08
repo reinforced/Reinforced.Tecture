@@ -1,4 +1,5 @@
-﻿using Reinforced.Tecture.Aspects;
+﻿using System;
+using Reinforced.Tecture.Aspects;
 using Reinforced.Tecture.Channels.Multiplexer;
 using Reinforced.Tecture.Commands;
 // ReSharper disable UnusedTypeParameter
@@ -8,7 +9,10 @@ namespace Reinforced.Tecture.Channels
     /// <summary>
     /// Channel's read end
     /// </summary>
-    public interface Read { }
+    public interface Read
+    {
+        Type Service { get; }
+    }
 
     /// <summary>
     /// Channel's read end
@@ -19,15 +23,18 @@ namespace Reinforced.Tecture.Channels
     internal struct SRead<TChannel> : IQueryMultiplexer, Read<TChannel> where TChannel : CanQuery
     {
         private readonly ChannelMultiplexer _mx;
-        public SRead(ChannelMultiplexer mx)
+        public SRead(ChannelMultiplexer mx, Type service)
         {
             _mx = mx;
+            Service = service;
         }
 
         public TAspect GetAspect<TAspect>() where TAspect : QueryAspect
         {
             return _mx.GetQueryAspect<TChannel, TAspect>();
         }
+
+        public Type Service { get; }
     }
 
     /// <summary>
@@ -64,10 +71,12 @@ namespace Reinforced.Tecture.Channels
     {
         private readonly ChannelMultiplexer _cm;
         private readonly Pipeline _pipeline;
-        public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+        public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
         {
             _cm = cm;
             _pipeline = p;
+            _service = service;
         }
 
         public TAspect GetAspect<TAspect>() where TAspect : CommandAspect
@@ -78,6 +87,7 @@ namespace Reinforced.Tecture.Channels
         public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
         {
             command.Channel = typeof(TChannel);
+            command.Service = _service;
             _pipeline.Enqueue(command);
             return command;
         }

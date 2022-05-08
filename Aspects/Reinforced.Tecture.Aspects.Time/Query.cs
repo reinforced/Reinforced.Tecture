@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Reinforced.Tecture.Aspects.Time.Queries;
+using Reinforced.Tecture.Testing;
 
 namespace Reinforced.Tecture.Aspects.Time
 {
@@ -8,15 +9,12 @@ namespace Reinforced.Tecture.Aspects.Time
     {
         internal Query()
         {
-            _dateTimeWrapper = new Lazy<DateTimeWrapper>(() => new DateTimeWrapper(this.Context));
-            _dateTimeOffsetWrapper = new Lazy<DateTimeOffsetWrapper>(() => new DateTimeOffsetWrapper(Context));
+            
         }
 
-        private readonly Lazy<DateTimeWrapper> _dateTimeWrapper;
-        private readonly Lazy<DateTimeOffsetWrapper> _dateTimeOffsetWrapper;
-
-        internal DateTimeWrapper DateTimeWrapper => _dateTimeWrapper.Value;
-        internal DateTimeOffsetWrapper DateTimeOffsetWrapper => _dateTimeOffsetWrapper.Value;
+        internal TestingContext Context => base.Context;
+        internal int Index;
+        
         
         public override void Dispose()
         { }

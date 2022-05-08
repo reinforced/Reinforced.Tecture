@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using Reinforced.Tecture.Aspects;
 using Reinforced.Tecture.Commands;
 using Reinforced.Tecture.Channels.Multiplexer;
@@ -32,15 +32,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -64,10 +67,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -78,6 +83,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -116,15 +122,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -151,10 +160,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -165,6 +176,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -206,15 +218,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -244,10 +259,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -258,6 +275,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -302,15 +320,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -343,10 +364,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -357,6 +380,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -404,15 +428,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -448,10 +475,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -462,6 +491,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -512,15 +542,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -559,10 +592,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -573,6 +608,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -626,15 +662,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -676,10 +715,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -690,6 +731,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}
@@ -746,15 +788,18 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		
-		public SRead(ChannelMultiplexer cm)
+		public SRead(ChannelMultiplexer cm, Type service)
 		{
 			_cm = cm;		
+            Service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : QueryAspect 
 		{
 			return _cm.GetQueryAspect<TChannel,TAspect>();
 		}
+
+        public Type Service { get; }
 	}
 
 	#endregion
@@ -799,10 +844,12 @@ namespace Reinforced.Tecture.Channels
 	{
 		private readonly ChannelMultiplexer _cm;
 		private readonly Pipeline _pipeline;
-		public SWrite(ChannelMultiplexer cm, Pipeline p)
+        private readonly Type _service;
+		public SWrite(ChannelMultiplexer cm, Pipeline p, Type service)
 		{
 			_cm = cm;
 			_pipeline = p;
+            _service = service;
 		}
 
 		public TAspect GetAspect<TAspect>() where TAspect : CommandAspect 
@@ -813,6 +860,7 @@ namespace Reinforced.Tecture.Channels
 		public TCmd Put<TCmd>(TCmd command) where TCmd : CommandBase
 		{
 			command.Channel = typeof(TChannel);
+            command.Service = _service;
 			_pipeline.Enqueue(command);
 			return command;
 		}

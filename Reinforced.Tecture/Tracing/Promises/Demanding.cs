@@ -33,9 +33,9 @@ namespace Reinforced.Tecture.Tracing.Promises
     class Demands<T> : Demanding<T>, Catching<T>
     {
         private PromisedQuery<T> _promised;
-        public Demands(TraceCollector traceCollector, Type channelType)
+        public Demands(TraceCollector traceCollector, Type channelType,Type service)
         {
-            _promised = traceCollector.PromiseQuery<T>(channelType);
+            _promised = traceCollector.PromiseQuery<T>(channelType,service);
         }
 
         public void Fulfill(T result, T clone, string hash, string description = null)

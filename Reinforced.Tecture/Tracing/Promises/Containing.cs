@@ -20,12 +20,12 @@ namespace Reinforced.Tecture.Tracing.Promises
         private readonly ITestDataSource _source;
         private readonly PromisedQuery<T>? _promised;
 
-        public Contains(ITestDataSource source, TraceCollector traceCollector, Type channelType)
+        public Contains(ITestDataSource source, TraceCollector traceCollector, Type channelType, Type service)
         {
             _source = source;
             if (traceCollector != null)
             {
-                _promised = traceCollector.PromiseTestQuery<T>(channelType);
+                _promised = traceCollector.PromiseTestQuery<T>(channelType,service);
             }
         }
 
