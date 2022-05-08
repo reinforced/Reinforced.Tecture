@@ -64,7 +64,7 @@ namespace Reinforced.Tecture.Services
 
         private TService CreateService<TService>() where TService : TectureServiceBase
         {
-            var service = (TService)typeof(TService).InstanceNonpublic(_resolver);
+            var service = (TService)typeof(TService).CreateServiceInstance(_resolver);
             service.ServiceManager = this;
             service.Pipeline = _pipeline;
             service.ChannelMultiplexer = _mux;

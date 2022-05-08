@@ -72,7 +72,7 @@ namespace Reinforced.Tecture
                    && type.Attributes.HasFlag(TypeAttributes.NotPublic);
         }
 
-        internal static object InstanceNonpublic(this Type t, Func<Type,object> resolver = null)
+        public static object InstanceNonpublic(this Type t, Func<Type,object> resolver = null)
         {
             var ctors = t.GetTypeInfo().DeclaredConstructors.ToArray();
             if (ctors.Length == 0)

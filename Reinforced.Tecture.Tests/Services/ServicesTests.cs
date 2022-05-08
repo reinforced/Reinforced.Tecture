@@ -18,6 +18,8 @@ namespace Reinforced.Tecture.Tests.Services
 
             public void Action(){}
         }
+
+        
         
         [Fact]
         public void Service_Must_Contain_AtLeast_One_Private_Constructor()
