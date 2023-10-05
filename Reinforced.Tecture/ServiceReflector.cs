@@ -14,15 +14,19 @@ namespace Reinforced.Tecture
 
         private static Delegate CreateServiceMaker(Type t)
         {
-            var ctors = t.GetTypeInfo().DeclaredConstructors.ToArray();
-            if (ctors.Length == 0)
+            var constructors = t
+                .GetTypeInfo()
+                .DeclaredConstructors
+                .Where(x => x.IsPrivate)
+                .OrderByDescending(x => x.GetParameters().Length)
+                .ToArray();
+            
+            if (constructors.Length == 0)
                 throw new MissingMethodException(
                     $"Service {t} cannot be created because of missing at least one private parameterless constructor");
-            
-            var paramConstructors = ctors.Where(x => x.IsPrivate).OrderByDescending(x => x.GetParameters().Length);
             var resolverParam = Expression.Parameter(typeof(Func<Type, object>));
             var returnOptions = new Stack<Expression>();
-            foreach (var ctor in paramConstructors)
+            foreach (var ctor in constructors)
             {
                 var parameters = ctor.GetParameters();
                 if (parameters.Length == 0)

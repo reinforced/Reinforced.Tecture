@@ -23,6 +23,11 @@ namespace Reinforced.Tecture.Testing
 
         private readonly Dictionary<Type, TestingContext> _cache = new Dictionary<Type, TestingContext>();
 
+        /// <summary>
+        /// Obtains testing context for particular channel
+        /// </summary>
+        /// <param name="channelType">Type of channel</param>
+        /// <returns>Testing context for channel</returns>
         internal TestingContext ForChannel(Type channelType)
         {
             if (!_cache.ContainsKey(channelType))

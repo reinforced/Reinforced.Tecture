@@ -17,11 +17,21 @@
         }
 
         /// <summary>
-        /// Forces table to be taken as alias, not alias declaration
+        /// Forces table to be taken itself, without declaration of all possible related joins
         /// </summary>
         /// <param name="entity">Entity table reference</param>
         /// <returns>Stroke</returns>
-        public static string Alias(this object entity)
+        public static string NoExpand(this object entity)
+        {
+            return "what?";
+        }
+        
+        /// <summary>
+        /// Forces table to be taken as itself, without alias
+        /// </summary>
+        /// <param name="entity">Entity table reference</param>
+        /// <returns>Stroke</returns>
+        public static string NoAlias(this object entity)
         {
             return "what?";
         }

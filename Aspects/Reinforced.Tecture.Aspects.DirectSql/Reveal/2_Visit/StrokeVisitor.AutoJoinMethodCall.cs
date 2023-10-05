@@ -62,8 +62,8 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit
                 return node;
             }
 
-            // reveal call of {x.Alias()}
-            if (node.Method == _aliasMethod)
+            // reveal call of {x.NoExpand()}
+            if (node.Method == _noExpandMethod || node.Method == _noAliasMethod)
             {
                 SqlTableReference result;
                 bool success = false;
@@ -74,12 +74,13 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit
                     if (result != null)
                     {
                         success = true;
-                        result.AsAlias = true;
+                        if (node.Method == _noExpandMethod) result.NotExpand = true;
+                        if (node.Method == _noAliasMethod) result.Table.SkipAliasing = true;
                         Return(result);
 
                     }
                 }
-                if (!success) throw new Exception("Invalid .JoinedAs expression");
+                if (!success) throw new Exception("Invalid .NoExpand/.NoAlias expression");
 
                 return node;
             }
@@ -122,14 +123,16 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit
 
 
         private static readonly MethodInfo _joinedAsMethod;
-        private static readonly MethodInfo _aliasMethod;
+        private static readonly MethodInfo _noExpandMethod;
+        private static readonly MethodInfo _noAliasMethod;
         private static readonly MethodInfo _joinOverrideMethod;
         private static readonly MethodInfo _everyMethod;
         private static readonly MethodInfo _relationMethod;
         static StrokeVisitor()
         {
             _joinedAsMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.JoinedAs));
-            _aliasMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.Alias));
+            _noExpandMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.NoExpand));
+            _noAliasMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.NoAlias));
             _joinOverrideMethod = typeof(StrokeJoins).GetMethod(nameof(StrokeJoins.Overjoin));
 
             _everyMethod = typeof(StrokeRelations).GetMethod(nameof(StrokeRelations.Every));

@@ -22,8 +22,12 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
             Mapper = mapper;
         }
 
+        protected void Before(LanguageInterpolatedQuery query){}
+        protected string After(List<object> actualParameters, string queryString) => queryString;
+        
         internal SchemaInterpolatedQuery Proceed(LanguageInterpolatedQuery query)
         {
+            Before(query);
             List<string> formatString = new List<string>();
             List<object> actualParameters = new List<object>();
             foreach (var p in query.Parameters)
@@ -44,22 +48,21 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
                 actualParameters.Add(p);
             }
 
-            var queryString = string.Format(query.Query, formatString.ToArray());
+            var queryString = After(actualParameters,string.Format(query.Query, formatString.ToArray()));
             return new SchemaInterpolatedQuery(queryString, actualParameters.ToArray(), query.UsedTypes);
         }
 
         protected virtual string VisitTableReference(SqlTableReference expr)
         {
-            return VisitTableReference(expr.Table, expr.ChildrenJoinedAs, expr.AsAlias);
-        }
-
-        protected virtual string VisitTableReference(TableReference tref, Join joinType, bool notExpand)
-        {
-            if (notExpand) return TableAlias(tref);
+            var notExpand = expr.NotExpand;
+            var tableRef = expr.Table;
+            var joinType = expr.ChildrenJoinedAs;
+            
+            if (notExpand) return TableAlias(tableRef);
 
             StringBuilder result = new StringBuilder();
-            result.Append(TableMakeAlias(tref));
-            VisitChildrenReferences(tref, joinType, result);
+            result.Append(TableMakeAlias(tableRef));
+            VisitChildrenReferences(tableRef, joinType, result);
             return result.ToString();
         }
 
@@ -89,12 +92,12 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.SchemaInterpolate
 
         protected virtual string TableMakeAlias(TableReference tr)
         {
-            if (string.IsNullOrEmpty(tr.Alias)) return $"[{Mapper.GetTableName(tr.EntityType)}]";
+            if (string.IsNullOrEmpty(tr.Alias) || tr.SkipAliasing) return $"[{Mapper.GetTableName(tr.EntityType)}]";
             return $"[{Mapper.GetTableName(tr.EntityType)}] [{tr.Alias}]";
         }
         protected virtual string TableAlias(TableReference tr)
         {
-            if (string.IsNullOrEmpty(tr.Alias)) return $"[{Mapper.GetTableName(tr.EntityType)}]";
+            if (string.IsNullOrEmpty(tr.Alias) || tr.SkipAliasing) return $"[{Mapper.GetTableName(tr.EntityType)}]";
             return $"[{tr.Alias}]";
         }
 

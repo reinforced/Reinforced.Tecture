@@ -42,11 +42,16 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
             index = index - search.Length + 1;
             return master.IndexOf(search, index, StringComparison.InvariantCultureIgnoreCase) == index;
         }
+        
+        protected virtual void Before(){}
+
+        protected virtual void After(){}
 
         internal LanguageInterpolatedQuery Proceed(VisitedQuery query)
         {
             QueryStructureText = query.QueryStructure;
             Expressions = query.Arguments.ToDictionary(x => x.Position);
+            Before();
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < QueryStructureText.Length; i++)
             {
@@ -60,10 +65,11 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
                 }
             }
 
-            return new LanguageInterpolatedQuery(result.ToString(), _parameters.ToArray(), query.UsedTypes);
+            After();
+            return new LanguageInterpolatedQuery(result.ToString(), Parameters.ToArray(), query.UsedTypes);
         }
 
-        private readonly List<object> _parameters = new List<object>();
+        protected readonly List<object> Parameters = new List<object>();
 
         protected string EmitParameter(object parameter)
         {
@@ -71,25 +77,28 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
             {
                 return VisitArrayParameter(arr);
             }
-            _parameters.Add(parameter);
-            return $"{{{_parameters.Count - 1}}}";
+            Parameters.Add(parameter);
+            return $"{{{Parameters.Count - 1}}}";
         }
 
         protected virtual string Visit(SqlQueryExpression sqe)
         {
-            if (sqe is SqlBinaryExpression x1) return VisitBinary(x1);
-            if (sqe is SqlColumnReference x2) return VisitColumnReference(x2);
-            if (sqe is SqlEmptyExpression x3) return VisitEmpty(x3);
-            if (sqe is SqlInExpression x4) return VisitIn(x4);
-            if (sqe is SqlObjectParameter x5) return VisitObjectParameter(x5);
-            if (sqe is SqlQueryLiteralExpression x6) return VisitLiteral(x6);
-            if (sqe is SqlNullExpression x7) return VisitNull(x7);
-            if (sqe is SqlBooleanExpression x8) return VisitBoolean(x8);
-            if (sqe is SqlTableReference x9) return VisitTableReference(x9);
-            if (sqe is SqlTernaryExpression x10) return VisitTernary(x10);
-            if (sqe is SqlUnaryExpression x11) return VisitUnary(x11);
-
-            throw new Exception("Unknown expression type");
+            switch (sqe)
+            {
+                case SqlBinaryExpression x1: return VisitBinary(x1);
+                case SqlColumnReference x2: return VisitColumnReference(x2);
+                case SqlEmptyExpression x3: return VisitEmpty(x3);
+                case SqlInExpression x4: return VisitIn(x4);
+                case SqlObjectParameter x5: return VisitObjectParameter(x5);
+                case SqlQueryLiteralExpression x6: return VisitLiteral(x6);
+                case SqlNullExpression x7: return VisitNull(x7);
+                case SqlBooleanExpression x8: return VisitBoolean(x8);
+                case SqlTableReference x9: return VisitTableReference(x9);
+                case SqlTernaryExpression x10: return VisitTernary(x10);
+                case SqlUnaryExpression x11: return VisitUnary(x11);
+                default:
+                    throw new Exception("Unknown expression type");
+            }
         }
 
         private string VisitTableReference(SqlTableReference x9)
@@ -115,7 +124,6 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
         protected virtual string VisitObjectParameter(SqlObjectParameter expr) => EmitParameter(expr.Parameter);
         protected virtual string VisitLiteral(SqlQueryLiteralExpression expr) => expr.Literal;
         protected virtual string VisitEmpty(SqlEmptyExpression expr) => string.Empty;
-
 
         #region SET
         protected virtual bool IsSetExpression(SqlBinaryExpression bex)
@@ -166,8 +174,6 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.LanguageInterpolate
 
 
         #endregion
-
-
 
     }
 }

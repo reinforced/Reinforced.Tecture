@@ -21,13 +21,15 @@ namespace Reinforced.Tecture.Channels.Multiplexer
 
         #region Channels
 
+        /// <summary>
+        /// Gets whether the channel of specific type is known and configured
+        /// </summary>
+        /// <param name="channel">Type of channel</param>
+        /// <returns>True when channel is known, false otherwise</returns>
         internal bool IsKnown(Type channel) => _knownChannels.Contains(channel);
 
-        private void EnsureKnown(Type channel)
-        {
-            if (!_knownChannels.Contains(channel)) _knownChannels.Add(channel);
-        }
-        
+        private void EnsureKnown(Type channel) => _knownChannels.Add(channel);
+
         private readonly HashSet<Type> _knownChannels = new HashSet<Type>();
         
         private void AssertChannelKnown(Type tchannel)
@@ -36,8 +38,6 @@ namespace Reinforced.Tecture.Channels.Multiplexer
         }
 
         #endregion
-       
-
 
         #region Query
         private readonly Dictionary<string, Dictionary<string, QueryAspect>> _channelAspectQuery = new Dictionary<string, Dictionary<string, QueryAspect>>();

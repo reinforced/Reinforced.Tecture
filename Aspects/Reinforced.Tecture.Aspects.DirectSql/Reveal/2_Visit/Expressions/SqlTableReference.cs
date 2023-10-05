@@ -23,6 +23,6 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit.Expressions
         /// <summary>
         /// Gets whether table must be mentioned as alias, not with full usage declaration
         /// </summary>
-        public bool AsAlias { get; internal set; }
+        public bool NotExpand { get; internal set; }
     }
 }

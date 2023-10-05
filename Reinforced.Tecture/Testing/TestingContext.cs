@@ -40,7 +40,6 @@ namespace Reinforced.Tecture.Testing
         /// Gets whether trace collects data in light mode
         /// </summary>
         public bool? LightMode => _container?.TraceCollector.LightMode;
-        
 
         /// <summary>
         /// Traces query that will be fulfilled later

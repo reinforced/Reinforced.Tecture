@@ -30,7 +30,7 @@ namespace Reinforced.Tecture.Commands
         private void Save(IEnumerable<string> channels)
         {
             var trans = _transactionManager.GetSaveTransactions(channels, false);
-            List<Exception> aggregate = new List<Exception>();
+            var aggregate = new List<Exception>();
             try
             {
                 foreach (var commandAspect in _mx.GetCommandAspectsForChannels(channels))
@@ -64,7 +64,7 @@ namespace Reinforced.Tecture.Commands
         private async Task SaveAsync(IEnumerable<string> channels, CancellationToken token = default)
         {
             var trans = _transactionManager.GetSaveTransactions(channels, true);
-            List<Exception> aggregate = new List<Exception>();
+            var aggregate = new List<Exception>();
             try
             {
                 foreach (var commandAspect in _mx.GetCommandAspectsForChannels(channels))
@@ -100,7 +100,7 @@ namespace Reinforced.Tecture.Commands
         {
             do
             {
-                HashSet<string> usedChannels = new HashSet<string>();
+                var usedChannels = new HashSet<string>();
                 if (queue.HasEffects)
                 {
                     RunCommands(queue.GetEffects(), usedChannels);
@@ -141,9 +141,7 @@ namespace Reinforced.Tecture.Commands
         {
             do
             {
-                HashSet<string> usedChannels = new HashSet<string>();
-
-
+                var usedChannels = new HashSet<string>();
                 if (queue.HasEffects)
                 {
                     await RunCommandsAsync(queue.GetEffects(), usedChannels, token);
@@ -185,37 +183,35 @@ namespace Reinforced.Tecture.Commands
         {
             foreach (var commandBase in commands)
             {
-                if (!(commandBase is ITracingOnly))
+                if (commandBase is ITracingOnly) continue;
+                usedChannels.Add(commandBase.ChannelId);
+                var r = _mx.GetRunner(commandBase);
+                var tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
+                Stopwatch sw = null;
+                if (_traceCollector != null && _traceCollector.Profiling)
                 {
-                    if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
-                    var r = _mx.GetRunner(commandBase);
-                    var tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, false);
-                    Stopwatch sw = null;
+                    sw = new Stopwatch();
+                    sw.Start();
+                }
+
+                try
+                {
+                    r.RunInternal(commandBase);
+                    commandBase.IsExecuted = true;
+                    tran.Commit();
+                }
+                catch (Exception e)
+                {
+                    commandBase.Exception = e;
+                    throw new TectureCommandRunException(commandBase, e);
+                }
+                finally
+                {
+                    tran.Dispose();
                     if (_traceCollector != null && _traceCollector.Profiling)
                     {
-                        sw = new Stopwatch();
-                        sw.Start();
-                    }
-
-                    try
-                    {
-                        r.RunInternal(commandBase);
-                        commandBase.IsExecuted = true;
-                        tran.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        commandBase.Exception = e;
-                        throw new TectureCommandRunException(commandBase, e);
-                    }
-                    finally
-                    {
-                        tran.Dispose();
-                        if (_traceCollector != null && _traceCollector.Profiling)
-                        {
-                            sw?.Stop();
-                            commandBase.TimeTaken = sw?.Elapsed ?? TimeSpan.Zero;
-                        }
+                        sw?.Stop();
+                        commandBase.TimeTaken = sw?.Elapsed ?? TimeSpan.Zero;
                     }
                 }
             }
@@ -226,42 +222,41 @@ namespace Reinforced.Tecture.Commands
         {
             foreach (var commandBase in commands)
             {
-                if (!(commandBase is ITracingOnly))
+                if (commandBase is ITracingOnly) continue;
+                
+                usedChannels.Add(commandBase.ChannelId);
+                var r1 = _mx.GetRunner(commandBase);
+                ChannelTransaction tran = null;
+                Stopwatch sw = null;
+                if (_traceCollector != null && _traceCollector.Profiling)
                 {
-                    if (!usedChannels.Contains(commandBase.ChannelId)) usedChannels.Add(commandBase.ChannelId);
-                    var r1 = _mx.GetRunner(commandBase);
-                    ChannelTransaction tran = null;
-                    Stopwatch sw = null;
+                    sw = new Stopwatch();
+                    sw.Start();
+                }
+
+                try
+                {
+                    var r = r1.RunInternalAsync(commandBase, token);
+                    if (r != null)
+                    {
+                        tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, true);
+                        await r;
+                        commandBase.IsExecuted = true;
+                        tran.Commit();
+                    }
+                }
+                catch (Exception e)
+                {
+                    commandBase.Exception = e;
+                    throw new TectureCommandRunException(commandBase, e);
+                }
+                finally
+                {
+                    tran?.Dispose();
                     if (_traceCollector != null && _traceCollector.Profiling)
                     {
-                        sw = new Stopwatch();
-                        sw.Start();
-                    }
-
-                    try
-                    {
-                        var r = r1.RunInternalAsync(commandBase, token);
-                        if (r != null)
-                        {
-                            tran = _transactionManager.GetCommandTransaction(commandBase.ChannelId, commandBase, true);
-                            await r;
-                            commandBase.IsExecuted = true;
-                            tran.Commit();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        commandBase.Exception = e;
-                        throw new TectureCommandRunException(commandBase, e);
-                    }
-                    finally
-                    {
-                        tran?.Dispose();
-                        if (_traceCollector != null && _traceCollector.Profiling)
-                        {
-                            sw.Stop();
-                            commandBase.TimeTaken = sw.Elapsed;
-                        }
+                        sw.Stop();
+                        commandBase.TimeTaken = sw.Elapsed;
                     }
                 }
             }

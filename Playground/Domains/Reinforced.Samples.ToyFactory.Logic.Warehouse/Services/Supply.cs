@@ -33,21 +33,21 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
         {
             From<Db>().All<ResourceSupply>().EnsureExists(id);
 
-            To<Db>().Sql<ResourceSupplyItem>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.ResourceSupplyId == id}");
-            To<Db>().Sql<ResourceSupply>(x => $"DELETE {x.Alias()} FROM {x} WHERE {x.Id == id}");
+            To<Db>().Sql<ResourceSupplyItem>(x => $"DELETE {x.NoExpand()} FROM {x} WHERE {x.ResourceSupplyId == id}");
+            To<Db>().Sql<ResourceSupply>(x => $"DELETE {x.NoExpand()} FROM {x} WHERE {x.Id == id}");
         }
 
         public void FinishResourceSupply(int id)
         {
             To<Db>().Sql<Resource, ResourceSupplyItem>((res, item) => $@"
-    UPDATE {res.Alias()}
+    UPDATE {res.NoExpand()}
     SET {res.StockQuantity == res.StockQuantity + item.Quantity}
     FROM {res}
     INNER JOIN {item} ON {item.ResourceId == res.Id}
     WHERE {item.ResourceSupplyId==id}
 ");
             To<Db>().Sql<ResourceSupply>(r =>
-                $"UPDATE {r.Alias()} SET {r.Status == ResourceSupplyStatus.Closed} FROM {r} WHERE {r.Id == id}");
+                $"UPDATE {r.NoExpand()} SET {r.Status == ResourceSupplyStatus.Closed} FROM {r} WHERE {r.Id == id}");
         }
 
         private void UpdateResourceSupplyItemsCount(int supplyId)
@@ -55,7 +55,7 @@ namespace Reinforced.Samples.ToyFactory.Logic.Warehouse.Services
             Finally(() =>
             {
                 To<Db>().Sql<ResourceSupply, ResourceSupplyItem>((r, item) =>
-                    $"UPATE {r.Alias()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
+                    $"UPATE {r.NoExpand()} SET {r.ItemsCount} = (SELECT COUNT(*) FROM {item} WHERE {item.ResourceSupplyId == supplyId}) FROM {r}");
             });
             
         }

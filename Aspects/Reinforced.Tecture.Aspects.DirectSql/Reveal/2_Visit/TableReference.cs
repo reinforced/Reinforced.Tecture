@@ -16,6 +16,11 @@ namespace Reinforced.Tecture.Aspects.DirectSql.Reveal.Visit
         /// Table alias (from expression)
         /// </summary>
         public string Alias { get; private set; }
+        
+        /// <summary>
+        /// Table should be addressed explicitly, without using alias
+        /// </summary>
+        public bool SkipAliasing { get; internal set; }
 
         /// <summary>
         /// Entity type
