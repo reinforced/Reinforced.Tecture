@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.AsyncExecutionAdapter
 {
-    class QueryableWithAsyncExecutor : IQueryable
+    class QueryableWithAsyncExecutor : IOrderedQueryable
     {
         private readonly IQueryable _original;
 
@@ -29,7 +29,7 @@ namespace Reinforced.Tecture.Aspects.Orm.Queries.Traced.Queryables.AsyncExecutio
         public IQueryProvider Provider { get; }
     }
 
-    class QueryableWithAsyncExecutor<T> : QueryableWithAsyncExecutor, IQueryable<T>
+    class QueryableWithAsyncExecutor<T> : QueryableWithAsyncExecutor, IOrderedQueryable<T>
     {
         private readonly IQueryable<T> _original;
 
